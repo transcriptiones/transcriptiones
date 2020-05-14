@@ -1,0 +1,27 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <h2>Institutionen</h2>
+</div>
+
+{% regroup institutions by city as cities_list %}
+
+<div>
+        {% for city in cities_list %}
+    <h4>{{ city.grouper }}</h4>
+                {% for institution in city.list %}
+                    <div class="container p-2 my-0">
+                        <a href="{{ institution.get_absolute_url }}">
+                            <div>
+                                {{ institution.institution_name }} -- {{ institution.refnumbers.count }} Signaturen
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+        {% endfor %}
+</div>
+
+
+{% endblock content %}

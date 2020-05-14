@@ -1,0 +1,67 @@
+﻿<!--
+
+
+THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
+
+
+-->
+
+<div class="modal-header">
+    <h5 class="modal-title" id="refNumberModalLabel">Neue Signatur hinzufügen</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div id="modalFormRefNumber" class="modal-body" style="display: block">
+    <div class="col-sm">
+        <div class="row">
+            <h5 id="modalIntro"></h5>
+        </div>
+    </div>
+    <form method="post" id="refNumberForm" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper form-group row">
+            {{ form.holding_institution.errors }}
+            <label for="{{ form.holding_institution.id_for_label }}" class="col-sm-3 control-label">
+                {{ form.holding_institution.label }}
+            </label>
+            <div class="col-sm-9">
+                {{ form.holding_institution }}
+                <span class="error"></span>
+            </div>
+        </div>
+        <div class="fieldWrapper form-group row">
+            {{ form.refnumber_name.errors }}
+            <label for="{{ form.refnumber_name.id_for_label }}" class="col-sm-3 control-label">
+                {{ form.refnumber_name.label }}
+            </label>
+            <div class="col-sm-9">
+                {{ form.refnumber_name }}
+                <span class="error"></span>
+            </div>
+        </div>
+        <div class="fieldWrapper form-group row">
+            {{ form.refnumber_title.errors }}
+            <label for="{{ form.refnumber_title.id_for_label }}" class="col-sm-3 control-label">
+                {{ form.refnumber_title.label }}
+            </label>
+            <div class="col-sm-9">
+                {{ form.refnumber_title }}
+                <span class="error"></span>
+            </div>
+        </div>
+        <div class="fieldWrapper form-group row">
+            {{ form.collection_link.errors }}
+            <label for="{{ form.collection_link.id_for_label }}" class="col-sm-3 control-label">
+                {{ form.collection_link.label }}
+            </label>
+            <div class="col-sm-9">
+                {{ form.collection_link }}
+                <span class="error"></span>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" id="submitButtonModal">Absenden</button>
+        <button type="button" class="btn btn-light" id="backButtonModal" style="display:none">Zurück</button>
+    </form>
+</div>

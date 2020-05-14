@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="de-ch">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="TRANSCRIPTIONES">
+    <meta name="author" content="TRANSCRIPTIONES">
+
+    <title>TRANSCRIPTIONES</title>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    {% load static %}
+
+    <!-- Custom scripts for this template -->
+    <script type="text/javascript" src="{% static 'upload/js/stylish-portfolio.js' %}"></script>
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'upload/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'upload/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'upload/css/stylish-portfolio.css' %}" rel="stylesheet" type="text/css">
+
+    {% block dependencies %}
+    {% endblock dependencies %}
+</head>
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-sm fixed-top position-absolute text.navbar">
+        <ul class="navbar-nav align-items-center">
+            <li class="navbar-brand">
+                <a class="nav-link text-navbar" href="#">Logo</a>
+            </li>
+            <li class="navbar-nav-item d-none d-sm-block">
+                <a class="nav-link text-navbar" href="#">Upload</a>
+            </li>
+            <li class="navbar-nav-item d-none d-sm-block">
+                <a class="nav-link text-navbar" href="#">Suche</a>
+            </li>
+            <li class="navbar-nav-item d-none d-sm-block">
+                <a class="nav-link text-navbar" href="#">Benutzerkonto</a>
+            </li>
+        </ul>
+    </nav>
+    <a class="menu-toggle rounded" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a class="js-scroll-trigger" href="#page-top">Menu</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="#upload">Upload</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="#search-plus">Suche</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="#information">Informationen</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="#account">Benutzerkonto</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="#contact">Kontakt</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
+    <section class="content-section bg-white">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="content-section-heading">
+                        {% block content %}
+                        <h2 class="mb-5">Titel</h2>
+                        <p class="lead mb-5">Text</p>
+                        {% endblock content %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#">
+                        <i class="icon-social-facebook"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#">
+                        <i class="icon-social-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="#">
+                        <i class="icon-social-github"></i>
+                    </a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2020</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% block javascript %}
+    {% endblock javascript %}
+</body>
+</html>
