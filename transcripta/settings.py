@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'transcripta.info.apps.InfoConfig',
     'transcripta.upload.apps.UploadConfig',
     'transcripta.transkriptionen.apps.TranskriptionenConfig',
     'transcripta.search.apps.SearchConfig',
