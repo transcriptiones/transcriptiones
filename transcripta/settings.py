@@ -31,16 +31,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'transcripta.upload.apps.UploadConfig',
-    'transcripta.transkriptionen.apps.TranskriptionenConfig',
-    'transcripta.search.apps.SearchConfig',
-    'transcripta.users.apps.UsersConfig',
+    'transcripta.transcripts.apps.TranscriptsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'six',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 #Specify custm user model
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'transcripts.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -132,3 +130,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     ]
+
+
+# Email configuration
+# print emails to console for development purposes
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

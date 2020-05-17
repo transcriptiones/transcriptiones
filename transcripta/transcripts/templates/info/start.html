@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TRANSCRIPTIONES</title>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    {% load static %}
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'base/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Custom scripts for this template -->
+    <script type="text/javascript" src="{% static 'info/js/startscripts.js' %}"></script>
+
+    <!-- Custom CSS -->
+    <link href="{% static 'info/css/startstyles.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-sm bg-transparent fixed-top position-absolute text.navbar">
+   <ul class="navbar-nav align-items-center">
+      <li class="navbar-brand">
+        <a class="nav-link text-navbar" href="#">Logo</a>
+      </li>
+      <li class="navbar-nav-item d-none d-sm-block">
+        <a class="nav-link text-navbar" href="#">Upload</a>
+      </li>
+      <li class="navbar-nav-item d-none d-sm-block">
+        <a class="nav-link text-navbar" href="#">Suche</a>
+      </li>
+      <li class="navbar-nav-item d-none d-sm-block">
+        <a class="nav-link text-navbar" href="#">Benutzerkonto</a>
+      </li>
+    </ul>
+   </nav>
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Menu</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#upload">Upload</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#search-plus">Suche</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#information">Informationen</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#account">Benutzerkonto</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Kontakt</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1 text-white">TRANSCRIPTIONES</h1>
+      <h3 class="mb-5 text-white">
+        <em>die Plattform für Transkriptionen historischer Handschriften</em>
+      </h3>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Mehr</a>
+    </div>
+    <div class="overlay"></div>
+  </header>
+
+  <!-- About -->
+  <section class="content-section bg-light" id="about">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>Sie haben Transkriptionen erstellt und möchten diese mit Interessierten teilen? Sie sind auf der Suche nach bereits transkribierten Manuskripten? Willkommen!</h2>
+          <p class="lead mb-5">Transcriptiones ist eine Datenbank für Transkriptionen von historischen Manuskripten. Jede*r ist eingeladen, die eigens erstellten Transkriptionen bei uns hochzuladen. Es sind alle Arten von Transkriptionen erwünscht – von einer Rohfassung bis hin zur ausgereiften Edition. Transcriptiones möchte mehrfach geleistete Transkriptionsarbeit verhindern und dieser Arbeit die nötige Wertschätzung entgegenbringen. Überarbeiten Sie die bestehenden Transkriptionen und helfen Sie sich gegenseitig bestehende Lücken zu füllen.</p>
+          <a class="btn btn-dark btn-xl js-scroll-trigger" href="#procedure">Vorgehen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Procedure -->
+  <section class="content-section bg-primary text-white text-center" id="procedure">
+    <div class="container">
+      <div class="content-section-heading">
+        <h2 class="mb-5">Vorgehen</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fas fa-arrow-up"></i>
+          </span>
+          <h4>
+            <strong>Upload</strong>
+          </h4>
+          <p class="text-faded mb-0">Die Transkriptionen werden in einen Editor kopiert. Geschieht dies aus einem Word-Dokument heraus, wird die Formatierung zum grössten Teil übernommen. Um Einheitlichkeit zu erreichen, legen wir Ihnen unsere unverbindlichen Transkriptionsrichtlinien ans Herz. Zudem sind verschiedene Metadaten anzugeben. Sie erleichtern später die Zuordnung zum Original und ermöglichen die Suchfunktionen. Fotos der Quelle können ebenfalls hochgeladen werden. Sie ermöglichen die Überarbeitung durch andere Nutzer*Innen.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fas fa-search-plus"></i>
+          </span>
+          <h4>
+            <strong>Recherche</strong>
+          </h4>
+          <p class="text-faded mb-0">Die Transkriptionen lassen sich unterschiedlich auffinden. Es besteht die Möglichkeit nach Metadaten zu filtern. Ausserdem kann direkt ein interessantes Archiv oder eine spannende Signatur angesteuert werden. Weiter ist eine Volltextsuche implementiert, dabei sind die verschiedenen Schreibweisen zu beachten. Sie können die Transkriptionen in verschiedene Formate exportieren und sich ein XML-File ausgeben lassen.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="fas fa-check-double"></i>
+          </span>
+          <h4>
+            <strong>Überarbeiten</strong>
+          </h4>
+          <p class="text-faded mb-0">Ihre überarbeitete Version wird primär erscheinen, ältere Versionen sind aber noch immer abrufbar. Metadaten und Fotos können ebenfalls ergänzt werden. Bitte beachten Sie dabei unsere Nutzungsbedingungen hinsichtlich dem Upload von Fotos.</p>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="far fa-user"></i>
+          </span>
+          <h4>
+            <strong>Benutzerkonto</strong>
+          </h4>
+          <p class="text-faded mb-0">Um Transkriptionen hochzuladen ist eine Registrierung notwendig. Dabei muss der Name sowie eine gültige E-Mail-Adresse angegeben werden. Weiter können Sie auswählen, ob Sie Ihre Transkriptionen mit Ihrem Namen signieren möchten oder nicht. Beachten Sie auch unsere RSS-Funktion, damit Sie eine Benachrichtigungsmail einrichten können für den Zuwachs eines bestimm-ten Transkriptionsbestands.</p>
+		</div>
+      </div>
+	<div class="col-lg-10 mx-auto">
+	<a class="btn btn-dark btn-xl js-scroll-trigger" href="#portfolio">Weitere Informationen</a>
+	</div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="content-section" id="portfolio">
+    <div class="container">
+      <div class="content-section-heading text-center">
+        <h2 class="mb-5">Weitere Informationen</h2>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>Transkriptionsrichtlinien</h2>
+                <p class="mb-0">ABCf</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'info/img/portfolio-1.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>Nutzungsbedingungen</h2>
+                <p class="mb-0">ABC</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'info/img/portfolio-2.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>RSS</h2>
+                <p class="mb-0">ABCj</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'info/img/portfolio-3.jpg' %}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#">
+            <span class="caption">
+              <span class="caption-content">
+                <h2>Über uns</h2>
+                <p class="mb-0">ABCw</p>
+              </span>
+            </span>
+            <img class="img-fluid" src="{% static 'info/img/portfolio-4.jpg' %}" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="#">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2020</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+</body>
+
+</html>

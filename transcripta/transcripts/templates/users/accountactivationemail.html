@@ -1,0 +1,8 @@
+{% autoescape off %}
+Sehr geehrte*r {{ user.username }},
+
+Herzlich Willkommen auf {{ domain }}. Klicken Sie auf den untenstehenden Link um die Registrierung abzuschliessen.
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

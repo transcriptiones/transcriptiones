@@ -1,0 +1,66 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+
+<div>
+    <h2>{{ institution.institution_name }}</h2>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#InstitutionDetails">
+        <a>Informationen zur Institution</a>
+    </div>
+    <div id="differentInstitutionDetails" class="collapse show">
+        <div class="card-body">
+            <table>
+                <tr>
+                    <th scope="row" id="tablestyle">Adresse</th>
+                    <td>{{ institution.street }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" id="tablestyle">PLZ / Ort</th>
+                    <td>{{ institution.zip_code }} / {{ institution.city }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" id="tablestyle">Land</th>
+                    <td>{{ institution.country }}</td>
+                </tr>
+                {% if institution.site_url %}
+                <tr>
+                    <th scope="row" id="tablestyle">Website</th>
+                    <td><a href="{{ institution.site_url }}" target="_blank">{{ institution.institution_name }}</a></td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
+        <a>Signaturen</a>
+    </div>
+
+    <div id="differentRefNumbers" class="collapse show">
+        <div class="card-body">
+            {% if institution.refnumbers.all %}
+            {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
+            <div class="container p-2 my-0">
+                <a href="{{ refnumber.get_absolute_url }}">
+                    <div> {{ refnumber.refnumber_name }} -- {{ refnumber.documents.count }} Dokumente</div>
+                </a>
+            </div>
+            {% endfor %}
+            {% else %}
+            Dieser Institution sind noch keine Signaturen zugeordnet
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+    <div id="backto">
+        <a href="{% url 'institutionlist' %}">Zurück zur Institutionenliste</a>
+    </div>
+
+    {% endblock content %}

@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <h2>Institutionen</h2>
+</div>
+
+{% regroup institutions by city as cities_list %}
+
+<div class="card">
+    {% for city in cities_list %}
+    <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
+        <a class="card-link">
+            {{ city.grouper }}
+        </a>
+    </div>
+    {% for institution in city.list %}
+    <div id="differentRefNumbers" class="collapse show">
+        <div class="card-body">
+                <div>{{ institution.institution_name }}</div>
+                <div><a href="{{ institution.get_absolute_url }}">{{ institution.refnumbers.count }} Signatur(en)</a></div>         
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+
+    {% endblock content %}
