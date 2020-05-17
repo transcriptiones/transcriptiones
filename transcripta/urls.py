@@ -22,4 +22,5 @@ urlpatterns = [
     path('upload/', include('transcripta.upload.urls')),
     path('transkriptionen/', include('transcripta.transkriptionen.urls')),
     path('search/', include('transcripta.search.urls')),
+    path('user/', include('transcripta.users.urls')),
 ]
