@@ -1,0 +1,104 @@
+from datetime import datetime
+from django import forms
+from transcripta.transcripts.models import Institution, RefNumber, DocumentTitle
+
+
+#Form for adding an Institution which is not yet in the Database
+class InstitutionForm(forms.ModelForm):
+    #add class form-control to each form field for bootstrap integration
+    def __init__(self, *args, **kwargs):
+        super(InstitutionForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.fields[name].help_text,
+                })
+        
+        self.fields['zip_code'].widget.attrs.update({
+            'max': 99999
+            })
+
+    class Meta:
+        model = Institution
+        fields = ['institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug']
+
+
+#Form for adding a RefNumber which is not yet in the Database
+class RefNumberForm(forms.ModelForm):
+    
+    #add class form-control to each form input for bootstrap integration
+    def __init__(self, *args, **kwargs):
+        super(RefNumberForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.fields[name].help_text,
+                })
+
+    class Meta:
+        model = RefNumber
+        fields = ['holding_institution', 'refnumber_name', 'refnumber_title', 'collection_link']
+
+
+#Form for adding a new Document to the Database
+class DocumentTitleForm(forms.ModelForm):
+
+    #add class form-control to each form input for bootstrap integration
+    def __init__(self, *args, **kwargs):
+        super(DocumentTitleForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.fields[name].help_text, #ToDo: let placeholder depend on input type
+                })
+        self.fields['start_year'].widget.attrs.update({
+            'min': -3000, #ToDo: Probably solve this with validators? Do the same for end_dates
+            'max': datetime.now().year
+            })
+        self.fields['start_month'].widget.attrs.update({
+            'min': '1',
+            'max': '12',
+            })
+        self.fields['start_day'].widget.attrs.update({
+            'min': '1',
+            'max': '31',
+            })
+
+        #handle dependent dropdowns
+        self.fields['parent_refnumber'].queryset = RefNumber.objects.none()
+
+        if 'parent_institution' in self.data:
+            try:
+                institution_id = int(self.data.get('parent_institution'))
+                self.fields['parent_refnumber'].queryset = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('refnumber_name')
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            self.fields['parent_refnumber'].queryset = self.instance.holding_institution.refnumber_set.order_by('refnumber_name')
+
+    class Meta:
+        model = DocumentTitle
+        fields = ['title_name',
+                  'parent_institution',
+                  'parent_refnumber',
+                  'author',
+                  'start_year',
+                  'start_month',
+                  'start_day',
+                  'end_year',
+                  'end_month',
+                  'end_day',
+                  'place_name',
+                  'language',
+                  'source_type',
+                  'material',
+                  'measurements_length',
+                  'measurements_width',
+                  'pages',
+                  'paging_system',
+                  'illuminated',
+                  'seal',
+                  'transcription_scope',
+                  'comments',
+                  'transcription_text',
+                  'document_slug']

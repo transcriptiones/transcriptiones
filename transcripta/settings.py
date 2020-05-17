@@ -31,11 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'transcripta.info.apps.InfoConfig',
-    'transcripta.upload.apps.UploadConfig',
-    'transcripta.transkriptionen.apps.TranskriptionenConfig',
-    'transcripta.search.apps.SearchConfig',
-    'transcripta.users.apps.UsersConfig',
+    'transcripta.transcripts.apps.TranscriptsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -110,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 #Specify custm user model
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'transcripts.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
