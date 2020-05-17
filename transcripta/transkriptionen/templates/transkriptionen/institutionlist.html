@@ -8,20 +8,23 @@
 
 {% regroup institutions by city as cities_list %}
 
-<div>
-        {% for city in cities_list %}
-    <h4>{{ city.grouper }}</h4>
-                {% for institution in city.list %}
-                    <div class="container p-2 my-0">
-                        <a href="{{ institution.get_absolute_url }}">
-                            <div>
-                                {{ institution.institution_name }} -- {{ institution.refnumbers.count }} Signaturen
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+<div class="card">
+    {% for city in cities_list %}
+    <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
+        <a class="card-link">
+            {{ city.grouper }}
+        </a>
+    </div>
+    {% for institution in city.list %}
+    <div id="differentRefNumbers" class="collapse show">
+        <div class="card-body">
+                <div>{{ institution.institution_name }}</div>
+                <div><a href="{{ institution.get_absolute_url }}">{{ institution.refnumbers.count }} Signatur(en)</a></div>         
+        </div>
         {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 
 
-{% endblock content %}
+    {% endblock content %}
