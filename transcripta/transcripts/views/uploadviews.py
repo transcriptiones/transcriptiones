@@ -138,10 +138,10 @@ class AddDocumentView(View):
 
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('thanks')
+                return HttpResponse('thanks')
 
             else:
-                return HttpResponse("form invalid")
+                return HttpResponse(str(form.errors).encode())
                 #Exception Handling goes here!
                 #
                 #return render(self.request, self.template_name,
