@@ -95,6 +95,10 @@ class DocumentVersioningTest(TestCase):
     def test_separate_new_object(self):
         self.assertEqual(DocumentTitle.all_objects.filter(document_id=self.doc.document_id).count(), 2)
         self.assertNotEqual(self.pk1, self.pk2)
+        self.assertNotEqual(DocumentTitle.all_objects.get(pk=self.pk1).title_name,
+                            DocumentTitle.all_objects.get(pk=self.pk2).title_name)
+        self.assertEqual(DocumentTitle.all_objects.get(pk=self.pk1).submitted_by,
+                         DocumentTitle.all_objects.get(pk=self.pk2).submitted_by)
 
     def test_activity(self):
         self.assertFalse(DocumentTitle.all_objects.get(pk=self.pk1).active)
