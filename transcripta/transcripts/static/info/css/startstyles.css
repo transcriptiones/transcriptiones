@@ -101,7 +101,7 @@ h6 {
   height: 100vh;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../img/bg-masthead.jpg");
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%), url("../img/bg-masthead.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -259,16 +259,16 @@ h6 {
   margin: auto auto 1rem;
 }
 
-.portfolio-item .caption {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(33, 37, 41, 0.2);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-}
+    .portfolio-item .caption {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(29, 128, 159, 0.7);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+    }
 
 .portfolio-item .caption .caption-content {
   color: #fff;
@@ -306,12 +306,13 @@ h6 {
     -webkit-clip-path: inset(-1px);
     clip-path: inset(-1px);
   }
+
   .portfolio-item:hover img {
     -webkit-clip-path: inset(2rem);
     clip-path: inset(2rem);
   }
   .portfolio-item:hover .caption {
-    background-color: rgba(29, 128, 159, 0.9);
+    background-color: rgb(29, 128, 159);
     -webkit-clip-path: inset(2rem);
     clip-path: inset(2rem);
   }
