@@ -7,11 +7,9 @@ from .views.uploadviews import AddDocumentView
 
 
 class AddDocumentFormTest(TestCase):
-    def setUp(self):
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='testuser', email='test@test.ch', password='pwd')
-        institution = Institution.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+        cls.institution = Institution.objects.create(
             institution_name='Testinstitut',
             street='Teststr. 123',
             zip_code=1234,
@@ -19,17 +17,22 @@ class AddDocumentFormTest(TestCase):
             country='Testland',
             site_url=''
         )
-        refnumber = institution.refnumbers.create(
+        cls.refnumber = cls.institution.refnumbers.create(
             refnumber_name='TEST 123456',
             refnumber_title='TEST',
             collection_link='',
             refnumber_slug='test123456'
         )
+        cls.user = User.objects.create_user(
+            username='testuser', email='test@test.ch', password='pwd')
+
+    def setUp(self):
+        self.factory = RequestFactory()
         self.testdocument_data = {
             'title_name': 'testtitle',
             'transcription_text': 'lol',
-            'parent_institution': f'{institution.id}',
-            'parent_refnumber': f'{refnumber.id}',
+            'parent_institution': f'{self.institution.id}',
+            'parent_refnumber': f'{self.refnumber.id}',
             'transcription_scope': 'komplett',
             'document_slug': 'testslug',
         }
