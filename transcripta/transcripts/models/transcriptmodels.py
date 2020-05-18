@@ -1,7 +1,9 @@
+import uuid
+
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
 
 class Institution(models.Model):
     institution_name = models.CharField(
@@ -160,20 +162,22 @@ class SearchManager(models.Manager):
         return qs
 
 
-
-
-
-
-
-
 class DocumentTitle(models.Model):
 
     YesNoChoices = models.TextChoices('YesNo', 'JA NEIN')
     MatChoices = models.TextChoices('MaterialType', 'PAPIER PERGAMENT PAPYRUS')
     PagChoices = models.TextChoices('PaginationType', 'PAGINIERUNG FOLIIERUNG')
-    MonthChoices = models.IntegerChoices('Month', 'JANUAR FEBRUAR MÄRZ APRIL MAI JUNI JULI AUGUST SEPTEMBER OKOBER NOVEMBER DEZEMBER')
-    DayChoices = models.IntegerChoices('Day', ' '.join(map(str, list(range(1, 32)))))
+    MonthChoices = models.IntegerChoices('Month', 'JANUAR FEBRUAR MÄRZ APRIL MAI JUNI '
+                                                  'JULI AUGUST SEPTEMBER OKTOBER NOVEMBER DEZEMBER')
+    DayChoices = models.IntegerChoices('Day', [str(n) for n in range(1, 32)])
 
+    document_id = models.UUIDField(
+        default=uuid.uuid1,
+        unique=True,
+        editable=False,
+        verbose_name="urtext-id",
+        help_text="ID des Urtexts; konstant zwischen aktuellen und alten Versionen einer Transkription",
+    )
     title_name = models.CharField(
         max_length=200,
         verbose_name="titel",
@@ -323,7 +327,18 @@ class DocumentTitle(models.Model):
         help_text="Transkription"
         )
     document_utc_add = models.DateTimeField(
-        auto_now_add=True)
+        auto_now_add=True,
+        verbose_name="einreichungsdatum",
+    )
+    User = settings.AUTH_USER_MODEL
+    submitted_by = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,  # Users are not supposed to be delible
+        related_name="contributions",
+        verbose_name="eingereicht durch",
+        help_text="Benutzer*in, die/der diese Transkription eingereicht hat",
+        editable=False
+    )
     document_slug = models.SlugField(
         unique=True,
         )
@@ -333,6 +348,7 @@ class DocumentTitle(models.Model):
     class Meta:
         verbose_name = "dokument"
         verbose_name_plural = "dokumente"
+        get_latest_by = "document_utc_add"
 
     def __str__(self):
         return self.title_name
@@ -344,6 +360,3 @@ class DocumentTitle(models.Model):
                            'refslug': self.parent_refnumber.refnumber_slug,
                            'docslug': self.document_slug
                            })
-
-
-
