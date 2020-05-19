@@ -1,5 +1,6 @@
 from datetime import datetime
 from django import forms
+
 from transcripta.transcripts.models import Institution, RefNumber, DocumentTitle
 
 
@@ -46,7 +47,9 @@ class DocumentTitleForm(forms.ModelForm):
     #add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(DocumentTitleForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
+        for name in self.fields:
+            if isinstance(self.fields[name], forms.BooleanField):
+                continue
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
                 'placeholder': self.fields[name].help_text, #ToDo: let placeholder depend on input type
@@ -101,4 +104,6 @@ class DocumentTitleForm(forms.ModelForm):
                   'transcription_scope',
                   'comments',
                   'transcription_text',
-                  'document_slug']
+                  'document_slug',
+                  'submitted_by_anonymous',
+                  ]

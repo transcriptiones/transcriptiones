@@ -236,7 +236,12 @@
                 <tr>
                     <th scope="row" id="tablestyle">Hochgeladen</th>
                     <td>
-                        Durch {{ documenttitle.submitted_by }} am {{ documenttitle.document_utc_add.date }}
+                        {% if documenttitle.submitted_by_anonymous %}
+                          Anonym
+                        {% else %}
+                          Durch {{ documenttitle.submitted_by }}
+                        {% endif %}
+                        am {{ documenttitle.document_utc_add.date }}
                         um {{ documenttitle.document_utc_add.time }}
                     </td>
                 </tr>

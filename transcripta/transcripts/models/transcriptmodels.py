@@ -340,6 +340,11 @@ class DocumentTitle(models.Model):
         help_text="Benutzer*in, die/der diese Transkription eingereicht hat",
         editable=False
     )
+    submitted_by_anonymous = models.BooleanField(
+        default=False,
+        verbose_name="Anonymer Beitrag",
+        help_text="Anwählen, um bei der Transkription keinen Benutzernamen anzuzeigen",
+    )
     document_slug = models.SlugField()
     active = models.BooleanField(default=True, editable=False)  # Whether this is the latest version
 
