@@ -1,0 +1,37 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <table class="table table-light">
+        <tbody>
+            <tr>
+                <th scope="row">Benutzername</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Email-Adresse</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Transkriptionen anonym publizieren</th>
+                <td>
+                    {% if user.anonymous_publication %}
+                    Ja
+                    {% else %}
+                    Nein
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div><a href="{% url 'password_change' %}">Passwort ändern</a></div>
+<div><a href="{% url 'user_update' %}">Profil anpassen</a></div>
+<div><a href="{% url 'logout' %}">Abmelden</a></div>
+
+
+<!-- ToDo: List contributions -->
+
+{% endblock %}

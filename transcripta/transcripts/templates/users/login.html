@@ -1,0 +1,47 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Benutzername und Passwort stimmen nicht überein. Versuchen Sie es erneut.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+<p>
+    Ihr Account hat keinen Zugriff auf diese Seite.
+    Melden Sie sich mit einem berechtigten Account an.
+</p>
+    {% else %}
+<p>Um diese Seite zu besuchen, müssen Sie angemeldet sein.</p>
+    {% endif %}
+{% endif %}
+
+{% if user.is_authenticated %}
+    <p>Sie sind bereits angemeldet.</p>
+{% else %}
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+
+    <button type="submit">Anmelden</button>
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+<a href="{% url 'password_reset' %}">Passwort vergessen?</a>
+
+{% endif %}
+
+
+
+{% endblock content %}
