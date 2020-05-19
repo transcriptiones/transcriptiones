@@ -105,20 +105,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-#Specify custm user model
+#Specify custom user model
 AUTH_USER_MODEL = 'transcripts.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'de-ch'
+TIME_ZONE = 'Europe/Zurich'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
