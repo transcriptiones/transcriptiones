@@ -7,11 +7,9 @@ from .views.uploadviews import AddDocumentView
 
 
 class AddDocumentFormTest(TestCase):
-    def setUp(self):
-        self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username='testuser', email='test@test.ch', password='pwd')
-        institution = Institution.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+        cls.institution = Institution.objects.create(
             institution_name='Testinstitut',
             street='Teststr. 123',
             zip_code=1234,
@@ -19,17 +17,22 @@ class AddDocumentFormTest(TestCase):
             country='Testland',
             site_url=''
         )
-        refnumber = institution.refnumbers.create(
+        cls.refnumber = cls.institution.refnumbers.create(
             refnumber_name='TEST 123456',
             refnumber_title='TEST',
             collection_link='',
             refnumber_slug='test123456'
         )
+        cls.user = User.objects.create_user(
+            username='testuser', email='test@test.ch', password='pwd')
+
+    def setUp(self):
+        self.factory = RequestFactory()
         self.testdocument_data = {
             'title_name': 'testtitle',
             'transcription_text': 'lol',
-            'parent_institution': f'{institution.id}',
-            'parent_refnumber': f'{refnumber.id}',
+            'parent_institution': f'{self.institution.id}',
+            'parent_refnumber': f'{self.refnumber.id}',
             'transcription_scope': 'komplett',
             'document_slug': 'testslug',
         }
@@ -55,5 +58,53 @@ class AddDocumentFormTest(TestCase):
         AddDocumentView.as_view()(request)
         edit_time = DocumentTitle.objects.latest().document_utc_add
         now = datetime.now(tz=edit_time.tzinfo)
-        self.assertLessEqual(abs(now-edit_time), timedelta(seconds=1),
+        self.assertLessEqual(abs(now - edit_time), timedelta(seconds=1),
                              f"Creation time {edit_time} is too far from now ({now} {now.tzinfo}).")
+
+
+class DocumentVersioningTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.institution = Institution.objects.create(
+            institution_name='Testinstitut',
+            street='Teststr. 123',
+            zip_code=1234,
+            city='Testhausen',
+            country='Testland',
+            site_url=''
+        )
+        cls.refnumber = cls.institution.refnumbers.create(
+            refnumber_name='TEST 123456',
+            refnumber_title='TEST',
+            collection_link='',
+            refnumber_slug='test123456'
+        )
+        cls.user = User.objects.create_user(
+            username='testuser', email='test@test.ch', password='pwd')
+
+    def setUp(self):
+        self.doc = DocumentTitle.all_objects.create(title_name='testtitle', transcription_text='lol',
+                                                    parent_institution=self.institution,
+                                                    parent_refnumber=self.refnumber, transcription_scope='komplett',
+                                                    document_slug='testslug', submitted_by=self.user)
+        self.pk1 = self.doc.pk
+        self.doc.title_name = "Test Title (proper casing!)"
+        self.doc.save()
+        self.pk2 = self.doc.pk
+
+    def test_separate_new_object(self):
+        self.assertEqual(DocumentTitle.all_objects.filter(document_id=self.doc.document_id).count(), 2)
+        self.assertNotEqual(self.pk1, self.pk2)
+        self.assertNotEqual(DocumentTitle.all_objects.get(pk=self.pk1).title_name,
+                            DocumentTitle.all_objects.get(pk=self.pk2).title_name)
+        self.assertEqual(DocumentTitle.all_objects.get(pk=self.pk1).submitted_by,
+                         DocumentTitle.all_objects.get(pk=self.pk2).submitted_by)
+
+    def test_activity(self):
+        self.assertFalse(DocumentTitle.all_objects.get(pk=self.pk1).active)
+        self.assertTrue(DocumentTitle.all_objects.get(pk=self.pk2).active)
+
+    def test_object_manager(self):
+        query_set = DocumentTitle.objects.filter(document_id=self.doc.document_id)
+        self.assertEqual(query_set.count(), 1)
+        self.assertTrue(query_set.get().active)
