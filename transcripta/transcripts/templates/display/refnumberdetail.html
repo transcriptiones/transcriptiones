@@ -8,40 +8,50 @@
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#RefNumberDetails">
-        <a>Informationen zur Signatur</a>
+        <a class="card-link">Informationen zur Signatur</a>
     </div>
     <div id="RefNumberDetails" class="collapse show">
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th scope="row" id="tablestyle">Institution</th>
-                    <td>{{ refnumber.holding_institution }}</td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Signatur</th>
-                    <td>{{ refnumber.refnumber_name }}</td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Titel der Verzeichniseinheit</th>
-                    <td>
-                        {% if refnumber.refnumber_title %}
-                        {{ refnumber.refnumber_title }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Link zum Archivbestand</th>
-                    <td>
-                        {% if refnumber.collection_link %}
-                        <a href="{{ refnumber.collection_link }}" target="_blank">{{ refnumber.collection_link }}</a>
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ refnumber.holding_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ refnumber.refnumber_name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Titel der Verzeichniseinheit
+                </div>
+                <div class="col-sm-8">
+                    {% if refnumber.refnumber_title %}
+                    {{ refnumber.refnumber_title }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Link zum Archivbestand
+                </div>
+                <div class="col-sm-8">
+                    {% if refnumber.collection_link %}
+                    <a href="{{ refnumber.collection_link }}" target="_blank">{{ refnumber.collection_link }}</a>
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -49,31 +59,33 @@
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#differentDocuments">
-        <a>Dokumente in dieser Signatur</a>
+        <a class="card-link">Dokumente in dieser Signatur</a>
     </div>
 
 
     <div id="differentDocuments" class="collapse show">
         <div class="card-body">
-            {% if refnumber.documents.all %}
-            <h2 class="mb-5">{% for documenttitle in refnumber.documents.all|dictsort:"title_name" %}</h2>
-            <div class="container p-2 my-0">
-                <a href="{{ documenttitle.get_absolute_url }}">
-                    <div>{{ documenttitle.title_name }}</div>
-                </a>
+            <div class="row">
+                <div>
+                    {% if refnumber.documents.all %}
+                    {% for documenttitle in refnumber.documents.all|dictsort:"title_name" %}
+                    <div class="col-sm-12">
+                        <a href="{{ documenttitle.get_absolute_url }}">
+                            {{ documenttitle.title_name }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    In dieser Signatur sind noch keine Dokumente enthalten
+                    {% endif %}
+                </div>
             </div>
-            {% endfor %}
-
-            {% else %}
-            In dieser Signatur sind noch keine Dokumente enthalten
-            {% endif %}
         </div>
     </div>
 </div>
 
-    <div id="backto">
-        <a href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a>
-    </div>
+<div id="backto">
+     <a class="btn btn-secondary" href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a>
+</div>
 
-
-    {% endblock content %}
+{% endblock content %}

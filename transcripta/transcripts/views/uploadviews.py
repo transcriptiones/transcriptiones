@@ -133,14 +133,15 @@ class AddDocumentView(View):
             document_slug = slugify(data.get("title_name"))
             data["document_slug"] = document_slug
 
-            form = self.form_class(data)
+            document = DocumentTitle(submitted_by=self.request.user)  # Set submitter to current user
+            form = self.form_class(data, instance=document)
 
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('thanks')
+                return HttpResponse('thanks')
 
             else:
-                return HttpResponse("form invalid")
+                return HttpResponse(str(form.errors).encode())
                 #Exception Handling goes here!
                 #
                 #return render(self.request, self.template_name,

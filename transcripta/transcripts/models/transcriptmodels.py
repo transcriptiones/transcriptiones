@@ -2,6 +2,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Q, Max, UniqueConstraint
 from django.urls import reverse
 
 
@@ -132,7 +133,10 @@ class SourceType(models.Model):
         return self.type_name
 
 
-class SearchManager(models.Manager):
+class DocumentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True)
+
     def search(self, kwargs):
         qs = self.get_queryset()
         
@@ -142,7 +146,6 @@ class SearchManager(models.Manager):
 
             if kwargs.get('f1') == 'refnumber':
                 qs = qs.filter(parent_refnumber__refnumber_name=kwargs.get('q1'))
-
 
         if kwargs.get('b1') == 'isnot':
             if kwargs.get('f1') == 'institution':
@@ -157,8 +160,7 @@ class SearchManager(models.Manager):
 
             if kwargs.get('f1') == 'refnumber':
                 qs = qs.filter(parent_refnumber__refnumber_name__icontains=kwargs.get('q1'))
-        
-                
+
         return qs
 
 
@@ -173,7 +175,6 @@ class DocumentTitle(models.Model):
 
     document_id = models.UUIDField(
         default=uuid.uuid1,
-        unique=True,
         editable=False,
         verbose_name="urtext-id",
         help_text="ID des Urtexts; konstant zwischen aktuellen und alten Versionen einer Transkription",
@@ -339,16 +340,20 @@ class DocumentTitle(models.Model):
         help_text="Benutzer*in, die/der diese Transkription eingereicht hat",
         editable=False
     )
-    document_slug = models.SlugField(
-        unique=True,
-        )
+    document_slug = models.SlugField()
+    active = models.BooleanField(default=True, editable=False)  # Whether this is the latest version
 
-    objects = SearchManager()
+    all_objects = models.Manager()  # Absolutely all objects, even outdated versions
+    objects = DocumentManager()  # Only current versions
 
     class Meta:
         verbose_name = "dokument"
         verbose_name_plural = "dokumente"
         get_latest_by = "document_utc_add"
+        constraints = [
+            UniqueConstraint(fields=['document_slug'], condition=Q(active=True), name='unique_active_slug'),
+            UniqueConstraint(fields=['document_id'], condition=Q(active=True), name='unique_active_docid'),
+        ]
 
     def __str__(self):
         return self.title_name
@@ -360,3 +365,11 @@ class DocumentTitle(models.Model):
                            'refslug': self.parent_refnumber.refnumber_slug,
                            'docslug': self.document_slug
                            })
+
+    def save(self, *args, **kwargs):
+        # Always save a new version alongside any old ones
+        self.pk = None
+        kwargs['force_insert'] = True
+        # Set all old versions to be inactive
+        type(self).all_objects.filter(document_id=self.document_id).update(active=False)
+        super().save(*args, **kwargs)
