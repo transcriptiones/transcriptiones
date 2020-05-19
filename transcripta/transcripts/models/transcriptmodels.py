@@ -366,10 +366,20 @@ class DocumentTitle(models.Model):
                            'docslug': self.document_slug
                            })
 
-    def save(self, *args, **kwargs):
-        # Always save a new version alongside any old ones
-        self.pk = None
-        kwargs['force_insert'] = True
-        # Set all old versions to be inactive
-        type(self).all_objects.filter(document_id=self.document_id).update(active=False)
-        super().save(*args, **kwargs)
+    def save(self, force_update=False, *args, **kwargs):
+        """Save the current instance.
+
+        Custom behaviour: This will normally create a new object in storage every time, marking any previous
+        versions (i.e. sharing the same document_id) as inactive.
+        Note that this only applies to manual calls to save(), not other methods like update().
+
+        To operate on the existing model instead (e.g. for quickfixes), set force_update=True. This only works for
+        objects which have been saved before and will raise ValueError for pk=None, or DatabaseError for unknown pks.
+        This option cannot be combined with force_insert.
+        """
+        if not force_update:
+            # Save a new version alongside any old ones
+            self.pk = None
+            # Set all old versions to be inactive
+            type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk).update(active=False)
+        super().save(force_update=force_update, *args, **kwargs)
