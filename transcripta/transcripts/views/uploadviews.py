@@ -18,7 +18,7 @@ class AddInstitutionView(View):
 
     #display form if accessed via GET
     def get(self, *args, **kwargs):
-        if self.request.method =="GET":
+        if self.request.method == "GET":
             form = self.form_class()
             return render(self.request, self.template_name,
                           {"form": form})

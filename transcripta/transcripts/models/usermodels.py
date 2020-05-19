@@ -4,6 +4,8 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 
+# Extention of BaseUserManager to handle creation of Custom Users
+
 class UserManager(BaseUserManager):
 
     use_in_migrations = True
@@ -12,13 +14,6 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('Bitte geben Sie eine Email-Addresse an')
 
-        #normalize passwords if created from form.cleaned_data
-        #this works but probably is not the best way...
-        #if extra_fields['password1'] and extra_fields['password2']:
-        #    password = extra_fields['password1']
-        #    extra_fields.pop('password1')
-        #    extra_fields.pop('password2')
-            
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -26,6 +21,14 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, password=None, **extra_fields):
+        
+        #normalize passwords if created from form.cleaned_data
+        #this works but probably is not the best way...
+        if extra_fields['password1'] and extra_fields['password2']:
+            password = extra_fields['password1']
+            extra_fields.pop('password1')
+            extra_fields.pop('password2')
+
         extra_fields.setdefault('email_confirmed', False)
         extra_fields.setdefault('is_active', False)
         extra_fields.setdefault('is_staff', False)
@@ -43,6 +46,8 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+
+# Custom User model.
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(unique=True, max_length=150, blank=False)

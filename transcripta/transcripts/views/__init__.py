@@ -2,4 +2,4 @@ from .displayviews import InstitutionListView, InstitutionDetailView, RefNumberD
 from .infoviews import StartView
 from .searchviews import SearchView, ResultsView
 from .uploadviews import AddInstitutionView, AddRefNumberView, AddDocumentView, RedirectView, load_refnumbers
-from .userviews import signup, AccountActivationSentView, activate
+from .userviews import signup, AccountActivationSentView, activate, CustomLoginView, CustomPasswordChangeView, userprofile, UserUpdateView, CustomPasswordResetView
