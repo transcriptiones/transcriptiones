@@ -105,8 +105,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-#Specify custom user model
+
+# Configuration for Authentication
+
 AUTH_USER_MODEL = 'transcripts.User'
+LOGIN_REDIRECT_URL = 'start'
+LOGIN_URL = 'login'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -129,5 +134,6 @@ STATICFILES_DIRS = [
 
 
 # Email configuration
-# print emails to console for development purposes
+# print emails to console for development purposes.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = "dominic.weber@librarylab.ethz.ch" #Change this as soon as we have a domain
