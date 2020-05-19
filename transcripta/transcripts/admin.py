@@ -23,6 +23,9 @@ class DocumentAdmin(admin.ModelAdmin):
             obj.submitted_by = request.user
         super().save_model(request, obj, form, change)
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(active=True)
+
 
 admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(RefNumber, RefNumberAdmin)
