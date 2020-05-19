@@ -15,238 +15,279 @@
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
-        <a>Übersicht</a>
+        <a class="card-link">Übersicht</a>
     </div>
 
     <div id="DocumentOverview" class="collapse show">
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th scope="row" id="tablestyle">Institution</th>
-                    <td>{{ documenttitle.parent_institution }}</td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Signatur</th>
-                    <td>{{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}</td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Transkribierte Teile des Dokuments</th>
-                    <td>{{ documenttitle.transcription_scope }}</td>
-                </tr>
-            </table>
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Transkribierte Teile des Dokuments
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.transcription_scope }}
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-    <div>
-        <h4>Transkription</h4>
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentTranscription">
+        <a class="card-link">Transkription</a>
     </div>
 
-<textarea id="transcriptionText">
-    {{ documenttitle.transcription_text }}
-</textarea>
+    <div id="DocumentTranscription" class="collapse show">
+        <div class="card-body">
+            <textarea id="transcriptionText">
+                {{ documenttitle.transcription_text }}
+            </textarea>
+        </div>
+    </div>
+</div>
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentMetadata">
-        <a>Inhaltliche Metadaten</a>
+        <a class="card-link">Inhaltliche Metadaten</a>
     </div>
 
     <div id="DocumentMetadata" class="collapse show">
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th scope="row" id="tablestyle">Beteiligte Personen</th>
-                    <td>
-                        {% if documenttitle.author.all %}
-                        {% for author in documenttitle.author.all %}
-                        {{ author }}<br />
-                        {% endfor %}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
+            <div class="row">
+                <div class="col-sm-4">
+                    Beteiligte Personen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.author.all %}
+                    {% for author in documenttitle.author.all %}
+                    {{ author }}
+                    {% endfor %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
                 {% if documenttitle.start_year and documenttitle.end_year %}
-                <tr>
-                    <th scope="row" id="tablestyle">Datierung von</th>
-                    <td>
-                        {% if documenttitle.start_day %}
-                        {{ documenttitle.start_day }}.
-                        {% endif %}
-                        {% if start_month_name %}
-                        {{ start_month_name|lower|capfirst }}
-                        {% endif %}
-                        {{ documenttitle.start_year }}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">bis</th>
-                    <td>
-                        {% if documenttitle.end_day %}
-                        {{ documenttitle.end_day }}.
-                        {% endif %}
-                        {% if end_month_name %}
-                        {{ end_month_name|lower|capfirst }}
-                        {% endif %}
-                        {{ documenttitle.end_year }}
-                    </td>
-                </tr>
+                <div class="col-sm-4">
+                    Datierung von
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.start_day %}
+                    {{ documenttitle.start_day }}.
+                    {% endif %}
+                    {% if start_month_name %}
+                    {{ start_month_name|lower|capfirst }}
+                    {% endif %}
+                    {{ documenttitle.start_year }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    bis
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.end_day %}
+                    {{ documenttitle.end_day }}.
+                    {% endif %}
+                    {% if end_month_name %}
+                    {{ end_month_name|lower|capfirst }}
+                    {% endif %}
+                    {{ documenttitle.end_year }}
+                </div>
                 {% elif documenttitle.start_year and not documenttitle.end_year %}
-                <tr>
-                    <th scope="row" id="tablestyle">Datierung</th>
-                    <td>
-                        {% if documenttitle.start_day %}
-                        {{ documenttitle.start_day }}.
-                        {% endif %}
-                        {% if start_month_name %}
-                        {{ start_month_name|lower|capfirst }}
-                        {% endif %}
-                        {{ documenttitle.start_year }}
-                    </td>
-                </tr>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Datierung
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.start_day %}
+                    {{ documenttitle.start_day }}.
+                    {% endif %}
+                    {% if start_month_name %}
+                    {{ start_month_name|lower|capfirst }}
+                    {% endif %}
+                    {{ documenttitle.start_year }}
+                </div>
                 {% else %}
-                <tr>
-                    <th scope="row" id="tablestyle">Datierung</th>
-                    <td>Keine Angabe</td>
-                </tr>
+                <div class="col-sm-4">
+                    Datierung
+                </div>
+                <div class="col-sm-8">
+                    Keine Angabe
+                </div>
                 {% endif %}
-                <tr>
-                    <th scope="row" id="tablestyle">Entstehungsort</th>
-                    <td>
-                        {% if documenttitle.place_name %}
-                        {{ documenttitle.place_name }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Sprachen</th>
-                    <td>
-                        {% if documenttitle.language.all %}
-                        {% for language in documenttitle.language.all %}
-                        {{ language }}<br />
-                        {% endfor %}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Archivalienart</th>
-                    <td>
-                        {% if documenttitle.source_type %}
-                        {{documenttitle.source_type.parent_type}} - {{ documenttitle.source_type }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Entstehungsort
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.place_name %}
+                    {{ documenttitle.place_name }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Sprachen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.language.all %}
+                    {% for language in documenttitle.language.all %}
+                    {{ language }}
+                    {% endfor %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Archivalienart
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.source_type %}
+                    {{documenttitle.source_type.parent_type}} - {{ documenttitle.source_type }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentMenuscriptDescription">
-        <a>Manuskriptbeschreibung</a>
+        <a class="card-link">Manuskriptbeschreibung</a>
     </div>
 
     <div id="DocumentMenuscriptDescription" class="collapse show">
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th scope="row" id="tablestyle">Beschreibstoff</th>
-                    <td>
-                        {% if documenttitle.material %}
-                        {{ documenttitle.material|lower|capfirst }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Abmessungen</th>
-                    <td>
-                        {% if documenttitle.measurements_length and documenttitle.measurements_width %}
-                        {{ documenttitle.measurements_length }} x {{ documenttitle.measurements_width }} cm
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Umfang</th>
-                    <td>
-                        {% if documenttitle.pages and documenttitle.paging_system %}
-                        {{ documenttitle.pages }}
-                        {% if documenttitle.paging_system == "PAGINIERUNG" %}
-                        s.
-                        {% elif documenttitle.paging_system == "FOLIIERUNG" %}
-                        fol.
-                        {% endif %}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Illuminiert</th>
-                    <td>
-                        {% if documenttitle.illuminated %}
-                        {{ documenttitle.illuminated|lower|capfirst }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Siegel</th>
-                    <td>
-                        {% if documenttitle.seal %}
-                        {{ documenttitle.seal|lower|capfirst }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
+            <div class="row">
+                <div class="col-sm-4">
+                    Beschreibstoff
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.material %}
+                    {{ documenttitle.material|lower|capfirst }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Abmessungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.measurements_length and documenttitle.measurements_width %}
+                    {{ documenttitle.measurements_length }} x {{ documenttitle.measurements_width }} cm
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Umfang
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.pages and documenttitle.paging_system %}
+                    {{ documenttitle.pages }}
+                    {% if documenttitle.paging_system == "PAGINIERUNG" %}
+                    s.
+                    {% elif documenttitle.paging_system == "FOLIIERUNG" %}
+                    fol.
+                    {% endif %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Illuminiert
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.illuminated %}
+                    {{ documenttitle.illuminated|lower|capfirst }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Siegel
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.seal %}
+                    {{ documenttitle.seal|lower|capfirst }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentComments">
-        <a>Kommentare und Links</a>
+         <a class="card-link">Kommentare und Links</a>
     </div>
 
     <div id="DocumentComments" class="collapse show">
         <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th scope="row" id="tablestyle">Editorische und inhaltliche Anmerkungen</th>
-                    <td>
-                        {% if documenttitle.comments %}
-                        {{ documenttitle.comments }}
-                        {% else %}
-                        Keine Angabe
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" id="tablestyle">Hochgeladen</th>
-                    <td>
-                        Durch {{ documenttitle.submitted_by }} am {{ documenttitle.document_utc_add.date }}
-                        um {{ documenttitle.document_utc_add.time }}
-                    </td>
-                </tr>
-            </table>
+            <div class="row">
+                <div class="col-sm-4">
+                    Editorische und inhaltliche Anmerkungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.comments %}
+                    {{ documenttitle.comments }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Hochgeladen
+                </div>
+                <div class="col-sm-8">
+                    Durch {{ documenttitle.submitted_by }} am {{ documenttitle.document_utc_add.date }}
+                    um {{ documenttitle.document_utc_add.time }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-    <div id="backto">
-        <a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
-    </div>
+<div id="backto">
+     <a class="btn btn-secondary" href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
+</div>
 
-    {% endblock content %}
+{% endblock content %}
