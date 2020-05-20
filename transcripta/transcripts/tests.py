@@ -1,5 +1,7 @@
+import uuid
 from datetime import datetime, timedelta
 
+from django.db.utils import DatabaseError
 from django.test import TestCase, RequestFactory
 
 from .models import Institution, User, DocumentTitle
@@ -108,3 +110,24 @@ class DocumentVersioningTest(TestCase):
         query_set = DocumentTitle.objects.filter(document_id=self.doc.document_id)
         self.assertEqual(query_set.count(), 1)
         self.assertTrue(query_set.get().active)
+
+    def test_force_update(self):
+        newtitle = "New and improved testtitle!"
+        initial_rowcount = DocumentTitle.all_objects.count()
+        self.doc.title_name = newtitle
+        self.doc.save(force_update=True)
+        self.assertEqual(DocumentTitle.all_objects.get(pk=self.pk2).title_name, newtitle)
+        self.assertEqual(DocumentTitle.all_objects.count(), initial_rowcount)
+
+        # New, different object
+        self.doc.pk = None
+        self.doc.document_id = uuid.uuid1()
+        with self.assertRaises(ValueError):
+            self.doc.save(force_update=True)
+        self.assertTrue(self.doc.active)
+
+        self.doc.pk = 12345
+        self.doc.document_id = uuid.uuid1()
+        with self.assertRaises(DatabaseError):
+            self.doc.save(force_update=True)
+        self.assertTrue(self.doc.active)

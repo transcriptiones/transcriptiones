@@ -277,10 +277,15 @@
                 <div class="col-sm-4">
                     Hochgeladen
                 </div>
-                <div class="col-sm-8">
-                    Durch {{ documenttitle.submitted_by }} am {{ documenttitle.document_utc_add.date }}
-                    um {{ documenttitle.document_utc_add.time }}
-                </div>
+              <div class="col-sm-8">
+                {% if documenttitle.submitted_by_anonymous %}
+                  Anonym
+                {% else %}
+                  Durch {{ documenttitle.submitted_by }}
+                {% endif %}
+                am {{ documenttitle.document_utc_add.date }}
+                um {{ documenttitle.document_utc_add.time }}
+              </div>
             </div>
         </div>
     </div>
