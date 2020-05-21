@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from transcripta.transcripts.models import User
-from transcripta.transcripts.forms import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm
+from transcripta.transcripts.forms import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from transcripta.transcripts.tokens import account_activation_token
 from transcripta.settings import DEFAULT_FROM_EMAIL
 
@@ -107,6 +107,11 @@ class UserUpdateView(LoginRequiredMixin, View):
 
                 
 class CustomPasswordResetView(PasswordResetView):
+    form_class = CustomPasswordResetForm
     email_template_name = "users/passwordresetemail.html"
     subject_template_name = "users/passwordresetsubject.txt"
     template_name = "users/passwordreset.html"
+
+class CustomPasswordConfirmView(PasswordResetConfirmView):
+    form_class = CustomSetPasswordForm
+    template_name = "users/passwordresetconfirm.html"
