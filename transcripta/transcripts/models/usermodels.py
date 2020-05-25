@@ -12,7 +12,7 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError('Bitte geben Sie eine Email-Addresse an')
+            raise ValueError('Bitte geben Sie eine E-Mail-Adresse an')
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -52,8 +52,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(unique=True, max_length=150, blank=False)
     email = models.EmailField(unique=True, max_length=255, blank=False)
-    email_confirmed = models.BooleanField('email bestätigt', default=True, help_text='Hat der User die Emailadresse bestätigt?')
-    is_staff = models.BooleanField('staff status', default=False, help_text='Kann sich der User in den Admin-Bereich inloggen?')
+    email_confirmed = models.BooleanField('email bestätigt', default=True, help_text='Hat der User die E-Mailadresse bestätigt?')
+    is_staff = models.BooleanField('staff status', default=False, help_text='Kann sich der User in den Admin-Bereich einloggen?')
     is_active = models.BooleanField('active', default=True, help_text='Ist der User aktiv? False setzen, statt löschen.')
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     anonymous_publication = models.BooleanField('anonyme Publikation', default=False)
