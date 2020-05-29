@@ -12,6 +12,19 @@
 <div>
     <h2>{{ documenttitle.title_name }}</h2>
 </div>
+{% if newest %}
+<div>
+    <h3>
+        {% if newest != documenttitle %}
+        Version vom {{ documenttitle.document_utc_add }}
+        {% elif newest == documenttitle %}
+        Aktuellste Version
+        {% endif %}
+    </h3>
+</div>
+{% endif %}
+
+
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
@@ -36,13 +49,24 @@
                     {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.transcription_scope != documenttitle.transcription_scope %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Transkribierte Teile des Dokuments
                 </div>
                 <div class="col-sm-8">
                     {{ documenttitle.transcription_scope }}
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Letzte Änderungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.commit_message == 'initial' %}
+                    Ursprüngliche Version
+                    {% else %}
+                    {{ documenttitle.commit_message }}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -55,7 +79,7 @@
     </div>
 
     <div id="DocumentTranscription" class="collapse show">
-        <div class="card-body">
+        <div class="card-body {% if newest and newest.transcription_text != documenttitle.transcription_text %}has-changed{% endif %}">
             <textarea id="transcriptionText">
                 {{ documenttitle.transcription_text }}
             </textarea>
@@ -70,22 +94,27 @@
 
     <div id="DocumentMetadata" class="collapse show">
         <div class="card-body">
-            <div class="row">
+            <div class="row {% if newest and newest.author != documenttitle.author %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Beteiligte Personen
                 </div>
                 <div class="col-sm-8">
                     {% if documenttitle.author.all %}
                     {% for author in documenttitle.author.all %}
-                    {{ author }}
+                    {{ author }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
                     {% else %}
                     Keine Angabe
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
-                {% if documenttitle.start_year and documenttitle.end_year %}
+            {% if documenttitle.start_year and documenttitle.end_year %}
+            <div class="row 
+                 {% if newest %}
+                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
+                 has-changed
+                 {% endif %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     Datierung von
                 </div>
@@ -99,7 +128,11 @@
                     {{ documenttitle.start_year }}
                 </div>
             </div>
-            <div class="row">
+            <div class="row 
+                 {% if newest %}
+                 {% if newest.end_year != documenttitle.end_year or newest.end_month != documenttitle.end_month or newest.end_day != documenttitle.end_day %}
+                 {% endif %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     bis
                 </div>
@@ -112,9 +145,14 @@
                     {% endif %}
                     {{ documenttitle.end_year }}
                 </div>
-                {% elif documenttitle.start_year and not documenttitle.end_year %}
             </div>
-            <div class="row">
+            {% elif documenttitle.start_year and not documenttitle.end_year %}
+            <div class="row 
+                 {% if newest %}
+                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
+                 has-changed
+                 {% endif %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     Datierung
                 </div>
@@ -127,16 +165,23 @@
                     {% endif %}
                     {{ documenttitle.start_year }}
                 </div>
-                {% else %}
+            </div>
+            {% else %}
+            <div class="row 
+                 {% if newest %}
+                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day or newest.end_year != documenttitle.end_year or newest.end_month != documenttitle.end_month or newest.end_day != documenttitle.end_day %}
+                 has-changed
+                 {% endif %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     Datierung
                 </div>
                 <div class="col-sm-8">
                     Keine Angabe
                 </div>
-                {% endif %}
             </div>
-            <div class="row">
+            {% endif %}
+            <div class="row {% if newest and newest.place_name != documenttitle.place_name %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Entstehungsort
                 </div>
@@ -148,7 +193,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.language != documenttitle.language %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Sprachen
                 </div>
@@ -162,7 +207,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.source_type != documenttitle.source_type %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Archivalienart
                 </div>
@@ -185,7 +230,7 @@
 
     <div id="DocumentMenuscriptDescription" class="collapse show">
         <div class="card-body">
-            <div class="row">
+            <div class="row {% if newest and newest.material != documenttitle.material %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Beschreibstoff
                 </div>
@@ -197,7 +242,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.measurements_length != documenttitle.measurements_length or newest.measurements_width != documenttitle.measurements_width %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Abmessungen
                 </div>
@@ -209,7 +254,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.pages != documenttitle.pages or newest.paging_system != documenttitle.paging_system %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Umfang
                 </div>
@@ -226,7 +271,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.illuminated != documenttitle.illuminated %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Illuminiert
                 </div>
@@ -238,7 +283,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row {% if newest and newest.seal != documenttitle.seal %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Siegel
                 </div>
@@ -261,7 +306,7 @@
 
     <div id="DocumentComments" class="collapse show">
         <div class="card-body">
-            <div class="row">
+            <div class="row {% if newest and newest.comments != documenttitle.comments %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Editorische und inhaltliche Anmerkungen
                 </div>

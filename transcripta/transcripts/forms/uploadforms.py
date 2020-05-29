@@ -107,3 +107,60 @@ class DocumentTitleForm(forms.ModelForm):
                   'document_slug',
                   'submitted_by_anonymous',
                   ]
+
+
+# Form for editing Metadata
+class EditMetaForm(forms.ModelForm):
+
+    # pass .form-control to form fields
+    def __init__(self, *args, **kwargs):
+        super(EditMetaForm, self).__init__(*args, **kwargs)
+        for name in self.fields:
+                self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.fields[name].help_text,
+                })
+    
+    class Meta:
+        model = DocumentTitle
+        fields = ['author',
+                  'start_year',
+                  'start_month',
+                  'start_day',
+                  'end_year',
+                  'end_month',
+                  'end_day',
+                  'place_name',
+                  'language',
+                  'source_type',
+                  'material',
+                  'measurements_length',
+                  'measurements_width',
+                  'pages',
+                  'paging_system',
+                  'illuminated',
+                  'seal',
+                  'comments',
+                  'commit_message',
+                  'submitted_by_anonymous',
+                  ]
+
+class EditTranscriptForm(forms.ModelForm):
+    
+    # pass .form-control to form fields
+    def __init__(self, *args, **kwargs):
+        super(EditTranscriptForm, self).__init__(*args, **kwargs)
+        for name in self.fields:
+                self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': self.fields[name].help_text,
+                })
+
+        
+    class Meta:
+        model = DocumentTitle
+        fields = ['transcription_scope',
+                  'transcription_text',
+                  'commit_message',
+                  'submitted_by_anonymous',
+                  ]

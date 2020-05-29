@@ -6,11 +6,10 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/de.js"></script>
 <link rel="stylesheet" href="{% static 'upload/formvalidation.css' %}" />
-<script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
 {% endblock dependencies %}
 
 {% block content %}
-<form action="{% url 'document_add' %}" method="post" id="documentTitleForm" dep-ref-url="{% url 'ajax_load_refnumbers' %}" modal-inst-url="{% url 'institution_add' %}" modal-ref-url="{% url 'refnumber_add' %}" class="needs-validation" novalidate>
+<form action="{% url 'editmeta' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}" method="post" id="editMetaForm" class="needs-validation" novalidate>
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="card">
@@ -22,50 +21,14 @@
         <div id="requiredFields" class="collapse show">
             <div class="card-body">
                 <div class="fieldWrapper form-group row">
-                    {{ form.title_name.errors }}
+                    {{ form.commit_message.errors }}
                     <div class="col-sm-3">
-                        <label for="{{ form.title_name.id_for_label }}" class="control-label">
-                            {{ form.title_name.label }}
+                        <label for="{{ form.commit_message.id_for_label }}" class="control-label">
+                            {{ form.commit_message.label }}
                         </label>
                     </div>
                     <div class="col-sm-9">
-                        {{ form.title_name }}
-                        <span class="error"></span>
-                    </div>
-                </div>
-                <div class="fieldWrapper form-group row">
-                    {{ form.parent_institution.errors }}
-                    <div class="col-sm-3">
-                        <label for="{{ form.parent_institution.id_for_label }}" class="control-label">
-                            {{ form.parent_institution.label }}
-                        </label>
-                    </div>
-                    <div class="col-sm-9">
-                        {{ form.parent_institution }}
-                        <span class="error"></span>
-                    </div>
-                </div>
-                <div class="fieldWrapper form-group row">
-                    {{ form.parent_refnumber.errors }}
-                    <div class="col-sm-3">
-                        <label for="{{ form.parent_refnumber.id_for_label }}" class="control-label">
-                            {{ form.parent_refnumber.label }}
-                        </label>
-                    </div>
-                    <div class="col-sm-9">
-                        {{ form.parent_refnumber }}
-                        <span class="error"></span>
-                    </div>
-                </div>
-                <div class="fieldWrapper form-group row">
-                    {{ form.transcription_scope.errors }}
-                    <div class="col-sm-3">
-                        <label for="{{ form.transcription_scope.id_for_label }}" class="control-label">
-                            {{ form.transcription_scope.label }}
-                        </label>
-                    </div>
-                    <div class="col-sm-9">
-                        {{ form.transcription_scope }}
+                        {{ form.commit_message }}
                         <span class="error"></span>
                     </div>
                 </div>
@@ -78,7 +41,7 @@
                 Inhaltliche Metadaten
             </a>
         </div>
-        <div id="textualMetadata" class="collapse">
+        <div id="textualMetadata" class="collapse show">
             <div class="card-body">
                 <div class="fieldWrapper form-group row">
                     {{ form.author.errors }}
@@ -186,7 +149,7 @@
                 Manuskriptbeschreibung
             </a>
         </div>
-        <div id="manuscriptMetadata" class="collapse">
+        <div id="manuscriptMetadata" class="collapse show">
             <div class="card-body">
                 <div class="fieldWrapper form-group row">
                     {{ form.material.errors }}
@@ -274,7 +237,7 @@
                 Kommentare und Links
             </a>
         </div>
-        <div id="miscMetadata" class="collapse">
+        <div id="miscMetadata" class="collapse show">
             <div class="card-body">
                 <div class="fieldWrapper form-group row">
                     {{ form.comments.errors }}
@@ -287,37 +250,12 @@
                         {{ form.comments }}
                         <span class="error"></span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header" data-toggle="collapse" href="#transcript">
-            <a class="card-link">
-                Transkription
-            </a>
-        </div>
-        <div id="transcript" class="collapse show">
-            <div class="card-body">
-                <div>
-                    <div class="fieldWrapper form-group row">
-                        {{ form.transcription_text.errors }}
-                        <div class="col-sm-3">
-                            <label for="{{ form.transcription_text.id_for_label }}" class="control-label">
-                                {{ form.transcription_text.label }}
-                            </label>
-                        </div>
-                        <div class="col-sm-9">
-                            {{ form.transcription_text }}
-                            <span class="error"></span>
-                        </div>
+                    <div class="fieldWrapper form-group" title="{{ form.submitted_by_anonymous.help_text }}">
+                        {{ form.submitted_by_anonymous }}
+                        <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="control-label align-middle ml-2">
+                          {{ form.submitted_by_anonymous.label }}
+                        </label>
                     </div>
-                  <div class="fieldWrapper form-group" title="{{ form.submitted_by_anonymous.help_text }}">
-                    {{ form.submitted_by_anonymous }}
-                    <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="control-label align-middle ml-2">
-                      {{ form.submitted_by_anonymous.label }}
-                    </label>
-                  </div>
                 </div>
             </div>
         </div>
@@ -325,23 +263,6 @@
     <button type="button" class="btn btn-secondary" id="submitButtonDocument">Absenden</button> <!-- Does this still work with a different value? -->
 </form>
 
-
-<!-- Define institutionModal. Does the modal div need to be in this file? -->
-<div class="modal fade" id="institutionModal" tabindex="-1" role="dialog" aria-labelledby="institutionModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-        </div>
-    </div>
-</div>
-
-<!-- Define refNumberModal. Does the modal div need to be in this file? -->
-<div class="modal fade" id="refNumberModal" tabindex="-1" role="dialog" aria-labelledby="refNumberModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
 
 <!-- Define confirmationModal-->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true" data-backdrop="static">
@@ -382,5 +303,5 @@
 {% endblock content %}
 
 {% block javascript %}
-<script src="{% static 'upload/uploadscripts.js' %}"></script>
+<script src="{% static 'upload/editmetascripts.js' %}"></script>
 {% endblock javascript %}

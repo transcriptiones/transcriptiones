@@ -1,6 +1,4 @@
-﻿//import { ClassicEditor } from "./ckeditor5/build/ckeditor";
-
-/*
+﻿/*
  * 
  * Handlers for buttons
  * 
@@ -364,14 +362,13 @@ function enableDate(event) {
 //change number of possible days based on selection of month
 
 $('#id_start_month, #id_end_month').on('change', function (event) {
-    console.log($(event.target).val());
     if (['4', '6', '9', '11'].includes($(event.target).val())) {
-        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"]').show();
-        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="31"]').hide();
+        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"]').prop('disabled', false);
+        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="31"]').prop('disabled', true);
     } else if ($(event.target).val() == '2') {
-        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"], option[value="31"]').hide();
+        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"], option[value="31"]').prop('disabled', true);
     } else {
-        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option:hidden').show();
+        $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option:hidden').prop('disabled', false);
     }
 });
 
