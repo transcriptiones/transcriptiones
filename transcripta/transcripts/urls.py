@@ -12,13 +12,16 @@ urlpatterns = [
     path('display/<slug:instslug>/', InstitutionDetailView.as_view(), name='institutiondetail'),
     path('display/<slug:instslug>/<slug:refslug>/', RefNumberDetailView.as_view(), name='refnumberdetail'),
     path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/', DocumentTitleDetailView.as_view(), name='documenttitledetail'),
-
+    path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/history/', DocumentHistoryView.as_view(), name='documenthistory'),
+    
     # urls for upload views
     path('upload/', AddDocumentView.as_view(), name='document_add'),
     path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
     path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),
     path('upload/thanks/', RedirectView.as_view(), name='thanks'),
+    path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='editmeta'),
+    path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edittranscript'),
 
     # urls for search views
     path('search/', SearchView.as_view(), name='searchform'),

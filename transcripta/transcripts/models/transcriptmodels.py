@@ -347,9 +347,15 @@ class DocumentTitle(models.Model):
     )
     document_slug = models.SlugField()
     active = models.BooleanField(default=True, editable=False)  # Whether this is the latest version
+    commit_message = models.CharField(
+        max_length=255,
+        verbose_name="Änderungen",
+        help_text="Knappe Beschreibung der Änderungen",
+        default="initial"
+        )
 
-    all_objects = models.Manager()  # Absolutely all objects, even outdated versions
     objects = DocumentManager()  # Only current versions
+    all_objects = models.Manager()  # Absolutely all objects, even outdated versions
 
     class Meta:
         verbose_name = "dokument"
@@ -370,6 +376,11 @@ class DocumentTitle(models.Model):
                            'refslug': self.parent_refnumber.refnumber_slug,
                            'docslug': self.document_slug
                            })
+
+    #model method to return queryset of all versions with the same document_id
+    def get_versions(self):
+        versions = type(self).all_objects.filter(document_id=self.document_id).order_by('-document_utc_add')
+        return versions
 
     def save(self, force_update=False, *args, **kwargs):
         """Save the current instance.

@@ -472,3 +472,6 @@ button[type="submit"] {
 .col-sm-4 {
   font-weight: 700;
 }
+
+.has-changed {
+    background-color: rgba(52, 58, 64, 0.5)

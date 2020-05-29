@@ -23,7 +23,6 @@ class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         
         #normalize passwords if created from form.cleaned_data
-        #this works but probably is not the best way...
         if 'password1' in extra_fields and 'password2' in extra_fields:
             password = extra_fields.pop('password1')
             del extra_fields['password2']

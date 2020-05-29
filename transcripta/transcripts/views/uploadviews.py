@@ -1,11 +1,11 @@
 import json
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from django.utils.text import slugify
-from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm
+from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
 from transcripta.transcripts.models import Author, Institution, RefNumber, DocumentTitle
 
 
@@ -90,7 +90,6 @@ class AddRefNumberView(View):
             return render(self.request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
 
 
-
 #View for creating new document object
 class AddDocumentView(View):
     form_class = DocumentTitleForm
@@ -99,9 +98,12 @@ class AddDocumentView(View):
     #display the form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method == "GET":
-            form = self.form_class()
-            return render(self.request, self.template_name,
-                          {"form": form})
+            # prepopulate field if user wants to publish anonymously
+            if self.request.user.anonymous_publication:
+                form = self.form_class(initial={'submitted_by_anonymous': True})
+            else:
+                form = self.form_class()
+            return render(self.request, self.template_name, {"form": form})
 
     #handle the form if accessed via POST
     def post(self, *args, **kwargs):
@@ -111,6 +113,7 @@ class AddDocumentView(View):
             #if there are authors in the formdata
             #add new authors to database
             #get list of new authors
+            #?? make this a shared form method tor AddDocumentTitleForm and EditMetaForm?
             if "author" in data:
                 authors = list()
                 newauthors = list()
@@ -138,7 +141,7 @@ class AddDocumentView(View):
 
             if form.is_valid():
                 form.save()
-                return HttpResponse('thanks')
+                return redirect('thanks')
 
             else:
                 return HttpResponse(str(form.errors).encode())
@@ -159,3 +162,131 @@ def load_refnumbers(request):
 
     refnumbers = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('holding_institution')
     return render(request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
+
+
+# view for editing Metadata
+# maybe write abstract class EditView and subclass for Metadata and Transcript?
+class EditMetaView(UpdateView):
+    model = DocumentTitle
+    form_class = EditMetaForm
+    template_name = "upload/editmeta.html"
+
+    # get object to update
+    def get_object(self):
+        institution = self.kwargs.get('instslug')
+        refnumber = self.kwargs.get('refslug')
+        document = self.kwargs.get('docslug')
+        queryset = DocumentTitle.objects.filter(parent_institution__institution_slug = institution)
+        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
+        return queryset.get(document_slug = document)
+
+    def get_context_data(self, **kwargs):
+        # if accessed via GET, clear field commit_message
+        if self.request.method == "GET":
+            context = super().get_context_data(**kwargs)
+            document = self.get_object()
+            document.commit_message = ''
+
+            # prepopulate field if user wants to publish anonymously
+            if self.request.user.anonymous_publication:
+                document.submitted_by_anonymous = True
+
+            form = self.form_class(instance=document)
+            context['form'] = form
+            return context
+
+        return super().get_context_data(**kwargs)
+
+    #handle the form if accesed via POST
+    def post(self, *args, **kwargs):
+        if self.request.method == "POST":
+            data = self.request.POST.copy()
+            
+            #if there are authors in the formdata
+            #add new authors to database
+            #get list of new authors
+            #?? make this a shared form method tor AddDocumentTitleForm and EditMetaForm?
+            if "author" in data:
+                authors = list()
+                newauthors = list()
+                for author in data.getlist("author"):
+                    try: 
+                        authors.append(int(author))
+                    except ValueError:
+                        newauthors.append(author)
+                
+                #create new author object for each element of the list.
+                #append their pks to the list of authors from the form data
+                for author in newauthors:
+                    newauthor = Author.objects.create(
+                        author_name = author
+                        )
+                    authors.append(newauthor.pk)
+
+                data.setlist("author", authors)
+
+            document = self.get_object()
+            document.submitted_by = self.request.user
+
+            form = self.form_class(data, instance=document)
+
+            if form.is_valid():
+                form.save()
+                return redirect('thanks')
+            else:
+                return HttpResponse(str(form.errors).encode())
+                #Exception Handling goes here!
+                #
+                #return render(self.request, self.template_name,
+                #          {"form": form})
+
+
+# View for editing Transcript
+class EditTranscriptView(UpdateView):
+    model = DocumentTitle
+    form_class = EditTranscriptForm
+    template_name = "upload/edittranscript.html"
+
+    # get object to update
+    def get_object(self):
+        institution = self.kwargs.get('instslug')
+        refnumber = self.kwargs.get('refslug')
+        document = self.kwargs.get('docslug')
+        queryset = DocumentTitle.objects.filter(parent_institution__institution_slug = institution)
+        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
+        return queryset.get(document_slug = document)
+
+    def get_context_data(self, **kwargs):
+        # if accessed via GET, clear field commit_message
+        if self.request.method == "GET":
+            context = super().get_context_data(**kwargs)
+            document = self.get_object()
+            document.commit_message = ''
+
+            # prepopulate field if user wants to publish anonymously
+            if self.request.user.anonymous_publication:
+                document.submitted_by_anonymous = True
+
+            form = self.form_class(instance=document)
+            context['form'] = form
+            return context
+
+        return super().get_context_data(**kwargs)
+    
+    #handle the form if accesed via POST
+    def post(self, *args, **kwargs):
+        if self.request.method == "POST":
+            document = self.get_object()
+            document.submitted_by = self.request.user
+
+            form = self.form_class(self.request.POST, instance=document)
+
+            if form.is_valid():
+                form.save()
+                return redirect('thanks')
+            else:
+                return HttpResponse(str(form.errors).encode())
+                #Exception Handling goes here!
+                #
+                #return render(self.request, self.template_name,
+                #          {"form": form})
