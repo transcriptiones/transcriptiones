@@ -24,10 +24,9 @@ class UserManager(BaseUserManager):
         
         #normalize passwords if created from form.cleaned_data
         #this works but probably is not the best way...
-        if extra_fields['password1'] and extra_fields['password2']:
-            password = extra_fields['password1']
-            extra_fields.pop('password1')
-            extra_fields.pop('password2')
+        if 'password1' in extra_fields and 'password2' in extra_fields:
+            password = extra_fields.pop('password1')
+            del extra_fields['password2']
 
         extra_fields.setdefault('email_confirmed', False)
         extra_fields.setdefault('is_active', False)
