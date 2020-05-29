@@ -42,16 +42,16 @@
   <nav class="navbar navbar-expand-sm bg-transparent fixed-top position-absolute text.navbar">
    <ul class="navbar-nav align-items-center">
       <li class="navbar-brand">
-        <a class="nav-link text-navbar" href="#">Logo</a>
+        <a class="nav-link text-navbar" href="{% url 'start' %}">Logo</a>
       </li>
       <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="#">Upload</a>
+        <a class="nav-link text-navbar" href="{% url 'document_add' %}">Upload</a>
       </li>
       <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="#">Suche</a>
+        <a class="nav-link text-navbar" href="{% url 'searchform' %}">Suche</a>
       </li>
       <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="#">Benutzerkonto</a>
+        <a class="nav-link text-navbar" href="{% url 'login' %}">Login</a>
       </li>
     </ul>
    </nav>
@@ -61,19 +61,19 @@
   <nav id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="#page-top">Menu</a>
+        <a class="js-scroll-trigger" href="{% url 'start' %}">Menu</a>
       </li>
       <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#upload">Upload</a>
+        <a class="js-scroll-trigger" href="{% url 'document_add' %}">Upload</a>
       </li>
       <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#search-plus">Suche</a>
+        <a class="js-scroll-trigger" href="{% url 'searchform' %}">Suche</a>
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#information">Informationen</a>
       </li>
       <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#account">Benutzerkonto</a>
+        <a class="js-scroll-trigger" href="{% url 'login' %}">Login</a>
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#contact">Kontakt</a>
