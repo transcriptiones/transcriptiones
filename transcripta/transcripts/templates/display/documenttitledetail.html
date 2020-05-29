@@ -242,7 +242,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row {% if newest and newest.measurements_length != documenttitle.measurements_length or newest.measurements_width != documenttitle.measurements_width %}has-changed{% endif %}">
+            <div class="row {% if newest %}{% if newest.measurements_length != documenttitle.measurements_length or newest.measurements_width != documenttitle.measurements_width %}has-changed{% endif %}{% endif %}">
                 <div class="col-sm-4">
                     Abmessungen
                 </div>
@@ -254,7 +254,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row {% if newest and newest.pages != documenttitle.pages or newest.paging_system != documenttitle.paging_system %}has-changed{% endif %}">
+            <div class="row {% if newest %}{% if newest.pages != documenttitle.pages or newest.paging_system != documenttitle.paging_system %}has-changed{% endif %}{% endif %}">
                 <div class="col-sm-4">
                     Umfang
                 </div>
