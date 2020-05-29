@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from transcripta.transcripts.models import User
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=255, help_text='Email-Adresse')
+    email = forms.EmailField(max_length=255, help_text='E-Mail-Adresse')
     anonymous_publication = forms.BooleanField(required=False)
 
     def __init__(self, *args, **kwargs):
@@ -36,7 +36,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 class UserUpdateForm(forms.ModelForm):
     # form field to prompt for password
     passwordprompt = forms.CharField(
-        label="Geben Sie Ihr Passwort ein um die Änderungen zu bestätigen.",
+        label="Geben Sie Ihr Passwort ein, um die Änderungen zu bestätigen.",
         strip=False,
         widget=forms.PasswordInput(),
     )

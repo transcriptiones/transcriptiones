@@ -7,14 +7,20 @@
     {% csrf_token %}
     {% for field in form %}
     <div>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-        <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
+        <div class="fieldWrapper form-group row">
+            <div class="col-sm-4">
+                {{ field.label_tag }}
+            </div>
+            <div class="col-sm-8">
+                {{ field }}
+            </div>
+        </div>
+            {% if field.help_text %}
+            <small id="helptext">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
     </div>
     {% endfor %}
     <button type="submit">Registrieren</button>

@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro';
+  font-family: 'Source Sans Pro' !important;
 }
 
 .btn-xl {
@@ -90,7 +90,6 @@ h6 {
     display: block;
     text-decoration: none;
     color: #fff;
-    padding: 30px;
 }
 
 .navbar-nav li a:hover {
@@ -276,6 +275,11 @@ h6 {
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
+.small > ol, ul {
+    list-style-type: none;
+    text-align: left;
+}
+
 .portfolio-item {
   display: block;
   position: relative;
@@ -342,9 +346,11 @@ h6 {
   }
 }
 
+
 .select2 {
     width: 100% !important;
 }
+
 
 footer.footer {
   padding-top: 5rem;
@@ -379,14 +385,22 @@ a:hover, a:focus, a:active {
   margin-top: 35px;
 }
 
-#refNumberModalLabel {
-  padding-left: 120px;
+#helptext {
+    color: grey !important;
+    text-align: left !important;
 }
+
+#refNumberModalLabel,
+#institutionModalLabel {
+    padding-left: 120px;
+}
+
 
 #smallnote {
     margin-top: 35px;
     font-size: 0.8rem;
 }
+
 
 
 .btn-primary {
@@ -405,18 +419,22 @@ a:hover, a:focus, a:active {
   color: #fff !important;
 }
 
-.btn-secondary {
+.btn-secondary,
+button[type="submit"] {
     text-align: center;
     color: white;
     font-weight: normal !important;
-    background-color: rgba(52, 58, 64, 0.5);
-    border-color: rgba(52, 58, 64, 0.5);
-    line-height: 45px;
-}
-
- .btn-secondary:hover, .btn-primary:focus, .btn-primary:active {
     background-color: #343a40;
     border-color: #343a40;
+    line-height: 35px;
+    margin-top: 35px;
+    border-radius: 5px;
+}
+
+ .btn-secondary:hover, .btn-primary:focus, .btn-primary:active,
+ button[type="submit"]:hover {
+    background-color: rgba(52, 58, 64, 0.9);
+    border-color: rgba(52, 58, 64, 0.9);
     font-weight: normal;
  }
 
@@ -441,11 +459,13 @@ a:hover, a:focus, a:active {
 
 .col-sm-3,
 .col-sm-4,
+.col-sm-5,
 .col-sm-6,
+.col-sm-7,
 .col-sm-8,
 .col-sm-9,
 .col-sm-12 {
-  text-align: left !important;
+    text-align: left !important;
 }
 
 .col-sm-3,
