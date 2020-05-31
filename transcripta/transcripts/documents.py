@@ -1,8 +1,23 @@
 from django.db.models import QuerySet
 from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields
 from django_elasticsearch_dsl.registries import registry
+from elasticsearch_dsl import analyzer, token_filter, char_filter
 
-from .models import DocumentTitle, Author, RefNumber
+from .models import DocumentTitle, Author, RefNumber, SourceLanguage
+
+transcript_analyzer = analyzer(
+    'transcript_analyzer',
+    tokenizer="standard",
+    filter=[
+        "lowercase",
+        token_filter('german_stop', 'stop', stopwords='_german_'),
+        token_filter('german_snowball', 'snowball', language='German2'),
+    ],
+    char_filter=[
+        "html_strip",
+        char_filter('bracket_strip', 'mapping', mappings=['[ => ', '] => ']),
+    ]
+)
 
 
 @registry.register_document
@@ -11,6 +26,7 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     Intended for user search, not storage or internal search.
     """
+    transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
     language = fields.KeywordField(multi=True)
@@ -19,7 +35,6 @@ class TranscriptionDocument(ElasticsearchDocument):
         model = DocumentTitle
         fields = [
             'title_name',
-            'transcription_text',
             'place_name',
             'measurements_length',
             'measurements_width',
@@ -28,7 +43,7 @@ class TranscriptionDocument(ElasticsearchDocument):
             'seal',
             # ...
         ]
-        related_models = [Author, RefNumber]
+        related_models = [Author, RefNumber, SourceLanguage]
 
     class Index:
         name = 'transcripts'
@@ -47,7 +62,7 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     def get_queryset(self):
         queryset: QuerySet = super().get_queryset()
-        return queryset.select_related('parent_refnumber').prefetch_related('author')
+        return queryset.select_related('parent_refnumber').prefetch_related('author', 'language')
 
     @staticmethod
     def get_instances_from_related(related_instance):
