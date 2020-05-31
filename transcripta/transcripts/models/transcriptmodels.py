@@ -2,7 +2,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from django.db.models import Q, Max, UniqueConstraint
+from django.db.models import Q, UniqueConstraint
 from django.urls import reverse
 
 
@@ -166,7 +166,6 @@ class DocumentManager(models.Manager):
 
 class DocumentTitle(models.Model):
 
-    YesNoChoices = models.TextChoices('YesNo', 'JA NEIN')
     MatChoices = models.TextChoices('MaterialType', 'PAPIER PERGAMENT PAPYRUS')
     PagChoices = models.TextChoices('PaginationType', 'PAGINIERUNG FOLIIERUNG')
     MonthChoices = models.IntegerChoices('Month', 'JANUAR FEBRUAR MÄRZ APRIL MAI JUNI '
@@ -202,7 +201,8 @@ class DocumentTitle(models.Model):
         Author,
         blank=True,
         verbose_name="beteiligte Personen",
-        help_text="Autor*innen, Kopist*innen, Editor*innen"
+        help_text="Autor*innen, Kopist*innen, Editor*innen",
+        related_name="works",
         )
     start_year = models.SmallIntegerField(
         blank=True,
@@ -300,18 +300,14 @@ class DocumentTitle(models.Model):
         choices=PagChoices.choices,
         help_text="Paginierungssystem"
         )
-    illuminated = models.CharField(
-        max_length=4,
-        blank=True,
+    illuminated = models.BooleanField(
+        null=True,
         verbose_name="illuminiert",
-        choices=YesNoChoices.choices,
         help_text="Ist die Quelle illuminiert?"
         )
-    seal = models.CharField(
-        max_length=4,
-        blank=True,
+    seal = models.BooleanField(
+        null=True,
         verbose_name="siegel",
-        choices=YesNoChoices.choices,
         help_text="Sind Siegel erhalten?"
         )
     transcription_scope = models.TextField(
@@ -360,6 +356,7 @@ class DocumentTitle(models.Model):
     class Meta:
         verbose_name = "dokument"
         verbose_name_plural = "dokumente"
+        default_manager_name = "objects"
         get_latest_by = "document_utc_add"
         constraints = [
             UniqueConstraint(fields=['document_slug'], condition=Q(active=True), name='unique_active_slug'),
