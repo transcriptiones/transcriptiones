@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'transcripta.transcripts.apps.TranscriptsConfig',
+    'transcripta.transcripts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'six',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,14 @@ DATABASES = {
             'NAME': 'transcripta',
     }
 }
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'  # TODO: Central instance
+    }
+}
+
+ELASTICSEARCH_DSL_PARALLEL = True
 
 
 # Password validation
