@@ -48,13 +48,13 @@
         <div class="card-body">
             {% for version in versions %}
             {% if forloop.counter <= 3 %}
-            <a href="{{ version.get_absolute_url }}?version={{ forloop.revcounter }}">
+            <a href="{{ version.get_absolute_version_url }}">
                 <div class="row">
                     <div class="col-sm-4">
                         {% if forloop.first %}
                         Aktuelle Version
                         {% else %}
-                        Version {{ forloop.revcounter }}
+                        Version {{ version.version_number }}
                         {% endif %}
                     </div>
                     <div class="col-sm">

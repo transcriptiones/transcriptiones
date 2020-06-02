@@ -149,12 +149,9 @@ def load_refnumbers(request):
     return render(request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
 
 
-# view for editing Metadata
-# maybe write abstract class EditView and subclass for Metadata and Transcript?
-class EditMetaView(UpdateView):
+# Base class for Editing DocumentTitle objects
+class BaseEditDocumentView(UpdateView):
     model = DocumentTitle
-    form_class = EditMetaForm
-    template_name = "upload/editmeta.html"
 
     # get object to update
     def get_object(self):
@@ -165,14 +162,15 @@ class EditMetaView(UpdateView):
         queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
         return queryset.get(document_slug = document)
 
+    # update form data if accessed via GET
     def get_context_data(self, **kwargs):
-        # if accessed via GET, clear field commit_message
         if self.request.method == "GET":
+            # get object and clear field commit_message
             context = super().get_context_data(**kwargs)
             document = self.get_object()
             document.commit_message = ''
 
-            # prepopulate field if user wants to publish anonymously
+            # prepopulate field submitted_by_anonymous
             if self.request.user.anonymous_publication:
                 document.submitted_by_anonymous = True
 
@@ -181,6 +179,13 @@ class EditMetaView(UpdateView):
             return context
 
         return super().get_context_data(**kwargs)
+
+
+
+# view for editing Metadata
+class EditMetaView(BaseEditDocumentView):
+    form_class = EditMetaForm
+    template_name = "upload/editmeta.html"
 
     #handle the form if accesed via POST
     def post(self, *args, **kwargs):
@@ -211,36 +216,9 @@ class EditMetaView(UpdateView):
 
 
 # View for editing Transcript
-class EditTranscriptView(UpdateView):
-    model = DocumentTitle
+class EditTranscriptView(BaseEditDocumentView):
     form_class = EditTranscriptForm
     template_name = "upload/edittranscript.html"
-
-    # get object to update
-    def get_object(self):
-        institution = self.kwargs.get('instslug')
-        refnumber = self.kwargs.get('refslug')
-        document = self.kwargs.get('docslug')
-        queryset = DocumentTitle.objects.filter(parent_institution__institution_slug = institution)
-        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
-        return queryset.get(document_slug = document)
-
-    def get_context_data(self, **kwargs):
-        # if accessed via GET, clear field commit_message
-        if self.request.method == "GET":
-            context = super().get_context_data(**kwargs)
-            document = self.get_object()
-            document.commit_message = ''
-
-            # prepopulate field if user wants to publish anonymously
-            if self.request.user.anonymous_publication:
-                document.submitted_by_anonymous = True
-
-            form = self.form_class(instance=document)
-            context['form'] = form
-            return context
-
-        return super().get_context_data(**kwargs)
     
     #handle the form if accesed via POST
     def post(self, *args, **kwargs):

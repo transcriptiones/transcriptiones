@@ -1,0 +1,36 @@
+﻿<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a class="js-scroll-trigger" href="{% url 'start' %}">Menu</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'document_add' %}">Upload</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'searchform' %}">Suche</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#information">Informationen</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#contact">Kontakt</a>
+        </li>
+    </ul>
+    <ul class="sidebar-nav sidebar-profile">
+        {% if user.is_authenticated %}
+        <li class="sidebar-nav-item sidebar-profile-title">
+            Willkommen, {{ user.username }}
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'profile' %}">Mein Profil</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
