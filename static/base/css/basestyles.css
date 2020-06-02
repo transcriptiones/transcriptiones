@@ -199,6 +199,19 @@ h6 {
   background: none;
 }
 
+.sidebar-profile {
+    top: unset;
+    bottom: 0;
+}
+
+.sidebar-profile-title {
+    background: rgba(52, 58, 64, 0.1);
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 15px;
+}
+
 #sidebar-wrapper.active {
   right: 250px;
   width: 250px;
@@ -475,3 +488,4 @@ button[type="submit"] {
 
 .has-changed {
     background-color: rgba(52, 58, 64, 0.5)
+}
