@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, UpdateView
 from django.utils.text import slugify
 from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
 from transcripta.transcripts.models import Author, Institution, RefNumber, DocumentTitle
+from transcripta.transcripts.utils import create_related_objects
 
 
 # Create your views here.
@@ -110,28 +111,12 @@ class AddDocumentView(View):
         if self.request.method == "POST":
             data = self.request.POST.copy()
             
-            #if there are authors in the formdata
-            #add new authors to database
-            #get list of new authors
-            #?? make this a shared form method tor AddDocumentTitleForm and EditMetaForm?
-            if "author" in data:
-                authors = list()
-                newauthors = list()
-                for author in data.getlist("author"):
-                    try: 
-                        authors.append(int(author))
-                    except ValueError:
-                        newauthors.append(author)
-                
-                #create new author object for each element of the list.
-                #append their pks to the list of authors from the form data
-                for author in newauthors:
-                    newauthor = Author.objects.create(
-                        author_name = author
-                        )
-                    authors.append(newauthor.pk)
-
-                data.setlist("author", authors)
+            #if there are authors in the formdata, add new authors to db
+            create_related_objects(listname="author",
+                                   formdata=data,
+                                   relatedclass=Author,
+                                   namefield="author_name"
+                                   )
 
             document_slug = slugify(data.get("title_name"))
             data["document_slug"] = document_slug
@@ -202,28 +187,12 @@ class EditMetaView(UpdateView):
         if self.request.method == "POST":
             data = self.request.POST.copy()
             
-            #if there are authors in the formdata
-            #add new authors to database
-            #get list of new authors
-            #?? make this a shared form method tor AddDocumentTitleForm and EditMetaForm?
-            if "author" in data:
-                authors = list()
-                newauthors = list()
-                for author in data.getlist("author"):
-                    try: 
-                        authors.append(int(author))
-                    except ValueError:
-                        newauthors.append(author)
-                
-                #create new author object for each element of the list.
-                #append their pks to the list of authors from the form data
-                for author in newauthors:
-                    newauthor = Author.objects.create(
-                        author_name = author
-                        )
-                    authors.append(newauthor.pk)
-
-                data.setlist("author", authors)
+            #if there are authors in the formdata, add new authors to db
+            create_related_objects(listname="author",
+                                   formdata=data,
+                                   relatedclass=Author,
+                                   namefield="author_name"
+                                   )
 
             document = self.get_object()
             document.submitted_by = self.request.user

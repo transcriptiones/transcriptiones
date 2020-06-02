@@ -3,6 +3,7 @@
 {% block content %}
 
 <div>
+    <h4>Meine persönlichen Daten</h4>
     <table class="table table-light">
         <tbody>
             <tr>
@@ -23,6 +24,43 @@
                     {% endif %}
                 </td>
             </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <h4>Meine Aktivitäten</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Titel
+                </th>
+                <th scope="col">
+                    Art des Beitrags
+                </th>
+                <th scope="col">
+                    Letzte Änderung am
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in contributions %}
+            <tr>
+                <td>
+                    {{ document.title_name }}
+                </td>
+                <td>
+                    {% if document.commit_message == "initial" %}
+                    Upload
+                    {% else %}
+                    Bearbeitung
+                    {% endif %}
+                </td>
+                <td>
+                    {{ document.document_utc_add }}
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
