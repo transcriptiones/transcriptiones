@@ -380,6 +380,15 @@ class DocumentTitle(models.Model):
                            'docslug': self.document_slug
                            })
 
+    def get_absolute_version_url(self):
+        return reverse('documenttitlelegacydetail',
+                       kwargs={
+                           'instslug': self.parent_institution.institution_slug,
+                           'refslug': self.parent_refnumber.refnumber_slug,
+                           'docslug': self.document_slug,
+                           'versionnr': self.version_number
+                           })
+
     #model method to return queryset of all versions with the same document_id
     def get_versions(self):
         versions = type(self).all_objects.filter(document_id=self.document_id).order_by('-document_utc_add')
