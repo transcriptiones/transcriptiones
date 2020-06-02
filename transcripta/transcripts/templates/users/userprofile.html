@@ -39,18 +39,29 @@
                     Art des Beitrags
                 </th>
                 <th scope="col">
+                    Zeitpunkt der Aktivität
+                </th>
+                <th scope="col">
+                    Änderungen
+                </th>
+                <th scope="col">
                     Letzte Änderung am
+                </th>
+                <th>
+                    Letzte Änderung durch
                 </th>
             </tr>
         </thead>
         <tbody>
             {% for document in contributions %}
-            <tr>
+            <tr style="transform: rotate(0)">
                 <td>
+                    <a href="{{ document.get_absolute_version_url }}" class="stretched-link">
                     {{ document.title_name }}
+                    </a>
                 </td>
                 <td>
-                    {% if document.commit_message == "initial" %}
+                    {% if document.version_number == 1 %}
                     Upload
                     {% else %}
                     Bearbeitung
@@ -59,17 +70,46 @@
                 <td>
                     {{ document.document_utc_add }}
                 </td>
+                <td>
+                    {{ document.commit_message }}
+                </td>
+                <td>
+                    {{ document.get_versions.latest.document_utc_add }}
+                </td>
+                <td>
+                    {{ document.get_versions.latest.submitted_by }}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
 
+<div class="pagination">
+    <span class="step-links">
+        {% if contributions.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ contributions.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contributions.number }} of {{ contributions.paginator.num_pages }}.
+        </span>
+
+        {% if contributions.has_next %}
+        <a href="?page={{ contributions.next_page_number }}">next</a>
+        <a href="?page={{ contributions.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
 <div><a href="{% url 'password_change' %}">Passwort ändern</a></div>
 <div><a href="{% url 'user_update' %}">Profil anpassen</a></div>
 <div><a href="{% url 'logout' %}">Abmelden</a></div>
 
 
-<!-- ToDo: List contributions -->
+
 
 {% endblock %}

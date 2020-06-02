@@ -38,7 +38,7 @@ class RefNumberDetailView(DetailView):
         return get_object_or_404(queryset, refnumber_slug = refnumber)
 
 
-# view to display DocumentTitle. Accepts optional verionnr to display legacy version
+# view to display DocumentTitle. Accepts optional versionnr to display legacy version
 
 class DocumentTitleDetailView(DetailView):
     model = DocumentTitle
