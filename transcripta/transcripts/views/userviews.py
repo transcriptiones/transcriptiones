@@ -78,7 +78,8 @@ class CustomPasswordChangeView(PasswordChangeView):
 @login_required
 def userprofile(request):
     user = request.user
-    return render(request, 'users/userprofile.html', {'user': user})
+    contributions = user.contributions(manager='all_objects').all().order_by('-document_utc_add')
+    return render(request, 'users/userprofile.html', {'user': user, 'contributions': contributions})
 
 # View for changing User Data
 class UserUpdateView(LoginRequiredMixin, View):

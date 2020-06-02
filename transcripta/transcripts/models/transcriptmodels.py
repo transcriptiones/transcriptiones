@@ -349,6 +349,11 @@ class DocumentTitle(models.Model):
         help_text="Knappe Beschreibung der Änderungen",
         default="initial"
         )
+    version_number = models.IntegerField(
+        verbose_name="versionsnummer",
+        help_text="Versionsnummer",
+        default=1,
+        )
 
     objects = DocumentManager()  # Only current versions
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
@@ -361,6 +366,7 @@ class DocumentTitle(models.Model):
         constraints = [
             UniqueConstraint(fields=['document_slug'], condition=Q(active=True), name='unique_active_slug'),
             UniqueConstraint(fields=['document_id'], condition=Q(active=True), name='unique_active_docid'),
+            UniqueConstraint(fields=['document_id', 'version_number'], name='version_by_document'),
         ]
 
     def __str__(self):
@@ -395,4 +401,10 @@ class DocumentTitle(models.Model):
             self.pk = None
             # Set all old versions to be inactive
             type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk).update(active=False)
+            # increment version_number by 1
+            try:
+                self.get_versions().latest()
+                self.version_number = self.get_versions().exclude(pk=self.pk).latest().version_number + 1
+            except type(self).DoesNotExist:
+                self.version_number = 1
         super().save(force_update=force_update, *args, **kwargs)
