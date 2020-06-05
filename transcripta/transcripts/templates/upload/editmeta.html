@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% block dependencies %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
@@ -9,6 +9,41 @@
 {% endblock dependencies %}
 
 {% block content %}
+<div>
+    <h2>{{ documenttitle.title_name }}</h2>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
+        <a class="card-link">Übersicht</a>
+    </div>
+
+    <div id="DocumentOverview" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <a class="btn btn-secondary" href="{{ documenttitle.get_absolute_url }}">Zurück zur Transkription</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <form action="{% url 'editmeta' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}" method="post" id="editMetaForm" class="needs-validation" novalidate>
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -253,14 +288,14 @@
                     <div class="fieldWrapper form-group" title="{{ form.submitted_by_anonymous.help_text }}">
                         {{ form.submitted_by_anonymous }}
                         <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="control-label align-middle ml-2">
-                          {{ form.submitted_by_anonymous.label }}
+                            {{ form.submitted_by_anonymous.label }}
                         </label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-secondary" id="submitButtonDocument">Absenden</button> <!-- Does this still work with a different value? -->
+    <button type="button" class="btn btn-secondary" id="submitButtonDocument">Absenden</button>
 </form>
 
 
@@ -281,7 +316,6 @@
                 </div>
                 <div class="col-sm">
                     <ul id="authorList">
-
                     </ul>
                 </div>
             </div>
