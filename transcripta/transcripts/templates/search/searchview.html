@@ -2,33 +2,19 @@
 {% load static %}
 {% block content %}
 
-<div>
-    <h2>Suchformular</h2>
-</div>
+  <h2>Suchformular</h2>
 
-<div>
-    <form id="searchForm" action="{% url 'searchresults' %}" method="get">
-        <button type="button" id="addButton">+</button>
-        <div id="wrapper">
-            <div id="g1">
-                <select name="f1">
-                    <option value="institution">Institution</option>
-                    <option value="refnumber">Signatur</option>
-                </select>
-                <select name="b1">
-                    <option value="is">ist gleich</option>
-                    <option value="isnot">ist nicht gleich</option>
-                    <option value="contains">enthält</option>
-                </select>
-                <input name="q1" type="text" placeholder="Suchen..." />
-            </div>
-        </div>
-        <button type="submit">Suchen</button>
+  <div>
+    <form id="searchForm" action="." method="post">
+      {{ form.as_p }}
+      <div><button type="button" id="addButton">+</button></div>
+      {% csrf_token %}
+      <button type="submit">Suchen</button>
     </form>
-</div>
+  </div>
 
 {% endblock content %}
 
 {% block javascript %}
-<script src="{% static 'search/scripts.js' %}"></script>
+  <script src="{% static 'search/scripts.js' %}"></script>
 {% endblock javascript %}

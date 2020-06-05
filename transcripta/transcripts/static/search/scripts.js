@@ -1,37 +1,26 @@
+$(function() {
 
-$(function () {
+  const max_fields = 10;
+  const $add_button = $('#addButton');
+  const $filterFields = $('.filter_field');
 
-    var max_fields = 10;
-    var wrapper = $('#wrapper');
-    var add_button = $('#addButton');
+  const $filters_filled_at_load = $filterFields.children('.value_field').filter(function() {
+    return this.value;
+  }).parent();
 
-    var x = 1;
+  // The number of VISIBLE filter fields
+  let number_of_fields = $filterFields.index($filters_filled_at_load.last()) + 2;
+  $filterFields.slice(0, number_of_fields).removeClass('d-none');
 
+  $add_button.click(function (e) {
+    e.preventDefault();
 
-    $(add_button).click(function (e) {
-        e.preventDefault();
-
-        if (x < max_fields) {
-            x++;
-
-            var field_group = '<div id="g' + x + '"><select name="f' + x + '"><option value="institution">' +
-                'Institution</option><option value="refnumber">Signatur</option></select>' +
-                '<select name="b' + x + '"><option value="is">ist gleich</option><option value="isnot">' +
-                'ist nicht gleich</option><option value="contains">enthält</option></select>' +
-                '<input name="q' + x + '" type="text" placeholder="Suchen..." />' +
-                '<button type="button" id="delButton">-</button></div>';
-
-            $(wrapper).append(field_group);
-
-        } else {
-            alert('Maximale Anzahl Felder erreicht')
-        }
-    });
-
-    $(wrapper).on('click', '#delButton', function (e) {
-        e.preventDefault();
-        $(this).parent('div').remove();
-        x--;
-    });
+    if (number_of_fields < max_fields) {
+      $filterFields.eq(number_of_fields).removeClass('d-none');
+      number_of_fields++;
+    } else {
+      alert('Maximale Anzahl Felder erreicht');
+    }
+  });
 
 });

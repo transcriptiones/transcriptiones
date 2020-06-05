@@ -62,7 +62,7 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     def get_queryset(self):
         queryset: QuerySet = super().get_queryset()
-        return queryset.select_related('parent_refnumber').prefetch_related('author', 'language')
+        return queryset.filter(active=True).select_related('parent_refnumber').prefetch_related('author', 'language')
 
     @staticmethod
     def get_instances_from_related(related_instance):
