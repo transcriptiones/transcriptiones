@@ -6,6 +6,41 @@
 {% endblock dependencies %}
 
 {% block content %}
+<div>
+    <h2>{{ documenttitle.title_name }}</h2>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
+        <a class="card-link">Übersicht</a>
+    </div>
+
+    <div id="DocumentOverview" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <a class="btn btn-secondary" href="{{ documenttitle.get_absolute_url }}">Zurück zur Transkription</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <form action="{% url 'edittranscript' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}" method="post" id="editTranscriptForm" class="needs-validation" novalidate>
     {% csrf_token %}
     {{ form.non_field_errors }}

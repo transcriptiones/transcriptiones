@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 {% block dependencies %}
@@ -94,7 +94,19 @@
 
     <div id="DocumentMetadata" class="collapse show">
         <div class="card-body">
-            <div class="row {% if newest and newest.author != documenttitle.author %}has-changed{% endif %}">
+            <div class="row 
+                 {% if newest %}
+                 {% for author in documenttitle.author.all %}
+                 {% if not author in newest.author.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% for author in newest.author.all %}
+                 {% if not author in documenttitle.author.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     Beteiligte Personen
                 </div>
@@ -193,7 +205,19 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row {% if newest and newest.language != documenttitle.language %}has-changed{% endif %}">
+            <div class="row 
+                 {% if newest %}
+                 {% for language in documenttitle.language.all %}
+                 {% if not language in newest.language.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% for language in newest.language.all %}
+                 {% if not language in documenttitle.language.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% endif %}">
                 <div class="col-sm-4">
                     Sprachen
                 </div>
@@ -336,8 +360,37 @@
     </div>
 </div>
 
+{% if not newest %}
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#actions">
+        <a class="card-link">Aktionen</a>
+    </div>
+
+    <div id="actions" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm">
+                    <a class="btn btn-secondary" href="{% url 'editmeta' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Metadaten bearbeiten</a>
+                </div>
+                <div class="col-sm">
+                    <a class="btn btn-secondary" href="{% url 'edittranscript' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Transkription bearbeiten</a>
+                </div>
+                <div class="col-sm">
+                    <a class="btn btn-secondary" href="{% url 'documenthistory' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Versionsgeschichte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
 <div id="backto">
-     <a class="btn btn-secondary" href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
+    {% if not newest %}
+    <a class="btn btn-secondary" href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
+    {% else %}
+    <a class="btn btn-secondary" href="{{ newest.get_absolute_url }}">Zur aktuellen Version</a>
+    {% endif %}
 </div>
 
 {% endblock content %}

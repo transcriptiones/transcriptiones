@@ -3,6 +3,7 @@ $(function() {
   $(".menu-toggle").click(function(e) {
     e.preventDefault();
     $("#sidebar-wrapper").toggleClass("active");
+    $("#sidebar-overlay").toggleClass("active");
     $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
     $(this).toggleClass("active");
   });
@@ -36,6 +37,15 @@ $(function() {
     } else {
       $('.scroll-to-top').fadeOut();
     }
+  });
+
+  // close sidebar on click on overlay
+  $("#sidebar-overlay").click(function (e) {
+      e.preventDefault();
+      $("#sidebar-wrapper").removeClass("active");
+      $("#sidebar-overlay").removeClass("active");
+      $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
+      $(".menu-toggle").removeClass("active");
   });
 
 }); // End of use strict

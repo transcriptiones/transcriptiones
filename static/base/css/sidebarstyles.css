@@ -1,0 +1,108 @@
+﻿#sidebar-wrapper {
+    position: fixed;
+    z-index: 2;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    transition: all 0.4s ease 0s;
+    transform: translateX(250px);
+    background: #1D809F;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 998;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 998;
+    text-align: left !important;
+}
+
+    .sidebar-nav li.sidebar-nav-item a {
+        display: block;
+        text-decoration: none;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .sidebar-nav li a:hover {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-nav li a:active,
+    .sidebar-nav li a:focus {
+        text-decoration: none;
+    }
+
+    .sidebar-nav > .sidebar-brand {
+        font-size: 1.2rem;
+        background: rgba(52, 58, 64, 0.1);
+        height: 80px;
+        line-height: 50px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+    }
+
+        .sidebar-nav > .sidebar-brand a {
+            color: #fff;
+        }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: none;
+            }
+
+.sidebar-profile {
+    top: unset;
+    bottom: 0;
+}
+
+.sidebar-profile-title {
+    background: rgba(52, 58, 64, 0.1);
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 15px;
+}
+
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+    position: fixed;
+    z-index: 998;
+}
+
+@media (max-width: 575.98px) {
+    #sidebar-wrapper.active {
+        width: 200px;
+    }
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 997;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.4s ease 0s;
+}
+    /* display .overlay when it has the .active class */
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
