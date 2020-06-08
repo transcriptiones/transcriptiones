@@ -149,6 +149,11 @@ function validateForm (form) {
 
     });
 
+    // set focus on first erroneous form field
+    if (formValid === false) {
+        $('.error.active').first().siblings().first().focus();
+    }
+
     return formValid;
 };
 
