@@ -123,7 +123,7 @@ class SourceLanguage(models.Model):
 
 class SourceType(models.Model):
     type_name = models.CharField(max_length=50, verbose_name="archivalienart")
-    parent_type = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name="child_type", verbose_name="übergeordnete Archivalienart")
+    parent_type = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name="child_type", verbose_name="übergeordnete Archivalienart")
 
     class Meta:
         verbose_name = "archivalienart"
@@ -205,8 +205,8 @@ class DocumentTitle(models.Model):
         related_name="works",
         )
     start_year = models.SmallIntegerField(
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         verbose_name="startjahr",
         help_text="YYYY"
         )
@@ -246,7 +246,7 @@ class DocumentTitle(models.Model):
         )
     place_name = models.CharField(
         max_length=150,
-        blank=True,
+        blank=False,
         verbose_name="entstehungsort",
         help_text="Entstehungsort der Quelle"
         )
@@ -259,8 +259,8 @@ class DocumentTitle(models.Model):
     source_type = models.ForeignKey(
         SourceType,
         on_delete=models.PROTECT,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         verbose_name="archivalienart",
         help_text="Archivalienart/Quellengattung"
         )
