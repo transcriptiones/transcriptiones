@@ -137,32 +137,6 @@ class DocumentManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(active=True)
 
-    def search(self, kwargs):
-        qs = self.get_queryset()
-        
-        if kwargs.get('b1') == 'is':
-            if kwargs.get('f1') == 'institution':
-                qs = qs.filter(parent_institution__institution_name=kwargs.get('q1'))
-
-            if kwargs.get('f1') == 'refnumber':
-                qs = qs.filter(parent_refnumber__refnumber_name=kwargs.get('q1'))
-
-        if kwargs.get('b1') == 'isnot':
-            if kwargs.get('f1') == 'institution':
-                qs = qs.exclude(parent_institution__institution_name=kwargs.get('q1'))
-
-            if kwargs.get('f1') == 'refnumber':
-                qs = qs.exclude(parent_refnumber__refnumber_name=kwargs.get('q1'))
-        
-        if kwargs.get('b1') == 'contains':
-            if kwargs.get('f1') == 'institution':
-                qs = qs.filter(parent_institution__institution_name__icontains=kwargs.get('q1'))
-
-            if kwargs.get('f1') == 'refnumber':
-                qs = qs.filter(parent_refnumber__refnumber_name__icontains=kwargs.get('q1'))
-
-        return qs
-
 
 class DocumentTitle(models.Model):
 

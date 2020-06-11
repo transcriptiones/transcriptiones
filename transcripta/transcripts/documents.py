@@ -28,6 +28,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     """
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
+    institution_name = fields.TextField(attr="parent_institution.institution_name", fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
     language = fields.KeywordField(multi=True)
 
@@ -54,10 +55,12 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     @staticmethod
     def prepare_author(instance: DocumentTitle) -> list:
+        """Compose a document's author field"""
         return [author.author_name for author in instance.author.all()]
 
     @staticmethod
     def prepare_language(instance: DocumentTitle) -> list:
+        """Compose a document's language field"""
         return [language.language_name for language in instance.language.all()]
 
     def get_queryset(self):

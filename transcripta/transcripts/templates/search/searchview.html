@@ -13,6 +13,16 @@
     </form>
   </div>
 
+  {% if results %}
+    <div id="searchResults">
+      <ul>
+        {% for result in results %}
+          <li><a href="{{ result.get_absolute_url }}">{{ result.title_name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
 {% endblock content %}
 
 {% block javascript %}

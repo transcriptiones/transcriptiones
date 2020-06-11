@@ -25,7 +25,6 @@ urlpatterns = [
 
     # urls for search views
     path('search/', SearchView.as_view(), name='searchform'),
-    path('search/results/', ResultsView.as_view(), name='searchresults'),
 
     # urls for user views
     path('user/signup/', signup, name='signup'),

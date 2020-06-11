@@ -1,24 +1,25 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import FormView, ListView
 
+from transcripta.transcripts.documents import TranscriptionDocument
 from transcripta.transcripts.forms.search import SearchForm
-from transcripta.transcripts.models import DocumentTitle
+
+FULLTEXT_FIELDS = ["transcription_text", "title_name", "author", "refnumber_title"]
 
 
-class SearchView(FormView):
+class SearchView(FormView, ListView):
     template_name = "search/searchview.html"
     form_class = SearchForm
-    success_url = 'results'
+    queryset = []
+    context_object_name = "results"
 
     def form_valid(self, form):
         print(form.cleaned_data)
-        return super(SearchView, self).form_valid(form)
-
-
-class ResultsView(ListView):
-
-    def get_queryset(self):
-        return DocumentTitle.objects.search(self.request.GET)
-
-    template_name = "search/resultsview.html"
-    context_object_name = "results"
+        self.queryset = TranscriptionDocument.search()
+        if form.cleaned_data['query']:
+            self.queryset = self.queryset.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
+        for filter in form.cleaned_data['filters']:
+            self.queryset = filter.apply(self.queryset)
+        print(repr(self.queryset.to_dict()))
+        self.queryset = self.queryset.to_queryset()  # DEBUG
+        print(self.queryset)
+        return self.get(self.request)
