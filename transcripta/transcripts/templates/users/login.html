@@ -21,30 +21,38 @@
     <p>Sie sind bereits angemeldet.</p>
 {% else %}
 
-<h2>Benutzerkonto</h2>
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div>
-        <div class="fieldWrapper form-group row">
-            <div class="col-sm-4">
-                {{ form.username.label_tag }}
-            </div>
-            <div class="col-sm-8">
-                {{ form.username }}
-            </div>
-            <div class="col-sm-4">
-                {{ form.password.label_tag }}
-            </div>
-            <div class="col-sm-8">
-                {{ form.password }}
+<div>
+    <h2>Benutzerkonto</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>
+            <div class="fieldWrapper form-group row">
+                <div class="col-sm-4">
+                    {{ form.username.label_tag }}
+                </div>
+                <div class="col-sm-8">
+                    {{ form.username }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form.password.label_tag }}
+                </div>
+                <div class="col-sm-8">
+                    {{ form.password }}
+                </div>
             </div>
         </div>
-    </div>
-    <button type="submit">Anmelden</button>
-    <input type="hidden" name="next" value="{{ next }}">
-</form>
+        <button type="submit">Anmelden</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+</div>
 
-<a href="{% url 'password_reset' %}">Passwort vergessen?</a>
+<div>
+    Noch kein Benutzerkonto? <a href="{% url 'signup' %}">Hier registrieren!</a>
+</div>
+
+<div>
+    <a href="{% url 'password_reset' %}">Passwort vergessen?</a>
+</div>
 
 {% endif %}
 

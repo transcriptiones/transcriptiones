@@ -23,6 +23,7 @@ urlpatterns = [
     path('upload/thanks/', RedirectView.as_view(), name='thanks'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='editmeta'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edittranscript'),
+    path('upload/batch/', batchupload, name='batchupload'),
 
     # urls for search views
     path('search/', SearchView.as_view(), name='searchform'),
