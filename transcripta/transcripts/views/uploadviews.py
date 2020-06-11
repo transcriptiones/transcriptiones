@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import TemplateView, UpdateView
 from django.utils.text import slugify
 from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
-from transcripta.transcripts.models import Author, Institution, RefNumber, DocumentTitle
+from transcripta.transcripts.models import Author, Institution, RefNumber, DocumentTitle, SourceType
 from transcripta.transcripts.utils import create_related_objects
 
 
@@ -237,3 +237,63 @@ class EditTranscriptView(BaseEditDocumentView):
                 #
                 #return render(self.request, self.template_name,
                 #          {"form": form})
+
+
+# View for creating multiple objects from csv-File
+def batchupload(request):
+    template_name = 'upload/batchupload.html'
+    errors = {}
+    if request.method == 'GET':
+        return render(request, template_name)
+
+    if request.method == 'POST':
+        try:
+            csv_file = request.FILES['csv_file']
+            
+            # check if file is csv
+            if not csv_file.name.endswith('.csv'):
+                errors['filetypeerror'] = "File ist keine CSV-Datei"
+            
+            # check if file is not bigger than 2.5 MB
+            if csv_file.multiple_chunks():
+                errors['filetoolarge'] = "File ist zu gross"
+            
+            # if checks have failed, return the form with errors
+            if len(errors) != 0:
+                return render(request, template_name, {'errors': errors})
+
+            # read csv and split it into lines
+            file_data = csv_file.read().decode('utf-8')
+            lines = file_data.split("\n")
+
+            # handle batch upload for SourceTypes
+            if request.POST.get('target_model') == 'SourceType':
+                for line in lines:
+                    fields = line.strip('\r').split(";")
+                    
+                    # ignore lines without type_name
+                    if fields[0] == '':
+                        continue
+
+                    # if parent is set, get parent object from db and create new child object
+                    elif fields[1] != '':
+                        type_name = str(fields[0])
+                        parent_name = str(fields[1])
+                        parent_id = SourceType.objects.get(type_name=parent_name)
+                        SourceType.objects.create(
+                            type_name = type_name,
+                            parent_type = parent_id
+                            )
+                    
+                    # if no parent is set, create new object
+                    else:
+                        type_name = str(fields[0])
+                        SourceType.objects.create(type_name=type_name)
+
+                return redirect('thanks')
+
+            return redirect('start')
+
+        except Exception as e:
+            return HttpResponse(str(e))
+            
