@@ -57,7 +57,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'anonymous_publication', 'passwordprompt')
+        fields = ('username', 'first_name', 'last_name', 'email', 'anonymous_publication', 'passwordprompt')
 
 class CustomPasswordResetForm(PasswordResetForm):
     # pass class form-control to form fields

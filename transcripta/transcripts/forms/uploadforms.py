@@ -48,8 +48,6 @@ class DocumentTitleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentTitleForm, self).__init__(*args, **kwargs)
         for name in self.fields:
-            if isinstance(self.fields[name], forms.BooleanField):
-                continue
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
                 'placeholder': self.fields[name].help_text, #ToDo: let placeholder depend on input type
