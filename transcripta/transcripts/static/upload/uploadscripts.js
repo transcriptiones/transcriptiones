@@ -4,7 +4,7 @@
  * 
  */
 
-// Show entered values in refNumberForm and ask for confirmation
+// Show entered values in ModalForm and ask for confirmation
 // Client-side validation happens here. Do we still need server-side validation?
 function submitModalForm(event) {
     var form = $(event.target).closest('form')[0];
@@ -44,12 +44,10 @@ function confirmRefNumber() {
         },
     })
         .done(function (data) {
+            var new_ref_name = $('#id_refnumber_name').val();
             $('#refNumberModal').modal('hide');
             $('#id_parent_refnumber').html(data).prop("disabled", false);
-            $('#id_parent_refnumber option:contains(' + $('#id_refnumber_name').val() + ')').prop("selected", true);
-            document.getElementById('refNumberForm').reset();
-            $('#refNumberForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
-            $('#refNumberForm').find('#backButtonModal').hide();
+            $('#id_parent_refnumber option:contains(' + new_ref_name + ')').prop("selected", true);
         });
 };
 
@@ -69,13 +67,11 @@ function confirmInstitution() {
         },
     })
         .done(function (data) {
+            var new_inst_name = $('#id_institution_name').val();
             $('#institutionModal').modal('hide');
             $('#id_parent_institution').html(data);
-            $('#id_parent_institution option:contains(' + $('#id_institution_name').val() + ')').prop("selected", true);
+            $('#id_parent_institution option:contains(' + new_inst_name + ')').prop("selected", true);
             $('#id_holding_institution').html(data);
-            document.getElementById('institutionForm').reset();
-            $('#institutionForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
-            $('#institutionForm').find('#backButtonModal').hide();
             //fires the function to update refnumbers in case institution has been chosen before
             $('#id_parent_institution').change();
             $('#id_parent_institution').prop("disabled", false);
@@ -205,11 +201,19 @@ $(document).on('show.bs.modal', '#refNumberModal', function () {
 $(document).on('hide.bs.modal', '#institutionModal', function () {
     $('#id_parent_institution').prop('selectedIndex', -1).change();
     $('#id_parent_refnumber').prop("disabled", true);
+    $('#institutionForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
+    $('#institutionForm').find('#backButtonModal').hide();
+    $('#institutionForm').find('.form-control').prop('disabled', false);
+    document.getElementById('institutionForm').reset();
 });
 
 // clear the form field which opened refNumberModal
 $(document).on('hide.bs.modal', '#refNumberModal', function () {
     $('#id_parent_refnumber').prop('selectedIndex', -1).change();
+    $('#refNumberForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
+    $('#refNumberForm').find('#backButtonModal').hide();
+    $('#refNumberForm').find('.form-control').prop('disabled', false);
+    document.getElementById('refNumberForm').reset();
 });
 
 /*

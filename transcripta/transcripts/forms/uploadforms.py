@@ -56,14 +56,6 @@ class DocumentTitleForm(forms.ModelForm):
             'min': -3000, #ToDo: Probably solve this with validators? Do the same for end_dates
             'max': datetime.now().year
             })
-        self.fields['start_month'].widget.attrs.update({
-            'min': '1',
-            'max': '12',
-            })
-        self.fields['start_day'].widget.attrs.update({
-            'min': '1',
-            'max': '31',
-            })
 
         #handle dependent dropdowns
         self.fields['parent_refnumber'].queryset = RefNumber.objects.none()
