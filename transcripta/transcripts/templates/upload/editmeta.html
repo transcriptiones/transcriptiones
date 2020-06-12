@@ -164,14 +164,21 @@
                     </div>
                 </div>
                 <div class="fieldWrapper form-group row">
-                    {{ form.source_type.errors }}
+                    {{ form.source_type_parent.errors }}
+                    {{ form.source_type_child.errors }}
                     <div class="col-sm-3">
-                        <label for="{{ form.source_type.id_for_label }}" class="control-label">
-                            {{ form.source_type.label }}
+                        <label for="{{ form.source_type_parent.id_for_label }}" class="control-label">
+                            {{ form.source_type_parent.label }}
                         </label>
                     </div>
                     <div class="col-sm-9">
-                        {{ form.source_type }}
+                        {{ form.source_type_parent }}
+                        <span class="error"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-sm-9">
+                        {{ form.source_type_child }}
                         <span class="error"></span>
                     </div>
                 </div>

@@ -360,7 +360,7 @@
     </div>
 </div>
 
-{% if not newest %}
+{% if not newest or newest == documenttitle %}
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#actions">
         <a class="card-link">Aktionen</a>
@@ -386,7 +386,7 @@
 
 
 <div id="backto">
-    {% if not newest %}
+    {% if not newest or newest == documenttitle %}
     <a class="btn btn-secondary" href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
     {% else %}
     <a class="btn btn-secondary" href="{{ newest.get_absolute_url }}">Zur aktuellen Version</a>

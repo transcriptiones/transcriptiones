@@ -261,15 +261,22 @@ $(function () {
         placeholder: $('#id_parent_refnumber').attr('placeholder'),
         disabled: true,
     });
-    $('#id_language, #id_source_type, #id_material, #id_start_month, #id_start_day, #id_end_month, #id_end_day').each(function () {
+    $('#id_language, #id_source_type_parent, #id_source_type_child, #id_material, #id_start_month, #id_start_day, #id_end_month, #id_end_day').each(function () {
         var element = $(this);
         element.select2({
             theme: 'bootstrap4',
             placeholder: element.attr('placeholder'),
+            allowClear: true,
         });
     });
-
-    $('#id_paging_system, #id_illuminated, #id_seal').each(function () {
+    $('#id_paging_system').select2({
+        theme: 'bootstrap4',
+        tags: true,
+        placeholder: $('#id_paging_system').attr('placeholder'),
+        minimumResultsForSearch: Infinity,
+        allowClear: true,
+    });
+    $('#id_illuminated, #id_seal').each(function () {
         var element = $(this);
         element.select2({
             theme: 'bootstrap4',
@@ -310,6 +317,7 @@ $(function () {
     $('#id_start_month, #id_start_day, #id_end_month, #id_end_day').prop('disabled', true);
     $('#id_start_year, #id_start_month, #id_end_year, #id_end_month').on('input', null, this, enableDate);
     $('#submitButtonDocument').on('click', null, this, submitDocument);
+    $('#id_source_type_child').prop('disabled', true).find('option').prop('disabled', true);
     $('#submitButtonAuthor').on('click', confirmAuthor);
     $('#closeButtonAuthor').on('click', closeAuthor);
     $('#buttonEndDate').on('click', showEndDate);
@@ -373,6 +381,18 @@ $('#id_start_month, #id_end_month').on('change', function (event) {
         $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"], option[value="31"]').prop('disabled', true);
     } else {
         $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option:hidden').prop('disabled', false);
+    }
+});
+
+
+// show/hide source_type_child options based on selection of source_type_parent
+$('#id_source_type_parent').on('change', function (event) {
+    var parent = $(event.target).val()
+    if (parent && parent != '') {
+        $('#id_source_type_child').find('option').prop('disabled', true);
+        $('#id_source_type_child').prop('disabled', false).find('option[data-parent=' + parent + ']').prop('disabled', false);
+    } else {
+        $('#id_source_type_child').prop('selectedIndex', -1).change().prop('disabled', true).find('option').prop('disabled', true);
     }
 });
 

@@ -122,6 +122,14 @@ class AddDocumentView(View):
             data["document_slug"] = document_slug
 
             document = DocumentTitle(submitted_by=self.request.user)  # Set submitter to current user
+
+            # set source_type based on selection
+            if 'source_type_child' in data:
+                document.source_type = SourceType.objects.get(pk=data['source_type_child'])
+            elif not 'source_type_child' in data:
+                document.source_type = SourceType.objects.get(pk=data['source_type_parent'])
+                
+
             form = self.form_class(data, instance=document)
 
             if form.is_valid():
@@ -175,6 +183,7 @@ class BaseEditDocumentView(UpdateView):
                 document.submitted_by_anonymous = True
 
             form = self.form_class(instance=document)
+
             context['form'] = form
             return context
 
@@ -186,6 +195,20 @@ class BaseEditDocumentView(UpdateView):
 class EditMetaView(BaseEditDocumentView):
     form_class = EditMetaForm
     template_name = "upload/editmeta.html"
+
+    def get_context_data(self, **kwargs):
+        if self.request.method == "GET":
+            context = super().get_context_data(**kwargs)
+
+            # prepopulate source_type_parent and source_type_child
+            if self.get_object().source_type.parent_type is None:
+                context['form'].fields['source_type_parent'].initial = self.get_object().source_type.pk
+            else:
+                context['form'].fields['source_type_parent'].initial = self.get_object().source_type.parent_type.pk
+                context['form'].fields['source_type_child'].initial = self.get_object().source_type.pk
+            return context
+        return super().get_context_data(**kwargs)
+
 
     #handle the form if accesed via POST
     def post(self, *args, **kwargs):
@@ -201,6 +224,12 @@ class EditMetaView(BaseEditDocumentView):
 
             document = self.get_object()
             document.submitted_by = self.request.user
+
+            # set source_type based on selection
+            if 'source_type_child' in data:
+                document.source_type = SourceType.objects.get(pk=data['source_type_child'])
+            elif not 'source_type_child' in data:
+                document.source_type = SourceType.objects.get(pk=data['source_type_parent'])
 
             form = self.form_class(data, instance=document)
 

@@ -1,7 +1,8 @@
 from datetime import datetime
 from django import forms
 
-from transcripta.transcripts.models import Institution, RefNumber, DocumentTitle
+from transcripta.transcripts.models import Institution, RefNumber, DocumentTitle, SourceType
+from transcripta.transcripts.widgets import SourceChildSelect
 
 
 #Form for adding an Institution which is not yet in the Database
@@ -43,6 +44,18 @@ class RefNumberForm(forms.ModelForm):
 
 #Form for adding a new Document to the Database
 class DocumentTitleForm(forms.ModelForm):
+    source_type_parent = forms.ModelChoiceField(
+        queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
+        required=True,
+        help_text='Ebene 1',
+        label = 'Archivalienart',
+        )
+    source_type_child = forms.ModelChoiceField(
+        queryset=SourceType.objects.filter(parent_type__isnull=False).order_by('type_name'),
+        required=False,
+        help_text='Ebene 2',
+        widget=SourceChildSelect,
+        )
 
     #add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
@@ -83,7 +96,8 @@ class DocumentTitleForm(forms.ModelForm):
                   'end_day',
                   'place_name',
                   'language',
-                  'source_type',
+                  'source_type_parent',
+                  'source_type_child',
                   'material',
                   'measurements_length',
                   'measurements_width',
@@ -101,6 +115,19 @@ class DocumentTitleForm(forms.ModelForm):
 
 # Form for editing Metadata
 class EditMetaForm(forms.ModelForm):
+    source_type_parent = forms.ModelChoiceField(
+        queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
+        required=True,
+        help_text='Ebene 1',
+        label = 'Archivalienart',
+        )
+    source_type_child = forms.ModelChoiceField(
+        queryset=SourceType.objects.filter(parent_type__isnull=False).order_by('type_name'),
+        required=False,
+        help_text='Ebene 2',
+        widget=SourceChildSelect,
+        )
+
 
     # pass .form-control to form fields
     def __init__(self, *args, **kwargs):
@@ -122,7 +149,8 @@ class EditMetaForm(forms.ModelForm):
                   'end_day',
                   'place_name',
                   'language',
-                  'source_type',
+                  'source_type_parent',
+                  'source_type_child',
                   'material',
                   'measurements_length',
                   'measurements_width',
