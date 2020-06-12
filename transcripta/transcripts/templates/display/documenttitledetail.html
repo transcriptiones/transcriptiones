@@ -178,31 +178,13 @@
                     {{ documenttitle.start_year }}
                 </div>
             </div>
-            {% else %}
-            <div class="row 
-                 {% if newest %}
-                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day or newest.end_year != documenttitle.end_year or newest.end_month != documenttitle.end_month or newest.end_day != documenttitle.end_day %}
-                 has-changed
-                 {% endif %}
-                 {% endif %}">
-                <div class="col-sm-4">
-                    Datierung
-                </div>
-                <div class="col-sm-8">
-                    Keine Angabe
-                </div>
-            </div>
             {% endif %}
             <div class="row {% if newest and newest.place_name != documenttitle.place_name %}has-changed{% endif %}">
                 <div class="col-sm-4">
                     Entstehungsort
                 </div>
                 <div class="col-sm-8">
-                    {% if documenttitle.place_name %}
                     {{ documenttitle.place_name }}
-                    {% else %}
-                    Keine Angabe
-                    {% endif %}
                 </div>
             </div>
             <div class="row 
@@ -236,11 +218,10 @@
                     Archivalienart
                 </div>
                 <div class="col-sm-8">
-                    {% if documenttitle.source_type %}
-                    {{documenttitle.source_type.parent_type}} - {{ documenttitle.source_type }}
-                    {% else %}
-                    Keine Angabe
+                    {% if documenttitle.source_type.parent_type is not None %}
+                    {{documenttitle.source_type.parent_type}} - 
                     {% endif %}
+                    {{ documenttitle.source_type }}
                 </div>
             </div>
         </div>
