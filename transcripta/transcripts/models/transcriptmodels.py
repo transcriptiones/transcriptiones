@@ -306,7 +306,7 @@ class DocumentTitle(models.Model):
     paging_system = models.CharField(
         max_length=15,
         blank=True,
-        verbose_name="paginierungssystem",
+        verbose_name="paginierung",
         choices=PagChoices.choices,
         help_text="Paginierungssystem"
         )

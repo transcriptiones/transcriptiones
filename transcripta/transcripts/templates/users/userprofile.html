@@ -85,7 +85,11 @@
                     {{ document.get_versions.latest.document_utc_add }}
                 </td>
                 <td>
+                    {% if document.get_versions.latest.submitted_by_anonymous %}
+                    Anonym
+                    {% else %}
                     {{ document.get_versions.latest.submitted_by }}
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

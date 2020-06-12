@@ -4,7 +4,7 @@ from transcripta.transcripts.models import User
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=255, help_text='E-Mail-Adresse')
-    anonymous_publication = forms.BooleanField(required=False)
+    anonymous_publication = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
