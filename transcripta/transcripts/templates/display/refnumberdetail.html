@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Zurück zur Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dokument</li>
+    </ol>
+</nav>
+
 <div>
     <h2>{{ refnumber.refnumber_name }}</h2>
 </div>
@@ -84,8 +92,5 @@
     </div>
 </div>
 
-<div id="backto">
-     <a class="btn btn-secondary" href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a>
-</div>
 
 {% endblock content %}

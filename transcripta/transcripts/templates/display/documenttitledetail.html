@@ -2,12 +2,23 @@
 
 {% load static %}
 {% block dependencies %}
+{% include "toolbox.html" %}
 <script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
 <script src="{% static 'display/scripts.js' %}"></script>
+<link href="{% static 'base/css/toolboxstyles.css' %}" rel="stylesheet" type="text/css">
 {% endblock dependencies %}
+
 
 {% block content %}
 
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Zurück zur Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dokument</li>
+    </ol>
+</nav>
 
 <div>
     <h2>{{ documenttitle.title_name }}</h2>
@@ -94,7 +105,7 @@
 
     <div id="DocumentMetadata" class="collapse show">
         <div class="card-body">
-            <div class="row 
+            <div class="row
                  {% if newest %}
                  {% for author in documenttitle.author.all %}
                  {% if not author in newest.author.all %}
@@ -121,7 +132,7 @@
                 </div>
             </div>
             {% if documenttitle.start_year and documenttitle.end_year %}
-            <div class="row 
+            <div class="row
                  {% if newest %}
                  {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
                  has-changed
@@ -140,7 +151,7 @@
                     {{ documenttitle.start_year }}
                 </div>
             </div>
-            <div class="row 
+            <div class="row
                  {% if newest %}
                  {% if newest.end_year != documenttitle.end_year or newest.end_month != documenttitle.end_month or newest.end_day != documenttitle.end_day %}
                  {% endif %}
@@ -159,7 +170,7 @@
                 </div>
             </div>
             {% elif documenttitle.start_year and not documenttitle.end_year %}
-            <div class="row 
+            <div class="row
                  {% if newest %}
                  {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
                  has-changed
@@ -187,7 +198,7 @@
                     {{ documenttitle.place_name }}
                 </div>
             </div>
-            <div class="row 
+            <div class="row
                  {% if newest %}
                  {% for language in documenttitle.language.all %}
                  {% if not language in newest.language.all %}
@@ -306,7 +317,7 @@
 
 <div class="card">
     <div class="card-header" data-toggle="collapse" href="#DocumentComments">
-         <a class="card-link">Kommentare und Links</a>
+        <a class="card-link">Kommentare und Links</a>
     </div>
 
     <div id="DocumentComments" class="collapse show">
@@ -327,15 +338,15 @@
                 <div class="col-sm-4">
                     Hochgeladen
                 </div>
-              <div class="col-sm-8">
-                {% if documenttitle.submitted_by_anonymous %}
-                  Anonym
-                {% else %}
-                  Durch {{ documenttitle.submitted_by }}
-                {% endif %}
-                am {{ documenttitle.document_utc_add.date }}
-                um {{ documenttitle.document_utc_add.time }}
-              </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.submitted_by_anonymous %}
+                    Anonym
+                    {% else %}
+                    Durch {{ documenttitle.submitted_by }}
+                    {% endif %}
+                    am {{ documenttitle.document_utc_add.date }}
+                    um {{ documenttitle.document_utc_add.time }}
+                </div>
             </div>
         </div>
     </div>
@@ -366,12 +377,6 @@
 {% endif %}
 
 
-<div id="backto">
-    {% if not newest or newest == documenttitle %}
-    <a class="btn btn-secondary" href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a>
-    {% else %}
-    <a class="btn btn-secondary" href="{{ newest.get_absolute_url }}">Zur aktuellen Version</a>
-    {% endif %}
-</div>
 
 {% endblock content %}
+
