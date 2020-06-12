@@ -12,6 +12,38 @@ body {
   padding: 1.25rem 2.5rem;
 }
 
+.breadcrumb {
+    padding: 15px 15px;
+    background-color: white;
+}
+
+.breadcrumb-item {
+    display: inline;
+    font-size: 16px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    padding-left: 5px;
+    content: "/\00a0";
+    color: #000000 !important;
+}
+
+    
+.breadcrumb-item.active {
+    color: #000000 !important;
+}
+
+
+.breadcrumb li a:hover {
+    color: #155d74;
+    text-decoration: none !important;
+}
+
+.breadcrumb li a:hover:after {
+    color: #155d74;
+    text-decoration: none !important;
+}
+
 .card-header {
     background-color: #1D809F !important;
     cursor: pointer;
