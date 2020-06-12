@@ -4,9 +4,9 @@
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Zurück zur Institutionenliste</a></li>
-        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Dokument</li>
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">{{ refnumber.holding_institution }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ refnumber.refnumber_name }}</li>
     </ol>
 </nav>
 

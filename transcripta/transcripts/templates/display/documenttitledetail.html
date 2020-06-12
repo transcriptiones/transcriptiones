@@ -13,9 +13,9 @@
 
 <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Zurück zur Institutionenliste</a></li>
-        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">Zurück zur Signatur</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Dokument</li>
     </ol>
 </nav>
