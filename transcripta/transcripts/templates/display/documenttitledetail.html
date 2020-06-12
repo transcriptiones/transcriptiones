@@ -134,8 +134,8 @@
                     {% if documenttitle.start_day %}
                     {{ documenttitle.start_day }}.
                     {% endif %}
-                    {% if start_month_name %}
-                    {{ start_month_name|lower|capfirst }}
+                    {% if documenttitle.start_month %}
+                    {{ documenttitle.get_start_month_display }}
                     {% endif %}
                     {{ documenttitle.start_year }}
                 </div>
@@ -152,8 +152,8 @@
                     {% if documenttitle.end_day %}
                     {{ documenttitle.end_day }}.
                     {% endif %}
-                    {% if end_month_name %}
-                    {{ end_month_name|lower|capfirst }}
+                    {% if documenttitle.end_month %}
+                    {{ documenttitle.get_end_month_display }}
                     {% endif %}
                     {{ documenttitle.end_year }}
                 </div>
@@ -172,8 +172,8 @@
                     {% if documenttitle.start_day %}
                     {{ documenttitle.start_day }}.
                     {% endif %}
-                    {% if start_month_name %}
-                    {{ start_month_name|lower|capfirst }}
+                    {% if documenttitle.start_month %}
+                    {{ documenttitle.get_start_month_display }}
                     {% endif %}
                     {{ documenttitle.start_year }}
                 </div>

@@ -413,3 +413,16 @@ button[type="submit"] {
 .has-changed {
     background-color: rgba(52, 58, 64, 0.5)
 }
+
+.display-list-element {
+    border-style: solid;
+    border-width: thin;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+    .display-list-element:hover {
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.1);
+    }

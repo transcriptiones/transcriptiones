@@ -15,16 +15,18 @@
             {{ city.grouper }}
         </a>
     </div>
-    {% for institution in city.list %}
     <div id="Ref{{ city.grouper|cut:"." }}" class="collapse show">
         <div class="card-body">
-            <div class="row">
-                <div class="col-sm-4">{{ institution.institution_name }}</div>
-                <div class="col-sm-8"><a href="{{ institution.get_absolute_url }}">{{ institution.refnumbers.count }} Signatur(en)</a></div>
-            </div>
+            {% for institution in city.list %}
+                <a href="{{ institution.get_absolute_url }}" class="row display-list-element">
+                    <div class="col-sm-10 text-left">{{ institution.institution_name }}</div>
+                    <div class="col-sm-2 text-left">
+                        {{ institution.refnumbers.count }} Signatur{% if institution.refnumbers.count != 1 %}en{% endif %}
+                    </div>
+                </a>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
     {% endfor %}
 </div>
 
