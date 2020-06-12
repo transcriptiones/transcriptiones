@@ -122,8 +122,18 @@ class SourceLanguage(models.Model):
         return self.language_name
 
 class SourceType(models.Model):
-    type_name = models.CharField(max_length=50, verbose_name="archivalienart")
-    parent_type = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name="child_type", verbose_name="übergeordnete Archivalienart")
+    type_name = models.CharField(
+        max_length=50,
+        verbose_name="archivalienart",
+        )
+    parent_type = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="child_type",
+        verbose_name="übergeordnete Archivalienart",
+        )
 
     class Meta:
         verbose_name = "archivalienart"
@@ -296,7 +306,7 @@ class DocumentTitle(models.Model):
     paging_system = models.CharField(
         max_length=15,
         blank=True,
-        verbose_name="paginierungssystem",
+        verbose_name="paginierung",
         choices=PagChoices.choices,
         help_text="Paginierungssystem"
         )

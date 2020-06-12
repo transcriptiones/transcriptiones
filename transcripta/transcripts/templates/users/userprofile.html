@@ -11,6 +11,14 @@
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
+                <th scope="row">Vorname</th>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nachname</th>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr>
                 <th scope="row">E-Mail-Adresse</th>
                 <td>{{ user.email }}</td>
             </tr>
@@ -77,7 +85,11 @@
                     {{ document.get_versions.latest.document_utc_add }}
                 </td>
                 <td>
+                    {% if document.get_versions.latest.submitted_by_anonymous %}
+                    Anonym
+                    {% else %}
                     {{ document.get_versions.latest.submitted_by }}
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
