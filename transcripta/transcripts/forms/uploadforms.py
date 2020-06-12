@@ -61,10 +61,14 @@ class DocumentTitleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentTitleForm, self).__init__(*args, **kwargs)
         for name in self.fields:
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].help_text, #ToDo: let placeholder depend on input type
-                })
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[name].widget.attrs.update({
+                    'class': 'form-control',
+                    'placeholder': self.fields[name].help_text,
+                    })
+        
         self.fields['start_year'].widget.attrs.update({
             'min': -3000, #ToDo: Probably solve this with validators? Do the same for end_dates
             'max': datetime.now().year
@@ -133,10 +137,13 @@ class EditMetaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditMetaForm, self).__init__(*args, **kwargs)
         for name in self.fields:
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
                 self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].help_text,
-                })
+                    'class': 'form-control',
+                    'placeholder': self.fields[name].help_text,
+                    })
     
     class Meta:
         model = DocumentTitle
@@ -169,10 +176,13 @@ class EditTranscriptForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditTranscriptForm, self).__init__(*args, **kwargs)
         for name in self.fields:
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
                 self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].help_text,
-                })
+                    'class': 'form-control',
+                    'placeholder': self.fields[name].help_text,
+                    })
 
         
     class Meta:

@@ -9,9 +9,12 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[name].widget.attrs.update({
+                    'class': 'form-control',
+                    })
 
     class Meta:
         model = User
@@ -45,9 +48,12 @@ class UserUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[name].widget.attrs.update({
+                    'class': 'form-control',
+                    })
 
     # check password. Raise ValidationError if password invalid
     def clean_passwordprompt(self):
