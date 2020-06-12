@@ -19,6 +19,9 @@
 
 {% if user.is_authenticated %}
     <p>Sie sind bereits angemeldet.</p>
+    <div id="logout">
+        <a class="btn btn-secondary" href="{% url 'logout' %}">Abmelden</a>
+    </div>
 {% else %}
 
 <div>
