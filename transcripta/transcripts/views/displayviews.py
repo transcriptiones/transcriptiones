@@ -69,10 +69,6 @@ class DocumentTitleDetailView(DetailView):
             newest = self.get_object().get_versions().latest()
             context['newest'] = newest
 
-        if self.get_object().start_month:
-            context['start_month_name'] = self.model.MonthChoices.names[self.get_object().start_month - 1]
-        if self.get_object().end_month:
-            context['end_month_name'] = self.model.MonthChoices.names[self.get_object().end_month - 1]
         return context
 
 

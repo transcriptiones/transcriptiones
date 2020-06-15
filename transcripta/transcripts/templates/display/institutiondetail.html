@@ -42,7 +42,6 @@
                     {{ institution.country }}
                 </div>
             </div>
-            {% if institution.site_url %}
             <div class="row">
                 <div class="col-sm-4">
                     Website
@@ -51,7 +50,6 @@
                     <a href="{{ institution.site_url }}" target="_blank">{{ institution.institution_name }}</a>
                 </div>
             </div>
-                    {% endif %}
         </div>
     </div>
 </div>
@@ -63,22 +61,27 @@
 
     <div id="differentRefNumbers" class="collapse show">
         <div class="card-body">
+            {% if institution.refnumbers.all %}
+            {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
+            <a href="{{ refnumber.get_absolute_url }}" class="row display-list-element">
+                <div class="col-sm-5 text-left">{{ refnumber.refnumber_name }}</div>
+                <div class="col-sm-5 text-left">
+                    {% if refnumber.refnumber_title %}
+                    {{ refnumber.refnumber_title }}
+                    {% else %}
+                    Ohne Titel
+                    {% endif %}
+                </div>
+                <div class="col-sm-2 text-left">
+                    {{ refnumber.documents.count }} Dokument{% if refnumber.documents.count != 1 %}e{% endif %}
+                </div>
+            </a>
+            {% endfor %}
+            {% else %}
             <div class="row">
-                {% if institution.refnumbers.all %}
-                {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
-                <div class="col-sm-4">
-                    {{ refnumber.refnumber_name }}
-                </div>
-                <div class="col-sm-8">
-                    <a href="{{ refnumber.get_absolute_url }}">
-                        {{ refnumber.documents.count }} Dokument(e)
-                    </a>
-                </div>
-                {% endfor %}
-                {% else %}
-                Dieser Institution sind noch keine Signaturen zugeordnet
-                {% endif %}
+                <div class="col-sm text-left">Dieser Institution sind noch keine Signaturen zugeordnet</div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
