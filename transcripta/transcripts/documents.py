@@ -28,6 +28,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     """
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
+    title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
     institution_name = fields.TextField(attr="parent_institution.institution_name", fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
     language = fields.KeywordField(multi=True)
@@ -35,7 +36,6 @@ class TranscriptionDocument(ElasticsearchDocument):
     class Django:
         model = DocumentTitle
         fields = [
-            'title_name',
             'place_name',
             'measurements_length',
             'measurements_width',

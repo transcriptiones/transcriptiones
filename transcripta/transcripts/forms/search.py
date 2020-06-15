@@ -1,5 +1,5 @@
 from dataclasses import dataclass, astuple
-from enum import Enum
+from enum import Enum, auto
 from typing import Optional, Type, Sequence, Tuple, Union
 
 from django import forms
@@ -17,17 +17,30 @@ class Choices(Enum):
 
 class Operation(Choices):
     """The desired relation between the index value and the point of comparison."""
-    EQUAL = ('ist',)  # Positive term query. Intended for keyword fields.
-    UNEQUAL = ('ist nicht',)  # Negative term query. Intended for keyword fields.
+    EQUAL = ('ist',)  # Positive term query. Intended for keyword or numeric fields.
+    UNEQUAL = ('ist nicht',)  # Negative term query. Intended for keyword or numeric fields.
     KEYWORD_EQUAL = ('ist',)  # Positive term query on subfield .keyword. Intended for composite fields.
     KEYWORD_UNEQUAL = ('ist nicht',)  # Negative term query on subfield .keyword. Intended for composite fields.
     CONTAINS = ('enthält',)  # Positive match query. Intended for text fields.
+    CONTAINS_NOT = ('enthält nicht',)  # Negative match query. Intended for text fields.
+    GTE = ('ist mindestens',)  # Upwards range query. Intended for numeric fields.
+    LTE = ('ist höchstens',)  # Downwards range query. Intended for numeric fields.
 
     def __str__(self):
-        return self.value[0]
+        return self.text
+
+    def __repr__(self):
+        return f'<{self.__class__.__qualname__}.{self.name}: {self}>'
+
+    def __new__(cls, text):
+        obj = object.__new__(cls)
+        obj._value_ = auto()
+        obj.text = text
+        return obj
 
 
 TEXT_OPERATIONS = (Operation.KEYWORD_EQUAL, Operation.KEYWORD_UNEQUAL, Operation.CONTAINS)
+NUMERIC_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL, Operation.GTE, Operation.LTE)
 
 
 @dataclass(frozen=True)
@@ -46,9 +59,13 @@ class Attribute:
         return self.widget.input_type
 
 
-ATTRIBUTES = {a.name: a for a in [
+ATTRIBUTES = {str(a): a for a in [
+    Attribute("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
     Attribute("Institut", 'institution_name'),
     Attribute("Signatur", 'refnumber_title'),
+    Attribute("Titel", 'title_name'),
+    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS),
+    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS),
 ]}
 
 
@@ -66,6 +83,7 @@ class FilterTriple:
         return {f'{self.attribute.field}.keyword': self.value}
 
     def apply(self, search: Search) -> Search:
+        """Restrict an ElasticSearch search by this filter."""
         if self.operation is Operation.EQUAL:
             return search.filter('term', **self.as_dict())
         if self.operation is Operation.UNEQUAL:
@@ -76,9 +94,23 @@ class FilterTriple:
             return search.exclude('term', **self.as_dict_with_kw())
         if self.operation is Operation.CONTAINS:
             return search.filter('match', **self.as_dict())
+        if self.operation is Operation.GTE:
+            return search.filter('range', **{self.attribute.field: {'gte': self.value}})
+        if self.operation is Operation.LTE:
+            return search.filter('range', **{self.attribute.field: {'lte': self.value}})
+        raise ValueError(self.operation)
 
     def __repr__(self):
         return f'<FilterTriple: {self.attribute} {self.operation} {self.value!r}>'
+
+
+class AttributeSelect(forms.Select):
+    """A specialised <select> widget for an Attribute."""
+    def create_option(self, name, value: str, label, selected, index, subindex=None, attrs=None):
+        option = super().create_option(name, value, label, selected, index, subindex, attrs)
+        if value:
+            option['attrs']['data-operations'] = ','.join(op.name for op in ATTRIBUTES[value].operations)
+        return option
 
 
 class FilterWidget(forms.MultiWidget):
@@ -92,7 +124,7 @@ class FilterWidget(forms.MultiWidget):
         if attrs is None:
             attrs = {}
         widgets = [  # TODO: Change to dict for better field names once Django 3.1 is released.
-            forms.Select(attrs=_append_class(attrs, 'attribute_field'), choices=[(a, a) for a in ATTRIBUTES]),
+            AttributeSelect(attrs=_append_class(attrs, 'attribute_field'), choices=[(a, a) for a in ATTRIBUTES]),
             forms.Select(attrs=_append_class(attrs, 'operation_field'), choices=Operation.choices()),
             forms.TextInput(attrs=_append_class(attrs, 'value_field')),
         ]

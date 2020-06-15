@@ -13,13 +13,10 @@ class SearchView(FormView, ListView):
     context_object_name = "results"
 
     def form_valid(self, form):
-        print(form.cleaned_data)
         self.queryset = TranscriptionDocument.search()
         if form.cleaned_data['query']:
             self.queryset = self.queryset.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
         for filter in form.cleaned_data['filters']:
             self.queryset = filter.apply(self.queryset)
-        print(repr(self.queryset.to_dict()))
         self.queryset = self.queryset.to_queryset()  # DEBUG
-        print(self.queryset)
         return self.get(self.request)
