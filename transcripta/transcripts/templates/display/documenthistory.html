@@ -49,7 +49,7 @@
             {% for version in versions %}
             {% if forloop.counter <= 3 %}
             <a href="{{ version.get_absolute_version_url }}">
-                <div class="row">
+                <div class="row display-list-element">
                     <div class="col-sm-4">
                         {% if forloop.first %}
                         Aktuelle Version
@@ -57,13 +57,13 @@
                         Version {{ version.version_number }}
                         {% endif %}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.commit_message }}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.document_utc_add }}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.submitted_by }}
                     </div>
                 </div>

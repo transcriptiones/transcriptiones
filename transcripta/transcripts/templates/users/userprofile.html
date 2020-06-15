@@ -37,65 +37,50 @@
 </div>
 <div>
     <h4>Meine Aktivitäten</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Titel
-                </th>
-                <th scope="col">
-                    Art des Beitrags
-                </th>
-                <th scope="col">
-                    Zeitpunkt der Aktivität
-                </th>
-                <th scope="col">
-                    Änderungen
-                </th>
-                <th scope="col">
-                    Letzte Änderung am
-                </th>
-                <th>
-                    Letzte Änderung durch
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for document in contributions %}
-            <tr style="transform: rotate(0)">
-                <td>
-                    <a href="{{ document.get_absolute_version_url }}" class="stretched-link">
-                    {{ document.title_name }}
-                    </a>
-                </td>
-                <td>
-                    {% if document.version_number == 1 %}
-                    Upload
-                    {% else %}
-                    Bearbeitung
-                    {% endif %}
-                </td>
-                <td>
-                    {{ document.document_utc_add }}
-                </td>
-                <td>
-                    {{ document.commit_message }}
-                </td>
-                <td>
-                    {{ document.get_versions.latest.document_utc_add }}
-                </td>
-                <td>
-                    {% if document.get_versions.latest.submitted_by_anonymous %}
-                    Anonym
-                    {% else %}
-                    {{ document.get_versions.latest.submitted_by }}
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+    <div class="row border-bottom">
+        <div class="col-sm text-left">
+            Titel
+        </div>
+        <div class="col-sm text-left">
+            Art des Beitrags
+        </div>
+        <div class="col-sm text-left">
+            Zeitpunkt der Aktivität
+        </div>
+        <div class="col-sm text-left">
+            Änderungen
+        </div>
+        <div class="col-sm text-left">
+            Letzte Änderung am
+        </div>
+        <div class="col-sm text-left">
+            Letzte Änderung durch
+        </div>
+    </div>
+    {% for document in contributions %}
+    <a href="{{ document.get_absolute_version_url }}" class="row display-list-element">
+        <div class="col-sm text-left">{{ document.title_name }}</div>
+        <div class="col-sm text-left">
+            {% if document.version_number == 1 %}
+            Upload
+            {% else %}
+            Bearbeitung
+            {% endif %}
+        </div>
+        <div class="col-sm text-left">{{ document.document_utc_add }}</div>
+        <div class="col-sm text-left">{{ document.commit_message }}</div>
+        <div class="col-sm text-left">{{ document.get_versions.latest.document_utc_add }}</div>
+        <div class="col-sm text-left">
+            {% if document.get_versions.latest.submitted_by_anonymous %}
+            Anonym
+            {% else %}
+            {{ document.get_versions.latest.submitted_by }}
+            {% endif %}
+        </div>
+    </a>
+    {% endfor %}
+
+
 
 <div class="pagination">
     <span class="step-links">
