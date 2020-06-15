@@ -153,6 +153,8 @@ function hideEndDate() {
 function institutionLoaded() {
     $('#institutionForm').find('#submitButtonModal').on('click', null, this, submitModalForm);
     $('#institutionForm').find('#backButtonModal').on('click', null, this, backModalForm);
+    // add label to required fields
+    $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
 };
 
 function refNumberLoaded() {
@@ -162,6 +164,8 @@ function refNumberLoaded() {
     });
     $('#refNumberForm').find('#submitButtonModal').on('click', null, this, submitModalForm);
     $('#refNumberForm').find('#backButtonModal').on('click', null, this, backModalForm);
+    // add label to required fields
+    $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
 };
 
 
