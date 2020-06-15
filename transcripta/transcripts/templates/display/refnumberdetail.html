@@ -1,6 +1,14 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">{{ refnumber.holding_institution }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ refnumber.refnumber_name }}</li>
+    </ol>
+</nav>
 
 <div>
     <h2>{{ refnumber.refnumber_name }}</h2>
@@ -61,31 +69,43 @@
     <div class="card-header" data-toggle="collapse" href="#differentDocuments">
         <a class="card-link">Dokumente in dieser Signatur</a>
     </div>
-
-
     <div id="differentDocuments" class="collapse show">
         <div class="card-body">
-            <div class="row">
-                <div>
-                    {% if refnumber.documents.all %}
-                    {% for documenttitle in refnumber.documents.all|dictsort:"title_name" %}
-                    <div class="col-sm-12">
-                        <a href="{{ documenttitle.get_absolute_url }}">
-                            {{ documenttitle.title_name }}
-                        </a>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    In dieser Signatur sind noch keine Dokumente enthalten
+            {% if refnumber.documents.all %}
+            {% for document in refnumber.documents.all|dictsort:"title_name" %}
+            <a href="{{ document.get_absolute_url }}" class="row display-list-element">
+                <div class="col-sm text-left">{{ document.title_name }}</div>
+                <div class="col-sm text-left">{{ document.place_name }}</div>
+                <div class="col-sm text-left">
+                    {% if document.start_day %}
+                    {{ document.start_day }}.
+                    {% endif %}
+                    {% if document.start_month %}
+                    {{ document.get_start_month_display }}.
+                    {% endif %}
+                    {{ document.start_year }}
+                    {% if document.start_year and document.end_year %}
+                    -<br />
+                    {% if document.end_day %}
+                    {{ document.end_day }}.
+                    {% endif %}
+                    {% if document.end_month %}
+                    {{ document.get_end_month_display }}.
+                    {% endif %}
+                    {{ document.end_year }}
                     {% endif %}
                 </div>
+                <div class="col-sm text-left">{{ document.document_utc_add }}</div>
+            </a>
+            {% endfor %}
+            {% else %}
+            <div class="row">
+                <div class="col-sm text-left">In dieser Signatur sind noch keine Dokumente enthalten</div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
 
-<div id="backto">
-     <a class="btn btn-secondary" href="{{ refnumber.holding_institution.get_absolute_url }}">Zurück zur Institution</a>
-</div>
 
 {% endblock content %}

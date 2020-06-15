@@ -12,6 +12,7 @@ urlpatterns = [
     path('display/<slug:instslug>/', InstitutionDetailView.as_view(), name='institutiondetail'),
     path('display/<slug:instslug>/<slug:refslug>/', RefNumberDetailView.as_view(), name='refnumberdetail'),
     path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/', DocumentTitleDetailView.as_view(), name='documenttitledetail'),
+    path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/<int:versionnr>/', DocumentTitleDetailView.as_view(), name='documenttitlelegacydetail'),
     path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/history/', DocumentHistoryView.as_view(), name='documenthistory'),
     
     # urls for upload views
@@ -22,6 +23,7 @@ urlpatterns = [
     path('upload/thanks/', RedirectView.as_view(), name='thanks'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='editmeta'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edittranscript'),
+    path('upload/batch/', batchupload, name='batchupload'),
 
     # urls for search views
     path('search/', SearchView.as_view(), name='searchform'),

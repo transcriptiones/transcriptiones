@@ -33,6 +33,7 @@
 
     <!-- Custom CSS -->
     <link href="{% static 'info/css/startstyles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/sidebarstyles.css' %}" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -40,46 +41,32 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-sm bg-transparent fixed-top position-absolute text.navbar">
-   <ul class="navbar-nav align-items-center">
-      <li class="navbar-brand">
-        <a class="nav-link text-navbar" href="{% url 'start' %}">Logo</a>
-      </li>
-      <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="{% url 'document_add' %}">Upload</a>
-      </li>
-      <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="{% url 'searchform' %}">Suche</a>
-      </li>
-      <li class="navbar-nav-item d-none d-sm-block">
-        <a class="nav-link text-navbar" href="{% url 'login' %}">Login</a>
-      </li>
-    </ul>
+      <ul class="navbar-nav align-items-center">
+          <li class="navbar-brand">
+              <a class="nav-link text-navbar" href="{% url 'start' %}">Logo</a>
+          </li>
+          <li class="navbar-nav-item d-none d-sm-block">
+              <a class="nav-link text-navbar" href="{% url 'document_add' %}">Upload</a>
+          </li>
+          <li class="navbar-nav-item d-none d-sm-block">
+              <a class="nav-link text-navbar" href="{% url 'institutionlist' %}">Bestand</a>
+          </li>
+          <li class="navbar-nav-item d-none d-sm-block">
+              <a class="nav-link text-navbar" href="#">Suche</a>
+          </li>
+          <li class="navbar-nav-item d-none d-sm-block">
+              {% if user.is_authenticated %}
+              <a class="nav-link text-navbar" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+              <a class="nav-link text-navbar" href="{% url 'logout' %}">Login</a>
+              {% endif %}
+          </li>
+      </ul>
    </nav>
-  <a class="menu-toggle rounded" href="#">
-    <i class="fas fa-bars"></i>
-  </a>
-  <nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="{% url 'start' %}">Menu</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="{% url 'document_add' %}">Upload</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="{% url 'searchform' %}">Suche</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#information">Informationen</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="{% url 'login' %}">Login</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#contact">Kontakt</a>
-      </li>
-    </ul>
-  </nav>
+
+
+  <!-- Sidebar-->
+  {% include "sidebar.html" %}
 
   <!-- Header -->
   <header class="masthead d-flex">
@@ -113,42 +100,33 @@
         <h2 class="mb-5">Vorgehen</h2>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
           <span class="service-icon rounded-circle mx-auto mb-3">
             <i class="fas fa-arrow-up"></i>
           </span>
           <h4>
             <strong>Upload</strong>
           </h4>
-          <p class="mb-0">Die Transkriptionen werden in einen Editor kopiert. Geschieht dies aus einem Word-Dokument heraus, wird die Formatierung zum grössten Teil übernommen. Um Einheitlichkeit zu erreichen, legen wir Ihnen unsere unverbindlichen Transkriptionsrichtlinien ans Herz. Zudem sind verschiedene Metadaten anzugeben. Sie erleichtern später die Zuordnung zum Original und ermöglichen die Suchfunktionen. Fotos der Quelle können ebenfalls hochgeladen werden. Sie ermöglichen die Überarbeitung durch andere Nutzer*Innen.</p>
+          <p class="mb-0">Die Transkriptionen werden in einen Editor kopiert. Geschieht dies aus einem Word-Dokument heraus, wird die Formatierung zum grössten Teil übernommen. Um Einheitlichkeit zu erreichen, legen wir Ihnen unsere unverbindlichen Transkriptionsrichtlinien ans Herz. Zudem sind verschiedene Metadaten anzugeben, damit die Quelle identifizierbar bleibt. Fotos der Quelle können ebenfalls hochgeladen werden.</p>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
           <span class="service-icon rounded-circle mx-auto mb-3">
             <i class="fas fa-search-plus"></i>
           </span>
           <h4>
             <strong>Recherche</strong>
           </h4>
-          <p class="mb-0">Die Transkriptionen lassen sich unterschiedlich auffinden. Es besteht die Möglichkeit nach Metadaten zu filtern. Ausserdem kann direkt ein interessantes Archiv oder eine spannende Signatur angesteuert werden. Weiter ist eine Volltextsuche implementiert, dabei sind die verschiedenen Schreibweisen zu beachten. Sie können die Transkriptionen in verschiedene Formate exportieren und sich ein XML-File ausgeben lassen.</p>
+          <p class="mb-0">Die Transkriptionen lassen sich unterschiedlich auffinden. Es besteht die Möglichkeit nach Metadaten zu filtern. Ausserdem kann direkt ein interessantes Archiv oder eine spannende Signatur angesteuert werden. Weiter ist eine Volltextsuche implementiert, dabei sind die verschiedenen Schreibweisen zu beachten.</p>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+        <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
           <span class="service-icon rounded-circle mx-auto mb-3">
             <i class="fas fa-check-double"></i>
           </span>
           <h4>
             <strong>Überarbeiten</strong>
           </h4>
-          <p class="mb-0">Ihre überarbeitete Version wird primär erscheinen, ältere Versionen sind aber noch immer abrufbar. Metadaten und Fotos können ebenfalls ergänzt werden. Bitte beachten Sie dabei unsere Nutzungsbedingungen hinsichtlich dem Upload von Fotos.</p>
+          <p class="mb-0">Ihre überarbeitete Version wird primär erscheinen, ältere Versionen sind aber noch immer abrufbar. Metadaten und Fotos können ebenfalls ergänzt werden. Bitte beachten Sie dabei unsere Nutzungsbedingungen. Ausserdem können Sie die Transkriptionen in verschiedene Formate exportieren.</p>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <span class="service-icon rounded-circle mx-auto mb-3">
-            <i class="far fa-user"></i>
-          </span>
-          <h4>
-            <strong>Benutzerkonto</strong>
-          </h4>
-          <p class="mb-0">Um Transkriptionen hochzuladen ist eine Registrierung notwendig. Dabei muss der Name sowie eine gültige E-Mail-Adresse angegeben werden. Weiter können Sie auswählen, ob Sie Ihre Transkriptionen mit Ihrem Namen signieren möchten oder nicht. Beachten Sie auch unsere RSS-Funktion, damit Sie eine Benachrichtigungsmail einrichten können für den Zuwachs eines bestimm-ten Transkriptionsbestands.</p>
-		</div>
       </div>
 	<div class="col-lg-10 mx-auto">
 	<a class="btn btn-dark btn-xl js-scroll-trigger" href="#portfolio">Weitere Informationen</a>
@@ -178,7 +156,7 @@
           <a class="portfolio-item" href="#">
             <span class="caption">
               <span class="caption-content">
-                <h2>Nutzungsbedingungen</h2>
+                <h2>Benutzerkonto</h2>
                 <p class="mb-0">ABC</p>
               </span>
             </span>
@@ -189,7 +167,7 @@
           <a class="portfolio-item" href="#">
             <span class="caption">
               <span class="caption-content">
-                <h2>RSS</h2>
+                <h2>Nutzungsbedingungen</h2>
                 <p class="mb-0">ABCj</p>
               </span>
             </span>

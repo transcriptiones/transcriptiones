@@ -122,8 +122,18 @@ class SourceLanguage(models.Model):
         return self.language_name
 
 class SourceType(models.Model):
-    type_name = models.CharField(max_length=50, verbose_name="archivalienart")
-    parent_type = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name="child_type", verbose_name="übergeordnete Archivalienart")
+    type_name = models.CharField(
+        max_length=50,
+        verbose_name="archivalienart",
+        )
+    parent_type = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="child_type",
+        verbose_name="übergeordnete Archivalienart",
+        )
 
     class Meta:
         verbose_name = "archivalienart"
@@ -179,8 +189,8 @@ class DocumentTitle(models.Model):
         related_name="works",
         )
     start_year = models.SmallIntegerField(
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         verbose_name="startjahr",
         help_text="YYYY"
         )
@@ -220,7 +230,7 @@ class DocumentTitle(models.Model):
         )
     place_name = models.CharField(
         max_length=150,
-        blank=True,
+        blank=False,
         verbose_name="entstehungsort",
         help_text="Entstehungsort der Quelle"
         )
@@ -233,8 +243,8 @@ class DocumentTitle(models.Model):
     source_type = models.ForeignKey(
         SourceType,
         on_delete=models.PROTECT,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         verbose_name="archivalienart",
         help_text="Archivalienart/Quellengattung"
         )
@@ -270,7 +280,7 @@ class DocumentTitle(models.Model):
     paging_system = models.CharField(
         max_length=15,
         blank=True,
-        verbose_name="paginierungssystem",
+        verbose_name="paginierung",
         choices=PagChoices.choices,
         help_text="Paginierungssystem"
         )
@@ -323,6 +333,11 @@ class DocumentTitle(models.Model):
         help_text="Knappe Beschreibung der Änderungen",
         default="initial"
         )
+    version_number = models.IntegerField(
+        verbose_name="versionsnummer",
+        help_text="Versionsnummer",
+        default=1,
+        )
 
     objects = DocumentManager()  # Only current versions
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
@@ -335,6 +350,7 @@ class DocumentTitle(models.Model):
         constraints = [
             UniqueConstraint(fields=['document_slug'], condition=Q(active=True), name='unique_active_slug'),
             UniqueConstraint(fields=['document_id'], condition=Q(active=True), name='unique_active_docid'),
+            UniqueConstraint(fields=['document_id', 'version_number'], name='version_by_document'),
         ]
 
     def __str__(self):
@@ -346,6 +362,15 @@ class DocumentTitle(models.Model):
                            'instslug': self.parent_institution.institution_slug,
                            'refslug': self.parent_refnumber.refnumber_slug,
                            'docslug': self.document_slug
+                           })
+
+    def get_absolute_version_url(self):
+        return reverse('documenttitlelegacydetail',
+                       kwargs={
+                           'instslug': self.parent_institution.institution_slug,
+                           'refslug': self.parent_refnumber.refnumber_slug,
+                           'docslug': self.document_slug,
+                           'versionnr': self.version_number
                            })
 
     #model method to return queryset of all versions with the same document_id
@@ -369,4 +394,10 @@ class DocumentTitle(models.Model):
             self.pk = None
             # Set all old versions to be inactive
             type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk).update(active=False)
+            # increment version_number by 1
+            try:
+                self.get_versions().latest()
+                self.version_number = self.get_versions().exclude(pk=self.pk).latest().version_number + 1
+            except type(self).DoesNotExist:
+                self.version_number = 1
         super().save(force_update=force_update, *args, **kwargs)

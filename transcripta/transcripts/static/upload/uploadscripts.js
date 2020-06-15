@@ -4,7 +4,7 @@
  * 
  */
 
-// Show entered values in refNumberForm and ask for confirmation
+// Show entered values in ModalForm and ask for confirmation
 // Client-side validation happens here. Do we still need server-side validation?
 function submitModalForm(event) {
     var form = $(event.target).closest('form')[0];
@@ -44,12 +44,10 @@ function confirmRefNumber() {
         },
     })
         .done(function (data) {
+            var new_ref_name = $('#id_refnumber_name').val();
             $('#refNumberModal').modal('hide');
             $('#id_parent_refnumber').html(data).prop("disabled", false);
-            $('#id_parent_refnumber option:contains(' + $('#id_refnumber_name').val() + ')').prop("selected", true);
-            document.getElementById('refNumberForm').reset();
-            $('#refNumberForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
-            $('#refNumberForm').find('#backButtonModal').hide();
+            $('#id_parent_refnumber option:contains(' + new_ref_name + ')').prop("selected", true);
         });
 };
 
@@ -69,13 +67,11 @@ function confirmInstitution() {
         },
     })
         .done(function (data) {
+            var new_inst_name = $('#id_institution_name').val();
             $('#institutionModal').modal('hide');
             $('#id_parent_institution').html(data);
-            $('#id_parent_institution option:contains(' + $('#id_institution_name').val() + ')').prop("selected", true);
+            $('#id_parent_institution option:contains(' + new_inst_name + ')').prop("selected", true);
             $('#id_holding_institution').html(data);
-            document.getElementById('institutionForm').reset();
-            $('#institutionForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
-            $('#institutionForm').find('#backButtonModal').hide();
             //fires the function to update refnumbers in case institution has been chosen before
             $('#id_parent_institution').change();
             $('#id_parent_institution').prop("disabled", false);
@@ -157,6 +153,8 @@ function hideEndDate() {
 function institutionLoaded() {
     $('#institutionForm').find('#submitButtonModal').on('click', null, this, submitModalForm);
     $('#institutionForm').find('#backButtonModal').on('click', null, this, backModalForm);
+    // add label to required fields
+    $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
 };
 
 function refNumberLoaded() {
@@ -166,6 +164,8 @@ function refNumberLoaded() {
     });
     $('#refNumberForm').find('#submitButtonModal').on('click', null, this, submitModalForm);
     $('#refNumberForm').find('#backButtonModal').on('click', null, this, backModalForm);
+    // add label to required fields
+    $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
 };
 
 
@@ -205,11 +205,19 @@ $(document).on('show.bs.modal', '#refNumberModal', function () {
 $(document).on('hide.bs.modal', '#institutionModal', function () {
     $('#id_parent_institution').prop('selectedIndex', -1).change();
     $('#id_parent_refnumber').prop("disabled", true);
+    $('#institutionForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
+    $('#institutionForm').find('#backButtonModal').hide();
+    $('#institutionForm').find('.form-control').prop('disabled', false);
+    document.getElementById('institutionForm').reset();
 });
 
 // clear the form field which opened refNumberModal
 $(document).on('hide.bs.modal', '#refNumberModal', function () {
     $('#id_parent_refnumber').prop('selectedIndex', -1).change();
+    $('#refNumberForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
+    $('#refNumberForm').find('#backButtonModal').hide();
+    $('#refNumberForm').find('.form-control').prop('disabled', false);
+    document.getElementById('refNumberForm').reset();
 });
 
 /*
@@ -257,15 +265,22 @@ $(function () {
         placeholder: $('#id_parent_refnumber').attr('placeholder'),
         disabled: true,
     });
-    $('#id_language, #id_source_type, #id_material, #id_start_month, #id_start_day, #id_end_month, #id_end_day').each(function () {
+    $('#id_language, #id_source_type_parent, #id_source_type_child, #id_material, #id_start_month, #id_start_day, #id_end_month, #id_end_day').each(function () {
         var element = $(this);
         element.select2({
             theme: 'bootstrap4',
             placeholder: element.attr('placeholder'),
+            allowClear: true,
         });
     });
-
-    $('#id_paging_system, #id_illuminated, #id_seal').each(function () {
+    $('#id_paging_system').select2({
+        theme: 'bootstrap4',
+        tags: true,
+        placeholder: $('#id_paging_system').attr('placeholder'),
+        minimumResultsForSearch: Infinity,
+        allowClear: true,
+    });
+    $('#id_illuminated, #id_seal').each(function () {
         var element = $(this);
         element.select2({
             theme: 'bootstrap4',
@@ -306,6 +321,7 @@ $(function () {
     $('#id_start_month, #id_start_day, #id_end_month, #id_end_day').prop('disabled', true);
     $('#id_start_year, #id_start_month, #id_end_year, #id_end_month').on('input', null, this, enableDate);
     $('#submitButtonDocument').on('click', null, this, submitDocument);
+    $('#id_source_type_child').prop('disabled', true).find('option').prop('disabled', true);
     $('#submitButtonAuthor').on('click', confirmAuthor);
     $('#closeButtonAuthor').on('click', closeAuthor);
     $('#buttonEndDate').on('click', showEndDate);
@@ -369,6 +385,18 @@ $('#id_start_month, #id_end_month').on('change', function (event) {
         $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option[value="30"], option[value="31"]').prop('disabled', true);
     } else {
         $(event.target).closest('.fieldWrapper').next('.fieldWrapper').find('option:hidden').prop('disabled', false);
+    }
+});
+
+
+// show/hide source_type_child options based on selection of source_type_parent
+$('#id_source_type_parent').on('change', function (event) {
+    var parent = $(event.target).val()
+    if (parent && parent != '') {
+        $('#id_source_type_child').find('option').prop('disabled', true);
+        $('#id_source_type_child').prop('disabled', false).find('option[data-parent=' + parent + ']').prop('disabled', false);
+    } else {
+        $('#id_source_type_child').prop('selectedIndex', -1).change().prop('disabled', true).find('option').prop('disabled', true);
     }
 });
 
@@ -448,6 +476,11 @@ function validateForm (form) {
         }
 
     });
+
+    // set focus on first erroneous form field
+    if (formValid === false) {
+        $('.error.active').first().siblings().first().focus();
+    }
 
     return formValid;
 };

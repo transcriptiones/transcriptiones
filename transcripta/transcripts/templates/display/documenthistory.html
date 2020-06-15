@@ -7,6 +7,15 @@
 
 {% block content %}
 
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">Dokument</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Versionen</li>
+    </ol>
+</nav>
 
 <div>
     <h2>{{ documenttitle.title_name }}</h2>
@@ -48,22 +57,22 @@
         <div class="card-body">
             {% for version in versions %}
             {% if forloop.counter <= 3 %}
-            <a href="{{ version.get_absolute_url }}?version={{ forloop.revcounter }}">
-                <div class="row">
+            <a href="{{ version.get_absolute_version_url }}">
+                <div class="row display-list-element">
                     <div class="col-sm-4">
                         {% if forloop.first %}
                         Aktuelle Version
                         {% else %}
-                        Version {{ forloop.revcounter }}
+                        Version {{ version.version_number }}
                         {% endif %}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.commit_message }}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.document_utc_add }}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm text-left">
                         {{ version.submitted_by }}
                     </div>
                 </div>
@@ -74,9 +83,5 @@
     </div>
 </div>
 
-
-<div id="backto">
-     <a class="btn btn-secondary" href="{{ documenttitle.get_absolute_url }}">Zurück zur Transkription</a>
-</div>
 
 {% endblock content %}

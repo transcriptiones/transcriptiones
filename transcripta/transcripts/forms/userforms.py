@@ -4,18 +4,21 @@ from transcripta.transcripts.models import User
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=255, help_text='E-Mail-Adresse')
-    anonymous_publication = forms.BooleanField(required=False)
+    anonymous_publication = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[name].widget.attrs.update({
+                    'class': 'form-control',
+                    })
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'anonymous_publication')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'anonymous_publication')
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -45,9 +48,12 @@ class UserUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
+            if isinstance(self.fields[name], forms.BooleanField):
+                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
+            else:
+                self.fields[name].widget.attrs.update({
+                    'class': 'form-control',
+                    })
 
     # check password. Raise ValidationError if password invalid
     def clean_passwordprompt(self):
@@ -57,7 +63,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'anonymous_publication', 'passwordprompt')
+        fields = ('username', 'first_name', 'last_name', 'email', 'anonymous_publication', 'passwordprompt')
 
 class CustomPasswordResetForm(PasswordResetForm):
     # pass class form-control to form fields

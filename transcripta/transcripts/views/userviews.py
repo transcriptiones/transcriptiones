@@ -9,6 +9,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from transcripta.transcripts.models import User
 from transcripta.transcripts.forms import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from transcripta.transcripts.tokens import account_activation_token
@@ -78,7 +79,13 @@ class CustomPasswordChangeView(PasswordChangeView):
 @login_required
 def userprofile(request):
     user = request.user
-    return render(request, 'users/userprofile.html', {'user': user})
+    contributions = user.contributions(manager='all_objects').all().order_by('-document_utc_add')
+    paginator = Paginator(contributions, 10)
+
+    page_number = request.GET.get('page')
+    contributions_pg = paginator.get_page(page_number)
+
+    return render(request, 'users/userprofile.html', {'user': user, 'contributions': contributions_pg})
 
 # View for changing User Data
 class UserUpdateView(LoginRequiredMixin, View):
