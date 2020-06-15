@@ -353,27 +353,7 @@
 </div>
 
 {% if not newest or newest == documenttitle %}
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#actions">
-        <a class="card-link">Aktionen</a>
-    </div>
 
-    <div id="actions" class="collapse show">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm">
-                    <a class="btn btn-secondary" href="{% url 'editmeta' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Metadaten bearbeiten</a>
-                </div>
-                <div class="col-sm">
-                    <a class="btn btn-secondary" href="{% url 'edittranscript' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Transkription bearbeiten</a>
-                </div>
-                <div class="col-sm">
-                    <a class="btn btn-secondary" href="{% url 'documenthistory' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">Versionsgeschichte</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endif %}
 
 

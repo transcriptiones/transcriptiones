@@ -360,7 +360,8 @@ a:hover, a:focus, a:active {
 }
 
 #refNumberModalLabel,
-#institutionModalLabel {
+#institutionModalLabel,
+#confirmationModalLabel {
     padding-left: 120px;
 }
 

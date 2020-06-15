@@ -6,6 +6,17 @@
 {% endblock dependencies %}
 
 {% block content %}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">Dokument</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Transkription überarbeiten</li>
+    </ol>
+</nav>
+
 <div>
     <h2>{{ documenttitle.title_name }}</h2>
 </div>
