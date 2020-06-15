@@ -35,14 +35,14 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         <div class="fieldWrapper form-group row">
             {{ form.street.errors }}
             <label for="{{ form.street.id_for_label }}" class="col-sm-3 control-label">
-                Addresse
+                Adresse
             </label>
             <div class="col-sm-9">
                 {{ form.street }}
                 <span class="error"></span>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="row">
             <label for="{{ form.zip_code.id_for_label }}" class="col-sm-3 control-label"></label>
             <div class="fieldWrapper col-sm-3">
                 {{ form.zip_code.errors }}
@@ -55,7 +55,7 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
                 <span class="error"></span> <!-- ToDo: Validation, Widgets. Also: Where to put fieldWrapper? -->
             </div>
         </div>
-        <div class="fieldWrapper form-group row">
+        <div class="fieldWrapper row">
             {{ form.country.errors }}
             <label for="{{ form.country.id_for_label }}" class="col-sm-3 control-label"></label>
             <div class="col-sm-9">

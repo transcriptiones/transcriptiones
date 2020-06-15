@@ -400,8 +400,16 @@ button[type="submit"] {
     border-radius: 5px;
 }
 
+.btn-light {
+    text-align: center;
+    font-weight: normal !important;
+    line-height: 35px;
+    margin-top: 35px;
+    border-radius: 5px;
+}
+
  .btn-secondary:hover, .btn-primary:focus, .btn-primary:active,
- button[type="submit"]:hover {
+ button[type="submit"]:hover, btn-light:hover {
     background-color: rgba(52, 58, 64, 0.9);
     border-color: rgba(52, 58, 64, 0.9);
     font-weight: normal;
@@ -458,3 +466,7 @@ button[type="submit"] {
         text-decoration: none;
         background-color: rgba(0, 0, 0, 0.1);
     }
+
+.fieldWrapper {
+    margin-bottom: 1rem;
+}
