@@ -12,7 +12,7 @@
         <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
         <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
         <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">Dokument</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">{{ documenttitle }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">Versionen</li>
     </ol>
 </nav>
