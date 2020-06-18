@@ -293,7 +293,7 @@
                 </div>
                 <div class="col-sm-8">
                     {% if documenttitle.illuminated %}
-                    {{ documenttitle.illuminated|lower|capfirst }}
+                    {{ documenttitle.illuminated|yesno }}
                     {% else %}
                     Keine Angabe
                     {% endif %}
@@ -305,7 +305,7 @@
                 </div>
                 <div class="col-sm-8">
                     {% if documenttitle.seal %}
-                    {{ documenttitle.seal|lower|capfirst }}
+                    {{ documenttitle.seal|yesno }}
                     {% else %}
                     Keine Angabe
                     {% endif %}
