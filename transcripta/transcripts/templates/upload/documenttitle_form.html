@@ -177,16 +177,18 @@
         </div>
         <div id="transcript" class="collapse show">
             <div class="card-body">
-                <div>
-                    <div class="fieldWrapper form-group row">
+                <div class="fieldWrapper form-group">
+                    <div class="row">
                         {{ form.transcription_text.errors }}
-                        <div class="col-sm-3">
+                        <div class="col-sm text-left font-weight-bold">
                             <label for="{{ form.transcription_text.id_for_label }}" class="control-label">
                                 {{ form.transcription_text.label }}
                             </label>
                             <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_transcription_text"></i>
                         </div>
-                        <div class="col-sm-9">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
                             {{ form.transcription_text }}
                             <span class="error"></span>
                         </div>
@@ -422,5 +424,5 @@
 {% endblock content %}
 
 {% block javascript %}
-<script src="{% static 'upload/uploadscripts.js' %}"></script>
+<script src="{% static 'upload/uploadscripts.js' %}" charset="utf-8"></script>
 {% endblock javascript %}
