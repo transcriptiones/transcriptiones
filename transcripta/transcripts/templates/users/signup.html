@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block dependencies %}
+<!-- Tooltipster Plugin -->
+<script src="{% static 'base/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/tooltipster.bundle.css' %}" />
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' %}" />
+{% endblock dependencies %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -14,26 +23,43 @@
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
-    <div>
+    {% if not forloop.last %}
         <div class="fieldWrapper form-group row">
             <div class="col-sm-4">
-                {{ field.label_tag }}
+                <label for="{{ field.id_for_label }}" class="control-label">
+                    {{ field.label }}
+                    <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_{{ field.name }}"></i>
+                </label>
             </div>
             <div class="col-sm-8">
                 {{ field }}
             </div>
         </div>
-        {% if field.help_text %}
-        <small id="helptext">{{ field.help_text }}</small>
-        {% endif %}
         {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
-    </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="fieldWrapper form-check col-sm text-right" title="{{ form.anonymous_publication.help_text }}">
+                <label for="{{ form.anonymous_publication.id_for_label }}" class="form-check-label tooltipster" data-tooltip-content="#tt_anonymous_publication">
+                    {{ form.anonymous_publication.label }}
+                </label>
+            </div>
+            <div class="col-sm text-left">
+                {{ form.anonymous_publication }}
+            </div>
+        </div>
+    {% endif %}
     {% endfor %}
-    <button type="submit">Registrieren</button>
+    <button type="submit" class="btn btn-secondary">Registrieren</button>
 </form>
+
+{% include "users/tooltips.html" %}
 
 {% endif %}
 
 {% endblock %}
+
+{% block javascript %}
+<script src="{% static 'users/userscripts.js' %}"></script>
+{% endblock javascript %}

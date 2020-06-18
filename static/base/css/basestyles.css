@@ -359,8 +359,6 @@ a:hover, a:focus, a:active {
     text-align: left !important;
 }
 
-#refNumberModalLabel,
-#institutionModalLabel,
 #confirmationModalLabel {
     padding-left: 120px;
 }
@@ -458,16 +456,73 @@ button[type="submit"] {
 .display-list-element {
     border-style: solid;
     border-width: thin;
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: #e9ecef;
     padding: 10px;
     margin-bottom: 5px;
 }
 
     .display-list-element:hover {
         text-decoration: none;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: #e9ecef;
+        border-color: #dee2e6;
     }
 
 .fieldWrapper {
     margin-bottom: 1rem;
+}
+
+
+/* Tooltips */
+
+.tooltip_templates {
+    display: none;
+}
+
+.tooltip_list {
+    list-style-type: disc;
+    text-align: left;
+}
+
+.fa-info-circle {
+    color: #1D809F;
+}
+
+
+.tooltipster-sidetip.tooltipster-punk.tooltipster-transcriptiones .tooltipster-box {
+    border-bottom: 5px solid #1D809F;
+}
+
+.tooltipster-sidetip.tooltipster-punk.tooltipster-transcriptiones.tooltipster-top .tooltipster-arrow-border {
+    border-top-color: #1D809F;
+}
+
+
+/* Pagination */
+
+.page-link {
+    color: #1D809F;
+}
+.page-link:hover {
+    color: #1D809F;
+}
+
+.page-item.active .page-link{
+    background-color: #1D809F;
+    border-color: #1D809F;
+    color: #fff;
+}
+
+/* unset these when reorganizing the stylesheet */
+.fa-angle-left,
+.fa-angle-right,
+.fa-angle-double-left,
+.fa-angle-double-right {
+    line-height: 1.25
+}
+
+
+/* ck-editor */
+
+.ck-editor__editable {
+    min-height: 400px;
 }

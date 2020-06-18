@@ -155,6 +155,11 @@ function institutionLoaded() {
     $('#institutionForm').find('#backButtonModal').on('click', null, this, backModalForm);
     // add label to required fields
     $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 };
 
 function refNumberLoaded() {
@@ -166,6 +171,11 @@ function refNumberLoaded() {
     $('#refNumberForm').find('#backButtonModal').on('click', null, this, backModalForm);
     // add label to required fields
     $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 };
 
 
@@ -325,6 +335,12 @@ $(function () {
     $('#submitButtonAuthor').on('click', confirmAuthor);
     $('#closeButtonAuthor').on('click', closeAuthor);
     $('#buttonEndDate').on('click', showEndDate);
+
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 });
 
 
