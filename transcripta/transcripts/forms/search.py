@@ -1,6 +1,8 @@
-from dataclasses import dataclass, astuple
+from __future__ import annotations
+
+from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Optional, Type, Sequence, Tuple, Union
+from typing import Optional, Union, Type, Sequence, Dict, Tuple, ClassVar
 
 from django import forms
 from django.forms.widgets import Input as InputWidget
@@ -39,7 +41,7 @@ class Operation(Choices):
         return obj
 
 
-TEXT_OPERATIONS = (Operation.KEYWORD_EQUAL, Operation.KEYWORD_UNEQUAL, Operation.CONTAINS)
+TEXT_OPERATIONS = (Operation.KEYWORD_EQUAL, Operation.KEYWORD_UNEQUAL, Operation.CONTAINS, Operation.CONTAINS_NOT)
 NUMERIC_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL, Operation.GTE, Operation.LTE)
 
 
@@ -51,22 +53,30 @@ class Attribute:
     operations: Sequence[Operation] = TEXT_OPERATIONS
     widget: Type[InputWidget] = forms.TextInput
 
-    def __str__(self):
-        return self.name
+    members: ClassVar[Dict[str, Attribute]] = {}
 
     @property
     def input_type(self):
         return self.widget.input_type
 
+    def __str__(self):
+        return self.name
 
-ATTRIBUTES = {str(a): a for a in [
+    def __class_getitem__(cls, item):
+        return cls.members[item]
+
+    def __iter__(self):
+        return iter(self.members)
+
+
+Attribute.members.update({str(a): a for a in [
     Attribute("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
     Attribute("Institut", 'institution_name'),
     Attribute("Signatur", 'refnumber_title'),
     Attribute("Titel", 'title_name'),
     Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS),
     Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS),
-]}
+]})
 
 
 @dataclass(frozen=True)
@@ -109,7 +119,7 @@ class AttributeSelect(forms.Select):
     def create_option(self, name, value: str, label, selected, index, subindex=None, attrs=None):
         option = super().create_option(name, value, label, selected, index, subindex, attrs)
         if value:
-            option['attrs']['data-operations'] = ','.join(op.name for op in ATTRIBUTES[value].operations)
+            option['attrs']['data-operations'] = ','.join(op.name for op in Attribute[value].operations)
         return option
 
 
@@ -124,7 +134,7 @@ class FilterWidget(forms.MultiWidget):
         if attrs is None:
             attrs = {}
         widgets = [  # TODO: Change to dict for better field names once Django 3.1 is released.
-            AttributeSelect(attrs=_append_class(attrs, 'attribute_field'), choices=[(a, a) for a in ATTRIBUTES]),
+            AttributeSelect(attrs=_append_class(attrs, 'attribute_field'), choices=[(a, a) for a in Attribute.members]),
             forms.Select(attrs=_append_class(attrs, 'operation_field'), choices=Operation.choices()),
             forms.TextInput(attrs=_append_class(attrs, 'value_field')),
         ]
@@ -143,7 +153,7 @@ class FilterWidget(forms.MultiWidget):
     def decompress(self, value: Optional[FilterTriple]) -> Union[Tuple[Attribute, Operation, object], Tuple[None, None, None]]:
         if value is None:
             return None, None, None
-        return ATTRIBUTES[value.attribute], Operation[value.operation], value.value
+        return Attribute[value.attribute], Operation[value.operation], value.value
 
 
 def _append_class(attrs: dict, class_name: str):
@@ -158,7 +168,7 @@ def _append_class(attrs: dict, class_name: str):
 class FilterField(forms.MultiValueField):
     def __init__(self, **kwargs):
         fields = (
-            forms.ChoiceField(choices=[(a, a) for a in ATTRIBUTES]),
+            forms.ChoiceField(choices=[(a, a) for a in Attribute.members]),
             forms.ChoiceField(choices=Operation.choices()),
             forms.CharField(),
         )
@@ -168,7 +178,7 @@ class FilterField(forms.MultiValueField):
         attribute, operation, value = data_list
         if not value:
             return None
-        return FilterTriple(ATTRIBUTES[attribute], Operation[operation], value)
+        return FilterTriple(Attribute[attribute], Operation[operation], value)
 
 
 class SearchForm(forms.Form):

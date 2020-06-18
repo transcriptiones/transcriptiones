@@ -88,7 +88,8 @@ DATABASES = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'  # TODO: Central instance
+        'hosts': 'localhost:63334'
+        # Note: requires tunnel, e.g. gcloud compute ssh --zone europe-west6-a elasticsearch -- -NL 63334:localhost:9200
     }
 }
 
