@@ -24,9 +24,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         {{ form.non_field_errors }}
         <div class="fieldWrapper form-group row">
             {{ form.institution_name.errors }}
-            <label for="{{ form.institution_name.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.institution_name.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.institution_name.id_for_label }}" class="control-label">
+                    {{ form.institution_name.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_institution_name"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.institution_name }}
                 <span class="error"></span>
@@ -34,9 +37,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         </div>
         <div class="fieldWrapper form-group row">
             {{ form.street.errors }}
-            <label for="{{ form.street.id_for_label }}" class="col-sm-3 control-label">
-                Adresse
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.street.id_for_label }}" class="control-label">
+                    Adresse
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_address"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.street }}
                 <span class="error"></span>
@@ -65,9 +71,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         </div>
         <div class="fieldWrapper form-group row">
             {{ form.site_url.errors }}
-            <label for="{{ form.site_url.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.site_url.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.site_url.id_for_label }}" class="control-label">
+                    {{ form.site_url.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_site_url"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.site_url }}
                 <span class="error"></span>

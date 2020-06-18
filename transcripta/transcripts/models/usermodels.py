@@ -48,11 +48,11 @@ class UserManager(BaseUserManager):
 # Custom User model.
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('benutzername', unique=True, max_length=150, blank=False)
-    first_name = models.CharField('vorname', max_length=150, blank=False)
-    last_name = models.CharField('nachname', max_length=150, blank=False)
-    email = models.EmailField(unique=True, max_length=255, blank=False)
-    email_confirmed = models.BooleanField('email bestätigt', default=True, help_text='Hat der User die E-Mailadresse bestätigt?')
+    username = models.CharField('benutzername', unique=True, max_length=150, blank=False, help_text='Benutzername')
+    first_name = models.CharField('vorname', max_length=150, blank=False, help_text='Vorname')
+    last_name = models.CharField('nachname', max_length=150, blank=False, help_text='Nachname')
+    email = models.EmailField('E-Mail', unique=True, max_length=255, blank=False, help_text='E-mail-Adresse')
+    email_confirmed = models.BooleanField('email bestätigt', default=True, help_text='Hat der User die E-Mail-Adresse bestätigt?')
     is_staff = models.BooleanField('staff status', default=False, help_text='Kann sich der User in den Admin-Bereich einloggen?')
     is_active = models.BooleanField('active', default=True, help_text='Ist der User aktiv? False setzen, statt löschen.')
     date_joined = models.DateTimeField('date joined', default=timezone.now)

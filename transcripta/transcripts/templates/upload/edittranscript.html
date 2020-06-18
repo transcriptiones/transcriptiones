@@ -3,6 +3,11 @@
 {% block dependencies %}
 <link rel="stylesheet" href="{% static 'upload/formvalidation.css' %}" />
 <script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
+
+<!-- Tooltipster Plugin -->
+<script src="{% static 'base/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/tooltipster.bundle.css' %}" />
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' %}" />
 {% endblock dependencies %}
 
 {% block content %}
@@ -12,8 +17,8 @@
         <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
         <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
         <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">{{ documenttitle }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Transkription überarbeiten</li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">{{ documenttitle.title_name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Transkription bearbeiten</li>
     </ol>
 </nav>
 
@@ -64,6 +69,7 @@
                         <label for="{{ form.commit_message.id_for_label }}" class="control-label">
                             {{ form.commit_message.label }}
                         </label>
+                        <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_commit_message"></i>
                     </div>
                     <div class="col-sm-9">
                         {{ form.commit_message }}
@@ -76,6 +82,7 @@
                         <label for="{{ form.transcription_scope.id_for_label }}" class="control-label">
                             {{ form.transcription_scope.label }}
                         </label>
+                        <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_transcription_scope"></i>
                     </div>
                     <div class="col-sm-9">
                         {{ form.transcription_scope }}
@@ -100,6 +107,7 @@
                             <label for="{{ form.transcription_text.id_for_label }}" class="control-label">
                                 {{ form.transcription_text.label }}
                             </label>
+                            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_transcription_text"></i>
                         </div>
                         <div class="col-sm-9">
                             {{ form.transcription_text }}
@@ -112,7 +120,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="fieldWrapper form-check col-sm text-right" title="{{ form.submitted_by_anonymous.help_text }}">
-            <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="form-check-label">
+            <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="form-check-label tooltipster" data-tooltip-content="#tt_anonymous">
                 {{ form.submitted_by_anonymous.label }}
             </label>
         </div>
@@ -129,6 +137,7 @@
     </p>
 </div>
 
+{% include "upload/tooltips.html" %}
 
 {% endblock content %}
 

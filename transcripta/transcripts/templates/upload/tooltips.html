@@ -1,0 +1,178 @@
+<!-- 
+
+    This is a helper Template to define tooltip-contents for uploadforms
+
+-->
+    <div class="tooltip_templates">
+        <div id="tt_title_name">
+            <p>
+                Titel des Dokuments.<br />
+                Wenn möglich den Titel der Quelle übernehmen.
+                Ansonsten eigenen Titel vergeben.
+            </p>
+        </div>
+        <div id="tt_parent_institution">
+            <p>
+                Institution, welche die Quelle aufbewahrt.<br />
+                Falls die Institution nicht in der Liste ist,
+                kann eine neue Institution
+                ins Feld eingetippt und mit ENTER erstellt werden.
+            </p>
+        </div>
+        <div id="tt_parent_refnumber">
+            <p>
+                Signatur der Quelle wie sie im Archivkatalog angegeben ist.<br />
+                Falls die Signatur nicht in der Liste ist, kann eine neue Signatur
+                ins Feld eingetippt und mit ENTER erstellt werden.
+            </p>
+        </div>
+        <div id="tt_transcription_scope">
+            <p>
+                Welche Teile des Dokuments wurden Transkribiert?<br />
+                Zum Beispiel:
+                <ul class="tooltip_list">
+                    <li>Fol. 3r - 10f</li>
+                    <li>Kapitel 10</li>
+                    <li>Einnahmen aus Fronfastenzinsen</li>
+                </ul>
+            </p>
+        </div>
+        <div id="tt_date">
+            <p>
+                Datierung des Originals.<br />
+                Nur das Entstehungsjahr ist ein Pflichtfeld.
+                Um eine Zeitspanne anzugeben, klicken Sie auf den Button Zeitspanne.
+                Das Enddatum kann nicht genauer sein als das Startdatum.
+            </p>
+        </div>
+        <div id="tt_place_name">
+            <p>
+                Entstehungsort des Originals.<br />
+                Gewünscht ist der geographische Ort. Zum Beispiel:
+                <ul class="tooltip_list">
+                    <li>"Basel" statt "Universität Basel"</li>
+                    <li>"Windisch" statt "Kloster Königsfelden"</li>
+                </ul>
+            </p>
+        </div>
+        <div id="tt_source_type">
+            <p>
+                Quellengattung bzw. Art der Archivalie.<br />
+                Mindestens die erste Ebene muss ausgefüllt werden.
+            </p>
+        </div>
+        <div id="tt_transcription_text">
+            <p>
+                Eigentliche Transkription.<br />
+                Sie können entweder direkt in dieses Feld transkribieren oder bereits bestehende
+                Transkriptionen aus Word- bzw. Excel-Files kopieren. In diesem Fall wird ein Grossteil der
+                Formatierungen übernommen.<br />
+                Bitte beachten Sie unsere Transkriptionsregeln.
+            </p>
+        </div>
+        <div id="tt_author">
+            <p>
+                An der Genese der Quelle beteiligte Personen<br />
+                Falls die gesuchte Person noch nicht in der Datenbank ist, kann sie ins Feld eingetippt
+                und mit ENTER erstellt werden.
+            </p>
+        </div>
+        <div id="tt_language">
+            <p>
+                In der Quelle verwendete Sprache(n).<br />
+            </p>
+        </div>
+        <div id="tt_material">
+            <p>
+                Beschreibstoff der Quelle
+            </p>
+        </div>
+        <div id="tt_measurements">
+            <p>
+                Abmessungen der Quelle in cm.
+            </p>
+        </div>
+        <div id="tt_pages">
+            <p>
+                Gesamtumfang der Quelle. Dies bezieht sich nicht nur auf den transkribierten Teil.
+                Bitte in Kombination mit dem Feld Paginierung ausfüllen.
+            </p>
+        </div>
+        <div id="tt_paging_system">
+            <p>
+                Ist die Quelle Paginiert oder Foliiert
+            </p>
+        </div>
+        <div id="tt_illuminated">
+            <p>
+                Verfügt die Quelle über Illuminationen jedweder Art?
+            </p>
+        </div>
+        <div id="tt_seal">
+            <p>
+                Sind im Original Siegel erhalten?
+            </p>
+        </div>
+        <div id="tt_comments">
+            <p>
+                Nutzen Sie dieses Feld für editorische und/oder inhaltliche Bemerkungen jeglicher Art
+            </p>
+        </div>
+        <div id="tt_anonymous">
+            <p>
+                Soll diese Transkription anonym veröffentlicht werden?<br />
+                Wenn dieses Häkchen nicht gesetzt ist, wird der Ihr Benutzername bei dieser Transkription
+                öffentlich sichtbar sein. Der Benutzername wird in jedem Fall in der Datenbank abgespeichert.
+            </p>
+        </div>
+        <div id="tt_institution_name">
+            <p>
+                Offizieller Name der Institution
+            </p>
+        </div>
+        <div id="tt_address">
+            <p>
+                Adresse der Institution
+            </p>
+        </div>
+        <div id="tt_site_url">
+            <p>
+                URL zur Website der Institution<br />
+                Die URL muss mit https:// oder http:// beginnen.
+            </p>
+        </div>
+        <div id="tt_holding_institution">
+            <p>
+                Institution, in welcher sich die Signatur befindet.
+            </p>
+        </div>
+        <div id="tt_refnumber_name">
+            <p>
+                Signatur wie sie im Katalog der Institution angegeben ist.<br />
+                Zum Beispiel: Spital F 5
+            </p>
+        </div>
+        <div id="tt_refnumber_title">
+            <p>
+                Titel der Signatur/Verzeichniseinheit falls vom Archiv vergeben.<br />
+                Zum Beispiel: Einnahmebücher (Zinsbücher)
+            </p>
+        </div>
+        <div id="tt_collection_link">
+            <p>
+                Direkte URL zur Signatur im Archivkatalog.<br />
+                Die URL muss mit https:// oder http:// beginnen.
+            </p>
+        </div>
+        <div id="tt_commit_message">
+            <p>
+                Knappe Beschreibung der Änderungen<br />
+                Zum Beispiel:
+                <ul class="tooltip_list">
+                    <li>Schreibfehler behoben</li>
+                    <li>Editor hinzugefügt</li>
+                    <li>Kapitel 4 hinzugefügt</li>
+                </ul>
+            </p>
+        </div>
+    </div>

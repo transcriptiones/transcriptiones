@@ -71,6 +71,12 @@ $(function () {
 
     // add various handlers to events
     $('#submitButtonDocument').on('click', null, this, submitDocument);
+
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 });
 
 /*
