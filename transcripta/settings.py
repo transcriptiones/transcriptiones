@@ -25,6 +25,11 @@ SECRET_KEY = '#)k!_20)vxd$d2rgo&l*yzwkg4g&q^p2i0+4c2u+6dc%yw@ngo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# serve .js as application/javascript via runserver
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
+
 ALLOWED_HOSTS = ['*']
 
 
