@@ -72,6 +72,23 @@
     <div id="differentDocuments" class="collapse show">
         <div class="card-body">
             {% if refnumber.documents.all %}
+            <div class="row border-bottom p-2 mb-2">
+                <div class="col-sm text-left font-weight-bold">
+                    Titel
+                </div>
+                <div class="col-sm text-left font-weight-bold">
+                    Ort
+                </div>
+                <div class="col-sm text-left font-weight-bold">
+                    Datierung
+                </div>
+                <div class="col-sm text-left font-weight-bold">
+                    Archivalienart
+                </div>
+                <div class="col-sm text-left font-weight-bold">
+                    Letzte Änderung
+                </div>
+            </div>
             {% for document in refnumber.documents.all|dictsort:"title_name" %}
             <a href="{{ document.get_absolute_url }}" class="row display-list-element">
                 <div class="col-sm text-left">{{ document.title_name }}</div>
@@ -95,7 +112,13 @@
                     {{ document.end_year }}
                     {% endif %}
                 </div>
-                <div class="col-sm text-left">{{ document.document_utc_add }}</div>
+                <div class="col-sm text-left">
+                    {% if document.source_type.parent_type is not None %}
+                    {{document.source_type.parent_type}} -<br />
+                    {% endif %}
+                    {{ document.source_type }}
+                </div>
+                <div class="col-sm text-left">{{ document.document_utc_add.date }}</div>
             </a>
             {% endfor %}
             {% else %}
