@@ -527,3 +527,9 @@ button[type="submit"]:hover, btn-light:hover {
 .ck-editor__editable {
     min-height: 400px;
 }
+
+/* Hide widget-handlers in disabled ck-editor */
+.ck-read-only > .ck-widget:hover > .ck-widget__selection-handle,
+.ck-read-only > .ck-widget_selected > .ck-widget__selection-handle {
+    display: none;
+}

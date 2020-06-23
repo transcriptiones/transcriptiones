@@ -261,11 +261,16 @@ class EditTranscriptView(BaseEditDocumentView):
         if self.request.method == "POST":
             document = self.get_object()
             document.submitted_by = self.request.user
+            
+            print(document.author.all()) # Output: <QuerySet [<Author: Theophil Läppli>]>
 
             form = self.form_class(self.request.POST, instance=document)
+            print(form.data.get('author')) # Output: None
 
             if form.is_valid():
+                print(form.cleaned_data.get('author')) # Output: <QuerySet []>
                 createdobj = form.save()
+                print(createdobj.author.all()) # Output: <QuerySet []>
                 context = {'object': createdobj}
                 response = thanks_view(self.request, context)
                 return response
