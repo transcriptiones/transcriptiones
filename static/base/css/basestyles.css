@@ -458,8 +458,8 @@ button[type="submit"]:hover, btn-light:hover {
     border-style: solid;
     border-width: thin;
     border-color: #e9ecef;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
     .display-list-element:hover {

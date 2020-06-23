@@ -19,8 +19,11 @@
         <div class="card-body">
             {% for institution in city.list %}
                 <a href="{{ institution.get_absolute_url }}" class="row display-list-element">
-                    <div class="col-sm-10 text-left">{{ institution.institution_name }}</div>
-                    <div class="col-sm-2 text-left">
+                    <div class="col-sm-6 text-left">{{ institution.institution_name }}</div>
+                    <div class="col-sm-3 text-right font-weight-normal">
+                        {{ institution.documents.count }} Dokument{% if institution.documents.count != 1 %}e{% endif %}
+                    </div>
+                    <div class="col-sm-3 text-right font-weight-normal">  
                         {{ institution.refnumbers.count }} Signatur{% if institution.refnumbers.count != 1 %}en{% endif %}
                     </div>
                 </a>
