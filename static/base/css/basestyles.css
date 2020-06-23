@@ -1,3 +1,5 @@
+/* General Styling, Fonts, etc. */
+
 body,
 html {
   width: 100%;
@@ -8,9 +10,17 @@ body {
   font-family: "Source Sans Pro", Helvetica, sans-serif !important;
 }
 
-.btn-xl {
-  padding: 1.25rem 2.5rem;
+.content-section {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
 }
+
+.content-section-heading h2 { /* Do we need this? */
+  font-size: 3rem;
+}
+
+
+/* Breadcrumb navigation*/
 
 .breadcrumb {
     padding: 15px 15px;
@@ -25,27 +35,28 @@ body {
 .breadcrumb-item + .breadcrumb-item::before {
     padding-left: 5px;
     content: "/\00a0";
-    color: #000000 !important;
+    color: #000000;
 }
 
-    
 .breadcrumb-item.active {
-    color: #000000 !important;
+    color: #000000;
 }
-
 
 .breadcrumb li a:hover {
     color: #155d74;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
-.breadcrumb li a:hover:after {
+.breadcrumb li a:hover::after { /* Do we need this? What does it do? */
     color: #155d74;
-    text-decoration: none !important;
+    text-decoration: none;
 }
+
+
+/* Cards */
 
 .card-header {
-    background-color: #1D809F !important;
+    background-color: #1D809F;
     cursor: pointer;
 }
 
@@ -56,15 +67,9 @@ body {
     z-index: 1;
 }
 
-.content-section {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
-}
 
-.content-section-heading h2 {
-  font-size: 3rem;
-}
-
+/* Font size and padding */
+/* Should we solve this with additional classes in the documents? */
 
 h1,
 h2,
@@ -80,6 +85,9 @@ h5,
 h6 {
   margin-top: 15px;
 }
+
+
+
 
 @media (max-width: 575.98px) {
   .content-section-heading h1 {
@@ -103,10 +111,6 @@ h6 {
 }
 
 
-.text-faded {
-  color: rgba(255, 255, 255, 0.7);
-}
-
 
 /* Nav Menu */
 .navbar {
@@ -120,7 +124,6 @@ h6 {
 
 .navbar-nav li.navbar-nav-item a,
 .navbar-nav li.navbar-brand a {
-    display: block;
     text-decoration: none;
     color: #fff;
 }
@@ -134,6 +137,9 @@ h6 {
 .nav-link {
  color: #fff !important;
 }
+
+
+/* Scroll-to-top-Button */
 
 .scroll-to-top {
   position: fixed;
@@ -162,6 +168,9 @@ h6 {
 
 
 /* select2 */
+.select2 {
+    width: 100% !important;
+}
 
 .select2-container .select2-selection__rendered > *:first-child.select2-search--inline {
     width: 100% !important;
@@ -181,6 +190,8 @@ h6 {
 }
 	
 
+
+/* Menu-toggler */
 
 .menu-toggle {
   position: fixed;
@@ -316,9 +327,6 @@ h6 {
 }
 
 
-.select2 {
-    width: 100% !important;
-}
 
 
 footer.footer {
