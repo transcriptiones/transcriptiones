@@ -5,9 +5,9 @@ from enum import Enum, auto
 from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar
 
 from django import forms
-from django.forms.widgets import Input as InputWidget
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
+from django.utils.translation import gettext_lazy as _
 
 
 class Choices(Enum):
@@ -43,6 +43,7 @@ class Operation(Choices):
 
 TEXT_OPERATIONS = (Operation.KEYWORD_EQUAL, Operation.KEYWORD_UNEQUAL, Operation.CONTAINS, Operation.CONTAINS_NOT)
 NUMERIC_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL, Operation.GTE, Operation.LTE)
+BINARY_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL)
 
 
 @dataclass(frozen=True)
@@ -51,13 +52,9 @@ class Attribute:
     name: str
     field: str
     operations: Sequence[Operation] = TEXT_OPERATIONS
-    widget: InputWidget = forms.TextInput()
+    widget: forms.Widget = forms.TextInput()
 
     members: ClassVar[Dict[str, Attribute]] = {}
-
-    @property
-    def input_type(self):
-        return self.widget.input_type
 
     def __str__(self):
         return self.name
@@ -78,13 +75,26 @@ class Attribute:
         return self.widget.render(self.template_name, "", {'id': self.template_name, 'class': 'value_field'})
 
 
+class BooleanSelect(forms.NullBooleanSelect):
+    """A two-element <select> for binary fields."""
+    def __init__(self, attrs=None):
+        choices = (
+            ('true', _('Yes')),
+            ('false', _('No')),
+        )
+        super(forms.NullBooleanSelect, self).__init__(attrs, choices)
+
+
 Attribute.members.update({str(a): a for a in [
     Attribute("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
     Attribute("Institut", 'institution_name'),
     Attribute("Signatur", 'refnumber_title'),
     Attribute("Titel", 'title_name'),
-    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1'})),
-    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1'})),
+    Attribute("Seitenzahl", 'pages', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
+    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1', 'min': '0'})),
+    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1', 'min': '0'})),
+    Attribute("Illuminiert", 'illuminated', BINARY_OPERATIONS, BooleanSelect()),
+    Attribute("Siegel", 'seal', BINARY_OPERATIONS, BooleanSelect()),
 ]})
 
 
@@ -161,7 +171,8 @@ class FilterWidget(forms.MultiWidget):
         else:
             return inner_html
 
-    def decompress(self, value: Optional[FilterTriple]) -> Union[Tuple[Attribute, Operation, object], Tuple[None, None, None]]:
+    def decompress(self, value: Optional[FilterTriple]) -> Union[Tuple[Attribute, Operation, object],
+                                                                 Tuple[None, None, None]]:
         if value is None:
             return None, None, None
         return Attribute[value.attribute], Operation[value.operation], value.value
