@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Optional, Union, Type, Sequence, Dict, Tuple, ClassVar
+from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar
 
 from django import forms
 from django.forms.widgets import Input as InputWidget
-from django.utils.safestring import mark_safe
+from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
 
 
@@ -51,7 +51,7 @@ class Attribute:
     name: str
     field: str
     operations: Sequence[Operation] = TEXT_OPERATIONS
-    widget: Type[InputWidget] = forms.TextInput
+    widget: InputWidget = forms.TextInput()
 
     members: ClassVar[Dict[str, Attribute]] = {}
 
@@ -68,14 +68,23 @@ class Attribute:
     def __iter__(self):
         return iter(self.members)
 
+    @property
+    def template_name(self) -> str:
+        return f"{self.field}-template"
+
+    @property
+    def template(self) -> SafeString:
+        """Renders the associated widget as HTML. Intended for copying."""
+        return self.widget.render(self.template_name, "", {'id': self.template_name, 'class': 'value_field'})
+
 
 Attribute.members.update({str(a): a for a in [
     Attribute("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
     Attribute("Institut", 'institution_name'),
     Attribute("Signatur", 'refnumber_title'),
     Attribute("Titel", 'title_name'),
-    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS),
-    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS),
+    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1'})),
+    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1'})),
 ]})
 
 
@@ -119,7 +128,9 @@ class AttributeSelect(forms.Select):
     def create_option(self, name, value: str, label, selected, index, subindex=None, attrs=None):
         option = super().create_option(name, value, label, selected, index, subindex, attrs)
         if value:
-            option['attrs']['data-operations'] = ','.join(op.name for op in Attribute[value].operations)
+            attribute = Attribute[value]
+            option['attrs']['data-operations'] = ','.join(op.name for op in attribute.operations)
+            option['attrs']['data-template-name'] = attribute.template_name
         return option
 
 

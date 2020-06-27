@@ -47,10 +47,30 @@ function update_operations() {
   }
 }
 
+function update_input_field() {
+  /**
+   * For $(this) attribute selector, change the sibling value field to be of the type suggested by the attribute.
+   * The value is carried over, if possible in any way.
+   */
+  const template_name = $(this).find("option:selected").data('template-name');
+  const $template = $('#'+template_name);
+  const $value_field = $(this).parent('.filter_field').find('.value_field');
+  const value_field_id = $value_field.attr('id');
+  const value_field_name = $value_field.attr('name');
+  const value_field_value = $value_field.val();
+  const new_field = $template.clone();
+  new_field.attr('id', value_field_id);
+  new_field.attr('name', value_field_name);
+  new_field.val(value_field_value);
+  $value_field.replaceWith(new_field);
+}
+
 $(function () {
 
   setup_field_groups();
-  $('.attribute_field').change(update_operations);
+  $('.attribute_field')
+      .change(update_operations)
+      .change(update_input_field);
   $('.attribute_field:visible').change();
 
 });

@@ -1,7 +1,7 @@
 from django.views.generic import FormView, ListView
 
 from transcripta.transcripts.documents import TranscriptionDocument
-from transcripta.transcripts.forms.search import SearchForm
+from transcripta.transcripts.forms.search import SearchForm, Attribute
 
 FULLTEXT_FIELDS = ["transcription_text", "title_name", "author", "refnumber_title"]
 
@@ -20,3 +20,9 @@ class SearchView(FormView, ListView):
             self.queryset = filter.apply(self.queryset)
         self.queryset = self.queryset.to_queryset()  # DEBUG
         return self.get(self.request)
+
+    def get_context_data(self, **kwargs):
+        """Add context variables."""
+        context = super().get_context_data(**kwargs)
+        context['ATTRIBUTES'] = Attribute.members
+        return context

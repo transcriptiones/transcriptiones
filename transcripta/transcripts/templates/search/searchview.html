@@ -23,6 +23,13 @@
     </div>
   {% endif %}
 
+  <div id="input-widget-templates" class="d-none">
+  {# These input widgets will not be displayed. They are simply provided for copying. #}
+  {% for attribute in ATTRIBUTES.values %}
+    {{ attribute.template }}
+  {% endfor %}
+  </div>
+
 {% endblock content %}
 
 {% block javascript %}
