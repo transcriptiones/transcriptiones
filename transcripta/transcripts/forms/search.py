@@ -5,9 +5,12 @@ from enum import Enum, auto
 from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar
 
 from django import forms
+from django.db.models import Choices
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
 from django.utils.translation import gettext_lazy as _
+
+from ..models.transcriptmodels import DocumentTitle
 
 
 class Choices(Enum):
@@ -95,6 +98,8 @@ Attribute.members.update({str(a): a for a in [
     Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1', 'min': '0'})),
     Attribute("Illuminiert", 'illuminated', BINARY_OPERATIONS, BooleanSelect()),
     Attribute("Siegel", 'seal', BINARY_OPERATIONS, BooleanSelect()),
+    Attribute("Material", 'material', BINARY_OPERATIONS, forms.Select(choices=DocumentTitle.MatChoices.choices)),
+    Attribute("Paginierung", 'paging_system', BINARY_OPERATIONS, forms.Select(choices=DocumentTitle.PagChoices.choices)),
 ]})
 
 

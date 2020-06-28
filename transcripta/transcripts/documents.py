@@ -32,6 +32,8 @@ class TranscriptionDocument(ElasticsearchDocument):
     institution_name = fields.TextField(attr="parent_institution.institution_name", fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
     language = fields.KeywordField(multi=True)
+    material = fields.KeywordField()
+    paging_system = fields.KeywordField()
 
     class Django:
         model = DocumentTitle
