@@ -4,23 +4,10 @@ from typing import Optional
 from django.db.models import QuerySet
 from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields, DEDField
 from django_elasticsearch_dsl.registries import registry
-from elasticsearch_dsl import analyzer, token_filter, char_filter, DateRange, Range, IntegerRange
+from elasticsearch_dsl import Range, DateRange, IntegerRange
 
+from .analyzers import transcript_analyzer
 from .models import DocumentTitle, Author, RefNumber, SourceLanguage
-
-transcript_analyzer = analyzer(
-    'transcript_analyzer',
-    tokenizer="standard",
-    filter=[
-        "lowercase",
-        token_filter('german_stop', 'stop', stopwords='_german_'),
-        token_filter('german_snowball', 'snowball', language='German2'),
-    ],
-    char_filter=[
-        "html_strip",
-        char_filter('bracket_strip', 'mapping', mappings=['[ => ', '] => ']),
-    ]
-)
 
 
 class IntegerRangeField(DEDField, IntegerRange):
@@ -59,7 +46,6 @@ class TranscriptionDocument(ElasticsearchDocument):
             'pages',
             'illuminated',
             'seal',
-            # ...
         ]
         related_models = [Author, RefNumber, SourceLanguage]
 

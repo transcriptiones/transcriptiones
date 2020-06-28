@@ -4,6 +4,7 @@ from transcripta.transcripts.documents import TranscriptionDocument
 from transcripta.transcripts.forms.search import SearchForm, Attribute
 
 FULLTEXT_FIELDS = ["transcription_text", "title_name", "author", "refnumber_title"]
+"""Which fields should be searched by the main search field."""
 
 
 class SearchView(FormView, ListView):
