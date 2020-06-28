@@ -26,3 +26,17 @@ def create_related_objects(listname, formdata, relatedclass, namefield):
             objs.append(newobj.pk)
         
         return formdata.setlist(listname, objs)
+
+
+# function to convert .docx-documents to html-strings
+# makes use of pypandoc, which in turn requires pandoc
+import pypandoc
+def convert_docx_html(dirpath, docname):
+    if not dirpath.endswith('/'):
+        dirpath = dirpath + '/'
+
+    docpath = dirpath + docname
+
+    # Wrap this in if-statement or try-except-block to check for file-ending
+    dochtml = pypandoc.convert_file()
+    return dochtml

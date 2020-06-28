@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from transcripta.transcripts.models import User
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=255, help_text='E-Mail-Adresse')
+    email = forms.EmailField(label='E-Mail', max_length=255, help_text='E-Mail-Adresse')
     anonymous_publication = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
@@ -14,6 +14,11 @@ class SignUpForm(UserCreationForm):
             else:
                 self.fields[name].widget.attrs.update({
                     'class': 'form-control',
+                    'placeholder': self.fields[name].help_text,
+                    })
+            if name.startswith('password'):
+                self.fields[name].widget.attrs.update({
+                    'placeholder': self.fields[name].label
                     })
 
     class Meta:
@@ -34,14 +39,15 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         for name in self.fields.keys():
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
+                'placeholder': self.fields[name].label,
                 })
 
 class UserUpdateForm(forms.ModelForm):
     # form field to prompt for password
     passwordprompt = forms.CharField(
-        label="Geben Sie Ihr Passwort ein, um die Änderungen zu bestätigen.",
+        label="Passwort",
         strip=False,
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Zur Bestätigung Passwort eingeben'}),
     )
 
     # pass class form-control to form fields
@@ -81,4 +87,5 @@ class CustomSetPasswordForm(SetPasswordForm):
         for name in self.fields.keys():
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
+                'placeholder': self.fields[name].label,
                 })

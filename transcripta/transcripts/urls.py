@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from transcripta.transcripts.views import *
 
@@ -6,6 +7,11 @@ from transcripta.transcripts.views import *
 urlpatterns = [
     # urls for info views
     path('', StartView.as_view(), name='start'),
+    path('info/guidelines/', TemplateView.as_view(template_name='info/guidelines.html'), name='guidelines'),
+    path('info/tos/', TemplateView.as_view(template_name='info/tos.html'), name='tos'),
+    path('info/about/', TemplateView.as_view(template_name='info/about.html'), name='about'),
+    path('info/aboutus/', TemplateView.as_view(template_name='info/aboutus.html'), name='aboutus'),
+    path('info/contact/', TemplateView.as_view(template_name='info/contact.html'), name='contact'),
     
     # urls for display views
     path('display/institutions/', InstitutionListView.as_view(), name='institutionlist'),
@@ -20,7 +26,7 @@ urlpatterns = [
     path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
     path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),
-    path('upload/thanks/', RedirectView.as_view(), name='thanks'),
+    path('upload/thanks/', thanks_view, name='thanks'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='editmeta'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edittranscript'),
     path('upload/batch/', batchupload, name='batchupload'),

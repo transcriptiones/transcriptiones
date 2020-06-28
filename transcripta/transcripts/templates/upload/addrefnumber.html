@@ -7,8 +7,8 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
 -->
 
 <div class="modal-header">
-    <h5 class="modal-title" id="refNumberModalLabel">Neue Signatur hinzufügen</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <h5 class="modal-title mx-auto" id="refNumberModalLabel">Neue Signatur hinzufügen</h5>
+    <button type="button" class="close ml-0" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -23,9 +23,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         {{ form.non_field_errors }}
         <div class="fieldWrapper form-group row">
             {{ form.holding_institution.errors }}
-            <label for="{{ form.holding_institution.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.holding_institution.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.holding_institution.id_for_label }}" class="control-label">
+                    {{ form.holding_institution.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_holding_institution"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.holding_institution }}
                 <span class="error"></span>
@@ -33,9 +36,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         </div>
         <div class="fieldWrapper form-group row">
             {{ form.refnumber_name.errors }}
-            <label for="{{ form.refnumber_name.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.refnumber_name.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.refnumber_name.id_for_label }}" class="control-label">
+                    {{ form.refnumber_name.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_refnumber_name"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.refnumber_name }}
                 <span class="error"></span>
@@ -43,9 +49,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         </div>
         <div class="fieldWrapper form-group row">
             {{ form.refnumber_title.errors }}
-            <label for="{{ form.refnumber_title.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.refnumber_title.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.refnumber_title.id_for_label }}" class="control-label">
+                    {{ form.refnumber_title.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_refnumber_title"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.refnumber_title }}
                 <span class="error"></span>
@@ -53,9 +62,12 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
         </div>
         <div class="fieldWrapper form-group row">
             {{ form.collection_link.errors }}
-            <label for="{{ form.collection_link.id_for_label }}" class="col-sm-3 control-label">
-                {{ form.collection_link.label }}
-            </label>
+            <div class="col-sm-3">
+                <label for="{{ form.collection_link.id_for_label }}" class="control-label">
+                    {{ form.collection_link.label }}
+                </label>
+                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_collection_link"></i>
+            </div>
             <div class="col-sm-9">
                 {{ form.collection_link }}
                 <span class="error"></span>

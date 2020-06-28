@@ -183,7 +183,6 @@ class EditTranscriptForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': self.fields[name].help_text,
                     })
-
         
     class Meta:
         model = DocumentTitle

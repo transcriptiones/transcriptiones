@@ -155,6 +155,11 @@ function institutionLoaded() {
     $('#institutionForm').find('#backButtonModal').on('click', null, this, backModalForm);
     // add label to required fields
     $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 };
 
 function refNumberLoaded() {
@@ -166,6 +171,11 @@ function refNumberLoaded() {
     $('#refNumberForm').find('#backButtonModal').on('click', null, this, backModalForm);
     // add label to required fields
     $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 };
 
 
@@ -228,12 +238,12 @@ $(document).on('hide.bs.modal', '#refNumberModal', function () {
 
 function SpecialCharactersSuperscript(editor) {
     editor.plugins.get('SpecialCharacters').addItems('Diakritische Zeichen', [
-        { title: 'latin capital letter O with combining latin small letter e', character: 'Oͤ'},
-        { title: 'latin small letter o with combining latin small letter e', character: 'oͤ' },
-        { title: 'latin capital letter U with combining latin small letter e', character: 'Uͤ' },
-        { title: 'latin small letter u with combining latin small letter e', character: 'uͤ' },
-        { title: 'latin capital letter U with combining latin small letter o', character: 'Uͦ' },
-        { title: 'latin small letter u with combining latin small letter o', character: 'uͦ' },
+        { title: 'latin capital letter O with combining latin small letter e', character: '\u004F\u034F\u0364' },
+        { title: 'latin small letter o with combining latin small letter e', character: '\u006F\u034F\u0364' },
+        { title: 'latin capital letter U with combining latin small letter e', character: '\u0055\u034F\u0364' },
+        { title: 'latin small letter u with combining latin small letter e', character: '\u0075\u034F\u0364' },
+        { title: 'latin capital letter U with combining latin small letter o', character: '\u0055\u034F\u0366' },
+        { title: 'latin small letter u with combining latin small letter o', character: '\u0075\u034F\u0366' },
 
     ]);
 }
@@ -325,6 +335,12 @@ $(function () {
     $('#submitButtonAuthor').on('click', confirmAuthor);
     $('#closeButtonAuthor').on('click', closeAuthor);
     $('#buttonEndDate').on('click', showEndDate);
+
+    // initialize tooltips
+    $('.tooltipster').tooltipster({
+        maxWidth: 300,
+        theme: ['tooltipster-punk', 'tooltipster-transcriptiones']
+    });
 });
 
 

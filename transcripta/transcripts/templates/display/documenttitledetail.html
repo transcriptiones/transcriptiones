@@ -4,7 +4,7 @@
 {% block dependencies %}
 {% include "toolbox.html" %}
 <script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
-<script src="{% static 'display/scripts.js' %}"></script>
+<script src="{% static 'display/scripts.js' %}" charset="utf-8"></script>
 <link href="{% static 'base/css/toolboxstyles.css' %}" rel="stylesheet" type="text/css">
 {% endblock dependencies %}
 
@@ -293,7 +293,7 @@
                 </div>
                 <div class="col-sm-8">
                     {% if documenttitle.illuminated %}
-                    {{ documenttitle.illuminated|lower|capfirst }}
+                    {{ documenttitle.illuminated|yesno }}
                     {% else %}
                     Keine Angabe
                     {% endif %}
@@ -305,7 +305,7 @@
                 </div>
                 <div class="col-sm-8">
                     {% if documenttitle.seal %}
-                    {{ documenttitle.seal|lower|capfirst }}
+                    {{ documenttitle.seal|yesno }}
                     {% else %}
                     Keine Angabe
                     {% endif %}

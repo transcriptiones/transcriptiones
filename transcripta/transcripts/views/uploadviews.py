@@ -5,6 +5,7 @@ from django.core import serializers
 from django.views import View
 from django.views.generic import TemplateView, UpdateView
 from django.utils.text import slugify
+from django.contrib.auth.mixins import LoginRequiredMixin
 from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
 from transcripta.transcripts.models import Author, Institution, RefNumber, DocumentTitle, SourceType
 from transcripta.transcripts.utils import create_related_objects
@@ -13,7 +14,7 @@ from transcripta.transcripts.utils import create_related_objects
 # Create your views here.
 
 #View for adding institution
-class AddInstitutionView(View):
+class AddInstitutionView(LoginRequiredMixin, View):
     form_class = InstitutionForm
     template_name = "upload/addinstitution.html"
 
@@ -54,7 +55,7 @@ class AddInstitutionView(View):
             return render(self.request, 'upload/inst_dropdown_options.html', {'institutions': institutions})
 
 #View for adding RefNumber
-class AddRefNumberView(View):
+class AddRefNumberView(LoginRequiredMixin, View):
     form_class = RefNumberForm
     template_name = "upload/addrefnumber.html"
 
@@ -92,11 +93,11 @@ class AddRefNumberView(View):
 
 
 #View for creating new document object
-class AddDocumentView(View):
+class AddDocumentView(LoginRequiredMixin, View):
     form_class = DocumentTitleForm
     template_name = "upload/documenttitle_form.html"
 
-    #display the form if accessed via GET
+    # display the form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method == "GET":
             # prepopulate field if user wants to publish anonymously
@@ -106,7 +107,7 @@ class AddDocumentView(View):
                 form = self.form_class()
             return render(self.request, self.template_name, {"form": form})
 
-    #handle the form if accessed via POST
+    # handle the form if accessed via POST
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
             data = self.request.POST.copy()
@@ -133,8 +134,10 @@ class AddDocumentView(View):
             form = self.form_class(data, instance=document)
 
             if form.is_valid():
-                form.save()
-                return redirect('thanks')
+                createdobj = form.save()
+                context = {'object': createdobj}
+                response = thanks_view(self.request, context)
+                return response
 
             else:
                 return HttpResponse(str(form.errors).encode())
@@ -145,8 +148,10 @@ class AddDocumentView(View):
 
 
 #View to display after successful form-submit
-class RedirectView(TemplateView):
+def thanks_view(request, context):
     template_name = "upload/formredirect.html"
+
+    return render(request, template_name, context)
     
     
 #View for loading refnumbers, depending on chosen Institution
@@ -158,7 +163,7 @@ def load_refnumbers(request):
 
 
 # Base class for Editing DocumentTitle objects
-class BaseEditDocumentView(UpdateView):
+class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
     model = DocumentTitle
 
     # get object to update
@@ -234,8 +239,10 @@ class EditMetaView(BaseEditDocumentView):
             form = self.form_class(data, instance=document)
 
             if form.is_valid():
-                form.save()
-                return redirect('thanks')
+                createdobj = form.save()
+                context = {'object': createdobj}
+                response = thanks_view(self.request, context)
+                return response
             else:
                 return HttpResponse(str(form.errors).encode())
                 #Exception Handling goes here!
@@ -254,12 +261,19 @@ class EditTranscriptView(BaseEditDocumentView):
         if self.request.method == "POST":
             document = self.get_object()
             document.submitted_by = self.request.user
+            
+            print(document.author.all()) # Output: <QuerySet [<Author: Theophil Läppli>]>
 
             form = self.form_class(self.request.POST, instance=document)
+            print(form.data.get('author')) # Output: None
 
             if form.is_valid():
-                form.save()
-                return redirect('thanks')
+                print(form.cleaned_data.get('author')) # Output: <QuerySet []>
+                createdobj = form.save()
+                print(createdobj.author.all()) # Output: <QuerySet []>
+                context = {'object': createdobj}
+                response = thanks_view(self.request, context)
+                return response
             else:
                 return HttpResponse(str(form.errors).encode())
                 #Exception Handling goes here!

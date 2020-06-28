@@ -1,3 +1,5 @@
+/* General Styling, Fonts, etc. */
+
 body,
 html {
   width: 100%;
@@ -5,12 +7,20 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro' !important;
+  font-family: "Source Sans Pro", Helvetica, sans-serif !important;
 }
 
-.btn-xl {
-  padding: 1.25rem 2.5rem;
+.content-section {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
 }
+
+.content-section-heading h2 { /* Do we need this? */
+  font-size: 3rem;
+}
+
+
+/* Breadcrumb navigation*/
 
 .breadcrumb {
     padding: 15px 15px;
@@ -25,27 +35,28 @@ body {
 .breadcrumb-item + .breadcrumb-item::before {
     padding-left: 5px;
     content: "/\00a0";
-    color: #000000 !important;
+    color: #000000;
 }
 
-    
 .breadcrumb-item.active {
-    color: #000000 !important;
+    color: #000000;
 }
-
 
 .breadcrumb li a:hover {
     color: #155d74;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
-.breadcrumb li a:hover:after {
+.breadcrumb li a:hover::after { /* Do we need this? What does it do? */
     color: #155d74;
-    text-decoration: none !important;
+    text-decoration: none;
 }
+
+
+/* Cards */
 
 .card-header {
-    background-color: #1D809F !important;
+    background-color: #1D809F;
     cursor: pointer;
 }
 
@@ -56,15 +67,9 @@ body {
     z-index: 1;
 }
 
-.content-section {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
-}
 
-.content-section-heading h2 {
-  font-size: 3rem;
-}
-
+/* Font size and padding */
+/* Should we solve this with additional classes in the documents? */
 
 h1,
 h2,
@@ -80,6 +85,9 @@ h5,
 h6 {
   margin-top: 15px;
 }
+
+
+
 
 @media (max-width: 575.98px) {
   .content-section-heading h1 {
@@ -103,10 +111,6 @@ h6 {
 }
 
 
-.text-faded {
-  color: rgba(255, 255, 255, 0.7);
-}
-
 
 /* Nav Menu */
 .navbar {
@@ -120,7 +124,6 @@ h6 {
 
 .navbar-nav li.navbar-nav-item a,
 .navbar-nav li.navbar-brand a {
-    display: block;
     text-decoration: none;
     color: #fff;
 }
@@ -134,6 +137,9 @@ h6 {
 .nav-link {
  color: #fff !important;
 }
+
+
+/* Scroll-to-top-Button */
 
 .scroll-to-top {
   position: fixed;
@@ -162,6 +168,9 @@ h6 {
 
 
 /* select2 */
+.select2 {
+    width: 100% !important;
+}
 
 .select2-container .select2-selection__rendered > *:first-child.select2-search--inline {
     width: 100% !important;
@@ -181,6 +190,8 @@ h6 {
 }
 	
 
+
+/* Menu-toggler */
 
 .menu-toggle {
   position: fixed;
@@ -316,9 +327,6 @@ h6 {
 }
 
 
-.select2 {
-    width: 100% !important;
-}
 
 
 footer.footer {
@@ -359,8 +367,6 @@ a:hover, a:focus, a:active {
     text-align: left !important;
 }
 
-#refNumberModalLabel,
-#institutionModalLabel,
 #confirmationModalLabel {
     padding-left: 120px;
 }
@@ -409,12 +415,13 @@ button[type="submit"] {
     border-radius: 5px;
 }
 
- .btn-secondary:hover, .btn-primary:focus, .btn-primary:active,
- button[type="submit"]:hover, btn-light:hover {
+
+.btn-secondary:hover, .btn-primary:focus, .btn-primary:active,
+button[type="submit"]:hover, btn-light:hover {
     background-color: rgba(52, 58, 64, 0.9);
     border-color: rgba(52, 58, 64, 0.9);
     font-weight: normal;
- }
+}
 
 .btn {
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
@@ -458,16 +465,79 @@ button[type="submit"] {
 .display-list-element {
     border-style: solid;
     border-width: thin;
-    border-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    margin-bottom: 5px;
+    border-color: #e9ecef;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
     .display-list-element:hover {
         text-decoration: none;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: #e9ecef;
+        border-color: #dee2e6;
     }
 
 .fieldWrapper {
     margin-bottom: 1rem;
+}
+
+
+/* Tooltips */
+
+.tooltip_templates {
+    display: none;
+}
+
+.tooltip_list {
+    list-style-type: disc;
+    text-align: left;
+}
+
+.fa-info-circle {
+    color: #1D809F;
+}
+
+
+.tooltipster-sidetip.tooltipster-punk.tooltipster-transcriptiones .tooltipster-box {
+    border-bottom: 5px solid #1D809F;
+}
+
+.tooltipster-sidetip.tooltipster-punk.tooltipster-transcriptiones.tooltipster-top .tooltipster-arrow-border {
+    border-top-color: #1D809F;
+}
+
+
+/* Pagination */
+
+.page-link {
+    color: #1D809F;
+}
+.page-link:hover {
+    color: #1D809F;
+}
+
+.page-item.active .page-link{
+    background-color: #1D809F;
+    border-color: #1D809F;
+    color: #fff;
+}
+
+/* unset these when reorganizing the stylesheet */
+.fa-angle-left,
+.fa-angle-right,
+.fa-angle-double-left,
+.fa-angle-double-right {
+    line-height: 1.25
+}
+
+
+/* ck-editor */
+
+.ck-editor__editable {
+    min-height: 400px;
+}
+
+/* Hide widget-handlers in disabled ck-editor */
+.ck-read-only > .ck-widget:hover > .ck-widget__selection-handle,
+.ck-read-only > .ck-widget_selected > .ck-widget__selection-handle {
+    display: none;
 }

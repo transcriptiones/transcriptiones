@@ -77,7 +77,7 @@ class RefNumber(models.Model):
     collection_link = models.URLField(
         max_length=200,
         blank=True,
-        verbose_name="link zum Archivbestand",
+        verbose_name="statischer Link",
         help_text="Link zum Archivbestand"
         )
     refnumber_utc_add = models.DateTimeField(
@@ -198,7 +198,7 @@ class DocumentTitle(models.Model):
         blank=True,
         null=True,
         verbose_name="startmonat",
-        help_text="MM",
+        help_text="Monat",
         choices=MonthChoices.choices
         ) 
     start_day = models.PositiveSmallIntegerField(
@@ -218,7 +218,7 @@ class DocumentTitle(models.Model):
         blank=True,
         null=True,
         verbose_name="endmonat",
-        help_text="MM",
+        help_text="Monat",
         choices=MonthChoices.choices
         )
     end_day = models.PositiveSmallIntegerField(
