@@ -2,21 +2,25 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar
+from functools import lru_cache
+from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar, List, Type
 
 from django import forms
-from django.db.models import Choices
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
 from django.utils.translation import gettext_lazy as _
 
+from ..documents import TranscriptionDocument, ElasticsearchDocument
 from ..models.transcriptmodels import DocumentTitle
+
+
+DjangoFormSelectFieldOptionsList = List[Tuple[str, str]]
 
 
 class Choices(Enum):
     """A specialised enum type for providing Django ChoiceField choices."""
     @classmethod
-    def choices(cls):
+    def choices(cls) -> DjangoFormSelectFieldOptionsList:
         return [(item.name, str(item)) for item in cls]
 
 
@@ -49,15 +53,31 @@ NUMERIC_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL, Operation.GTE, Operati
 BINARY_OPERATIONS = (Operation.EQUAL, Operation.UNEQUAL)
 
 
+class BooleanSelect(forms.NullBooleanSelect):
+    """A two-element <select> for binary fields."""
+
+    def __init__(self, attrs=None):
+        choices = (
+            ('true', _('Yes')),
+            ('false', _('No')),
+        )
+        super(forms.NullBooleanSelect, self).__init__(attrs, choices)
+
+
 @dataclass(frozen=True)
 class Attribute:
-    """The potential filter criteria."""
+    """The potential filter criteria.
+
+    During import, this caches some information, namely possible choice values that may depend on index population
+    at import time. They can be refreshed at any time by calling Attribute.build_members()
+    """
     name: str
     field: str
     operations: Sequence[Operation] = TEXT_OPERATIONS
     widget: forms.Widget = forms.TextInput()
 
     members: ClassVar[Dict[str, Attribute]] = {}
+    """All attributes, mapped from their field names to the Attribute object. Filled after class creation."""
 
     def __str__(self):
         return self.name
@@ -77,30 +97,50 @@ class Attribute:
         """Renders the associated widget as HTML. Intended for copying."""
         return self.widget.render(self.template_name, "", {'id': self.template_name, 'class': 'value_field'})
 
+    @staticmethod
+    def _choices_for_document_field(field: str, document: Type[ElasticsearchDocument] = TranscriptionDocument,
+                                    **filters) -> DjangoFormSelectFieldOptionsList:
+        """Find all distinct entries of a field (capped to 10 000), in a format for Django's choice fields
 
-class BooleanSelect(forms.NullBooleanSelect):
-    """A two-element <select> for binary fields."""
-    def __init__(self, attrs=None):
-        choices = (
-            ('true', _('Yes')),
-            ('false', _('No')),
+        Any further keyword arguments are used to filter by a match query.
+        """
+        s = document.search()[:0]
+        if filters:
+            s = s.query('match', **filters)
+        s.aggs.bucket('choices', 'terms', field=field, size=10_000)
+        results = s.execute()
+        choices_list = sorted(
+            [bucket['key'] for bucket in results.aggregations.choices.buckets]
         )
-        super(forms.NullBooleanSelect, self).__init__(attrs, choices)
+        return [(choice, choice) for choice in choices_list]
+
+    @classmethod
+    def build_members(cls):
+        """Populates Attribute.members."""
+        cls.members = {str(a): a for a in [
+            cls("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
+            cls("Institut", 'institution_name'),
+            cls("Signatur", 'refnumber_title'),
+            cls("Titel", 'title_name'),
+            cls("Sprache", 'language', BINARY_OPERATIONS,
+                forms.Select(choices=cls._choices_for_document_field('language'))),
+            cls("Quellgattung", 'source_type', BINARY_OPERATIONS,
+                forms.Select(choices=cls._choices_for_document_field('source_type'))),
+            cls("Seitenzahl", 'pages', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
+            cls("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS,
+                forms.NumberInput({'step': '0.1', 'min': '0'})),
+            cls("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS,
+                forms.NumberInput({'step': '0.1', 'min': '0'})),
+            cls("Illuminiert", 'illuminated', BINARY_OPERATIONS, BooleanSelect()),
+            cls("Siegel", 'seal', BINARY_OPERATIONS, BooleanSelect()),
+            cls("Material", 'material', BINARY_OPERATIONS,
+                forms.Select(choices=DocumentTitle.MatChoices.choices)),
+            cls("Paginierung", 'paging_system', BINARY_OPERATIONS,
+                forms.Select(choices=DocumentTitle.PagChoices.choices)),
+        ]}
 
 
-Attribute.members.update({str(a): a for a in [
-    Attribute("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
-    Attribute("Institut", 'institution_name'),
-    Attribute("Signatur", 'refnumber_title'),
-    Attribute("Titel", 'title_name'),
-    Attribute("Seitenzahl", 'pages', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
-    Attribute("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1', 'min': '0'})),
-    Attribute("Seitenbreite", 'measurements_width', NUMERIC_OPERATIONS, forms.NumberInput({'step': '0.1', 'min': '0'})),
-    Attribute("Illuminiert", 'illuminated', BINARY_OPERATIONS, BooleanSelect()),
-    Attribute("Siegel", 'seal', BINARY_OPERATIONS, BooleanSelect()),
-    Attribute("Material", 'material', BINARY_OPERATIONS, forms.Select(choices=DocumentTitle.MatChoices.choices)),
-    Attribute("Paginierung", 'paging_system', BINARY_OPERATIONS, forms.Select(choices=DocumentTitle.PagChoices.choices)),
-]})
+Attribute.build_members()
 
 
 @dataclass(frozen=True)

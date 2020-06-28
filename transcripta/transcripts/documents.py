@@ -29,9 +29,11 @@ class TranscriptionDocument(ElasticsearchDocument):
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
     title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
-    institution_name = fields.TextField(attr="parent_institution.institution_name", fields={"keyword": fields.KeywordField()})
+    institution_name = fields.TextField(attr="parent_institution.institution_name",
+                                        fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
     language = fields.KeywordField(multi=True)
+    source_type = fields.KeywordField(attr="source_type.type_name")
     material = fields.KeywordField()
     paging_system = fields.KeywordField()
 
