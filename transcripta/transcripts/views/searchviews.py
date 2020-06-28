@@ -18,7 +18,7 @@ class SearchView(FormView, ListView):
             self.queryset = self.queryset.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
         for filter in form.cleaned_data['filters']:
             self.queryset = filter.apply(self.queryset)
-        self.queryset = self.queryset.to_queryset()  # DEBUG
+        self.queryset = self.queryset.to_queryset()
         return self.get(self.request)
 
     def get_context_data(self, **kwargs):

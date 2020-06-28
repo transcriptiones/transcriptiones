@@ -116,7 +116,7 @@ class Attribute:
 
     @classmethod
     def build_members(cls):
-        """Populates Attribute.members."""
+        """Populates Attribute.members. Call once after class creation, and again for clearing the option cache."""
         cls.members = {str(a): a for a in [
             cls("Text", 'transcription_text', (Operation.CONTAINS, Operation.CONTAINS_NOT)),
             cls("Institut", 'institution_name'),
@@ -126,6 +126,7 @@ class Attribute:
                 forms.Select(choices=cls._choices_for_document_field('language'))),
             cls("Quellgattung", 'source_type', BINARY_OPERATIONS,
                 forms.Select(choices=cls._choices_for_document_field('source_type'))),
+            cls("Datum", 'date', NUMERIC_OPERATIONS, forms.DateInput({'type': 'date'})),
             cls("Seitenzahl", 'pages', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
             cls("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS,
                 forms.NumberInput({'step': '0.1', 'min': '0'})),

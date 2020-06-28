@@ -1,7 +1,10 @@
+from datetime import date, timedelta
+from typing import Optional
+
 from django.db.models import QuerySet
-from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields
+from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields, DEDField
 from django_elasticsearch_dsl.registries import registry
-from elasticsearch_dsl import analyzer, token_filter, char_filter
+from elasticsearch_dsl import analyzer, token_filter, char_filter, DateRange, Range
 
 from .models import DocumentTitle, Author, RefNumber, SourceLanguage
 
@@ -20,6 +23,10 @@ transcript_analyzer = analyzer(
 )
 
 
+class DateRangeField(DEDField, DateRange):
+    pass
+
+
 @registry.register_document
 class TranscriptionDocument(ElasticsearchDocument):
     """Elasticsearch index mapping for DocumentTitle models.
@@ -29,6 +36,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
     title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
+    date = DateRangeField()
     institution_name = fields.TextField(attr="parent_institution.institution_name",
                                         fields={"keyword": fields.KeywordField()})
     refnumber_title = fields.TextField(attr="parent_refnumber.refnumber_title")
@@ -59,13 +67,33 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     @staticmethod
     def prepare_author(instance: DocumentTitle) -> list:
-        """Compose a document's author field"""
+        """Compose a document's author field."""
         return [author.author_name for author in instance.author.all()]
 
     @staticmethod
     def prepare_language(instance: DocumentTitle) -> list:
-        """Compose a document's language field"""
+        """Compose a document's language field."""
         return [language.language_name for language in instance.language.all()]
+
+    @classmethod
+    def prepare_date(cls, instance: DocumentTitle) -> Optional[Range]:
+        """Compose a document's date range field.
+
+        Will write None if there is no information whatsoever. This is because Range() would cause the entry to be
+        found no matter the filter.
+        """
+        if instance.start_year is None:
+            return None
+        min_date = date(instance.start_year, instance.start_month or 1, instance.start_day or 1)
+        max_month = instance.end_month or instance.start_month or 12
+        max_day = instance.end_day or instance.start_day or cls._last_day_in_month(max_month)
+        max_date = date(instance.end_year or instance.start_year, max_month, max_day)
+        return Range(gte=min_date, lte=max_date)
+
+    @staticmethod
+    def _last_day_in_month(month: int) -> int:
+        """Gives the number of days in a given month."""
+        return (date(420, month % 12 + 1, 1) - timedelta(days=1)).day
 
     def get_queryset(self):
         queryset: QuerySet = super().get_queryset()
