@@ -209,6 +209,7 @@ class FilterWidget(forms.MultiWidget):
 
     def render(self, name, value, attrs=None, renderer=None):
         inner_html = super().render(name, value, attrs, renderer)
+        inner_html += '<button type="button" class="btn btn-danger removal_button">&times;</button>'
         if self.divattrs is not None:
             divattrs = _append_class(self.divattrs, 'filter_field')
             divattr_str = ' '.join(f'{key}="{value}"' for (key, value) in divattrs.items())

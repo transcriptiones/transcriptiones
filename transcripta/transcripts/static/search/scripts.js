@@ -65,6 +65,21 @@ function update_input_field() {
   $value_field.replaceWith(new_field);
 }
 
+function hide_field_group() {
+  /**
+   * For $(this) attribute selector, reset and hide the parent field group.
+   */
+  const $group = $(this).parent('.filter_field');
+  $group.addClass('d-none');
+  // Reset to the default attribute and default operation
+  const $attribute_field = $group.find('.attribute_field');
+  $attribute_field.prop('selectedIndex', '0').change();
+  const $operation_field = $group.find('.operation_field');
+  $operation_field.prop('selectedIndex', '0');
+  // Empty the value field if necessary
+  $group.find('.value_field').val("");
+}
+
 $(function () {
 
   setup_field_groups();
@@ -72,5 +87,6 @@ $(function () {
       .change(update_operations)
       .change(update_input_field);
   $('.attribute_field:visible').change();
+  $('.removal_button').click(hide_field_group);
 
 });

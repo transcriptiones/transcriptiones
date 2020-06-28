@@ -7,7 +7,7 @@
   <div>
     <form id="searchForm" action="." method="post">
       {{ form.as_p }}
-      <div><button type="button" id="addButton">+</button></div>
+      <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
       {% csrf_token %}
       <button type="submit">Suchen</button>
     </form>
