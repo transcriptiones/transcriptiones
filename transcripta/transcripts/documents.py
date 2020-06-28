@@ -4,7 +4,7 @@ from typing import Optional
 from django.db.models import QuerySet
 from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields, DEDField
 from django_elasticsearch_dsl.registries import registry
-from elasticsearch_dsl import analyzer, token_filter, char_filter, DateRange, Range
+from elasticsearch_dsl import analyzer, token_filter, char_filter, DateRange, Range, IntegerRange
 
 from .models import DocumentTitle, Author, RefNumber, SourceLanguage
 
@@ -23,6 +23,10 @@ transcript_analyzer = analyzer(
 )
 
 
+class IntegerRangeField(DEDField, IntegerRange):
+    pass
+
+
 class DateRangeField(DEDField, DateRange):
     pass
 
@@ -36,6 +40,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
     title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
+    year = IntegerRangeField()
     date = DateRangeField()
     institution_name = fields.TextField(attr="parent_institution.institution_name",
                                         fields={"keyword": fields.KeywordField()})
@@ -74,6 +79,18 @@ class TranscriptionDocument(ElasticsearchDocument):
     def prepare_language(instance: DocumentTitle) -> list:
         """Compose a document's language field."""
         return [language.language_name for language in instance.language.all()]
+
+    @classmethod
+    def prepare_year(cls, instance: DocumentTitle) -> Optional[Range]:
+        """Compose a document's date range field.
+
+        Will write None if there is no information whatsoever. This is because Range() would cause the entry to be
+        found no matter the filter.
+        """
+        if instance.start_year is None:
+            return None
+        return Range(gte=instance.start_year, lte=instance.end_year or instance.start_year)
+
 
     @classmethod
     def prepare_date(cls, instance: DocumentTitle) -> Optional[Range]:

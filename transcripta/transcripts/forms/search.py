@@ -126,6 +126,7 @@ class Attribute:
                 forms.Select(choices=cls._choices_for_document_field('language'))),
             cls("Quellgattung", 'source_type', BINARY_OPERATIONS,
                 forms.Select(choices=cls._choices_for_document_field('source_type'))),
+            cls("Jahr", 'year', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'style': 'width: 4em'})),
             cls("Datum", 'date', NUMERIC_OPERATIONS, forms.DateInput({'type': 'date'})),
             cls("Seitenzahl", 'pages', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
             cls("Seitenlänge", 'measurements_length', NUMERIC_OPERATIONS,
