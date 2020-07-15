@@ -333,7 +333,7 @@ def batchupload(request):
                         type_name = str(fields[0])
                         SourceType.objects.create(type_name=type_name)
 
-                return redirect('thanks')
+                return redirect('start')
 
             return redirect('start')
 

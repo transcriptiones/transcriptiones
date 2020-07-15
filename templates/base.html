@@ -53,7 +53,7 @@
                 <a class="nav-link text-navbar" href="{% url 'institutionlist' %}">Bestand</a>
             </li>
             <li class="navbar-nav-item d-none d-sm-block">
-                <a class="nav-link text-navbar" href="#">Suche</a>
+                <a class="nav-link text-navbar" href="{% url 'search' %}">Suche</a>
             </li>
             <li class="navbar-nav-item d-none d-sm-block">
                 {% if user.is_authenticated %}

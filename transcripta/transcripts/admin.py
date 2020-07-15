@@ -26,11 +26,13 @@ class DocumentAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).filter(active=True)
 
+class SourceTypeAdmin(admin.ModelAdmin):
+    list_display = ('type_name', 'parent_type')
 
 admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(RefNumber, RefNumberAdmin)
 admin.site.register(Author)
 admin.site.register(SourceLanguage)
-admin.site.register(SourceType)
+admin.site.register(SourceType, SourceTypeAdmin)
 admin.site.register(DocumentTitle, DocumentAdmin)
 admin.site.register(User)

@@ -32,7 +32,7 @@ urlpatterns = [
     path('upload/batch/', batchupload, name='batchupload'),
 
     # urls for search views
-    path('search/', SearchView.as_view(), name='searchform'),
+    path('search/', SearchView.as_view(), name='search'),
 
     # urls for user views
     path('user/signup/', signup, name='signup'),

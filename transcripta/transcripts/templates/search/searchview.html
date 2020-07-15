@@ -2,26 +2,99 @@
 {% load static %}
 {% block content %}
 
-  <h2>Suchformular</h2>
+  <h2>Suche</h2>
 
   <div>
-    <form id="searchForm" action="." method="post">
-      {{ form.as_p }}
-      <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
-      {% csrf_token %}
-      <button type="submit">Suchen</button>
-    </form>
+      <form id="searchForm" action="." method="post">
+          <div class="card mt-5">
+              <div class="card-header" data-toggle="collapse" href="#standard">
+                  <a class="card-link">Standardsuche</a>
+              </div>
+              <div id="standard" class="collapse show">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-sm">
+                              {{ form.query }}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="card-header" data-toggle="collapse" href="#advanced">
+                  <a class="card-link">Erweiterte Suche</a>
+              </div>
+              <div id="advanced" class="collapse show">
+                  <div class="card-body">
+                      {% for field in form %}
+                      {% if not forloop.first %}
+                      <div class="row">
+                          <div class="col-sm">
+                              {{ field }}
+                          </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                      <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
+                  </div>
+              </div>
+          </div>
+        {% csrf_token %}
+        <button type="submit">Suchen</button>
+      </form>
   </div>
 
   {% if results %}
-    <div id="searchResults">
-      <ul>
-        {% for result in results %}
-          <li><a href="{{ result.get_absolute_url }}">{{ result.title_name }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
+  <div id="searchResults" class="card mt-5">
+      <div class="card-header" data-toggle="collapse" href="#results">
+          <a class="card-link">{{ results.count }} Suchresultat{% if results.count != 1 %}e{% endif %}</a>
+      </div>
+      <div id="results" class="collapse show">
+          <div class="card-body">
+              {% for result in results %}
+              <a href="{{ result.get_absolute_url }}" class="row display-list-element">
+                  <div class="col-sm">
+                      <div class="row"><h6 class="text-left">{{ result.title_name }}</h6></div>
+                      <div class="row">
+                          <div class="col-sm text-left">
+                              <div class="row">{{ result.parent_institution }}</div>
+                              <div class="row">{{ result.parent_refnumber }}</div>
+                          </div>
+                          <div class="col-sm text-left">
+                              <div class="row">{{ result.place_name }}</div>
+                              <div class="row">
+                                  {% if result.start_day %}
+                                  {{ result.start_day }}.
+                                  {% endif %}
+                                  {% if result.start_month %}
+                                  {{ result.get_start_month_display }}.
+                                  {% endif %}
+                                  {{ result.start_year }}
+                                  {% if result.start_year and result.end_year %} -<br />
+                                  {% if result.end_day %}
+                                  {{ result.end_day }}.
+                                  {% endif %}
+                                  {% if result.end_month %}
+                                  {{ result.get_end_month_display }}.
+                                  {% endif %}
+                                  {{ result.end_year }}
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-sm text-left">
+                              {% if result.source_type.parent_type is not None %}
+                              {{result.source_type.parent_type}} -<br />
+                              {% endif %}
+                              {{ result.source_type }}
+                          </div>
+                      </div>
+                  </div>
+              </a>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+{% endif %}
 
   <div id="input-widget-templates" class="d-none">
   {# These input widgets will not be displayed. They are simply provided for copying. #}

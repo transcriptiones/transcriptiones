@@ -52,7 +52,7 @@
                 <a class="nav-link text-navbar" href="{% url 'institutionlist' %}">Bestand</a>
             </li>
             <li class="navbar-nav-item d-none d-sm-block">
-                <a class="nav-link text-navbar" href="#">Suche</a>
+                <a class="nav-link text-navbar" href="{% url 'search' %}">Suche</a>
             </li>
             <li class="navbar-nav-item d-none d-sm-block">
                 <a class="nav-link text-navbar" href="{% url 'aboutus' %}">Über uns</a>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
                     <span class="service-icon rounded-circle mx-auto mb-3">
-                        <a href="{% url 'searchform' %}">
+                        <a href="{% url 'search' %}">
                             <i class="fas fa-search-plus"></i>
                         </a>
                     </span>

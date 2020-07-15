@@ -252,7 +252,10 @@ class FilterField(forms.MultiValueField):
 
 
 class SearchForm(forms.Form):
-    query = forms.CharField(label=False, required=False, widget=forms.widgets.TextInput(attrs={'type': 'search'}))
+    query = forms.CharField(label=False, required=False, widget=forms.widgets.TextInput(attrs={'type': 'search',
+                                                                                               'class': 'form-control',
+                                                                                               'placeholder': 'Suchen...',
+                                                                                               }))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
