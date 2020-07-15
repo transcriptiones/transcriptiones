@@ -183,7 +183,36 @@ class EditTranscriptForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': self.fields[name].help_text,
                     })
-        
+
+    # Override save to prevent m2m-fields from being cleared
+    def save(self, commit=True):
+        # Get the unsaved DocumentTitle instance and their m2m-relations
+        instance = forms.ModelForm.save(self, False)
+        authors = instance.author.all()
+        languages = instance.language.all()
+
+        # Prepare a 'save_m2m' method for the form,
+        old_save_m2m = self.save_m2m
+
+        def save_m2m():
+            old_save_m2m()
+            # link the document with their m2m-relations
+            instance.author.clear()
+            instance.author.add(*list(authors))
+            instance.language.clear()
+            instance.language.add(*list(languages))
+
+
+        self.save_m2m = save_m2m
+
+        # Do we need to save all changes now?
+        if commit:
+            instance.save()
+            self.save_m2m()
+
+        return instance
+    
+
     class Meta:
         model = DocumentTitle
         fields = ['transcription_scope',
