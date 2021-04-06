@@ -1,0 +1,16 @@
+{% load static %}    
+
+<div class="btn-group-vertical">
+                    <a class="btn btn-light btn-rounded" id="toolboxicon" title="Transkription bearbeiten" href="{% url 'edittranscript' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">
+                        <img src="{% static 'base/img/check-double-solid-t.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
+                    </a>
+                    <a class="btn btn-light btn-rounded" id="toolboxicon" title="Metadaten bearbeiten" href="{% url 'editmeta' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">
+                        <img src="{% static 'base/img/check-double-solid-m.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
+                    </a>
+                    <a class="btn btn-light btn-rounded" id="toolboxicon" title="Versionen" href="{% url 'documenthistory' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}">
+                        <i class="fas fa-code-branch"></i>
+                    </a>
+                    <a class="btn btn-light btn-rounded" id="toolboxicon" title="Export">
+                        <i class="fas fa-file-export"></i>
+                    </a>
+</div>

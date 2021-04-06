@@ -1,0 +1,4 @@
+﻿<option value="">---------</option>
+{% for refnumber in refnumbers %}
+<option value="{{ refnumber.pk }}">{{ refnumber.refnumber_name }}</option>
+{% endfor %}

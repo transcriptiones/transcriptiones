@@ -1,0 +1,362 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block dependencies %}
+{% include "toolbox.html" %}
+<script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
+<script src="{% static 'display/scripts.js' %}" charset="utf-8"></script>
+<link href="{% static 'base/css/toolboxstyles.css' %}" rel="stylesheet" type="text/css">
+{% endblock dependencies %}
+
+
+{% block content %}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dokument</li>
+    </ol>
+</nav>
+
+<div>
+    <h2>{{ documenttitle.title_name }}</h2>
+</div>
+{% if newest %}
+<div>
+    <h3>
+        {% if newest != documenttitle %}
+        Version vom {{ documenttitle.document_utc_add }}
+        {% elif newest == documenttitle %}
+        Aktuellste Version
+        {% endif %}
+    </h3>
+</div>
+{% endif %}
+
+
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
+        <a class="card-link">Übersicht</a>
+    </div>
+
+    <div id="DocumentOverview" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
+                </div>
+            </div>
+            <div class="row {% if newest and newest.transcription_scope != documenttitle.transcription_scope %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Transkribierte Teile des Dokuments
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.transcription_scope }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Letzte Änderungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.commit_message == 'initial' %}
+                    Ursprüngliche Version
+                    {% else %}
+                    {{ documenttitle.commit_message }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentTranscription">
+        <a class="card-link">Transkription</a>
+    </div>
+
+    <div id="DocumentTranscription" class="collapse show">
+        <div class="card-body {% if newest and newest.transcription_text != documenttitle.transcription_text %}has-changed{% endif %}">
+            <textarea id="transcriptionText">
+                {{ documenttitle.transcription_text }}
+            </textarea>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentMetadata">
+        <a class="card-link">Inhaltliche Metadaten</a>
+    </div>
+
+    <div id="DocumentMetadata" class="collapse show">
+        <div class="card-body">
+            <div class="row
+                 {% if newest %}
+                 {% for author in documenttitle.author.all %}
+                 {% if not author in newest.author.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% for author in newest.author.all %}
+                 {% if not author in documenttitle.author.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% endif %}">
+                <div class="col-sm-4">
+                    Beteiligte Personen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.author.all %}
+                    {% for author in documenttitle.author.all %}
+                    {{ author }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            {% if documenttitle.start_year and documenttitle.end_year %}
+            <div class="row
+                 {% if newest %}
+                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
+                 has-changed
+                 {% endif %}
+                 {% endif %}">
+                <div class="col-sm-4">
+                    Datierung von
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.start_day %}
+                    {{ documenttitle.start_day }}.
+                    {% endif %}
+                    {% if documenttitle.start_month %}
+                    {{ documenttitle.get_start_month_display }}
+                    {% endif %}
+                    {{ documenttitle.start_year }}
+                </div>
+            </div>
+            <div class="row
+                 {% if newest %}
+                 {% if newest.end_year != documenttitle.end_year or newest.end_month != documenttitle.end_month or newest.end_day != documenttitle.end_day %}
+                 {% endif %}
+                 {% endif %}">
+                <div class="col-sm-4">
+                    bis
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.end_day %}
+                    {{ documenttitle.end_day }}.
+                    {% endif %}
+                    {% if documenttitle.end_month %}
+                    {{ documenttitle.get_end_month_display }}
+                    {% endif %}
+                    {{ documenttitle.end_year }}
+                </div>
+            </div>
+            {% elif documenttitle.start_year and not documenttitle.end_year %}
+            <div class="row
+                 {% if newest %}
+                 {% if newest.start_year != documenttitle.start_year or newest.start_month != documenttitle.start_month or newest.start_day != documenttitle.start_day %}
+                 has-changed
+                 {% endif %}
+                 {% endif %}">
+                <div class="col-sm-4">
+                    Datierung
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.start_day %}
+                    {{ documenttitle.start_day }}.
+                    {% endif %}
+                    {% if documenttitle.start_month %}
+                    {{ documenttitle.get_start_month_display }}
+                    {% endif %}
+                    {{ documenttitle.start_year }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="row {% if newest and newest.place_name != documenttitle.place_name %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Entstehungsort
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.place_name }}
+                </div>
+            </div>
+            <div class="row
+                 {% if newest %}
+                 {% for language in documenttitle.language.all %}
+                 {% if not language in newest.language.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% for language in newest.language.all %}
+                 {% if not language in documenttitle.language.all %}
+                 has-changed
+                 {% endif %}
+                 {% endfor %}
+                 {% endif %}">
+                <div class="col-sm-4">
+                    Sprachen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.language.all %}
+                    {% for language in documenttitle.language.all %}
+                    {{ language }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row {% if newest and newest.source_type != documenttitle.source_type %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Archivalienart
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.source_type.parent_type is not None %}
+                    {{documenttitle.source_type.parent_type}} - 
+                    {% endif %}
+                    {{ documenttitle.source_type }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentMenuscriptDescription">
+        <a class="card-link">Manuskriptbeschreibung</a>
+    </div>
+
+    <div id="DocumentMenuscriptDescription" class="collapse show">
+        <div class="card-body">
+            <div class="row {% if newest and newest.material != documenttitle.material %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Beschreibstoff
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.material %}
+                    {{ documenttitle.material|lower|capfirst }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row {% if newest %}{% if newest.measurements_length != documenttitle.measurements_length or newest.measurements_width != documenttitle.measurements_width %}has-changed{% endif %}{% endif %}">
+                <div class="col-sm-4">
+                    Abmessungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.measurements_length and documenttitle.measurements_width %}
+                    {{ documenttitle.measurements_length }} x {{ documenttitle.measurements_width }} cm
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row {% if newest %}{% if newest.pages != documenttitle.pages or newest.paging_system != documenttitle.paging_system %}has-changed{% endif %}{% endif %}">
+                <div class="col-sm-4">
+                    Umfang
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.pages and documenttitle.paging_system %}
+                    {{ documenttitle.pages }}
+                    {% if documenttitle.paging_system == "PAGINIERUNG" %}
+                    s.
+                    {% elif documenttitle.paging_system == "FOLIIERUNG" %}
+                    fol.
+                    {% endif %}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row {% if newest and newest.illuminated != documenttitle.illuminated %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Illuminiert
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.illuminated %}
+                    {{ documenttitle.illuminated|yesno }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row {% if newest and newest.seal != documenttitle.seal %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Siegel
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.seal %}
+                    {{ documenttitle.seal|yesno }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentComments">
+        <a class="card-link">Kommentare und Links</a>
+    </div>
+
+    <div id="DocumentComments" class="collapse show">
+        <div class="card-body">
+            <div class="row {% if newest and newest.comments != documenttitle.comments %}has-changed{% endif %}">
+                <div class="col-sm-4">
+                    Editorische und inhaltliche Anmerkungen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.comments %}
+                    {{ documenttitle.comments }}
+                    {% else %}
+                    Keine Angabe
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Hochgeladen
+                </div>
+                <div class="col-sm-8">
+                    {% if documenttitle.submitted_by_anonymous %}
+                    Anonym
+                    {% else %}
+                    Durch {{ documenttitle.submitted_by }}
+                    {% endif %}
+                    am {{ documenttitle.document_utc_add.date }}
+                    um {{ documenttitle.document_utc_add.time }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not newest or newest == documenttitle %}
+
+{% endif %}
+
+
+
+{% endblock content %}
+

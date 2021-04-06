@@ -1,0 +1,146 @@
+﻿{% extends "base.html" %}
+{% load static %}
+{% block dependencies %}
+<link rel="stylesheet" href="{% static 'upload/formvalidation.css' %}" />
+<script src="{% static 'upload/ckeditor5/build/ckeditor.js' %}"></script>
+
+<!-- Tooltipster Plugin -->
+<script src="{% static 'base/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/tooltipster.bundle.css' %}" />
+<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' %}" />
+{% endblock dependencies %}
+
+{% block content %}
+
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'institutionlist' %}">Institutionenliste</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">{{ documenttitle.title_name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Transkription bearbeiten</li>
+    </ol>
+</nav>
+
+<div>
+    <h2>{{ documenttitle.title_name }}</h2>
+</div>
+
+<div class="card">
+    <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
+        <a class="card-link">Übersicht</a>
+    </div>
+
+    <div id="DocumentOverview" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    Institution
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_institution }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Signatur
+                </div>
+                <div class="col-sm-8">
+                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="{% url 'edittranscript' documenttitle.parent_institution.institution_slug documenttitle.parent_refnumber.refnumber_slug documenttitle.document_slug  %}" method="post" id="editTranscriptForm" class="needs-validation" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="card">
+        <div class="card-header" data-toggle="collapse" href="#requiredFields">
+            <a class="card-link">
+                Pflichtfelder
+            </a>
+        </div>
+        <div id="requiredFields" class="collapse show">
+            <div class="card-body">
+                <div class="fieldWrapper form-group row">
+                    {{ form.commit_message.errors }}
+                    <div class="col-sm-3">
+                        <label for="{{ form.commit_message.id_for_label }}" class="control-label">
+                            {{ form.commit_message.label }}
+                        </label>
+                        <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_commit_message"></i>
+                    </div>
+                    <div class="col-sm-9">
+                        {{ form.commit_message }}
+                        <span class="error"></span>
+                    </div>
+                </div>
+                <div class="fieldWrapper form-group row">
+                    {{ form.transcription_scope.errors }}
+                    <div class="col-sm-3">
+                        <label for="{{ form.transcription_scope.id_for_label }}" class="control-label">
+                            {{ form.transcription_scope.label }}
+                        </label>
+                        <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_transcription_scope"></i>
+                    </div>
+                    <div class="col-sm-9">
+                        {{ form.transcription_scope }}
+                        <span class="error"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" data-toggle="collapse" href="#transcript">
+            <a class="card-link">
+                Transkription
+            </a>
+        </div>
+        <div id="transcript" class="collapse show">
+            <div class="card-body">
+                <div>
+                    <div class="fieldWrapper form-group row">
+                        {{ form.transcription_text.errors }}
+                        <div class="col-sm-3">
+                            <label for="{{ form.transcription_text.id_for_label }}" class="control-label">
+                                {{ form.transcription_text.label }}
+                            </label>
+                            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_transcription_text"></i>
+                        </div>
+                        <div class="col-sm-9">
+                            {{ form.transcription_text }}
+                            <span class="error"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="fieldWrapper form-check col-sm text-right" title="{{ form.submitted_by_anonymous.help_text }}">
+            <label for="{{ form.submitted_by_anonymous.id_for_label }}" class="form-check-label tooltipster" data-tooltip-content="#tt_anonymous">
+                {{ form.submitted_by_anonymous.label }}
+            </label>
+        </div>
+        <div class="col-sm text-left">
+            {{ form.submitted_by_anonymous }}
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary" id="submitButtonDocument">Absenden</button> <!-- Does this still work with a different value? -->
+</form>
+
+<div class="container" id="smallnote">
+    <p>
+        Die mit einem Stern markierten Felder sind Pflichtfelder.
+    </p>
+</div>
+
+{% include "upload/tooltips.html" %}
+
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'upload/edittranscriptscripts.js' %}"></script>
+{% endblock javascript %}
