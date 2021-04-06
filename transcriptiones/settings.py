@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Configuration for Authentication
 
-AUTH_USER_MODEL = 'transcripts.User'
+AUTH_USER_MODEL = 'main.User'
 LOGIN_REDIRECT_URL = 'start'
 LOGIN_URL = 'login'
 
