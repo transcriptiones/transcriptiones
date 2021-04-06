@@ -1,0 +1,45 @@
+<a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+</a>
+
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a class="js-scroll-trigger" href="{% url 'main:start' %}">Menu</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">Upload</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">Bestand</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="#">Suche</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:about' %}">Informationen</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:contact' %}">Kontakt</a>
+        </li>
+    </ul>
+    <ul class="sidebar-nav sidebar-profile">
+        {% if user.is_authenticated %}
+        <li class="sidebar-nav-item sidebar-profile-title">
+            Willkommen, {{ user.username }}
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:profile' %}">Mein Profil</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:login' %}">Login</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
