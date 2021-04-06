@@ -7,11 +7,10 @@ from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.utils import timezone
 
 from partial_date import PartialDateField
 from django_countries.fields import CountryField
-from i18n_model.models import I18nModel
+#TODO replace from i18n_model.models import I18nModel
 
 
 class Institution(models.Model):
@@ -157,12 +156,6 @@ class SourceType(models.Model):
 
     def __str__(self):
         return self.type_name
-
-
-class SourceTypeI18N(I18nModel):
-    class Meta:
-        source_model = SourceType
-        translation_fields = ('type_name', )
 
 
 class DocumentManager(models.Manager):
