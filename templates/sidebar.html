@@ -1,3 +1,5 @@
+{%  load i18n %}
+
 <a class="menu-toggle rounded" href="#">
     <i class="fas fa-bars"></i>
 </a>
@@ -5,39 +7,41 @@
 <nav id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a class="js-scroll-trigger" href="{% url 'main:start' %}">Menu</a>
+            <a class="js-scroll-trigger" href="{% url 'main:start' %}">{% trans 'Menu' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">Upload</a>
+            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">{% trans 'Upload' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">Bestand</a>
+            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">{% trans 'Browse' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#">Suche</a>
+            <a class="js-scroll-trigger" href="#">{% trans 'Search' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:about' %}">Informationen</a>
+            <a class="js-scroll-trigger" href="{% url 'main:about' %}">{% trans 'About' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:contact' %}">Kontakt</a>
+            <a class="js-scroll-trigger" href="{% url 'main:contact' %}">{% trans 'Contact' %}</a>
         </li>
     </ul>
     <ul class="sidebar-nav sidebar-profile">
         {% if user.is_authenticated %}
-        <li class="sidebar-nav-item sidebar-profile-title">
-            Willkommen, {{ user.username }}
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:profile' %}">Mein Profil</a>
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:logout' %}">Logout</a>
-        </li>
+            <li class="sidebar-nav-item sidebar-profile-title">
+                {% blocktrans with username=user.username %}
+                  Welcome, {{ username }}
+                {% endblocktrans %}
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% trans 'My Profile' %}</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="{% url 'main:logout' %}">{% trans 'Logout' %}</a>
+            </li>
         {% else %}
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:login' %}">Login</a>
-        </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="{% url 'main:login' %}">{% trans 'Login' %}</a>
+            </li>
         {% endif %}
     </ul>
 </nav>
