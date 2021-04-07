@@ -24,7 +24,7 @@ class Institution(models.Model):
 
     street = models.CharField(verbose_name=_("street"),
                               max_length=80,
-                              help_text=_("Street"))
+                              help_text=_("Street with number"))
 
     zip_code = models.IntegerField(verbose_name=_("zip code"),
                                    help_text=_("Zip code"))

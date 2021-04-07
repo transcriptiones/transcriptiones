@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'main.apps.MainConfig',
     'django_static_fontawesome',
+    'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -103,6 +104,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Configuration for country selection
+COUNTRIES_FIRST = ['CH', 'DE', 'FR']
+COUNTRIES_FIRST_REPEAT = True
+COUNTRIES_FIRST_BREAK = _('--- (Select Country) ---')
 
 # Configuration for Authentication
 
