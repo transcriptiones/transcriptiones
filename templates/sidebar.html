@@ -7,40 +7,40 @@
 <nav id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a class="js-scroll-trigger" href="{% url 'main:start' %}">{% trans 'Menu' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:start' %}">{% translate 'Menu' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">{% trans 'Upload' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">{% translate 'Upload' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">{% trans 'Browse' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#">{% trans 'Search' %}</a>
+            <a class="js-scroll-trigger" href="#">{% translate 'Search' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:about' %}">{% trans 'About' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:about' %}">{% translate 'About' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:contact' %}">{% trans 'Contact' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:contact' %}">{% translate 'Contact' %}</a>
         </li>
     </ul>
     <ul class="sidebar-nav sidebar-profile">
         {% if user.is_authenticated %}
             <li class="sidebar-nav-item sidebar-profile-title">
-                {% blocktrans with username=user.username %}
+                {% blocktranslate with username=user.username %}
                   Welcome, {{ username }}
-                {% endblocktrans %}
+                {% endblocktranslate %}
             </li>
             <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% trans 'My Profile' %}</a>
+                <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% translate 'My Profile' %}</a>
             </li>
             <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="{% url 'main:logout' %}">{% trans 'Logout' %}</a>
+                <a class="js-scroll-trigger" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
             </li>
         {% else %}
             <li class="sidebar-nav-item">
-                <a class="js-scroll-trigger" href="{% url 'main:login' %}">{% trans 'Login' %}</a>
+                <a class="js-scroll-trigger" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
             </li>
         {% endif %}
     </ul>

@@ -50,19 +50,19 @@
                     <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
                 </li>
                 <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:upload_document' %}">{% trans 'Upload' %}</a>
+                    <a class="nav-link text-navbar" href="{% url 'main:upload_document' %}">{% translate 'Upload' %}</a>
                 </li>
                 <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:institution_list' %}">{% trans 'Browse' %}</a>
+                    <a class="nav-link text-navbar" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
                 </li>
                 <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% trans 'Search' %}</a>
+                    <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
                 </li>
                 <li class="navbar-nav-item d-none d-sm-block">
                     {% if user.is_authenticated %}
-                        <a class="nav-link text-navbar" href="{% url 'main:logout' %}">{% trans 'Logout' %}</a>
+                        <a class="nav-link text-navbar" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
                     {% else %}
-                        <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% trans 'Login' %}</a>
+                        <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
                     {% endif %}
                 </li>
             </ul>
