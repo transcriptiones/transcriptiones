@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import views
+from . import views
 
 app_name = 'main'
 urlpatterns = [
@@ -16,8 +16,7 @@ urlpatterns = [
     path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
 
     # urls for display views
-    #### path('display/institutions/', InstitutionListView.as_view(), name='institutionlist'),
-    path('display/institutions/', TemplateView.as_view(template_name='main/dummy.html'), name='institution_list'),
+    path('display/institutions/', views.InstitutionListView.as_view(), name='institution_list'),
     #### path('display/<slug:instslug>/', InstitutionDetailView.as_view(), name='institutiondetail'),
     #### path('display/<slug:instslug>/<slug:refslug>/', RefNumberDetailView.as_view(), name='refnumberdetail'),
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/', DocumentTitleDetailView.as_view(), name='documenttitledetail'),
