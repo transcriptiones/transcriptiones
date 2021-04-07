@@ -1,11 +1,152 @@
 ﻿{% extends 'base.html' %}
 {% load transcriptiones %}
 {% load i18n %}
+{% load static %}
 
 {% block page_title %}
-
 {% endblock %}
 
-{% block content %}
+{% block custom_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+{% endblock %}
 
+{% block base_content %}
+    <!-- Header -->
+    <header class="masthead d-flex">
+        <div class="container text-center my-auto">
+            <h1 class="mb-1 text-white">TRANSCRIPTIONES</h1>
+            <h3 class="mb-5 text-white">
+                {% translate 'The place to transcript historical manuscripts' %}
+            </h3>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">{% translate 'More' %}</a>
+        </div>
+        <div class="overlay"></div>
+    </header>
+
+    <!-- About -->
+    <section class="content-section bg-light" id="about">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2>{% translate 'You created transcripts and want to share them? You are looking for already transcribed material? Welcome!' %}</h2>
+                    {% comment %} Translators: Main Page introductory text. {% endcomment %}
+                    <p class="lead mb-5">{% translate 'WhatIsTranscriptiones-Text' %} </p>
+                    <a class="btn btn-dark btn-xl js-scroll-trigger" href="#procedure">{% translate 'How it works' %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Procedure -->
+    <section class="content-section bg-primary text-white text-center" id="procedure">
+        <div class="container">
+            <div class="content-section-heading">
+                <h2 class="mb-5">{% translate 'How it works' %}</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a href="{% url 'main:upload_document' %}">
+                            <i class="fas fa-arrow-up"></i>
+                        </a>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'Upload' %}</strong>
+                    </h4>
+                    {% comment %} Translators: Main Page text about upload procedure. {% endcomment %}
+                    <p class="mb-0">{% translate 'HowItWorksUpload-Text' %}</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <a href="{% url 'main:search' %}">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'Search' %}</strong>
+                    </h4>
+                    {% comment %} Translators: Main Page text about search functions. {% endcomment %}
+                    <p class="mb-0">{% translate 'HowItWorksSearch-Text' %}</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
+                    <span class="service-icon rounded-circle mx-auto mb-3">
+                        <i class="fas fa-check-double"></i>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'Edit' %}</strong>
+                    </h4>
+                    {% comment %} Translators: Main Page text about edit/correct functions. {% endcomment %}
+                    <p class="mb-0">{% translate 'HowItWorksEdit-Text' %}</p>
+                </div>
+            </div>
+            <div class="col-lg-10 mx-auto">
+                <a class="btn btn-dark btn-xl js-scroll-trigger" href="#portfolio">{% translate 'Additional information' %}</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="content-section" id="portfolio">
+        <div class="container">
+            <div class="content-section-heading text-center">
+                <h2 class="mb-5">{% translate 'Additional Information' %}</h2>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="{% url 'main:guidelines' %}">
+                        <span class="caption">
+                            <span class="caption-content">
+                                <h2>
+                                    {% comment %}Translators: This message gets capitalized.{% endcomment %}
+                                    {% translate 'Transcript Guidelines' %}
+                                </h2>
+                            </span>
+                        </span>
+                        <img class="img-fluid" src="{% static 'main/images/portfolio-1.jpg' %}" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="{% url 'main:profile' %}">
+                        <span class="caption">
+                            <span class="caption-content">
+                                <h2>
+                                    {% comment %}Translators: This message gets capitalized.{% endcomment %}
+                                    {% translate 'User Account' %}
+                                </h2>
+                            </span>
+                        </span>
+                        <img class="img-fluid" src="{% static 'main/images/portfolio-2.jpg' %}" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="{% url 'main:tos' %}">
+                        <span class="caption">
+                            <span class="caption-content">
+                                <h2>
+                                    {% comment %}Translators: This message gets capitalized.{% endcomment %}
+                                    {% translate 'Terms of usage' %}
+                                </h2>
+                            </span>
+                        </span>
+                        <img class="img-fluid" src="{% static 'main/images/portfolio-3.jpg' %}" alt="">
+                    </a>
+                </div>
+
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="{% url 'main:about_us' %}">
+                        <span class="caption">
+                            <span class="caption-content">
+                                <h2>
+                                    {% comment %}Translators: This message gets capitalized.{% endcomment %}
+                                    {% translate 'About us' %}
+                                </h2>
+                            </span>
+                        </span>
+                        <img class="img-fluid" src="{% static 'main/images/portfolio-4.jpg' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

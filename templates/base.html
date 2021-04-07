@@ -37,8 +37,11 @@
         <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+
+        {%  block custom_css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+        {% endblock %}
 
         {% block additional_head_tags %}
         {% endblock additional_head_tags %}
@@ -75,27 +78,29 @@
         {% include "sidebar.html" %}
 
         <!-- Content -->
-        <section class="content-section bg-white">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-sm-10 mx-auto">
-                        {%  block breadcrumb %}
-                            <!-- nav breadcrumb if needed -->
-                        {% endblock %}
-                        <div class="content-section-heading">
-                            <h2 class="mb-5">
-                                {% block page_title %}
-                                    Implement block "page_title"
-                                {% endblock %}
-                            </h2>
-                            {% block content %}
-                                <p class="lead mb-5">Implement block "content"</p>
+        {% block base_content %}
+            <section class="content-section bg-white">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-sm-10 mx-auto">
+                            {%  block breadcrumb %}
+                                <!-- nav breadcrumb if needed -->
                             {% endblock %}
+                            <div class="content-section-heading">
+                                <h2 class="mb-5">
+                                    {% block page_title %}
+                                        Implement block "page_title"
+                                    {% endblock %}
+                                </h2>
+                                {% block content %}
+                                    <p class="lead mb-5">Implement block "content"</p>
+                                {% endblock %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        {% endblock %}
 
 
     <!-- Footer -->
