@@ -53,7 +53,7 @@ class Institution(models.Model):
 
     def get_absolute_url(self):
         # TODO
-        return reverse('institution_detail', kwargs={'instslug': self.institution_slug})
+        return reverse('main:institution_detail', kwargs={'inst_slug': self.institution_slug})
 
 
 class RefNumber(models.Model):
@@ -96,7 +96,7 @@ class RefNumber(models.Model):
 
     def get_absolute_url(self):
         return reverse('ref_number_detail',     # TODO
-                       kwargs={'instslug': self.holding_institution.institution_slug, 'refslug': self.refnumber_slug})
+                       kwargs={'inst_slug': self.holding_institution.institution_slug, 'refslug': self.refnumber_slug})
 
 
 class Author(models.Model):
@@ -323,20 +323,20 @@ class Document(models.Model):
         return self.title_name
 
     def get_absolute_url(self):
-        return reverse('documenttitledetail',
+        return reverse('document_title_detail',
                        kwargs={
-                           'instslug': self.parent_institution.institution_slug,
-                           'refslug': self.parent_refnumber.refnumber_slug,
-                           'docslug': self.document_slug
+                           'inst_slug': self.parent_institution.institution_slug,
+                           'ref_slug': self.parent_refnumber.refnumber_slug,
+                           'doc_slug': self.document_slug
                        })
 
     def get_absolute_version_url(self):
-        return reverse('documenttitlelegacydetail',
+        return reverse('document_title_legacy_detail',
                        kwargs={
-                           'instslug': self.parent_institution.institution_slug,
-                           'refslug': self.parent_refnumber.refnumber_slug,
-                           'docslug': self.document_slug,
-                           'versionnr': self.version_number
+                           'inst_slug': self.parent_institution.institution_slug,
+                           'ref_slug': self.parent_refnumber.refnumber_slug,
+                           'doc_slug': self.document_slug,
+                           'version_nr': self.version_number
                        })
 
     # model method to return queryset of all versions with the same document_id
