@@ -17,36 +17,36 @@ class Institution(models.Model):
     """An institution is a physical location which holds documents. These documents have a reference number.
     Reference numbers are always associated with an institution."""
 
-    institution_name = models.CharField(verbose_name=_("institution"),
+    institution_name = models.CharField(verbose_name=_("Institution"),
                                         max_length=80,
                                         unique=True,
                                         help_text=_("Complete name of the institution"))
 
-    street = models.CharField(verbose_name=_("street"),
+    street = models.CharField(verbose_name=_("Street"),
                               max_length=80,
                               help_text=_("Street with number"))
 
-    zip_code = models.IntegerField(verbose_name=_("zip code"),
+    zip_code = models.IntegerField(verbose_name=_("Zip code"),
                                    help_text=_("Zip code"))
 
-    city = models.CharField(verbose_name=_("city"),
+    city = models.CharField(verbose_name=_("City"),
                             max_length=100,
                             help_text=_("City"))
 
-    country = CountryField(verbose_name=_("country"),
+    country = CountryField(verbose_name=_("Country"),
                            help_text=_("Country"))
 
-    site_url = models.URLField(verbose_name=_("website"),
+    site_url = models.URLField(verbose_name=_("Web site"),
                                max_length=200,
                                blank=True,
-                               help_text=_("URL of the Website"))
+                               help_text=_("URL of the web site"))
 
     institution_utc_add = models.DateTimeField(auto_now_add=True)
     institution_slug = models.SlugField(unique=True)
 
     class Meta:
-        verbose_name = _("institution")
-        verbose_name_plural = _("institutions")
+        verbose_name = _("Institution")
+        verbose_name_plural = _("Institutions")
 
     def __str__(self):
         return self.institution_name

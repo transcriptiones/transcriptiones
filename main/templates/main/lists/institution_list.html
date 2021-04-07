@@ -23,9 +23,11 @@
                 <a href="{{ institution.get_absolute_url }}" class="row display-list-element">
                     <div class="col-sm-6 text-left">{{ institution.institution_name }}</div>
                     <div class="col-sm-3 text-right font-weight-normal">
+                        <!-- TODO translate -->
                         {{ institution.documents.count }} Dokument{% if institution.documents.count != 1 %}e{% endif %}
                     </div>
                     <div class="col-sm-3 text-right font-weight-normal">  
+                        <!-- TODO translate -->
                         {{ institution.refnumbers.count }} Signatur{% if institution.refnumbers.count != 1 %}en{% endif %}
                     </div>
                 </a>

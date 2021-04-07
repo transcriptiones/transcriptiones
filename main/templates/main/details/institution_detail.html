@@ -1,89 +1,95 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load transcriptiones %}
+
+{% block page_title %}
+    {{ institution.institution_name }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">{% translate 'Institutions list' %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ institution.institution_name }}</li>
+        </ol>
+    </nav>
+{% endblock %}
 
 {% block content %}
 
-<nav>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'institution_list' %}">Institutionenliste</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ institution.institution_name }}</li>
-    </ol>
-</nav>
-<div>
-    <h2>{{ institution.institution_name }}</h2>
-</div>
-
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#InstitutionDetails">
-        <a class="card-link">Informationen zur Institution</a>
-    </div>
-    <div id="InstitutionDetails" class="collapse show">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-4">
-                    Adresse
+    <div class="card">
+        <div class="card-header" data-toggle="collapse" href="#InstitutionDetails">
+            <a class="card-link">{% translate 'About the institution' %}</a>
+        </div>
+        <div id="InstitutionDetails" class="collapse show">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        {% get_verbose_name institution 'street' %}
+                    </div>
+                    <div class="col-sm-8">
+                        {{ institution.street }}
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    {{ institution.street }}
+                <div class="row">
+                    <div class="col-sm-4">
+                        {% get_verbose_name institution 'zip_code' %} / {% get_verbose_name institution 'city' %}
+                    </div>
+                    <div class="col-sm-8">
+                        {{ institution.zip_code }} / {{ institution.city }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    PLZ / Ort
+                <div class="row">
+                    <div class="col-sm-4">
+                        {% get_verbose_name institution 'country' %}
+                    </div>
+                    <div class="col-sm-8">
+                        <i class="{{ institution.country.flag_css }}"></i> {{ institution.country.name  }}
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    {{ institution.zip_code }} / {{ institution.city }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    Land
-                </div>
-                <div class="col-sm-8">
-                    {{ institution.country }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    Website
-                </div>
-                <div class="col-sm-8">
-                    <a href="{{ institution.site_url }}" target="_blank">{{ institution.institution_name }}</a>
+                <div class="row">
+                    <div class="col-sm-4">
+                        {% get_verbose_name institution 'site_url' %}
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{{ institution.site_url }}" target="_blank">{{ institution.institution_name }}</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
-        <a class="card-link">Signaturen</a>
-    </div>
+    <div class="card">
+        <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
+            <a class="card-link">{% translate 'Reference numbers' %}</a>
+        </div>
 
-    <div id="differentRefNumbers" class="collapse show">
-        <div class="card-body">
-            {% if institution.refnumbers.all %}
-            {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
-            <a href="{{ refnumber.get_absolute_url }}" class="row display-list-element">
-                <div class="col-sm-5 text-left">{{ refnumber.refnumber_name }}</div>
-                <div class="col-sm-5 text-left">
-                    {% if refnumber.refnumber_title %}
-                    {{ refnumber.refnumber_title }}
-                    {% else %}
-                    Ohne Titel
-                    {% endif %}
-                </div>
-                <div class="col-sm-2 text-left">
-                    {{ refnumber.documents.count }} Dokument{% if refnumber.documents.count != 1 %}e{% endif %}
-                </div>
-            </a>
-            {% endfor %}
-            {% else %}
-            <div class="row">
-                <div class="col-sm text-left">Dieser Institution sind noch keine Signaturen zugeordnet</div>
+        <div id="differentRefNumbers" class="collapse show">
+            <div class="card-body">
+                {% if institution.refnumbers.all %}
+                    {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
+                        <a href="{{ refnumber.get_absolute_url }}" class="row display-list-element">
+                            <div class="col-sm-5 text-left">{{ refnumber.refnumber_name }}</div>
+                            <div class="col-sm-5 text-left">
+                                {% if refnumber.refnumber_title %}
+                                    {{ refnumber.refnumber_title }}
+                                {% else %}
+                                    {% translate 'No title' %}
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-2 text-left">
+                                <!-- TODO translate -->
+                                {{ refnumber.documents.count }} Dokument{% if refnumber.documents.count != 1 %}e{% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="row">
+                        <div class="col-sm text-left">{% translate 'This institution has no reference numbers yet' %}</div>
+                    </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
-</div>
 
 {% endblock content %}
