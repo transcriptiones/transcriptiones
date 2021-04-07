@@ -151,8 +151,8 @@ class SourceType(models.Model):
                                     related_name="child_type",)
 
     class Meta:
-        verbose_name = "archivalienart"
-        verbose_name_plural = "archivalienarten"
+        verbose_name = _("Source type")
+        verbose_name_plural = _("Source types")
 
     def __str__(self):
         return self.type_name
@@ -309,8 +309,8 @@ class Document(models.Model):
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
 
     class Meta:
-        verbose_name = "dokument"
-        verbose_name_plural = "dokumente"
+        verbose_name = _("document")
+        verbose_name_plural = _("documents")
         default_manager_name = "objects"
         get_latest_by = "document_utc_add"
         constraints = [
