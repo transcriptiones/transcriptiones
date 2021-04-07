@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Configuration for country selection
-COUNTRIES_FIRST = ['CH', 'DE', 'FR']
+COUNTRIES_FIRST = ['CH', 'DE', 'FR', 'IT']
 COUNTRIES_FIRST_REPEAT = True
 COUNTRIES_FIRST_BREAK = _('--- (Select Country) ---')
 
@@ -123,6 +123,7 @@ LANGUAGES = (
     ('en-us', _('English')),
     ('de', _('German')),
     ('fr', _('French')),
+    ('it', _('Italian')),
 )
 
 TIME_ZONE = 'Europe/Zurich'
