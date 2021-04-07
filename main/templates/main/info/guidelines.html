@@ -1,39 +1,17 @@
 {% extends 'base.html' %}
+{% load transcriptiones %}
+{% load i18n %}
+
+{% block page_title %}
+    {% translate 'Guidelines' %}
+{% endblock %}
 
 {% block content %}
 
-<div>
-    <h2>Transkriptionsrichtlinien</h2>
-</div>
+    {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
+    {% text_card _("General GL") _("General Guidelines Text Message") %}
 
-<div class="card mt-5">
-    <div class="card-header" data-toggle="collapse" href="#card1">
-        <a class="card-link">Allgemeines</a>
-    </div>
-    <div id="card1" class="collapse show">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm text-left">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </div>
-            </div> 
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#card2">
-        <a class="card-link">Einzelnes</a>
-    </div>
-    <div id="card2" class="collapse show">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm text-left">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+    {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
+    {% text_card _("Specific GL") _("Specific Guidelines Text Message") %}
 
 {% endblock %}
