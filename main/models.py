@@ -52,7 +52,6 @@ class Institution(models.Model):
         return self.institution_name
 
     def get_absolute_url(self):
-        # TODO
         return reverse('main:institution_detail', kwargs={'inst_slug': self.institution_slug})
 
 
@@ -95,8 +94,8 @@ class RefNumber(models.Model):
         return self.ref_number_name
 
     def get_absolute_url(self):
-        return reverse('ref_number_detail',     # TODO
-                       kwargs={'inst_slug': self.holding_institution.institution_slug, 'refslug': self.refnumber_slug})
+        return reverse('main:ref_number_detail',
+                       kwargs={'inst_slug': self.holding_institution.institution_slug, 'ref_slug': self.ref_number_slug})
 
 
 class Author(models.Model):
