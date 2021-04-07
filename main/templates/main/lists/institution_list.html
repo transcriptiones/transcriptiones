@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-sm-3 text-right font-weight-normal">  
                         <!-- TODO translate -->
-                        {{ institution.refnumbers.count }} Signatur{% if institution.refnumbers.count != 1 %}en{% endif %}
+                        {{ institution.ref_numbers.count }} Signatur{% if institution.ref_numbers.count != 1 %}en{% endif %}
                     </div>
                 </a>
             {% endfor %}

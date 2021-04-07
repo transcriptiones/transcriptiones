@@ -66,20 +66,20 @@
 
         <div id="differentRefNumbers" class="collapse show">
             <div class="card-body">
-                {% if institution.refnumbers.all %}
-                    {% for refnumber in institution.refnumbers.all|dictsort:"refnumber_name" %}
-                        <a href="{{ refnumber.get_absolute_url }}" class="row display-list-element">
-                            <div class="col-sm-5 text-left">{{ refnumber.refnumber_name }}</div>
+                {% if institution.ref_numbers.all %}
+                    {% for ref_number in institution.ref_numbers.all|dictsort:"ref_number_name" %}
+                        <a href="{{ ref_number.get_absolute_url }}" class="row display-list-element">
+                            <div class="col-sm-5 text-left">{{ ref_number.ref_number_name }}</div>
                             <div class="col-sm-5 text-left">
-                                {% if refnumber.refnumber_title %}
-                                    {{ refnumber.refnumber_title }}
+                                {% if ref_number.ref_number_title %}
+                                    {{ ref_number.ref_number_title }}
                                 {% else %}
                                     {% translate 'No title' %}
                                 {% endif %}
                             </div>
                             <div class="col-sm-2 text-left">
                                 <!-- TODO translate -->
-                                {{ refnumber.documents.count }} Dokument{% if refnumber.documents.count != 1 %}e{% endif %}
+                                {{ ref_number.documents.count }} Dokument{% if ref_number.documents.count != 1 %}e{% endif %}
                             </div>
                         </a>
                     {% endfor %}
