@@ -116,6 +116,7 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = (
     ('en-us', _('English')),
     ('de', _('German')),
+    ('fr', _('French')),
 )
 
 TIME_ZONE = 'Europe/Zurich'

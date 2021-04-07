@@ -8,8 +8,6 @@
 
 ## Sphinx generated doc
 docs/_build/
-docs/_static/
-docs/_templates/
 
 # Root Static folder (gets generated)
 static/

@@ -5,15 +5,15 @@ from .views import views, infoviews
 
 app_name = 'main'
 urlpatterns = [
-    path('tests/i18n', views.test, name='test'),
+    path('test/', views.test, name='test'),
 
     # urls for info views
     path('', infoviews.StartView.as_view(), name='start'),
-    path('info/guidelines/', TemplateView.as_view(template_name='info/guidelines.html'), name='guidelines'),
-    path('info/tos/',        TemplateView.as_view(template_name='info/tos.html'),        name='tos'),
-    path('info/about/',      TemplateView.as_view(template_name='info/about.html'),      name='about'),
-    path('info/aboutus/',    TemplateView.as_view(template_name='info/aboutus.html'),    name='aboutus'),
-    path('info/contact/',    TemplateView.as_view(template_name='info/contact.html'),    name='contact'),
+    path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
+    path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
+    path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
+    path('info/aboutus/',    TemplateView.as_view(template_name='main/info/about_us.html'),   name='about_us'),
+    path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
 
     # urls for display views
     #### path('display/institutions/', InstitutionListView.as_view(), name='institutionlist'),
@@ -31,8 +31,8 @@ urlpatterns = [
     #### path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
     #### path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),
     #### path('upload/thanks/', thanks_view, name='thanks'),
-    #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='editmeta'),
-    #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edittranscript'),
+    #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
+    #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),
     #### path('upload/batch/', batchupload, name='batchupload'),
 
     # urls for search views
