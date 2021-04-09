@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'django_static_fontawesome',
     'django_countries',
+    'languages_plus',
+    'countries_plus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,3 +145,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # print emails to console for development purposes.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = "dominic.weber@librarylab.ethz.ch"     # Change this as soon as we have a domain
+
+# AUTO FIELD
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
