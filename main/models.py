@@ -300,7 +300,7 @@ class Document(models.Model):
         return self.title_name
 
     def get_absolute_url(self):
-        return reverse('document_title_detail',
+        return reverse('main:document_detail',
                        kwargs={
                            'inst_slug': self.parent_institution.institution_slug,
                            'ref_slug': self.parent_ref_number.ref_number_slug,
@@ -308,7 +308,7 @@ class Document(models.Model):
                        })
 
     def get_absolute_version_url(self):
-        return reverse('document_title_legacy_detail',
+        return reverse('main:document_legacy_detail',
                        kwargs={
                            'inst_slug': self.parent_institution.institution_slug,
                            'ref_slug': self.parent_ref_number.ref_number_slug,

@@ -19,7 +19,9 @@ urlpatterns = [
     path('display/institutions/', views.InstitutionListView.as_view(), name='institution_list'),
     path('display/<slug:inst_slug>/', views.InstitutionDetailView.as_view(), name='institution_detail'),
     path('display/<slug:inst_slug>/<slug:ref_slug>/', views.RefNumberDetailView.as_view(), name='ref_number_detail'),
-    #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/', DocumentTitleDetailView.as_view(), name='documenttitledetail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', views.DocumentDetailView.as_view(),
+         name='document_detail'),
+
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/<int:versionnr>/', DocumentTitleDetailView.as_view(), name='documenttitlelegacydetail'),
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/history/', DocumentHistoryView.as_view(), name='documenthistory'),
 
