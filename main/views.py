@@ -24,13 +24,13 @@ class InstitutionDetailView(DetailView):
 class RefNumberDetailView(DetailView):
     """View to show details of institutions and list all reference numbers of this institution"""
     model = RefNumber
-    template_name = "display/refnumberdetail.html"
+    template_name = "main/details/ref_number_detail.html"
 
     def get_object(self):
         institution = self.kwargs.get('inst_slug')
         ref_number = self.kwargs.get('ref_slug')
         queryset = RefNumber.objects.filter(holding_institution__institution_slug=institution)
-        return get_object_or_404(queryset, refnumber_slug=ref_number)
+        return get_object_or_404(queryset, ref_number_slug=ref_number)
 
 
 def test(request):

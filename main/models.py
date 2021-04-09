@@ -10,6 +10,8 @@ from django.contrib.auth.models import PermissionsMixin
 
 from partial_date import PartialDateField
 from django_countries.fields import CountryField
+from languages_plus.models import Language
+
 #TODO replace from i18n_model.models import I18nModel
 
 
@@ -60,21 +62,21 @@ class RefNumber(models.Model):
     documents with multiple pages."""
 
     holding_institution = models.ForeignKey(Institution,
-                                            verbose_name=_("institution"),
+                                            verbose_name=_("Institution"),
                                             on_delete=models.PROTECT,
                                             related_name="ref_numbers",  # TODO
                                             help_text=_("Institution associated with this reference number"))
 
-    ref_number_name = models.CharField(verbose_name=_("reference number"),
+    ref_number_name = models.CharField(verbose_name=_("Reference number"),
                                        max_length=100,
                                        help_text=_("reference number of the collection containing a document"))
 
-    ref_number_title = models.CharField(verbose_name=_("title"),
+    ref_number_title = models.CharField(verbose_name=_("Title"),
                                         max_length=150,
                                         blank=True,
                                         help_text=_("Title of the collection"))
 
-    collection_link = models.URLField(verbose_name=_("static URL"),
+    collection_link = models.URLField(verbose_name=_("Static URL"),
                                       max_length=200,
                                       blank=True,
                                       help_text=_("Link to the collection"))
@@ -117,24 +119,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.author_name
-
-
-class SourceLanguage(models.Model):
-    """Documents are written in certain languages. This table contains these languages with their ISO 639-3 Codes.
-    TODO: Remove this model
-    """
-    language_name = models.CharField(verbose_name=_("Language"),
-                                     max_length=50)
-
-    language_code = models.CharField(verbose_name=_("ISO 639-3 code"),
-                                     max_length=3)
-
-    class Meta:
-        verbose_name = _("Language")
-        verbose_name_plural = _("Languages")
-
-    def __str__(self):
-        return self.language_name
 
 
 class SourceType(models.Model):
@@ -188,107 +172,101 @@ class Document(models.Model):
                                   help_text=_("Title of the Document"))
 
     parent_institution = models.ForeignKey(Institution,
-                                           verbose_name="institution",
+                                           verbose_name="Institution",
                                            related_name="documents",
                                            on_delete=models.PROTECT,
                                            help_text="Institution, welche die Quelle aufbewahrt")
 
-    parent_refnumber = models.ForeignKey(RefNumber,
-                                         verbose_name="signatur",
-                                         related_name="documents",
-                                         on_delete=models.PROTECT,
-                                         help_text="Signatur der Quelle")
+    parent_ref_number = models.ForeignKey(RefNumber,
+                                          verbose_name=_("Reference Number"),
+                                          on_delete=models.PROTECT,
+                                          related_name="documents", # TODO what is this?
+                                          help_text="Signatur der Quelle")
 
     author = models.ManyToManyField(Author,
-                                    verbose_name="beteiligte Personen",
+                                    verbose_name=_("Source Participants"),
                                     blank=True,
-                                    help_text="Autor*innen, Kopist*innen, Editor*innen",
-                                    related_name="works",)
+                                    related_name="works",   # TODO what is this?
+                                    help_text=_("Authors, Copiers, Editors"))
 
     doc_start_date = PartialDateField(verbose_name=_("Creation period start"),)
 
     doc_end_date = PartialDateField(verbose_name=_("Creation period end"),
                                     blank=True)
 
-    place_name = models.CharField(verbose_name="entstehungsort",
+    place_name = models.CharField(verbose_name=_("Creation Location"),
                                   max_length=150,
                                   blank=False,
-                                  help_text="Entstehungsort der Quelle")
+                                  help_text=_("The City/Place where the source was created."))
 
-    language = models.ManyToManyField(SourceLanguage,
-                                      verbose_name="sprachen",
+    """
+    language = models.ManyToManyField(Language,
+                                      verbose_name=_("Languages"),
                                       blank=True,
-                                      help_text="In der Quelle verwendete Sprachen")
-
+                                      help_text=_("Languages used in the source"))
+    """
     source_type = models.ForeignKey(SourceType,
-                                    verbose_name="archivalienart",
+                                    verbose_name=_("Source Type"),
                                     on_delete=models.PROTECT,
                                     blank=False,
                                     null=False,
-                                    help_text="Archivalienart/Quellengattung")
+                                    help_text=_("Type of the source"))
 
-    material = models.CharField(verbose_name="beschreibstoff",
+    material = models.CharField(verbose_name=_("Writing material"),
                                 max_length=15,
                                 blank=True,
                                 choices=MaterialType.choices,
-                                help_text="Beschreibstoff")
+                                help_text=_("Is the manuscript on paper, papyrus or parchment?"))
 
-    measurements_length = models.DecimalField(verbose_name="länge",
+    measurements_length = models.DecimalField(verbose_name=_("Height"),
                                               max_digits=5,
                                               decimal_places=1,
                                               blank=True,
                                               null=True,
-                                              help_text="Länge in cm")
+                                              help_text=_("Height in centimeters (cm)"))
 
-    measurements_width = models.DecimalField(verbose_name="breite",
+    measurements_width = models.DecimalField(verbose_name=_("Width"),
                                              max_digits=5,
                                              decimal_places=1,
                                              blank=True,
                                              null=True,
-                                             help_text="Breite in cm")
+                                             help_text=_("Width in centimeters (cm)"))
 
-    pages = models.PositiveSmallIntegerField(verbose_name="anzahl Seiten",
+    pages = models.PositiveSmallIntegerField(verbose_name=_("Number of pages"),
                                              blank=True,
                                              null=True,
-                                             help_text="Umfang der Quelle")
+                                             help_text=_("The number of pages of the whole source"))
 
-    paging_system = models.CharField(verbose_name="paginierung",
+    paging_system = models.CharField(verbose_name=_("Pagination"),
                                      max_length=15,
                                      blank=True,
                                      choices=PaginationType.choices,
-                                     help_text="Paginierungssystem")
+                                     help_text=_("How are the pages numbered?"))
 
-    illuminated = models.BooleanField(null=True,
-                                      verbose_name="illuminiert",
-                                      help_text="Ist die Quelle illuminiert?")
-
-    transcription_scope = models.TextField(verbose_name="transkribierte Teile des Dokuments",
+    transcription_scope = models.TextField(verbose_name=_("transkribierte Teile des Dokuments"),
                                            help_text="Liste der transkribierten Abschnitte/Seiten/Kapitel")
 
-    comments = models.TextField(blank=True,
-                                verbose_name="editorische und inhaltliche Anmerkungen",
-                                help_text="Platz für editorische und inhaltliche Anmerkungen")
+    comments = models.TextField(verbose_name=_("Editorial comments"),
+                                blank=True,
+                                help_text=_("Add editorial comments or remarks on the contents of the document."))
 
-    transcription_text = models.TextField(verbose_name="transkription",
-                                          help_text="Transkription")
+    transcription_text = models.TextField(verbose_name=_("Transcript"),
+                                          help_text=_("Formatted text of your transcript."))
 
-    document_utc_add = models.DateTimeField(verbose_name=_("upload date"),
+    document_utc_add = models.DateTimeField(verbose_name=_("Upload date"),
                                             auto_now_add=True)
 
-    # TODO i dont get it
-    User = settings.AUTH_USER_MODEL
 
     submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                     verbose_name="eingereicht durch",
-                                     on_delete=models.PROTECT,  # Users are not supposed to be delible
+                                     verbose_name=_("Submitted by"),
+                                     on_delete=models.PROTECT,  # Users are not supposed to be deletable
                                      related_name="contributions",
-                                     help_text="Benutzer*in, die/der diese Transkription eingereicht hat",
+                                     help_text=_("Uploading user"),
                                      editable=False)
 
-    submitted_by_anonymous = models.BooleanField(verbose_name=_("Anonymous"),
-                                                 default=False,
-                                                 help_text=_("Select this, if you want to publish this "
-                                                             "document anonymously"))
+    publish_user = models.BooleanField(verbose_name=_("Publish anonymous"),
+                                       default=False,
+                                       help_text=_("Select this, if you want to publish this document anonymously"))
 
     document_slug = models.SlugField()
 
@@ -325,7 +303,7 @@ class Document(models.Model):
         return reverse('document_title_detail',
                        kwargs={
                            'inst_slug': self.parent_institution.institution_slug,
-                           'ref_slug': self.parent_refnumber.refnumber_slug,
+                           'ref_slug': self.parent_ref_number.ref_number_slug,
                            'doc_slug': self.document_slug
                        })
 
@@ -333,7 +311,7 @@ class Document(models.Model):
         return reverse('document_title_legacy_detail',
                        kwargs={
                            'inst_slug': self.parent_institution.institution_slug,
-                           'ref_slug': self.parent_refnumber.refnumber_slug,
+                           'ref_slug': self.parent_ref_number.ref_number_slug,
                            'doc_slug': self.document_slug,
                            'version_nr': self.version_number
                        })
@@ -369,12 +347,17 @@ class Document(models.Model):
 
 
 class DocumentPage(models.Model):
-    """A document is made up of pages. Ideally these pages correspond to physical pages but at the end a
-     DocumentPage is a part of a Document."""
+    """A document is made up of pages. Ideally these pages correspond to physical pages but they don't have to.
+    At the end a DocumentPage is a part of a Document."""
 
     seal = models.BooleanField(verbose_name=_("Seal"),
                                null=True,
                                help_text=_("Are there any seals on this page?"))
+
+    illuminated = models.BooleanField(verbose_name=_("Illuminations"),
+                                      null=True,
+                                      help_text=_("Does the source contain painted miniatures (=illuminations)?"))
+
 
 
 class UserManager(BaseUserManager):

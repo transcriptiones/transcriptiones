@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Institution, RefNumber, Author, SourceLanguage, SourceType, Document, User
+from .models import Institution, RefNumber, Author, SourceType, Document, User
 
 
 class InstitutionAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class RefNumberAdmin(admin.ModelAdmin):
 class DocumentAdmin(admin.ModelAdmin):
     """Admin model for the Documents. """
 
-    list_display = ('title_name', 'parent_institution', 'parent_refnumber', 'document_slug')
+    list_display = ('title_name', 'parent_institution', 'parent_ref_number', 'document_slug')
     prepopulated_fields = {'document_slug': ('title_name',)}
     readonly_fields = ('submitted_by', 'document_utc_add')
 
@@ -42,7 +42,6 @@ class SourceTypeAdmin(admin.ModelAdmin):
 admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(RefNumber, RefNumberAdmin)
 admin.site.register(Author)
-admin.site.register(SourceLanguage)
 admin.site.register(SourceType, SourceTypeAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(User)
