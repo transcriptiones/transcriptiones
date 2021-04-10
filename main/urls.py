@@ -24,6 +24,7 @@ urlpatterns = [
 
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/<int:versionnr>/', DocumentTitleDetailView.as_view(), name='documenttitlelegacydetail'),
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/history/', DocumentHistoryView.as_view(), name='documenthistory'),
+    path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/history/', TemplateView.as_view(template_name='main/dummy.html'), name='document_history'),
 
     # urls for upload views
     #### path('upload/', AddDocumentView.as_view(), name='document_add'),
@@ -33,7 +34,9 @@ urlpatterns = [
     #### path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),
     #### path('upload/thanks/', thanks_view, name='thanks'),
     #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
+    path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_meta'),
     #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),
+    path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_transcript'),
     #### path('upload/batch/', batchupload, name='batchupload'),
 
     # urls for search views

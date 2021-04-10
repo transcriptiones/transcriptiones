@@ -6,7 +6,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django_tables2 import SingleTableMixin, MultiTableMixin
 
 from .models import Institution, RefNumber, Document
-from .tables import TitleValueTable, RefNumberTable
+from .tables import TitleValueTable, RefNumberTable, DocumentTable
 
 
 class InstitutionListView(ListView):
@@ -49,21 +49,46 @@ class InstitutionDetailView(MultiTableMixin, DetailView):
         return tables
 
 
-class RefNumberDetailView(DetailView):
+class RefNumberDetailView(MultiTableMixin, DetailView):
     """View to show details of institutions and list all reference numbers of this institution"""
+
     model = RefNumber
+    slug_field = 'ref_number_slug'
+    slug_url_kwarg = 'ref_slug'
+
+    table_pagination = {
+        "per_page": 20
+    }
+
     template_name = "main/details/ref_number_detail.html"
 
-    def get_object(self):
-        institution = self.kwargs.get('inst_slug')
-        ref_number = self.kwargs.get('ref_slug')
-        queryset = RefNumber.objects.filter(holding_institution__institution_slug=institution)
-        return get_object_or_404(queryset, ref_number_slug=ref_number)
+
+    def get_tables(self):
+        ref_number = self.get_object()
+        data = [
+            {'title': ref_number._meta.get_field('holding_institution').verbose_name,
+             'value': ref_number.holding_institution},
+            {'title': ref_number._meta.get_field('ref_number_name').verbose_name,
+             'value': ref_number.ref_number_name},
+            {'title': ref_number._meta.get_field('ref_number_title').verbose_name,
+             'value': ref_number.ref_number_title},
+            {'title': ref_number._meta.get_field('collection_link').verbose_name,
+             'value': mark_safe(f'<a href="{ref_number.collection_link}" target="_blank">{ref_number.collection_link}</a>')}
+        ]
+
+        tables = [
+            TitleValueTable(data=data),
+            DocumentTable(Document.objects.filter(parent_ref_number=ref_number)),
+        ]
+        return tables
 
 
-class DocumentDetailView(DetailView):
+class DocumentDetailView(MultiTableMixin, DetailView):
     """View to display DocumentTitle. Accepts optional version number to display legacy version"""
     model = Document
+    slug_field = 'document_slug'
+    slug_url_kwarg = 'doc_slug'
+
     template_name = "main/details/document_detail.html"
 
     def get_object(self):
@@ -93,18 +118,14 @@ class DocumentDetailView(DetailView):
 
         return context
 
+    def get_tables(self):
+        document = self.get_object()
+        data = document.get_card_data()
 
-from django import forms
-from ckeditor.widgets import CKEditorWidget
+        tables = [TitleValueTable(data=data[i]) for i in range(len(data))]
 
-class TestForm(forms.ModelForm):
-
-    class Meta:
-        model = Document
-        fields = ('transcription_text',)
+        return tables
 
 
 def test(request):
-    form = TestForm()
-    context = {'form': form}
-    return render(request, 'main/test.html', context)
+    return render(request, 'main/test.html')

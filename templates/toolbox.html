@@ -3,17 +3,17 @@
 
 <div class="btn-group-vertical">
     <a class="btn btn-light btn-rounded" id="toolboxicon" title={% translate 'Edit Transcription' %}
-       href="{% url 'edit_transcript' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
-        <img src="{% static 'base/img/check-double-solid-t.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
+       href="{% url 'main:edit_transcript' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
+        <img src="{% static 'main/images/check-double-solid-t.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
     </a>
 
     <a class="btn btn-light btn-rounded" id="toolboxicon" title="{% translate 'Edit Metadata' %}"
-       href="{% url 'edit_meta' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
-        <img src="{% static 'base/img/check-double-solid-m.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
+       href="{% url 'main:edit_meta' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
+        <img src="{% static 'main/images/check-double-solid-m.png' %}" alt="icon" id="toolboximage" width="38" height="18" />
     </a>
 
     <a class="btn btn-light btn-rounded" id="toolboxicon" title="{% translate 'Versions' %}"
-       href="{% url 'document_history' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
+       href="{% url 'main:document_history' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
         <i class="fas fa-code-branch"></i>
     </a>
 

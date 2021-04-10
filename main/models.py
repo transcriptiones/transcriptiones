@@ -180,13 +180,11 @@ class Document(models.Model):
     parent_ref_number = models.ForeignKey(RefNumber,
                                           verbose_name=_("Reference Number"),
                                           on_delete=models.PROTECT,
-                                          related_name="documents", # TODO what is this?
                                           help_text="Signatur der Quelle")
 
     author = models.ManyToManyField(Author,
                                     verbose_name=_("Source Participants"),
                                     blank=True,
-                                    related_name="works",   # TODO what is this?
                                     help_text=_("Authors, Copiers, Editors"))
 
     doc_start_date = PartialDateField(verbose_name=_("Creation period start"),)
@@ -199,12 +197,11 @@ class Document(models.Model):
                                   blank=False,
                                   help_text=_("The City/Place where the source was created."))
 
-    """
     language = models.ManyToManyField(Language,
                                       verbose_name=_("Languages"),
                                       blank=True,
                                       help_text=_("Languages used in the source"))
-    """
+
     source_type = models.ForeignKey(SourceType,
                                     verbose_name=_("Source Type"),
                                     on_delete=models.PROTECT,
@@ -243,8 +240,8 @@ class Document(models.Model):
                                      choices=PaginationType.choices,
                                      help_text=_("How are the pages numbered?"))
 
-    transcription_scope = models.TextField(verbose_name=_("transkribierte Teile des Dokuments"),
-                                           help_text="Liste der transkribierten Abschnitte/Seiten/Kapitel")
+    transcription_scope = models.TextField(verbose_name=_("Transcribed parts of the document"),
+                                           help_text=_("List of the transcribed pages/chapters, etc."))
 
     comments = models.TextField(verbose_name=_("Editorial comments"),
                                 blank=True,
@@ -256,6 +253,8 @@ class Document(models.Model):
     document_utc_add = models.DateTimeField(verbose_name=_("Upload date"),
                                             auto_now_add=True)
 
+    document_utc_update = models.DateTimeField(verbose_name=_("Update date"),
+                                               auto_now=True)
 
     submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                      verbose_name=_("Submitted by"),
@@ -298,6 +297,42 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title_name
+
+    def get_card_data(self):
+        overview = [{'title': self.parent_ref_number.holding_institution._meta.get_field('institution_name').verbose_name,
+                     'value': self.parent_ref_number.holding_institution, },
+                    {'title': self.parent_ref_number._meta.get_field('ref_number_name').verbose_name,
+                     'value': f'{self.parent_ref_number.ref_number_name} ({self.parent_ref_number.ref_number_title})', },
+                    {'title': self._meta.get_field('transcription_scope').verbose_name,
+                     'value': self.transcription_scope, },
+                    {'title': self._meta.get_field('document_utc_update').verbose_name,
+                     'value': self.document_utc_update},
+                    ]
+
+        meta_data = [{'title': self._meta.get_field('author').verbose_name,
+                      'value': ", ".join(self.author.all().values_list('author_name', flat=True))},
+                     {'title': self._meta.get_field('place_name').verbose_name,
+                      'value': self.place_name},
+                     {'title': self._meta.get_field('language').verbose_name,
+                      'value': ", ".join(self.language.all().values_list('name_en', flat=True))},
+                     {'title': self._meta.get_field('source_type').verbose_name,
+                      'value': " / ".join([self.source_type.parent_type.type_name, self.source_type.type_name])},
+                     ]
+
+        manuscript = [{'title': self._meta.get_field('material').verbose_name,
+                       'value': self.material},
+                      {'title': _('Measurements'),
+                       'value': "{width:.2f} / {length:.2f} cm".format(width=self.measurements_width, length=self.measurements_length)},
+                      {'title': self._meta.get_field('pages').verbose_name,
+                       'value': self.pages}
+                      ]
+        comments = [{'title': self._meta.get_field('comments').verbose_name,
+                     'value': self.comments},
+                    {'title': _('Uploaded'),
+                     'value': "By {user}, on {date}".format(date=self.document_utc_update, user=self.submitted_by.username if not self.publish_user else _('Anonymous'))},
+                    ]
+
+        return [overview, meta_data, manuscript, comments]
 
     def get_absolute_url(self):
         return reverse('main:document_detail',
@@ -357,7 +392,6 @@ class DocumentPage(models.Model):
     illuminated = models.BooleanField(verbose_name=_("Illuminations"),
                                       null=True,
                                       help_text=_("Does the source contain painted miniatures (=illuminations)?"))
-
 
 
 class UserManager(BaseUserManager):
