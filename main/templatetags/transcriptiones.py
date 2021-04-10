@@ -12,7 +12,7 @@ def card(parser, token):
     except ValueError:
         raise template.TemplateSyntaxError("%r takes two arguments: the card id and title" % token.contents.split()[0])
 
-    nodelist = parser.parse(('endmodal',))
+    nodelist = parser.parse(('endcard',))
     parser.delete_first_token()
 
     card_id = FilterExpression(card_id, parser)

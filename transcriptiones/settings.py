@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'languages_plus',
     'countries_plus',
     'ckeditor',
+    'django_tables2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

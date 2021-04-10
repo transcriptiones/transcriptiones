@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load transcriptiones %}
+{% load render_table from django_tables2 %}
 
 {% block page_title %}
     {{ institution.institution_name }}
@@ -17,79 +18,12 @@
 
 {% block content %}
 
-    <div class="card">
-        <div class="card-header" data-toggle="collapse" href="#InstitutionDetails">
-            <a class="card-link">{% translate 'About the institution' %}</a>
-        </div>
-        <div id="InstitutionDetails" class="collapse show">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-4">
-                        {% get_verbose_name institution 'street' %}
-                    </div>
-                    <div class="col-sm-8">
-                        {{ institution.street }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        {% get_verbose_name institution 'zip_code' %} / {% get_verbose_name institution 'city' %}
-                    </div>
-                    <div class="col-sm-8">
-                        {{ institution.zip_code }} / {{ institution.city }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        {% get_verbose_name institution 'country' %}
-                    </div>
-                    <div class="col-sm-8">
-                        <i class="{{ institution.country.flag_css }}"></i> {{ institution.country.name  }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        {% get_verbose_name institution 'site_url' %}
-                    </div>
-                    <div class="col-sm-8">
-                        <a href="{{ institution.site_url }}" target="_blank">{{ institution.institution_name }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% card 'institution_detail' _('About the institution') %}
+        {% render_table tables.0 %}
+    {%  endcard %}
 
-    <div class="card">
-        <div class="card-header" data-toggle="collapse" href="#differentRefNumbers">
-            <a class="card-link">{% translate 'Reference numbers' %}</a>
-        </div>
-
-        <div id="differentRefNumbers" class="collapse show">
-            <div class="card-body">
-                {% if institution.ref_numbers.all %}
-                    {% for ref_number in institution.ref_numbers.all|dictsort:"ref_number_name" %}
-                        <a href="{{ ref_number.get_absolute_url }}" class="row display-list-element">
-                            <div class="col-sm-5 text-left">{{ ref_number.ref_number_name }}</div>
-                            <div class="col-sm-5 text-left">
-                                {% if ref_number.ref_number_title %}
-                                    {{ ref_number.ref_number_title }}
-                                {% else %}
-                                    {% translate 'No title' %}
-                                {% endif %}
-                            </div>
-                            <div class="col-sm-2 text-left">
-                                <!-- TODO translate -->
-                                {{ ref_number.documents.count }} Dokument{% if ref_number.documents.count != 1 %}e{% endif %}
-                            </div>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <div class="row">
-                        <div class="col-sm text-left">{% translate 'This institution has no reference numbers yet' %}</div>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    {% card 'institution_ref_number' _('Reference Numbers in this institution') %}
+        {% render_table tables.1 %}
+    {%  endcard %}
 
 {% endblock content %}
