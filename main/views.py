@@ -66,5 +66,17 @@ class DocumentDetailView(DetailView):
         return context
 
 
+from django import forms
+from ckeditor.widgets import CKEditorWidget
+
+class TestForm(forms.ModelForm):
+
+    class Meta:
+        model = Document
+        fields = ('transcription_text',)
+
+
 def test(request):
-    return render(request, 'main/test.html')
+    form = TestForm()
+    context = {'form': form}
+    return render(request, 'main/test.html', context)

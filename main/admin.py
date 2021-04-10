@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.forms import ModelForm, CharField
+from ckeditor.widgets import CKEditorWidget
+
 from .models import Institution, RefNumber, Author, SourceType, Document, User
 
 
@@ -16,8 +19,18 @@ class RefNumberAdmin(admin.ModelAdmin):
     prepopulated_fields = {'ref_number_slug': ('ref_number_name',)}
 
 
+class DocumentAdminForm(ModelForm):
+    transcription_text = CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Document
+        fields = '__all__'
+
+
 class DocumentAdmin(admin.ModelAdmin):
     """Admin model for the Documents. """
+
+    form = DocumentAdminForm
 
     list_display = ('title_name', 'parent_institution', 'parent_ref_number', 'document_slug')
     prepopulated_fields = {'document_slug': ('title_name',)}

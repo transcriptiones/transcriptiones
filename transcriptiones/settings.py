@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_countries',
     'languages_plus',
     'countries_plus',
+    'ckeditor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,3 +149,6 @@ DEFAULT_FROM_EMAIL = "dominic.weber@librarylab.ethz.ch"     # Change this as soo
 
 # AUTO FIELD
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# CKEDITOR
+# CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"

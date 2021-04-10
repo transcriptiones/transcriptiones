@@ -7,4 +7,10 @@
 
 {% block content %}
     {% text_card "About us" "Test" %}
+    <form action="/your-name/" method="post">
+        {% csrf_token %}
+        {{ form.media }}
+    {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}

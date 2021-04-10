@@ -11,6 +11,7 @@ from django.contrib.auth.models import PermissionsMixin
 from partial_date import PartialDateField
 from django_countries.fields import CountryField
 from languages_plus.models import Language
+from ckeditor.fields import RichTextField
 
 #TODO replace from i18n_model.models import I18nModel
 
@@ -250,8 +251,8 @@ class Document(models.Model):
                                 blank=True,
                                 help_text=_("Add editorial comments or remarks on the contents of the document."))
 
-    transcription_text = models.TextField(verbose_name=_("Transcript"),
-                                          help_text=_("Formatted text of your transcript."))
+    transcription_text = RichTextField(verbose_name=_("Transcript"),
+                                       help_text=_("Formatted text of your transcript."))
 
     document_utc_add = models.DateTimeField(verbose_name=_("Upload date"),
                                             auto_now_add=True)
