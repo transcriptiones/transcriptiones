@@ -5,8 +5,8 @@ from django.views.generic import DetailView, ListView, View
 from django.views.generic.detail import SingleObjectMixin
 from django_tables2 import SingleTableMixin, MultiTableMixin
 
-from .models import Institution, RefNumber, Document
-from .tables import TitleValueTable, RefNumberTable, DocumentTable
+from models import Institution, RefNumber, Document
+from tables import TitleValueTable, RefNumberTable, DocumentTable
 
 
 class InstitutionListView(ListView):

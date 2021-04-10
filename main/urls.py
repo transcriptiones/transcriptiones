@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from . import views
+from views import views, views_upload
 
 app_name = 'main'
 urlpatterns = [
@@ -28,7 +28,7 @@ urlpatterns = [
 
     # urls for upload views
     #### path('upload/', AddDocumentView.as_view(), name='document_add'),
-    path('upload/', TemplateView.as_view(template_name='main/dummy.html'), name='upload_document'),
+    path('upload/', views_upload.AddDocumentView.as_view(), name='upload_document'),
     #### path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     #### path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
     #### path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),

@@ -32,7 +32,7 @@ class CardNode(template.Node):
         card_title = self.card_title.resolve(context) if self.card_title else 'Set a Title'
 
         output = \
-            '<div class="card">' \
+            '<div class="card mt-3">' \
             f'  <div class="card-header" data-toggle="collapse" href="#{card_id}">' \
             f'    <a class="card-link">{_(card_title)} </a>' \
             '  </div>' \
