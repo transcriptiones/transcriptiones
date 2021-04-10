@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-07 08:13+0200\n"
+"POT-Creation-Date: 2021-04-10 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,297 +17,602 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\main\models.py:20 .\main\models.py:48 .\main\models.py:64
-msgid "institution"
+#: .\main\models.py:23 .\main\models.py:51 .\main\models.py:66
+msgid "Institution"
 msgstr ""
 
-#: .\main\models.py:23
+#: .\main\models.py:26
 msgid "Complete name of the institution"
 msgstr ""
 
-#: .\main\models.py:25
-msgid "street"
-msgstr ""
-
-#: .\main\models.py:27
+#: .\main\models.py:28
 msgid "Street"
 msgstr ""
 
-#: .\main\models.py:29
-msgid "zip code"
+#: .\main\models.py:30
+msgid "Street with number"
 msgstr ""
 
-#: .\main\models.py:30
+#: .\main\models.py:32 .\main\models.py:33
 msgid "Zip code"
 msgstr ""
 
-#: .\main\models.py:32
-msgid "city"
-msgstr ""
-
-#: .\main\models.py:34
+#: .\main\models.py:35 .\main\models.py:37
 msgid "City"
 msgstr ""
 
-#: .\main\models.py:36
-msgid "country"
-msgstr ""
-
-#: .\main\models.py:37
+#: .\main\models.py:39 .\main\models.py:40
 msgid "Country"
 msgstr ""
 
-#: .\main\models.py:39
-msgid "website"
-msgstr ""
-
 #: .\main\models.py:42
-msgid "URL of the Website"
+msgid "Web site"
 msgstr ""
 
-#: .\main\models.py:49
-msgid "institutions"
+#: .\main\models.py:45
+msgid "URL of the web site"
 msgstr ""
 
-#: .\main\models.py:67
+#: .\main\models.py:52 .\main\templates\main\lists\institution_list.html:5
+msgid "Institutions"
+msgstr ""
+
+#: .\main\models.py:69
 msgid "Institution associated with this reference number"
 msgstr ""
 
-#: .\main\models.py:69 .\main\models.py:91
-msgid "reference number"
-msgstr ""
-
 #: .\main\models.py:71
-msgid "reference number of the collection containing a document"
+msgid "Reference number"
 msgstr ""
 
 #: .\main\models.py:73
-msgid "title"
+msgid "reference number of the collection containing a document"
 msgstr ""
 
-#: .\main\models.py:76
-msgid "Title of the collection"
+#: .\main\models.py:75 .\main\models.py:171
+msgid "Title"
 msgstr ""
 
 #: .\main\models.py:78
-msgid "static URL"
+msgid "Title of the collection"
 msgstr ""
 
-#: .\main\models.py:81
+#: .\main\models.py:80
+msgid "Static URL"
+msgstr ""
+
+#: .\main\models.py:83
 msgid "Link to the collection"
 msgstr ""
 
-#: .\main\models.py:92
+#: .\main\models.py:93
+msgid "reference number"
+msgstr ""
+
+#: .\main\models.py:94
 msgid "reference numbers"
 msgstr ""
 
-#: .\main\models.py:106
+#: .\main\models.py:108
 msgid "Name of author"
 msgstr ""
 
-#: .\main\models.py:108
+#: .\main\models.py:110
 msgid "Name of the author of the original document."
 msgstr ""
 
-#: .\main\models.py:110
+#: .\main\models.py:112
 msgid "Link to GND entry"
 msgstr ""
 
-#: .\main\models.py:113
+#: .\main\models.py:115
 msgid "Persistent URL to the GND entry of the author."
 msgstr ""
 
-#: .\main\models.py:116
+#: .\main\models.py:118
 msgid "Document author"
 msgstr ""
 
-#: .\main\models.py:117
+#: .\main\models.py:119
 msgid "Document authors"
 msgstr ""
 
-#: .\main\models.py:127 .\main\models.py:134
-msgid "Language"
+#: .\main\models.py:138
+msgid "Source type"
 msgstr ""
 
-#: .\main\models.py:130
-msgid "ISO 639-3 code"
+#: .\main\models.py:139
+msgid "Source types"
 msgstr ""
 
-#: .\main\models.py:135
-msgid "Languages"
-msgstr ""
-
-#: .\main\models.py:169
+#: .\main\models.py:153
 msgid "Paper"
 msgstr ""
 
-#: .\main\models.py:170
+#: .\main\models.py:154
 msgid "Parchment"
 msgstr ""
 
-#: .\main\models.py:171
+#: .\main\models.py:155
 msgid "Papyrus"
 msgstr ""
 
-#: .\main\models.py:173 .\main\models.py:179
+#: .\main\models.py:157 .\main\models.py:163
 msgid "(Unknown)"
 msgstr ""
 
-#: .\main\models.py:176
+#: .\main\models.py:160 .\main\models.py:241
 msgid "Pagination"
 msgstr ""
 
-#: .\main\models.py:177
+#: .\main\models.py:161
 msgid "Foliated"
 msgstr ""
 
-#: .\main\models.py:181
+#: .\main\models.py:165
 msgid "Document UUID"
 msgstr ""
 
-#: .\main\models.py:184
+#: .\main\models.py:168
 msgid ""
 "ID of the first Version of this document. Is kept constant between versions "
 "of this document."
 msgstr ""
 
-#: .\main\models.py:187
-msgid "Title"
-msgstr ""
-
-#: .\main\models.py:189
+#: .\main\models.py:173
 msgid "Title of the Document"
 msgstr ""
 
-#: .\main\models.py:209
+#: .\main\models.py:182
+msgid "Reference Number"
+msgstr ""
+
+#: .\main\models.py:188
+msgid "Source Participants"
+msgstr ""
+
+#: .\main\models.py:191
+msgid "Authors, Copiers, Editors"
+msgstr ""
+
+#: .\main\models.py:193
 msgid "Creation period start"
 msgstr ""
 
-#: .\main\models.py:211
+#: .\main\models.py:195
 msgid "Creation period end"
 msgstr ""
 
-#: .\main\models.py:276
-msgid "upload date"
+#: .\main\models.py:198
+msgid "Creation Location"
 msgstr ""
 
-#: .\main\models.py:289
-msgid "Anonymous"
+#: .\main\models.py:201
+msgid "The City/Place where the source was created."
 msgstr ""
 
-#: .\main\models.py:291
+#: .\main\models.py:210
+msgid "Source Type"
+msgstr ""
+
+#: .\main\models.py:214
+msgid "Type of the source"
+msgstr ""
+
+#: .\main\models.py:216
+msgid "Writing material"
+msgstr ""
+
+#: .\main\models.py:220
+msgid "Is the manuscript on paper, papyrus or parchment?"
+msgstr ""
+
+#: .\main\models.py:222
+msgid "Height"
+msgstr ""
+
+#: .\main\models.py:227
+msgid "Height in centimeters (cm)"
+msgstr ""
+
+#: .\main\models.py:229
+msgid "Width"
+msgstr ""
+
+#: .\main\models.py:234
+msgid "Width in centimeters (cm)"
+msgstr ""
+
+#: .\main\models.py:236
+msgid "Number of pages"
+msgstr ""
+
+#: .\main\models.py:239
+msgid "The number of pages of the whole source"
+msgstr ""
+
+#: .\main\models.py:245
+msgid "How are the pages numbered?"
+msgstr ""
+
+#: .\main\models.py:247
+msgid "transkribierte Teile des Dokuments"
+msgstr ""
+
+#: .\main\models.py:250
+msgid "Editorial comments"
+msgstr ""
+
+#: .\main\models.py:252
+msgid "Add editorial comments or remarks on the contents of the document."
+msgstr ""
+
+#: .\main\models.py:254
+msgid "Transcript"
+msgstr ""
+
+#: .\main\models.py:255
+msgid "Formatted text of your transcript."
+msgstr ""
+
+#: .\main\models.py:257
+msgid "Upload date"
+msgstr ""
+
+#: .\main\models.py:262
+msgid "Submitted by"
+msgstr ""
+
+#: .\main\models.py:265
+msgid "Uploading user"
+msgstr ""
+
+#: .\main\models.py:268
+msgid "Publish anonymous"
+msgstr ""
+
+#: .\main\models.py:270
 msgid "Select this, if you want to publish this document anonymously"
 msgstr ""
 
-#: .\main\models.py:298
+#: .\main\models.py:276
 msgid "Changes"
 msgstr ""
 
-#: .\main\models.py:301
+#: .\main\models.py:279
 msgid "A brief description of the applied changes."
 msgstr ""
 
-#: .\main\models.py:303
+#: .\main\models.py:281
 msgid "version number"
 msgstr ""
 
-#: .\main\models.py:305
+#: .\main\models.py:283
 msgid "Version number"
 msgstr ""
 
-#: .\main\models.py:376
+#: .\main\models.py:290
+msgid "document"
+msgstr ""
+
+#: .\main\models.py:291
+msgid "documents"
+msgstr ""
+
+#: .\main\models.py:354
 msgid "Seal"
 msgstr ""
 
-#: .\main\models.py:378
+#: .\main\models.py:356
 msgid "Are there any seals on this page?"
 msgstr ""
 
-#: .\main\models.py:388
+#: .\main\models.py:358
+msgid "Illuminations"
+msgstr ""
+
+#: .\main\models.py:360
+msgid "Does the source contain painted miniatures (=illuminations)?"
+msgstr ""
+
+#: .\main\models.py:371
 msgid "Please enter an e-mail address"
 msgstr ""
 
-#: .\main\models.py:414
+#: .\main\models.py:397
 msgid "All superusers must have is_staff = True."
 msgstr ""
 
-#: .\main\models.py:416
+#: .\main\models.py:399
 msgid "All superusers must have is_superuser = True"
 msgstr ""
 
-#: .\main\models.py:424
+#: .\main\models.py:407
 msgid "username"
 msgstr ""
 
-#: .\main\models.py:428
+#: .\main\models.py:411
 msgid "Provide a user name"
 msgstr ""
 
-#: .\main\models.py:430
+#: .\main\models.py:413
 msgid "first name"
 msgstr ""
 
-#: .\main\models.py:435
+#: .\main\models.py:418
 msgid "last name"
 msgstr ""
 
-#: .\main\models.py:438
+#: .\main\models.py:421
 msgid "Enter your last name"
 msgstr ""
 
-#: .\main\models.py:440
+#: .\main\models.py:423
 msgid "email"
 msgstr ""
 
-#: .\main\models.py:444
+#: .\main\models.py:427
 msgid "Enter your email address"
 msgstr ""
 
-#: .\main\models.py:446
+#: .\main\models.py:429
 msgid "email confirmed"
 msgstr ""
 
-#: .\main\models.py:448
+#: .\main\models.py:431
 msgid "Has the user confirmed the email address?"
 msgstr ""
 
-#: .\main\models.py:450
+#: .\main\models.py:433
 msgid "staff status"
 msgstr ""
 
-#: .\main\models.py:452
+#: .\main\models.py:435
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 
-#: .\main\models.py:454
+#: .\main\models.py:437
 msgid "active"
 msgstr ""
 
-#: .\main\models.py:456
+#: .\main\models.py:439
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 
-#: .\main\models.py:458
+#: .\main\models.py:441
 msgid "date joined"
 msgstr ""
 
-#: .\main\models.py:461
+#: .\main\models.py:444
 msgid "Mark anonymous by default"
 msgstr ""
 
-#: .\main\templates\main\info\about_us.html:10
+#: .\main\templates\main\details\institution_detail.html:12
+#: .\main\templates\main\details\ref_number_detail.html:12
+msgid "Institutions list"
+msgstr ""
+
+#: .\main\templates\main\details\institution_detail.html:22
+msgid "About the institution"
+msgstr ""
+
+#: .\main\templates\main\details\institution_detail.html:64
+msgid "Reference numbers"
+msgstr ""
+
+#: .\main\templates\main\details\institution_detail.html:77
+msgid "No title"
+msgstr ""
+
+#: .\main\templates\main\details\institution_detail.html:88
+msgid "This institution has no reference numbers yet"
+msgstr ""
+
+#: .\main\templates\main\details\ref_number_detail.html:24
+msgid "Information about the reference number"
+msgstr ""
+
+#: .\main\templates\main\details\ref_number_detail.html:52
+msgid "(No Title)"
+msgstr ""
+
+#: .\main\templates\main\details\ref_number_detail.html:64
+msgid "No Website"
+msgstr ""
+
+#: .\main\templates\main\details\ref_number_detail.html:75
+msgid "Documents with this reference number"
+msgstr ""
+
+#: .\main\templates\main\details\ref_number_detail.html:136
+msgid "No documents with this signature"
+msgstr ""
+
+#: .\main\templates\main\info\about.html:6
+msgid "What is Transcriptiones?"
+msgstr ""
+
+#. Translators: This is a lengthy message about the project.
+#: .\main\templates\main\info\about.html:12
+msgid "The Project"
+msgstr ""
+
+#: .\main\templates\main\info\about.html:12
+msgid "Project text message"
+msgstr ""
+
+#. Translators: This is a FAQ.
+#: .\main\templates\main\info\about.html:15
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: .\main\templates\main\info\about.html:15
+msgid "FAQ"
+msgstr ""
+
+#. Translators: This is a about us message.
+#. Translators: This message gets capitalized.
+#: .\main\templates\main\info\about_us.html:6
+#: .\main\templates\main\info\about_us.html:12
+#: .\main\templates\main\info\start.html:142
 msgid "About us"
 msgstr ""
 
-#. Translators: This is a lengthy thank you message to the supporters of the project.
 #: .\main\templates\main\info\about_us.html:12
+msgid "About Us Text Message"
+msgstr ""
+
+#. Translators: This is a lengthy thank you message to the supporters of the project.
+#: .\main\templates\main\info\about_us.html:15
 msgid "Supporters"
 msgstr "Unterstützer*innen"
 
-#: .\main\templates\main\info\about_us.html:12
+#: .\main\templates\main\info\about_us.html:15
 msgid "Thank You Text Message"
 msgstr ""
 
-#: .\main\templates\main\test.html:5
-msgid "Test"
+#: .\main\templates\main\info\contact.html:6
+msgid "Contact"
 msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\contact.html:12
+msgid "General"
+msgstr ""
+
+#: .\main\templates\main\info\contact.html:12
+msgid "General Contact Text Message"
+msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\contact.html:15
+msgid "Specific"
+msgstr ""
+
+#: .\main\templates\main\info\contact.html:15
+msgid "Specific Contact Text Message"
+msgstr ""
+
+#: .\main\templates\main\info\guidelines.html:6
+msgid "Guidelines"
+msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\guidelines.html:12
+msgid "General GL"
+msgstr ""
+
+#: .\main\templates\main\info\guidelines.html:12
+msgid "General Guidelines Text Message"
+msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\guidelines.html:15
+msgid "Specific GL"
+msgstr ""
+
+#: .\main\templates\main\info\guidelines.html:15
+msgid "Specific Guidelines Text Message"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:20
+msgid "The place to transcript historical manuscripts"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:22
+msgid "More"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:32
+msgid ""
+"You created transcripts and want to share them? You are looking for already "
+"transcribed material? Welcome!"
+msgstr ""
+
+#. Translators: Main Page introductory text.
+#: .\main\templates\main\info\start.html:34
+msgid "WhatIsTranscriptiones-Text"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:35
+#: .\main\templates\main\info\start.html:45
+msgid "How it works"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:55
+msgid "Upload"
+msgstr ""
+
+#. Translators: Main Page text about upload procedure.
+#: .\main\templates\main\info\start.html:58
+msgid "HowItWorksUpload-Text"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:67
+#: .\main\templates\main\search.html:6
+msgid "Search"
+msgstr ""
+
+#. Translators: Main Page text about search functions.
+#: .\main\templates\main\info\start.html:70
+msgid "HowItWorksSearch-Text"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:77
+msgid "Edit"
+msgstr ""
+
+#. Translators: Main Page text about edit/correct functions.
+#: .\main\templates\main\info\start.html:80
+msgid "HowItWorksEdit-Text"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:84
+msgid "Additional information"
+msgstr ""
+
+#: .\main\templates\main\info\start.html:93
+msgid "Additional Information"
+msgstr ""
+
+#. Translators: This message gets capitalized.
+#: .\main\templates\main\info\start.html:102
+msgid "Transcript Guidelines"
+msgstr ""
+
+#. Translators: This message gets capitalized.
+#: .\main\templates\main\info\start.html:115
+msgid "User Account"
+msgstr ""
+
+#. Translators: This message gets capitalized.
+#: .\main\templates\main\info\start.html:128
+msgid "Terms of usage"
+msgstr ""
+
+#: .\main\templates\main\info\tos.html:6
+msgid "Terms Of Service"
+msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\tos.html:12
+msgid "General TOS"
+msgstr ""
+
+#: .\main\templates\main\info\tos.html:12
+msgid "General TOS Text Message"
+msgstr ""
+
+#. Translators: This is a dummy message. Do not translate yet.
+#: .\main\templates\main\info\tos.html:15
+msgid "Specific TOS"
+msgstr ""
+
+#: .\main\templates\main\info\tos.html:15
+msgid "Specific TOS Text Message"
+msgstr ""
+
+#: .\main\templates\main\test.html:6 .\main\templates\main\test.html:12
+#: .\main\templates\main\test.html:13
+msgid "Test"
+msgstr "Test DE"

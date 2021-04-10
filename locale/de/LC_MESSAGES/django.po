@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-07 08:13+0200\n"
+"POT-Creation-Date: 2021-04-10 15:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\base.html:53 .\templates\sidebar.html:13
+#: .\templates\base.html:59 .\templates\sidebar.html:13
 msgid "Upload"
 msgstr ""
 
-#: .\templates\base.html:56 .\templates\sidebar.html:16
+#: .\templates\base.html:62 .\templates\sidebar.html:16
 msgid "Browse"
 msgstr ""
 
-#: .\templates\base.html:59 .\templates\sidebar.html:19
+#: .\templates\base.html:65 .\templates\sidebar.html:19
 msgid "Search"
 msgstr ""
 
-#: .\templates\base.html:63 .\templates\sidebar.html:39
+#: .\templates\base.html:69 .\templates\sidebar.html:39
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:65 .\templates\sidebar.html:43
+#: .\templates\base.html:71 .\templates\sidebar.html:43
 msgid "Login"
 msgstr ""
 
@@ -78,14 +78,22 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: .\transcriptiones\settings.py:117
+#: .\transcriptiones\settings.py:114
+msgid "--- (Select Country) ---"
+msgstr ""
+
+#: .\transcriptiones\settings.py:126
 msgid "English"
 msgstr ""
 
-#: .\transcriptiones\settings.py:118
+#: .\transcriptiones\settings.py:127
 msgid "German"
 msgstr ""
 
-#: .\transcriptiones\settings.py:119
+#: .\transcriptiones\settings.py:128
 msgid "French"
+msgstr ""
+
+#: .\transcriptiones\settings.py:129
+msgid "Italian"
 msgstr ""

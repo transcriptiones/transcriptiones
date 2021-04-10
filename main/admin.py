@@ -20,6 +20,8 @@ class RefNumberAdmin(admin.ModelAdmin):
 
 
 class DocumentAdminForm(ModelForm):
+    """Overwrites the Admin form for the Document object to use the ckEditor as widget for the transcription."""
+
     transcription_text = CharField(widget=CKEditorWidget())
 
     class Meta:

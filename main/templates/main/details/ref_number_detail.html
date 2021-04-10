@@ -9,7 +9,7 @@
 {% block breadcrumb %}
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">Institutionenliste</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">{% translate 'Institutions list' %}</a></li>
             <li class="breadcrumb-item"><a href="{{ refnumber.holding_institution.get_absolute_url }}">{{ refnumber.holding_institution }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ refnumber.ref_number_name }}</li>
         </ol>
@@ -61,7 +61,7 @@
                     {% if refnumber.collection_link %}
                     <a href="{{ refnumber.collection_link }}" target="_blank">{{ refnumber.collection_link }}</a>
                     {% else %}
-                    Keine Angabe
+                        {% translate 'No Website' %}
                     {% endif %}
                 </div>
             </div>
