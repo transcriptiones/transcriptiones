@@ -8,10 +8,14 @@
 
 {% block content %}
 
-    {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
-    {% text_card _("General GL") _("General Guidelines Text Message") %}
+    {% card 'general' _('General') %}
+        {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
+        {% translate 'General Contact Text Message' %}
+    {% endcard %}
 
-    {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
-    {% text_card _("Specific GL") _("Specific Guidelines Text Message") %}
+    {% card 'specific' _('Specific') %}
+        {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
+        {% translate 'Specific Contact Text Message' %}
+    {% endcard %}
 
 {% endblock %}

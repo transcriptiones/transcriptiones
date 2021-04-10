@@ -8,10 +8,14 @@
 
 {% block content %}
 
-    {%  comment %} Translators: This is a lengthy message about the project. {% endcomment %}
-    {% text_card _("The Project") _("Project text message") %}
+    {% card 'the_project' _('The Project') %}
+        {%  comment %} Translators: This is a lengthy message about the project. {% endcomment %}
+        {% translate 'Project text message' %}
+    {% endcard %}
 
-    {%  comment %} Translators: This is a FAQ. {% endcomment %}
-    {% text_card _("Frequently Asked Questions") _("FAQ") %}
+    {% card 'faq' _('Frequently Asked Questions') %}
+        {%  comment %} Translators: This is a FAQ. {% endcomment %}
+        {% translate 'FAQ' %}
+    {% endcard %}
 
 {% endblock %}

@@ -8,10 +8,14 @@
 
 {% block content %}
 
-    {%  comment %} Translators: This is a about us message. {% endcomment %}
-    {% text_card _("About us") _("About Us Text Message") %}
+    {% card 'about_us' _('About us') %}
+        {%  comment %} Translators: This is a about us message. {% endcomment %}
+        {% translate 'About Us Text Message' %}
+    {% endcard %}
 
-    {%  comment %} Translators: This is a lengthy thank you message to the supporters of the project. {% endcomment %}
-    {% text_card _("Supporters") _("Thank You Text Message") %}
+    {% card 'supporters' _('Supporters') %}
+        {%  comment %} Translators: This is a lengthy thank you message to the supporters of the project. {% endcomment %}
+        {% translate 'Thank You Text Message' %}
+    {% endcard %}
 
 {% endblock %}

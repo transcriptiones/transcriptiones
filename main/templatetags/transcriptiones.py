@@ -38,7 +38,11 @@ class CardNode(template.Node):
             '  </div>' \
             f'  <div id="{card_id}" class="collapse show">' \
             '    <div class="card-body">' \
-            f'      {self.nodelist.render(context)}' \
+            '      <div class="row">' \
+            '        <div class="col-sm text-left">' \
+            f'         {self.nodelist.render(context)}' \
+            '        </div>' \
+            '      </div>' \
             '    </div>' \
             '  </div>' \
             '</div>'
