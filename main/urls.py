@@ -1,11 +1,14 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from views import views, views_upload
+from main.views.views import test
+from main.views.views import InstitutionListView
+from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView
+from main.views.views_upload import AddDocumentView
 
 app_name = 'main'
 urlpatterns = [
-    path('test/', views.test, name='test'),
+    path('test/', test, name='test'),
 
     # urls for info views
     path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
@@ -16,10 +19,10 @@ urlpatterns = [
     path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
 
     # urls for display views
-    path('display/institutions/', views.InstitutionListView.as_view(), name='institution_list'),
-    path('display/<slug:inst_slug>/', views.InstitutionDetailView.as_view(), name='institution_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/', views.RefNumberDetailView.as_view(), name='ref_number_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', views.DocumentDetailView.as_view(),
+    path('display/institutions/', InstitutionListView.as_view(), name='institution_list'),
+    path('display/<slug:inst_slug>/', InstitutionDetailView.as_view(), name='institution_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/', RefNumberDetailView.as_view(), name='ref_number_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', DocumentDetailView.as_view(),
          name='document_detail'),
 
     #### path('display/<slug:instslug>/<slug:refslug>/<slug:docslug>/<int:versionnr>/', DocumentTitleDetailView.as_view(), name='documenttitlelegacydetail'),
@@ -28,7 +31,7 @@ urlpatterns = [
 
     # urls for upload views
     #### path('upload/', AddDocumentView.as_view(), name='document_add'),
-    path('upload/', views_upload.AddDocumentView.as_view(), name='upload_document'),
+    path('upload/', AddDocumentView.as_view(), name='upload_document'),
     #### path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     #### path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
     #### path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),

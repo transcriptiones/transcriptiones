@@ -1,28 +1,28 @@
-import json
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse, HttpResponse
-from django.core import serializers
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views import View
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import UpdateView
 from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
-from transcripta.transcripts.forms import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
-from models import Author, Institution, RefNumber, Document, SourceType
-from transcripta.transcripts.utils import create_related_objects
+from main.forms.forms_upload import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
+from main.models import Author, Institution, RefNumber, Document, SourceType
+from main.utils import create_related_objects
 
-#View for adding institution
+
 class AddInstitutionView(LoginRequiredMixin, View):
+    """View for adding institution"""
+
     form_class = InstitutionForm
     template_name = "upload/addinstitution.html"
 
-    #display form if accessed via GET
+    # display form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method == "GET":
             form = self.form_class()
             return render(self.request, self.template_name,
                           {"form": form})
 
-    #handle the form if accessed via POST
+    # handle the form if accessed via POST
     def post(self, *args, **kwargs):
         if self.request.is_ajax and self.request.method == "POST":            
             institution_name = self.request.POST.get('new_institution_name')
@@ -34,7 +34,7 @@ class AddInstitutionView(LoginRequiredMixin, View):
             institution_slug = slugify(institution_name)
 
             #
-            #Do we need server-side validation here?
+            # Do we need server-side validation here?
             #
 
             Institution.objects.create(
@@ -51,8 +51,9 @@ class AddInstitutionView(LoginRequiredMixin, View):
 
             return render(self.request, 'upload/inst_dropdown_options.html', {'institutions': institutions})
 
-#View for adding RefNumber
+
 class AddRefNumberView(LoginRequiredMixin, View):
+    """View for adding RefNumber"""
     form_class = RefNumberForm
     template_name = "upload/addrefnumber.html"
 
@@ -119,7 +120,7 @@ class AddDocumentView(LoginRequiredMixin, View):
             document_slug = slugify(data.get("title_name"))
             data["document_slug"] = document_slug
 
-            document = DocumentTitle(submitted_by=self.request.user)  # Set submitter to current user
+            document = Document(submitted_by=self.request.user)  # Set submitter to current user
 
             # set source_type based on selection
             if 'source_type_child' in data:
@@ -161,14 +162,14 @@ def load_refnumbers(request):
 
 # Base class for Editing DocumentTitle objects
 class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
-    model = DocumentTitle
+    model = Document
 
     # get object to update
     def get_object(self):
         institution = self.kwargs.get('instslug')
         refnumber = self.kwargs.get('refslug')
         document = self.kwargs.get('docslug')
-        queryset = DocumentTitle.objects.filter(parent_institution__institution_slug = institution)
+        queryset = Document.objects.filter(parent_institution__institution_slug = institution)
         queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
         return queryset.get(document_slug = document)
 

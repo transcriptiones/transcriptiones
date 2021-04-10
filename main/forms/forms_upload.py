@@ -1,13 +1,14 @@
 from datetime import datetime
 from django import forms
 
-from transcripta.transcripts.models import Institution, RefNumber, DocumentTitle, SourceType
-from transcripta.transcripts.widgets import SourceChildSelect
+from main.models import Institution, RefNumber, Document, SourceType
+from main.widgets import SourceChildSelect
 
 
-#Form for adding an Institution which is not yet in the Database
 class InstitutionForm(forms.ModelForm):
-    #add class form-control to each form field for bootstrap integration
+    """Form for adding an Institution which is not yet in the Database"""
+
+    # Add class form-control to each form field for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(InstitutionForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
@@ -25,10 +26,10 @@ class InstitutionForm(forms.ModelForm):
         fields = ['institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug']
 
 
-#Form for adding a RefNumber which is not yet in the Database
 class RefNumberForm(forms.ModelForm):
-    
-    #add class form-control to each form input for bootstrap integration
+    """Form for adding a RefNumber which is not yet in the Database"""
+
+    # Add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(RefNumberForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
@@ -39,11 +40,12 @@ class RefNumberForm(forms.ModelForm):
 
     class Meta:
         model = RefNumber
-        fields = ['holding_institution', 'refnumber_name', 'refnumber_title', 'collection_link']
+        fields = ['holding_institution', 'ref_number_name', 'ref_number_title', 'collection_link']
 
 
-#Form for adding a new Document to the Database
 class DocumentTitleForm(forms.ModelForm):
+    """Form for adding a new Document to the Database"""
+
     source_type_parent = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
         required=True,
@@ -57,7 +59,7 @@ class DocumentTitleForm(forms.ModelForm):
         widget=SourceChildSelect,
         )
 
-    #add class form-control to each form input for bootstrap integration
+    # add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(DocumentTitleForm, self).__init__(*args, **kwargs)
         for name in self.fields:
@@ -70,11 +72,11 @@ class DocumentTitleForm(forms.ModelForm):
                     })
         
         self.fields['start_year'].widget.attrs.update({
-            'min': -3000, #ToDo: Probably solve this with validators? Do the same for end_dates
+            'min': -3000, # ToDo: Probably solve this with validators? Do the same for end_dates
             'max': datetime.now().year
             })
 
-        #handle dependent dropdowns
+        # handle dependent dropdowns
         self.fields['parent_refnumber'].queryset = RefNumber.objects.none()
 
         if 'parent_institution' in self.data:
@@ -87,7 +89,7 @@ class DocumentTitleForm(forms.ModelForm):
             self.fields['parent_refnumber'].queryset = self.instance.holding_institution.refnumber_set.order_by('refnumber_name')
 
     class Meta:
-        model = DocumentTitle
+        model = Document
         fields = ['title_name',
                   'parent_institution',
                   'parent_refnumber',
@@ -132,7 +134,6 @@ class EditMetaForm(forms.ModelForm):
         widget=SourceChildSelect,
         )
 
-
     # pass .form-control to form fields
     def __init__(self, *args, **kwargs):
         super(EditMetaForm, self).__init__(*args, **kwargs)
@@ -146,7 +147,7 @@ class EditMetaForm(forms.ModelForm):
                     })
     
     class Meta:
-        model = DocumentTitle
+        model = Document
         fields = ['author',
                   'start_year',
                   'start_month',
@@ -169,6 +170,7 @@ class EditMetaForm(forms.ModelForm):
                   'commit_message',
                   'submitted_by_anonymous',
                   ]
+
 
 class EditTranscriptForm(forms.ModelForm):
     
@@ -209,12 +211,10 @@ class EditTranscriptForm(forms.ModelForm):
         if commit:
             instance.save()
             self.save_m2m()
-
         return instance
-    
 
     class Meta:
-        model = DocumentTitle
+        model = Document
         fields = ['transcription_scope',
                   'transcription_text',
                   'commit_message',
