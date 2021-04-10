@@ -65,7 +65,6 @@ class RefNumber(models.Model):
     holding_institution = models.ForeignKey(Institution,
                                             verbose_name=_("Institution"),
                                             on_delete=models.PROTECT,
-                                            related_name="ref_numbers",  # TODO
                                             help_text=_("Institution associated with this reference number"))
 
     ref_number_name = models.CharField(verbose_name=_("Reference number"),
