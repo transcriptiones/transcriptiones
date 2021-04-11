@@ -8,9 +8,7 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Benutzername und Passwort stimmen nicht überein. Versuchen Sie es erneut.</p>
-{% endif %}
+
 
 {% if next %}
     {% if user.is_authenticated %}

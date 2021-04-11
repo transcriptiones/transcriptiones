@@ -1,3 +1,4 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.views.generic import View, TemplateView
 from django.contrib.auth import login
@@ -14,6 +15,7 @@ from main.models import User
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from main.tokens import account_activation_token
 from transcriptiones.settings import DEFAULT_FROM_EMAIL
+from django.utils.translation import ugettext as _
 
 
 def signup(request):
@@ -42,7 +44,7 @@ def signup(request):
 
 class AccountActivationSentView(TemplateView):
     """View to Inform the User that the confirmation-link has been sent."""
-    template_name = 'main/users/accountactivationsent.html'
+    template_name = 'main/users/account_activation_sent.html'
 
 
 def activate(request, uidb64, token):
@@ -61,18 +63,19 @@ def activate(request, uidb64, token):
         login(request, user)
         return redirect('start')
     else:
-        return render(request, 'main/users/accountactivationinvalid.html')
+        return render(request, 'main/users/account_activation_invalid.html')
 
 
-class CustomLoginView(LoginView):
+class CustomLoginView(SuccessMessageMixin, LoginView):
     """View for Login"""
     template_name = "main/users/login.html"
     form_class = LoginForm
+    success_message = _('Successfully logged in!')
 
 
 class CustomPasswordChangeView(PasswordChangeView):
     """View for changing password"""
-    template_name = "main/users/passwordchange.html"
+    template_name = "main/users/password_change.html"
     form_class = CustomPasswordChangeForm
 
 

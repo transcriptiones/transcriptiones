@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+{% block page_title %}
+    {% translate 'Logged out' %}
+{% endblock %}
 
 {% block content %}
-
-<div>Sie haben sich erfolgreich abgemeldet.</div>
 
 {% endblock %}

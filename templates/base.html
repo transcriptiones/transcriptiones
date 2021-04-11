@@ -42,6 +42,8 @@
             <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
             <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
         {% endblock %}
+        {% block additional_css %}
+        {% endblock additional_css %}
 
         {% block additional_head_tags %}
         {% endblock additional_head_tags %}
@@ -75,7 +77,7 @@
             </ul>
         </nav>
 
-        <!-- Sidebar -->
+         <!-- Sidebar -->
         {% include "sidebar.html" %}
 
         <!-- Content -->
@@ -93,10 +95,24 @@
                                         Implement block "page_title"
                                     {% endblock %}
                                 </h2>
-                                {% block content %}
+                            </div>
+                            <div>
+                                {% for message in messages %}
+                  <div class="alert {{ message.tags }}" role="alert" >
+                    <small>{{ message }}</small>
+                  </div>
+                {% endfor %}
+
+                {% if form.non_field_errors %}
+                  <div class="alert alert-danger" role="alert">
+                      <small>{{ form.non_field_errors }}</small>
+                  </div>
+                {% endif %}
+                            </div>
+                            {% block content %}
                                     <p class="lead mb-5">Implement block "content"</p>
                                 {% endblock %}
-                            </div>
+
                         </div>
                     </div>
                 </div>
