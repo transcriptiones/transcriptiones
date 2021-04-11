@@ -1,10 +1,16 @@
 from django.urls import path
 from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, PasswordResetDoneView,\
+    PasswordResetCompleteView
 
 from main.views.views import test
 from main.views.views import InstitutionListView
 from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView
 from main.views.views_upload import AddInstitutionView, AddRefNumberView, AddDocumentView, batch_upload, load_refnumbers
+from main.views.views_user import signup, userprofile, UserUpdateView
+from main.views.views_user import CustomLoginView
+from main.views.views_user import activate, AccountActivationSentView
+from main.views.views_user import CustomPasswordConfirmView, CustomPasswordResetView, CustomPasswordChangeView
 
 app_name = 'main'
 urlpatterns = [
@@ -43,7 +49,6 @@ urlpatterns = [
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_meta'),
     #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_transcript'),
-    #### path('upload/batch/', batchupload, name='batchupload'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
     # urls for search views
@@ -51,20 +56,20 @@ urlpatterns = [
     path('search/', TemplateView.as_view(template_name='main/dummy.html'), name='search'),
 
     # urls for user views
-    #### path('user/signup/', signup, name='signup'),
-    #### path('user/activationsent/', AccountActivationSentView.as_view(), name='account_activation_sent'),
-    #### path('user/activate/<uidb64>/<token>/', activate, name='activate'),
-    #### path('user/login/', CustomLoginView.as_view(), name='login'),
-    path('user/login/', TemplateView.as_view(template_name='main/dummy.html'), name='login'),
-    #### path('user/logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('user/signup/', signup, name='signup'),
+    path('user/activationsent/', AccountActivationSentView.as_view(), name='account_activation_sent'),
+    path('user/activate/<uidb64>/<token>/', activate, name='activate'),
+    path('user/login/', CustomLoginView.as_view(), name='login'),
+    path('user/login/', CustomLoginView.as_view(), name='login'),
+    path('user/logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('user/logout/', TemplateView.as_view(template_name='main/dummy.html'), name='logout'),
-    #### path('user/passwordchange/', CustomPasswordChangeView.as_view(), name='password_change'),
-    #### path('user/passwordchange/done/', PasswordChangeDoneView.as_view(template_name='users/passwordchangedone.html'), name='password_change_done'),
-    #### path('user/profile/', userprofile, name='profile'),
+    path('user/passwordchange/', CustomPasswordChangeView.as_view(), name='password_change'),
+    path('user/passwordchange/done/', PasswordChangeDoneView.as_view(template_name='users/passwordchangedone.html'), name='password_change_done'),
+    path('user/profile/', userprofile, name='profile'),
     path('user/profile/', TemplateView.as_view(template_name='main/dummy.html'), name='profile'),
-    #### path('user/profile/update/', UserUpdateView.as_view(), name='user_update'),
-    #### path('user/passwordreset/', CustomPasswordResetView.as_view(), name='password_reset'),
-    #### path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='users/passwordresetdone.html'), name='password_reset_done'),
-    #### path('user/reset/<uidb64>/<token>/', CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
-    #### path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='users/passwordresetcomplete.html'), name='password_reset_complete'),
+    path('user/profile/update/', UserUpdateView.as_view(), name='user_update'),
+    path('user/passwordreset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='users/passwordresetdone.html'), name='password_reset_done'),
+    path('user/reset/<uidb64>/<token>/', CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
+    path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='users/passwordresetcomplete.html'), name='password_reset_complete'),
     ]

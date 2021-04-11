@@ -117,8 +117,8 @@ COUNTRIES_FIRST_BREAK = _('--- (Select Country) ---')
 # Configuration for Authentication
 
 AUTH_USER_MODEL = 'main.User'
-LOGIN_REDIRECT_URL = 'start'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'main:start'
+LOGIN_URL = 'main:login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

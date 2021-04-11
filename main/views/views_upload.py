@@ -94,7 +94,7 @@ class AddDocumentView(LoginRequiredMixin, View):
     """View for creating new document object"""
 
     form_class = DocumentForm
-    template_name = "main/upload/document_form.html"
+    template_name = "main/upload/add_document_form.html"
 
     # Display the form if accessed via GET
     def get(self, *args, **kwargs):
