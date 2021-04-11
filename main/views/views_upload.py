@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import UpdateView
 from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main.forms.forms_upload import InstitutionForm, RefNumberForm, DocumentTitleForm, EditMetaForm, EditTranscriptForm
+from main.forms.forms_upload import InstitutionForm, RefNumberForm, DocumentForm, EditMetaForm, EditTranscriptForm
 from main.models import Author, Institution, RefNumber, Document, SourceType
 from main.utils import create_related_objects
 
@@ -93,13 +93,13 @@ class AddRefNumberView(LoginRequiredMixin, View):
 class AddDocumentView(LoginRequiredMixin, View):
     """View for creating new document object"""
 
-    form_class = DocumentTitleForm
+    form_class = DocumentForm
     template_name = "main/upload/document_form.html"
 
-    # display the form if accessed via GET
+    # Display the form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method == "GET":
-            # prepopulate field if user wants to publish anonymously
+            # Pre-populate field if user wants to publish anonymously
             if self.request.user.mark_anonymous:
                 form = self.form_class(initial={'publish_user': True})
             else:
@@ -140,21 +140,19 @@ class AddDocumentView(LoginRequiredMixin, View):
 
             else:
                 return HttpResponse(str(form.errors).encode())
-                #Exception Handling goes here!
-                #
-                #return render(self.request, self.template_name,
-                #          {"form": form})
+                # TODO CHECK
+                # Exception Handling goes here!
+                # return render(self.request, self.template_name, {"form": form})
 
 
-#View to display after successful form-submit
 def thanks_view(request, context):
+    """View to display after successful form-submit"""
     template_name = "main/upload/form_redirect.html"
-
     return render(request, template_name, context)
     
-    
-#View for loading refnumbers, depending on chosen Institution
+
 def load_refnumbers(request):
+    """View for loading refnumbers, depending on chosen Institution"""
     institution_id = request.GET.get('institution')
 
     refnumbers = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('holding_institution')
@@ -167,9 +165,9 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
 
     # get object to update
     def get_object(self):
-        institution = self.kwargs.get('instslug')
-        refnumber = self.kwargs.get('refslug')
-        document = self.kwargs.get('docslug')
+        institution = self.kwargs.get('inst_slug')
+        refnumber = self.kwargs.get('ref_slug')
+        document = self.kwargs.get('doc_slug')
         queryset = Document.objects.filter(parent_institution__institution_slug = institution)
         queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
         return queryset.get(document_slug = document)
@@ -195,8 +193,9 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
 
 
 
-# view for editing Metadata
 class EditMetaView(BaseEditDocumentView):
+    """view for editing Metadata"""
+
     form_class = EditMetaForm
     template_name = "main/upload/edit_meta.html"
 

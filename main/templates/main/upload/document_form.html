@@ -20,7 +20,7 @@
 {% endblock dependencies %}
 
 {% block content %}
-<form action="{% url 'main:document_add' %}" method="post" id="documentTitleForm" dep-ref-url="{% url 'ajax_load_refnumbers' %}" modal-inst-url="{% url 'main:institution_add' %}" modal-ref-url="{% url 'refnumber_add' %}" class="needs-validation" novalidate>
+<form action="{% url 'main:upload_document' %}" method="post" id="documentTitleForm" dep-ref-url="{% url 'main:ajax_load_ref_numbers' %}" modal-inst-url="{% url 'main:institution_add' %}" modal-ref-url="{% url 'main:ref_number_add' %}" class="needs-validation" novalidate>
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="card">
@@ -418,7 +418,7 @@
     </p>
 </div>
 
-{% include "upload/tooltips.html" %}
+{% include "main/upload/tooltips.html" %}
 
 
 {% endblock content %}

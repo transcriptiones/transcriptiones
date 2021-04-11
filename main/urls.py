@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from main.views.views import test
 from main.views.views import InstitutionListView
 from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView
-from main.views.views_upload import AddDocumentView, batch_upload
+from main.views.views_upload import AddInstitutionView, AddRefNumberView, AddDocumentView, batch_upload, load_refnumbers
 
 app_name = 'main'
 urlpatterns = [
@@ -33,8 +33,11 @@ urlpatterns = [
     #### path('upload/', AddDocumentView.as_view(), name='document_add'),
     path('upload/', AddDocumentView.as_view(), name='upload_document'),
     #### path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
+    path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     #### path('upload/addrefnumber/', AddRefNumberView.as_view(), name='refnumber_add'),
+    path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
     #### path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_refnumbers'),
+    path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_ref_numbers'),
     #### path('upload/thanks/', thanks_view, name='thanks'),
     #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/editmeta/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_meta'),

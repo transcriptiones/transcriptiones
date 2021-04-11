@@ -43,9 +43,10 @@ class RefNumberForm(forms.ModelForm):
         fields = ['holding_institution', 'ref_number_name', 'ref_number_title', 'collection_link']
 
 
-class DocumentTitleForm(forms.ModelForm):
+class DocumentForm(forms.ModelForm):
     """Form for adding a new Document to the Database"""
 
+    '''
     source_type_parent = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
         required=True,
@@ -58,10 +59,11 @@ class DocumentTitleForm(forms.ModelForm):
         help_text='Ebene 2',
         widget=SourceChildSelect,
         )
+    '''
 
     # add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
-        super(DocumentTitleForm, self).__init__(*args, **kwargs)
+        super(DocumentForm, self).__init__(*args, **kwargs)
         for name in self.fields:
             if isinstance(self.fields[name], forms.BooleanField):
                 self.fields[name].widget.attrs.update({'class': 'form-check-input'})
@@ -99,8 +101,8 @@ class DocumentTitleForm(forms.ModelForm):
                   # TODO dates
                   'place_name',
                   'language',
-                  'source_type_parent',
-                  'source_type_child',
+                  # TODO 'source_type_parent',
+                  # TODO 'source_type_child',
                   'material',
                   'measurements_length',
                   'measurements_width',
