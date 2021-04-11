@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from main.views.views import test
 from main.views.views import InstitutionListView
 from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView
-from main.views.views_upload import AddDocumentView
+from main.views.views_upload import AddDocumentView, batch_upload
 
 app_name = 'main'
 urlpatterns = [
@@ -41,6 +41,7 @@ urlpatterns = [
     #### path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),
     path('upload/<slug:instslug>/<slug:refslug>/<slug:docslug>/edittranscript/', TemplateView.as_view(template_name='main/dummy.html'), name='edit_transcript'),
     #### path('upload/batch/', batchupload, name='batchupload'),
+    path('upload/batch/', batch_upload, name='batch_upload'),
 
     # urls for search views
     #### path('search/', SearchView.as_view(), name='search'),

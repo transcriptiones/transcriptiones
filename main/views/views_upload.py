@@ -13,7 +13,7 @@ class AddInstitutionView(LoginRequiredMixin, View):
     """View for adding institution"""
 
     form_class = InstitutionForm
-    template_name = "upload/addinstitution.html"
+    template_name = "main/upload/add_institution.html"
 
     # display form if accessed via GET
     def get(self, *args, **kwargs):
@@ -55,16 +55,16 @@ class AddInstitutionView(LoginRequiredMixin, View):
 class AddRefNumberView(LoginRequiredMixin, View):
     """View for adding RefNumber"""
     form_class = RefNumberForm
-    template_name = "upload/addrefnumber.html"
+    template_name = "main/upload/add_ref_number.html"
 
-    #display form if accessed via GET
+    # Display form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method =="GET":
             form = self.form_class()
             return render(self.request, self.template_name,
                           {"form": form})
 
-    #handle the form if accessed via POST
+    # Handle the form if accessed via POST
     def post(self, *args, **kwargs):
         if self.request.is_ajax and self.request.method == "POST":            
             holding_institution = Institution.objects.get(id=self.request.POST.get('new_holding_institution'))
@@ -90,17 +90,18 @@ class AddRefNumberView(LoginRequiredMixin, View):
             return render(self.request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
 
 
-#View for creating new document object
 class AddDocumentView(LoginRequiredMixin, View):
+    """View for creating new document object"""
+
     form_class = DocumentTitleForm
-    template_name = "upload/documenttitle_form.html"
+    template_name = "main/upload/document_form.html"
 
     # display the form if accessed via GET
     def get(self, *args, **kwargs):
         if self.request.method == "GET":
             # prepopulate field if user wants to publish anonymously
-            if self.request.user.anonymous_publication:
-                form = self.form_class(initial={'submitted_by_anonymous': True})
+            if self.request.user.mark_anonymous:
+                form = self.form_class(initial={'publish_user': True})
             else:
                 form = self.form_class()
             return render(self.request, self.template_name, {"form": form})
@@ -147,7 +148,7 @@ class AddDocumentView(LoginRequiredMixin, View):
 
 #View to display after successful form-submit
 def thanks_view(request, context):
-    template_name = "upload/formredirect.html"
+    template_name = "main/upload/form_redirect.html"
 
     return render(request, template_name, context)
     
@@ -157,7 +158,7 @@ def load_refnumbers(request):
     institution_id = request.GET.get('institution')
 
     refnumbers = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('holding_institution')
-    return render(request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
+    return render(request, 'main/upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
 
 
 # Base class for Editing DocumentTitle objects
@@ -181,9 +182,9 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
             document = self.get_object()
             document.commit_message = ''
 
-            # prepopulate field submitted_by_anonymous
-            if self.request.user.anonymous_publication:
-                document.submitted_by_anonymous = True
+            # prepopulate field publish_user
+            if self.request.user.mark_anonymous:
+                document.publish_user = True
 
             form = self.form_class(instance=document)
 
@@ -197,7 +198,7 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
 # view for editing Metadata
 class EditMetaView(BaseEditDocumentView):
     form_class = EditMetaForm
-    template_name = "upload/editmeta.html"
+    template_name = "main/upload/edit_meta.html"
 
     def get_context_data(self, **kwargs):
         if self.request.method == "GET":
@@ -213,12 +214,12 @@ class EditMetaView(BaseEditDocumentView):
         return super().get_context_data(**kwargs)
 
 
-    #handle the form if accesed via POST
+    # Handle the form if accesed via POST
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
             data = self.request.POST.copy()
             
-            #if there are authors in the formdata, add new authors to db
+            # If there are authors in the formdata, add new authors to db
             create_related_objects(listname="author",
                                    formdata=data,
                                    relatedclass=Author,
@@ -252,7 +253,7 @@ class EditMetaView(BaseEditDocumentView):
 # View for editing Transcript
 class EditTranscriptView(BaseEditDocumentView):
     form_class = EditTranscriptForm
-    template_name = "upload/edittranscript.html"
+    template_name = "main/upload/edit_transcript.html"
     
     #handle the form if accesed via POST
     def post(self, *args, **kwargs):
@@ -281,8 +282,8 @@ class EditTranscriptView(BaseEditDocumentView):
 
 
 # View for creating multiple objects from csv-File
-def batchupload(request):
-    template_name = 'upload/batchupload.html'
+def batch_upload(request):
+    template_name = 'main/upload/batch_upload.html'
     errors = {}
     if request.method == 'GET':
         return render(request, template_name)
@@ -337,4 +338,4 @@ def batchupload(request):
 
         except Exception as e:
             return HttpResponse(str(e))
-            
+

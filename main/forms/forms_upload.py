@@ -70,36 +70,33 @@ class DocumentTitleForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': self.fields[name].help_text,
                     })
-        
+
+        """ TODO check This. Bit it probably isnt needed anymore
         self.fields['start_year'].widget.attrs.update({
             'min': -3000, # ToDo: Probably solve this with validators? Do the same for end_dates
             'max': datetime.now().year
             })
+        """
 
         # handle dependent dropdowns
-        self.fields['parent_refnumber'].queryset = RefNumber.objects.none()
+        self.fields['parent_ref_number'].queryset = RefNumber.objects.none()
 
         if 'parent_institution' in self.data:
             try:
                 institution_id = int(self.data.get('parent_institution'))
-                self.fields['parent_refnumber'].queryset = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('refnumber_name')
+                self.fields['parent_ref_number'].queryset = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('ref_number_name')
             except (ValueError, TypeError):
                 pass
         elif self.instance.pk:
-            self.fields['parent_refnumber'].queryset = self.instance.holding_institution.refnumber_set.order_by('refnumber_name')
+            self.fields['parent_ref_number'].queryset = self.instance.holding_institution.refnumber_set.order_by('ref_number_name')
 
     class Meta:
         model = Document
         fields = ['title_name',
                   'parent_institution',
-                  'parent_refnumber',
+                  'parent_ref_number',
                   'author',
-                  'start_year',
-                  'start_month',
-                  'start_day',
-                  'end_year',
-                  'end_month',
-                  'end_day',
+                  # TODO dates
                   'place_name',
                   'language',
                   'source_type_parent',
@@ -109,13 +106,13 @@ class DocumentTitleForm(forms.ModelForm):
                   'measurements_width',
                   'pages',
                   'paging_system',
-                  'illuminated',
-                  'seal',
+                  # TODO 'illuminated',
+                  # TODO 'seal',
                   'transcription_scope',
                   'comments',
                   'transcription_text',
                   'document_slug',
-                  'submitted_by_anonymous',
+                  # TODO 'submitted_by_anonymous',
                   ]
 
 
@@ -149,12 +146,7 @@ class EditMetaForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ['author',
-                  'start_year',
-                  'start_month',
-                  'start_day',
-                  'end_year',
-                  'end_month',
-                  'end_day',
+                  # replace with dates
                   'place_name',
                   'language',
                   'source_type_parent',
@@ -164,11 +156,11 @@ class EditMetaForm(forms.ModelForm):
                   'measurements_width',
                   'pages',
                   'paging_system',
-                  'illuminated',
-                  'seal',
+                  # TODO 'illuminated',
+                  # TODO 'seal',
                   'comments',
                   'commit_message',
-                  'submitted_by_anonymous',
+                  # TODO 'submitted_by_anonymous',
                   ]
 
 
@@ -204,7 +196,6 @@ class EditTranscriptForm(forms.ModelForm):
             instance.language.clear()
             instance.language.add(*list(languages))
 
-
         self.save_m2m = save_m2m
 
         # Do we need to save all changes now?
@@ -218,5 +209,5 @@ class EditTranscriptForm(forms.ModelForm):
         fields = ['transcription_scope',
                   'transcription_text',
                   'commit_message',
-                  'submitted_by_anonymous',
+                  # TODO 'submitted_by_anonymous',
                   ]

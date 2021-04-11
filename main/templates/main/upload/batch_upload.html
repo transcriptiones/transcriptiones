@@ -1,0 +1,38 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<h2>CSV-Upload</h2>
+
+{% for error in errors.values %}
+<div>{{ error }}</div>
+{% endfor %}
+
+<form action="{% url 'main:batch_upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="fieldWrapper form-group row">
+        <div class="col-sm-4">
+            <label for="id_model">Model</label>
+        </div>
+        <div class="col-sm-8">
+            <select class="form-control" id="id_target_model" name="target_model" required>
+                <option value="">----------</option>
+                <option value="SourceType">Archivalienart</option>
+                <option value="Institution">Institution</option>
+            </select>
+        </div>
+    </div>
+    <div class="fieldWrapper form-group row">
+        <div class="col-sm-4">
+            <label for="id_csv_file">CSV-File</label>
+        </div>
+        <div class="col-sm-8">
+            <input class="form-control-file" type="file" name="csv_file" id="id_csv_file" required />
+        </div>
+    </div>
+    <div>
+        <button type="submit">Abschicken</button>
+    </div>
+</form>
+
+{% endblock content %}
