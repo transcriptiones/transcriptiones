@@ -1,7 +1,7 @@
 from ckeditor.widgets import CKEditorWidget
 from crispy_forms.helper import FormHelper
 from django import forms
-
+from django.utils.translation import ugettext as _
 from main.models import Institution, RefNumber, Document, SourceType
 from main.widgets import SourceChildSelect
 
@@ -44,11 +44,12 @@ class RefNumberForm(forms.ModelForm):
         fields = ['holding_institution', 'ref_number_name', 'ref_number_title', 'collection_link']
 
 
-def popover_html(field_name, content):
+def popover_html(field_name, content=None):
     label = Document._meta.get_field(field_name).verbose_name
-    return label + f' <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_title_name"></i>\
-                     <div class="tooltip_templates"><div id="tt_title_name">\
-                        <p>{content}</p>\
+    tooltip = Document._meta.get_field(field_name).help_text if content is None else content
+    return label + f' <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_{field_name}"></i>\
+                     <div class="tooltip_templates"><div id="tt_{field_name}">\
+                        <p>{tooltip}</p>\
                      </div></div>'
 
 
@@ -82,9 +83,19 @@ class DocumentForm(forms.ModelForm):
                   ]
 
         labels = {
-            'title_name': popover_html('title_name', 'Content of the thingy'),
-            'parent_institution' : popover_html('parent_institution', 'Another text'),
-            'parent_ref_number': popover_html('parent_ref_number', 'Another text'),
+            'title_name': popover_html('title_name'),
+            'parent_institution': popover_html('parent_institution', _('')),
+            'parent_ref_number': popover_html('parent_ref_number', _('')),
+            'author': popover_html('author', _('')),
+            'place_name': popover_html('place_name', _('')),
+            'language': popover_html('language', _('')),
+            'material': popover_html('material', _('')),
+            'pages': popover_html('pages', _('')),
+            'paging_system': popover_html('paging_system', _('')),
+            'transcription_scope': popover_html('transcription_scope', _('')),
+            'comments': popover_html('comments', _('')),
+            'transcription_text': popover_html('transcription_text', _('')),
+            'publish_user': popover_html('publish_user', _('')),
         }
 
     transcription_text = forms.CharField(widget=CKEditorWidget)

@@ -31,7 +31,11 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'main:upload_document' %}" method="post" id="documentTitleForm" dep-ref-url="{% url 'main:ajax_load_ref_numbers' %}" modal-inst-url="{% url 'main:institution_add' %}" modal-ref-url="{% url 'main:ref_number_add' %}" class="needs-validation" novalidate>
+    <form action="{% url 'main:upload_document' %}" method="POST" id="documentTitleForm"
+          dep-ref-url="{% url 'main:ajax_load_ref_numbers' %}"
+          modal-inst-url="{% url 'main:institution_add' %}"
+          modal-ref-url="{% url 'main:ref_number_add' %}" class="needs-validation" novalidate>
+
         {% csrf_token %}
         {{ form.media }}
 
