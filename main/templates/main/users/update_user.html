@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load transcriptiones %}
-{% load crispy_form_tags %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}
     {% translate 'Change User Profile' %}
@@ -27,96 +27,10 @@
     {% card 'update_user' _('Update Your User Information') %}
         <form method="post" action="{% url 'main:user_update' %}">
             {% csrf_token %}
+            {% crispy form %}
+            <button type="submit" class="btn btn-secondary">{% translate 'Save Changes' %}</button>
         </form>
     {% endcard %}
-
-    <div>
-    {{ form.non_field_errors }}
-</div>
-
-<form method="post" action="{% url 'main:user_update' %}">
-    {% csrf_token %}
-    <div class="fieldWrapper form-group row">
-        {{ form.username.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.username.id_for_label }}" class="control-label">
-                {{ form.username.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_username"></i>
-        </div>
-        <div class="col-sm-9">
-            {{ form.username }}
-            <span class="error"></span>
-        </div>
-    </div>
-    <div class="fieldWrapper form-group row">
-        {{ form.first_name.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.first_name.id_for_label }}" class="control-label">
-                {{ form.first_name.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_first_name"></i>
-        </div>
-        <div class="col-sm-9">
-            {{ form.first_name }}
-            <span class="error"></span>
-        </div>
-    </div>
-    <div class="fieldWrapper form-group row">
-        {{ form.last_name.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.last_name.id_for_label }}" class="control-label">
-                {{ form.last_name.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_last_name"></i>
-        </div>
-        <div class="col-sm-9">
-            {{ form.last_name }}
-            <span class="error"></span>
-        </div>
-    </div>
-    <div class="fieldWrapper form-group row">
-        {{ form.email.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.email.id_for_label }}" class="control-label">
-                {{ form.email.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_email"></i>
-        </div>
-        <div class="col-sm-9">
-            {{ form.email }}
-            <span class="error"></span>
-        </div>
-    </div>
-    <div class="fieldWrapper form-group row">
-        {{ form.anonymous_publication.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.mark_anonymous.id_for_label }}" class="form-check-label">
-                {{ form.mark_anonymous.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_anonymous_publication"></i>
-        </div>
-        <div class="col-sm">
-            {{ form.mark_anonymous }}
-            <span class="error"></span>
-        </div>
-    </div>
-    <div class="fieldWrapper form-group row">
-        {{ form.passwordprompt.errors }}
-        <div class="col-sm-3">
-            <label for="{{ form.passwordprompt.id_for_label }}" class="control-label">
-                {{ form.passwordprompt.label }}
-            </label>
-            <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_passwordprompt"></i>
-        </div>
-        <div class="col-sm-9">
-            {{ form.passwordprompt }}
-            <span class="error"></span>
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-secondary">Änderungen bestätigen</button>
-</form>
 
 {% include "main/users/tooltips.html" %}
 
