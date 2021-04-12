@@ -1,5 +1,5 @@
 import django_tables2 as tables
-
+from django.utils.translation import ugettext as _
 from .models import RefNumber, Document
 
 
@@ -53,3 +53,34 @@ class DocumentTable(tables.Table):
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
     document_utc_update = tables.DateTimeColumn(orderable=False)
+
+
+class DocumentHistoryTable(tables.Table):
+    """The DocumentHistoryTable shows a list of documents"""
+
+    class Meta:
+        model = Document
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("title_name", "activity_type", "document_utc_add", "commit_message", "submitted_by")
+        attrs = {"class": "table table-hover",
+                 'th': {'style': 'text-align: left;'},
+                 'td': {'style': 'text-align: left;'}
+                 }
+
+    title_name = tables.LinkColumn(orderable=False)
+    activity_type = tables.Column(orderable=False, accessor='id')
+    document_utc_add = tables.Column(orderable=False)
+    commit_message = tables.Column(orderable=False)
+    submitted_by = tables.Column(orderable=False)
+
+    def render_activity_type(self, value, record):
+        if record.version_number == 1:
+            return _("Upload")
+        else:
+            return _("Edit")
+
+    def render_submitted_by(self, value, record):
+        if record.publish_user:
+            return value
+        else:
+            return "Anonymous"
