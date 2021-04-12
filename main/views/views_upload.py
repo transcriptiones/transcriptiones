@@ -109,6 +109,7 @@ class AddDocumentView(LoginRequiredMixin, View):
     # handle the form if accessed via POST
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
+            print('in post')
             data = self.request.POST.copy()
             
             #if there are authors in the formdata, add new authors to db
