@@ -1,0 +1,9 @@
+{% load bootstrap4 %}
+
+<form action="" method="get" class="form form-inline">
+        Filter:&nbsp;
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'Filter' %}
+        <small><a href='{{ request.path }}' %}>Clear</a></small>
+</form>
+<br/>
