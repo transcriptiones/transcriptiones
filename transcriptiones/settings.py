@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_tables2',
     'crispy_forms',
     'bsmodals',
+    'django_filters',
+    'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
