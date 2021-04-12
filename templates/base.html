@@ -1,5 +1,6 @@
 {% load static %}
-{%  load i18n %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 <!DOCTYPE html>
 <html>
@@ -52,6 +53,9 @@
     <body id="page-top">
         {% block body_includes %}
         {% endblock %}
+
+        {% block breadcrumb_init %}
+        {% endblock %}
         <!-- Navigation -->
         <nav class="navbar navbar-expand-sm fixed-top position-absolute text.navbar">
             <ul class="navbar-nav align-items-center">
@@ -86,8 +90,8 @@
                 <div class="container text-center">
                     <div class="row">
                         <div class="col-sm-10 mx-auto">
-                            {%  block breadcrumb %}
-                                <!-- nav breadcrumb if needed -->
+                            {%  block breadcrumbs %}
+                                {% render_breadcrumbs %}
                             {% endblock %}
                             <div class="content-section-heading">
                                 <h2 class="mb-5">

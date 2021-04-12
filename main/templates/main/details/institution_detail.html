@@ -2,19 +2,17 @@
 {% load i18n %}
 {% load transcriptiones %}
 {% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {{ institution.institution_name }}
 {% endblock %}
 
-{% block breadcrumb %}
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">{% translate 'Institutions list' %}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ institution.institution_name }}</li>
-        </ol>
-    </nav>
+{% block breadcrumb_init %}
+    {% breadcrumb _("Institutions list") "main:institution_list" %}
+    {% breadcrumb institution.institution_name "" %}
 {% endblock %}
+
 
 {% block content %}
 

@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load transcriptiones %}
 {% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block additional_head_tags %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/toolbox.css' %}">
@@ -16,15 +17,11 @@
     {{ document.title_name }}
 {% endblock %}
 
-{% block breadcrumb %}
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">{% translate 'Institutions list' %}</a></li>
-            <li class="breadcrumb-item"><a href="{{ document.parent_institution.get_absolute_url }}">{{ document.parent_institution }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ document.parent_ref_number.get_absolute_url }}">{{ document.parent_ref_number }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{% translate 'Document' %}</li>
-        </ol>
-    </nav>
+{% block breadcrumb_init %}
+    {% breadcrumb _("Institutions list") "main:institution_list" %}
+    {% breadcrumb document.parent_institution document.parent_institution.get_absolute_url %}
+    {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
+    {% breadcrumb _('Document') '' %}
 {% endblock %}
 
 {% block content %}
