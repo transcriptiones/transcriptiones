@@ -8,14 +8,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.translation import ugettext as _
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
+from django_tables2 import RequestConfig
+
+from transcriptiones.settings import DEFAULT_FROM_EMAIL
+
 from main.models import User
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from main.tokens import account_activation_token
-from transcriptiones.settings import DEFAULT_FROM_EMAIL
-from django.utils.translation import ugettext as _
+from main.model_info import get_user_info
+from main.tables import TitleValueTable, DocumentHistoryTable, DocumentTable
+from main.filters import DocumentFilter
 
 
 def signup(request):
@@ -82,14 +88,19 @@ class CustomPasswordChangeView(PasswordChangeView):
 @login_required
 def userprofile(request):
     """View for User Profile Page"""
-    user = request.user
-    contributions = user.contributions(manager='all_objects').all().order_by('-document_utc_add')
+    contributions = request.user.contributions(manager='all_objects').all().order_by('-document_utc_add')
     paginator = Paginator(contributions, 10)
 
     page_number = request.GET.get('page')
     contributions_pg = paginator.get_page(page_number)
 
-    return render(request, 'main/users/userprofile.html', {'user': user, 'contributions': contributions_pg})
+    user_table = TitleValueTable(data=get_user_info(request.user))
+
+    d_filter = DocumentFilter(request.GET, queryset=contributions)
+    activity_table = DocumentHistoryTable(data=d_filter.qs)
+    RequestConfig(request).configure(activity_table)
+
+    return render(request, 'main/users/user_profile.html', {'user_table': user_table, 'activity_table': activity_table, 'filter': d_filter})
 
 
 class UserUpdateView(LoginRequiredMixin, View):

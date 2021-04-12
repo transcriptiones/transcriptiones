@@ -127,5 +127,30 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         return tables
 
 
+class DocumentHistoryView(DetailView):
+    """View to display version history of a DocumentTitle object"""
+
+    model = Document
+    template_name = "main/details/document_history.html"
+
+    def get_object(self):
+        institution = self.kwargs.get('instslug')
+        refnumber = self.kwargs.get('refslug')
+        document = self.kwargs.get('docslug')
+        queryset = Document.objects.filter(parent_institution__institution_slug = institution)
+        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
+        return get_object_or_404(queryset, document_slug = document)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        versions = self.model.get_versions(self.get_object())
+        context['versions'] = versions
+        return context
+
+
+def search(request):
+    return render(request, 'main/search.html')
+
+
 def test(request):
     return render(request, 'main/test.html')
