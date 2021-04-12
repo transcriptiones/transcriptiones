@@ -1,0 +1,26 @@
+﻿{% extends 'base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+
+{% block page_title %}
+    {% translate 'User Profile' %}
+{% endblock %}
+
+{% block content %}
+
+    {% card 'user_profile_personal' _('My Personal Data') %}
+        {% render_table user_table %}
+    {% endcard %}
+
+    {% card 'user_profile_activity' _('My Activity') %}
+        {% include 'main/filter.html' %}
+        {% render_table activity_table %}
+    {% endcard %}
+
+    <!-- TODO check table pagination -->
+
+    <div><a href="{% url 'main:password_change' %}">Passwort ändern</a></div>
+    <div><a href="{% url 'main:user_update' %}">Profil anpassen</a></div>
+    <div><a href="{% url 'main:logout' %}">Abmelden</a></div>
+{% endblock %}
