@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+
+{% block page_title %}
+    {% translate 'Registration' %}
+{%  endblock %}
 
 {% block dependencies %}
 <!-- Tooltipster Plugin -->
