@@ -3,7 +3,10 @@
 <form action="" method="get" class="form form-inline">
         Filter:&nbsp;
         {% bootstrap_form filter.form layout='inline' %}
+        &nbsp;
         {% bootstrap_button 'Filter' %}
-        <small><a href='{{ request.path }}' %}>Clear</a></small>
+        &nbsp;
+        <a class="btn btn-primary" href='{{ request.path }}'>Clear</a>
+
 </form>
 <br/>

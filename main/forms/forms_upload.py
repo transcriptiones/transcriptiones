@@ -22,6 +22,11 @@ class InstitutionForm(forms.ModelForm):
             'max': 99999
             })
 
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-3'
+        self.helper.field_class = 'col-sm-9'
+
     class Meta:
         model = Institution
         fields = ['institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug']
@@ -157,7 +162,7 @@ class EditMetaForm(forms.ModelForm):
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
         required=True,
         help_text='Ebene 1',
-        label = 'Archivalienart',
+        label='Archivalienart',
         )
     source_type_child = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=False).order_by('type_name'),
@@ -165,6 +170,9 @@ class EditMetaForm(forms.ModelForm):
         help_text='Ebene 2',
         widget=SourceChildSelect,
         )
+
+    seal = forms.BooleanField()
+    illuminated = forms.BooleanField()
 
     # pass .form-control to form fields
     def __init__(self, *args, **kwargs):
@@ -177,11 +185,17 @@ class EditMetaForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': self.fields[name].help_text,
                     })
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-3'
+        self.helper.field_class = 'col-sm-9'
     
     class Meta:
         model = Document
         fields = ['author',
-                  # replace with dates
+                  'doc_start_date',
+                  'doc_end_date',
                   'place_name',
                   'language',
                   'source_type_parent',
@@ -191,8 +205,8 @@ class EditMetaForm(forms.ModelForm):
                   'measurements_width',
                   'pages',
                   'paging_system',
-                  # TODO 'illuminated',
-                  # TODO 'seal',
+                  'illuminated',
+                  'seal',
                   'comments',
                   'commit_message',
                   # TODO 'submitted_by_anonymous',

@@ -8,6 +8,8 @@ from django_tables2 import SingleTableMixin, MultiTableMixin
 from main.models import Institution, RefNumber, Document
 from main.tables import TitleValueTable, RefNumberTable, DocumentTable
 
+import main.model_info as m_info
+
 
 class InstitutionListView(ListView):
     """Creates a list view for all instituions. """
@@ -62,9 +64,9 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
     template_name = "main/details/ref_number_detail.html"
 
-
     def get_tables(self):
         ref_number = self.get_object()
+        # TODO move to model info
         data = [
             {'title': ref_number._meta.get_field('holding_institution').verbose_name,
              'value': ref_number.holding_institution},
@@ -120,9 +122,13 @@ class DocumentDetailView(MultiTableMixin, DetailView):
 
     def get_tables(self):
         document = self.get_object()
-        data = document.get_card_data()
 
-        tables = [TitleValueTable(data=data[i]) for i in range(len(data))]
+        tables = [
+            TitleValueTable(data=m_info.get_document_info_overview(document)),
+            TitleValueTable(data=m_info.get_document_info_metadata(document)),
+            TitleValueTable(data=m_info.get_document_info_manuscript(document)),
+            TitleValueTable(data=m_info.get_document_info_comments(document)),
+        ]
 
         return tables
 

@@ -1,17 +1,16 @@
-﻿{% load  %}
+﻿{% load i18n %}
+{% load crispy_forms_tags %}
 <!--
-
-
-THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
-
-
+THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED! WHY?
 -->
+
 <div class="modal-header">
-    <h5 class="modal-title" id="institutionModalLabel">Neue Institution hinzufügen</h5>
+    <h5 class="modal-title" id="institutionModalLabel">{% translate 'Add Institution' %}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+
 <div id="modalFormInstitution" class="modal-body" style="display: block">
     <div class="col-sm">
         <div class="row">
@@ -20,67 +19,22 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED!
     </div>
     <form method="post" id="institutionForm" class="needs-validation" novalidate>
         {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="fieldWrapper form-group row">
-            {{ form.institution_name.errors }}
-            <div class="col-sm-3">
-                <label for="{{ form.institution_name.id_for_label }}" class="control-label">
-                    {{ form.institution_name.label }}
-                </label>
-                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_institution_name"></i>
+        {{ form.institution_name|as_crispy_field }}
+        {{ form.street|as_crispy_field }}
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                Zip code / City*
             </div>
-            <div class="col-sm-9">
-                {{ form.institution_name }}
-                <span class="error"></span>
-            </div>
-        </div>
-        <div class="fieldWrapper form-group row">
-            {{ form.street.errors }}
-            <div class="col-sm-3">
-                <label for="{{ form.street.id_for_label }}" class="control-label">
-                    Adresse
-                </label>
-                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_address"></i>
-            </div>
-            <div class="col-sm-9">
-                {{ form.street }}
-                <span class="error"></span>
-            </div>
-        </div>
-        <div class="row">
-            <label for="{{ form.zip_code.id_for_label }}" class="col-sm-3 control-label"></label>
-            <div class="fieldWrapper col-sm-3">
-                {{ form.zip_code.errors }}
+            <div class="form-group col-sm-4">
                 {{ form.zip_code }}
-                <span class="error"></span>
             </div>
-            <div class="fieldWrapper col-sm-6">
-                {{ form.city.errors }}
+            <div class="form-group col-sm-5">
                 {{ form.city }}
-                <span class="error"></span> <!-- ToDo: Validation, Widgets. Also: Where to put fieldWrapper? -->
             </div>
         </div>
-        <div class="fieldWrapper row">
-            {{ form.country.errors }}
-            <label for="{{ form.country.id_for_label }}" class="col-sm-3 control-label"></label>
-            <div class="col-sm-9">
-                {{ form.country }}
-                <span class="error"></span>
-            </div>
-        </div>
-        <div class="fieldWrapper form-group row">
-            {{ form.site_url.errors }}
-            <div class="col-sm-3">
-                <label for="{{ form.site_url.id_for_label }}" class="control-label">
-                    {{ form.site_url.label }}
-                </label>
-                <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_site_url"></i>
-            </div>
-            <div class="col-sm-9">
-                {{ form.site_url }}
-                <span class="error"></span>
-            </div>
-        </div>
+        {{ form.country|as_crispy_field }}
+        {{ form.site_url|as_crispy_field }}
+
         <button type="button" class="btn btn-secondary" id="submitButtonModal">Absenden</button>
         <button type="button" class="btn btn-light" id="backButtonModal" style="display:none">Zurück</button>
     </form>

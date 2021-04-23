@@ -46,8 +46,8 @@ function confirmRefNumber() {
         .done(function (data) {
             var new_ref_name = $('#id_refnumber_name').val();
             $('#refNumberModal').modal('hide');
-            $('#id_parent_refnumber').html(data).prop("disabled", false);
-            $('#id_parent_refnumber option:contains(' + new_ref_name + ')').prop("selected", true);
+            $('#id_parent_ref_number').html(data).prop("disabled", false);
+            $('#id_parent_ref_number option:contains(' + new_ref_name + ')').prop("selected", true);
         });
 };
 
@@ -197,7 +197,7 @@ $(document).on('show.bs.modal', '#institutionModal', function () {
 //append selected values to intro and refNumberForm
 $(document).on('show.bs.modal', '#refNumberModal', function () {
     var instValue = $('#id_parent_institution').val();
-    var refValue = $('#id_parent_refnumber').val();
+    var refValue = $('#id_parent_ref_number').val();
     var txt = "Die Signatur " + refValue + " ist noch nicht Teil der Datenbank.";
     $('#refNumberModal').find('#modalIntro').html(txt);
     $('#id_holding_institution option[value="' + instValue + '"]').prop("selected", true).change();
@@ -211,10 +211,10 @@ $(document).on('show.bs.modal', '#refNumberModal', function () {
  * 
  */
 
-// clear the form field which opened institutionModal and disable parent_refnumber
+// clear the form field which opened institutionModal and disable parent_ref_number
 $(document).on('hide.bs.modal', '#institutionModal', function () {
     $('#id_parent_institution').prop('selectedIndex', -1).change();
-    $('#id_parent_refnumber').prop("disabled", true);
+    $('#id_parent_ref_number').prop("disabled", true);
     $('#institutionForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
     $('#institutionForm').find('#backButtonModal').hide();
     $('#institutionForm').find('.form-control').prop('disabled', false);
@@ -223,7 +223,7 @@ $(document).on('hide.bs.modal', '#institutionModal', function () {
 
 // clear the form field which opened refNumberModal
 $(document).on('hide.bs.modal', '#refNumberModal', function () {
-    $('#id_parent_refnumber').prop('selectedIndex', -1).change();
+    $('#id_parent_ref_number').prop('selectedIndex', -1).change();
     $('#refNumberForm').find('#submitButtonModal').off().on('click', null, this, submitModalForm).html('Absenden');
     $('#refNumberForm').find('#backButtonModal').hide();
     $('#refNumberForm').find('.form-control').prop('disabled', false);
@@ -269,10 +269,10 @@ $(function () {
             placeholder: element.attr('placeholder'),
         });
     });
-    $('#id_parent_refnumber').select2({
+    $('#id_parent_ref_number').select2({
         theme: 'bootstrap4',
         tags: true,
-        placeholder: $('#id_parent_refnumber').attr('placeholder'),
+        placeholder: $('#id_parent_ref_number').attr('placeholder'),
         disabled: true,
     });
     $('#id_language, #id_source_type_parent, #id_source_type_child, #id_material, #id_start_month, #id_start_day, #id_end_month, #id_end_day').each(function () {
@@ -363,8 +363,8 @@ $(document).on('change', '#id_parent_institution', function () {
             },
         })
             .done(function (data) {
-                $('#id_parent_refnumber').html(data);
-                $('#id_parent_refnumber').prop("disabled", false);
+                $('#id_parent_ref_number').html(data);
+                $('#id_parent_ref_number').prop("disabled", false);
             });
     } else {
         $('#institutionModal').modal('show');
@@ -373,7 +373,7 @@ $(document).on('change', '#id_parent_institution', function () {
 
 
 // Open RefNuberForm if Refnumber is not Part of the Database
-$(document).on('change', '#id_parent_refnumber', function () {
+$(document).on('change', '#id_parent_ref_number', function () {
     var refId = Number($(this).val());
 
     if (Number.isNaN(refId)) {

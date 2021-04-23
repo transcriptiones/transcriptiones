@@ -9,6 +9,14 @@
 
 {% block content %}
 
+    {% card 'user_profile_options' _('Options') %}
+        <div align="center">
+            <a href="{% url 'main:password_change' %}" class="btn btn-primary">{% translate 'Change Password' %}</a> &nbsp;
+            <a href="{% url 'main:user_update' %}" class="btn btn-primary">{% translate 'Update Profile' %}</a> &nbsp;
+            <a href="{% url 'main:logout' %}" class="btn btn-primary">{% translate 'Log Out' %}</a>
+        </div>
+    {% endcard %}
+
     {% card 'user_profile_personal' _('My Personal Data') %}
         {% render_table user_table %}
     {% endcard %}
@@ -19,8 +27,4 @@
     {% endcard %}
 
     <!-- TODO check table pagination -->
-
-    <div><a href="{% url 'main:password_change' %}">Passwort ändern</a></div>
-    <div><a href="{% url 'main:user_update' %}">Profil anpassen</a></div>
-    <div><a href="{% url 'main:logout' %}">Abmelden</a></div>
 {% endblock %}

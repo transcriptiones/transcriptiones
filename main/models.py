@@ -209,11 +209,10 @@ class Document(models.Model):
                                     null=False,
                                     help_text=_("Type of the source"))
 
-    material = models.CharField(verbose_name=_("Writing material"),
-                                max_length=15,
-                                blank=True,
-                                choices=MaterialType.choices,
-                                help_text=_("Is the manuscript on paper, papyrus or parchment?"))
+    material = models.IntegerField(verbose_name=_("Writing material"),
+                                   blank=True,
+                                   choices=MaterialType.choices,
+                                   help_text=_("Is the manuscript on paper, papyrus or parchment?"))
 
     measurements_length = models.DecimalField(verbose_name=_("Height"),
                                               max_digits=5,
@@ -234,11 +233,10 @@ class Document(models.Model):
                                              null=True,
                                              help_text=_("The number of pages of the whole source"))
 
-    paging_system = models.CharField(verbose_name=_("Pagination"),
-                                     max_length=15,
-                                     blank=True,
-                                     choices=PaginationType.choices,
-                                     help_text=_("How are the pages numbered?"))
+    paging_system = models.IntegerField(verbose_name=_("Pagination"),
+                                        blank=True,
+                                        choices=PaginationType.choices,
+                                        help_text=_("How are the pages numbered?"))
 
     transcription_scope = models.TextField(verbose_name=_("Transcribed parts of the document"),
                                            help_text=_("List of the transcribed pages/chapters, etc."))
@@ -280,6 +278,16 @@ class Document(models.Model):
                                          default=1,
                                          help_text=_("Version number"))
 
+    seal = models.BooleanField(verbose_name=_("Seal"),
+                               blank=True,
+                               null=True,
+                               help_text=_("Are there any seals on this page?"))
+
+    illuminated = models.BooleanField(verbose_name=_("Illuminations"),
+                                      blank=True, 
+                                      null=True,
+                                      help_text=_("Does the source contain painted miniatures (=illuminations)?"))
+
     # TODO I don't get it
     objects = DocumentManager()  # Only current versions
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
@@ -297,42 +305,6 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title_name
-
-    def get_card_data(self):
-        overview = [{'title': self.parent_ref_number.holding_institution._meta.get_field('institution_name').verbose_name,
-                     'value': self.parent_ref_number.holding_institution, },
-                    {'title': self.parent_ref_number._meta.get_field('ref_number_name').verbose_name,
-                     'value': f'{self.parent_ref_number.ref_number_name} ({self.parent_ref_number.ref_number_title})', },
-                    {'title': self._meta.get_field('transcription_scope').verbose_name,
-                     'value': self.transcription_scope, },
-                    {'title': self._meta.get_field('document_utc_update').verbose_name,
-                     'value': self.document_utc_update},
-                    ]
-
-        meta_data = [{'title': self._meta.get_field('author').verbose_name,
-                      'value': ", ".join(self.author.all().values_list('author_name', flat=True))},
-                     {'title': self._meta.get_field('place_name').verbose_name,
-                      'value': self.place_name},
-                     {'title': self._meta.get_field('language').verbose_name,
-                      'value': ", ".join(self.language.all().values_list('name_en', flat=True))},
-                     {'title': self._meta.get_field('source_type').verbose_name,
-                      'value': " / ".join([self.source_type.parent_type.type_name, self.source_type.type_name])},
-                     ]
-
-        manuscript = [{'title': self._meta.get_field('material').verbose_name,
-                       'value': self.material},
-                      {'title': _('Measurements'),
-                       'value': "{width:.2f} / {length:.2f} cm".format(width=self.measurements_width, length=self.measurements_length)},
-                      {'title': self._meta.get_field('pages').verbose_name,
-                       'value': self.pages}
-                      ]
-        comments = [{'title': self._meta.get_field('comments').verbose_name,
-                     'value': self.comments},
-                    {'title': _('Uploaded'),
-                     'value': "By {user}, on {date}".format(date=self.document_utc_update, user=self.submitted_by.username if not self.publish_user else _('Anonymous'))},
-                    ]
-
-        return [overview, meta_data, manuscript, comments]
 
     def get_absolute_url(self):
         return reverse('main:document_detail',
@@ -381,19 +353,6 @@ class Document(models.Model):
         super().save(force_update=force_update, *args, **kwargs)
 
 
-class DocumentPage(models.Model):
-    """A document is made up of pages. Ideally these pages correspond to physical pages but they don't have to.
-    At the end a DocumentPage is a part of a Document."""
-
-    seal = models.BooleanField(verbose_name=_("Seal"),
-                               null=True,
-                               help_text=_("Are there any seals on this page?"))
-
-    illuminated = models.BooleanField(verbose_name=_("Illuminations"),
-                                      null=True,
-                                      help_text=_("Does the source contain painted miniatures (=illuminations)?"))
-
-
 class UserManager(BaseUserManager):
     """Custom UserManager for transcriptiones."""
 
@@ -437,41 +396,41 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model for the transcriptiones project."""
 
-    username = models.CharField(verbose_name=_('username'),
+    username = models.CharField(verbose_name=_('Username'),
                                 unique=True,
                                 max_length=150,
                                 blank=False,
                                 help_text=_('Provide a user name'))
 
-    first_name = models.CharField(verbose_name=_('first name'),
+    first_name = models.CharField(verbose_name=_('First name'),
                                   max_length=150,
                                   blank=False,
                                   help_text='Enter your first name(s)')
 
-    last_name = models.CharField(verbose_name=_('last name'),
+    last_name = models.CharField(verbose_name=_('Last name'),
                                  max_length=150,
                                  blank=False,
                                  help_text=_('Enter your last name'))
 
-    email = models.EmailField(verbose_name=_('email'),
+    email = models.EmailField(verbose_name=_('Email'),
                               unique=True,
                               max_length=255,
                               blank=False,
                               help_text=_('Enter your email address'))
 
-    email_confirmed = models.BooleanField(_('email confirmed'),
+    email_confirmed = models.BooleanField(_('Email confirmed'),
                                           default=True,     # TODO Why?
                                           help_text=_('Has the user confirmed the email address?'))
 
-    is_staff = models.BooleanField(verbose_name=_('staff status'),
+    is_staff = models.BooleanField(verbose_name=_('Staff status'),
                                    default=False,
                                    help_text=_('Does the user have staff status and can thus login to the admin page?'))
 
-    is_active = models.BooleanField(verbose_name=_('active'),
+    is_active = models.BooleanField(verbose_name=_('Active'),
                                     default=True,
                                     help_text=_('Is the user active? Users get deactivated instead of deleted.'))
 
-    date_joined = models.DateTimeField(verbose_name=_('date joined'),
+    date_joined = models.DateTimeField(verbose_name=_('Date joined'),
                                        auto_now_add=True)
 
     mark_anonymous = models.BooleanField(verbose_name=_('Mark anonymous by default'),

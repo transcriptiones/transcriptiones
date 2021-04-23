@@ -6,7 +6,8 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
 from main.views.views import test
 from main.views.views import search, InstitutionListView
 from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView, DocumentHistoryView
-from main.views.views_upload import AddInstitutionView, AddRefNumberView, AddDocumentView, batch_upload, load_refnumbers
+from main.views.views_upload import AddInstitutionView, AddRefNumberView, AddDocumentView
+from main.views.views_upload import batch_upload, load_ref_numbers
 from main.views.views_upload import EditMetaView, EditTranscriptView
 from main.views.views_upload import thanks_view
 from main.views.views_user import signup, userprofile, UserUpdateView
@@ -40,7 +41,7 @@ urlpatterns = [
     path('upload/', AddDocumentView.as_view(), name='upload_document'),
     path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
-    path('upload/ajax/load-refnumbers/', load_refnumbers, name='ajax_load_ref_numbers'),
+    path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
     path('upload/thanks/', thanks_view, name='thanks'),
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),

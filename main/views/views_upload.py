@@ -112,7 +112,7 @@ class AddDocumentView(LoginRequiredMixin, View):
             print('in post')
             data = self.request.POST.copy()
             
-            #if there are authors in the formdata, add new authors to db
+            # If there are authors in the formdata, add new authors to db
             create_related_objects(listname="author",
                                    formdata=data,
                                    relatedclass=Author,
@@ -127,9 +127,8 @@ class AddDocumentView(LoginRequiredMixin, View):
             # set source_type based on selection
             if 'source_type_child' in data:
                 document.source_type = SourceType.objects.get(pk=data['source_type_child'])
-            elif not 'source_type_child' in data:
+            elif 'source_type_child' not in data:
                 document.source_type = SourceType.objects.get(pk=data['source_type_parent'])
-                
 
             form = self.form_class(data, instance=document)
 
@@ -152,12 +151,12 @@ def thanks_view(request, context):
     return render(request, template_name, context)
     
 
-def load_refnumbers(request):
-    """View for loading refnumbers, depending on chosen Institution"""
+def load_ref_numbers(request):
+    """View for loading ref numbers, depending on chosen Institution"""
     institution_id = request.GET.get('institution')
 
-    refnumbers = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('holding_institution')
-    return render(request, 'main/upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
+    ref_numbers = RefNumber.objects.filter(holding_institution_id=institution_id).order_by('holding_institution')
+    return render(request, 'main/upload/ref_dropdown_options.html', {'ref_numbers': ref_numbers})
 
 
 # Base class for Editing DocumentTitle objects
@@ -167,11 +166,11 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
     # get object to update
     def get_object(self):
         institution = self.kwargs.get('inst_slug')
-        refnumber = self.kwargs.get('ref_slug')
+        ref_number = self.kwargs.get('ref_slug')
         document = self.kwargs.get('doc_slug')
-        queryset = Document.objects.filter(parent_institution__institution_slug = institution)
-        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
-        return queryset.get(document_slug = document)
+        queryset = Document.objects.filter(parent_institution__institution_slug=institution)
+        queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
+        return queryset.get(document_slug=document)
 
     # update form data if accessed via GET
     def get_context_data(self, **kwargs):
@@ -193,9 +192,8 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-
 class EditMetaView(BaseEditDocumentView):
-    """view for editing Metadata"""
+    """View for editing Metadata"""
 
     form_class = EditMetaForm
     template_name = "main/upload/edit_meta.html"
@@ -210,9 +208,9 @@ class EditMetaView(BaseEditDocumentView):
             else:
                 context['form'].fields['source_type_parent'].initial = self.get_object().source_type.parent_type.pk
                 context['form'].fields['source_type_child'].initial = self.get_object().source_type.pk
+
             return context
         return super().get_context_data(**kwargs)
-
 
     # Handle the form if accesed via POST
     def post(self, *args, **kwargs):
@@ -255,7 +253,7 @@ class EditTranscriptView(BaseEditDocumentView):
     form_class = EditTranscriptForm
     template_name = "main/upload/edit_transcript.html"
     
-    #handle the form if accesed via POST
+    # Handle the form if accessed via POST
     def post(self, *args, **kwargs):
         if self.request.method == "POST":
             document = self.get_object()

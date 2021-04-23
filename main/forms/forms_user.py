@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm, PasswordResetForm, SetPasswordForm
 from main.models import User
+from crispy_forms.helper import FormHelper
 
 
 class SignUpForm(UserCreationForm):
@@ -45,15 +46,13 @@ class CustomPasswordChangeForm(PasswordChangeForm):
                 'placeholder': self.fields[name].label,
                 })
 
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-3'
+        self.helper.field_class = 'col-sm-9'
+
 
 class UserUpdateForm(forms.ModelForm):
-    # form field to prompt for password
-    passwordprompt = forms.CharField(
-        label="Passwort",
-        strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Zur Bestätigung Passwort eingeben'}),
-    )
-
     # pass class form-control to form fields
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
@@ -65,15 +64,14 @@ class UserUpdateForm(forms.ModelForm):
                     'class': 'form-control',
                     })
 
-    # check password. Raise ValidationError if password invalid
-    def clean_passwordprompt(self):
-        valid = self.instance.check_password(self.cleaned_data['passwordprompt'])
-        if not valid:
-            raise forms.ValidationError("Falsches Passwort")
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-3'
+        self.helper.field_class = 'col-sm-9'
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'mark_anonymous', 'passwordprompt')
+        fields = ('username', 'first_name', 'last_name', 'email', 'mark_anonymous')
 
 
 class CustomPasswordResetForm(PasswordResetForm):
