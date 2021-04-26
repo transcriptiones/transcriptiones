@@ -180,4 +180,25 @@ def get_extended_help_text(model, field):
                                                                       'institution\'s catalog. Must start with http:// '
                                                                       'or https://'))
 
+    ###
+    # User
+    elif model_name == 'user':
+        if field == 'username':
+            help_text = get_title_text_format(_('Username'), _('The name must be unique and can\'t contain any special '
+                                                               'characters. It will be shown to other users.'))
+        elif field == 'first_name':
+            help_text = get_title_text_format(_('First name'), _('Your given name. This information will not be public '
+                                                                 'unless you choose so.'))
+        elif field == 'last_name':
+            help_text = get_title_text_format(_('Last name'), _('Your family name. This information will not be public '
+                                                                'unless you choose so.'))
+        elif field == 'email':
+            help_text = get_title_text_format(_('Email address'), _('You must choose a valid address. It is used to '
+                                                                    'verify your information and activate your '
+                                                                    'account. This information will not be public.'))
+        elif field == 'mark_anonymous':
+            help_text = get_title_text_format(_('Anonymous publishing'), _('Your documents can be published '
+                                                                           'anonymously by default. You can change '
+                                                                           'this setting any time.'))
+
     return help_text
