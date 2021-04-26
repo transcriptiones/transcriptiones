@@ -14,10 +14,12 @@ from main.views.views_user import signup, userprofile, UserUpdateView
 from main.views.views_user import CustomLoginView
 from main.views.views_user import activate, AccountActivationSentView
 from main.views.views_user import CustomPasswordConfirmView, CustomPasswordResetView, CustomPasswordChangeView
+from main.views.views_export import DocumentExportView
 
 app_name = 'main'
 urlpatterns = [
     path('test/', test, name='test'),
+    path('dummy/', test, name='dummy'),
 
     # urls for info views
     path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
@@ -34,8 +36,12 @@ urlpatterns = [
     path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', DocumentDetailView.as_view(),
          name='document_detail'),
 
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', DocumentDetailView.as_view(), name='document_legacy_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', DocumentHistoryView.as_view(), name='document_history'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', DocumentDetailView.as_view(),
+         name='document_legacy_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', DocumentHistoryView.as_view(),
+         name='document_history'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', DocumentExportView.as_view(),
+         name='document_export'),
 
     # urls for upload views
     path('upload/', AddDocumentView.as_view(), name='upload_document'),

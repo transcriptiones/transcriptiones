@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Export document' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'user_profile_options' _('Options') %}
+        <p>
+            You can export the transcriptions in different formats. Please choose below:
+        </p>
+        <div align="center">
+            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export JSON' %}</a> &nbsp;
+            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export TEI' %}</a> &nbsp;
+            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export HTML' %}</a>
+            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export PDF' %}</a>
+        </div>
+    {% endcard %}
+{% endblock %}

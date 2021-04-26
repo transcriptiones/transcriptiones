@@ -302,7 +302,7 @@ $(function () {
 
 
     // initialize ckedit
-
+    /*
     ClassicEditor
         .create(document.querySelector('#id_transcription_text'), {
             removePlugins: ['Title'],
@@ -322,7 +322,7 @@ $(function () {
         .catch(error => {
             console.error(error);
         })
-
+    */
 
     // add label to required fields
     $('[required]').parents('.form-group').find('.control-label').addClass('label-required');
@@ -427,9 +427,9 @@ function validateForm (form) {
 
     // get different types of inputs or selects
     const textInputs = form.querySelectorAll('input[type=text]');
-    const numberInputs = form.querySelectorAll('input[type=number');
+    const numberInputs = form.querySelectorAll('input[type=number]');   // ??? was: 'input[type=number'
     const selectInputs = form.querySelectorAll('select');
-    const urlInputs = form.querySelectorAll('input[type=url');
+    const urlInputs = form.querySelectorAll('input[type=url]');         // ??? was: 'input[type=url'
     const textareaInputs = form.querySelectorAll('textarea');
 
     var formValid = true;
