@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm, PasswordResetForm, SetPasswordForm
 from main.models import User
-from crispy_forms.helper import FormHelper
+from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class SignUpForm(UserCreationForm):
@@ -22,10 +22,18 @@ class SignUpForm(UserCreationForm):
                 self.fields[name].widget.attrs.update({
                     'placeholder': self.fields[name].label
                     })
+        self.helper = initialize_form_helper()
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'mark_anonymous')
+        labels = {
+            'username': get_popover_html(User, 'username'),
+            'first_name': get_popover_html(User, 'first_name'),
+            'last_name': get_popover_html(User, 'last_name'),
+            'email': get_popover_html(User, 'email'),
+            'mark_anonymous': get_popover_html(User, 'mark_anonymous')
+        }
 
 
 class LoginForm(AuthenticationForm):
