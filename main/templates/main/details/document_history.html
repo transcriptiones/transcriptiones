@@ -1,84 +1,39 @@
 ﻿{% extends "base.html" %}
 {% load static %}
-{% load tz %}
+{% load django_bootstrap_breadcrumbs %}
 {% load i18n %}
+{% load transcriptiones %}
 
 {% block page_title %}
     {{ documenttitle.title_name }}
 {% endblock page_title %}
 
+{% block breadcrumb_init %}
+    {% breadcrumb _("Institutions list") "main:institution_list" %}
+    {% breadcrumb document.parent_institution document.parent_institution.get_absolute_url %}
+    {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
+    {% breadcrumb document.title_name document.get_absolute_url %}
+    {% breadcrumb _('Versions') '' %}
+{% endblock %}
+
+
 {% block content %}
-<nav>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'main:institution_list' %}">Institutionenliste</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_institution.get_absolute_url }}">{{ documenttitle.parent_institution }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.parent_refnumber.get_absolute_url }}">{{ documenttitle.parent_refnumber }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ documenttitle.get_absolute_url }}">{{ documenttitle }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Versionen</li>
-    </ol>
-</nav>
+    {% card 'doc_history_overview' _('Overview') %}
+        <!-- % render_table tables.0 %} -->
+        <!--
+        Institution
+        Signatur
+        -->
+    {% endcard %}
 
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#DocumentOverview">
-        <a class="card-link">Übersicht</a>
-    </div>
-
-    <div id="DocumentOverview" class="collapse show">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-4">
-                    Institution
-                </div>
-                <div class="col-sm-8">
-                    {{ documenttitle.parent_institution }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    Signatur
-                </div>
-                <div class="col-sm-8">
-                    {{ documenttitle.parent_refnumber }} {{ documenttitle.parent_refnumber.refnumber_title }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header" data-toggle="collapse" href="#DocumentTranscription">
-        <a class="card-link">Versionen</a>
-    </div>
-
-    <div id="DocumentTranscription" class="collapse show">
-        <div class="card-body">
-            {% for version in versions %}
-            {% if forloop.counter <= 3 %}
-            <a href="{{ version.get_absolute_version_url }}">
-                <div class="row display-list-element">
-                    <div class="col-sm-4">
-                        {% if forloop.first %}
-                        Aktuelle Version
-                        {% else %}
-                        Version {{ version.version_number }}
-                        {% endif %}
-                    </div>
-                    <div class="col-sm text-left">
-                        {{ version.commit_message }}
-                    </div>
-                    <div class="col-sm text-left">
-                        {{ version.document_utc_add }}
-                    </div>
-                    <div class="col-sm text-left">
-                        {{ version.submitted_by }}
-                    </div>
-                </div>
-            </a>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
+    {% card 'doc_history_overview' _('Versions') %}
+        <!-- % render_table tables.0 %} -->
+        <!-- Version table with:
+        Version
+        commit message
+        document_utc_add
+        submitted_by
+        -->
+    {% endcard %}
 
 {% endblock content %}

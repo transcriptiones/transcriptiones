@@ -140,12 +140,12 @@ class DocumentHistoryView(DetailView):
     template_name = "main/details/document_history.html"
 
     def get_object(self):
-        institution = self.kwargs.get('instslug')
-        refnumber = self.kwargs.get('refslug')
-        document = self.kwargs.get('docslug')
-        queryset = Document.objects.filter(parent_institution__institution_slug = institution)
-        queryset = queryset.filter(parent_refnumber__refnumber_slug = refnumber)
-        return get_object_or_404(queryset, document_slug = document)
+        institution = self.kwargs.get('inst_slug')
+        ref_number = self.kwargs.get('ref_slug')
+        document = self.kwargs.get('doc_slug')
+        queryset = Document.objects.filter(parent_institution__institution_slug=institution)
+        queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
+        return get_object_or_404(queryset, document_slug=document)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
