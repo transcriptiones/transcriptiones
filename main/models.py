@@ -284,7 +284,7 @@ class Document(models.Model):
                                help_text=_("Are there any seals on this page?"))
 
     illuminated = models.BooleanField(verbose_name=_("Illuminations"),
-                                      blank=True, 
+                                      blank=True,
                                       null=True,
                                       help_text=_("Does the source contain painted miniatures (=illuminations)?"))
 

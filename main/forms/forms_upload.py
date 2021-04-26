@@ -1,9 +1,9 @@
 from ckeditor.widgets import CKEditorWidget
-from crispy_forms.helper import FormHelper
 from django import forms
 from django.utils.translation import ugettext as _
 from main.models import Institution, RefNumber, Document, SourceType
 from main.widgets import SourceChildSelect
+from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class InstitutionForm(forms.ModelForm):
@@ -22,14 +22,26 @@ class InstitutionForm(forms.ModelForm):
             'max': 99999
             })
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-3'
-        self.helper.field_class = 'col-sm-9'
+        self.helper = initialize_form_helper()
 
     class Meta:
         model = Institution
-        fields = ['institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug']
+        fields = [
+            'institution_name',
+            'street',
+            'zip_code',
+            'city',
+            'country',
+            'site_url',
+            'institution_slug']
+
+        labels = {
+            'institution_name': get_popover_html(Institution, 'institution_name'),
+            'street': get_popover_html(Institution, 'street'),
+            'city': get_popover_html(Institution, 'city'),
+            'language': get_popover_html(Institution, 'language'),
+            'site_url': get_popover_html(Institution, 'site_url')
+        }
 
 
 class RefNumberForm(forms.ModelForm):
@@ -43,20 +55,21 @@ class RefNumberForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': self.fields[name].help_text,
                 })
+        self.helper = initialize_form_helper()
 
     class Meta:
         model = RefNumber
-        fields = ['holding_institution', 'ref_number_name', 'ref_number_title', 'collection_link']
-
-
-def popover_html(field_name, content=None):
-    label = Document._meta.get_field(field_name).verbose_name
-    tooltip = Document._meta.get_field(field_name).help_text if content is None else content
-    return label + f' <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_{field_name}"></i>\
-                     <div class="tooltip_templates"><div id="tt_{field_name}">\
-                        <p>{tooltip}</p>\
-                     </div></div>'
-
+        fields = [
+            'holding_institution',
+            'ref_number_name',
+            'ref_number_title',
+            'collection_link']
+        labels = {
+            'holding_institution': get_popover_html(RefNumber, 'holding_institution'),
+            'ref_number_name': get_popover_html(RefNumber, 'ref_number_name'),
+            'ref_number_title': get_popover_html(RefNumber, 'ref_number_title'),
+            'collection_link': get_popover_html(RefNumber, 'collection_link'),
+        }
 
 class DocumentForm(forms.ModelForm):
     """Form for adding a new Document to the Database"""
@@ -78,8 +91,8 @@ class DocumentForm(forms.ModelForm):
                   'measurements_width',
                   'pages',
                   'paging_system',
-                  # TODO 'illuminated',
-                  # TODO 'seal',
+                  'illuminated',
+                  'seal',
                   'transcription_scope',
                   'comments',
                   'transcription_text',
@@ -88,19 +101,21 @@ class DocumentForm(forms.ModelForm):
                   ]
 
         labels = {
-            'title_name': popover_html('title_name'),
-            'parent_institution': popover_html('parent_institution', _('')),
-            'parent_ref_number': popover_html('parent_ref_number', _('')),
-            'author': popover_html('author', _('')),
-            'place_name': popover_html('place_name', _('')),
-            'language': popover_html('language', _('')),
-            'material': popover_html('material', _('')),
-            'pages': popover_html('pages', _('')),
-            'paging_system': popover_html('paging_system', _('')),
-            'transcription_scope': popover_html('transcription_scope', _('')),
-            'comments': popover_html('comments', _('')),
-            'transcription_text': popover_html('transcription_text', _('')),
-            'publish_user': popover_html('publish_user', _('')),
+            'title_name': get_popover_html(Document, 'title_name'),
+            'parent_institution': get_popover_html(Document, 'parent_institution'),
+            'parent_ref_number': get_popover_html(Document, 'parent_ref_number'),
+            'author': get_popover_html(Document, 'author'),
+            'place_name': get_popover_html(Document, 'place_name'),
+            'language': get_popover_html(Document, 'language'),
+            'material': get_popover_html(Document, 'material'),
+            'pages': get_popover_html(Document, 'pages'),
+            'paging_system': get_popover_html(Document, 'paging_system'),
+            'illuminated': get_popover_html(Document, 'illuminated'),
+            'seal': get_popover_html(Document, 'seal'),
+            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
+            'comments': get_popover_html(Document, 'comments'),
+            'transcription_text': get_popover_html(Document, 'transcription_text'),
+            'publish_user': get_popover_html(Document, 'publish_user'),
         }
 
     transcription_text = forms.CharField(widget=CKEditorWidget)
@@ -130,10 +145,7 @@ class DocumentForm(forms.ModelForm):
                     'placeholder': self.fields[name].help_text,
                     })
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-3'
-        self.helper.field_class = 'col-sm-9'
+        self.helper = initialize_form_helper()
 
 
         """ TODO check This. Bit it probably isnt needed anymore
@@ -186,10 +198,7 @@ class EditMetaForm(forms.ModelForm):
                     'placeholder': self.fields[name].help_text,
                     })
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-3'
-        self.helper.field_class = 'col-sm-9'
+        self.helper = initialize_form_helper()
     
     class Meta:
         model = Document

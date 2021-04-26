@@ -66,10 +66,8 @@
             {{ form.measurements_width|as_crispy_field }}
             {{ form.pages|as_crispy_field }}
             {{ form.paging_system|as_crispy_field }}
-            {% comment %}
-            {{ form.illuminated }}
-            {{ form.seal }}
-            {% endcomment %}
+            {{ form.illuminated|as_crispy_field }}
+            {{ form.seal|as_crispy_field }}
         {% endcard %}
 
         {% card 'upload_comments' _('Comments and Links') %}
