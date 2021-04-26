@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bsmodals',
     'django_filters',
     'bootstrap4',
+    'easy_pdf',
     'django_bootstrap_breadcrumbs',
     'django.contrib.admin',
     'django.contrib.auth',

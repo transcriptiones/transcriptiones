@@ -14,10 +14,13 @@
             You can export the transcriptions in different formats. Please choose below:
         </p>
         <div align="center">
-            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export JSON' %}</a> &nbsp;
-            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export TEI' %}</a> &nbsp;
-            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export HTML' %}</a>
-            <a href="{% url 'main:dummy' %}" class="btn btn-primary">{% translate 'Export PDF' %}</a>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary" name="export_tei">{%  translate 'Export TEI' %}</button>
+                <button type="submit" class="btn btn-primary" name="export_json">{%  translate 'Export JSON' %}</button>
+                <button type="submit" class="btn btn-primary" name="export_html">{%  translate 'Export HTML' %}</button>
+                <button type="submit" class="btn btn-primary" name="export_pdf">{%  translate 'Export PDF' %}</button>
+            </form>
         </div>
     {% endcard %}
 {% endblock %}
