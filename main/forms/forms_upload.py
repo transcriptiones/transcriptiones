@@ -39,7 +39,7 @@ class InstitutionForm(forms.ModelForm):
             'institution_name': get_popover_html(Institution, 'institution_name'),
             'street': get_popover_html(Institution, 'street'),
             'city': get_popover_html(Institution, 'city'),
-            'language': get_popover_html(Institution, 'language'),
+            'country': get_popover_html(Institution, 'country'),
             'site_url': get_popover_html(Institution, 'site_url')
         }
 
