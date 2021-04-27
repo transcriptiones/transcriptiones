@@ -7,39 +7,7 @@
     {% translate 'Institutions' %}
 {% endblock %}
 
-
 {% block content %}
-
+    {% include 'main/filter.html' %}
     {% render_table table %}
-
-{% regroup institutions by city as cities_list %}
-
-<div class="card">
-    {% for city in cities_list %}
-    <div class="card-header" data-toggle="collapse" href="#Ref{{ city.grouper|cut:"." }}">
-        <a class="card-link">
-            {{ city.grouper }}
-        </a>
-    </div>
-    <div id="Ref{{ city.grouper|cut:"." }}" class="collapse show">
-        <div class="card-body">
-            {% for institution in city.list %}
-                <a href="{{ institution.get_absolute_url }}" class="row display-list-element">
-                    <div class="col-sm-6 text-left">{{ institution.institution_name }}</div>
-                    <div class="col-sm-3 text-right font-weight-normal">
-                        <!-- TODO translate -->
-                        {{ institution.documents.count }} Dokument{% if institution.documents.count != 1 %}e{% endif %}
-                    </div>
-                    <div class="col-sm-3 text-right font-weight-normal">  
-                        <!-- TODO translate -->
-                        {{ institution.ref_numbers.count }} Signatur{% if institution.ref_numbers.count != 1 %}en{% endif %}
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-</div>
-
-
 {% endblock content %}

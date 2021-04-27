@@ -1,22 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-from django.views.generic import DetailView, ListView, View
-from django.views.generic.detail import SingleObjectMixin
-from django_tables2 import SingleTableMixin, MultiTableMixin, SingleTableView
+from django.views.generic import DetailView
+from django_filters.views import FilterView
+from django_tables2 import MultiTableMixin, SingleTableView, RequestConfig, SingleTableMixin
 
 from main.models import Institution, RefNumber, Document
 from main.tables import TitleValueTable, RefNumberTable, DocumentTable, InstitutionTable
+from main.filters import InstitutionFilter
 
 import main.model_info as m_info
 
 
-class InstitutionListView(SingleTableView):
+class InstitutionListView(SingleTableMixin, FilterView):
     """Creates a list view for all instituions. """
     model = Institution
-    queryset = Institution.objects.order_by('institution_name')
-    template_name = "main/lists/institution_list.html"
     table_class = InstitutionTable
+    filterset_class = InstitutionFilter
+    template_name = "main/lists/institution_list.html"
 
 
 class InstitutionDetailView(MultiTableMixin, DetailView):
@@ -33,16 +34,7 @@ class InstitutionDetailView(MultiTableMixin, DetailView):
 
     def get_tables(self):
         institution = self.get_object()
-        data = [
-            {'title': institution._meta.get_field('street').verbose_name,
-             'value': institution.street},
-            {'title': f"{institution._meta.get_field('zip_code').verbose_name} / {institution._meta.get_field('city').verbose_name}",
-             'value': f"{institution.zip_code} / {institution.city}"},
-            {'title': institution._meta.get_field('country').verbose_name,
-             'value': institution.country.name},
-            {'title': institution._meta.get_field('site_url').verbose_name,
-             'value': mark_safe(f'<a href="{institution.site_url}" target="_blank">{institution.site_url}</a>')}
-        ]
+        data = m_info.get_institution_info(institution)
 
         tables = [
             TitleValueTable(data=data),
@@ -66,17 +58,7 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
     def get_tables(self):
         ref_number = self.get_object()
-        # TODO move to model info
-        data = [
-            {'title': ref_number._meta.get_field('holding_institution').verbose_name,
-             'value': ref_number.holding_institution},
-            {'title': ref_number._meta.get_field('ref_number_name').verbose_name,
-             'value': ref_number.ref_number_name},
-            {'title': ref_number._meta.get_field('ref_number_title').verbose_name,
-             'value': ref_number.ref_number_title},
-            {'title': ref_number._meta.get_field('collection_link').verbose_name,
-             'value': mark_safe(f'<a href="{ref_number.collection_link}" target="_blank">{ref_number.collection_link}</a>')}
-        ]
+        data = m_info.get_ref_number_info(ref_number)
 
         tables = [
             TitleValueTable(data=data),
