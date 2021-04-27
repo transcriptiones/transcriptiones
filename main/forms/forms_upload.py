@@ -78,7 +78,7 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ['title_name',
-                  #'parent_institution',
+                  'parent_institution',
                   'parent_ref_number',
                   'author',
                   'doc_start_date',
@@ -103,7 +103,7 @@ class DocumentForm(forms.ModelForm):
 
         labels = {
             'title_name': get_popover_html(Document, 'title_name'),
-            #'parent_institution': get_popover_html(Document, 'parent_institution'),
+            'parent_institution': 'todo',
             'parent_ref_number': get_popover_html(Document, 'parent_ref_number'),
             'author': get_popover_html(Document, 'author'),
             'place_name': get_popover_html(Document, 'place_name'),
@@ -119,6 +119,7 @@ class DocumentForm(forms.ModelForm):
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
 
+    parent_institution = forms.ModelChoiceField(queryset=Institution.objects.all().order_by('institution_name'))
     transcription_text = forms.CharField(widget=CKEditorWidget)
     source_type_parent = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
