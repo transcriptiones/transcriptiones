@@ -1,11 +1,20 @@
-{% extends "base.html" %}
+{% extends "main/base.html" %}
 {% load static %}
 {% load i18n %}
 {% load transcriptiones %}
 {% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Export document' %}
+{% endblock %}
+
+{% block breadcrumb_init %}
+    {% breadcrumb _("Institutions list") "main:institution_list" %}
+    {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
+    {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
+    {% breadcrumb document.title_name document.get_absolute_url %}
+    {% breadcrumb _('Export Document') '' %}
 {% endblock %}
 
 {% block content %}

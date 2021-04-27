@@ -53,9 +53,3 @@ class DocumentExportView(LoginRequiredMixin, DetailView):
         response = HttpResponse(file_contents, content_type=content_type)
         response['Content-Disposition'] = f'attachment; filename={file_name}.{file_ending}'
         return response
-
-
-class PDFView(PDFTemplateView):
-    template_name = 'main/pdf_export_template.html'
-    base_url = 'file://' + settings.STATIC_ROOT
-    download_filename = 'hello.pdf'

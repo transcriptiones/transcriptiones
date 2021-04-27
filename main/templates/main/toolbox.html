@@ -17,7 +17,8 @@
         <i class="fas fa-code-branch"></i>
     </a>
 
-    <a class="btn btn-light btn-rounded" id="toolboxicon" title="{% translate 'Export' %}">
+    <a class="btn btn-light btn-rounded" id="toolboxicon" title="{% translate 'Export' %}"
+        href="{% url 'main:document_export' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}">
         <i class="fas fa-file-export"></i>
     </a>
 </div>
