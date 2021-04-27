@@ -1,3 +1,4 @@
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from main.models import Document
@@ -21,6 +22,26 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'last_name'), user.last_name),
             (get_verbose_field_name(user, 'email'), user.email),
             (get_verbose_field_name(user, 'mark_anonymous'), user.mark_anonymous)
+            ]
+    return title_value_list(data)
+
+
+def get_institution_info(institution):
+    data = [(get_verbose_field_name(institution, 'street'), institution.street),
+            (_('Zip / City'), f"{institution.zip_code} / {institution.city}"),
+            (get_verbose_field_name(institution, 'country'), institution.country.name),
+            (get_verbose_field_name(institution, 'site_url'),
+             mark_safe(f'<a href="{institution.site_url}" target="_blank">{institution.site_url}</a>'))
+            ]
+    return title_value_list(data)
+
+
+def get_ref_number_info(ref_number):
+    data = [(get_verbose_field_name(ref_number, 'holding_institution'), ref_number.holding_institution),
+            (get_verbose_field_name(ref_number, 'ref_number_name'), ref_number.ref_number_name),
+            (get_verbose_field_name(ref_number, 'ref_number_title'), ref_number.ref_number_title),
+            (get_verbose_field_name(ref_number, 'collection_link'),
+             mark_safe(f'<a href="{ref_number.collection_link}" target="_blank">{ref_number.collection_link}</a>'))
             ]
     return title_value_list(data)
 
@@ -70,6 +91,7 @@ def get_document_info_comments(document):
 
 # EXTENDED HELP TEXTS
 def get_list(items):
+    """Formats a list as <ul>"""
     formatted_text = '<ul>'
     for item in items:
         formatted_text = formatted_text + '<li>' + item + '</li>'
@@ -78,10 +100,13 @@ def get_list(items):
 
 
 def get_title_text_format(title, text):
+    """Formats the title of a tooltip"""
     return "<b>{}</b><br/>{}".format(title, text)
 
 
 def get_extended_help_text(model, field):
+    """Form fields have an extended help text with more information on what to put in the field. Those help texts are
+    managed here."""
     model_name = model._meta.model_name
     help_text = 'No help text found'
 
