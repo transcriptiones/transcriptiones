@@ -3,20 +3,20 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.detail import SingleObjectMixin
-from django_tables2 import SingleTableMixin, MultiTableMixin
+from django_tables2 import SingleTableMixin, MultiTableMixin, SingleTableView
 
 from main.models import Institution, RefNumber, Document
-from main.tables import TitleValueTable, RefNumberTable, DocumentTable
+from main.tables import TitleValueTable, RefNumberTable, DocumentTable, InstitutionTable
 
 import main.model_info as m_info
 
 
-class InstitutionListView(ListView):
+class InstitutionListView(SingleTableView):
     """Creates a list view for all instituions. """
     model = Institution
-    queryset = Institution.objects.order_by('city', 'institution_name')
+    queryset = Institution.objects.order_by('institution_name')
     template_name = "main/lists/institution_list.html"
-    context_object_name = "institutions"
+    table_class = InstitutionTable
 
 
 class InstitutionDetailView(MultiTableMixin, DetailView):
@@ -97,8 +97,7 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         institution = self.kwargs.get('inst_slug')
         ref_number = self.kwargs.get('ref_slug')
         document = self.kwargs.get('doc_slug')
-
-        queryset = Document.all_objects.filter(parent_institution__institution_slug=institution)
+        queryset = Document.all_objects.filter(parent_ref_number__holding_institution__institution_slug=institution)
         queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
         queryset = queryset.filter(document_slug=document)
 
@@ -143,7 +142,7 @@ class DocumentHistoryView(DetailView):
         institution = self.kwargs.get('inst_slug')
         ref_number = self.kwargs.get('ref_slug')
         document = self.kwargs.get('doc_slug')
-        queryset = Document.objects.filter(parent_institution__institution_slug=institution)
+        queryset = Document.objects.filter(parent_ref_number__holding_institution__institution_slug=institution)
         queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
         return get_object_or_404(queryset, document_slug=document)
 

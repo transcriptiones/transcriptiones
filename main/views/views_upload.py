@@ -168,7 +168,7 @@ class BaseEditDocumentView(LoginRequiredMixin, UpdateView):
         institution = self.kwargs.get('inst_slug')
         ref_number = self.kwargs.get('ref_slug')
         document = self.kwargs.get('doc_slug')
-        queryset = Document.objects.filter(parent_institution__institution_slug=institution)
+        queryset = Document.objects.filter(parent_ref_number__holding_institution__institution_slug=institution)
         queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
         return queryset.get(document_slug=document)
 

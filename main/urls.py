@@ -50,7 +50,8 @@ urlpatterns = [
     path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
     path('upload/thanks/', thanks_view, name='thanks'),
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(), name='edit_transcript'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(),
+         name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
     # urls for search views

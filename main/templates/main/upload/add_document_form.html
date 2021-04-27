@@ -43,7 +43,7 @@
 
         {% card 'upload_required' _('Required Information') %}
             {{ form.title_name|as_crispy_field }}
-            {{ form.parent_institution|as_crispy_field }}
+            {% comment %}{{ form.parent_institution|as_crispy_field }}{% endcomment %}
             {{ form.parent_ref_number|as_crispy_field }}
             {{ form.transcription_scope|as_crispy_field }}
             {{ form.doc_start_date|as_crispy_field }}

@@ -17,7 +17,7 @@
 
 {% block breadcrumb_init %}
     {% breadcrumb _("Institutions list") "main:institution_list" %}
-    {% breadcrumb document.parent_institution document.parent_institution.get_absolute_url %}
+    {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
     {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
     {% breadcrumb document.title_name document.get_absolute_url %}
     {% breadcrumb _('Edit transcription') '' %}
@@ -33,7 +33,7 @@
         <!-- % render_table tables.0 %} -->
     {% endcard %}
 
-    <form action="{% url 'main:edit_transcript' document.parent_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug  %}"
+    <form action="{% url 'main:edit_transcript' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug  %}"
           method="post" id="editTranscriptForm" class="needs-validation" novalidate>
         {% csrf_token %}
 

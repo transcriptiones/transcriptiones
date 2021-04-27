@@ -171,12 +171,6 @@ class Document(models.Model):
                                   max_length=200,
                                   help_text=_("Title of the Document"))
 
-    parent_institution = models.ForeignKey(Institution,
-                                           verbose_name="Institution",
-                                           related_name="documents",
-                                           on_delete=models.PROTECT,
-                                           help_text="Institution, welche die Quelle aufbewahrt")
-
     parent_ref_number = models.ForeignKey(RefNumber,
                                           verbose_name=_("Reference Number"),
                                           on_delete=models.PROTECT,
@@ -288,7 +282,6 @@ class Document(models.Model):
                                       null=True,
                                       help_text=_("Does the source contain painted miniatures (=illuminations)?"))
 
-    # TODO I don't get it
     objects = DocumentManager()  # Only current versions
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
 
@@ -309,7 +302,7 @@ class Document(models.Model):
     def get_absolute_url(self):
         return reverse('main:document_detail',
                        kwargs={
-                           'inst_slug': self.parent_institution.institution_slug,
+                           'inst_slug': self.parent_ref_number.holding_institution.institution_slug,
                            'ref_slug': self.parent_ref_number.ref_number_slug,
                            'doc_slug': self.document_slug
                        })
@@ -317,7 +310,7 @@ class Document(models.Model):
     def get_absolute_version_url(self):
         return reverse('main:document_legacy_detail',
                        kwargs={
-                           'inst_slug': self.parent_institution.institution_slug,
+                           'inst_slug': self.parent_ref_number.holding_institution.institution_slug,
                            'ref_slug': self.parent_ref_number.ref_number_slug,
                            'doc_slug': self.document_slug,
                            'version_nr': self.version_number

@@ -71,13 +71,14 @@ class RefNumberForm(forms.ModelForm):
             'collection_link': get_popover_html(RefNumber, 'collection_link'),
         }
 
+
 class DocumentForm(forms.ModelForm):
     """Form for adding a new Document to the Database"""
 
     class Meta:
         model = Document
         fields = ['title_name',
-                  'parent_institution',
+                  #'parent_institution',
                   'parent_ref_number',
                   'author',
                   'doc_start_date',
@@ -102,7 +103,7 @@ class DocumentForm(forms.ModelForm):
 
         labels = {
             'title_name': get_popover_html(Document, 'title_name'),
-            'parent_institution': get_popover_html(Document, 'parent_institution'),
+            #'parent_institution': get_popover_html(Document, 'parent_institution'),
             'parent_ref_number': get_popover_html(Document, 'parent_ref_number'),
             'author': get_popover_html(Document, 'author'),
             'place_name': get_popover_html(Document, 'place_name'),

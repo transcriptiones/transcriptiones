@@ -34,7 +34,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
     form = DocumentAdminForm
 
-    list_display = ('title_name', 'parent_institution', 'parent_ref_number', 'document_slug')
+    list_display = ('title_name', 'parent_ref_number', 'document_slug')
     prepopulated_fields = {'document_slug': ('title_name',)}
     readonly_fields = ('submitted_by', 'document_utc_add')
 
