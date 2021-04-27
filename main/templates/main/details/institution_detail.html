@@ -8,9 +8,9 @@
     {{ institution.institution_name }}
 {% endblock %}
 
-{% block breadcrumb_init %}
-    {% breadcrumb _("Institutions list") "main:institution_list" %}
-    {% breadcrumb institution.institution_name "" %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb institution "main:institution_detail" institution.institution_slug %}
 {% endblock %}
 
 

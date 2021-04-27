@@ -8,12 +8,6 @@
     {{ refnumber.ref_number_name }}
 {% endblock %}
 
-{% block breadcrumb_init %}
-    {% breadcrumb _("Institutions list") "main:institution_list" %}
-    {% breadcrumb refnumber.holding_institution refnumber.holding_institution.get_absolute_url %}
-    {% breadcrumb refnumber.ref_number_name '' %}
-{% endblock %}
-
 {% block content %}
 
     {% card 'ref_number_detail' _('Information about the reference number') %}
