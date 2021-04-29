@@ -16,24 +16,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.4.0/dist/select2-bootstrap4.min.css" />
 {% endblock %}
 
-{% block javascript %}
-     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+{% block additional_javascript %}
+
 
     <!-- Tooltipster Plugin -->
     <script src="{% static 'main/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
-    <script src="{% static 'main/js/upload_scripts.js' %}" charset="utf-8"></script>
 
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/de.js"></script>
-{% endblock javascript %}
+{% endblock %}
 
 {% block page_title %}
     {% translate 'Upload Transcript' %}
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'main:upload_document' %}" method="POST" id="documentTitleForm"
+    <form action="{% url 'main:upload_document' %}" method="POST" id="documentForm"
           dep-ref-url="{% url 'main:ajax_load_ref_numbers' %}"
           modal-inst-url="{% url 'main:institution_add' %}"
           modal-ref-url="{% url 'main:ref_number_add' %}" class="needs-validation" novalidate>

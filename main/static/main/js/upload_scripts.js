@@ -8,6 +8,7 @@
 // Client-side validation happens here. Do we still need server-side validation?
 function submitModalForm(event) {
     var form = $(event.target).closest('form')[0];
+
     if (validateForm(form)) {
         $(form).find('.form-control').prop('disabled', true);
 
@@ -34,11 +35,11 @@ function backModalForm() {
 function confirmRefNumber() {
     $.ajax({
         type: 'POST',
-        url: $('#documentTitleForm').attr('modal-ref-url'),
+        url: $('#documentForm').attr('modal-ref-url'),
         data: {
-            new_holding_institution: $('#id_holding_institution').val(),
-            new_refnumber_name: $('#id_refnumber_name').val(),
-            new_refnumber_title: $('#id_refnumber_title').val(),
+            new_holding_institution: $('#id_parent_institution').val(),
+            new_refnumber_name: $('#id_ref_number_name').val(),
+            new_refnumber_title: $('#id_ref_number_title').val(),
             new_collection_link: $('#id_collection_link').val(),
             csrfmiddlewaretoken: $('#refNumberForm input[name=csrfmiddlewaretoken]').val(),
         },
@@ -55,7 +56,7 @@ function confirmRefNumber() {
 function confirmInstitution() {
     $.ajax({
         type: 'POST',
-        url: $('#documentTitleForm').attr('modal-inst-url'),
+        url: $('#documentForm').attr('modal-inst-url'),
         data: {
             new_institution_name: $('#id_institution_name').val(),
             new_street: $('#id_street').val(),
@@ -83,7 +84,7 @@ function confirmInstitution() {
 function confirmAuthor() {
     $('#confirmationModal').modal('hide');
     $('#authorList').empty();
-    $('#documentTitleForm').submit();
+    $('#documentForm').submit();
 };
 
 function closeAuthor() {
@@ -93,7 +94,7 @@ function closeAuthor() {
 };
 
 
-// Handle documentTitleForm
+// Handle documentForm
 function submitDocument(event) {
     var form = $(event.target).closest('form')[0];
     var authorData = $(form).find('#id_author').val();
@@ -257,8 +258,8 @@ function SpecialCharactersSuperscript(editor) {
 
 $(function () {
     // load modal-contents of instutionModal and refNumberModal
-    $('#institutionModal').find('.modal-content').load($('#documentTitleForm').attr('modal-inst-url'), institutionLoaded);
-    $('#refNumberModal').find('.modal-content').load($('#documentTitleForm').attr('modal-ref-url'), refNumberLoaded);
+    $('#institutionModal').find('.modal-content').load($('#documentForm').attr('modal-inst-url'), institutionLoaded);
+    $('#refNumberModal').find('.modal-content').load($('#documentForm').attr('modal-ref-url'), refNumberLoaded);
 
     // Turn select fields into Select2 fields and pass additional information.
     $('#id_parent_institution, #id_author').each(function () {
@@ -352,7 +353,7 @@ $(function () {
 
 // Make Refnumber depend on Institution. Open InstitutionForm if Institution is not part of selection
 $(document).on('change', '#id_parent_institution', function () {
-    var urldepend = $('#documentTitleForm').attr('dep-ref-url');
+    var urldepend = $('#documentForm').attr('dep-ref-url');
     var instId = $(this).val();
 
     if (Number.isInteger(Number(instId)) && instId != null) {
