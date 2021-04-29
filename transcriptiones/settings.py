@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'django_filters',
     'bootstrap4',
     'easy_pdf',
+    'rest_framework',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
     'django_bootstrap_breadcrumbs',
+    'bootstrap_modal_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -170,3 +174,9 @@ MESSAGE_TAGS = {
  }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
