@@ -1,0 +1,55 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>{{ SOURCE_TITLE }}</title>
+                {{ PARTICIPANT_LIST }}
+                <respStmt>
+                    <resp>Originally uploaded by</resp>
+                    <name>{{ UPLOADING_USER }}</name>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <distributor>{{ DISTRIBUTOR }}</distributor>
+                <availability>
+                    <p>Freely available on a non-commercial basis.</p>
+                </availability>
+                <date when="{{ UPLOAD_DATE }}">{{ UPLOAD_DATE_COMPLETE }}</date>
+            </publicationStmt>
+            <notesStmt>hodl
+                <note>Last commit message: {{ COMMIT_MESSAGE }}</note>
+                <note>Editorial comments: {{ EDITORIAL_COMMENTS }}</note>
+                <note>Transcription scope: {{ TRANSCRIPTION_SCOPE }}</note>
+            </notesStmt>
+        </fileDesc>
+        <sourceDesc>
+            <msIdentifier>
+                <institution>{{ INSTITUTION_NAME }}</institution>
+                <idno>{{ REF_NUMBER }}</idno>
+            </msIdentifier>
+            <msDesc>
+                <physDesc>
+                    <supportDesc>
+                        <support>{{ WRITING_MATERIAL }}</support>
+                        <extent>
+                            {{ NUMBER_OF_PAGES }} pages
+                            <dimensions scope="all" type="page" unit="cam">
+                                <height>{{ DOC_HEIGHT }}</height>
+                                <width>{{ DOC_WIDTH }}</width>
+                            </dimensions>
+                        </extent>
+                    </supportDesc>
+                    <decoDesc>
+                        <p>{{ HAS_ILLUMINATIONS }}</p>
+                    </decoDesc>
+                    <sealDesc>
+                        <p>{{ HAS_SEALS }}</p>
+                    </sealDesc>
+                </physDesc>
+            </msDesc>
+        </sourceDesc>
+    </teiHeader>
+    <text>
+        {{ TRANSCRIPTION_TEXT }}
+    </text>
+</TEI>
