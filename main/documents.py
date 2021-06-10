@@ -111,7 +111,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     @staticmethod
     def get_instances_from_related(related_instance):
         if isinstance(related_instance, Author):
-            return related_instance.works.all()
+            return related_instance.document_set.all()
         if isinstance(related_instance, RefNumber):
-            return related_instance.documents.all()
+            return related_instance.document_set.all()
         raise TypeError
