@@ -1,0 +1,300 @@
+﻿The Project Gutenberg EBook of Oliver Twist, by Charles Dickens
+
+This eBook is for the use of anyone anywhere in the United States and most
+other parts of the world at no cost and with almost no restrictions
+whatsoever.  You may copy it, give it away or re-use it under the terms of
+the Project Gutenberg License included with this eBook or online at
+www.gutenberg.org.  If you are not located in the United States, you'll have
+to check the laws of the country where you are located before using this ebook.
+
+
+
+Title: Oliver Twist
+
+Author: Charles Dickens
+
+Contributor: Johannes Gaulke
+
+Release Date: February 17, 2018 [EBook #56586]
+
+Language: German
+
+Character set encoding: UTF-8
+
+*** START OF THIS PROJECT GUTENBERG EBOOK OLIVER TWIST ***
+
+
+
+
+Produced by Heike Leichsenring, Peter Becker and the Online
+Distributed Proofreading Team at http://www.pgdp.net
+
+
+
+
+
+Anmerkungen zur Transkription:
+
+Umschließungen mit * zeigen "gesperrt" gedruckten Text an,
+Umschließungen mit _ Text, der im Original in einer anderen Schriftart
+dargestellt war, und Umschließungen mit = fett gedruckten Text.
+
+Offensichtliche Druckfehler sowie die am Ende dieses Textes aufgeführten
+Fehler wurden berichtigt. Im Übrigen wurden Inkonsistenzen in der
+Interpunktion und Schreibweise einzelner Wörter belassen.
+
+
+
+                             Oliver Twist
+
+                                  von
+
+                            Charles Dickens
+
+                  mit einer biographischen Einleitung
+                          von Johannes Gaulke
+
+                     Globus Verlag G.m.b.H. Berlin
+
+
+
+
+Charles Dickens
+
+
+Unter den großen Humoristen des vorigen Jahrhunderts, die zugleich
+Tendenzschriftsteller im besten Sinne waren, nimmt Charles Dickens
+einen hervorragenden Platz ein, den er trotz des schnellen Wandels des
+literarischen Geschmacks und der Kunstanschauung in der Weltliteratur
+behaupten wird. Dickens ist nicht nur der Lieblingsdichter seines
+Volkes, sondern er ist schon zu Lebzeiten in allen Ländern des
+Erdenrunds heimisch geworden. In Hütte und Palast sind seine Werke
+gedrungen und haben überall starke und nachhaltige Wirkungen ausgeübt.
+Begabt mit dem köstlichen Humor, der mit dem einen Auge weint und dem
+anderen lacht, ist Dickens allen denen, die auf der Höhe des Lebens
+wandeln, ein treuer Mentor geworden, den Elenden und Enterbten des
+Lebensglücks aber ein aufrichtiger Freund und Tröster.
+
+Charles Dickens konnte zum ganzen Volke von allen den Dingen, die
+unsre Welt ausmachen, sprechen, weil er das Leben gründlich kannte,
+weil er selbst alle Wechselfälle des Lebens an sich selbst erfahren
+hatte. Als Kind wenig bemittelter Eltern am 7. Februar 1812 in Landport
+bei Portsmouth geboren, mußte er schon im Alter von zehn Jahren,
+als sein Vater in London ins Schuldgefängnis gewandert war, für den
+eigenen Lebensunterhalt sorgen. Während er als Laufbursche gegen einen
+kärglichen Wochenlohn tätig war, vernachlässigte er naturgemäß seine
+Schulbildung gänzlich, und er genoß erst, nachdem der Vater eine
+bescheidene Stellung in London erlangt hatte, als zwölfjähriger Knabe
+einen besseren Unterricht. Den Mangel eines systematischen Unterrichts
+hat er durch Selbstunterricht, der sich auf alle Gebiete des
+Wissens erstreckte, namentlich aber durch das Studium der englischen
+Schriftsteller ausgeglichen. Im Jahre 1833 veröffentlichte er, nachdem
+er sich schon als Journalist an führenden Blättern unter dem Pseudonym
+Boz mit großem Erfolge betätigt hatte, sein erstes Buch, eine Reihe von
+Skizzen aus dem Londoner Volksleben in zwei Bänden. Einige Jahre später
+folgten die «_Pickwick papers_», die ihn mit einem Schlage zu einem
+gelesenen und in allen Schichten gleich geschätzten Autor machten.
+Das Buch, das in einer Reihe von lose aneinandergefügten Skizzen die
+Abenteuer einiger Mitglieder des Pickwickklubs auf ihrer Reise durch
+England schildert, enthält in gewissem Sinne das Programm des späteren
+Dickens, der das Leben schildert, wie es sich ihm darbietet, immer
+von dem Gedanken getragen, moralische Wirkungen zu erzielen und den
+Menschen mit seiner Umwelt zu versöhnen. Um dieses Ziel zu erreichen,
+schrickt er nicht vor Übertreibungen eines Zustandes oder einer
+Handlung zurück und macht selbst, um möglichst eindringlich zu wirken,
+seine Figuren, die meistens sehr lebensvoll einsetzen, zu menschlichen
+Karikaturen.
+
+In rascher Folge erscheinen in den dreißiger und vierziger Jahren
+des vorigen Jahrhunderts die Hauptwerke Dickens. Die Reihe eröffnet
+«Oliver Twist» (1838), das als das erste realistische, aus dem
+Volkstum geschöpfte Buch mit außerordentlichem Enthusiasmus in England
+aufgenommen wurde und bald seinen Weg über den Erdball machte.
+Es folgten: «Nicholas Nickleby» (1839) und «_Master Humphrey's
+clock_» (1840), ein Werk, das sich ähnlich wie die «Pickwickier»
+aus Einzelerzählungen zusammensetzt, sich aber vor einem ernsteren
+Hintergrund abspielt und tiefergreifende Menschenschicksale darstellt.
+
+In den vierziger Jahren unternahm Dickens, der inzwischen zu einem
+gewissen Wohlstand gelangt war, große Auslandsreisen. Die Hauptfrucht
+seiner ersten Amerikareise (1842) ist der Roman «Martin Chuzzlewit»,
+in dem er die Heuchelei der Amerikaner mit scharfen Hieben geißelt.
+Auch in seinen «_American notes_» läßt er es an harten Bemerkungen
+über die Amerikaner und amerikanischen Einrichtungen nicht fehlen. Die
+Amerikaner haben ihm die geringe Meinung über sie und ihr Land, der
+er zu wiederholten Malen Ausdruck gegeben hat, nicht nachgetragen,
+sondern ihm in Neuyork, Chicago und anderen Städten prächtige Denkmäler
+errichtet.
+
+In Italien schrieb Dickens den Roman «Chimes» (1844), am Genfer
+See «_Battle of Life_» (1846). Fast gleichzeitig entstand «_Dombey
+and son_», ein Lebensbild aus dem Bürgertum, in dem Episoden von
+ergreifender Tragik und grotesker Komik einander folgen. Auf der Höhe
+des Schaffens stehend, schrieb Dickens Ende der vierziger Jahre den
+autobiographischen Roman «David Copperfield», der nach Plan und Anlage
+als ein wahrhaft geniales Werk genannt zu werden verdient. In der
+Charakterisierung der Person hat Dickens hier die höchste Meisterschaft
+erreicht, auch ist die Handlung einheitlicher und geschlossener als in
+den Werken seiner ersten Periode.
+
+David Copperfield ist wie die meisten Romane ein sozialer Tendenzroman.
+Für Dickens, der aus dem Volke hervorgegangen war, der auch als
+Dichter ein Selfmademan war, war die Kunst immer nur ein Mittel zum
+Zweck, nicht Selbstzweck, wie es eine spätere französische Richtung
+durch den Grundsatz «_l'art pour l'art_» ausdrückt. Dickens ist
+daher keiner begrenzten Gruppe oder Kunstrichtung einzureihen; er
+ist weder Realist noch Idealist im herkömmlichen Sinne, sondern auch
+als Künstler immer nur Moralist. Zwar sind die Zustände stets mit
+den Augen des Realisten gesehen, er ist sogar ein Kleinmaler von
+einer Prägnanz des Ausdrucks wie wenige, aber darüber hinaus reicht
+sein Wirklichkeitssinn nicht. Sobald er an den Menschen herantritt,
+versagt sein Charakterisierungsvermögen, er schildert die Menschen
+nicht wie sie sind, aus dem Milieu heraus, sondern wie er wünscht, daß
+sie sein möchten. Nur selten gelingt es ihm, einen der Wirklichkeit
+entsprechenden Menschen zu zeichnen; seine Romanfiguren sind entweder
+idealisiert oder karikiert -- im besten Falle Typen, keine Individuen.
+Entweder sind sie Erzbösewichter oder herzensgute Engel. Und zum Schluß
+erhalten sie alle, ganz im Einklang mit dem höchsten moralischen
+Grundgesetz, ihre Strafe oder ihre Belohnung für das, was sie getan
+oder unterlassen haben.
+
+Am besten gelingen Dickens die Gestalten aus dem Volk, mit ihnen ist
+der Dichter aufgewachsen, mit ihnen hat er gelitten, mit ihnen kann er
+daher auch empfinden. Auch in die Seele des Kindes vermag sich Dickens
+zu versetzen; hier wirkt sein Pathos immer echt, ob er das Elend des
+ausgesetzten Kindes schildert, die Qualen und Entbehrungen eines
+kleinen Bettlers oder gar den Tod eines unglücklichen kleinen Wesens.
+
+Je weiter sich Dickens vom Volkstum entfernt, umso unklarer und
+verschwommener werden seine Gestalten, doch weiß er auch hier
+wiederum mit glücklichem Griff das Milieu, in dem eine Lordschaft
+oder gar ein englischer Herzog sich bewegt, festzuhalten. Man
+sieht gern über die angedeuteten Schwächen hinweg, da der Dichter
+unerschöpflich in der Erfindung komischer und grotesker Situationen
+ist und mit einem von Herzen kommenden und zu Herzen gehenden Humor
+alle menschlichen Schwächen und Verirrungen zu entschuldigen weiß.
+Selbst dem tiefgesunkenen Verbrecher haftet immer noch ein menschlich
+liebenswürdiger Zug an. Ohne gerade Kriminalpsychologe zu sein,
+schildert Dickens seine Gestalten fast durchgängig als Produkte ihrer
+Umgebung und behandelt auch den schändlichsten Missetäter mit Nachsicht
+und Milde. So nur konnte er zu einem Anwalt der Unglücklichen und
+Enterbten werden.
+
+In der zweiten Periode seines dichterischen Schaffens, die die beiden
+letzten Jahrzehnte seines Lebens umfaßt, treten die Eigenarten und
+Schwächen des Dichters immer schärfer hervor. Rastlos tätig, lockert
+sich in seinen Romanen immer mehr die Komposition, auf langatmige
+Schilderungen folgen knappe dramatische Evolutionen und spannende
+Konflikte, die zu einem plötzlichen Abschluß drängen. Besonders
+charakteristisch ist in dieser Beziehung der vierbändige Roman «_Our
+mutual friend_», aber auch «_Bleakhouse_» und «_Tale of two cities_»,
+wo die französische Revolution den Hintergrund bildet, lassen die
+Einheitlichkeit des Plans vermissen.
+
+Charles Dickens war während seines ganzen Lebens von einem
+Arbeitseifer, der weder Rast noch Ruh kennt, beseelt. Während er seine
+großen Romane schrieb, war er im Nebenfach als Journalist und Redakteur
+tätig. Im Jahre 1845 trat er in die Redaktion der neubegründeten
+Zeitung «_Daily News_», die auch seine italienischen Reisebilder zuerst
+veröffentlichte, ein. 1849 gab er eine Wochenschrift «_Household
+Words_», die der Unterhaltung und Belehrung diente, heraus. Daneben
+fand er Zeit zu Vortragsreisen in England, Irland und Amerika, die ihm
+Reichtümer und hohe Ehrungen einbrachten, aber auch die mittelbare
+Ursache zu seinem plötzlichen Tode wurden. Er starb, vom Schlage
+getroffen, nach kurzem Krankenlager auf seinem Landsitz Gadshill,
+am 9. Juli 1870 im Alter von 58 Jahren. Seine Gebeine wurden in der
+Westminsterabtei, dem Pantheon Englands, beigesetzt.
+
+Wenden wir uns nunmehr der in diesem Bande veröffentlichten Erzählung
+«Oliver Twist» zu, so werden wir die Vorzüge und Schwächen Dickensscher
+Erzählungskunst gerade an diesem Werke höchst eindringlich wahrnehmen
+können. Oliver Twist ist Dickens hervorragendstes Jugendwerk und
+behandelt die Geschichte einer Jugend. Zweifellos haben eigene
+Jugendeindrücke dem Dichter die Direktive zu dieser Arbeit gegeben.
+Wie der kleine Oliver, so hat auch Dickens, zwar unter anderen
+Verhältnissen, aber ebenso mühselig, sich emporringen müssen. Das
+Leben hatte den Dichter schon in zarter Jugend hart angepackt, aber
+wie das Gold sich im Feuer läutert, so läutert sich die Seele im
+Lebenskampf, der Schmutz haftet nur dem Schmutzigen an, wer gesund und
+rein empfindet, muß schließlich alle Widerwärtigkeiten des Lebens
+überwinden. Das ist der Leitgedanke in Oliver Twist. Höchst drastische
+Bilder läßt der Dichter vor unserem geistigen Auge entstehen, scharf
+zugespitzte Situationen schildert er mit einer Anschaulichkeit, die uns
+um das Schicksal des jugendlichen Helden mit banger Sorge erfüllt. Wir
+empfinden und fühlen mit Oliver Twist, wir fürchten gar um sein Leben
+und zittern um sein Seelenheil. Oftmals hat es den Anschein, als müsse
+die Katastrophe jäh über ihn hereinbrechen, aber immer wieder entwirren
+sich die verworrenen Schicksalsfäden, bis ihm endlich die Erlösung aus
+unwürdigen Zuständen, in die er ohne seine Schuld geraten ist, wird.
+
+Wenn man den moralischen Maßstab an eine dichterische Arbeit anlegen
+will, so vollzieht sich in «Oliver Twist» alles ganz folgerichtig:
+die Tugend muß schließlich siegen, denn so will es die moralische
+Weltordnung. Vom literarischen Gesichtspunkt betrachtet, ließe sich
+allerdings mancherlei gegen den Optimismus Dickens einwenden; man
+merkt gar zu schnell die moralisierende Absicht und wird verstimmt.
+Dagegen kann Dickens als Zustandsschilderer auch hier vor jeder
+literarischen Kritik bestehen. Wie anschaulich sind allein die
+Verbrecherschlupfwinkel geschildert! Wie überzeugend die Örtlichkeiten
+des dunkelsten Londons! Man gewinnt hier überall den Eindruck des
+Selbstgeschauten. Dickens bedient sich zur Erreichung seines Zwecks
+oft ungewöhnlicher Mittel und verblüffender Wendungen. Er konstruiert
+die unwahrscheinlichsten Situationen und nimmt es auch mit den
+Tatsachen nicht so genau, um eine Kontrastwirkung zu erzielen. Einzelne
+Begebenheiten streifen fast das Niveau des Kolportageromans, während
+andere den Eindruck höchster Künstlerschaft auf den Leser machen.
+
+«Oliver Twist» ist eine Arbeit, die nicht mit dem Kopf, sondern mit
+dem Herzen geschrieben ist. Es ist der Roman des Kindes, vielleicht
+der erste dieser Art in der neueren Literatur. Der maßlose Jammer der
+ausgesetzten und verlassenen Kinder, von denen es im heutigen London
+noch hunderte und aberhunderte gibt, hat den Dichter angeregt zu einer
+Arbeit, die ein Appell an die Welt zur Abhilfe der verrotteten Zustände
+sein soll. Wir leben im «Jahrhundert des Kindes»! Männer und Frauen
+aller Kreise haben zusammengewirkt, um eine Hebung des sittlichen
+Niveaus, aber auch der materiellen Lage der Kinder der Ärmsten zu
+erzielen. Der Dichter des «Oliver Twist» verdient als Vorläufer dieser
+Bewegung bezeichnet zu werden. Menschengüte und Kinderliebe sprechen
+aus jeder Zeile des Buches; ohne diese Qualitäten hätte es schwerlich
+seinen Platz in der Weltliteratur behauptet.
+
+Von dem feinen Verständnis der Kinderseele und den Bedürfnissen des
+Kindes legt neben «Oliver Twist» auch Dickens «_A child's history of
+England_» ein glänzendes Zeugnis ab. In einer, den Anschauungskreis des
+Kindes angemessenen Form schildert Dickens hier die Hauptereignisse der
+englischen Geschichte mit höchster Eindringlichkeit und Wahrhaftigkeit,
+aber auch zugleich frei von jeder aufdringlichen chauvinistischen
+Tendenz. Das Buch, das in England und Amerika zu den meistgelesenen
+Büchern zählt, hat bei uns bei weitem nicht die ihm gebührende
+Beachtung gefunden, obgleich wir in der geschichtlichen Jugendliteratur
+ihm nichts Ebenbürtiges zur Seite stellen können.
+
+Charles Dickens hat in England viele Nachahmer gefunden, aber niemand
+hat ihn, dem das Schreiben eine sittliche Aufgabe war, auch nur im
+entferntesten erreicht. Seine Nachahmer haben ihn eigentlich nur
+in der Breite der Anlage und der Umständlichkeit der Schilderung
+getroffen, nicht aber in der Eindringlichkeit seines Vortrags und
+in der Überzeugungskraft, mit der er seine Tendenz verficht. Bald
+wird ein halbes Jahrhundert seit seinem Tode verflossen sein, die
+englische Familienblattliteratur hat inzwischen hunderttausende von
+Neuerscheinungen auf den Markt geworfen, aber doch ist Dickens der
+Dichter des Volkes geblieben. Von den großen Humoristen des vorigen
+Jahrhunderts kann ihm nur einer als gleichwertig zur Seite gestellt
+werden: unser Fritz Reuter, der ja auch wie Dickens in einer harten
+Schule der Entbehrungen zum Dichter und Menschenfreund herangewachsen
+ist. Sie liebten beide das Volk, weil sie es als echte Söhne des Volkes
+genau kannten, und sie haben beide dadurch, daß sie die erbärmliche
+Alltäglichkeit mit echter Poesie und echtem Humor durchtränkt haben,
+Millionen entzückt und mit dem Leben versöhnt. Wer das zuwege bringt,
+ist ein Wohltäter der Menschheit. In diesem Sinne hat sich einer der
+größten Staatsmänner Englands, Gladstone, über Dickens geäußert; auch
+er feierte ihn als einen Erzieher und Wohltäter seines Volkes. Charles
+Dickens wird daher, mag er einer strengen literarischen Kritik auch
+nicht immer standhalten, mag er selbst als Menschenschilderer überholt
+worden sein, dennoch weiterleben und noch viele Generationen durch
+seinen köstlichen Humor entzücken und begeistern.
+
+                                                       Johannes Gaulke.
+
+
+

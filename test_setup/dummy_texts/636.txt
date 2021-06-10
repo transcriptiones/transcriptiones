@@ -1,0 +1,50 @@
+   3. Kreuz-Reuel-Bukgordings.
+   4.   "     "  -Geitaue.
+   5.   "   -Bram-Bukgordings.
+   6.   "      " -Nockgordings.
+   7.   "      " -Geitaue.
+   8.   "  -Ober-Mars-Bukgordings.
+   9.   "    "    "  -Rah-Niederholer.
+  10.   "  -Unter-Mars-Bukgordings.
+  11.   "     "    "  -Geitaue.
+  12. Kreuz-Reuel-Stag-Segels-Fall.
+  13.   "     "    "     "   -Niederholer.
+  14.   "     "    "     "   -Schot.
+  15.   "  -Bram-Stag-Segels-Fall.
+  16.   "    "    "     "   -Niederholer.
+  17.   "    "    "     "   -Schot.
+  18.   "  -Stängen-Stag-Segels-Fall.
+  19.   "      "     "     "   -Niederholer.
+  20.   "      "     "     "   -Schot.
+  21.   "  -Stag-Segels-Niederholer.
+  22.   "    "     "   -Schot.
+
+
+Großtopp.
+
+  23. Groß-Reuel-Bukgordings.
+  24.  "     "  -Geitaue.
+  25.  "  -Bram-Bukgordings.
+  26.  "    "  -Nockgordings.
+  27.  "    "  -Geitaue.
+  28.  "  -Ober-Mars-Bukgordings.
+  29.  "    "  -Rah-Niederholer.
+  30.  "  -Unter-Mars-Bukgordings.
+  31.  "     "    "  -Geitaue.
+  32.  "  -Bukgordings.
+  33.  "  -Nockgordings.
+  34. Groß-Geitaue.
+  35.  "  -Hals.
+  36.  "  -Schot.
+  37.  "  -Reuel-Stag-Segels-Fall.
+  38.  "     "     "    "   -Niederholer.
+  39.  "     "     "    "   -Schot.
+  40.  "  -Bram-   "    "   -Fall.
+  41.  "    "      "    "   -Niederholer.
+  42.  "    "      "    "   -Schot.
+  43.  " -Stängen- "    "   -Fall.
+  44.  "     "     "    "   -Niederholer.
+  45.  "     "     "    "   -Schot.
+
+
+Vortopp.

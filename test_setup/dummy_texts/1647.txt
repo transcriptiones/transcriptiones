@@ -1,0 +1,50 @@
+    Röm. 3, 22. ‘räd’ gewechselt zu ‘red’
+    Röm. 6, 19. ‘Unrennlichkeit’ gewechselt zu ‘Unreinlichkeit’
+    Röm. 7, 3. ‘anner’ gewechselt zu ‘annern’
+    Röm. 8, 10. ‘twars’ gewechselt zu ‘twar’
+    Röm. 8, 39. ‘Depe’ gewechselt zu ‘Deepe’
+    Röm. 10, 7. ‘Depe’ gewechselt zu ‘Deepe’
+    Röm. 10, 18. ‘Twars’ gewechselt zu ‘twar’
+    Röm. 13, 4. ‘Denerin’ gewechselt zu ‘Deenerin’ (zweimal)
+    Röm. 13, 6. ‘Dener’ gewechselt zu ‘Deener’
+    Röm. 13, 11. ‘toerst’ gewechselt zu ‘toeerst’
+    Röm. 14, 12. ‘geben’ gewechselt zu ‘geven’
+    Röm. 15, 12. ‘Wortel’ gewechselt zu ‘Woddel’
+    1. Cor. 1, 9. ‘Den’ gewechselt zu ‘Denn’
+    1. Cor. 2, 2. ‘Ehristus’ gewechselt zu ‘Christus’
+    1. Cor. 5, 7. ‘wil’ gewechselt zu ‘wiel’
+    1. Cor. 6, 7. ‘leever bedregen’ gewechselt zu ‘lever bedregen’
+    1. Cor. 6, 11. ‘geretht’ gewechselt zu ‘gerecht’
+    1. Cor. 9, 3. ‘antword’ gewechselt zu ‘antwort’
+    1. Cor. 9, 19. ‘Vele’ gewechselt zu ‘Veele’
+    1. Cor. 10, 5. ‘vele’ gewechselt zu ‘veele’
+    1. Cor. 10, 8. ‘dreuntwintig’ gewechselt zu ‘dreeuntwintig’
+    1. Cor. 11, 5. ‘vel’ gewechselt zu ‘veel’
+    1. Cor. 11, 18. ‘Toerst’ gewechselt zu ‘Toeerst’
+    1. Cor. 12, 26. ‘liden’ gewechselt zu ‘lieden’
+    1. Cor. 14, 4. ‘süsvst’ gewechselt zu ‘sülvst’
+    1. Cor. 15, 3. ‘toerst’ gewechselt zu ‘toeerst’
+    1. Cor. 16, 13. ‘Past’ gewechselt zu ‘Paßt’
+    2. Cor. 1, 15. ‘enmal’ gewechselt zu ‘eenmal’
+    2. Cor. 2, 13. ‘Afschied’ gewechselt zu ‘Afscheed’
+    2. Cor. 5, 5. ‘farig’ gewechselt zu ‘fardig’
+    2. Cor. 6, 10. ‘und’ gewechselt zu ‘un’
+    2. Cor. 6, 15. ‘past’ gewechselt zu ‘paßt’
+    2. Cor. 7, 9. ‘irgenwo’ gewechselt zu ‘irgendwo’
+    2. Cor. 8, 5. ‘toerst’ gewechselt zu ‘toeerst’
+    2. Cor. 10, 13. ‘Maal, sonnern’ gewechselt zu ‘Maat, sonnern’
+    2. Cor. 11, 16. ‘bet’ gewechselt zu ‘beten’
+    2. Cor. 11, 29. ‘ich’ gewechselt zu ‘ik’
+    2. Cor. 11, 33. ‘dahl’ gewechselt zu ‘dal’
+    2. Cor. 12, 4. ‘und’ gewechselt zu ‘un’
+    2. Cor. 12, 4. ‘Wörd’ gewechselt zu ‘Wör’’
+    2. Cor. 12, 19. ‘werrer’ gewechselt zu ‘wedder’
+    Gal. 1, 9. ‘wie nu’ gewechselt zu ‘wi nu’
+    Gal. 3, 18. ‘öwer’ gewechselt zu ‘awer’
+    Gal. 3, 27. ‘Ehristus’ gewechselt zu ‘Christus’
+    Gal. 4, 1. ‘twüschen’ gewechselt zu ‘twischen’
+    Gal. 4, 27. ‘deist’ gewechselt zu ‘deihst’
+    Eph. 1, 3. ‘un’ gewechselt zu ‘und’
+    Eph. 1, 11. ‘Rad’ gewechselt zu ‘Rath’
+    Eph. 2, 6. ‘Ehristus’ gewechselt zu ‘Christus’
+    Eph. 4, 12. ‘wadörch’ gewechselt zu ‘wodörch’
