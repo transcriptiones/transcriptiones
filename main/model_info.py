@@ -70,9 +70,16 @@ def get_document_info_metadata(document):
 
 
 def get_document_info_manuscript(document):
+    doc_width = document.measurements_width
+    doc_length = document.measurements_length
+    if doc_width is None:
+        doc_width = 0.0
+    if doc_length is None:
+        doc_length = 0.0
+
     data = [(get_verbose_field_name(document, 'material'), document.material),
-            (_('Measurements'), "{width:.2f} / {length:.2f} cm".format(width=document.measurements_width,
-                                                                       length=document.measurements_length)),
+            (_('Measurements'), "{width:.2f} / {length:.2f} cm".format(width=doc_width,
+                                                                       length=doc_length)),
             (get_verbose_field_name(document, 'pages'), document.pages)
             ]
     return title_value_list(data)

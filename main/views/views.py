@@ -19,6 +19,10 @@ class InstitutionListView(SingleTableMixin, FilterView):
     filterset_class = InstitutionFilter
     template_name = "main/lists/institution_list.html"
 
+    def get_queryset(self):
+        return Institution.objects.all().order_by('institution_name')
+    # TODO sorted queryset by name
+
 
 class InstitutionDetailView(MultiTableMixin, DetailView):
     """View to show details of institutions and list all reference numbers of this institution"""
@@ -68,7 +72,7 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
 
 class DocumentDetailView(MultiTableMixin, DetailView):
-    """View to display DocumentTitle. Accepts optional version number to display legacy version"""
+    """View to display Document. Accepts optional version number to display legacy version"""
     model = Document
     slug_field = 'document_slug'
     slug_url_kwarg = 'doc_slug'
@@ -82,6 +86,7 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         queryset = Document.all_objects.filter(parent_ref_number__holding_institution__institution_slug=institution)
         queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
         queryset = queryset.filter(document_slug=document)
+        print(queryset)
 
         # if url specifies version_number, get this specific version, else get the active version
         if 'version_nr' in self.kwargs:
@@ -133,11 +138,3 @@ class DocumentHistoryView(DetailView):
         versions = self.model.get_versions(self.get_object())
         context['versions'] = versions
         return context
-
-
-def search(request):
-    return render(request, 'main/search.html')
-
-
-def test(request):
-    return render(request, 'main/test.html')

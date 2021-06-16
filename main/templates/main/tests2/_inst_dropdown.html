@@ -1,0 +1,5 @@
+<select id="insts-dropdown">
+    {% for inst in insts %}
+        <option value="{{ inst.id }}">{{ inst.institution_name }}</option>
+    {% endfor %}
+</select>

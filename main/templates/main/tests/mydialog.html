@@ -1,0 +1,33 @@
+{% extends 'bsmodals/generic.html' %}
+
+{% block title %}
+  <h5 id="mydialog-title">Replace This</h5>
+{% endblock title %}
+
+{% block body %}
+
+<form>
+  <div class="form-group">
+    <label for="name" class="col-form-label">Name</label>
+    <input type="text" class="form-control" name="name">
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <label for="number" class="col-form-label">Number</label>
+    <select class="form-control" name="number">
+      <option value="val1">1</option>
+      <option value="val2">2</option>
+      <option value="val3">3</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="message" class="col-form-label">Message</label>
+    <textarea class="form-control" name="message" rows="3"></textarea>
+  </div>
+
+</form>
+
+<button id="mydialog-close" class="btn btn-primary btn-sm"
+  >Close Me via .hide()</button>
+
+{% endblock body %}

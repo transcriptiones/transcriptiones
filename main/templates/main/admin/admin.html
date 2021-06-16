@@ -1,0 +1,70 @@
+﻿{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Transcriptiones Administration' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'admin_intro' _('Options') %}
+        <p>
+            {% translate 'You are a Transciptiones Admin user. You have the following options.' %}
+        </p>
+    {% endcard %}
+    {% card 'admin_crud' _('Change or Create Database Objects') %}
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:index" %}" role="button">{% translate 'Django Administration Interface' %}</a></td>
+                <td><small>{% translate 'The Django Administration Interface lets you add, modify and delete database objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_document_changelist" %}" role="button">{% translate 'Documents' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete document objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_institution_changelist" %}" role="button">{% translate 'Institutions' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete institution objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_refnumber_changelist" %}" role="button">{% translate 'Reference Numbers' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete reference number objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_sourcetype_changelist" %}" role="button">{% translate 'Source Types' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete source type objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_author_changelist" %}" role="button">{% translate 'Authors' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete author objects.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_user_changelist" %}" role="button">{% translate 'Users' %}</a></td>
+                <td><small>{% translate 'Add, modify or delete user objects.' %}</small></td>
+            </tr>
+
+
+        </table>
+    {% endcard %}
+    {% card 'admin_special' _('Special functions') %}
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_statistics" %}" role="button">{% translate 'View Statistics' %}</a></td>
+                <td><small>{% translate 'Display a page with usage statistics.' %}</small></td>
+            </tr>
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_merge_docs" %}" role="button">{% translate 'Merge Documents' %}</a></td>
+                <td><small>{% translate 'Merge documents which transcribe the same physical document.' %}</small></td>
+            </tr>
+        </table>
+    {% endcard %}
+    {% card 'admin_export' _('Export Database Objects') %}
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_export_json" %}" role="button">{% translate 'Export Database (JSON)' %}</a></td>
+                <td><small>{% translate 'Export the complete database as JSON file. (Be patient!).' %}</small></td>
+            </tr>
+        </table>
+    {% endcard %}
+{% endblock %}

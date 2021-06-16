@@ -1,0 +1,59 @@
+{% extends 'bsmodals/form.html' %}
+
+{% block body %}
+
+<form>
+  <div class="form-group">
+    <label for="name" class="col-form-label">Name</label>
+    <input type="text" class="form-control" name="name">
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <label for="number" class="col-form-label">Number</label>
+    <select class="form-control" name="number">
+      <option value="val1">1</option>
+      <option value="val2">2</option>
+      <option value="val3">3</option>
+    </select>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <label for="message" class="col-form-label">Message</label>
+    <textarea class="form-control" name="message" rows="3"></textarea>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" name="check1">
+    <label class="form-check-label" for="check">Check it out</label>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" name="check2">
+    <label class="form-check-label" for="check">Or not</label>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="radio1-1" type="radio" value="1" 
+      name="radio1">
+    <label class="form-check-label" for="radio1-1">One</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="radio1-2" type="radio" value="2" 
+      name="radio1">
+    <label class="form-check-label" for="radio1-2">Two</label>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="radio2-1" type="radio" value="A" 
+      name="radio2">
+    <label class="form-check-label" for="radio2-1">A</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="radio2-2" type="radio" value="B" 
+      name="radio2">
+    <label class="form-check-label" for="radio2-2">B</label>
+    <div class="invalid-feedback"></div>
+  </div>
+</form>
+
+{% endblock body %}

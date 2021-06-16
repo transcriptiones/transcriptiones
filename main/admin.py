@@ -1,16 +1,17 @@
 from django.contrib import admin
 from django.forms import ModelForm, CharField
 from ckeditor.widgets import CKEditorWidget
-
+from easy_select2 import select2_modelform
 from .models import Institution, RefNumber, Author, SourceType, Document, User
+
+InstitutionForm = select2_modelform(Institution, attrs={'width': '250px'})
 
 
 class InstitutionAdmin(admin.ModelAdmin):
     """Admin model for the institutions. """
-
     list_display = ('institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug')
     prepopulated_fields = {'institution_slug': ('institution_name',)}
-
+    # form = InstitutionForm
 
 class RefNumberAdmin(admin.ModelAdmin):
     """Admin model for the reference numbers. """

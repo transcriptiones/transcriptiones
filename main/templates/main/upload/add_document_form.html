@@ -11,9 +11,13 @@
     <!-- Stylesheet for Form validation. -->
     <link rel="stylesheet" href="{% static 'main/css/form_validation.css' %}" />
 
-    <!-- Select2 Bootstrap4 Theme -->
+    <!-- BS modals -->
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+
+    <!-- Select2 Bootstrap4 Theme
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.4.0/dist/select2-bootstrap4.min.css" />
+     -->
 {% endblock %}
 
 {% block additional_javascript %}
@@ -22,9 +26,11 @@
     <!-- Tooltipster Plugin -->
     <script src="{% static 'main/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
 
-    <!-- Select2 -->
+    <!-- Select2
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/de.js"></script>
+    -->
+
 {% endblock %}
 
 {% block page_title %}
@@ -134,3 +140,15 @@
 
 
 {% endblock content %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#create-book").modalForm({
+                formURL: "{% url 'main:institution_add' %}"
+            });
+
+        });
+    </script>
+{% endblock %}

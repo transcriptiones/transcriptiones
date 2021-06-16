@@ -1,12 +1,30 @@
 import random, os, uuid
 import string
 
+ref_number_titles = ['Briefwechsel Mustermann - Beispilia',
+                     'Gerichtsprotokoll Samson',
+                     'Ratsprotokolle Musterstadt',
+                     'Marktvorschriften Examplonien',
+                     'Flugschriftensammlung Subversia',
+                     'Gründungsurkunde Stadthausens',
+                     'Gebetssprüche Kloster Frommbad']
+
+doc_titles = ['Brief', 'Akte', 'Dokument', 'Pergament', 'Urkunde', 'Notiz']
+doc_names = ['Colbert', 'Kimmel', 'Conan', 'Meyers', 'Stewart', 'Oliver']
+
+institution_name_parts = ['Universitätsbibliothek', 'Staatsarchiv', 'Sammlung', 'Klosterarchiv', 'Stiftung']
+city_names = ['Aarau', 'Basel', 'Köln', 'Duisburg', 'Einsiedeln', 'Hamburg', 'Bremen', 'Berlin', 'Wien', 'Biel', 'Winterthur', 'Zürich']
+institution_names = list()
+for c_name in city_names:
+    for i_name in institution_name_parts:
+        institution_names.append(i_name + " " + c_name)
+
 str_source_type = "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_type_id`) " \
-                  "VALUES (1, 'Main Group 1', NULL),\n (2, 'Main Group 2', NULL),\n" \
-                  "(3, 'Sub Group 1-1', 1),\n (4, 'Sub Group 1-2', 1),\n" \
-                  "(5, 'Sub Group 1-3', 1),\n (6, 'Sub Group 1-4', 1),\n" \
-                  "(7, 'Sub Group 2-1', 2),\n (8, 'Sub Group 2-2', 2),\n" \
-                  "(9, 'Sub Group 2-3', 2),\n (10, 'Sub Group 2-4', 2);\n"
+                  "VALUES (1, 'Protokolle', NULL),\n (2, 'Anderes', NULL),\n" \
+                  "(3, 'Ratsprotokolle', 1),\n (4, 'Briefwechsel', 1),\n" \
+                  "(5, 'Gerichtsprotokolle', 1),\n (6, 'Markterlasse', 1),\n" \
+                  "(7, 'Andere Protokolle', 2),\n (8, 'Urkunden', 2),\n" \
+                  "(9, 'Jene Protokolle', 2),\n (10, 'Religiöses', 2);\n"
 
 str_institution = "INSERT INTO main_institution (id, institution_name, street, zip_code, " \
                   "city, country, site_url, institution_utc_add, institution_slug) VALUES"
@@ -17,12 +35,13 @@ str_ref_number = "INSERT INTO main_refnumber (id, ref_number_name, ref_number_ti
 ref_number_idx = 1
 for institution_idx in range(50):
     institution = institution_idx+1
-    str_institution += f"({institution}, 'Test Institution {institution}', 'Street{institution}', '10{institution}', " \
+    str_institution += f"({institution}, '{institution_names[institution_idx]}', 'Street{institution}', '10{institution}', " \
                        f"'City{institution}', 'ch', 'http://www.dummy.ch', NOW(), 'test-institution-{institution}'),\n"
 
     for ref_number in range(10):
         random_number = random.randint(1000, 9999)
-        str_ref_number += f"({ref_number_idx}, 'I{institution} - {random_number}', 'I{institution} RefNumber {ref_number}', 'http://www.dummy.ch', NOW(), 'i{institution}-refnumber-{ref_number}', '{institution}'),\n"
+        random_number2 = random.randint(0, len(ref_number_titles)-1)
+        str_ref_number += f"({ref_number_idx}, 'I{institution}-{random_number}-{random_number2}', '{ref_number_titles[random_number2]} {ref_number}', 'http://www.dummy.ch', NOW(), 'i{institution}-refnumber-{ref_number}', '{institution}'),\n"
         ref_number_idx += 1
 
 str_ref_number = str_ref_number[:-2]
@@ -72,10 +91,10 @@ str_documents = ""
 document_no = 1
 for filename in os.listdir('dummy_texts'):
     str_documents += "INSERT INTO main_document (id, document_id, title_name, doc_start_date, doc_end_date, place_name, " \
-                    "material, measurements_length, measurements_width, pages, paging_system, transcription_scope, " \
-                    "comments, transcription_text, document_utc_add, document_slug, active, commit_message, " \
-                    "version_number, parent_ref_number_id, source_type_id, submitted_by_id, publish_user, " \
-                    "document_utc_update, illuminated, seal) VALUES "
+                     "material, measurements_length, measurements_width, pages, paging_system, transcription_scope, " \
+                     "comments, transcription_text, document_utc_add, document_slug, active, commit_message, " \
+                     "version_number, parent_ref_number_id, source_type_id, submitted_by_id, publish_user, " \
+                     "document_utc_update, illuminated, seal) VALUES "
     # random_chars = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(30))
     my_uuid = str(uuid.uuid1(random.randint(0, 281474976710655))).replace("-", "")
     with open(os.path.join('dummy_texts', filename), encoding="utf8") as f:
@@ -83,10 +102,20 @@ for filename in os.listdir('dummy_texts'):
     transcription_text = " ".join(lines)
     transcription_text = transcription_text.replace("'", "''")
     parent_ref_number = random.randint(1, 500)
-    str_documents += f"(NULL, '{my_uuid}', 'Document title {document_no}', '1999-01-01 11:15:35.000000', NULL, " \
-                     f"'Basel', '1', NULL, NULL, NULL, NULL, 'All things transcribed.', '', " \
-                     f"'{transcription_text}', NOW(), 'document-title-{institution_idx}-{ref_number_idx}', '1', '', " \
-                     f"'1', '{parent_ref_number}', '3', '1', '1', NOW(), NULL, NULL);\n"
+    random_year = random.randint(1350, 1800)
+    random_material = random.randint(1, 3)
+    random_p_system = random.randint(1, 2)
+    random_pages = random.randint(1, 30)
+    random_source_type = random.randint(3, 10)
+    random_illuminated = random.randint(0, 1)
+    random_seal = random.randint(0, 1)
+    random_number2 = random.randint(0, len(doc_titles) - 1)
+    random_number3 = random.randint(0, len(doc_names) - 1)
+
+    str_documents += f"(NULL, '{my_uuid}', '{doc_titles[random_number2]} {doc_names[random_number3]}, {document_no}', '{random_year}-01-01 11:15:35.000000', NULL, " \
+                     f"'{city_names[random.randint(0,len(city_names)-1)]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
+                     f"'{transcription_text}', NOW(), 'document-title-{document_no}', '1', 'generated', " \
+                     f"'1', '{parent_ref_number}', '{random_source_type}', '1', '1', NOW(), {random_illuminated}, {random_seal});\n"
     document_no += 1
 
 str_documents = str_documents[:-2]

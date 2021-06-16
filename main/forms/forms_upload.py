@@ -1,12 +1,44 @@
+from bootstrap_modal_forms.mixins import CreateUpdateAjaxMixin
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.utils.translation import ugettext as _
 from main.models import Institution, RefNumber, Document, SourceType
 from main.widgets import SourceChildSelect
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
+from bootstrap_modal_forms.forms import BSModalModelForm
+from dal import autocomplete
+from django.utils.text import slugify
+
+class InstitutionForm2(BSModalModelForm):
+    class Meta:
+        model = Institution
+        exclude = ['institution_slug']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs['class'] = 'form-control'
+
+    def clean_institution_name(self):
+        data = self.cleaned_data['institution_name']
+        matching_entries = Institution.objects.filter(institution_name=data).exclude().all()
+        '''
+        if len(matching_entries) > 0:
+            raise forms.ValidationError("A Institution with this name already exists.")
+        '''
+        return data
+
+    def save(self, commit=True):
+        instance = super(InstitutionForm2, self).save(commit=False)
+        instance.institution_slug = slugify(instance.institution_name)
+
+        if commit:
+            #instance.save()
+            pass
+        return instance
 
 
-class InstitutionForm(forms.ModelForm):
+class InstitutionForm(BSModalModelForm):
     """Form for adding an Institution which is not yet in the Database"""
 
     # Add class form-control to each form field for bootstrap integration
@@ -73,7 +105,8 @@ class RefNumberForm(forms.ModelForm):
 
 
 class DocumentForm(forms.ModelForm):
-    """Form for adding a new Document to the Database"""
+    """Form for adding a new Document to the Database.
+    """
 
     class Meta:
         model = Document
@@ -119,7 +152,13 @@ class DocumentForm(forms.ModelForm):
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
 
-    parent_institution = forms.ModelChoiceField(queryset=Institution.objects.all().order_by('institution_name'))
+    parent_institution = forms.ModelChoiceField(queryset=Institution.objects.all().order_by('institution_name'),
+                                                widget=autocomplete.ModelSelect2(url='main:ac-institution'))
+
+    parent_ref_number = forms.ModelChoiceField(queryset=RefNumber.objects.all().order_by('ref_number_name'),
+                                               widget=autocomplete.ModelSelect2(url='main:ac-ref_number',
+                                                                                forward=['parent_institution', ]))
+
     transcription_text = forms.CharField(widget=CKEditorWidget)
     source_type_parent = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
@@ -137,7 +176,11 @@ class DocumentForm(forms.ModelForm):
 
     # add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
-        super(DocumentForm, self).__init__(*args, **kwargs)
+        # super(DocumentForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        # self.fields['parent_institution'].queryset = Institution.objects.all()
+
+        """
         for name in self.fields:
             if isinstance(self.fields[name], forms.BooleanField):
                 self.fields[name].widget.attrs.update({'class': 'form-check-input'})
@@ -146,6 +189,7 @@ class DocumentForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': self.fields[name].help_text,
                     })
+        """
 
         self.helper = initialize_form_helper()
 

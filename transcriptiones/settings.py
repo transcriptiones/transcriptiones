@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'bootstrap4',
     'easy_pdf',
     'rest_framework',
+    'dal',              # Remove
+    'dal_select2',      # Remove
+    'widget_tweaks',
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',
     'django_bootstrap_breadcrumbs',
@@ -96,8 +99,13 @@ WSGI_APPLICATION = 'transcriptiones.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'transcriptiones',
+        'USER': 'transcriptiones_user',
+        'PASSWORD': 'transcriptiones',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
     }
 }
 

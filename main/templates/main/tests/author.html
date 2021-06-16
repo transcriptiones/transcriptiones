@@ -1,0 +1,28 @@
+{% extends 'bsmodals/form.html' %}
+
+{% block body %}
+
+<form>
+  <div class="form-group">
+    <label for="name" class="col-form-label">Name</label>
+    <input type="text" class="form-control" name="name">
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <label for="rating" class="col-form-label">Rating</label>
+    <select class="form-control" name="rating">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="TOOLONG">TOO LONG</option>
+    </select>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="col-form-label">Description</label>
+    <textarea class="form-control" name="description" rows="3"></textarea>
+    <div class="invalid-feedback"></div>
+  </div>
+</form>
+
+{% endblock body %}

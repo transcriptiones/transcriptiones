@@ -4,22 +4,18 @@
 THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED! WHY?
 -->
 
-<div class="modal-header">
-    <h5 class="modal-title" id="institutionModalLabel">{% translate 'Add Institution' %}</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<form method="post" action="">
+  {% csrf_token %}
 
-<div id="modalFormInstitution" class="modal-body" style="display: block">
-    <div class="col-sm">
-        <div class="row">
-            <h5 id="modalIntro"></h5>
-        </div>
-    </div>
-    <form method="post" id="institutionForm" class="needs-validation" novalidate>
-        {% csrf_token %}
-        {{ form.institution_name|as_crispy_field }}
+ <div class="modal-header">
+    <h5 class="modal-title">Create new Institution</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    {{ form.institution_name|as_crispy_field }}
         {{ form.street|as_crispy_field }}
         <div class="form-row">
             <div class="form-group col-sm-3">
@@ -34,9 +30,11 @@ THIS IS A HELPER TEMPLATE! SOON TO BE DEPRECATED! WHY?
         </div>
         {{ form.country|as_crispy_field }}
         {{ form.site_url|as_crispy_field }}
+  </div>
 
-        <button type="button" class="btn btn-secondary" id="submitButtonModal">Absenden</button>
-        <button type="button" class="btn btn-light" id="backButtonModal" style="display:none">Zurück</button>
-    </form>
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </div>
 
+</form>

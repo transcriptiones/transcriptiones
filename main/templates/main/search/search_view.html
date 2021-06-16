@@ -1,0 +1,86 @@
+﻿{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+
+{% block page_title %}
+    {% translate 'Search' %}
+{% endblock %}
+
+{% block content %}
+    <form id="searchForm" action="." method="post">
+        {% csrf_token %}
+
+        {% card 'simple_search_form' _('Simple search') %}
+            {{ form.query }} <button type="submit">{% translate 'Search' %}</button>
+        {% endcard %}
+
+        {% card 'advanced_search_form' _('Advanced search') %}
+            {% for field in form %}
+                {% if not forloop.first %}
+                    <div class="row">
+                        <div class="col-sm">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %} <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
+            <button type="submit">{% translate 'Search' %}</button>
+        {% endcard %}
+
+
+      </form>
+
+    {% if table %}
+        {% card 'search_results_test' _('Search results') %}
+            {% render_table table %}
+        {% endcard %}
+    {% endif %}
+
+    {% if results %}
+       {% card 'search_results' _('Search results') %}
+          <span>{{ results.count }} Suchresultat{% if results.count != 1 %}e{% endif %}</span>
+          {% for result in results %}
+                <a href="{{ result.get_absolute_url }}" class="row display-list-element">
+                  <div class="col-sm">
+                      <div class="row"><h6 class="text-left">{{ result.title_name }}</h6></div>
+                      <div class="row">
+                          <div class="col-sm text-left">
+                              <div class="row">{{ result.parent_ref_number.holding_institution }}</div>
+                              <div class="row">{{ result.parent_ref_number }}</div>
+                          </div>
+                          <div class="col-sm text-left">
+                              <div class="row">{{ result.place_name }}</div>
+                              <div class="row">
+                                  {% if result.doc_start_date %}
+                                  {{ result.doc_start_date }}.
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-sm text-left">
+                              {% if result.source_type.parent_type is not None %}
+                              {{result.source_type.parent_type}} -<br />
+                              {% endif %}
+                              {{ result.source_type }}
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          {% endfor %}
+      {% endcard %}
+    {% endif %}
+
+
+  <div id="input-widget-templates" class="d-none">
+      {# These input widgets will not be displayed. They are simply provided for copying. #}
+      {% for attribute in ATTRIBUTES.values %}
+        {{ attribute.template }}
+      {% endfor %}
+  </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+  <script src="{% static 'main/search/scripts.js' %}"></script>
+{% endblock %}

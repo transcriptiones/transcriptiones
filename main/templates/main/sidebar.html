@@ -35,6 +35,11 @@
             <li class="sidebar-nav-item">
                 <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% translate 'My Profile' %}</a>
             </li>
+            {% if user.is_superuser %}
+                <li class="sidebar-nav-item">
+                    <a class="js-scroll-trigger" href="{% url 'main:admin' %}">{% translate 'Administration' %}</a>
+                </li>
+            {% endif %}
             <li class="sidebar-nav-item">
                 <a class="js-scroll-trigger" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
             </li>

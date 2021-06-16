@@ -1,5 +1,9 @@
 /* START PAGE */
 
+.double-striped tr:nth-child(4n+1), .double-striped tr:nth-child(4n+2) {
+ background: #eeeeee;
+}
+
 /* General Styling, Fonts, etc. */
 
 body,

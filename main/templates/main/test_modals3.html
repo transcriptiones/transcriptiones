@@ -1,0 +1,168 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block page_title %}
+    {% translate 'Test Modals 2' %}
+{% endblock %}
+
+{% block modal_includes %}
+     {% include "main/tests/_modal.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-3">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <button id="create-book-sync" class="btn btn-primary" type="button" name="button">
+              <span class="fa fa-plus mr-2"></span> Create book - Synchronous
+            </button>
+              <button id="create-book-async" class="btn btn-primary" type="button" name="button">
+              <span class="fa fa-plus mr-2"></span>Create book - Asynchronous
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+    <script type="text/javascript">
+      $(function () {
+          // Login
+          $("#login-btn").modalForm({
+            formURL: "{% url 'main:login' %}"
+          });
+
+          //  Signup
+          $("#signup-btn").modalForm({
+            formURL: "{% url 'main:signup' %}"
+          });
+
+          // Create book synchronous
+          function createBookSyncModalForm() {
+            $("#create-book-sync").modalForm({
+                formURL: "{% url 'main:create_institution' %}",
+                modalID: "#create-modal"
+            });
+          }
+          createBookSyncModalForm();
+
+          // Create book asynchronous button
+          // message
+          var asyncSuccessMessageCreate = [
+            "<div ",
+            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+            "Success: Book was created.",
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+            "<span aria-hidden='true'>&times;</span>",
+            "</button>",
+            "</div>",
+            "<script>",
+            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+            "<\/script>"
+          ].join("");
+
+          // modal form
+          function createBookAsyncModalForm() {
+            $("#create-book-async").modalForm({
+                formURL: "{% url 'main:create_institution' %}",
+                modalID: "#create-modal",
+                asyncUpdate: true,
+                asyncSettings: {
+                  closeOnSubmit: true,
+                  successMessage: asyncSuccessMessageCreate,
+                  dataUrl: "{% url 'main:start' %}",
+                  dataElementId: "#books-table",
+                  dataKey: "table",
+                  addModalFormFunction: reinstantiateModalForms
+                }
+            });
+          }
+          createBookAsyncModalForm();
+
+          // Update book asynchronous button
+          // message
+          var asyncSuccessMessageUpdate = [
+            "<div ",
+            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+            "Success: Book was updated.",
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+            "<span aria-hidden='true'>&times;</span>",
+            "</button>",
+            "</div>",
+            "<script>",
+            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+            "<\/script>"
+          ].join("");
+
+          // modal form
+          function updateBookModalForm() {
+            $(".update-book").each(function () {
+              $(this).modalForm({
+                formURL: $(this).data("form-url"),
+                asyncUpdate: true,
+                asyncSettings: {
+                  closeOnSubmit: false,
+                  successMessage: asyncSuccessMessageUpdate,
+                  dataUrl: "{% url 'main:test_modals' %}",
+                  dataElementId: "#books-table",
+                  dataKey: "table",
+                  addModalFormFunction: reinstantiateModalForms
+                }
+              });
+            });
+          }
+          updateBookModalForm();
+
+          // Delete book buttons - formURL is retrieved from the data of the element
+          function deleteBookModalForm() {
+            $(".delete-book").each(function () {
+                $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+            });
+          }
+          deleteBookModalForm();
+
+          // Read book buttons
+          function readBookModalForm() {
+            $(".read-book").each(function () {
+                $(this).modalForm({formURL: $(this).data("form-url")});
+            });
+          }
+          readBookModalForm();
+
+          function reinstantiateModalForms() {
+            createBookAsyncModalForm();
+            readBookModalForm();
+            updateBookModalForm();
+            deleteBookModalForm();
+          }
+
+          // Filter books button
+          $("#filter-book").each(function () {
+              $(this).modalForm({formURL: $(this).data("form-url")});
+          });
+
+          // Hide message
+          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+              $(".alert").slideUp(500);
+          });
+      });
+  </script>
+{% endblock %}
+
+{% block scripts %}
+      <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+      <script src="{% static 'assets/js/popper.min.js' %}"></script>
+      <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+{% endblock %}

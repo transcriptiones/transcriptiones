@@ -14,6 +14,17 @@ from languages_plus.models import Language
 from ckeditor.fields import RichTextField
 
 #TODO replace from i18n_model.models import I18nModel
+from rest_framework import serializers
+
+
+class Institution2(models.Model):
+    institution_name = models.CharField(verbose_name=_("Institution"),
+                                        max_length=80,
+                                        unique=True,
+                                        help_text=_("Complete name of the institution"))
+
+    def __str__(self):
+        return self.institution_name
 
 
 class Institution(models.Model):
@@ -56,6 +67,12 @@ class Institution(models.Model):
 
     def get_absolute_url(self):
         return reverse('main:institution_detail', kwargs={'inst_slug': self.institution_slug})
+
+
+class InstitutionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Institution
+        fields = ['url', 'id', 'institution_name', 'street', 'zip_code']
 
 
 class RefNumber(models.Model):
@@ -174,17 +191,20 @@ class Document(models.Model):
     parent_ref_number = models.ForeignKey(RefNumber,
                                           verbose_name=_("Reference Number"),
                                           on_delete=models.PROTECT,
-                                          help_text="Signatur der Quelle")
+                                          help_text="Reference number of the source")
 
     author = models.ManyToManyField(Author,
                                     verbose_name=_("Source Participants"),
                                     blank=True,
                                     help_text=_("Authors, Copiers, Editors"))
 
-    doc_start_date = PartialDateField(verbose_name=_("Creation period start"),)
+    doc_start_date = PartialDateField(verbose_name=_("Creation period start"),
+                                      help_text=_("When was the document written? Supply at least a year."))
 
     doc_end_date = PartialDateField(verbose_name=_("Creation period end"),
-                                    blank=True)
+                                    null=True,
+                                    blank=True,
+                                    help_text=_("If the document was created over a time span, please indicate the end time."))
 
     place_name = models.CharField(verbose_name=_("Creation Location"),
                                   max_length=150,
@@ -205,6 +225,7 @@ class Document(models.Model):
 
     material = models.IntegerField(verbose_name=_("Writing material"),
                                    blank=True,
+                                   null=True,
                                    choices=MaterialType.choices,
                                    help_text=_("Is the manuscript on paper, papyrus or parchment?"))
 
@@ -228,6 +249,7 @@ class Document(models.Model):
                                              help_text=_("The number of pages of the whole source"))
 
     paging_system = models.IntegerField(verbose_name=_("Pagination"),
+                                        null=True,
                                         blank=True,
                                         choices=PaginationType.choices,
                                         help_text=_("How are the pages numbered?"))

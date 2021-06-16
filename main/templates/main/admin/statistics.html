@@ -1,0 +1,15 @@
+﻿{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Transcriptiones Statistics' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'stats_intro' _('General Statistics') %}
+        <!-- TODO Show a table with documents, etc. -->
+        <p>This function is not implemented yet.</p>
+    {% endcard %}
+{% endblock %}

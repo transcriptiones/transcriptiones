@@ -15,7 +15,13 @@
 
         <!-- Bootstrap core JavaScript -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
         <!-- Plugin JavaScript -->
@@ -54,10 +60,21 @@
 
         {% block additional_head_tags %}
         {% endblock %}
+
+
+    {% block scripts %}
+
+
+        <!-- You can alternatively load the minified version -->
+
+    {% endblock %}
     </head>
 
     <body id="page-top">
         {% block body_includes %}
+        {% endblock %}
+
+        {% block modal_includes %}
         {% endblock %}
 
         {% block breadcrumbs %}
@@ -163,5 +180,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    {% block extrascripts %}{% endblock extrascripts %}
 </body>
 </html>

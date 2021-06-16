@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Test Dropdown' %}
+{% endblock %}
+
+{% block content %}
+    <form>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+{% endblock %}

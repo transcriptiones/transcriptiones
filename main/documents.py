@@ -21,7 +21,6 @@ class DateRangeField(DEDField, DateRange):
 @registry.register_document
 class TranscriptionDocument(ElasticsearchDocument):
     """Elasticsearch index mapping for DocumentTitle models.
-
     Intended for user search, not storage or internal search.
     """
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
@@ -52,7 +51,7 @@ class TranscriptionDocument(ElasticsearchDocument):
         related_models = [Author, RefNumber, Language]
 
     class Index:
-        name = 'transcripts'
+        name = 'transcriptiones_idx'
         settings = {
             'number_of_shards': 1,
             'number_of_replicas': 0
@@ -99,6 +98,7 @@ class TranscriptionDocument(ElasticsearchDocument):
         return Range(gte=min_date, lte=max_date)
         """
         return None
+
     @staticmethod
     def _last_day_in_month(month: int) -> int:
         """Gives the number of days in a given month."""
@@ -106,7 +106,8 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     def get_queryset(self):
         queryset: QuerySet = super().get_queryset()
-        return queryset.filter(active=True).select_related('parent_ref_number').prefetch_related('author', 'language')
+        #return queryset.filter(active=True).select_related('parent_ref_number').prefetch_related('author', 'language')
+        return queryset
 
     @staticmethod
     def get_instances_from_related(related_instance):
