@@ -1,0 +1,5 @@
+<select id="refns-dropdown">
+    {% for inst in insts %}
+        <option value="{{ inst.id }}">{{ inst.ref_number_name }}</option>
+    {% endfor %}
+</select>
