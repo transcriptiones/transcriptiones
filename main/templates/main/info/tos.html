@@ -8,6 +8,14 @@
 
 {% block content %}
 
+    {% card 'general' _('Information about Transcriptiones') %}
+        <div align="center">
+            <a href="{% url 'main:guidelines' %}" class="btn btn-primary">{% translate 'Guidelines' %}</a> &nbsp;
+            <a href="{% url 'main:tos' %}" class="btn btn-outline-primary">{% translate 'Terms Of Service' %}</a> &nbsp;
+            <a href="{% url 'main:about' %}" class="btn btn-primary">{% translate 'About' %}</a> &nbsp;
+        </div>
+    {% endcard %}
+
     {% card 'general' _('General') %}
         {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
         {% translate 'General Contact Text Message' %}
