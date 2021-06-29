@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<form action="{% url 'main:search_redirect' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="query">
+    <button type="submit" name="search">{% translate 'Search' %}</button>
+</form>
