@@ -10,17 +10,18 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb "Institutions" "main:institution_list"%}
     {% breadcrumb institution "main:institution_detail" institution.institution_slug %}
 {% endblock %}
 
 
 {% block content %}
-
     {% card 'institution_detail' _('About the institution') %}
         {% render_table tables.0 %}
     {% endcard %}
 
     {% card 'institution_ref_number' _('Reference Numbers in this institution') %}
+        {% include 'main/filter.html' %}
         {% render_table tables.1 %}
     {% endcard %}
 
