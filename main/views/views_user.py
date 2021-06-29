@@ -1,5 +1,6 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import View, TemplateView
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
@@ -83,6 +84,7 @@ class CustomPasswordChangeView(PasswordChangeView):
     """View for changing password"""
     template_name = "main/users/password_change.html"
     form_class = CustomPasswordChangeForm
+    success_url = reverse_lazy('main:password_change_done')
 
 
 @login_required
