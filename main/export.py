@@ -81,7 +81,7 @@ def export_tei(document):
         text = text.replace('{{ TRANSCRIPTION_SCOPE }}', document.transcription_scope)
         text = text.replace('{{ INSTITUTION_NAME }}', document.parent_ref_number.holding_institution.institution_name)
         text = text.replace('{{ REF_NUMBER }}', document.parent_ref_number.ref_number_name)
-        text = text.replace('{{ WRITING_MATERIAL }}', document.material)
+        text = text.replace('{{ WRITING_MATERIAL }}', str(document.material))
         text = text.replace('{{ NUMBER_OF_PAGES }}', str(document.pages))
         text = text.replace('{{ DOC_HEIGHT }}', str(document.measurements_length))
         text = text.replace('{{ DOC_WIDTH }}', str(document.measurements_width))
