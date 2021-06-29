@@ -1,10 +1,16 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
+{% load transcriptiones %}
 
 {% block page_title %}
     {% translate 'Logged out' %}
 {% endblock %}
 
 {% block content %}
-
+    {% card 'logged_out_card' _('Logged out') %}
+        <div align="center">
+            <p>{% translate 'You have been securely logged out.' %}</p>
+            <a href="{% url 'main:start' %}" class="btn btn-primary">{% translate 'Go To Main Page' %}</a>
+        </div>
+    {% endcard %}
 {% endblock %}
