@@ -1,4 +1,7 @@
 /* START PAGE */
+.alert-info {
+  margin-bottom:0;
+}
 
 .double-striped tr:nth-child(4n+1), .double-striped tr:nth-child(4n+2) {
  background: #eeeeee;
