@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import FormView, ListView
 from django_tables2 import RequestConfig
 
@@ -35,6 +38,27 @@ def test_search(request):
 
             table = DocumentResultTable(data=queryset, query=form.cleaned_data['query'])
             RequestConfig(request).configure(table)
+
+    context = {'form': form, 'ATTRIBUTES': Attribute.members, 'results': queryset, 'table': table}
+    return render(request, "main/search/search_view.html", context)
+
+
+def search_box_redirect(request):
+    if request.method == "POST":
+        query = request.POST.get('query', '')
+        if query == '':
+            messages.warning(request, 'Please enter a search term')
+            return redirect(request.META.get('HTTP_REFERER'))
+        return HttpResponseRedirect(reverse('main:search_by_box', kwargs={'query': query}))
+
+
+def search_by_box_view(request, query):
+    form = SearchForm()
+    queryset = TranscriptionDocument.search()
+    queryset = queryset.query("multi_match", query=query,
+                              fields=FULLTEXT_FIELDS)
+    queryset = queryset.to_queryset()
+    table = DocumentResultTable(data=queryset, query=query)
 
     context = {'form': form, 'ATTRIBUTES': Attribute.members, 'results': queryset, 'table': table}
     return render(request, "main/search/search_view.html", context)
