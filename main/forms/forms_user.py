@@ -1,10 +1,14 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UserChangeForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
+    PasswordChangeForm, PasswordResetForm, SetPasswordForm
+
 from main.models import User
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class SignUpForm(UserCreationForm):
+    """Form to sign up for transcriptiones"""
+
     email = forms.EmailField(label='E-Mail', max_length=255, help_text='E-Mail-Adresse')
     mark_anonymous = forms.BooleanField(label='Anonym publizieren', required=False)
 
@@ -54,10 +58,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
                 'placeholder': self.fields[name].label,
                 })
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-3'
-        self.helper.field_class = 'col-sm-9'
+        self.helper = initialize_form_helper()
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -72,10 +73,7 @@ class UserUpdateForm(forms.ModelForm):
                     'class': 'form-control',
                     })
 
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-3'
-        self.helper.field_class = 'col-sm-9'
+        self.helper = initialize_form_helper()
 
     class Meta:
         model = User
