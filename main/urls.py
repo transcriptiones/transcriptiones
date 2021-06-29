@@ -7,17 +7,17 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
 from rest_framework.routers import DefaultRouter
 
 from main.views.views_test import test, test_dropdown, test_bsmodals, test_bsmodals2, test_bsmodals3, InstitutionAutocomplete, RefNumberAutocomplete, InstitutionViewSet, InstitutionCreateView
-from main.views.views import InstitutionListView
-from main.views.views import InstitutionDetailView, RefNumberDetailView, DocumentDetailView, DocumentHistoryView
 from main.views.views_upload_old import AddInstitutionView, AddRefNumberView, AddDocumentView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
 from main.views.views_upload_old import EditMetaView, EditTranscriptView
-from main.views.views_upload_old import thanks_view
 from main.views.views_user import signup, userprofile, UserUpdateView
 from main.views.views_user import CustomLoginView
 from main.views.views_user import activate, AccountActivationSentView
 from main.views.views_user import CustomPasswordConfirmView, CustomPasswordResetView, CustomPasswordChangeView
 from main.views.views_export import DocumentExportView
+
+import main.views.views_browse as v_browse
+import main.views.views_export as v_export
 import main.views.views_upload as v_upload
 import main.views.views_admin as views_admin
 import main.views.views_search as v_search
@@ -29,11 +29,50 @@ router.register('institutions', InstitutionViewSet)
 
 app_name = 'main'
 urlpatterns = [
-    # ADMIN PAGES
-    path('transcriptiones_admin/', views_admin.admin_view, name='admin'),
-    path('transcriptiones_admin/statistics/', views_admin.admin_statistics_view, name='admin_statistics'),
-    path('transcriptiones_admin/merge_doc/', views_admin.admin_merge_docs_view, name='admin_merge_docs'),
-    path('transcriptiones_admin/export/json/', views_admin.admin_export_json_view, name='admin_export_json'),
+    # ROOT VIEW
+    path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
+
+    ##############
+    # INFO PAGES
+    path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
+    path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
+    path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
+    # TODO These pages are currently unused
+    path('info/aboutus/',    TemplateView.as_view(template_name='main/info/about_us.html'),   name='about_us'),
+    path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
+
+    ##############
+    # SEARCH VIEW
+    path('search/', v_search.SearchView.as_view(), name='search'),
+    path('search_box/<str:query>/', v_search.search_by_box_view, name='search_by_box'),
+    path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
+
+    ##############
+    # UPLOAD PAGES
+    # Upload form for a new document
+    path('upload/', v_upload.upload_transcription_view, name='upload_document'),
+    # Thank you screen after uploading
+    path('upload/thanks/<int:doc_id>', v_upload.thanks_view, name='thank_you'),
+
+    ##############
+    # AUTOMPLETE VIEWS
+    url(r'^inst-autocomplete/$', v_autocomplete.InstitutionAutocomplete.as_view(), name='inst-autocomplete', ),
+    url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
+    url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),
+    url(r'^srctype-ch-autocomplete/$', v_autocomplete.SourceTypeChildAutocomplete.as_view(), name='srctype-ch-autocomplete', ),
+    url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(), name='author-autocomplete', ),
+    url(r'^language-autocomplete/$', v_autocomplete.LanguageAutocomplete.as_view(), name='language-autocomplete', ),
+
+
+    ##############
+    # VIEW DATA PAGES
+    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
+    path('display/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', v_browse.DocumentDetailView.as_view(), name='document_legacy_detail'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', v_browse.DocumentHistoryView.as_view(), name='document_history'),
+    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', v_export.DocumentExportView.as_view(), name='document_export'),
 
     path('search_test/', v_search.test_search, name='search_test'),
     path('test/', test, name='test'),
@@ -43,59 +82,14 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('create_institution/', InstitutionCreateView.as_view(), name='create_institution'),
 
-    path('insti_idx/', v_upload.new_index_inst, name='index_inst'),
-    path('instis/create/', v_upload.InstCreateView.as_view(), name='create_inst'),
-    path('instis/', v_upload.insts, name='insts'),
+    path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
+    path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),
+    path('refis/create/', v_upload.ModalCreateRefNumberView.as_view(), name='create_refn'),
+    path('instis/', v_upload.institution_dropdown_view, name='insts'),
+    path('refis/', v_upload.refnumber_dropdown_view, name='refns'),
 
-    # Autocomplete Views for upload form
-    url(r'^inst-autocomplete/$', v_autocomplete.InstitutionAutocomplete.as_view(), name='inst-autocomplete', ),
-    url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
-    url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),
-    url(r'^srctype-ch-autocomplete/$', v_autocomplete.SourceTypeChildAutocomplete.as_view(), name='srctype-ch-autocomplete', ),
-    url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(), name='author-autocomplete', ),
-    url(r'^language-autocomplete/$', v_autocomplete.LanguageAutocomplete.as_view(), name='language-autocomplete', ),
-
-    # auto complete views
-    # path('ac-institution', InstitutionAutocomplete.as_view(create_field='institution_name'), name='ac-institution'),
-    # path('ac-ref_number', RefNumberAutocomplete.as_view(create_field='ref_number_name'), name='ac-ref_number'),
-
-    # urls for info views
-    path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
-    path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
-    path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
-    path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
-    path('info/aboutus/',    TemplateView.as_view(template_name='main/info/about_us.html'),   name='about_us'),
-    path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
-
-    # urls for display views
-    path('display/institutions/', InstitutionListView.as_view(), name='institution_list'),
-    path('display/<slug:inst_slug>/', InstitutionDetailView.as_view(), name='institution_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/', RefNumberDetailView.as_view(), name='ref_number_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', DocumentDetailView.as_view(),
-         name='document_detail'),
-
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', DocumentDetailView.as_view(),
-         name='document_legacy_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', DocumentHistoryView.as_view(),
-         name='document_history'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', DocumentExportView.as_view(),
-         name='document_export'),
-
-    # urls for upload views
-    path('upload/', v_upload.new_index_inst, name='upload_document'),
-    path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
-    path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
-    path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
-    path('upload/thanks/', thanks_view, name='thanks'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(),
-         name='edit_transcript'),
-    path('upload/batch/', batch_upload, name='batch_upload'),
-
-    # urls for search views
-    path('search/', v_search.SearchView.as_view(), name='search'),
-
-    # urls for user views
+    ##############
+    # USER VIEWS
     path('user/signup/', signup, name='signup'),
     path('user/activationsent/', AccountActivationSentView.as_view(), name='account_activation_sent'),
     path('user/activate/<uidb64>/<token>/', activate, name='activate'),
@@ -109,4 +103,25 @@ urlpatterns = [
     path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='main/users/password_reset_done.html'), name='password_reset_done'),
     path('user/reset/<uidb64>/<token>/', CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
     path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='main/users/password_reset_complete.html'), name='password_reset_complete'),
+
+    ##############
+    # ADMIN PAGES
+    path('transcriptiones_admin/', views_admin.admin_view, name='admin'),
+    path('transcriptiones_admin/statistics/', views_admin.admin_statistics_view, name='admin_statistics'),
+    path('transcriptiones_admin/merge_doc/', views_admin.admin_merge_docs_view, name='admin_merge_docs'),
+    path('transcriptiones_admin/export/json/', views_admin.admin_export_json_view, name='admin_export_json'),
+
+
+    path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
+    path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
+    path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
+
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(),
+         name='edit_transcript'),
+    path('upload/batch/', batch_upload, name='batch_upload'),
+
+
+
+
     ]
