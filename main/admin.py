@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.forms import ModelForm, CharField
 from ckeditor.widgets import CKEditorWidget
 from easy_select2 import select2_modelform
@@ -60,4 +61,4 @@ admin.site.register(RefNumber, RefNumberAdmin)
 admin.site.register(Author)
 admin.site.register(SourceType, SourceTypeAdmin)
 admin.site.register(Document, DocumentAdmin)
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
