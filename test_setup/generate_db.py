@@ -20,11 +20,58 @@ for c_name in city_names:
         institution_names.append(i_name + " " + c_name)
 
 str_source_type = "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_type_id`) " \
-                  "VALUES (1, 'Protokolle', NULL),\n (2, 'Anderes', NULL),\n" \
-                  "(3, 'Ratsprotokolle', 1),\n (4, 'Briefwechsel', 1),\n" \
-                  "(5, 'Gerichtsprotokolle', 1),\n (6, 'Markterlasse', 1),\n" \
-                  "(7, 'Andere Protokolle', 2),\n (8, 'Urkunden', 2),\n" \
-                  "(9, 'Jene Protokolle', 2),\n (10, 'Religiöses', 2);\n"
+                  "VALUES (1, 'Historiographische Quellen', NULL),\n " \
+                  "(2, 'Hagiographische Quellen', NULL),\n" \
+                  "(3, 'Rechtsquellen', NULL),\n " \
+                  "(4, 'Verwaltungsschrifttum', NULL),\n" \
+                  "(5, 'Korrespondenz', NULL),\n " \
+                  "(6, 'Liturgische Schriften', NULL),\n" \
+                  "(7, 'Wissenschaftliches Schrifttum', NULL),\n " \
+                  "(8, 'Dichtung', NULL),\n" \
+                  "(9, 'Politische Schriften', NULL),\n " \
+                  "(10, 'Pläne / Karten', NULL),\n" \
+                  "(11, 'Sonstiges', NULL),\n " \
+                  "(12, 'Annalen', 1),\n " \
+                  "(13, 'Chroniken', 1),\n " \
+                  "(14, 'Biographien', 1),\n " \
+                  "(15, 'Reiseberichte', 1),\n " \
+                  "(16, 'Exempla', 1),\n " \
+                  "(17, 'Geschichtsdichtung', 1),\n " \
+                  "(18, 'Selbstzeugnisse', 1),\n " \
+                  "(19, 'Viten', 2),\n " \
+                  "(20, 'Mirakel- und Translationsberichte', 2),\n " \
+                  "(21, 'Diplomatische Urkunden', 3),\n " \
+                  "(22, 'Weltliche Rechtsquellen', 3),\n " \
+                  "(23, 'Kirchliche Rechtsquellen', 3),\n " \
+                  "(24, 'Persönliche Verträge', 3),\n " \
+                  "(25, 'Urbare', 4),\n " \
+                  "(26, 'Lehnbücher', 4),\n " \
+                  "(27, 'Amts- und Rechnungsbücher', 4),\n " \
+                  "(28, 'Bürgerbücher', 4),\n " \
+                  "(29, 'Zunftakten', 4),\n " \
+                  "(30, 'Matrikeln', 4),\n " \
+                  "(31, 'Ratsbücher', 4),\n " \
+                  "(32, 'Briefe', 5),\n " \
+                  "(33, 'Postkarten', 5),\n " \
+                  "(34, 'Messeregelungen', 6),\n " \
+                  "(35, 'Predigten', 6),\n " \
+                  "(36, 'Memorialbücher', 6),\n " \
+                  "(37, 'Predigtanleitungen', 6),\n " \
+                  "(38, 'Visionen', 6),\n " \
+                  "(39, 'Theoretisch-theologische Schriften', 7),\n " \
+                  "(40, 'Dogmatische Schriften', 7),\n " \
+                  "(41, 'Enzyklopädische Schriften und Summen', 7),\n " \
+                  "(42, 'Medizinische Schriften', 7),\n " \
+                  "(43, 'Philosophische Schriften', 7),\n " \
+                  "(44, 'Sonstige nichttheologische Fachliteratur', 7),\n " \
+                  "(45, 'Epik', 8),\n " \
+                  "(46, 'Lyrik', 8),\n " \
+                  "(47, 'Prosa', 8),\n " \
+                  "(48, 'Spiele', 8),\n " \
+                  "(49, 'Traktate', 9),\n " \
+                  "(50, 'Pamphlete', 9),\n " \
+                  "(51, 'Allgemein', 10),\n " \
+                  "(52, 'Notizen', 11);\n"
 
 str_institution = "INSERT INTO main_institution (id, institution_name, street, zip_code, " \
                   "city, country, site_url, institution_utc_add, institution_slug) VALUES"
