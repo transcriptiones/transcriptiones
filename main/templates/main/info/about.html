@@ -8,6 +8,14 @@
 
 {% block content %}
 
+    {% card 'general' _('Information about Transcriptiones') %}
+        <div align="center">
+            <a href="{% url 'main:guidelines' %}" class="btn btn-primary">{% translate 'Guidelines' %}</a> &nbsp;
+            <a href="{% url 'main:tos' %}" class="btn btn-primary">{% translate 'Terms Of Service' %}</a> &nbsp;
+            <a href="{% url 'main:about' %}" class="btn btn-outline-primary">{% translate 'About' %}</a> &nbsp;
+        </div>
+    {% endcard %}
+
     {% card 'the_project' _('The Project') %}
         {%  comment %} Translators: This is a lengthy message about the project. {% endcomment %}
         {% translate 'Project text message' %}
