@@ -9,7 +9,6 @@ class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
         qs = Institution.objects.all()
         if self.q:
             qs = qs.filter(institution_name__icontains=self.q)
-
         return qs
 
 
@@ -28,7 +27,6 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(ref_number_title__icontains=self.q, ref_number_name__icontains=self.q)
-
         return qs
 
 
@@ -40,7 +38,6 @@ class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(type_name__icontains=self.q)
-
         return qs
 
 
@@ -58,7 +55,6 @@ class SourceTypeChildAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(type_name__icontains=self.q)
-
         return qs
 
 
@@ -70,7 +66,6 @@ class AuthorAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(author_name__icontains=self.q)
-
         return qs
 
 
@@ -82,5 +77,4 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(name_native__icontains=self.q)
-
         return qs
