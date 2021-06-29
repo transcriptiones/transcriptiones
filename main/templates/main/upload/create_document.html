@@ -1,0 +1,245 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load transcriptiones %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Upload Transcription' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Upload Transcription" "main:upload" %}
+{% endblock %}
+
+{% block content %}
+    {% include "main/tests2/_modal.html" %}
+    {# include "main/tests2/_inst_dropdown.html" #}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% card 'upload_required' _('Required Information') %}
+            {{ form.title_name|as_crispy_field }}
+
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    Institution
+                </div>
+                <div class="form-group col-sm-7">
+                    {{ form.parent_institution }}
+                </div>
+                <div class="form-group col-sm-2">
+                    <button id="create-inst-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>Add</button>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    Reference Number
+                </div>
+                <div class="form-group col-sm-7">
+                    {{ form.parent_ref_number }}
+                </div>
+                <div class="form-group col-sm-2">
+                    <button id="create-refn-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>Add</button>
+                </div>
+            </div>
+
+            {{ form.transcription_scope|as_crispy_field }}
+            {{ form.doc_start_date|as_crispy_field }}
+            {{ form.doc_end_date|as_crispy_field }}
+            {{ form.place_name|as_crispy_field }}
+            {{ form.selection_helper_source_type|as_crispy_field }}
+            {{ form.source_type|as_crispy_field }}
+        {% endcard %}
+
+        {% card 'upload_transcript' _('Transcript') %}
+            {{ form.transcription_text }}
+        {% endcard %}
+
+        {% card 'upload_metadata' _('Content Meta Data') %}
+            {{ form.author|as_crispy_field }}
+            {{ form.language|as_crispy_field }}
+
+        {% endcard %}
+
+        {% card 'upload_description' _('Manuscript Description') %}
+            {{ form.material|as_crispy_field }}
+            {{ form.measurements_length|as_crispy_field }}
+            {{ form.measurements_width|as_crispy_field }}
+            {{ form.pages|as_crispy_field }}
+            {{ form.paging_system|as_crispy_field }}
+            {{ form.illuminated|as_crispy_field }}
+            {{ form.seal|as_crispy_field }}
+        {% endcard %}
+
+        {% card 'upload_comments' _('Comments and Links') %}
+            {{ form.comments|as_crispy_field }}
+            {{ form.publish_user|as_crispy_field }}
+        {% endcard %}
+
+        <button type="button" class="btn btn-secondary" id="submitButtonDocument">{% translate 'Upload' %}</button>
+
+        <table style="display: none">
+            {{ view.formset.empty_form }}
+        </table>
+
+        <table>
+            {{ view.formset }}
+        </table>
+
+        <span id="add-form" class="button">Add form</span>
+
+        <input type="submit" />
+    </form>
+
+    {{ form.media }}
+
+{% endblock content %}
+
+{% block extrascripts %}
+    <!-- I dont understand this?? -->
+    <script>
+        (function($) {
+            $('#add-form').click(function() {
+                var index = $('#id_inline_test_models-TOTAL_FORMS').val()
+                var newTable = $('#id_inline_test_models-__prefix__-DELETE').parents('table').clone()
+                newTable.find(':input').each(function() {
+                    for (attr of ['name', 'id'])
+                        $(this).attr(
+                            attr,
+                            $(this).attr(attr).replace('__prefix__', index)
+                        )
+                })
+                newTable.insertBefore($(this))
+                $('#id_inline_test_models-TOTAL_FORMS').val(
+                    parseInt($('#id_inline_test_models-TOTAL_FORMS').val()) + 1
+                )
+                newTable.slideDown()
+            })
+        })($)
+    </script>
+
+    <!-- RESETS THE REF NUMBER DROPDOWN WHEN THE INSTITUTION CHANGES -->
+    <script>
+        $(document).ready(function() {
+            // Bind on continent field change
+            $(':input[name$=parent_institution]').on('change', function() {
+                // Get the field prefix, ie. if this comes from a formset form
+                var prefix = $(this).getFormPrefix();
+
+                // Clear the autocomplete with the same prefix
+                $(':input[name=' + prefix + 'parent_ref_number]').val(null).trigger('change');
+            });
+        });
+    </script>
+
+    <!-- RESETS THE SOURCE TYPE DROPDOWN WHEN THE PARENT TYPE CHANGES -->
+    <script>
+        $(document).ready(function() {
+            // Bind on continent field change
+            $(':input[name$=selection_helper_source_type]').on('change', function() {
+                // Get the field prefix, ie. if this comes from a formset form
+                var prefix = $(this).getFormPrefix();
+
+                // Clear the autocomplete with the same prefix
+                $(':input[name=' + prefix + 'source_type]').val(null).trigger('change');
+            });
+        });
+    </script>
+
+  <script type="text/javascript">
+      $(function () {
+          // Create institution asynchronous button
+          // message
+          var asyncSuccessMessageCreate = [
+            "<div ",
+            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+            "Success: Inst was created. (oh yeah)!",
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+            "<span aria-hidden='true'>&times;</span>",
+            "</button>",
+            "</div>",
+            "<script>",
+            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+            "<\/script>"
+          ].join("");
+
+          // modal form
+          function createBookAsyncModalForm() {
+            $("#create-inst-async").modalForm({
+                formURL: "{% url 'main:create_inst' %}",
+                modalID: "#create-modal",
+                asyncUpdate: true,
+                asyncSettings: {
+                  closeOnSubmit: true,
+                  successMessage: asyncSuccessMessageCreate,
+                  dataUrl: "{% url 'main:insts' %}",
+                  dataElementId: "#insts-dropdown",
+                  dataKey: "select",
+                  addModalFormFunction: reinstantiateModalForms
+                }
+            });
+          }
+          createBookAsyncModalForm();
+
+          function reinstantiateModalForms() {
+            createBookAsyncModalForm();
+          }
+
+          // Hide message
+          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+              $(".alert").slideUp(500);
+          });
+      });
+  </script>
+
+    <script type="text/javascript">
+      $(function () {
+          // Create reference number asynchronous button
+          // message
+          var asyncSuccessMessageCreate = [
+            "<div ",
+            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+            "Success: REFN was created. (oh yeah)!",
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+            "<span aria-hidden='true'>&times;</span>",
+            "</button>",
+            "</div>",
+            "<script>",
+            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+            "<\/script>"
+          ].join("");
+
+          // modal form
+          function createBookAsyncModalForm() {
+            $("#create-refn-async").modalForm({
+                formURL: "{% url 'main:create_refn' %}",
+                modalID: "#create-modal",
+                asyncUpdate: true,
+                asyncSettings: {
+                  closeOnSubmit: true,
+                  successMessage: asyncSuccessMessageCreate,
+                  dataUrl: "{% url 'main:insts' %}",
+                  dataElementId: "#insts-dropdown",
+                  dataKey: "select",
+                  addModalFormFunction: reinstantiateModalForms
+                }
+            });
+          }
+          createBookAsyncModalForm();
+
+          function reinstantiateModalForms() {
+            createBookAsyncModalForm();
+          }
+
+          // Hide message
+          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+              $(".alert").slideUp(500);
+          });
+      });
+  </script>
+{% endblock extrascripts %}
