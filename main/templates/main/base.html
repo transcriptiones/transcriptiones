@@ -64,9 +64,6 @@
 
     {% block scripts %}
 
-
-        <!-- You can alternatively load the minified version -->
-
     {% endblock %}
     </head>
 
@@ -84,36 +81,55 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-expand-sm fixed-top position-absolute text.navbar">
-            <ul class="navbar-nav align-items-center">
-                <li class="navbar-brand">
-                    <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
-                </li>
-                <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:upload_document' %}">{% translate 'Upload' %}</a>
-                </li>
-                <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
-                </li>
-                <li class="navbar-nav-item d-none d-sm-block">
-                    <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
-                </li>
-                <li class="navbar-nav-item d-none d-sm-block">
-                    {% if user.is_authenticated %}
-                        <a class="nav-link text-navbar" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
-                    {% else %}
-                        <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
-                    {% endif %}
-                </li>
-            </ul>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                 <ul class="navbar-nav mr-auto align-items-center">
+                    <li class="navbar-brand">
+                        <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
+                    </li>
+                    <li class="navbar-nav-item d-none d-sm-block">
+                        <a class="nav-link text-navbar" href="{% url 'main:upload_document' %}">{% translate 'Upload' %}</a>
+                    </li>
+                    <li class="navbar-nav-item d-none d-sm-block">
+                        <a class="nav-link text-navbar" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
+                    </li>
+                    <li class="navbar-nav-item d-none d-sm-block">
+                        <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
+                    </li>
+                    <li class="navbar-nav-item d-none d-sm-block">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link text-navbar" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
+                        {% else %}
+                            <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
+                        {% endif %}
+                    </li>
+                 </ul>
+            </div>
+
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
+                    <li class="nav-item">
+                        {% include "main/search_box.html" %}
+                    </li>
+                </ul>
+            </div>
         </nav>
 
+
          <!-- Sidebar -->
+
         {% include "main/sidebar.html" %}
 
         <!-- Content -->
         {% block base_content %}
             <section class="content-section bg-white">
                 <div class="container text-center">
+                   {% for message in messages %}
+                      <div class="alert {{ message.tags }}" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+
                     <div class="row">
                         <div class="col-sm-10 mx-auto">
                             {% render_breadcrumbs %}
@@ -125,11 +141,6 @@
                                 </h2>
                             </div>
                             <div>
-                                {% for message in messages %}
-                  <div class="alert {{ message.tags }}" role="alert" >
-                    <small>{{ message }}</small>
-                  </div>
-                {% endfor %}
 
                 {% if form.non_field_errors %}
                   <div class="alert alert-danger" role="alert">
