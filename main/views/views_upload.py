@@ -1,15 +1,18 @@
-from django.http import JsonResponse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
-from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.template.defaultfilters import slugify
+from django.utils.translation import gettext as _
 
 from bootstrap_modal_forms.generic import BSModalCreateView
 
-from main.forms.forms_test import InstModelForm, InstSelectTestForm
-from main.models import Institution, RefNumber, SourceType, Author, Language
+from main.forms.forms_test import InstModelForm, RefnModelForm
+from main.forms.forms_upload import UploadTranscriptionForm
+from main.models import Document, Institution, RefNumber, SourceType, Author, Language
 
 
 class IndexInst(generic.ListView):
@@ -18,12 +21,14 @@ class IndexInst(generic.ListView):
     template_name = 'main/tests2/inst.html'
 
 
-def new_index_inst(request):
-    form = InstSelectTestForm()
+@login_required
+def upload_transcription_view(request):
+    """This view shows the upload form."""
+    form = UploadTranscriptionForm()
     context = {'insts': Institution.objects.all(), 'form': form}
 
     if request.method == "POST":
-        form = InstSelectTestForm(request.POST)
+        form = UploadTranscriptionForm(request.POST)
 
         if form.is_valid():
             new_document = form.save(commit=False)
@@ -40,6 +45,8 @@ def new_index_inst(request):
                 new_document.paging_system = None
 
             new_document.save()
+            messages.success(request, _('The document has been created.'))
+            return HttpResponseRedirect(reverse('main:thank_you', kwargs={'doc_id': new_document.id}))
         else:
             print("NOT VALID")
             print(form.errors)
@@ -62,23 +69,58 @@ def new_index_inst(request):
                     'seal': ['unknown'],
                     'comments': ['']}
 
-    return render(request, 'main/tests2/inst.html', context)
+    return render(request, 'main/upload/create_document.html', context)
 
 
-class InstCreateView(BSModalCreateView):
-    template_name = 'main/tests2/create_inst.html'
+class ModalCreateInstitutionView(BSModalCreateView):
+    """Creates a bootstrap modal view to create an institution."""
+    template_name = 'main/upload/create_institution.html'
     form_class = InstModelForm
-    success_message = 'Success: Inst was created.'
-    success_url = reverse_lazy('main:index_inst')
+    success_message = _('Success: Institution was created.')
+    success_url = reverse_lazy('main:upload_document')
 
 
-def insts(request):
+class ModalCreateRefNumberView(BSModalCreateView):
+    """Creates a bootstrap modal view to create a reference number."""
+    template_name = 'main/upload/create_ref_number.html'
+    form_class = RefnModelForm
+    success_message = _('Success: RefNumber was created.')
+    success_url = reverse_lazy('main:upload_document')
+
+
+def institution_dropdown_view(request):
+    """Creates a SELECT view for the institutions"""
     data = dict()
     if request.method == 'GET':
-        insts = Institution.objects.all().order_by('institution_name')
+        institutions = Institution.objects.all().order_by('institution_name')
         data['select'] = render_to_string(
             'main/tests2/_inst_dropdown.html',
-            {'insts': insts},
+            {'insts': institutions},
             request=request
         )
         return JsonResponse(data)
+
+
+def refnumber_dropdown_view(request):
+    """Creates a SELECT view for the reference numbers"""
+    data = dict()
+    if request.method == 'GET':
+        ref_numbers = RefNumber.objects.all().order_by('ref_number_name')
+        data['select'] = render_to_string(
+            'main/tests2/_refn_dropdown.html',
+            {'refns': ref_numbers},
+            request=request
+        )
+        return JsonResponse(data)
+
+
+def thanks_view(request, doc_id):
+    """View to display after successful transcription upload"""
+    try:
+        document = Document.objects.get(id=doc_id)
+    except Document.DoesNotExist:
+        document = None
+
+    context = {'document': document}
+    template_name = "main/upload/thank_you.html"
+    return render(request, template_name, context)
