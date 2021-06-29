@@ -151,11 +151,6 @@ class AddDocumentView(LoginRequiredMixin, View):
                 # Exception Handling goes here!
                 # return render(self.request, self.template_name, {"form": form})
 
-
-def thanks_view(request, context):
-    """View to display after successful form-submit"""
-    template_name = "main/upload/form_redirect.html"
-    return render(request, template_name, context)
     
 
 def load_ref_numbers(request):
