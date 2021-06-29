@@ -1,9 +1,15 @@
 {% extends 'main/base.html' %}
 {% load transcriptiones %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Terms Of Service' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Terms Of Service" "main:tos" %}
 {% endblock %}
 
 {% block content %}
