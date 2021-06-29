@@ -15,6 +15,12 @@
     <!-- Header -->
     <header class="masthead d-flex">
         <div class="container text-center my-auto">
+            {% for message in messages %}
+                  <div class="alert {{ message.tags }}" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ message }}
+                  </div>
+            {% endfor %}
             <h1 class="mb-1 text-white">TRANSCRIPTIONES</h1>
             <h3 class="mb-5 text-white">
                 {% translate 'The place to transcript historical manuscripts' %}
