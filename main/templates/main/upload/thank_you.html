@@ -2,12 +2,17 @@
 {% load i18n %}
 {% load transcriptiones %}
 
+{% block page_title %}
+    {% translate 'Thank you!' %}
+{% endblock %}
+
+
 {% block content %}
 
     {% card 'thank_you_card' _('Thank you for your contribution') %}
         <div align="center">
             <p>What would you like to do next?</p>
-            <a href="{{ object.get_absolute_url }}" class="btn btn-primary">{% translate 'View Uploaded Document' %}</a> &nbsp;
+            <a href="{{ document.get_absolute_url }}" class="btn btn-primary">{% translate 'View Uploaded Document' %}</a> &nbsp;
             <a href="{% url 'main:profile' %}" class="btn btn-primary">{% translate 'View Your Profile' %}</a> &nbsp;
             <a href="{% url 'main:upload_document' %}" class="btn btn-primary">{% translate 'Upload another document' %}</a>
         </div>
