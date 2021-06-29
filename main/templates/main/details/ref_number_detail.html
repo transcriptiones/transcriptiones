@@ -5,7 +5,14 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {{ refnumber.ref_number_name }}
+    {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Institutions" "main:institution_list"%}
+    {% breadcrumb refnumber.holding_institution "main:institution_detail" refnumber.holding_institution.institution_slug %}
+    {% breadcrumb refnumber "main:ref_number_detail" refnumber.holding_institution.institution_slug refnumber.ref_number_slug %}
 {% endblock %}
 
 {% block content %}
@@ -15,6 +22,7 @@
     {%  endcard %}
 
     {% card 'ref_number_documents' _('Documents with this reference number') %}
+        {% include 'main/filter.html' %}
         {% render_table tables.1 %}
     {%  endcard %}
 
