@@ -115,4 +115,6 @@ class TranscriptionDocument(ElasticsearchDocument):
             return related_instance.document_set.all()
         if isinstance(related_instance, RefNumber):
             return related_instance.document_set.all()
+        if isinstance(related_instance, Language):
+            return related_instance.document_set.all()
         raise TypeError
