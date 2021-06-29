@@ -7,7 +7,18 @@ from main.models import Institution, \
     RefNumber, Document, SourceType, Author, Language
 
 
+class RefnModelForm(BSModalModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
 
+    class Meta:
+        model = RefNumber
+        fields = [
+            'ref_number_name',
+            'ref_number_title',
+            'collection_link',
+            'ref_number_slug']
 
 
 class InstModelForm(BSModalModelForm):
