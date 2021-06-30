@@ -21,6 +21,7 @@ import main.views.views_export as v_export
 import main.views.views_upload as v_upload
 import main.views.views_admin as views_admin
 import main.views.views_search as v_search
+import main.views.views_subscriptions as v_subscriptions
 import main.views.views_autocomplete as v_autocomplete
 
 router = DefaultRouter()
@@ -103,6 +104,16 @@ urlpatterns = [
     path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='main/users/password_reset_done.html'), name='password_reset_done'),
     path('user/reset/<uidb64>/<token>/', CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
     path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='main/users/password_reset_complete.html'), name='password_reset_complete'),
+
+    ##############
+    # USER SUBSCRIPTIONS
+    path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
+    path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
+    path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
+    path('unsubscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
+    path('unsubscribe/document/<int:pk>/', v_subscriptions.unsubscribe_document_view, name='unsubscribe_document'),
+    path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
+    path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
     ##############
     # ADMIN PAGES

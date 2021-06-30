@@ -410,6 +410,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model for the transcriptiones project."""
+    class NotificationPolicy(models.IntegerChoices):
+        NONE = 1, _('No notification E-Mails')
+        IMMEDIATE = 2, _('Every time a subscribed document has changed.')
+        DAILY = 3, _('Once a day, only if changes happened.')
+        WEEKLY = 4, _('Once a week, only if changes happened.')
 
     username = models.CharField(verbose_name=_('Username'),
                                 unique=True,
@@ -449,9 +454,36 @@ class User(AbstractBaseUser, PermissionsMixin):
                                        auto_now_add=True)
 
     mark_anonymous = models.BooleanField(verbose_name=_('Mark anonymous by default'),
-                                         default=False)
+                                         default=False,
+                                         help_text=_('If selected, your documents will be published anonymously by '
+                                                     'default. Can be changed on a document basis.'))
+
+    user_orcid = models.CharField(verbose_name=_('Orcid'), default='', max_length=255,
+                                  help_text=_('User id from https://orcid.org/'))
+
+    notification_policy = models.IntegerField(verbose_name=_('Notification policy'),
+                                              choices=NotificationPolicy.choices,
+                                              default=NotificationPolicy.DAILY,
+                                              help_text=_('How often do you want to be notified about your subscribed '
+                                                          'documents?'))
+
+    different_editor_subscription = models.BooleanField(verbose_name=_('Subscription to owned documents'),
+                                                        help_text=_('Do you want to be notified when your '
+                                                                    'documents were edited by another user?'),
+                                                        default=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
+
+
+class UserSubscription(models.Model):
+    class SubscriptionType(models.IntegerChoices):
+        REF_NUMBER = 1, _('Reference number')
+        DOCUMENT = 2, _('Document')
+        USER = 3, _('User')
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subscription_type = models.IntegerField(choices=SubscriptionType.choices)
+    object_id = models.BigIntegerField()
