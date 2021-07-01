@@ -26,6 +26,13 @@ def get_user_info(user):
     return title_value_list(data)
 
 
+def get_public_user_info(user):
+    data = [(get_verbose_field_name(user, 'username'), user.username),
+            # TODO
+            ]
+    return title_value_list(data)
+
+
 def get_institution_info(institution):
     data = [(get_verbose_field_name(institution, 'street'), institution.street),
             (_('Zip / City'), f"{institution.zip_code} / {institution.city}"),

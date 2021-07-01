@@ -1,0 +1,32 @@
+﻿{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+
+{% block page_title %}
+    {% translate 'User ' %} {{ profile_user.username }}
+{% endblock %}
+
+{% block content %}
+
+    {% card 'user_profile_personal' _('My Personal Data') %}
+        {% render_table user_table %}
+        {% if request.user.id == profile_user.id %}
+            <small>(This is you. Check your <a href="{% url 'main:profile' %}">Private Profile</a>)</small>
+        {% else %}
+            {% if subscribed %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_user' user.pk %}" role="button">Unsubscribe from this user</a>
+            {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' user.pk %}" role="button">Subscribe to this user</a>
+            {% endif %}
+            &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+        {% endif %}
+    {% endcard %}
+
+    {% card 'user_profile_activity' _('My Activity') %}
+        {% include 'main/filter.html' %}
+        {% render_table activity_table %}
+    {% endcard %}
+
+    <!-- TODO check table pagination -->
+{% endblock %}

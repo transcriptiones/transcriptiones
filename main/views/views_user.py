@@ -20,8 +20,8 @@ from transcriptiones.settings import DEFAULT_FROM_EMAIL
 from main.models import User
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from main.tokens import account_activation_token
-from main.model_info import get_user_info
-from main.tables import TitleValueTable, DocumentHistoryTable, DocumentTable
+from main.model_info import get_user_info, get_public_user_info
+from main.tables import TitleValueTable, DocumentHistoryTable
 from main.filters import DocumentFilter
 
 
@@ -103,6 +103,24 @@ def userprofile(request):
     RequestConfig(request).configure(activity_table)
 
     return render(request, 'main/users/user_profile.html', {'user_table': user_table, 'activity_table': activity_table, 'filter': d_filter})
+
+
+@login_required
+def public_profile(request, username):
+    """View for Public User Profile Page"""
+    user = User.objects.get(username=username)
+    contributions = user.contributions(manager='all_objects').filter(publish_user=True).order_by('-document_utc_add')
+
+    user_table = TitleValueTable(data=get_public_user_info(request.user))
+
+    d_filter = DocumentFilter(request.GET, queryset=contributions)
+    activity_table = DocumentHistoryTable(data=d_filter.qs)
+    RequestConfig(request).configure(activity_table)
+
+    return render(request, 'main/users/public_user_profile.html', {'profile_user': user,
+                                                                   'user_table': user_table,
+                                                                   'activity_table': activity_table,
+                                                                   'filter': d_filter})
 
 
 class UserUpdateView(LoginRequiredMixin, View):
