@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.forms import ModelForm, CharField
 from ckeditor.widgets import CKEditorWidget
 from easy_select2 import select2_modelform
-from .models import Institution, RefNumber, Author, SourceType, Document, User
+from .models import Institution, RefNumber, Author, SourceType, Document, User, UserSubscription
 
 InstitutionForm = select2_modelform(Institution, attrs={'width': '250px'})
 
@@ -62,3 +62,4 @@ admin.site.register(Author)
 admin.site.register(SourceType, SourceTypeAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(UserSubscription)
