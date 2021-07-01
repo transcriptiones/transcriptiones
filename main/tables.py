@@ -1,8 +1,75 @@
 import django_tables2 as tables
 import django.utils.html as utils
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-from .models import RefNumber, Document, Institution
+from .models import RefNumber, Document, Institution, UserSubscription, User
+
+
+class UserSubscriptionTable(tables.Table):
+    """The UserSubscriptionTable shows a list of subscriptions to ref numbers, documents or users."""
+
+    class Meta:
+        model = UserSubscription
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("subscription_type", "object_id",)
+        attrs = {"class": "table table-hover",
+                 'td': {'style': 'text-align: left;'}
+                 }
+
+    subscription_type = tables.Column(orderable=False)
+    object_id = tables.Column(orderable=False, verbose_name=_('Subscription object'))
+    options = tables.Column(orderable=False, accessor='id', verbose_name=_('Options'))
+
+    def render_subscription_type(self, value, record):
+        badge_class = "secondary"
+        if value == UserSubscription.SubscriptionType.USER.label:
+            badge_class = "success"
+        if value == UserSubscription.SubscriptionType.REF_NUMBER.label:
+            badge_class = "warning"
+        if value == UserSubscription.SubscriptionType.DOCUMENT.label:
+            badge_class = "info"
+
+        return mark_safe(f'<span class="badge badge-{badge_class}">{value}</span>')
+
+    def render_object_id(self, value, record):
+        if record.subscription_type == UserSubscription.SubscriptionType.REF_NUMBER:
+            ref_number = RefNumber.objects.get(id=value)
+            return ref_number.ref_number_name + ": " + ref_number.ref_number_title
+        if record.subscription_type == UserSubscription.SubscriptionType.DOCUMENT:
+            document = Document.objects.get(id=value)
+            return document.title_name
+        if record.subscription_type == UserSubscription.SubscriptionType.USER:
+            user = User.objects.get(id=value)
+            return user.username
+        return value
+
+    def render_options(self, value, record):
+        url = '#'
+        url_view = '#'
+        if record.subscription_type == UserSubscription.SubscriptionType.REF_NUMBER:
+            url = reverse('main:unsubscribe_ref_number', kwargs={'pk': record.object_id})
+            ref_number = RefNumber.objects.get(id=record.object_id)
+            url_view = reverse('main:ref_number_detail',
+                               kwargs={'inst_slug': ref_number.holding_institution.institution_slug,
+                                       'ref_slug': ref_number.ref_number_slug})
+
+        if record.subscription_type == UserSubscription.SubscriptionType.DOCUMENT:
+            url = reverse('main:unsubscribe_document', kwargs={'pk': record.object_id})
+            document = Document.objects.get(id=record.object_id)
+            url_view = reverse('main:document_detail',
+                               kwargs={'inst_slug': document.parent_ref_number.holding_institution.institution_slug,
+                                       'ref_slug': document.parent_ref_number.ref_number_slug,
+                                       'doc_slug': document.document_slug})
+
+        if record.subscription_type == UserSubscription.SubscriptionType.USER:
+            url = reverse('main:unsubscribe_user', kwargs={'pk': record.object_id})
+            user = User.objects.get(id=record.object_id)
+            url_view = reverse('main:public_profile', kwargs={'username': user.username})
+
+        html_text = f'<a class="btn btn-danger btn-sm" href="{url}" role="button">Unsubscribe</a> &nbsp;' \
+                    f'<a class="btn btn-primary btn-sm" href="{url_view}" role="button">View</a>'
+        return mark_safe(html_text)
 
 
 class TitleValueTable(tables.Table):

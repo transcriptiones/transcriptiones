@@ -6,6 +6,18 @@ from main.models import User
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
+class UserSubscriptionOptionsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserSubscriptionOptionsForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+
+    """Form to edit user notification policy."""
+    class Meta:
+        model = User
+        fields = ('notification_policy', 'different_editor_subscription')
+
+
 class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 

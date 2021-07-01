@@ -17,7 +17,7 @@ from django_tables2 import RequestConfig
 
 from transcriptiones.settings import DEFAULT_FROM_EMAIL
 
-from main.models import User
+from main.models import User, UserSubscription
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from main.tokens import account_activation_token
 from main.model_info import get_user_info, get_public_user_info
@@ -111,16 +111,20 @@ def public_profile(request, username):
     user = User.objects.get(username=username)
     contributions = user.contributions(manager='all_objects').filter(publish_user=True).order_by('-document_utc_add')
 
-    user_table = TitleValueTable(data=get_public_user_info(request.user))
+    user_table = TitleValueTable(data=get_public_user_info(user))
 
     d_filter = DocumentFilter(request.GET, queryset=contributions)
     activity_table = DocumentHistoryTable(data=d_filter.qs)
     RequestConfig(request).configure(activity_table)
 
+    subscribed = UserSubscription.objects.filter(user=request.user,
+                                                 subscription_type=UserSubscription.SubscriptionType.USER,
+                                                 object_id=user.id).count() > 0
     return render(request, 'main/users/public_user_profile.html', {'profile_user': user,
                                                                    'user_table': user_table,
                                                                    'activity_table': activity_table,
-                                                                   'filter': d_filter})
+                                                                   'filter': d_filter,
+                                                                   'subscribed': subscribed})
 
 
 class UserUpdateView(LoginRequiredMixin, View):

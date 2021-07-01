@@ -4,7 +4,7 @@ from django_tables2 import MultiTableMixin, SingleTableMixin
 from django_filters.views import FilterView
 
 import main.model_info as m_info
-from main.models import Institution, RefNumber, Document
+from main.models import Institution, RefNumber, Document, UserSubscription
 from main.tables import TitleValueTable, RefNumberTable, DocumentTable, InstitutionTable
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter
 
@@ -85,6 +85,9 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
+        context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
+                                                                object_id=self.get_object().id).count() > 0
         return context
 
 
@@ -103,7 +106,6 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         queryset = Document.all_objects.filter(parent_ref_number__holding_institution__institution_slug=institution)
         queryset = queryset.filter(parent_ref_number__ref_number_slug=ref_number)
         queryset = queryset.filter(document_slug=document)
-        print(queryset)
 
         # if url specifies version_number, get this specific version, else get the active version
         if 'version_nr' in self.kwargs:
@@ -121,6 +123,9 @@ class DocumentDetailView(MultiTableMixin, DetailView):
             newest = self.get_object().get_versions().latest()
             context['newest'] = newest
 
+        context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
+                                                                object_id=self.get_object().id).count() > 0
         return context
 
     def get_tables(self):

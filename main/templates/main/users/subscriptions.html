@@ -4,6 +4,7 @@
 {% load transcriptiones %}
 {% load render_table from django_tables2 %}
 {% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}
     {% translate 'Subscriptions' %}
@@ -11,13 +12,23 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Users" "" %}
+    {% breadcrumb _('Users') "" %}
     {% breadcrumb request.user.username "main:profile" %}
     {% breadcrumb _('Subscriptions') '' %}
 {% endblock %}
 
 {% block content %}
+    {% card 'subscription_options_card' _('Your subscription options') %}
+            <p>How do you want to to be notified if there are changes in your subscriptions?</p>
+            {% crispy form %}
+    {% endcard %}
+
     {% card 'subscription_card' _('Your subscriptions') %}
-        {% render_table table %}
+        {% if table.data|length > 0 %}
+             <p><a class="btn btn-danger btn-sm" href="{% url 'main:unsubscribe_all' %}" role="button">{% translate 'Unsubscribe from all' %}</a></p>
+            {% render_table table %}
+        {% else %}
+            {% translate 'You have no subscriptions. You can subscribe to documents, reference numbers and users on the respective pages.' %}
+        {% endif %}
     {% endcard %}
 {% endblock %}

@@ -16,21 +16,21 @@
 
 
 {% block content %}
-    {% card 'user_profile_personal' _('My Personal Data') %}
+    {% card 'user_profile_personal' _('User Data') %}
         {% render_table user_table %}
         {% if request.user.id == profile_user.id %}
             <small>(This is you. Check your <a href="{% url 'main:profile' %}">Private Profile</a>)</small>
         {% else %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_user' user.pk %}" role="button">Unsubscribe from this user</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_user' profile_user.pk %}" role="button">Unsubscribe from this user</a>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' user.pk %}" role="button">Subscribe to this user</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">Subscribe to this user</a>
             {% endif %}
             &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
         {% endif %}
     {% endcard %}
 
-    {% card 'user_profile_activity' _('My Activity') %}
+    {% card 'user_profile_activity' _('User Activity') %}
         {% include 'main/filter.html' %}
         {% render_table activity_table %}
     {% endcard %}
