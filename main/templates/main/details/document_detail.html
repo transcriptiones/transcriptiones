@@ -29,6 +29,12 @@
 
     {% card 'doc_detail_overview' _('Overview') %}
         {% render_table tables.0 %}
+        {% if subscribed %}
+            <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_document' document.pk %}" role="button">Unsubscribe from this document</a>
+        {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_document' document.pk %}" role="button">Subscribe to this document</a>
+        {% endif %}
+        &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
     {% endcard %}
 
     {% card 'doc_detail_transcription' _('Transcript') %}

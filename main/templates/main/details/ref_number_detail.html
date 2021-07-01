@@ -19,6 +19,12 @@
 
     {% card 'ref_number_detail' _('Information about the reference number') %}
         {% render_table tables.0 %}
+        {% if subscribed %}
+            <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_ref_number' refnumber.pk %}" role="button">Unsubscribe from this reference number</a>
+        {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_ref_number' refnumber.pk %}" role="button">Subscribe to this reference number</a>
+        {% endif %}
+        &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
     {%  endcard %}
 
     {% card 'ref_number_documents' _('Documents with this reference number') %}
