@@ -6,23 +6,19 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
     PasswordResetCompleteView
 from rest_framework.routers import DefaultRouter
 
-from main.views.views_test import test, test_dropdown, test_bsmodals, test_bsmodals2, test_bsmodals3, InstitutionAutocomplete, RefNumberAutocomplete, InstitutionViewSet, InstitutionCreateView
-from main.views.views_upload_old import AddInstitutionView, AddRefNumberView, AddDocumentView
+from main.views.views_test import test, test_dropdown, test_bsmodals2, InstitutionViewSet, InstitutionCreateView
+from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
 from main.views.views_upload_old import EditMetaView, EditTranscriptView
-from main.views.views_user import signup, userprofile, UserUpdateView
-from main.views.views_user import CustomLoginView
-from main.views.views_user import activate, AccountActivationSentView
-from main.views.views_user import CustomPasswordConfirmView, CustomPasswordResetView, CustomPasswordChangeView
-from main.views.views_export import DocumentExportView
 
+import main.views.views_admin as v_admin
+import main.views.views_autocomplete as v_autocomplete
 import main.views.views_browse as v_browse
 import main.views.views_export as v_export
-import main.views.views_upload as v_upload
-import main.views.views_admin as views_admin
 import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
-import main.views.views_autocomplete as v_autocomplete
+import main.views.views_upload as v_upload
+import main.views.views_user as v_user
 
 router = DefaultRouter()
 router.register('institutions', InstitutionViewSet)
@@ -91,22 +87,24 @@ urlpatterns = [
 
     ##############
     # USER VIEWS
-    path('user/signup/', signup, name='signup'),
-    path('user/activationsent/', AccountActivationSentView.as_view(), name='account_activation_sent'),
-    path('user/activate/<uidb64>/<token>/', activate, name='activate'),
-    path('user/login/', CustomLoginView.as_view(), name='login'),
+    path('user/signup/', v_user.signup, name='signup'),
+    path('user/activationsent/', v_user.AccountActivationSentView.as_view(), name='account_activation_sent'),
+    path('user/activate/<uidb64>/<token>/', v_user.activate, name='activate'),
+    path('user/login/', v_user.CustomLoginView.as_view(), name='login'),
     path('user/logout/', LogoutView.as_view(template_name='main/users/logout.html'), name='logout'),
-    path('user/passwordchange/', CustomPasswordChangeView.as_view(), name='password_change'),
+    path('user/passwordchange/', v_user.CustomPasswordChangeView.as_view(), name='password_change'),
     path('user/passwordchange/done/', PasswordChangeDoneView.as_view(template_name='main/users/password_change_done.html'), name='password_change_done'),
-    path('user/profile/', userprofile, name='profile'),
-    path('user/profile/update/', UserUpdateView.as_view(), name='user_update'),
-    path('user/passwordreset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('user/profile/', v_user.userprofile, name='profile'),
+    path('user/public/profile/<str:username>/', v_user.public_profile, name='public_profile'),
+    path('user/profile/update/', v_user.UserUpdateView.as_view(), name='user_update'),
+    path('user/passwordreset/', v_user.CustomPasswordResetView.as_view(), name='password_reset'),
     path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='main/users/password_reset_done.html'), name='password_reset_done'),
-    path('user/reset/<uidb64>/<token>/', CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
+    path('user/reset/<uidb64>/<token>/', v_user.CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
     path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='main/users/password_reset_complete.html'), name='password_reset_complete'),
 
     ##############
     # USER SUBSCRIPTIONS
+    path('user/subscriptions/', v_subscriptions.subscriptions, name='subscriptions'),
     path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
     path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
     path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
@@ -117,10 +115,10 @@ urlpatterns = [
 
     ##############
     # ADMIN PAGES
-    path('transcriptiones_admin/', views_admin.admin_view, name='admin'),
-    path('transcriptiones_admin/statistics/', views_admin.admin_statistics_view, name='admin_statistics'),
-    path('transcriptiones_admin/merge_doc/', views_admin.admin_merge_docs_view, name='admin_merge_docs'),
-    path('transcriptiones_admin/export/json/', views_admin.admin_export_json_view, name='admin_export_json'),
+    path('transcriptiones_admin/', v_admin.admin_view, name='admin'),
+    path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
+    path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),
+    path('transcriptiones_admin/export/json/', v_admin.admin_export_json_view, name='admin_export_json'),
 
 
     path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
