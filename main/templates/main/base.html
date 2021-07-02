@@ -106,7 +106,10 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
                     {% if user.is_authenticated %}
+
                         <li class="nav-item dropdown">
+                            <a href="#" title="You have 3 notifications"><span class="badge badge-pill badge-danger">3</span></a>
+                            <a href="#" title="You have 2 messages"><span class="badge badge-pill badge-warning">2</span></a> &nbsp;
                             <a class="nav-link dropdown-toggle" href="#" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-user"></i>
                             </a>
