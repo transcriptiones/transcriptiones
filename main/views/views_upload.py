@@ -15,10 +15,24 @@ from main.forms.forms_upload import UploadTranscriptionForm
 from main.models import Document, Institution, RefNumber, SourceType, Author, Language
 
 
+def upload_options(request):
+    return render(request, 'main/upload/upload_options.html')
+
+
 class IndexInst(generic.ListView):
     model = Institution
     context_object_name = 'insts'
     template_name = 'main/tests2/inst.html'
+
+
+@login_required
+def upload_multiple_transcriptions_view(request):
+    return render(request, 'main/upload/create_multiple_documents.html')
+
+
+@login_required
+def upload_batch_view(request):
+    return render(request, 'main/upload/create_batch_contact.html')
 
 
 @login_required

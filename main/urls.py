@@ -46,8 +46,13 @@ urlpatterns = [
 
     ##############
     # UPLOAD PAGES
+    path('upload/options/', v_upload.upload_options, name='upload_options'),
     # Upload form for a new document
-    path('upload/', v_upload.upload_transcription_view, name='upload_document'),
+    path('upload/document/', v_upload.upload_transcription_view, name='upload_document'),
+    # Upload form for a new document
+    path('upload/documents/', v_upload.upload_multiple_transcriptions_view, name='upload_multiple'),
+    # Contact form for a batch upload
+    path('upload/batch/', v_upload.upload_batch_view, name='upload_batch'),
     # Thank you screen after uploading
     path('upload/thanks/<int:doc_id>', v_upload.thanks_view, name='thank_you'),
 
