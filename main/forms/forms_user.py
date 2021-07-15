@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext as _
+from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
@@ -59,6 +61,9 @@ class LoginForm(AuthenticationForm):
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
                 })
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Login'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):

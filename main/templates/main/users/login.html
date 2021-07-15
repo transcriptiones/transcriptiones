@@ -1,6 +1,7 @@
 ﻿{% extends 'main/base.html' %}
 {% load i18n %}
 {% load transcriptiones %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}
     {% translate 'Login' %}
@@ -8,60 +9,36 @@
 
 {% block content %}
 
-
-
-{% if next %}
-    {% if user.is_authenticated %}
-<p>
-    Ihr Account hat keinen Zugriff auf diese Seite.
-    Melden Sie sich mit einem berechtigten Account an.
-</p>
-    {% else %}
-<p>Um diese Seite zu besuchen, müssen Sie angemeldet sein.</p>
+{% card 'login_Card' _('Login To Your Account') %}
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>
+                {% translate 'Your account has no access to this page. Please login with adifferent account.' %}
+            </p>
+        {% else %}
+            <p>
+                {% translate 'You need to be logged in, to view the requested page.' %}
+            </p>
+        {% endif %}
     {% endif %}
-{% endif %}
 
-{% if user.is_authenticated %}
-    <p>Sie sind bereits angemeldet.</p>
-    <div id="logout">
-        <a class="btn btn-secondary" href="{% url 'main:logout' %}">Abmelden</a>
-    </div>
-{% else %}
-
-<div>
-    <form method="post" action="{% url 'main:login' %}">
-        {% csrf_token %}
-        <div>
-            <div class="fieldWrapper form-group row">
-                <div class="col-sm-4">
-                    {{ form.username.label_tag }}
-                </div>
-                <div class="col-sm-8">
-                    {{ form.username }}
-                </div>
-                <div class="col-sm-4">
-                    {{ form.password.label_tag }}
-                </div>
-                <div class="col-sm-8">
-                    {{ form.password }}
-                </div>
-            </div>
+    {% if user.is_authenticated %}
+        <p>{% translate 'You are already logged in.' %}</p>
+        <div id="logout">
+            <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
         </div>
-        <button type="submit" class="btn btn-secondary">Anmelden</button>
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-</div>
+    {% else %}
+         {% crispy form %}
 
-<div>
-    Noch kein Benutzerkonto? <a href="{% url 'main:signup' %}">Hier registrieren!</a>
-</div>
-
-<div>
-    <a href="{% url 'main:password_reset' %}">Passwort vergessen?</a>
-</div>
-
-{% endif %}
+        <p class="text-center text-muted">
+            {% translate 'Forgot your password?' %} <a href="{% url 'main:password_reset' %}">{% translate 'Reset it here.' %}</a> &nbsp;|&nbsp;
+            {% translate 'No user account?' %} <a href="{% url 'main:signup' %}">{% translate 'Register here.' %}</a>
 
 
+        </p>
+
+    {% endif %}
+
+{% endcard %}
 
 {% endblock content %}
