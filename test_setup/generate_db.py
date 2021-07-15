@@ -170,7 +170,7 @@ for filename in os.listdir('dummy_texts'):
     random_material = random.randint(1, 3)
     random_p_system = random.randint(1, 2)
     random_pages = random.randint(1, 30)
-    random_source_type = random.randint(3, 10)
+    random_source_type = random.randint(12, 52)
     random_illuminated = random.randint(0, 1)
     random_seal = random.randint(0, 1)
     random_number2 = random.randint(0, len(doc_titles) - 1)
