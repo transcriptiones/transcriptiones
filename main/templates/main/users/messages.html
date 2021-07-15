@@ -1,0 +1,34 @@
+﻿{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'User Messages' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Users') "" %}
+    {% breadcrumb request.user.username "main:profile" %}
+    {% breadcrumb _('Messages') '' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'message_options_card' _('Your subscription options') %}
+            <p>How do you want to to be notified if you receive messages?</p>
+            {% crispy form %}
+    {% endcard %}
+
+    {% card 'messages_card' _('Your Inbox') %}
+        {% if table.data|length > 0 %}
+             <p><a class="btn btn-danger btn-sm" href="{% url 'main:message_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a></p>
+            {% render_table table %}
+        {% else %}
+            {% translate 'You have no messages. You can send messages to users via their profile page.' %}
+        {% endif %}
+    {% endcard %}
+{% endblock %}

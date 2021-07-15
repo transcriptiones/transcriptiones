@@ -15,6 +15,7 @@ import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
 import main.views.views_browse as v_browse
 import main.views.views_export as v_export
+import main.views.views_messages as v_messages
 import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
 import main.views.views_upload as v_upload
@@ -118,6 +119,10 @@ urlpatterns = [
     path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
     path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
+    ##############
+    # USER MESSAGES
+    path('user/messages/', v_messages.messages, name='messages'),
+    path('user/messages/delete/all', v_messages.delete_all_view, name='messages_delete_all'),
     ##############
     # ADMIN PAGES
     path('transcriptiones_admin/', v_admin.admin_view, name='admin'),

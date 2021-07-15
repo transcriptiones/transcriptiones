@@ -3,7 +3,19 @@ import django.utils.html as utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-from .models import RefNumber, Document, Institution, UserSubscription, User
+from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage
+
+
+class UserMessageTable(tables.Table):
+    """The UserMessageTable shows a list of subscriptions to ref numbers, documents or users."""
+
+    class Meta:
+        model = UserMessage
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("receiving_user", "subject", "message",)
+        attrs = {"class": "table table-hover",
+                 'td': {'style': 'text-align: left;'}
+                 }
 
 
 class UserSubscriptionTable(tables.Table):

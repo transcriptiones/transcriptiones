@@ -8,6 +8,18 @@ from main.models import User
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
+class UserMessageOptionsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserMessageOptionsForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+
+    """Form to edit user message notification policy."""
+    class Meta:
+        model = User
+        fields = ('message_notification_policy', )
+
+
 class UserSubscriptionOptionsForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):

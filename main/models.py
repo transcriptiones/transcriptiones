@@ -416,6 +416,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         DAILY = 3, _('Once a day, only if changes happened.')
         WEEKLY = 4, _('Once a week, only if changes happened.')
 
+    class MessageNotificationPolicy(models.IntegerChoices):
+        NONE = 1, _('No notification E-Mails')
+        IMMEDIATE = 2, _('Every time a message is sent.')
+        DAILY = 3, _('Once a day, only if you received messages.')
+
     username = models.CharField(verbose_name=_('Username'),
                                 unique=True,
                                 max_length=150,
@@ -461,11 +466,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_orcid = models.CharField(verbose_name=_('Orcid'), default='', max_length=255,
                                   help_text=_('User id from https://orcid.org/'))
 
-    notification_policy = models.IntegerField(verbose_name=_('Notification policy'),
+    notification_policy = models.IntegerField(verbose_name=_('Subscription Notification policy'),
                                               choices=NotificationPolicy.choices,
                                               default=NotificationPolicy.DAILY,
                                               help_text=_('How often do you want to be notified about your subscribed '
                                                           'documents?'))
+
+    message_notification_policy = models.IntegerField(verbose_name=_('Message Notification policy'),
+                                                      choices=MessageNotificationPolicy.choices,
+                                                      default=MessageNotificationPolicy.IMMEDIATE,
+                                                      help_text=_('How often do you want to be notified about messages '
+                                                                  'you receive?'))
 
     different_editor_subscription = models.BooleanField(verbose_name=_('Subscription to owned documents'),
                                                         help_text=_('Do you want to be notified when your '
@@ -487,3 +498,13 @@ class UserSubscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subscription_type = models.IntegerField(choices=SubscriptionType.choices)
     object_id = models.BigIntegerField()
+
+
+class UserMessage(models.Model):
+    receiving_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tc_msg_rec_user')
+    sending_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tc_msg_send_user')
+
+    subject = models.CharField(max_length=250)
+    message = models.TextField()
+
+    viewing_state = models.IntegerField()
