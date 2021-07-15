@@ -45,8 +45,11 @@ def upload_transcription_view(request):
         form = UploadTranscriptionForm(request.POST)
 
         if form.is_valid():
+
             new_document = form.save(commit=False)
+            print("VALID", new_document.title_name)
             new_document.document_slug = slugify(new_document.title_name)
+            print("SLUG", new_document.document_slug)
             new_document.submitted_by = request.user
             new_document.active = True
             new_document.commit_message = 'Initial commit'
@@ -93,6 +96,12 @@ class ModalCreateInstitutionView(BSModalCreateView):
     success_message = _('Success: Institution was created.')
     success_url = reverse_lazy('main:upload_document')
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.institution_slug = slugify(self.object.institution_name)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 
 class ModalCreateRefNumberView(BSModalCreateView):
     """Creates a bootstrap modal view to create a reference number."""
@@ -100,6 +109,12 @@ class ModalCreateRefNumberView(BSModalCreateView):
     form_class = RefnModelForm
     success_message = _('Success: RefNumber was created.')
     success_url = reverse_lazy('main:upload_document')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.ref_number_slug = slugify(self.object.ref_number_name + " " + self.object.ref_number_title)
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 def institution_dropdown_view(request):

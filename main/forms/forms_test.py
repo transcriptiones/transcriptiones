@@ -15,10 +15,10 @@ class RefnModelForm(BSModalModelForm):
     class Meta:
         model = RefNumber
         fields = [
+            'holding_institution',
             'ref_number_name',
             'ref_number_title',
-            'collection_link',
-            'ref_number_slug']
+            'collection_link']
 
 
 class InstModelForm(BSModalModelForm):
@@ -35,5 +35,4 @@ class InstModelForm(BSModalModelForm):
             'zip_code',
             'city',
             'country',
-            'site_url',
-            'institution_slug']
+            'site_url']
