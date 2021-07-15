@@ -1,0 +1,26 @@
+﻿{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Write Message' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Users') "" %}
+    {% breadcrumb request.user.username "main:profile" %}
+    {% breadcrumb _('Messages') '' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'your_message' _('Write A Message') %}
+            <p>{% translate 'Make contact with other users of transcriptiones!' %}</p>
+            {% crispy form %}
+    {% endcard %}
+
+{% endblock %}

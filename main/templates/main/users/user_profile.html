@@ -19,11 +19,13 @@
     {% card 'user_profile_options' _('Options') %}
         <div align="center">
 
-            <a href="{% url 'main:password_change' %}" class="btn btn-primary">{% translate 'Change Password' %}</a> &nbsp;
-            <a href="{% url 'main:user_update' %}" class="btn btn-primary">{% translate 'Update Profile' %}</a> &nbsp;
-            <a href="{% url 'main:subscriptions' %}" class="btn btn-primary">{% translate 'My subscriptions' %}</a> &nbsp;
-            <a href="{% url 'main:public_profile' request.user.username %}" class="btn btn-primary">{% translate 'View public profile' %}</a> &nbsp;
-            <a href="{% url 'main:logout' %}" class="btn btn-primary">{% translate 'Log Out' %}</a>
+            <a href="{% url 'main:password_change' %}" class="btn btn-sm btn-primary">{% translate 'Change Password' %}</a> &nbsp;
+            <a href="{% url 'main:user_update' %}" class="btn btn-sm btn-primary">{% translate 'Update Profile' %}</a> &nbsp;
+            <a href="{% url 'main:messages' %}" class="btn btn-sm btn-primary">{% translate 'My messages' %}</a> &nbsp;
+            <a href="{% url 'main:notifications' %}" class="btn btn-sm btn-primary">{% translate 'My notifications' %}</a> &nbsp;
+            <a href="{% url 'main:subscriptions' %}" class="btn btn-sm btn-primary">{% translate 'My subscriptions' %}</a> &nbsp;
+            <a href="{% url 'main:public_profile' request.user.username %}" class="btn btn-sm btn-primary">{% translate 'View public profile' %}</a> &nbsp;
+            <a href="{% url 'main:logout' %}" class="btn btn-sm btn-primary">{% translate 'Log Out' %}</a>
         </div>
     {% endcard %}
 

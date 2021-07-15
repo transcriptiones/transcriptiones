@@ -4,8 +4,29 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
-from main.models import User
+from main.models import User, UserMessage
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
+
+
+class WriteMessageForm(forms.ModelForm):
+    """Form to edit user message notification policy."""
+
+    def __init__(self, *args, **kwargs):
+        rec_user = kwargs.pop('user', None)
+        super(WriteMessageForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
+
+        if rec_user:
+            print(rec_user)
+            self.fields['receiving_user'].initial = rec_user
+        self.fields['receiving_user'].disabled = True
+
+    class Meta:
+        model = UserMessage
+        fields = ('receiving_user', 'subject', 'message')
+
 
 
 class UserMessageOptionsForm(forms.ModelForm):

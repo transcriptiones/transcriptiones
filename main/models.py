@@ -507,4 +507,12 @@ class UserMessage(models.Model):
     subject = models.CharField(max_length=250)
     message = models.TextField()
 
-    viewing_state = models.IntegerField()
+    # 0 = new, 1 = read
+    viewing_state = models.IntegerField(default=0)
+    sending_time = models.DateTimeField(auto_now_add=True)
+
+
+class UserNotification(models.Model):
+    
+    # 0 = new, 1 = read
+    viewing_state = models.IntegerField(default=0)

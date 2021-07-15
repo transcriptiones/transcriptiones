@@ -7,14 +7,14 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    {% translate 'User Messages' %}
+    {% translate 'User Notifications' %}
 {%  endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb _('Users') "" %}
     {% breadcrumb request.user.username "main:profile" %}
-    {% breadcrumb _('Messages') '' %}
+    {% breadcrumb _('Notifications') '' %}
 {% endblock %}
 
 {% block content %}

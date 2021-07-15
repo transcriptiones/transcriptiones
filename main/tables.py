@@ -12,11 +12,15 @@ class UserMessageTable(tables.Table):
     class Meta:
         model = UserMessage
         template_name = "django_tables2/bootstrap4.html"
-        fields = ("receiving_user", "subject", "message",)
+        fields = ("sending_user", "subject", "message", "sending_time")
         attrs = {"class": "table table-hover",
                  'td': {'style': 'text-align: left;'}
                  }
 
+    sending_user = tables.Column(verbose_name='from')
+    message = tables.TemplateColumn(
+        '<data-toggle="tooltip" title="{{record.message}}">{{record.message|truncatewords:5}}')
+    
 
 class UserSubscriptionTable(tables.Table):
     """The UserSubscriptionTable shows a list of subscriptions to ref numbers, documents or users."""
@@ -160,7 +164,16 @@ class DocumentTable(tables.Table):
     place_name = tables.Column(orderable=False)
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
-    document_utc_update = tables.DateTimeColumn(orderable=False)
+    document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
+
+    def render_document_utc_update(self, value, record):
+        if record.publish_user:
+            profile_url = reverse("main:public_profile", kwargs={"username": record.submitted_by.username})
+            return mark_safe(f'<small>by <a href="{profile_url}">{record.submitted_by}</a> '
+                             f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+        else:
+            return mark_safe(f'<small>by anonymous '
+                             f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
 
 
 class DocumentHistoryTable(tables.Table):

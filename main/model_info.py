@@ -96,7 +96,7 @@ def get_document_info_comments(document):
     data = [(get_verbose_field_name(document, 'comments'), document.comments),
             (_('Uploaded'),
              "By {user}, on {date}".format(date=document.document_utc_update,
-                                           user=document.submitted_by.username if not document.publish_user else _(
+                                           user=document.submitted_by.username if document.publish_user else _(
                                                'Anonymous')))
             ]
 

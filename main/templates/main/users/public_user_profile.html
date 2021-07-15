@@ -18,15 +18,18 @@
 {% block content %}
     {% card 'user_profile_personal' _('User Data') %}
         {% render_table user_table %}
-        {% if request.user.id == profile_user.id %}
-            <small>(This is you. Check your <a href="{% url 'main:profile' %}">Private Profile</a>)</small>
-        {% else %}
-            {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_user' profile_user.pk %}" role="button">Unsubscribe from this user</a>
+        {% if request.user.is_authenticated %}
+            {% if request.user.id == profile_user.id %}
+                <small>(This is you. Check your <a href="{% url 'main:profile' %}">Private Profile</a>)</small>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">Subscribe to this user</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:message_user' profile_user.username %}" role="button">Message this user</a>
+                {% if subscribed %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_user' profile_user.pk %}" role="button">Unsubscribe from this user</a>
+                {% else %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">Subscribe to this user</a>
+                {% endif %}
+                &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
             {% endif %}
-            &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
         {% endif %}
     {% endcard %}
 
