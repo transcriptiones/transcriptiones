@@ -173,6 +173,7 @@ for filename in os.listdir('dummy_texts'):
     random_source_type = random.randint(12, 52)
     random_illuminated = random.randint(0, 1)
     random_seal = random.randint(0, 1)
+    random_anonymous = random.randint(0, 1)
     random_number2 = random.randint(0, len(doc_titles) - 1)
     random_number3 = random.randint(0, len(doc_names) - 1)
     random_user = random.randint(1, len(users))
@@ -180,7 +181,7 @@ for filename in os.listdir('dummy_texts'):
     str_documents += f"(NULL, '{my_uuid}', '{doc_titles[random_number2]} {doc_names[random_number3]}, {document_no}', '{random_year}-01-01 11:15:35.000000', NULL, " \
                      f"'{city_names[random.randint(0,len(city_names)-1)]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
                      f"'{transcription_text}', NOW(), 'document-title-{document_no}', '1', 'generated', " \
-                     f"'1', '{parent_ref_number}', '{random_source_type}', '{random_user}', '1', NOW(), {random_illuminated}, {random_seal});\n"
+                     f"'1', '{parent_ref_number}', '{random_source_type}', '{random_user}', '{random_anonymous}', NOW(), {random_illuminated}, {random_seal});\n"
     document_no += 1
 
 str_documents = str_documents[:-2]
