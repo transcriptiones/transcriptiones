@@ -4,9 +4,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 
-from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm
-from main.tables import UserMessageTable
-from main.models import User, UserMessage
+from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm, UserSubscriptionOptionsForm
+from main.tables import UserMessageTable, UserNotificationTable
+from main.models import User, UserMessage, UserNotification
 
 
 @login_required
@@ -22,11 +22,11 @@ def messages_view(request):
 
 @login_required
 def notifications_view(request):
-    table = UserMessageTable(data=UserMessage.objects.filter(receiving_user=request.user))
-    form = UserMessageOptionsForm()
+    table = UserNotificationTable(data=UserNotification.objects.filter(user=request.user))
+    form = UserSubscriptionOptionsForm()
 
     if request.method == 'POST':
-        form = UserMessageOptionsForm(request.POST)
+        form = UserSubscriptionOptionsForm(request.POST)
 
     return render(request, 'main/users/notifications.html', {'table': table, 'form': form})
 

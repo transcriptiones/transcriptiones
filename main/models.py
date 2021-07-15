@@ -513,6 +513,12 @@ class UserMessage(models.Model):
 
 
 class UserNotification(models.Model):
-    
+    subscription = models.ForeignKey(UserSubscription, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    subject = models.CharField(max_length=250)
+    message = models.TextField()
+
     # 0 = new, 1 = read
     viewing_state = models.IntegerField(default=0)
+    sending_time = models.DateTimeField(auto_now_add=True)

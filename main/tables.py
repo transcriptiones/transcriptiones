@@ -3,7 +3,22 @@ import django.utils.html as utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage
+from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification
+
+
+class UserNotificationTable(tables.Table):
+    """The UserMessageTable shows a list of subscriptions to ref numbers, documents or users."""
+
+    class Meta:
+        model = UserNotification
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("subject", "message", "sending_time")
+        attrs = {"class": "table table-hover",
+                 'td': {'style': 'text-align: left;'}
+                 }
+
+    message = tables.TemplateColumn(
+        '<data-toggle="tooltip" title="{{record.message}}">{{record.message|truncatewords:5}}')
 
 
 class UserMessageTable(tables.Table):
@@ -20,7 +35,7 @@ class UserMessageTable(tables.Table):
     sending_user = tables.Column(verbose_name='from')
     message = tables.TemplateColumn(
         '<data-toggle="tooltip" title="{{record.message}}">{{record.message|truncatewords:5}}')
-    
+
 
 class UserSubscriptionTable(tables.Table):
     """The UserSubscriptionTable shows a list of subscriptions to ref numbers, documents or users."""
