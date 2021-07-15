@@ -108,8 +108,12 @@
                     {% if user.is_authenticated %}
 
                         <li class="nav-item dropdown">
-                            <a href="#" title="You have 3 notifications"><span class="badge badge-pill badge-danger">3</span></a>
-                            <a href="#" title="You have 2 messages"><span class="badge badge-pill badge-warning">2</span></a> &nbsp;
+                            {% if user_subscriptions > 0 %}
+                                <a href="{% url 'main:notifications' %}" title="You have {{ user_subscriptions }} notifications"><span class="badge badge-pill badge-danger">{{ user_subscriptions }}</span></a>
+                            {% endif %}
+                            {% if user_messages > 0 %}
+                                <a href="{% url 'main:messages' %}" title="You have {{ user_messages }} messages"><span class="badge badge-pill badge-warning">{{ user_messages }}</span></a> &nbsp;
+                            {% endif %}
                             <a class="nav-link dropdown-toggle" href="#" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-user"></i>
                             </a>
