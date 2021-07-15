@@ -1,6 +1,7 @@
 {% load i18n %}
 
 <form class="form-inline my-2 my-lg-0" action="{% url 'main:search_redirect' %}" method="post">
+    {% csrf_token %}
   <input class="form-control mr-sm-2" type="search" placeholder="{% translate 'Search' %}" aria-label="{% translate 'Search' %}" name="query">
   <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="search"><i class="fas fa-search"></i></button>
 </form>
