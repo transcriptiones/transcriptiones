@@ -6,9 +6,9 @@ users = [(2, 'transcriber_johnny', ),
          (5, 'dominic', ),
          (6, 'yvonne', )]
 
-str_users = "INSERT INTO 'main_user' ('id', 'password', 'last_login', 'is_superuser', 'username', 'first_name', " \
-            "'last_name', 'email', 'email_confirmed', 'is_staff', 'is_active', 'date_joined', 'mark_anonymous', " \
-            "'different_editor_subscription', 'notification_policy', 'user_orcid', 'message_notification_policy')\n " \
+str_users = "INSERT INTO main_user (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, " \
+            "`last_name`, `email`, `email_confirmed`, `is_staff`, `is_active`, `date_joined`, `mark_anonymous`, " \
+            "`different_editor_subscription`, `notification_policy`, `user_orcid`, `message_notification_policy`)\n " \
             "VALUES "
 
 for user in users:
