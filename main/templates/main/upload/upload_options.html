@@ -8,7 +8,9 @@
 
 
 {% block content %}
-
+    {% if not request.user.is_authenticated %}
+        (You need a login to upload a document. <a href="{% url 'main:login'%}">Login</a> or Register a <a href="{% url 'main:signup'%}">new account</a>)
+    {% endif %}
     {% card 'options_card' _('How do you want to proceed?') %}
         <div class="card-deck">
           <div class="card">
