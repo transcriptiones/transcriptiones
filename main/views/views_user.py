@@ -156,11 +156,13 @@ class UserUpdateView(LoginRequiredMixin, View):
                 
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
-    email_template_name = "main/users/passwordresetemail.html"
-    subject_template_name = "main/users/passwordresetsubject.txt"
-    template_name = "main/users/passwordreset.html"
+    email_template_name = "main/users/password_reset_email.html"
+    subject_template_name = "main/users/password_reset_subject.txt"
+    template_name = "main/users/password_reset.html"
+    success_url = reverse_lazy('main:password_reset_done')
 
 
 class CustomPasswordConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
-    template_name = "main/users/passwordresetconfirm.html"
+    template_name = "main/users/password_reset_confirm.html"
+    success_url = reverse_lazy('main:password_reset_complete')

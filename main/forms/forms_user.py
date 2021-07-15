@@ -105,6 +105,9 @@ class CustomPasswordResetForm(PasswordResetForm):
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
                 })
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Reset Password'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
 
 class CustomSetPasswordForm(SetPasswordForm):
@@ -116,3 +119,6 @@ class CustomSetPasswordForm(SetPasswordForm):
                 'class': 'form-control',
                 'placeholder': self.fields[name].label,
                 })
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Reset Password'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
