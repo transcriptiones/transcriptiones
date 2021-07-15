@@ -121,8 +121,11 @@ urlpatterns = [
 
     ##############
     # USER MESSAGES
-    path('user/messages/', v_messages.messages, name='messages'),
+    path('user/messages/', v_messages.messages_view, name='messages'),
+    path('user/notifications/', v_messages.notifications_view, name='notifications'),
     path('user/messages/delete/all', v_messages.delete_all_view, name='messages_delete_all'),
+    path('user/messages/compose/<str:username>/', v_messages.message_user_view, name='message_user'),
+
     ##############
     # ADMIN PAGES
     path('transcriptiones_admin/', v_admin.admin_view, name='admin'),
