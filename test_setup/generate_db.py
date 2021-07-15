@@ -1,5 +1,22 @@
 import random, os, uuid
-import string
+
+users = [(2, 'transcriber_johnny', ),
+         (3, 'viola_xx69xx', ),
+         (4, 'gerry_gantenbein', ),
+         (5, 'dominic', ),
+         (6, 'yvonne', )]
+
+str_users = "INSERT INTO 'main_user' ('id', 'password', 'last_login', 'is_superuser', 'username', 'first_name', " \
+            "'last_name', 'email', 'email_confirmed', 'is_staff', 'is_active', 'date_joined', 'mark_anonymous', " \
+            "'different_editor_subscription', 'notification_policy', 'user_orcid', 'message_notification_policy')\n " \
+            "VALUES "
+
+for user in users:
+    str_users += f"({user[0]}, '', NULL, 0, '{user[1]}', '', '', '{user[1]}@test.com', " \
+                 f"'1', '0', '1', NOW(), '0', '1', '1', '0000-1234-5678', '1'),\n"
+
+str_users = str_users[:-2]
+str_users += ";"
 
 ref_number_titles = ['Briefwechsel Mustermann - Beispilia',
                      'Gerichtsprotokoll Samson',
@@ -158,11 +175,12 @@ for filename in os.listdir('dummy_texts'):
     random_seal = random.randint(0, 1)
     random_number2 = random.randint(0, len(doc_titles) - 1)
     random_number3 = random.randint(0, len(doc_names) - 1)
+    random_user = random.randint(1, len(users))
 
     str_documents += f"(NULL, '{my_uuid}', '{doc_titles[random_number2]} {doc_names[random_number3]}, {document_no}', '{random_year}-01-01 11:15:35.000000', NULL, " \
                      f"'{city_names[random.randint(0,len(city_names)-1)]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
                      f"'{transcription_text}', NOW(), 'document-title-{document_no}', '1', 'generated', " \
-                     f"'1', '{parent_ref_number}', '{random_source_type}', '1', '1', NOW(), {random_illuminated}, {random_seal});\n"
+                     f"'1', '{parent_ref_number}', '{random_source_type}', '{random_user}', '1', NOW(), {random_illuminated}, {random_seal});\n"
     document_no += 1
 
 str_documents = str_documents[:-2]
@@ -177,8 +195,11 @@ f.write("DELETE FROM main_refnumber WHERE 1;\n")
 f.write("DELETE FROM main_institution WHERE 1;\n")
 f.write("DELETE FROM main_author WHERE 1;\n")
 f.write("DELETE FROM main_sourcetype WHERE parent_type_id IS NOT NULL;\n")
-f.write("DELETE FROM main_sourcetype WHERE 1;\n\n")
-f.write("-- AUTHORS\n")
+f.write("DELETE FROM main_sourcetype WHERE 1;\n")
+f.write("DELETE FROM main_user WHERE username != 'sorin';\n\n")
+f.write("-- USERS\n")
+f.write(str_users)
+f.write("\n\n-- AUTHORS\n")
 f.write(str_authors)
 f.write("\n\n-- SOURCE TYPES\n")
 f.write(str_source_type)
