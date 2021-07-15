@@ -85,9 +85,12 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
-        context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
-                                                                subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
-                                                                object_id=self.get_object().id).count() > 0
+        if self.request.user.is_authenticated:
+            context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                    subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
+                                                                    object_id=self.get_object().id).count() > 0
+        else:
+            context['subscribed'] = False
         return context
 
 
@@ -123,9 +126,13 @@ class DocumentDetailView(MultiTableMixin, DetailView):
             newest = self.get_object().get_versions().latest()
             context['newest'] = newest
 
-        context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
-                                                                subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
-                                                                object_id=self.get_object().id).count() > 0
+        if self.request.user.is_authenticated:
+            context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                    subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
+                                                                    object_id=self.get_object().id).count() > 0
+        else:
+            context['subscribed'] = False
+
         return context
 
     def get_tables(self):
