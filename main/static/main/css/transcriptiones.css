@@ -67,10 +67,12 @@ body {
 .card-header {
     background-color: #1D809F;
     cursor: pointer;
+    padding-top: 7px;
+    padding-bottom: 7px;
 }
 
 .card-link {
-    color: #fff !important;
+    color: #d9d9d9 !important;
     display: inline-block;
     position: relative;
     z-index: 1;
