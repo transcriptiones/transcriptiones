@@ -14,6 +14,8 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'main/filter.html' %}
-    {% render_table table %}
+    {% card 'institutins_list_card' _('Institutions') %}
+        {% include 'main/filter.html' %}
+        {% render_table table %}
+    {% endcard %}
 {% endblock content %}
