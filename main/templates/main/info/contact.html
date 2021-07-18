@@ -1,21 +1,25 @@
 {% extends 'main/base.html' %}
 {% load transcriptiones %}
+{% load crispy_forms_tags %}
 {% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Contact' %}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Contact" "main:contact" %}
+{% endblock %}
+
+
 {% block content %}
 
-    {% card 'general' _('General') %}
-        {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
-        {% translate 'General Contact Text Message' %}
-    {% endcard %}
+    {% include 'main/info/info_options.html' %}
 
-    {% card 'specific' _('Specific') %}
-        {%  comment %} Translators: This is a dummy message. Do not translate yet. {% endcomment %}
-        {% translate 'Specific Contact Text Message' %}
+    {% card 'general' _('Write us a message') %}
+        {% crispy form %}
     {% endcard %}
 
 {% endblock %}
