@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from bootstrap_modal_forms.generic import BSModalCreateView
 
 from main.forms.forms_test import InstModelForm, RefnModelForm
-from main.forms.forms_upload import UploadTranscriptionForm
+from main.forms.forms_upload import UploadTranscriptionForm, BatchUploadForm
 from main.models import Document, Institution, RefNumber, SourceType, Author, Language
 
 
@@ -32,7 +32,8 @@ def upload_multiple_transcriptions_view(request):
 
 @login_required
 def upload_batch_view(request):
-    return render(request, 'main/upload/create_batch_contact.html')
+    form = BatchUploadForm()
+    return render(request, 'main/upload/create_batch_contact.html', {'form': form})
 
 
 @login_required

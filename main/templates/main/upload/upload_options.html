@@ -1,15 +1,21 @@
 {% extends "main/base.html" %}
 {% load i18n %}
 {% load transcriptiones %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Upload Transcriptions' %}
 {% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Upload" "main:upload_options" %}
+{% endblock %}
+
 
 {% block content %}
     {% if not request.user.is_authenticated %}
-        (You need a login to upload a document. <a href="{% url 'main:login'%}">Login</a> or Register a <a href="{% url 'main:signup'%}">new account</a>)
+        <p>(<span class="text-danger"><strong>{% translate 'Important:' %}</strong></span> You need a login to upload a document. <a href="{% url 'main:login'%}">Login</a> or register a <a href="{% url 'main:signup'%}">new account.</a>)</p>
     {% endif %}
     {% card 'options_card' _('How do you want to proceed?') %}
         <div class="card-deck">

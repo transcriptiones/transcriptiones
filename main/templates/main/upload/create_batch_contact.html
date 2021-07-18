@@ -5,18 +5,21 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Upload Transcriptions' %}
+    {% translate 'Upload Large Amount Of Transcriptions' %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb "Upload" "main:upload_options" %}
-    {% breadcrumb "Upload Multiple Pages" "" %}
+    {% breadcrumb "Upload Batch" "" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'multiple_card' _('Upload Multiple Documents') %}
-        Coming soon
+    {% card 'batch_card' _('Upload Batch') %}
+        <p>
+            {% translate "We would like to help you, to bring your transcriptions online as easy as possible. Please fill out the following form and we'll be in touch!" %}
+        </p>
+        {% crispy form %}
     {% endcard %}
 {% endblock content %}
 

@@ -349,3 +349,7 @@ class EditTranscriptForm(forms.ModelForm):
                   'commit_message',
                   # TODO 'submitted_by_anonymous',
                   ]
+
+
+class BatchUploadForm(forms.Form):
+    batch_description = forms.CharField(widget=forms.Textarea)
