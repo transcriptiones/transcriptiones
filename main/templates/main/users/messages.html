@@ -7,7 +7,7 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    {% translate 'User Messages' %}
+    {% translate 'Messages' %}
 {%  endblock %}
 
 {% block breadcrumbs %}
@@ -18,9 +18,15 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include 'main/users/user_options.html' %}
+
     {% card 'messages_card' _('Your Inbox') %}
         {% if table.data|length > 0 %}
-             <p><a class="btn btn-danger btn-sm" href="{% url 'main:messages_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a></p>
+             <p>
+                 <a class="btn btn-danger btn-sm" href="{% url 'main:messages_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a>
+                 <a class="btn btn-primary btn-sm" href="{% url 'main:messages' %}" role="button"><i class="fas fa-sync"></i></a>
+             </p>
             {% render_table table %}
         {% else %}
             {% translate 'You have no messages. You can send messages to users via their profile page.' %}

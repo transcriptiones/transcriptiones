@@ -18,6 +18,9 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include 'main/users/user_options.html' %}
+
     {% card 'subscription_options_card' _('Your subscription options') %}
             <p>How do you want to to be notified if there are changes in your subscriptions?</p>
             {% crispy form %}

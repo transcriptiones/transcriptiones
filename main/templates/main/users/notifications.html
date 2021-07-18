@@ -7,7 +7,7 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    {% translate 'User Notifications' %}
+    {% translate 'Notifications' %}
 {%  endblock %}
 
 {% block breadcrumbs %}
@@ -18,6 +18,9 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include 'main/users/user_options.html' %}
+
     {% card 'messages_card' _('Your Inbox') %}
         {% if table.data|length > 0 %}
              <p><a class="btn btn-danger btn-sm" href="{% url 'main:messages_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a></p>

@@ -80,6 +80,7 @@ body {
 /* Font size and padding */
 /* Should we solve this with additional classes in the documents? */
 
+/*
 h1,
 h2,
 h3,
@@ -88,6 +89,8 @@ h5,
 h6 {
   font-weight: 700;
 }
+*/
+
 
 h4,
 h5,

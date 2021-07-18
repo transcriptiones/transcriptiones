@@ -1,0 +1,49 @@
+{% load transcriptiones %}
+{% load i18n %}
+
+{% card 'user_profile_options' _('Options') %}
+        <div align="center">
+            <table width="100%">
+                <tr>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:profile' %}" title="{% translate 'Your Profile' %}"><i class="fas fa-user"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:messages' %}" title="{% translate 'Your message inbox' %}"><i class="fas fa-envelope-open"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:notifications' %}" title="{% translate 'Your notifications' %}"><i class="fas fa-flag"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:subscriptions' %}" title="{% translate 'Your subscriptions' %}"><i class="fas fa-bell"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="25%"><p class="text-center text-muted small">Profile</p></td>
+                    <td width="25%"><p class="text-center text-muted small">Messages</p></td>
+                    <td width="25%"><p class="text-center text-muted small">Notifications</p></td>
+                    <td width="25%"><p class="text-center text-muted small">Subscriptions</p></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:password_change' %}" title="{% translate 'Change your password' %}"><i class="fas fa-key"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:user_update' %}" title="{% translate 'Update your Profile information' %}"><i class="fas fa-user-edit"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:public_profile' request.user.username %}" title="{% translate 'View your public profile' %}"><i class="fas fa-user"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:logout' %}" title="{% translate 'Log out' %}"><i class="fas fa-sign-out-alt"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="text-center text-muted small">Change Password</p></td>
+                    <td><p class="text-center text-muted small">Edit Profile</p></td>
+                    <td><p class="text-center text-muted small">Public Profile</p></td>
+                    <td><p class="text-center text-muted small">Logout</p></td>
+                </tr>
+            </table>
+        </div>
+    {% endcard %}
