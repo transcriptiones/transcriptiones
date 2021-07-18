@@ -15,6 +15,7 @@ import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
 import main.views.views_browse as v_browse
 import main.views.views_export as v_export
+import main.views.views_info as v_info
 import main.views.views_messages as v_messages
 import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
@@ -35,9 +36,11 @@ urlpatterns = [
     path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
+    path('info/contact/', v_info.contact_view, name='contact'),
+
     # TODO These pages are currently unused
     path('info/aboutus/',    TemplateView.as_view(template_name='main/info/about_us.html'),   name='about_us'),
-    path('info/contact/',    TemplateView.as_view(template_name='main/info/contact.html'),    name='contact'),
+
 
     ##############
     # SEARCH VIEW
