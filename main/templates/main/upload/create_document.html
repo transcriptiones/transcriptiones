@@ -79,8 +79,6 @@
             {{ form.publish_user|as_crispy_field }}
         {% endcard %}
 
-        <button type="button" class="btn btn-secondary" id="submitButtonDocument">{% translate 'Upload' %}</button>
-
         <table style="display: none">
             {{ view.formset.empty_form }}
         </table>
@@ -89,9 +87,12 @@
             {{ view.formset }}
         </table>
 
-        <span id="add-form" class="button">Add form</span>
-
-        <input type="submit" />
+        {% card 'upload_upload' _('Upload Your Transcription') %}
+            <div class="text-center">
+            <p>If you're done entering your information, you can upload the document.</p>
+                <input type="submit" value="{% translate 'Upload Transcription' %}" class="btn btn-primary">
+            </div>
+        {% endcard %}
     </form>
 
     {{ form.media }}
