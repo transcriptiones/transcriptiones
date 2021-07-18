@@ -3,6 +3,8 @@ import django.utils.html as utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+from django_tables2 import A
+
 from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification
 
 
@@ -27,14 +29,50 @@ class UserMessageTable(tables.Table):
     class Meta:
         model = UserMessage
         template_name = "django_tables2/bootstrap4.html"
-        fields = ("sending_user", "subject", "message", "sending_time")
+        fields = ("sending_user", "subject", "sending_time")
         attrs = {"class": "table table-hover",
                  'td': {'style': 'text-align: left;'}
                  }
 
-    sending_user = tables.Column(verbose_name='from')
+    sending_user = tables.Column(verbose_name='from', orderable=False)
+    subject = tables.LinkColumn('main:messages_read', args=[A('pk')], orderable=False)
+    sending_time = tables.Column(verbose_name='sent', orderable=False)
+    options = tables.Column(accessor='id', verbose_name="", orderable=False)
+
+    """
     message = tables.TemplateColumn(
         '<data-toggle="tooltip" title="{{record.message}}">{{record.message|truncatewords:5}}')
+    """
+
+    def render_sending_user(self, value, record):
+        if record.viewing_state == 0:
+            return mark_safe(f"<strong>{value}</strong>")
+        return value
+
+    def render_subject(self, value, record):
+        if record.viewing_state == 0:
+            return mark_safe(f"<strong>{value}</strong>")
+        return value
+
+    def render_sending_time(self, value, record):
+        if record.viewing_state == 0:
+            return mark_safe(f'<strong>{value.strftime("%b %d %Y %H:%M:%S")}</strong>')
+        return value.strftime("%b %d %Y %H:%M:%S")
+
+    def render_options(self, value, record):
+        open_url = reverse('main:messages_read', kwargs={'message_id': record.id})
+        reply_url = reverse('main:messages_reply', kwargs={'message_id': record.id})
+        delete_url = reverse('main:messages_delete', kwargs={'message_id': record.id})
+
+        open_title = _("Open this message")
+        reply_title = _("Reply to this message")
+        delete_title = _("Delete this message")
+
+        options = f'<a href="{open_url}" class="btn btn-sm btn-primary" title="{open_title}"><i class="fas fa-envelope-open"></i></a> &nbsp;'
+        options += f'<a href="{reply_url}" class="btn btn-sm btn-primary" title="{reply_title}"><i class="fas fa-reply"></i></a> &nbsp;'
+        options += f'<a href="{delete_url}" class="btn btn-sm btn-danger" title="{delete_title}"><i class="fas fa-trash"></i></a> &nbsp;'
+
+        return mark_safe(options)
 
 
 class UserSubscriptionTable(tables.Table):

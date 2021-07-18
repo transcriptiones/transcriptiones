@@ -41,7 +41,8 @@ urlpatterns = [
 
     ##############
     # SEARCH VIEW
-    path('search/', v_search.SearchView.as_view(), name='search'),
+    # path('search/', v_search.SearchView.as_view(), name='search'),
+    path('search/', v_search.test_search, name='search'),
     path('search_box/<str:query>/', v_search.search_by_box_view, name='search_by_box'),
     path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
 
@@ -120,10 +121,19 @@ urlpatterns = [
     path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
     ##############
-    # USER MESSAGES
+    # USER MESSAGES & NOTIFICATIONS
     path('user/messages/', v_messages.messages_view, name='messages'),
     path('user/notifications/', v_messages.notifications_view, name='notifications'),
-    path('user/messages/delete/all', v_messages.delete_all_view, name='messages_delete_all'),
+
+    path('user/messages/delete/all', v_messages.delete_all_messages_view, name='messages_delete_all'),
+    path('user/messages/delete/<int:message_id>', v_messages.messages_delete_view, name='messages_delete'),
+    path('user/notifications/delete/all', v_messages.delete_all_notifications_view, name='notifications_delete_all'),
+    path('user/notifications/delete/<int:notification_id>>', v_messages.notifications_delete_view, name='notifications_delete'),
+
+    path('user/messages/view/<int:message_id>/', v_messages.messages_read_view, name='messages_read'),
+    path('user/messages/reply/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
+    path('user/notifications/view/<int:notification_id>/', v_messages.notifications_read_view, name='notifications_read'),
+
     path('user/messages/compose/<str:username>/', v_messages.message_user_view, name='message_user'),
 
     ##############

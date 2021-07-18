@@ -1,0 +1,32 @@
+﻿{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Read Notification' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Users') "" %}
+    {% breadcrumb request.user.username "main:profile" %}
+    {% breadcrumb _('Notifications') 'main:notifications' %}
+    {% breadcrumb notification.subject '' %}
+{% endblock %}
+
+{% block content %}
+    {% card 'message_card' _('Your Notification') %}
+        <table>
+            <tr>
+                <td><strong>{{ notification.subject }}</strong></td>
+            </tr>
+            <tr>
+                <td>{{ notification.message|linebreaksbr }}</td>
+            </tr>
+        </table>
+    {% endcard %}
+{% endblock %}
