@@ -3,46 +3,47 @@
 
 {% card 'user_profile_options' _('Options') %}
         <div align="center">
+        {{ v }}
             <table width="100%">
                 <tr>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:profile' %}" title="{% translate 'Your Profile' %}"><i class="fas fa-user"></i></a>
+                        <a href="{% url 'main:profile' %}" {% if request.resolver_match.url_name == 'profile' %}class="text-danger"{% endif %} title="{% translate 'Your Profile' %}"><i class="fas fa-user"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:messages' %}" title="{% translate 'Your message inbox' %}"><i class="fas fa-envelope-open"></i></a>
+                        <a href="{% url 'main:messages' %}" {% if request.resolver_match.url_name == 'messages' %}class="text-danger"{% endif %} title="{% translate 'Your message inbox' %}"><i class="fas fa-envelope-open"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:notifications' %}" title="{% translate 'Your notifications' %}"><i class="fas fa-flag"></i></a>
+                        <a href="{% url 'main:notifications' %}" {% if request.resolver_match.url_name == 'notifications' %}class="text-danger"{% endif %} title="{% translate 'Your notifications' %}"><i class="fas fa-flag"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:subscriptions' %}" title="{% translate 'Your subscriptions' %}"><i class="fas fa-bell"></i></a>
+                        <a href="{% url 'main:subscriptions' %}" {% if request.resolver_match.url_name == 'subscriptions' %}class="text-danger"{% endif %} title="{% translate 'Your subscriptions' %}"><i class="fas fa-bell"></i></a>
                     </td>
                 </tr>
                 <tr>
-                    <td width="25%"><p class="text-center text-muted small">Profile</p></td>
-                    <td width="25%"><p class="text-center text-muted small">Messages</p></td>
-                    <td width="25%"><p class="text-center text-muted small">Notifications</p></td>
-                    <td width="25%"><p class="text-center text-muted small">Subscriptions</p></td>
+                    <td width="25%"><a href="{% url 'main:profile' %}" class="text-{% if request.resolver_match.url_name == 'profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">Profile</p></a></td>
+                    <td width="25%"><a href="{% url 'main:messages' %}" class="text-{% if request.resolver_match.url_name == 'messages' %}danger{% else %}muted{% endif %}"><p class="text-center small">Messages</p></td>
+                    <td width="25%"><a href="{% url 'main:notifications' %}" class="text-{% if request.resolver_match.url_name == 'notifications' %}danger{% else %}muted{% endif %}"><p class="text-center small">Notifications</p></a></td>
+                    <td width="25%"><a href="{% url 'main:subscriptions' %}" class="text-{% if request.resolver_match.url_name == 'subscriptions' %}danger{% else %}muted{% endif %}"><p class="text-center small">Subscriptions</p></a></td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:password_change' %}" title="{% translate 'Change your password' %}"><i class="fas fa-key"></i></a>
+                        <a href="{% url 'main:password_change' %}" {% if request.resolver_match.url_name == 'password_change' %}class="text-danger"{% endif %} title="{% translate 'Change your password' %}"><i class="fas fa-key"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:user_update' %}" title="{% translate 'Update your Profile information' %}"><i class="fas fa-user-edit"></i></a>
+                        <a href="{% url 'main:user_update' %}" {% if request.resolver_match.url_name == 'user_update' %}class="text-danger"{% endif %} title="{% translate 'Update your Profile information' %}"><i class="fas fa-user-edit"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:public_profile' request.user.username %}" title="{% translate 'View your public profile' %}"><i class="fas fa-user"></i></a>
+                        <a href="{% url 'main:public_profile' request.user.username %}" {% if request.resolver_match.url_name == 'public_profile' %}class="text-danger"{% endif %} title="{% translate 'View your public profile' %}"><i class="fas fa-user"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:logout' %}" title="{% translate 'Log out' %}"><i class="fas fa-sign-out-alt"></i></a>
+                        <a href="{% url 'main:logout' %}" {% if request.resolver_match.url_name == 'logout' %}class="text-danger"{% endif %} title="{% translate 'Log out' %}"><i class="fas fa-sign-out-alt"></i></a>
                     </td>
                 </tr>
                 <tr>
-                    <td><p class="text-center text-muted small">Change Password</p></td>
-                    <td><p class="text-center text-muted small">Edit Profile</p></td>
-                    <td><p class="text-center text-muted small">Public Profile</p></td>
-                    <td><p class="text-center text-muted small">Logout</p></td>
+                    <td><a href="{% url 'main:password_change' %}" class="text-{% if request.resolver_match.url_name == 'password_change' %}danger{% else %}muted{% endif %}"><p class="text-center small">Change Password</p></a></td>
+                    <td><a href="{% url 'main:user_update' %}" class="text-{% if request.resolver_match.url_name == 'user_update' %}danger{% else %}muted{% endif %}"><p class="text-center small">Edit Profile</p></a></td>
+                    <td><a href="{% url 'main:public_profile' request.user.username %}" class="text-{% if request.resolver_match.url_name == 'public_profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">Public Profile</p></a></td>
+                    <td><a href="{% url 'main:logout' %}" class="text-{% if request.resolver_match.url_name == 'logout' %}danger{% else %}muted{% endif %}"><p class="text-center small">Logout</p></a></td>
                 </tr>
             </table>
         </div>
