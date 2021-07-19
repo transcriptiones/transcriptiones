@@ -28,9 +28,11 @@
     <ul class="sidebar-nav sidebar-profile">
         {% if user.is_authenticated %}
             <li class="sidebar-nav-item sidebar-profile-title">
-                {% blocktranslate with username=user.username %}
-                  Welcome, {{ username }}
-                {% endblocktranslate %}
+                <i>
+                    {% blocktranslate with username=user.username %}
+                        Welcome, {{ username }}
+                    {% endblocktranslate %}
+                </i>
             </li>
             <li class="sidebar-nav-item">
                 <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% translate 'My Profile' %}</a>
