@@ -1,0 +1,26 @@
+﻿{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'User Management' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Administration') "main:admin" %}
+    {% breadcrumb _('User Management') '' %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/admin/admin_options.html' %}
+
+    {% card 'admin_users' _('User Management') %}
+        Coming soon
+    {% endcard %}
+{% endblock %}

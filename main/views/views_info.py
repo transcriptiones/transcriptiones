@@ -5,11 +5,18 @@ from django_filters.views import FilterView
 
 import main.model_info as m_info
 from main.forms.forms_info import ContactForm
-from main.models import Institution, RefNumber, Document, UserSubscription
+from main.models import Institution, RefNumber, Document, UserSubscription, UserMessage, ContactMessage
 from main.tables import TitleValueTable, RefNumberTable, DocumentTable, InstitutionTable
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter
 
 
 def contact_view(request):
     form = ContactForm()
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            ContactMessage.objects.create(reply_email=form.cleaned_data['reply_to'],
+                                          message=form.cleaned_data['message'])
+
     return render(request, 'main/info/contact.html', context={'form': form})

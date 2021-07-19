@@ -522,3 +522,12 @@ class UserNotification(models.Model):
     # 0 = new, 1 = read
     viewing_state = models.IntegerField(default=0)
     sending_time = models.DateTimeField(auto_now_add=True)
+
+
+class ContactMessage(models.Model):
+    reply_email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+
+    state = models.IntegerField(default=0)
+    sending_time = models.DateTimeField(auto_now_add=True)

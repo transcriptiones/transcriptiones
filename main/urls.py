@@ -142,6 +142,9 @@ urlpatterns = [
     ##############
     # ADMIN PAGES
     path('transcriptiones_admin/', v_admin.admin_view, name='admin'),
+    path('transcriptiones_admin/inbox/', v_admin.admin_inbox_view, name='admin_inbox'),
+    path('transcriptiones_admin/users/', v_admin.admin_users_view, name='admin_users'),
+    path('transcriptiones_admin/expert/', v_admin.admin_expert_view, name='admin_expert'),
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),
     path('transcriptiones_admin/export/json/', v_admin.admin_export_json_view, name='admin_export_json'),

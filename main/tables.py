@@ -5,7 +5,37 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django_tables2 import A
 
-from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification
+from .models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification, \
+    ContactMessage
+
+
+class UserTable(tables.Table):
+    """The UserTable shows a list of users"""
+
+    class Meta:
+        model = User
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("username", )
+        attrs = {"class": "table table-hover",
+                 'td': {'style': 'text-align: left;'}
+                 }
+
+
+class ContactMessageTable(tables.Table):
+    """The UserMessageTable shows a list of subscriptions to ref numbers, documents or users."""
+
+    class Meta:
+        model = ContactMessage
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("sending_user", "subject", "sending_time")
+        attrs = {"class": "table table-hover",
+                 'td': {'style': 'text-align: left;'}
+                 }
+
+    reply_email = tables.Column(verbose_name='from', orderable=False)
+    subject = tables.LinkColumn('main:contact_message_read', args=[A('pk')], orderable=False)
+    sending_time = tables.Column(verbose_name='sent', orderable=False)
+    options = tables.Column(accessor='id', verbose_name="", orderable=False)
 
 
 class UserNotificationTable(tables.Table):

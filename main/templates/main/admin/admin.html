@@ -2,19 +2,27 @@
 {% load i18n %}
 {% load transcriptiones %}
 {% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Transcriptiones Administration' %}
+    {% translate 'Database Functions' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Administration') "main:admin" %}
+    {% breadcrumb _('Database Functions') '' %}
 {% endblock %}
 
 {% block content %}
-    {% card 'admin_intro' _('Options') %}
-        <p>
-            {% translate 'You are a Transciptiones Admin user. You have the following options.' %}
-        </p>
-    {% endcard %}
+    {% include 'main/admin/admin_options.html' %}
+
     {% card 'admin_crud' _('Change or Create Database Objects') %}
         <table style="width: 100%;">
+            <tr>
+                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_inbox" %}" role="button">{% translate 'Contact Messages' %}</a></td>
+                <td><small>{% translate 'Messages sent over the contact form.' %}</small></td>
+            </tr>
             <tr>
                 <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:index" %}" role="button">{% translate 'Django Administration Interface' %}</a></td>
                 <td><small>{% translate 'The Django Administration Interface lets you add, modify and delete database objects.' %}</small></td>
@@ -47,24 +55,10 @@
 
         </table>
     {% endcard %}
-    {% card 'admin_special' _('Special functions') %}
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_statistics" %}" role="button">{% translate 'View Statistics' %}</a></td>
-                <td><small>{% translate 'Display a page with usage statistics.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_merge_docs" %}" role="button">{% translate 'Merge Documents' %}</a></td>
-                <td><small>{% translate 'Merge documents which transcribe the same physical document.' %}</small></td>
-            </tr>
-        </table>
-    {% endcard %}
+
     {% card 'admin_export' _('Export Database Objects') %}
         <table style="width: 100%;">
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_export_json" %}" role="button">{% translate 'Export Database (JSON)' %}</a></td>
-                <td><small>{% translate 'Export the complete database as JSON file. (Be patient!).' %}</small></td>
-            </tr>
+
         </table>
     {% endcard %}
 {% endblock %}

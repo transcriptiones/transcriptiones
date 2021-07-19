@@ -6,11 +6,30 @@ from main import models
 import zipfile
 import os
 
+from main.models import ContactMessage
+from main.tables import ContactMessageTable
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_view(request):
     """Shows a static page with options of an admin user."""
     return render(request, 'main/admin/admin.html')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_view(request):
+    table = ContactMessageTable(data=ContactMessage.objects.filter(state=0))
+    return render(request, 'main/admin/contact_messages.html', {'table': table})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_users_view(request):
+    return render(request, 'main/admin/admin_users.html')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_expert_view(request):
+    return render(request, 'main/admin/admin_expert.html')
 
 
 @user_passes_test(lambda u: u.is_superuser)
