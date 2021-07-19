@@ -6,23 +6,23 @@
             <table width="100%">
                 <tr>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:admin_inbox' %}" title="{% translate 'Contact Messages' %}"><i class="fas fa-inbox"></i></a>
+                        <a href="{% url 'main:admin_inbox' %}" {% if request.resolver_match.url_name == 'admin_inbox' %}class="text-danger"{% endif %} title="{% translate 'Contact Messages' %}"><i class="fas fa-inbox"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:admin' %}" title="{% translate 'Database Functions' %}"><i class="fas fa-database"></i></a>
+                        <a href="{% url 'main:admin' %}" {% if request.resolver_match.url_name == 'admin' %}class="text-danger"{% endif %} title="{% translate 'Database Functions' %}"><i class="fas fa-database"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:admin_users' %}" title="{% translate 'User Management' %}"><i class="fas fa-users-cog"></i></a>
+                        <a href="{% url 'main:admin_users' %}" {% if request.resolver_match.url_name == 'admin_users' %}class="text-danger"{% endif %} title="{% translate 'User Management' %}"><i class="fas fa-users-cog"></i></a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{% url 'main:admin_expert' %}" title="{% translate 'Expert Functions' %}"><i class="fas fa-tools"></i></a>
+                        <a href="{% url 'main:admin_expert' %}" {% if request.resolver_match.url_name == 'admin_expert' %}class="text-danger"{% endif %} title="{% translate 'Expert Functions' %}"><i class="fas fa-tools"></i></a>
                     </td>
                 </tr>
                 <tr>
-                    <td width="25%"><p class="text-center text-muted small">Contact Messages</p></td>
-                    <td width="25%"><p class="text-center text-muted small">Database Functions</p></td>
-                    <td width="25%"><p class="text-center text-muted small">User Management</p></td>
-                    <td width="25%"><p class="text-center text-muted small">Expert Functions</p></td>
+                    <td width="25%"><a href="{% url 'main:admin_inbox' %}" class="text-{% if request.resolver_match.url_name == 'admin_inbox' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Contact Messages' %}</p></a></td>
+                    <td width="25%"><a href="{% url 'main:admin' %}" class="text-{% if request.resolver_match.url_name == 'admin' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Database Functions' %}</p></a></td>
+                    <td width="25%"><a href="{% url 'main:admin_users' %}" class="text-{% if request.resolver_match.url_name == 'admin_users' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'User Management' %}</p></a></td>
+                    <td width="25%"><a href="{% url 'main:admin_expert' %}" class="text-{% if request.resolver_match.url_name == 'admin_expert' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Expert Functions' %}</p></a></td>
                 </tr>
             </table>
         </div>
