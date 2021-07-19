@@ -10,6 +10,7 @@
 {% block content %}
 
 {% card 'login_Card' _('Login To Your Account') %}
+    <div align="center">
     {% if next %}
         {% if user.is_authenticated %}
             <p>
@@ -23,21 +24,17 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        <p>{% translate 'You are already logged in.' %}</p>
-        <div id="logout">
-            <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
-        </div>
+        <a class="btn btn-primary" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
     {% else %}
          {% crispy form %}
 
         <p class="text-center text-muted">
             {% translate 'Forgot your password?' %} <a href="{% url 'main:password_reset' %}">{% translate 'Reset it here.' %}</a> &nbsp;|&nbsp;
             {% translate 'No user account?' %} <a href="{% url 'main:signup' %}">{% translate 'Register here.' %}</a>
-
-
         </p>
 
     {% endif %}
+    </div>
 
 {% endcard %}
 
