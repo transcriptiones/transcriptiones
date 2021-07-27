@@ -56,10 +56,15 @@ class SourceTypeAdmin(admin.ModelAdmin):
     list_display = ('type_name', 'parent_type')
 
 
+class MyUserAdmin(UserAdmin):
+    readonly_fields = ('date_joined', )
+    list_display = ('username', 'is_superuser')
+
+
 admin.site.register(Institution, InstitutionAdmin)
 admin.site.register(RefNumber, RefNumberAdmin)
 admin.site.register(Author)
 admin.site.register(SourceType, SourceTypeAdmin)
 admin.site.register(Document, DocumentAdmin)
-admin.site.register(User)
+admin.site.register(User, MyUserAdmin)
 admin.site.register(UserSubscription)
