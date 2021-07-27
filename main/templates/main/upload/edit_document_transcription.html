@@ -1,0 +1,26 @@
+﻿{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+    {% breadcrumb _("Institutions list") "main:institution_list" %}
+    {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
+    {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
+    {% breadcrumb document.title_name document.get_absolute_url %}
+    {% breadcrumb _('Edit transcription') '' %}
+{% endblock %}
+
+{% block page_title %}
+    Edit {{ document.title_name }}
+{% endblock %}
+
+{% block content %}
+    {% card 'edit_transcript_overview' _('Edit Transcription') %}
+        {{ form.transcription_text }}
+    {% endcard %}
+
+    {{ form.media }}
+{% endblock content %}

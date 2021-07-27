@@ -1,0 +1,20 @@
+{% load i18n %}
+<div class="modal fade" id="confirmDeactivateModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="confirmDeactivateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deactivate User?</h5>
+      </div>
+      <div class="modal-body">
+          {% blocktranslate %}
+          Do you really want to deactivate this user?<br/>
+          The user will be notified and will no longer be able to login.
+          {% endblocktranslate %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmDeactivateButtonModal">Deactivate</button>
+      </div>
+    </div>
+  </div>
+</div>
