@@ -1,3 +1,4 @@
+"""Contains all the tables for the transcriptiones app."""
 import django_tables2 as tables
 import django.utils.html as utils
 from django.urls import reverse
@@ -12,6 +13,12 @@ from .models import RefNumber, Document, Institution, UserSubscription, User, Us
 class UserTable(tables.Table):
     """The UserTable shows a list of users"""
 
+    def __init__(self, *args, **kwargs):
+        temp_user = kwargs.pop("current_user", None)
+        super(UserTable, self).__init__(*args, **kwargs)
+        self.current_user = temp_user
+
+
     class Meta:
         model = User
         template_name = "django_tables2/bootstrap4.html"
@@ -19,6 +26,58 @@ class UserTable(tables.Table):
         attrs = {"class": "table table-hover",
                  'td': {'style': 'text-align: left;'}
                  }
+
+    username = tables.LinkColumn('main:public_profile', args=[A('username')])
+    state = tables.Column(accessor='id', verbose_name="", orderable=False)
+    options = tables.Column(accessor='id', verbose_name="", orderable=False)
+
+    def render_state(self, value, record):
+        activity_state = record.get_user_activity_badge()
+        user_state = record.get_user_state_badge()
+
+        return mark_safe(activity_state + "&nbsp;" + user_state)
+
+    def render_options(self, value, record):
+        # No options for the logged in user. He cannot deactivate himself
+        if record.id == self.current_user.id:
+            return ''
+
+        # Options only for active users: else only activate
+        options = ''
+        if record.is_active:
+            # A user can not be deactivated if she is a superuser
+            if not record.is_superuser or self.current_user.username == "admin":
+                deactivate_title = _("Deactivate this user")
+                deactivate_url = reverse('main:admin_deactivate_user', kwargs={'user_id': record.id})
+                options += f'<a href="{deactivate_url}" class="btn btn-sm btn-danger confirm-deactivate" title="{deactivate_title}" data-toggle="modal" data-target="#confirmDeactivateModal" id="deactivateButton{record.id}"><i class="fas fa-toggle-off"></i></a> &nbsp;'
+
+            make_staff_title = _("Make this user staff")
+            make_staff_url = reverse('main:admin_set_user_staff', kwargs={'user_id': record.id})
+            if not record.is_staff:
+                options += f'<a href="{make_staff_url}" class="btn btn-sm btn-warning" title="{make_staff_title}"><i class="fas fa-users-cog"></i></a> &nbsp;'
+            if record.is_staff and not record.is_superuser and self.current_user.is_superuser:
+                make_admin_title = _("Make this user an administrator")
+                make_user_title = _("Make this user a normal user")
+                make_admin_url = reverse('main:admin_set_user_admin', kwargs={'user_id': record.id})
+                make_user_url = reverse('main:admin_set_user_user', kwargs={'user_id': record.id})
+                options += f'<a href="{make_user_url}" class="btn btn-sm btn-primary" title="{make_user_title}"><i class="fas fa-user"></i></a> &nbsp;'
+                options += f'<a href="{make_admin_url}" class="btn btn-sm btn-danger" title="{make_admin_title}"><i class="fas fa-user-shield"></i></a> &nbsp;'
+            # Only the superuser named admin can downgrade other users
+            if record.is_superuser and self.current_user.username == 'admin':
+                options += f'<a href="{make_staff_url}" class="btn btn-sm btn-warning" title="{make_staff_title}"><i class="fas fa-users-cog"></i></a> &nbsp;'
+
+        # User is inactive
+        else:
+            activate_title = _("Activate this user")
+            activate_url = reverse('main:admin_activate_user', kwargs={'user_id': record.id})
+            options = f'<a href="{activate_url}" class="btn btn-sm btn-primary" title="{activate_title}"><i class="fas fa-toggle-on"></i></a>'
+
+
+        make_staff_url = reverse('main:admin_set_user_staff', kwargs={'user_id': record.id})
+        make_user_url = reverse('main:admin_set_user_user', kwargs={'user_id': record.id})
+        message_url = reverse('main:message_user', kwargs={'username': record.username})
+
+        return mark_safe(options)
 
 
 class ContactMessageTable(tables.Table):
@@ -98,10 +157,12 @@ class UserMessageTable(tables.Table):
         reply_title = _("Reply to this message")
         delete_title = _("Delete this message")
 
-        options = f'<a href="{open_url}" class="btn btn-sm btn-primary" title="{open_title}"><i class="fas fa-envelope-open"></i></a> &nbsp;'
+        options = f'<a href="{delete_url}" class="confirm-delete" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{record.id}">Delete</a>'
+        """
+        options += f'<a href="{open_url}" class="btn btn-sm btn-primary" title="{open_title}"><i class="fas fa-envelope-open"></i></a> &nbsp;'
         options += f'<a href="{reply_url}" class="btn btn-sm btn-primary" title="{reply_title}"><i class="fas fa-reply"></i></a> &nbsp;'
         options += f'<a href="{delete_url}" class="btn btn-sm btn-danger" title="{delete_title}"><i class="fas fa-trash"></i></a> &nbsp;'
-
+        """
         return mark_safe(options)
 
 
