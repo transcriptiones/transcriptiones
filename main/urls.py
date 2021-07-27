@@ -148,15 +148,19 @@ urlpatterns = [
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),
     path('transcriptiones_admin/export/json/', v_admin.admin_export_json_view, name='admin_export_json'),
-
+    # ADMIN FUNCTIONS
+    path('transcriptiones_admin/activate_user/<int:user_id>', v_admin.activate_user, name='admin_activate_user'),
+    path('transcriptiones_admin/deactivate_user/<int:user_id>', v_admin.deactivate_user, name='admin_deactivate_user'),
+    path('transcriptiones_admin/set_user_staff/<int:user_id>', v_admin.set_user_staff, name='admin_set_user_staff'),
+    path('transcriptiones_admin/set_user_admin/<int:user_id>', v_admin.set_user_admin, name='admin_set_user_admin'),
+    path('transcriptiones_admin/set_user_user/<int:user_id>', v_admin.set_user_user, name='admin_set_user_user'),
 
     path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
     path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
     path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
 
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', EditTranscriptView.as_view(),
-         name='edit_transcript'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_upload.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
 
