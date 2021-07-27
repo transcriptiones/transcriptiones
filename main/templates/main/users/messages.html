@@ -24,7 +24,7 @@
     {% card 'messages_card' _('Your Inbox') %}
         {% if table.data|length > 0 %}
              <p>
-                 <a class="btn btn-danger btn-sm" href="{% url 'main:messages_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a>
+                 <button class="btn btn-danger btn-sm" type="button" id="do-delete-all">{% translate 'Delete All Messages' %}</button>
                  <a class="btn btn-primary btn-sm" href="{% url 'main:messages' %}" role="button"><i class="fas fa-sync"></i></a>
              </p>
             {% render_table table %}
@@ -37,4 +37,42 @@
             <p>How do you want to to be notified if you receive messages?</p>
             {% crispy form %}
     {% endcard %}
+
+    {% include "bsmodals/confirm.html" %}
+    {% include 'main/confirm_delete.html' %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="{% static 'bsmodals/bsmodals.js' %}"></script>
+    <script>
+        $(document).on('click', '.confirm-delete', function () {
+            $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmDeleteButtonModal', function () {
+            var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+            window.location = $("#".concat(caller)).attr("href");
+        });
+
+        $(document).ready(function() {
+            $('#do-delete-all').click(function () {
+                bsmodals_confirm('Delete all messages?', ' Do you really want to delete all your messages? This cannot be undone.', (result) => {
+                    if (result) {
+                        location.href="{% url 'main:messages_delete_all' %}"
+
+                    }
+                }, yes_text = "Delete All", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
+            });
+
+            $('#do-delete').click(function () {
+                bsmodals_confirm('Delete message?', ' Delete message? This cannot be undone.', (result) => {
+                    if (result) {
+                        location.href="{% url 'main:messages_delete' 1 %}"
+
+                    }
+                }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
+            });
+        });
+
+
+    </script>
 {% endblock %}
