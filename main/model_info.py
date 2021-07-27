@@ -21,6 +21,10 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'first_name'), user.first_name),
             (get_verbose_field_name(user, 'last_name'), user.last_name),
             (get_verbose_field_name(user, 'email'), user.email),
+            (get_verbose_field_name(user, 'date_joined'), user.date_joined),
+            (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
+            (_('User State'), mark_safe(user.get_user_state_badge())),
+            (_('Active'), mark_safe(user.get_user_activity_badge())),
             (get_verbose_field_name(user, 'mark_anonymous'), user.mark_anonymous)
             ]
     return title_value_list(data)
@@ -28,7 +32,9 @@ def get_user_info(user):
 
 def get_public_user_info(user):
     data = [(get_verbose_field_name(user, 'username'), user.username),
-            # TODO
+            (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
+            (_('Year joined'), user.date_joined.year),
+            (_('Active'), mark_safe(user.get_user_activity_badge())),
             ]
     return title_value_list(data)
 
