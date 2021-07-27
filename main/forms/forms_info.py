@@ -18,5 +18,5 @@ class ContactForm(forms.Form):
         self.helper.form_method = 'POST'
 
     subject = forms.CharField()
-    reply_to = forms.EmailField()
+    reply_to = forms.EmailField(label=_('Reply E-Mail'), help_text=_("We are going to reply to this E-Mail address."))
     message = forms.CharField(widget=forms.Textarea)
