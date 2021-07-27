@@ -1,6 +1,8 @@
 from django.db.models import Q
-from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter
-from main.models import Institution, RefNumber, Document
+from django import forms
+from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
+    ChoiceFilter
+from main.models import Institution, RefNumber, Document, User
 
 
 class InstitutionFilter(FilterSet):
@@ -31,3 +33,19 @@ class DocumentFilter(FilterSet):
     class Meta:
         model = Document
         fields = ['title_name']
+
+
+class UserFilter(FilterSet):
+    """Filter to filter a user table"""
+    STATUS_CHOICES = (
+        (0, 'User'),
+        (1, 'Staff'),
+        (2, 'Admin'),
+    )
+
+    username = CharFilter(lookup_expr='icontains')
+    user_state = ChoiceFilter(choices=STATUS_CHOICES)
+
+    class Meta:
+        model = User
+        fields = ['username', ]
