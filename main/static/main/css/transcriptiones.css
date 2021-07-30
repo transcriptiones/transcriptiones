@@ -1,3 +1,17 @@
+/* DJANGO TABLES SORTING
+table.table thead th.orderable {
+    background: url('../images/sort_none.png') no-repeat left;
+}
+*/
+
+table.table thead th.asc.orderable {
+    background: url('../images/sort_asc.png') no-repeat left;
+}
+
+table.table thead th.desc.orderable {
+    background: url('../images/sort_desc.png') no-repeat left;
+}
+
 /* START PAGE */
 .alert-info {
   margin-bottom:0;
@@ -415,6 +429,7 @@ a:hover, a:focus, a:active {
   color: #fff !important;
 }
 
+/*
 .btn-secondary,
 button[type="submit"] {
     text-align: center;
@@ -426,6 +441,7 @@ button[type="submit"] {
     margin-top: 35px;
     border-radius: 5px;
 }
+*/
 
 .btn-light {
     text-align: center;
@@ -435,13 +451,14 @@ button[type="submit"] {
     border-radius: 5px;
 }
 
-
+/*
 .btn-secondary:hover, .btn-primary:focus, .btn-primary:active,
 button[type="submit"]:hover, btn-light:hover {
     background-color: rgba(52, 58, 64, 0.9);
     border-color: rgba(52, 58, 64, 0.9);
     font-weight: normal;
 }
+*/
 
 .btn {
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
