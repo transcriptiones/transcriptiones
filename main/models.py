@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Q, UniqueConstraint
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -134,6 +135,9 @@ class Author(models.Model):
         verbose_name = _("Document author")
         verbose_name_plural = _("Document authors")
 
+    def get_absolute_url(self):
+        return reverse('main:author_detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.author_name
 
@@ -153,6 +157,9 @@ class SourceType(models.Model):
     class Meta:
         verbose_name = _("Source type")
         verbose_name_plural = _("Source types")
+
+    def get_absolute_url(self):
+        return reverse('main:source_type_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.type_name
@@ -353,8 +360,12 @@ class Document(models.Model):
         To operate on the existing model instead (e.g. for quickfixes), set force_update=True. This only works for
         objects which have been saved before and will raise ValueError for pk=None, or DatabaseError for unknown pks.
         This option cannot be combined with force_insert.
+
+        Subscriptions: if a change happens, subscriptions are checked and Notifications are created.
         """
         if not force_update:
+            old_doc_id = self.pk
+
             # Save a new version alongside any old ones
             self.pk = None
             # Set all old versions to be inactive
@@ -365,6 +376,34 @@ class Document(models.Model):
                 self.version_number = self.get_versions().exclude(pk=self.pk).latest().version_number + 1
             except type(self).DoesNotExist:
                 self.version_number = 1
+
+            # Check Subscriptions:
+            old_ref_id = self.parent_ref_number.id
+            old_user_id = self.submitted_by.id
+
+            # Gets all document subscriptions for the current document
+            doc_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
+                                                                object_id=old_doc_id)
+            for d_sub in doc_subscriptions:
+                UserNotification.objects.create(subscription=d_sub, user=d_sub.user,
+                                                subject=_(f'Document {self.title_name} changed'),
+                                                message='A document changed. For realz!')
+
+            # Gets all ref_number subscriptions for the current document
+            ref_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
+                                                                object_id=old_ref_id)
+            for r_sub in ref_subscriptions:
+                UserNotification.objects.create(subscription=r_sub, user=r_sub.user,
+                                                subject='A ref changed',
+                                                message='A ref changed. For realz!')
+
+            usr_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.USER,
+                                                                object_id=old_user_id)
+            for u_sub in usr_subscriptions:
+                UserNotification.objects.create(subscription=u_sub, user=u_sub.user,
+                                                subject='A usr changed',
+                                                message='A usr changed. For realz!')
+
         super().save(force_update=force_update, *args, **kwargs)
 
 
@@ -488,12 +527,32 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
+    def get_absolute_url(self):
+        return reverse('main:public_profile', kwargs={'username': self.username})
+
+    def get_user_state_badge(self):
+        ret_value = '<span class="badge badge-info">User</span>'
+        if self.is_staff:
+            ret_value = '<span class="badge badge-warning">Staff</span>'
+        if self.is_superuser:
+            ret_value = '<span class="badge badge-danger">Admin</span>'
+
+        return mark_safe(ret_value)
+
+    def get_user_activity_badge(self):
+        activity_state = '<span class="badge badge-success">Active</span>'
+        if not self.is_active:
+            activity_state = '<span class="badge badge-secondary">Inactive</span>'
+        return mark_safe(activity_state)
 
 class UserSubscription(models.Model):
     class SubscriptionType(models.IntegerChoices):
         REF_NUMBER = 1, _('Reference number')
         DOCUMENT = 2, _('Document')
         USER = 3, _('User')
+        AUTHOR = 4, _('Author')
+        INSTITUTION = 5, _('Institution')
+        SOURCE_TYPE = 6, _('Source Type')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     subscription_type = models.IntegerField(choices=SubscriptionType.choices)
@@ -528,6 +587,8 @@ class ContactMessage(models.Model):
     reply_email = models.EmailField()
     subject = models.CharField(max_length=100)
     message = models.TextField()
+
+    # assignee = models.ForeignKey(User, on_delete=models.CASCADE)
 
     state = models.IntegerField(default=0)
     sending_time = models.DateTimeField(auto_now_add=True)
