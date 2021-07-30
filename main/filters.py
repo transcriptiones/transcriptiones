@@ -2,16 +2,36 @@ from django.db.models import Q
 from django import forms
 from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
     ChoiceFilter
-from main.models import Institution, RefNumber, Document, User
+from main.models import Institution, RefNumber, Document, User, SourceType, Author
+
+
+class SourceTypeFilter(FilterSet):
+    """Filter to filter a source type table"""
+    institution_name = CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = SourceType
+        fields = ['institution_name']
+
+
+class AuthorFilter(FilterSet):
+    """Filter to filter a source type table"""
+    author_name = CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = Author
+        fields = ['author_name']
 
 
 class InstitutionFilter(FilterSet):
     """Filter to filter an institution table"""
     institution_name = CharFilter(lookup_expr='icontains')
+    city = CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = Institution
-        fields = ['institution_name']
+        fields = ['institution_name', 'city', 'country']
+
 
 
 class RefNumberFilter(FilterSet):
@@ -32,7 +52,7 @@ class DocumentFilter(FilterSet):
 
     class Meta:
         model = Document
-        fields = ['title_name']
+        fields = ['title_name', 'source_type', 'place_name']
 
 
 class UserFilter(FilterSet):
