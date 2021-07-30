@@ -1,13 +1,81 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.utils.translation import ugettext as _
+from django.shortcuts import render, redirect
 from django.core import serializers
+from django_tables2 import RequestConfig
+
 from main import models
 import zipfile
 import os
 
-from main.models import ContactMessage
-from main.tables import ContactMessageTable
+from main.filters import UserFilter
+from main.models import ContactMessage, User
+from main.tables.tables import ContactMessageTable, UserTable
+
+
+def get_user_or_none(user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(_('User does not exist'))
+        user = None
+    return user
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def activate_user(request, user_id):
+    user = get_user_or_none(user_id)
+    if user is not None:
+        user.is_active = True
+        user.save()
+        messages.success(request, _('User activated'))
+    return redirect('main:admin_users')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def deactivate_user(request, user_id):
+    # TODO send email
+    user = get_user_or_none(user_id)
+    if user is not None:
+        user.is_active = False
+        user.save()
+        messages.success(request, _('User deactivated'))
+    return redirect('main:admin_users')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def set_user_staff(request, user_id):
+    user = get_user_or_none(user_id)
+    if user is not None:
+        user.is_staff = True
+        user.is_superuser = False
+        user.save()
+        messages.success(request, _('User set to staff'))
+    return redirect('main:admin_users')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def set_user_admin(request, user_id):
+    user = get_user_or_none(user_id)
+    if user is not None:
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+        messages.success(request, _('User set to user'))
+    return redirect('main:admin_users')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def set_user_user(request, user_id):
+    user = get_user_or_none(user_id)
+    if user is not None:
+        user.is_staff = False
+        user.is_superuser = False
+        user.save()
+        messages.success(request, _('User set to admin'))
+    return redirect('main:admin_users')
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -24,7 +92,11 @@ def admin_inbox_view(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_users_view(request):
-    return render(request, 'main/admin/admin_users.html')
+    u_filter = UserFilter(request.GET, queryset=User.objects.all())
+    table = UserTable(data=u_filter.qs, current_user=request.user)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'main/admin/admin_users.html', {'table': table, 'filter': u_filter})
 
 
 @user_passes_test(lambda u: u.is_superuser)
