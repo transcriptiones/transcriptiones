@@ -74,12 +74,18 @@ urlpatterns = [
     ##############
     # VIEW DATA PAGES
     path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
-    path('display/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', v_browse.DocumentDetailView.as_view(), name='document_legacy_detail'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', v_browse.DocumentHistoryView.as_view(), name='document_history'),
-    path('display/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', v_export.DocumentExportView.as_view(), name='document_export'),
+    path('display/institutions/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
+    path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
+    path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
+    path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/<int:version_nr>/', v_browse.DocumentDetailView.as_view(), name='document_legacy_detail'),
+    path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', v_browse.DocumentHistoryView.as_view(), name='document_history'),
+    path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', v_export.DocumentExportView.as_view(), name='document_export'),
+
+    path('display/source_types/', v_browse.SourceTypeListView.as_view(), name='source_type_list'),
+    path('display/source_types/<int:pk>/', v_browse.SourceTypeDetailView.as_view(), name='source_type_detail'),
+
+    path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
+    path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('search_test/', v_search.test_search, name='search_test'),
     path('test/', test, name='test'),
@@ -118,9 +124,11 @@ urlpatterns = [
     path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
     path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
     path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
+    path('subscribe/author/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
     path('unsubscribe/ref_number/<int:pk>/', v_subscriptions.unsubscribe_ref_number_view, name='unsubscribe_ref_number'),
     path('unsubscribe/document/<int:pk>/', v_subscriptions.unsubscribe_document_view, name='unsubscribe_document'),
     path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
+    path('unsubscribe/author/<int:pk>/', v_subscriptions.unsubscribe_author_view, name='unsubscribe_author'),
     path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
     ##############
