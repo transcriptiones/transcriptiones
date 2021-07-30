@@ -86,11 +86,28 @@
                     <li class="navbar-brand">
                         <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
                     </li>
-                    <li class="navbar-nav-item d-none d-sm-block">
-                        <a class="nav-link text-navbar" href="{% url 'main:upload_options' %}">{% translate 'Upload' %}</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="upload_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {% translate 'Upload' %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="upload_dropdown">
+                            <a class="dropdown-item" href="{% url 'main:upload_document' %}">{% translate 'Upload Single Page' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:upload_multiple' %}">{% translate 'Upload Multiple Pages' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:upload_batch' %}">{% translate 'Guided Batch Upload' %}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'main:upload_options' %}">{% translate 'Upload Options Info' %}</a>
+                        </div>
                     </li>
-                    <li class="navbar-nav-item d-none d-sm-block">
-                        <a class="nav-link text-navbar" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
+                    <!-- <li class="navbar-nav-item d-none d-sm-block"> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="browse_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {% translate 'Browse' %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="browse_dropdown">
+                            <a class="dropdown-item" href="{% url 'main:institution_list' %}">{% translate 'Institutions' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:source_type_list' %}">{% translate 'Source Types' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:author_list' %}">{% translate 'Authors' %}</a>
+                        </div>
                     </li>
                     <li class="navbar-nav-item d-none d-sm-block">
                         <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
