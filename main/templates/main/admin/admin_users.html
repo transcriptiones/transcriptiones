@@ -17,10 +17,25 @@
 {% endblock %}
 
 {% block content %}
-
     {% include 'main/admin/admin_options.html' %}
 
     {% card 'admin_users' _('User Management') %}
-        Coming soon
+        {% include 'main/filter.html' %}
+        {% render_table table %}
     {% endcard %}
+
+    {% include 'main/admin/confirm_deactivate_user.html' %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        $(document).on('click', '.confirm-deactivate', function () {
+            $("#confirmDeactivateModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmDeactivateButtonModal', function () {
+            var caller = $("#confirmDeactivateButtonModal").closest(".modal").attr("caller-id");
+            console.debug(caller);
+            window.location = $("#".concat(caller)).attr("href");
+        });
+    </script>
 {% endblock %}
