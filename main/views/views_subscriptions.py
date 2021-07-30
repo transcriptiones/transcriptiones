@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext as _
 
 from main.forms.forms_user import UserSubscriptionOptionsForm
-from main.tables import UserSubscriptionTable
-from main.models import Document, RefNumber, User, UserSubscription
+from main.tables.tables import UserSubscriptionTable
+from main.models import Document, RefNumber, User, UserSubscription, Author
 
 
 @login_required
@@ -63,6 +62,20 @@ def subscribe_user_view(request, pk):
 
 
 @login_required
+def subscribe_author_view(request, pk):
+    try:
+        author = Author.objects.get(pk=pk)
+        UserSubscription.objects.create(user=request.user,
+                                        subscription_type=UserSubscription.SubscriptionType.AUTHOR,
+                                        object_id=author.id)
+        messages.success(request, _('Subscription added'))
+    except User.DoesNotExist:
+        messages.error(request, _('Could not add subscription'))
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
 def unsubscribe_ref_number_view(request, pk):
     return do_unsubscribe(request, pk, UserSubscription.SubscriptionType.REF_NUMBER)
 
@@ -75,6 +88,11 @@ def unsubscribe_document_view(request, pk):
 @login_required
 def unsubscribe_user_view(request, pk):
     return do_unsubscribe(request, pk, UserSubscription.SubscriptionType.USER)
+
+
+@login_required
+def unsubscribe_author_view(request, pk):
+    return do_unsubscribe(request, pk, UserSubscription.SubscriptionType.AUTHOR)
 
 
 def do_unsubscribe(request, pk, sub_type):
