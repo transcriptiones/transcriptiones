@@ -16,6 +16,18 @@ def get_verbose_field_name(model, field_name):
     return verbose_name
 
 
+def get_author_info(author):
+    data = [(get_verbose_field_name(author, 'author_name'), author.author_name),
+            (get_verbose_field_name(author, 'author_gnd'), author.author_gnd)]
+    return title_value_list(data)
+
+
+def get_source_type_info(source_type):
+    data = [(get_verbose_field_name(source_type, 'type_name'), source_type.type_name),
+            (get_verbose_field_name(source_type, 'parent_type'), source_type.parent_type)]
+    return title_value_list(data)
+
+
 def get_user_info(user):
     data = [(get_verbose_field_name(user, 'username'), user.username),
             (get_verbose_field_name(user, 'first_name'), user.first_name),
