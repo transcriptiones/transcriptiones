@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Authors" "main:author_list"%}
+    {% breadcrumb author.author_name "main:author_detail" author.pk %}
+{% endblock %}
+
+{% block content %}
+
+    {% card 'author_detail' _('Information about this author') %}
+        {% render_table tables.0 %}
+        {% if request.user.is_authenticated %}
+            {% if subscribed %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_author' author.pk %}" role="button">Unsubscribe from this author</a>
+            {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">Subscribe to this author</a>
+            {% endif %}
+         &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+        {% endif %}
+
+    {%  endcard %}
+
+    {% card 'author_documents' _('Documents from this author') %}
+        {% include 'main/filter.html' %}
+        {% render_table tables.1 %}
+    {%  endcard %}
+
+{% endblock content %}

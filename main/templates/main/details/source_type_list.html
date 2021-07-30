@@ -5,16 +5,16 @@
 {% load render_table from django_tables2 %}
 
 {% block page_title %}
-    {% translate 'Institutions' %}
+    {% translate 'Source Types' %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Institutions" "main:institution_list" %}
+    {% breadcrumb "Source Types" "main:source_type_list" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'institutins_list_card' _('Institutions') %}
+    {% card 'source_type_list_card' _('Source Types') %}
         {% include 'main/filter.html' %}
         {% render_table table %}
     {% endcard %}

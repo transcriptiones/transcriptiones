@@ -5,16 +5,16 @@
 {% load render_table from django_tables2 %}
 
 {% block page_title %}
-    {% translate 'Institutions' %}
+    {% translate 'Authors' %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Institutions" "main:institution_list" %}
+    {% breadcrumb "Authors" "main:author_list" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'institutins_list_card' _('Institutions') %}
+    {% card 'authors_list_card' _('Authors') %}
         {% include 'main/filter.html' %}
         {% render_table table %}
     {% endcard %}
