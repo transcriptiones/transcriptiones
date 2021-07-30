@@ -7,9 +7,10 @@ from django_tables2 import RequestConfig
 
 from main.documents import TranscriptionDocument
 from main.forms.search_forms import SearchForm, Attribute
-from main.tables import DocumentTable, DocumentResultTable
+from main.tables.tables_document import DocumentResultTable
 
 FULLTEXT_FIELDS = ["transcription_text", "title_name", "author", "ref_number_title"]
+
 
 def test_search(request):
     form = SearchForm()
@@ -48,7 +49,7 @@ def search_box_redirect(request):
         query = request.POST.get('query', '')
         if query == '':
             messages.warning(request, 'Please enter a search term')
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect('main:search')
         return HttpResponseRedirect(reverse('main:search_by_box', kwargs={'query': query}))
 
 
