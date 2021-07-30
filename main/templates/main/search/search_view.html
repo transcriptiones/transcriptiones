@@ -39,12 +39,13 @@
       </form>
 
     {% if table %}
+
         {% card 'search_results_test' _('Search results') %}
             {% render_table table %}
         {% endcard %}
     {% endif %}
 
-    {% if results %}
+    {% if results_xx %}
        {% card 'search_results' _('Search results') %}
           <span>{{ results.count }} Suchresultat{% if results.count != 1 %}e{% endif %}</span>
           {% for result in results %}
