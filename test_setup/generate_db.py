@@ -1,10 +1,36 @@
 import random, os, uuid
 
-users = [(2, 'transcriber_johnny', ),
-         (3, 'viola_xx69xx', ),
-         (4, 'gerry_gantenbein', ),
-         (5, 'dominic', ),
-         (6, 'yvonne', )]
+users = [(1, 'sorin', 'sorin.marti@unibas.ch'),
+         (2, 'dominic', 'd.weber@unibas.ch'),
+         (3, 'yvonne', 'yfuchs@unibas.ch'),
+         (4, 'transcriber_johnny', ),
+         (5, 'viola_xx69xx', ),
+         (6, 'gerry_gantenbein', ),
+         (7, 'hanging_with_my_gnomies', ),
+         (8, 'shaquille.oatmeal', ),
+         (9, 'hoosier-daddy', ),
+         (10, 'fast_and_the_curious', ),
+         (11, 'averagestudent', ),
+         (12, 'BadKarma', ),
+         (13, 'google_was_my_idea', ),
+         (14, 'YellowSnowman', ),
+         (15, 'AllGoodNamesRGone', ),
+         (16, 'banana_hammock', ),
+         (17, 'thegodfatherpart4', ),
+         (18, 'abductedbyaliens', ),
+         (19, 'actuallynotchrishemsworth', ),
+         (20, 'personallyvictimizedbyreginageorge', ),
+         (21, 'fatBatman', ),
+         (22, 'FreddyMercurysCat', ),
+         (23, 'ima.robot', ),
+         (24, 'turkey_sandwich', ),
+         (25, 'LOWERCASE_GUY', ),
+         (26, 'ironmansnap', ),
+         (27, 'bill_nye_the_russian_spy', ),
+         (28, 'imma_rage_quit',),
+         (29, 'PuppiesnKittens',),
+         (30, 'cereal_killer',),
+         ]
 
 str_users = "INSERT INTO main_user (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, " \
             "`last_name`, `email`, `email_confirmed`, `is_staff`, `is_active`, `date_joined`, `mark_anonymous`, " \
@@ -31,6 +57,7 @@ doc_names = ['Colbert', 'Kimmel', 'Conan', 'Meyers', 'Stewart', 'Oliver']
 
 institution_name_parts = ['Universitätsbibliothek', 'Staatsarchiv', 'Sammlung', 'Klosterarchiv', 'Stiftung']
 city_names = ['Aarau', 'Basel', 'Köln', 'Duisburg', 'Einsiedeln', 'Hamburg', 'Bremen', 'Berlin', 'Wien', 'Biel', 'Winterthur', 'Zürich']
+country_codes = ['ch', 'de', 'gb', 'fr']
 institution_names = list()
 for c_name in city_names:
     for i_name in institution_name_parts:
@@ -99,8 +126,10 @@ str_ref_number = "INSERT INTO main_refnumber (id, ref_number_name, ref_number_ti
 ref_number_idx = 1
 for institution_idx in range(50):
     institution = institution_idx+1
+    random_city_number = random.randint(0, len(city_names)-1)
+    random_country_number = random.randint(0, len(country_codes)-1)
     str_institution += f"({institution}, '{institution_names[institution_idx]}', 'Street{institution}', '10{institution}', " \
-                       f"'City{institution}', 'ch', 'http://www.dummy.ch', NOW(), 'test-institution-{institution}'),\n"
+                       f"'{city_names[random_city_number]}', '{country_codes[random_country_number]}', 'http://www.dummy.ch', NOW(), 'test-institution-{institution}'),\n"
 
     for ref_number in range(10):
         random_number = random.randint(1000, 9999)
