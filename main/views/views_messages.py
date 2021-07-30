@@ -2,11 +2,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse
 from django.utils.translation import ugettext as _
 
 from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm, UserSubscriptionOptionsForm
-from main.tables import UserMessageTable, UserNotificationTable
+from main.tables.tables import UserMessageTable, UserNotificationTable
 from main.models import User, UserMessage, UserNotification
 
 
@@ -122,7 +121,11 @@ def notifications_delete_view(request, notification_id):
 
 @login_required
 def delete_all_messages_view(request):
-    return HttpResponse('NIY')
+    the_messages = UserMessage.objects.filter(receiving_user=request.user)
+    for a_message in the_messages:
+        a_message.delete()
+    messages.success(_('All messages have been deleted.'))
+    return redirect('main:messages')
 
 
 @login_required
