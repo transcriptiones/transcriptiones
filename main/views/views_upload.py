@@ -90,6 +90,14 @@ def upload_transcription_view(request):
     return render(request, 'main/upload/create_document.html', context)
 
 
+@login_required
+def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
+    document = Document.objects.get(document_slug=doc_slug)
+    form = UploadTranscriptionForm()
+    context = {'document': document, 'form': form}
+    return render(request, 'main/upload/edit_document_transcription.html', context)
+
+
 class ModalCreateInstitutionView(BSModalCreateView):
     """Creates a bootstrap modal view to create an institution."""
     template_name = 'main/upload/create_institution.html'
