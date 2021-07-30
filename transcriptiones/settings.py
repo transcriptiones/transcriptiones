@@ -173,6 +173,34 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # CKEDITOR
 # CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Transcriptiones',
+        'toolbar_Transcriptiones': [
+            ['Format'],
+            ['Bold', 'Italic', 'Underline', 'Strike'],
+            ['NumberedList', 'BulletedList'],
+            ['Table', 'HorizontalRule'],
+            ['SpecialChar'],
+            ['RemoveFormat', 'Undo', 'Redo', 'Maximize'],
+        ],
+
+        'toolbar_MyFull': [
+            ['Styles', 'Format'],
+            ['Bold', 'Italic', 'Underline', 'Strike'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['SpellChecker'],
+            ['Undo', 'Redo'],
+            ['NumberedList', 'BulletedList'],
+            ['Outdent', 'Indent'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['SpecialChar', 'Smiley', 'About'],
+            ['RemoveFormat', 'Source'],
+            ['Maximize']
+        ]
+    }
+}
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
