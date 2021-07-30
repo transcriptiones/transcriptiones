@@ -21,7 +21,8 @@ from main.models import User, UserSubscription
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
 from main.tokens import account_activation_token
 from main.model_info import get_user_info, get_public_user_info
-from main.tables import TitleValueTable, DocumentHistoryTable
+from main.tables.tables_base import TitleValueTable
+from main.tables.tables_document import DocumentHistoryTable
 from main.filters import DocumentFilter
 
 
