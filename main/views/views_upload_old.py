@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import UpdateView
 from django.utils.text import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main.forms.forms_upload import InstitutionForm, RefNumberForm, DocumentForm, EditMetaForm, EditTranscriptForm
+from main.forms.forms_upload import InstitutionForm, RefNumberForm, EditMetaForm, EditTranscriptForm
 from main.models import Author, Institution, RefNumber, Document, SourceType
 from main.utils import create_related_objects
 from bootstrap_modal_forms.generic import BSModalCreateView
@@ -96,9 +96,9 @@ class AddRefNumberView(LoginRequiredMixin, View):
 
             return render(self.request, 'upload/ref_dropdown_options.html', {'refnumbers': refnumbers})
 
-
+"""
 class AddDocumentView(LoginRequiredMixin, View):
-    """View for creating new document object"""
+    
 
     form_class = DocumentForm
     template_name = "main/upload/add_document_form.html"
@@ -150,8 +150,7 @@ class AddDocumentView(LoginRequiredMixin, View):
                 # TODO CHECK
                 # Exception Handling goes here!
                 # return render(self.request, self.template_name, {"form": form})
-
-    
+"""
 
 def load_ref_numbers(request):
     """View for loading ref numbers, depending on chosen Institution"""

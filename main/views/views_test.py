@@ -1,15 +1,13 @@
-from bootstrap_modal_forms.generic import BSModalCreateView
 from bsmodals import handle_form
 from django.http import JsonResponse
 from django.shortcuts import render
 from dal import autocomplete
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 
 from main.models import Institution, RefNumber, InstitutionSerializer
-from main.forms.forms_upload import DocumentForm, InstitutionForm, InstitutionForm2
+from main.forms.forms_upload import InstitutionForm
 
 
 class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
@@ -57,19 +55,6 @@ def test_bsmodals2(request):
 
     return render(request, 'main/test_modals2.html')
 
-def test_bsmodals3(request):
-    return render(request, 'main/test_modals3.html')
-
-def test_bsmodals(request):
-    return render(request, 'main/test_modals.html')
-
-
-class InstitutionCreateView(BSModalCreateView):
-    template_name = 'main/tests/create_book.html'
-    form_class = InstitutionForm2
-    success_message = 'Success: Book was created.'
-    success_url = reverse_lazy('main:test_modals')
-
 
 class InstitutionViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutionSerializer
@@ -88,10 +73,11 @@ class InstitutionViewSet(viewsets.ModelViewSet):
         return response
 
 
+"""
 def test_dropdown(request):
     form = DocumentForm()
     return render(request, 'main/test_dd.html', {'form': form})
-
+"""
 
 @csrf_exempt
 def create_institution(request):
