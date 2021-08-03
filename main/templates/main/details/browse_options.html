@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Browse Uploaded Data' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Browse" "main:browse_options" %}
+{% endblock %}
+
+
+{% block content %}
+    {% card 'options_card' _('How do you want to proceed?') %}
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Institutions' %}</h5>
+              <p class="card-text">{% translate 'Institutions are holders of documents such as archives, collections or libraries.' %}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'main:institution_list' %}" class="btn btn-primary">{% translate 'Browse Institutions' %}</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Source Types' %}</h5>
+              <p class="card-text">{% translate 'Each document has an assigned type. This is a classification of the documents nature, such as Vitae, historiographical sources, etc.' %}.</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'main:source_type_list' %}" class="btn btn-primary">{% translate 'Browse Source Types' %}</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Authors' %}</h5>
+              <p class="card-text">If you are looking for a certain creator of a document, you can browse by author.</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'main:author_list' %}" class="btn btn-primary">{% translate 'Browse Authors' %}</a>
+            </div>
+          </div>
+        </div>
+
+    {% endcard %}
+
+{% endblock content %}

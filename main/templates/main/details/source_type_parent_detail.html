@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load django_bootstrap_breadcrumbs %}
+{% load render_table from django_tables2 %}
+
+{% block page_title %}
+    {% translate 'Source Types' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Source Types" "main:source_type_list" %}
+    {% breadcrumb selected "" %}
+{% endblock %}
+
+{% block content %}
+    {% card 'source_type_parent_list_card' _('First Level Source Types') %}
+        <p>Select A Source Type to see its children.</p>
+        {% for st in source_types %}
+            {% if st.id == selected.id %}
+                <span class="badge badge-primary">{{ st }}</span>
+            {% else %}
+                <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{{ st }}</span></a>
+            {% endif %}
+        {% endfor %}
+    {% endcard %}
+
+    {% card 'source_type_list_card' _('Source Types') %}
+        {% render_table table %}
+    {% endcard %}
+{% endblock content %}
+
+{% block extrascripts %}
+    {% include 'main/clickable_table.html' %}
+{% endblock %}

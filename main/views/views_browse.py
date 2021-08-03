@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin
 from django_filters.views import FilterView
@@ -9,6 +9,10 @@ from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
 from main.tables.tables_document import DocumentTable
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, SourceTypeFilter, AuthorFilter
+
+
+def browse_options(request):
+    return render(request, 'main/details/browse_options.html')
 
 
 class InstitutionListView(SingleTableMixin, FilterView):
@@ -22,19 +26,13 @@ class InstitutionListView(SingleTableMixin, FilterView):
 
     def get_queryset(self):
         return Institution.objects.all().order_by('institution_name')
-    # TODO sorted queryset by name
 
 
-class SourceTypeListView(SingleTableMixin, FilterView):
-    """Creates a list view for all source types."""
-
-    model = SourceType
-    table_class = SourceTypeTable
-    filterset_class = SourceTypeFilter
-    template_name = "main/details/source_type_list.html"
-
-    def get_queryset(self):
-        return SourceType.objects.all()
+def source_type_list_view(request):
+    """Creates a list view for all parent source types."""
+    parent_source_type_list = SourceType.objects.filter(parent_type=None)
+    context = {'source_types': parent_source_type_list}
+    return render(request, "main/details/source_type_list.html", context=context)
 
 
 class AuthorListView(SingleTableMixin, FilterView):
@@ -53,10 +51,6 @@ class AuthorDetailView(MultiTableMixin, DetailView):
     """View to show details of authors and list all documents of this author."""
     model = Author
     my_filter = None
-
-    table_pagination = {
-        "per_page": 20
-    }
     template_name = "main/details/author_detail.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -79,34 +73,21 @@ class AuthorDetailView(MultiTableMixin, DetailView):
         return context
 
 
-class SourceTypeDetailView(MultiTableMixin, DetailView):
-    """View to show details of authors and list all documents of this author."""
-    model = SourceType
-    my_filter = None
+def source_type_detail_view(request, pk):
+    selected_source_type = SourceType.objects.get(id=pk)
+    if selected_source_type.parent_type is None:
+        parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+        children_source_type_list = SourceType.objects.filter(parent_type=selected_source_type).order_by('type_name')
+        table = SourceTypeTable(data=children_source_type_list)
+        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
+        return render(request, "main/details/source_type_parent_detail.html", context=context)
+    else:
+        parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
+        document_list = Document.objects.filter(source_type=selected_source_type)
+        table = DocumentTable(data=document_list)
+        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
+        return render(request, "main/details/source_type_child_detail.html", context=context)
 
-    table_pagination = {
-        "per_page": 20
-    }
-    template_name = "main/details/source_type_detail.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        self.my_filter = SourceTypeFilter(request.GET, Document.objects.filter(source_type=self.get_object()))
-        return super(SourceTypeDetailView, self).dispatch(request, *args, **kwargs)
-
-    def get_tables(self):
-        source_type = self.get_object()
-        data = m_info.get_source_type_info(source_type)
-
-        tables = [
-            TitleValueTable(data=data),
-            DocumentTable(self.my_filter.qs)
-        ]
-        return tables
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = self.my_filter
-        return context
 
 
 class InstitutionDetailView(MultiTableMixin, DetailView):
