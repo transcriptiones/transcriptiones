@@ -1,4 +1,3 @@
-from dal import autocomplete
 from django.conf.urls import url
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -6,10 +5,10 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
     PasswordResetCompleteView
 from rest_framework.routers import DefaultRouter
 
-from main.views.views_test import test, test_dropdown, test_bsmodals2, InstitutionViewSet, InstitutionCreateView
+from main.views.views_test import test, test_bsmodals2, InstitutionViewSet
 from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
-from main.views.views_upload_old import EditMetaView, EditTranscriptView
+from main.views.views_upload_old import EditMetaView
 
 import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
@@ -73,7 +72,9 @@ urlpatterns = [
 
     ##############
     # VIEW DATA PAGES
-    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
+    path('display/', v_browse.InstitutionListView.as_view(), name='institution_list'),
+
+    path('display/institutions/', v_browse.browse_options, name='browse_options'),
     path('display/institutions/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
@@ -81,19 +82,19 @@ urlpatterns = [
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/history/', v_browse.DocumentHistoryView.as_view(), name='document_history'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/export/', v_export.DocumentExportView.as_view(), name='document_export'),
 
-    path('display/source_types/', v_browse.SourceTypeListView.as_view(), name='source_type_list'),
-    path('display/source_types/<int:pk>/', v_browse.SourceTypeDetailView.as_view(), name='source_type_detail'),
+    path('display/source_types/', v_browse.source_type_list_view, name='source_type_list'),
+    path('display/source_types/<int:pk>/', v_browse.source_type_detail_view, name='source_type_detail'),
 
     path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
     path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('search_test/', v_search.test_search, name='search_test'),
     path('test/', test, name='test'),
-    path('test_dd/', test_dropdown, name='test_dd'),
+    # path('test_dd/', test_dropdown, name='test_dd'),
     path('test_modals/', test_bsmodals2, name='test_modals'),
     path('dummy/', test, name='dummy'),
     path('api/', include(router.urls)),
-    path('create_institution/', InstitutionCreateView.as_view(), name='create_institution'),
+    # path('create_institution/', InstitutionCreateView.as_view(), name='create_institution'),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
     path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),
@@ -139,7 +140,7 @@ urlpatterns = [
     path('user/messages/delete/all', v_messages.delete_all_messages_view, name='messages_delete_all'),
     path('user/messages/delete/<int:message_id>', v_messages.messages_delete_view, name='messages_delete'),
     path('user/notifications/delete/all', v_messages.delete_all_notifications_view, name='notifications_delete_all'),
-    path('user/notifications/delete/<int:notification_id>>', v_messages.notifications_delete_view, name='notifications_delete'),
+    path('user/notifications/delete/<int:notification_id>', v_messages.notifications_delete_view, name='notifications_delete'),
 
     path('user/messages/view/<int:message_id>/', v_messages.messages_read_view, name='messages_read'),
     path('user/messages/reply/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
