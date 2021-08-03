@@ -10,14 +10,18 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb "Browse" "main:browse_options" %}
     {% breadcrumb "Source Types" "main:source_type_list" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'source_type_list_card' _('Source Types') %}
-        {% include 'main/filter.html' %}
-        {% render_table table %}
+    {% card 'source_type_parent_list_card' _('First Level Source Types') %}
+        <p>Select A Source Type to see its children.</p>
+        {% for st in source_types %}
+            <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{{ st }}</span></a>
+        {% endfor %}
     {% endcard %}
+
 {% endblock content %}
 
 {% block extrascripts %}

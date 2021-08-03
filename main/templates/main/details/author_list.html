@@ -10,6 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb "Browse" "main:browse_options" %}
     {% breadcrumb "Authors" "main:author_list" %}
 {% endblock %}
 

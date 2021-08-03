@@ -10,6 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb "Browse" "main:browse_options" %}
     {% breadcrumb "Institutions" "main:institution_list" %}
 {% endblock %}
 
