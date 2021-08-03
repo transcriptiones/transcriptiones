@@ -2,7 +2,7 @@ import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-from main.tables.tables_base import TranscriptionesTable
+from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 from main.models import Document
 
 
@@ -12,8 +12,9 @@ class DocumentTable(TranscriptionesTable):
     class Meta(TranscriptionesTable.Meta):
         model = Document
         fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
+        row_attrs = default_row_attrs
 
-    title_name = tables.LinkColumn(orderable=False)
+    title_name = tables.Column()
     place_name = tables.Column(orderable=False)
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
