@@ -6,7 +6,7 @@ class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Institutions"""
 
     def get_queryset(self):
-        qs = Institution.objects.all()
+        qs = Institution.objects.all().order_by('institution_name')
         if self.q:
             qs = qs.filter(institution_name__icontains=self.q)
         return qs
@@ -16,9 +16,8 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Ref Numbers"""
 
     def get_queryset(self):
-        qs = RefNumber.objects.all()
+        qs = RefNumber.objects.all().order_by('ref_number_name')
         selected_institution = self.forwarded.get('parent_institution', None)
-        print(selected_institution)
 
         if not selected_institution:
             return []
