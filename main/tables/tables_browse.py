@@ -60,19 +60,21 @@ class InstitutionTable(TranscriptionesTable):
 
 class SourceTypeTable(TranscriptionesTable):
     """The SourceTypeTable shows a list of source types"""
-    no_of_documents = tables.Column(verbose_name=_('No. of Documents'), accessor='id', orderable=False)
-    no_of_ref_numbers = tables.Column(verbose_name=_('No. of Ref. Numbers'), accessor='id', orderable=False)
+    no_of_documents = tables.Column(accessor='id', orderable=False)
 
     class Meta(TranscriptionesTable.Meta):
         model = SourceType
-        fields = ("type_name", "no_of_ref_numbers", "no_of_documents")
+        fields = ("type_name", "no_of_documents")
         row_attrs = default_row_attrs
 
-    def render_no_of_documents(self, value, record):
-        return 0
+    def __init__(self, *args, **kwargs):
+        self.base_columns['no_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
+                                                                                   label_class='far fa-file-alt',
+                                                                                   title=_('Number of documents in this institution'))
+        super(SourceTypeTable, self).__init__(*args, **kwargs)
 
-    def render_no_of_ref_numbers(self, value, record):
-        return 0
+    def render_no_of_documents(self, value, record):
+        return record.document_set.count()
 
 
 class AuthorTable(TranscriptionesTable):
