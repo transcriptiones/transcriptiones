@@ -18,16 +18,6 @@ from ckeditor.fields import RichTextField
 from rest_framework import serializers
 
 
-class Institution2(models.Model):
-    institution_name = models.CharField(verbose_name=_("Institution"),
-                                        max_length=80,
-                                        unique=True,
-                                        help_text=_("Complete name of the institution"))
-
-    def __str__(self):
-        return self.institution_name
-
-
 class Institution(models.Model):
     """An institution is a physical location which holds documents. These documents have a reference number.
     Reference numbers are always associated with an institution."""
@@ -202,16 +192,21 @@ class Document(models.Model):
 
     author = models.ManyToManyField(Author,
                                     verbose_name=_("Source Participants"),
-                                    blank=True,
+                                    blank=True, null=True,
                                     help_text=_("Authors, Copiers, Editors"))
 
     doc_start_date = PartialDateField(verbose_name=_("Creation period start"),
-                                      help_text=_("When was the document written? Supply at least a year."))
+                                      help_text=_("When was the document written? Be as specific as possible. <br/>"
+                                                  "Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), "
+                                                  "DD.MM.YYYY ('23.07.1643')"))
 
     doc_end_date = PartialDateField(verbose_name=_("Creation period end"),
                                     null=True,
                                     blank=True,
-                                    help_text=_("If the document was created over a time span, please indicate the end time."))
+                                    help_text=_("If the document was created over a time span, "
+                                                "please indicate the end time. <br/>"
+                                                "Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), "
+                                                "DD.MM.YYYY ('23.07.1643')"))
 
     place_name = models.CharField(verbose_name=_("Creation Location"),
                                   max_length=150,
@@ -220,7 +215,7 @@ class Document(models.Model):
 
     language = models.ManyToManyField(Language,
                                       verbose_name=_("Languages"),
-                                      blank=True,
+                                      blank=True, null=True,
                                       help_text=_("Languages used in the source"))
 
     source_type = models.ForeignKey(SourceType,
