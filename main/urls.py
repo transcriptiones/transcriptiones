@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
     PasswordResetCompleteView
 from rest_framework.routers import DefaultRouter
 
-from main.views.views_test import test, test_bsmodals2, InstitutionViewSet
+from main.views.views_test import test, InstitutionViewSet, show_i18n
 from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
 from main.views.views_upload_old import EditMetaView
@@ -27,6 +27,9 @@ router.register('institutions', InstitutionViewSet)
 
 app_name = 'main'
 urlpatterns = [
+    # TESTS TODO: Delete these pages
+    path('i18n_test', show_i18n, name='start'),
+
     # ROOT VIEW
     path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
 
@@ -84,17 +87,15 @@ urlpatterns = [
 
     path('display/source_types/', v_browse.source_type_list_view, name='source_type_list'),
     path('display/source_types/<int:pk>/', v_browse.source_type_detail_view, name='source_type_detail'),
+    path('display/source_types/<int:pk>/all/', v_browse.source_type_group_detail_view, name='source_type_group_detail'),
 
     path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
     path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('search_test/', v_search.test_search, name='search_test'),
     path('test/', test, name='test'),
-    # path('test_dd/', test_dropdown, name='test_dd'),
-    path('test_modals/', test_bsmodals2, name='test_modals'),
     path('dummy/', test, name='dummy'),
     path('api/', include(router.urls)),
-    # path('create_institution/', InstitutionCreateView.as_view(), name='create_institution'),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
     path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),
@@ -122,10 +123,12 @@ urlpatterns = [
     ##############
     # USER SUBSCRIPTIONS
     path('user/subscriptions/', v_subscriptions.subscriptions, name='subscriptions'),
+    path('subscribe/institution/<int:pk>/', v_subscriptions.subscribe_institution_view, name='subscribe_institution'),
     path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
     path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
     path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
     path('subscribe/author/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
+    path('unsubscribe/institution/<int:pk>/', v_subscriptions.unsubscribe_institution_view, name='unsubscribe_institution'),
     path('unsubscribe/ref_number/<int:pk>/', v_subscriptions.unsubscribe_ref_number_view, name='unsubscribe_ref_number'),
     path('unsubscribe/document/<int:pk>/', v_subscriptions.unsubscribe_document_view, name='unsubscribe_document'),
     path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
