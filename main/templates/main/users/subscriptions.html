@@ -22,16 +22,32 @@
     {% include 'main/users/user_options.html' %}
 
     {% card 'subscription_options_card' _('Your subscription options') %}
-            <p>How do you want to to be notified if there are changes in your subscriptions?</p>
+            <p>{% translate 'How do you want to to be notified if there are changes in your subscriptions?' %}</p>
             {% crispy form %}
     {% endcard %}
 
     {% card 'subscription_card' _('Your subscriptions') %}
         {% if table.data|length > 0 %}
-             <p><a class="btn btn-danger btn-sm" href="{% url 'main:unsubscribe_all' %}" role="button">{% translate 'Unsubscribe from all' %}</a></p>
+             <p><a class="btn btn-danger btn-sm confirm-unsubscribe-all" href="{% url 'main:unsubscribe_all' %}" data-toggle="modal" data-target="#confirmUnsubscribeAllModal" id="unsubscribeAllButtonXXX">{% translate 'Unsubscribe from all' %}</a></p>
             {% render_table table %}
         {% else %}
             {% translate 'You have no subscriptions. You can subscribe to documents, reference numbers and users on the respective pages.' %}
         {% endif %}
     {% endcard %}
+
+    {% include 'main/admin/confirm_unsubscribe_all.html' %}
+
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        $(document).on('click', '.confirm-unsubscribe-all', function () {
+            $("#confirmUnsubscribeAllModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmUnsubscribeAllButtonModal', function () {
+            var caller = $("#confirmUnsubscribeAllButtonModal").closest(".modal").attr("caller-id");
+            console.debug(caller);
+            window.location = $("#".concat(caller)).attr("href");
+        });
+    </script>
 {% endblock %}
