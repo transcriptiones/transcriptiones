@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from main.forms.forms_user import UserSubscriptionOptionsForm
 from main.tables.tables import UserSubscriptionTable
-from main.models import Document, RefNumber, User, UserSubscription, Author
+from main.models import Document, RefNumber, User, UserSubscription, Author, Institution
 
 
 @login_required
@@ -17,6 +17,20 @@ def subscriptions(request):
         form = UserSubscriptionOptionsForm(request.POST)
 
     return render(request, 'main/users/subscriptions.html', {'table': table, 'form': form})
+
+
+@login_required
+def subscribe_institution_view(request, pk):
+    try:
+        institution = Institution.objects.get(pk=pk)
+        UserSubscription.objects.create(user=request.user,
+                                        subscription_type=UserSubscription.SubscriptionType.INSTITUTION,
+                                        object_id=institution.id)
+        messages.success(request, _('Subscription added'))
+    except Institution.DoesNotExist:
+        messages.error(request, _('Could not add subscription'))
+
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -73,6 +87,11 @@ def subscribe_author_view(request, pk):
         messages.error(request, _('Could not add subscription'))
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def unsubscribe_institution_view(request, pk):
+    return do_unsubscribe(request, pk, UserSubscription.SubscriptionType.INSTITUTION)
 
 
 @login_required
