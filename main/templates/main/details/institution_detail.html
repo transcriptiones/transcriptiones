@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Institutions" "main:institution_list"%}
+    {% breadcrumb _("Institutions") "main:institution_list"%}
     {% breadcrumb institution "main:institution_detail" institution.institution_slug %}
 {% endblock %}
 
@@ -18,6 +18,19 @@
 {% block content %}
     {% card 'institution_detail' _('About the institution') %}
         {% render_table tables.0 %}
+        {% if request.user.is_authenticated %}
+            {% if subscribed %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_institution' institution.pk %}" role="button">{% translate 'Unsubscribe from this institution' %}</a>
+            {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_institution' institution.pk %}" role="button">{% translate 'Subscribe to this institution' %}</a>
+            {% endif %}
+            <small>
+              {% url 'main:subscriptions' as sub_url %}
+              {% blocktranslate %}
+              (Manage your subscriptions <a href="{{sub_url}}">here</a>)
+              {% endblocktranslate %}
+            </small>
+        {% endif %}
     {% endcard %}
 
     {% card 'institution_ref_number' _('Reference Numbers in this institution') %}

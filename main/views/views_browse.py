@@ -129,6 +129,12 @@ class InstitutionDetailView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
+        if self.request.user.is_authenticated:
+            context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                    subscription_type=UserSubscription.SubscriptionType.INSTITUTION,
+                                                                    object_id=self.get_object().id).count() > 0
+        else:
+            context['subscribed'] = False
         return context
 
 
