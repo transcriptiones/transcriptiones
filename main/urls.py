@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
     PasswordResetCompleteView
 from rest_framework.routers import DefaultRouter
 
-from main.views.views_test import test, InstitutionViewSet, show_i18n
+from main.views.views_test import InstitutionViewSet, show_i18n
 from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
 from main.views.views_upload_old import EditMetaView
@@ -93,8 +93,6 @@ urlpatterns = [
     path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('search_test/', v_search.test_search, name='search_test'),
-    path('test/', test, name='test'),
-    path('dummy/', test, name='dummy'),
     path('api/', include(router.urls)),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),

@@ -67,10 +67,6 @@ class InstitutionViewSet(viewsets.ModelViewSet):
         return response
 
 
-def test(request):
-    return render(request, 'main/test.html')
-
-
 def show_i18n(request):
     form = InstitutionForm()
     ht = get_extended_help_text(Institution, 'zip_code')
