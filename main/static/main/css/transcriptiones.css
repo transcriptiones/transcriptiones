@@ -22,18 +22,9 @@ table.table thead th.desc.orderable {
 }
 
 /* General Styling, Fonts, etc. */
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
 body {
-    width: 100%;
-    height: 100%;
     background-image: url("../images/background_tile.jpg");
     background-repeat: repeat;
-    font-family: "Source Sans Pro", Helvetica, sans-serif !important;
 }
 
 .content-section {
@@ -44,43 +35,6 @@ body {
 .content-section-heading h2 { /* Do we need this? */
   font-size: 3rem;
 }
-
-
-/* Breadcrumb navigation*/
-
-.breadcrumb {
-    padding: 7px 7px;
-    background-color: whitesmoke;
-    border-radius: 5px;
-    border: 1px solid #6b6b6b;
-    box-shadow: 1px 1px #888888;
-}
-
-.breadcrumb-item {
-    display: inline;
-    font-size: 16px;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-    padding-left: 5px;
-    content: "/\00a0";
-    color: #000000;
-}
-
-.breadcrumb-item.active {
-    color: #000000;
-}
-
-.breadcrumb li a:hover {
-    color: #155d74;
-    text-decoration: none;
-}
-
-.breadcrumb li a:hover::after { /* Do we need this? What does it do? */
-    color: #155d74;
-    text-decoration: none;
-}
-
 
 /* Cards */
 
@@ -144,36 +98,7 @@ h6 {
   }
 }
 
-
-
-/* Nav Menu */
-.navbar {
-  height: 80px;
-  right: 0;
-  top: 0;
-  background-color: #1D809F !important;
-  position: absolute;
-  z-index: 990;
-}
-
-.navbar-nav li.navbar-nav-item a,
-.navbar-nav li.navbar-brand a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.navbar-nav li a:hover {
-    text-decoration: none;
-    color: #1D809F;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.nav-link {
- color: #fff !important;
-}
-
-
-/* Scroll-to-top-Button */
+/* Scroll-to-top-Button
 
 .scroll-to-top {
   position: fixed;
@@ -188,6 +113,7 @@ h6 {
   line-height: 45px;
 }
 
+/*
 .scroll-to-top:focus, .scroll-to-top:hover {
   color: white;
 }
@@ -199,7 +125,7 @@ h6 {
 .scroll-to-top i {
   font-weight: 800;
 }
-
+*/
 
 /* select2 */
 .select2 {
@@ -221,31 +147,6 @@ h6 {
 /* Hide disabled select2-options */
 .select2-container .select2-results__option[aria-disabled=true] {
     display: none;
-}
-	
-
-
-/* Menu-toggler */
-
-.menu-toggle {
-  position: fixed;
-  right: 15px;
-  top: 15px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  color: #fff;
-  background: rgba(52, 58, 64, 0.5);
-  line-height: 50px;
-  z-index: 999;
-}
-
-.menu-toggle:focus, .menu-toggle:hover {
-  color: #fff;
-}
-
-.menu-toggle:hover {
-  background: #343a40;
 }
 
 .fa,
@@ -360,38 +261,6 @@ h6 {
   }
 }
 
-
-
-
-footer.footer {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-footer.footer .social-link {
-  display: block;
-  height: 4rem;
-  width: 4rem;
-  line-height: 4.3rem;
-  font-size: 1.5rem;
-  background-color: #1D809F;
-  transition: background-color 0.15s ease-in-out;
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-footer.footer .social-link:hover {
-  background-color: #155d74;
-  text-decoration: none;
-}
-
-a {
-  color: #1D809F;
-}
-
-a:hover, a:focus, a:active {
-  color: #155d74;
-}
-
 #backto {
   margin-top: 35px;
 }
@@ -411,37 +280,9 @@ a:hover, a:focus, a:active {
     font-size: 0.8rem;
 }
 
-
-
-.btn-primary {
-    background-color: #1D809F !important;
-    border-color: #1D809F !important;
-    color: #fff !important;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #155d74 !important;
-  border-color: #155d74 !important;
-}
-
-
 .btn-dark {
   color: #fff !important;
 }
-
-/*
-.btn-secondary,
-button[type="submit"] {
-    text-align: center;
-    color: white;
-    font-weight: normal !important;
-    background-color: #343a40;
-    border-color: #343a40;
-    line-height: 35px;
-    margin-top: 35px;
-    border-radius: 5px;
-}
-*/
 
 .btn-light {
     text-align: center;

@@ -1,0 +1,32 @@
+.breadcrumb {
+    padding: 7px 7px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border: 1px solid #6b6b6b;
+    box-shadow: 1px 1px #888888;
+}
+
+.breadcrumb-item {
+    display: inline;
+    font-size: 16px;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    padding-left: 5px;
+    content: "/\00a0";
+    color: #000000;
+}
+
+.breadcrumb-item.active {
+    color: #000000;
+}
+
+.breadcrumb li a:hover {
+    color: #155d74;
+    text-decoration: none;
+}
+
+.breadcrumb li a:hover::after { /* Do we need this? What does it do? */
+    color: #155d74;
+    text-decoration: none;
+}
