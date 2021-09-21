@@ -1,5 +1,5 @@
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from main.models import Document
 
@@ -13,7 +13,7 @@ def title_value_list(data):
 
 def get_verbose_field_name(model, field_name):
     verbose_name = model._meta.get_field(field_name).verbose_name
-    return verbose_name
+    return _(verbose_name)
 
 
 def get_author_info(author):
@@ -140,12 +140,13 @@ def get_extended_help_text(model, field):
     """Form fields have an extended help text with more information on what to put in the field. Those help texts are
     managed here."""
     model_name = model._meta.model_name
-    help_text = 'No help text found'
-
+    help_text = _('No help text found')
+    print("MMMM: ", model_name)
     ###
     # Document
     if model_name == 'document':
         if field == 'title_name':
+
             help_text = get_title_text_format(_('Title of the document'), ('Use the original document\'s title if '
                                                                            'possible, use own title otherwise.'))
         elif field == 'parent_institution':

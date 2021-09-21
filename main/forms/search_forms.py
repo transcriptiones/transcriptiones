@@ -8,7 +8,7 @@ from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar, List, Type
 from django import forms
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from main.documents import TranscriptionDocument, ElasticsearchDocument
 from main.models import Document

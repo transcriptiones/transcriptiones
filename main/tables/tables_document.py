@@ -1,7 +1,7 @@
 import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 from main.models import Document
 

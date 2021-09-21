@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.template.defaultfilters import slugify
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from bootstrap_modal_forms.generic import BSModalCreateView
 

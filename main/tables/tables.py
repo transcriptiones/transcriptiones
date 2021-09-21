@@ -3,7 +3,7 @@ import django_tables2 as tables
 import django.utils.html as utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django_tables2 import A
 
 from main.models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification, \

@@ -2,7 +2,7 @@ from django import forms
 from bootstrap_modal_forms.forms import BSModalModelForm
 from dal import autocomplete
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from main.models import Institution, RefNumber, Document, SourceType, Author, Language
 from main.widgets import SourceChildSelect
@@ -60,7 +60,7 @@ class UploadTranscriptionForm(forms.ModelForm):
             'transcription_text': get_popover_html(Document, 'transcription_text'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
-        """
+       """
 
 
 class InstitutionForm(BSModalModelForm):
