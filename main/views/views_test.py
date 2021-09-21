@@ -2,12 +2,13 @@ from bsmodals import handle_form
 from django.http import JsonResponse
 from django.shortcuts import render
 from dal import autocomplete
-from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
+from django.utils.translation import ugettext_lazy as _
 
 from main.models import Institution, RefNumber, InstitutionSerializer
 from main.forms.forms_upload import InstitutionForm
+from main.model_info import get_extended_help_text
 
 
 class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
@@ -49,13 +50,6 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-def test_bsmodals2(request):
-    if request.method == "POST":
-        print("POSTED!!!")
-
-    return render(request, 'main/test_modals2.html')
-
-
 class InstitutionViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutionSerializer
     queryset = Institution.objects.all()
@@ -73,33 +67,12 @@ class InstitutionViewSet(viewsets.ModelViewSet):
         return response
 
 
-"""
-def test_dropdown(request):
-    form = DocumentForm()
-    return render(request, 'main/test_dd.html', {'form': form})
-"""
-
-@csrf_exempt
-def create_institution(request):
-    form = InstitutionForm(request.POST)
-
-    # Uncomment to use real form handler
-    result, data = handle_form(form)
-    print('Handled form:', result, data)
-
-    return JsonResponse(data)
-
 def test(request):
     return render(request, 'main/test.html')
 
 
-def institutions(request):
-    data = dict()
-    if request.method == 'GET':
-        books = Institution.objects.all()
-        data['table'] = render_to_string(
-            'main/tests/_books_table.html',
-            {'books': books},
-            request=request
-        )
-        return JsonResponse(data)
+def show_i18n(request):
+    form = InstitutionForm()
+    ht = get_extended_help_text(Institution, 'zip_code')
+    context = {'form': form, 'v1': _('Paper'), 'v2': Institution.institution_name, 'v3': ht}
+    return render(request, 'main/i18n_test.html', context=context)
