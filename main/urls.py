@@ -5,7 +5,7 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
     PasswordResetCompleteView
 from rest_framework.routers import DefaultRouter
 
-from main.views.views_test import InstitutionViewSet, show_i18n
+from main.views.views_test import InstitutionViewSet
 from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
 from main.views.views_upload_old import batch_upload, load_ref_numbers
 from main.views.views_upload_old import EditMetaView
@@ -27,9 +27,6 @@ router.register('institutions', InstitutionViewSet)
 
 app_name = 'main'
 urlpatterns = [
-    # TESTS TODO: Delete these pages
-    path('i18n_test', show_i18n, name='start'),
-
     # ROOT VIEW
     path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
 
