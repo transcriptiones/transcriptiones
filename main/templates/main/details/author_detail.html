@@ -5,7 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
+    {{ author.author_name }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -20,7 +20,7 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_author' author.pk %}" role="button">{% translate 'Unsubscribe from this author' %}</a>
+                <a href="{% url 'main:unsubscribe_author' author.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this author' %}</a>
             {% else %}
                 <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">{% translate 'Subscribe to this author' %}</a>
             {% endif %}
@@ -39,4 +39,21 @@
         {% render_table tables.1 %}
     {%  endcard %}
 
+    {% include 'main/admin/confirm_unsubscribe.html' %}
+
 {% endblock content %}
+
+{% block extrascripts %}
+    <script>
+        $(document).on('click', '.confirm-unsubscribe', function () {
+            console.debug('in here');
+            $("#confirmUnsubscribeModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmUnsubscribeButtonModal', function () {
+            console.debug('in here 2');
+            var caller = $("#confirmUnsubscribeButtonModal").closest(".modal").attr("caller-id");
+            console.debug(caller);
+            window.location = $("#".concat(caller)).attr("href");
+        });
+    </script>
+{% endblock %}

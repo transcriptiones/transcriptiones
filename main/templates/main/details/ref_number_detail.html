@@ -21,7 +21,7 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_ref_number' refnumber.pk %}" role="button">{% translate 'Unsubscribe from this reference number' %}</a>
+                <a href="{% url 'main:unsubscribe_ref_number' refnumber.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this reference number' %}</a>
             {% else %}
                 <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_ref_number' refnumber.pk %}" role="button">{% translate 'Subscribe to this reference number' %}</a>
             {% endif %}
@@ -40,4 +40,19 @@
         {% render_table tables.1 %}
     {%  endcard %}
 
+    {% include 'main/admin/confirm_unsubscribe.html' %}
+
 {% endblock content %}
+
+{% block extrascripts %}
+    <script>
+        $(document).on('click', '.confirm-unsubscribe', function () {
+            $("#confirmUnsubscribeModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmUnsubscribeButtonModal', function () {
+            var caller = $("#confirmUnsubscribeButtonModal").closest(".modal").attr("caller-id");
+            console.debug(caller);
+            window.location = $("#".concat(caller)).attr("href");
+        });
+    </script>
+{% endblock %}

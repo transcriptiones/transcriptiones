@@ -1,0 +1,19 @@
+{% load i18n %}
+<div class="modal fade" id="confirmUnsubscribeModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="confirmUnsubscribeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% translate 'Unsubscribe?' %}</h5>
+      </div>
+      <div class="modal-body">
+          {% blocktranslate %}
+          You will no longer be notified about changes of this item. Proceed?
+          {% endblocktranslate %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% translate 'Cancel' %}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmUnsubscribeButtonModal">{% translate 'Unsubscribe' %}</button>
+      </div>
+    </div>
+  </div>
+</div>
