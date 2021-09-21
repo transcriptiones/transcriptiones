@@ -65,10 +65,3 @@ class InstitutionViewSet(viewsets.ModelViewSet):
             print('!!!', e)
             raise
         return response
-
-
-def show_i18n(request):
-    form = InstitutionForm()
-    ht = get_extended_help_text(Institution, 'zip_code')
-    context = {'form': form, 'v1': _('Paper'), 'v2': Institution.institution_name, 'v3': ht}
-    return render(request, 'main/i18n_test.html', context=context)
