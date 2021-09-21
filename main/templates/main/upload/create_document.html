@@ -10,8 +10,8 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Upload" "main:upload_options" %}
-    {% breadcrumb "Upload Single Page" "" %}
+    {% breadcrumb _("Upload") "main:upload_options" %}
+    {% breadcrumb _("Upload Single Page") "" %}
 {% endblock %}
 
 {% block content %}
@@ -90,7 +90,7 @@
 
         {% card 'upload_upload' _('Upload Your Transcription') %}
             <div class="text-center">
-            <p>If you're done entering your information, you can upload the document.</p>
+            <p>{% translate "If you're done entering your information, you can upload the document." %} </p>
                 <input type="submit" value="{% translate 'Upload Transcription' %}" class="btn btn-primary">
             </div>
         {% endcard %}
