@@ -45,11 +45,15 @@
         <!-- Flags for country dropdown -->
         <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
 
-        <!-- Custom CSS -->
+        <!-- Transcriptiones CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones_base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/scroll_to_top.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/footer.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/breadcrumbs.css' %}">
 
         {%  block custom_css %}
             <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
-            <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
         {% endblock %}
 
         {% block additional_css %}
@@ -151,15 +155,11 @@
                         </li>
                     {% endif %}
                     {% include "main/search_box.html" %}
+
                 </ul>
             </div>
         </nav>
-
-
-         <!-- Sidebar -->
-
         {% include "main/sidebar.html" %}
-
         <!-- Content -->
         {% block base_content %}
             <section class="content-section">
