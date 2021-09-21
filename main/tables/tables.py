@@ -195,6 +195,12 @@ class UserSubscriptionTable(tables.Table):
         if record.subscription_type == UserSubscription.SubscriptionType.DOCUMENT:
             document = Document.objects.get(id=value)
             return document.title_name
+        if record.subscription_type == UserSubscription.SubscriptionType.INSTITUTION:
+            institution = Institution.objects.get(id=value)
+            return institution.institution_name
+        if record.subscription_type == UserSubscription.SubscriptionType.AUTHOR:
+            author = Author.objects.get(id=value)
+            return author.author_name
         if record.subscription_type == UserSubscription.SubscriptionType.USER:
             user = User.objects.get(id=value)
             return user.username
