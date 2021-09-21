@@ -92,7 +92,7 @@ class InstitutionForm(BSModalModelForm):
             'country',
             'site_url',
             'institution_slug']
-
+        """
         labels = {
             'institution_name': get_popover_html(Institution, 'institution_name'),
             'street': get_popover_html(Institution, 'street'),
@@ -100,6 +100,7 @@ class InstitutionForm(BSModalModelForm):
             'country': get_popover_html(Institution, 'country'),
             'site_url': get_popover_html(Institution, 'site_url')
         }
+        """
 
 
 class RefNumberForm(forms.ModelForm):
@@ -108,11 +109,11 @@ class RefNumberForm(forms.ModelForm):
     # Add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(RefNumberForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
+        """for name in self.fields.keys():
             self.fields[name].widget.attrs.update({
                 'class': 'form-control',
                 'placeholder': self.fields[name].help_text,
-                })
+                })"""
         self.helper = initialize_form_helper()
 
     class Meta:
@@ -122,12 +123,14 @@ class RefNumberForm(forms.ModelForm):
             'ref_number_name',
             'ref_number_title',
             'collection_link']
+        """
         labels = {
             'holding_institution': get_popover_html(RefNumber, 'holding_institution'),
             'ref_number_name': get_popover_html(RefNumber, 'ref_number_name'),
             'ref_number_title': get_popover_html(RefNumber, 'ref_number_title'),
             'collection_link': get_popover_html(RefNumber, 'collection_link'),
         }
+        """
 
 
 # Form for editing Metadata
