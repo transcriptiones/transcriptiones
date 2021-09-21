@@ -30,35 +30,23 @@ class DocumentTable(TranscriptionesTable):
                              f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
 
 
-class DocumentHistoryTable(tables.Table):
+class DocumentHistoryTable(TranscriptionesTable):
     """The DocumentHistoryTable shows a list of documents"""
 
-    class Meta:
+    class Meta(TranscriptionesTable.Meta):
         model = Document
-        template_name = "django_tables2/bootstrap4.html"
-        fields = ("title_name", "activity_type", "document_utc_add", "commit_message", "submitted_by")
-        attrs = {"class": "table table-hover",
-                 'th': {'style': 'text-align: left;'},
-                 'td': {'style': 'text-align: left;'}
-                 }
+        fields = ("title_name", "activity_type", "document_utc_add", "commit_message")
 
-    title_name = tables.LinkColumn(orderable=False)
-    activity_type = tables.Column(orderable=False, accessor='id')
-    document_utc_add = tables.Column(orderable=False)
+    title_name = tables.LinkColumn()
+    activity_type = tables.Column(orderable=False, accessor='id', verbose_name=_("Action"))
+    document_utc_add = tables.Column()
     commit_message = tables.Column(orderable=False)
-    submitted_by = tables.Column(orderable=False)
 
     def render_activity_type(self, value, record):
         if record.version_number == 1:
             return _("Upload")
         else:
             return _("Edit")
-
-    def render_submitted_by(self, value, record):
-        if record.publish_user:
-            return value
-        else:
-            return "Anonymous"
 
 
 class DocumentResultTable(tables.Table):
