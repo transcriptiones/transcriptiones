@@ -28,13 +28,6 @@ class InstitutionListView(SingleTableMixin, FilterView):
         return Institution.objects.all().order_by('institution_name')
 
 
-def source_type_list_view(request):
-    """Creates a list view for all parent source types."""
-    parent_source_type_list = SourceType.objects.filter(parent_type=None)
-    context = {'source_types': parent_source_type_list}
-    return render(request, "main/details/source_type_list.html", context=context)
-
-
 class AuthorListView(SingleTableMixin, FilterView):
     """Creates a list view for all source types."""
 
@@ -73,6 +66,13 @@ class AuthorDetailView(MultiTableMixin, DetailView):
         return context
 
 
+def source_type_list_view(request):
+    """Creates a list view for all parent source types."""
+    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+    context = {'source_types': parent_source_type_list}
+    return render(request, "main/details/source_type_list.html", context=context)
+
+
 def source_type_detail_view(request, pk):
     selected_source_type = SourceType.objects.get(id=pk)
     if selected_source_type.parent_type is None:
@@ -88,6 +88,16 @@ def source_type_detail_view(request, pk):
         context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
         return render(request, "main/details/source_type_child_detail.html", context=context)
 
+
+def source_type_group_detail_view(request, pk):
+    """Show documents of """
+    print("PK", pk)
+    selected_source_type = SourceType.objects.get(id=pk)
+    parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
+    document_list = Document.objects.filter(source_type__in=parent_source_type_list)
+    table = DocumentTable(data=document_list)
+    context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type, 'all': True}
+    return render(request, "main/details/source_type_child_detail.html", context=context)
 
 
 class InstitutionDetailView(MultiTableMixin, DetailView):
