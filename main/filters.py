@@ -1,7 +1,7 @@
 from django.db.models import Q
-from django import forms
+from django.utils.translation import ugettext_lazy as _
 from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
-    ChoiceFilter
+    ChoiceFilter, ModelChoiceFilter, DateFromToRangeFilter
 from main.models import Institution, RefNumber, Document, User, SourceType, Author
 
 
@@ -33,7 +33,6 @@ class InstitutionFilter(FilterSet):
         fields = ['institution_name', 'city', 'country']
 
 
-
 class RefNumberFilter(FilterSet):
     """Filter to filter a reference number table"""
     ref_number_name = CharFilter(method='multi_filter')
@@ -49,18 +48,21 @@ class RefNumberFilter(FilterSet):
 class DocumentFilter(FilterSet):
     """Filter to filter a document table"""
     title_name = CharFilter(lookup_expr='icontains')
+    place_name = CharFilter(lookup_expr='icontains')
+    doc_start_date = DateFromToRangeFilter()
+    source_type = ModelChoiceFilter(queryset=SourceType.objects.all().order_by('type_name'))
 
     class Meta:
         model = Document
-        fields = ['title_name', 'source_type', 'place_name']
+        fields = ['title_name', 'source_type', 'place_name', 'doc_start_date']
 
 
 class UserFilter(FilterSet):
     """Filter to filter a user table"""
     STATUS_CHOICES = (
-        (0, 'User'),
-        (1, 'Staff'),
-        (2, 'Admin'),
+        (0, _('User')),
+        (1, _('Staff')),
+        (2, _('Admin')),
     )
 
     username = CharFilter(lookup_expr='icontains')
