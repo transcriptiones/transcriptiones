@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Institutions" "main:institution_list"%}
+    {% breadcrumb _("Institutions") "main:institution_list"%}
     {% breadcrumb refnumber.holding_institution "main:institution_detail" refnumber.holding_institution.institution_slug %}
     {% breadcrumb refnumber "main:ref_number_detail" refnumber.holding_institution.institution_slug refnumber.ref_number_slug %}
 {% endblock %}
@@ -21,11 +21,16 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_ref_number' refnumber.pk %}" role="button">Unsubscribe from this reference number</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_ref_number' refnumber.pk %}" role="button">{% translate 'Unsubscribe from this reference number' %}</a>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_ref_number' refnumber.pk %}" role="button">Subscribe to this reference number</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_ref_number' refnumber.pk %}" role="button">{% translate 'Subscribe to this reference number' %}</a>
             {% endif %}
-         &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+         &nbsp;&nbsp;<small>
+              {% url 'main:subscriptions' as sub_url %}
+              {% blocktranslate %}
+              (Manage your subscriptions <a href="{{sub_url}}">here</a>)
+              {% endblocktranslate %}
+          </small>
         {% endif %}
 
     {%  endcard %}

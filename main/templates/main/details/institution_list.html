@@ -10,8 +10,8 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Browse" "main:browse_options" %}
-    {% breadcrumb "Institutions" "main:institution_list" %}
+    {% breadcrumb _("Browse") "main:browse_options" %}
+    {% breadcrumb _("Institutions") "main:institution_list" %}
 {% endblock %}
 
 {% block content %}
@@ -20,7 +20,3 @@
         {% render_table table %}
     {% endcard %}
 {% endblock content %}
-
-{% block extrascripts %}
-    {% include 'main/clickable_table.html' %}
-{% endblock %}

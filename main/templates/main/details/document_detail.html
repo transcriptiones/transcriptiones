@@ -31,11 +31,16 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_document' document.pk %}" role="button">Unsubscribe from this document</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_document' document.pk %}" role="button">{% translate 'Unsubscribe from this document' %}</a>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_document' document.pk %}" role="button">Subscribe to this document</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_document' document.pk %}" role="button">{% translate 'Subscribe to this document' %}</a>
             {% endif %}
-            &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+            <small>
+              {% url 'main:subscriptions' as sub_url %}
+              {% blocktranslate %}
+              (Manage your subscriptions <a href="{{sub_url}}">here</a>)
+              {% endblocktranslate %}
+            </small>
         {% endif %}
     {% endcard %}
 

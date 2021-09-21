@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Authors" "main:author_list"%}
+    {% breadcrumb _("Authors") "main:author_list"%}
     {% breadcrumb author.author_name "main:author_detail" author.pk %}
 {% endblock %}
 
@@ -20,11 +20,16 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_author' author.pk %}" role="button">Unsubscribe from this author</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:unsubscribe_author' author.pk %}" role="button">{% translate 'Unsubscribe from this author' %}</a>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">Subscribe to this author</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">{% translate 'Subscribe to this author' %}</a>
             {% endif %}
-         &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+         &nbsp;&nbsp; <small>
+              {% url 'main:subscriptions' as sub_url %}
+              {% blocktranslate %}
+              (Manage your subscriptions <a href="{{sub_url}}">here</a>)
+              {% endblocktranslate %}
+            </small>
         {% endif %}
 
     {%  endcard %}
