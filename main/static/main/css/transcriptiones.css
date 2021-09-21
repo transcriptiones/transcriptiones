@@ -419,3 +419,11 @@ button[type="submit"]:hover, btn-light:hover {
 .ck-read-only > .ck-widget_selected > .ck-widget__selection-handle {
     display: none;
 }
+
+.my-small-form input.form-control {
+    font-size: 10px;
+}
+
+.my-small-form select.form-control {
+    font-size: 10px;
+}
