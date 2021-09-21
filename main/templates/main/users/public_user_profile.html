@@ -20,7 +20,12 @@
         {% render_table user_table %}
         {% if request.user.is_authenticated %}
             {% if request.user.id == profile_user.id %}
-                <small>(This is you. Check your <a href="{% url 'main:profile' %}">Private Profile</a>)</small>
+                <small>
+                    {% url 'main:profile' as profile_url %}
+                    {% blocktranslate %}
+                    (This is you. Check your <a href="{{profile_url}}">Private Profile</a>)
+                    {% endblocktranslate %}
+                </small>
             {% else %}
                 <a class="btn btn-primary btn-sm" href="{% url 'main:message_user' profile_user.username %}" role="button">Message this user</a>
                 {% if subscribed %}
@@ -28,7 +33,12 @@
                 {% else %}
                     <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">Subscribe to this user</a>
                 {% endif %}
-                &nbsp;&nbsp;<small>(Manage your subscriptions <a href="{% url 'main:subscriptions' %}">here</a>)</small>
+                <small>
+                  {% url 'main:subscriptions' as sub_url %}
+                  {% blocktranslate %}
+                  (Manage your subscriptions <a href="{{sub_url}}">here</a>)
+                  {% endblocktranslate %}
+                </small>
             {% endif %}
         {% endif %}
     {% endcard %}
