@@ -131,8 +131,8 @@ def unsubscribe_all_view(request):
         subs = UserSubscription.objects.filter(user=request.user)
         for sub in subs:
             sub.delete()
-        messages.success(request, _('Subscription removed'))
+        messages.success(request, _('All subscriptions removed'))
     except UserSubscription.DoesNotExist:
-        messages.error(request, _('Could not remove subscription'))
+        messages.error(request, _('Could not remove subscriptions'))
 
     return redirect(request.META.get('HTTP_REFERER'))
