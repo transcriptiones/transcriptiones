@@ -141,16 +141,16 @@
                                 <i class="fas fa-user"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="user_dropdown">
-                                <a class="dropdown-item disabled" href="#"><small>Your Profile</small></a>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Profile' %}</small></a>
                                 <a class="dropdown-item" href="{% url 'main:profile' %}">{% translate 'User Information' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:subscriptions' %}">{% translate 'Subscriptions' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:messages' %}">{% translate 'Inbox' %}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item disabled" href="#"><small>Administrator Functions</small></a>
-                                <a class="dropdown-item" href="{% url 'main:admin' %}">Administration Pages</a>
-                                <a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Administrator Functions' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:admin' %}">{% translate 'Administration Pages' %}</a>
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">{% translate 'Django Admin' %}</a>
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{% url 'main:logout' %}">Logout</a>
+                              <a class="dropdown-item" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
                             </div>
                         </li>
                     {% endif %}
@@ -213,7 +213,7 @@
                     </a>
                 </li>
             </ul>
-            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2020</p> <!-- TODO Get these values from a context processor-->
+            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2021</p> <!-- TODO Get these values from a context processor-->
         </div>
 
         <!-- Sidebar -->
