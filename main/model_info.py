@@ -73,9 +73,9 @@ def get_ref_number_info(ref_number):
 
 def get_document_info_overview(document):
     data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
-             document.parent_ref_number.holding_institution.institution_name),
+             mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
-             document.parent_ref_number.ref_number_name),
+             mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
             (get_verbose_field_name(document, 'transcription_scope'), document.transcription_scope),
             (get_verbose_field_name(document, 'document_utc_update'), document.document_utc_update),
             ]
@@ -83,13 +83,19 @@ def get_document_info_overview(document):
 
 
 def get_document_info_metadata(document):
+    author_list = document.author.all()
+    formatted_author_list = list()
+    for a in author_list:
+        formatted_author_list.append(f'<a href="{a.get_absolute_url()}">{a.author_name}</a>')
+
     data = [(get_verbose_field_name(document, 'author'),
-             ", ".join(document.author.all().values_list('author_name', flat=True))),
+             mark_safe(", ".join(formatted_author_list))),
             (get_verbose_field_name(document, 'place_name'), document.place_name),
             (get_verbose_field_name(document, 'language'),
              ", ".join(document.language.all().values_list('name_en', flat=True))),
             (get_verbose_field_name(document, 'source_type'),
-             " / ".join([document.source_type.parent_type.type_name, document.source_type.type_name])),
+             mark_safe(" / ".join([f'<a href="{document.source_type.parent_type.get_absolute_url()}">{document.source_type.parent_type.type_name}</a>',
+                                   f'<a href="{document.source_type.get_absolute_url()}">{document.source_type.type_name}</a>']))),
             ]
     return title_value_list(data)
 
@@ -102,7 +108,7 @@ def get_document_info_manuscript(document):
     if doc_length is None:
         doc_length = 0.0
 
-    data = [(get_verbose_field_name(document, 'material'), document.material),
+    data = [(get_verbose_field_name(document, 'material'), document.get_material_display()),
             (_('Measurements'), "{width:.2f} / {length:.2f} cm".format(width=doc_width,
                                                                        length=doc_length)),
             (get_verbose_field_name(document, 'pages'), document.pages)
@@ -111,11 +117,15 @@ def get_document_info_manuscript(document):
 
 
 def get_document_info_comments(document):
+    if document.publish_user:
+        user = f'<a href="{document.submitted_by.get_absolute_url()}">{document.submitted_by.username}</a>'
+    else:
+        user = _('Anonymous')
+    date = document.document_utc_update
+
     data = [(get_verbose_field_name(document, 'comments'), document.comments),
             (_('Uploaded'),
-             "By {user}, on {date}".format(date=document.document_utc_update,
-                                           user=document.submitted_by.username if document.publish_user else _(
-                                               'Anonymous')))
+             mark_safe(f'By {user}, on {date}'))
             ]
 
     return title_value_list(data)
