@@ -10,17 +10,23 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Source Types" "main:source_type_list" %}
+    {% breadcrumb _("Source Types") "main:source_type_list" %}
     {% breadcrumb selected.parent_type "main:source_type_detail" selected.parent_type.id %}
     {% breadcrumb selected "main:source_type_detail" selected.id %}
 {% endblock %}
 
 {% block content %}
     {% card 'source_type_parent_list_card' _('Second Level Source Types') %}
-        <p>Select A Source Type to see documents of this type or go up one level.</p>
-         <a href="{% url 'main:source_type_detail' selected.parent_type.id %}"><span class="badge badge-info">Go up: {{ selected.parent_type }}</span></a><br/>
+        <p>{% translate 'Select A Source Type to see documents of this type or go up one level.' %}</p>
+         <a href="{% url 'main:source_type_detail' selected.parent_type.id %}"><span class="badge badge-info">Go up: {{ selected.parent_type }}</span></a>
+         {% if all %}
+             <span class="badge badge-primary">Show All in: {{ selected.parent_type }}</span>
+         {% else %}
+             <a href="{% url 'main:source_type_group_detail' selected.id %}"><span class="badge badge-secondary">Show All in: {{ selected.parent_type }}</span></a>
+        {% endif %}
+        <br/>
         {% for st in source_types %}
-            {% if st.id == selected.id %}
+            {% if st.id == selected.id and not all %}
                 <span class="badge badge-primary">{{ st }}</span>
             {% else %}
                 <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{{ st }}</span></a>
@@ -29,6 +35,7 @@
     {% endcard %}
 
     {% card 'source_type_list_card' _('Source Types') %}
+
         <p>Documents with type '{{ selected }}'</p>
         {% render_table table %}
     {% endcard %}
