@@ -1,5 +1,5 @@
 from django import template
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.template.base import FilterExpression
 register = template.Library()
 

@@ -19,10 +19,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="25%"><a href="{% url 'main:profile' %}" class="text-{% if request.resolver_match.url_name == 'profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">Profile</p></a></td>
-                    <td width="25%"><a href="{% url 'main:messages' %}" class="text-{% if request.resolver_match.url_name == 'messages' %}danger{% else %}muted{% endif %}"><p class="text-center small">Messages</p></td>
-                    <td width="25%"><a href="{% url 'main:notifications' %}" class="text-{% if request.resolver_match.url_name == 'notifications' %}danger{% else %}muted{% endif %}"><p class="text-center small">Notifications</p></a></td>
-                    <td width="25%"><a href="{% url 'main:subscriptions' %}" class="text-{% if request.resolver_match.url_name == 'subscriptions' %}danger{% else %}muted{% endif %}"><p class="text-center small">Subscriptions</p></a></td>
+                    <td width="25%"><a href="{% url 'main:profile' %}" class="text-{% if request.resolver_match.url_name == 'profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Profile' %}</p></a></td>
+                    <td width="25%"><a href="{% url 'main:messages' %}" class="text-{% if request.resolver_match.url_name == 'messages' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Messages' %}</p></td>
+                    <td width="25%"><a href="{% url 'main:notifications' %}" class="text-{% if request.resolver_match.url_name == 'notifications' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Notifications' %}</p></a></td>
+                    <td width="25%"><a href="{% url 'main:subscriptions' %}" class="text-{% if request.resolver_match.url_name == 'subscriptions' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Subscriptions' %}</p></a></td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">
@@ -39,10 +39,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'main:password_change' %}" class="text-{% if request.resolver_match.url_name == 'password_change' %}danger{% else %}muted{% endif %}"><p class="text-center small">Change Password</p></a></td>
-                    <td><a href="{% url 'main:user_update' %}" class="text-{% if request.resolver_match.url_name == 'user_update' %}danger{% else %}muted{% endif %}"><p class="text-center small">Edit Profile</p></a></td>
-                    <td><a href="{% url 'main:public_profile' request.user.username %}" class="text-{% if request.resolver_match.url_name == 'public_profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">Public Profile</p></a></td>
-                    <td><a href="{% url 'main:logout' %}" class="text-{% if request.resolver_match.url_name == 'logout' %}danger{% else %}muted{% endif %}"><p class="text-center small">Logout</p></a></td>
+                    <td><a href="{% url 'main:password_change' %}" class="text-{% if request.resolver_match.url_name == 'password_change' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Change Password' %}</p></a></td>
+                    <td><a href="{% url 'main:user_update' %}" class="text-{% if request.resolver_match.url_name == 'user_update' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Edit Profile' %}</p></a></td>
+                    <td><a href="{% url 'main:public_profile' request.user.username %}" class="text-{% if request.resolver_match.url_name == 'public_profile' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Public Profile' %}</p></a></td>
+                    <td><a href="{% url 'main:logout' %}" class="text-{% if request.resolver_match.url_name == 'logout' %}danger{% else %}muted{% endif %}"><p class="text-center small">{% translate 'Logout' %}</p></a></td>
                 </tr>
             </table>
         </div>

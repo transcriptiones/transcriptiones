@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb "Users" "" %}
+    {% breadcrumb _("Users") "" %}
     {% breadcrumb request.user.username "main:profile" %}
 {% endblock %}
 
