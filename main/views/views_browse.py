@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
-from django_tables2 import MultiTableMixin, SingleTableMixin
+from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
 
 import main.model_info as m_info
@@ -79,12 +79,14 @@ def source_type_detail_view(request, pk):
         parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
         children_source_type_list = SourceType.objects.filter(parent_type=selected_source_type).order_by('type_name')
         table = SourceTypeTable(data=children_source_type_list)
+        RequestConfig(request).configure(table)
         context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
         return render(request, "main/details/source_type_parent_detail.html", context=context)
     else:
         parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
         document_list = Document.objects.filter(source_type=selected_source_type)
         table = DocumentTable(data=document_list)
+        RequestConfig(request).configure(table)
         context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
         return render(request, "main/details/source_type_child_detail.html", context=context)
 
@@ -96,6 +98,7 @@ def source_type_group_detail_view(request, pk):
     parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
     document_list = Document.objects.filter(source_type__in=parent_source_type_list)
     table = DocumentTable(data=document_list)
+    RequestConfig(request).configure(table)
     context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type, 'all': True}
     return render(request, "main/details/source_type_child_detail.html", context=context)
 
