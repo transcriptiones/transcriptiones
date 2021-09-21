@@ -1,6 +1,6 @@
 import django_tables2 as tables
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from main.models import RefNumber, Institution, SourceType, Author
 from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 
@@ -20,6 +20,8 @@ class RefNumberTable(TranscriptionesTable):
 
 class InstitutionTable(TranscriptionesTable):
     """The InstitutionTable shows a list of institutions"""
+
+    institution_name = tables.LinkColumn()
 
     city = tables.Column(verbose_name=_('Location'))
 
@@ -60,6 +62,8 @@ class InstitutionTable(TranscriptionesTable):
 
 class SourceTypeTable(TranscriptionesTable):
     """The SourceTypeTable shows a list of source types"""
+    type_name = tables.LinkColumn()
+
     no_of_documents = tables.Column(accessor='id', orderable=False)
 
     class Meta(TranscriptionesTable.Meta):
@@ -79,6 +83,8 @@ class SourceTypeTable(TranscriptionesTable):
 
 class AuthorTable(TranscriptionesTable):
     """The SourceTypeTable shows a list of source types"""
+    author_name = tables.LinkColumn()
+
     no_of_documents = tables.Column(verbose_name=_('No. of Documents'), accessor='id', orderable=False)
     no_of_ref_numbers = tables.Column(verbose_name=_('No. of Ref. Numbers'), accessor='id', orderable=False)
 
