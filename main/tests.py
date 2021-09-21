@@ -70,3 +70,6 @@ class AnimalTestCase(TestCase):
         self.assertEqual(Document.all_objects.filter(document_id=doc.document_id).count(), 2)
 
         self.assertEqual(UserNotification.objects.all().count(), 3)
+
+    def test_i18n(self):
+        pass
