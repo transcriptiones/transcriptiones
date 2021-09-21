@@ -4,42 +4,23 @@
 {% load transcriptiones %}
 {% load crispy_forms_tags %}
 
-{% block additional_css %}
-    <link rel="stylesheet" href="{% static 'main/vendor/tooltipster/dist/css/tooltipster.bundle.css' %}" />
-    <link rel="stylesheet" href="{% static 'main/vendor/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' %}" />
-
-    <!-- Stylesheet for Form validation. -->
-    <link rel="stylesheet" href="{% static 'main/css/form_validation.css' %}" />
-{% endblock %}
-
-{% block javascript %}
-    <!-- Tooltipster Plugin -->
-    <script src="{% static 'main/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
-    <script src="{% static 'main/js/user_scripts.js' %}" charset="utf-8"></script> <!-- TODO check user scripts -->
-{% endblock javascript %}
-
 {% block page_title %}
     {% translate 'Registration' %}
 {%  endblock %}
 
-{% block dependencies %}
-<!-- Tooltipster Plugin -->
-<script src="{% static 'base/vendor/tooltipster/dist/js/tooltipster.bundle.js' %}"></script>
-<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/tooltipster.bundle.css' %}" />
-<link rel="stylesheet" href="{% static 'base/vendor/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css' %}" />
-{% endblock dependencies %}
-
 {% block content %}
-    {% if user.is_authenticated %}
-        <p>Sie sind bereits angemeldet.</p>
-        <div id="logout">
-            <a class="btn btn-secondary" href="{% url 'main:logout' %}">Abmelden</a>
-        </div>
-    {% else %}
-        <form method="POST">
-            {% csrf_token %}
-            {% crispy form %}
-            <button type="submit" class="btn btn-secondary">{% translate 'Register' %}</button>
-        </form>
-    {% endif %}
+    {% card 'signup_card' _('Register') %}
+        {% if user.is_authenticated %}
+            <p>Sie sind bereits angemeldet.</p>
+            <div id="logout">
+                <a class="btn btn-secondary" href="{% url 'main:logout' %}">Abmelden</a>
+            </div>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                {% crispy form %}
+                <button type="submit" class="btn btn-primary">{% translate 'Register' %}</button>
+            </form>
+        {% endif %}
+    {% endcard %}
 {% endblock %}

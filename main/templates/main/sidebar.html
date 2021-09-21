@@ -10,10 +10,30 @@
             <a class="js-scroll-trigger" href="{% url 'main:start' %}">{% translate 'Menu' %}</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">{% translate 'Upload' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:upload_options' %}">{% translate 'Upload' %}</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:upload_document' %}">{% translate 'Upload Single Page' %}</a>
+        </li>
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:upload_multiple' %}">{% translate 'Upload Multiple Pages' %}</a>
+        </li>
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:upload_batch' %}">{% translate 'Upload Batch' %}</a>
+        </li>
+        {% endif %}
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">{% translate 'Browse' %}</a>
+            <a class="js-scroll-trigger" href="{% url 'main:browse_options' %}">{% translate 'Browse' %}</a>
+        </li>
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:institution_list' %}">{% translate 'Browse by Institution' %}</a>
+        </li>
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:author_list' %}">{% translate 'Browse by Author' %}</a>
+        </li>
+        <li class="sidebar-subnav-item">
+            <a class="js-scroll-trigger" href="{% url 'main:source_type_list' %}">{% translate 'Browse by Document Type' %}</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main:search' %}">{% translate 'Search' %}</a>

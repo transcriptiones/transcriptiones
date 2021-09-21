@@ -1,12 +1,12 @@
 {% load bootstrap4 %}
 
 <form action="" method="get" class="form form-inline">
-        Filter:&nbsp;
+    <i class="fas fa-filter"></i>&nbsp;
         {% bootstrap_form filter.form layout='inline' %}
         &nbsp;
-        {% bootstrap_button 'Filter' %}
+        {% bootstrap_button '<i class="fas fa-filter"></i>' %}
         &nbsp;
-        <a class="btn btn-primary" href='{{ request.path }}'>Clear</a>
+        <a class="btn btn-primary" href='{{ request.path }}'><i class="fas fa-times"></i></a>
 
 </form>
 <br/>
