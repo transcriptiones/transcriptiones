@@ -63,7 +63,7 @@ class AuthorAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Authors"""
 
     def get_queryset(self):
-        qs = Author.objects.all()
+        qs = Author.objects.all().order_by('author_name')
 
         if self.q:
             qs = qs.filter(author_name__icontains=self.q)
@@ -74,7 +74,7 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Languages"""
 
     def get_queryset(self):
-        qs = Language.objects.all()
+        qs = Language.objects.all().order_by('name_native')
 
         if self.q:
             qs = qs.filter(name_native__icontains=self.q)
