@@ -14,7 +14,7 @@ class DocumentTable(TranscriptionesTable):
         fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
         row_attrs = default_row_attrs
 
-    title_name = tables.Column()
+    title_name = tables.LinkColumn()
     place_name = tables.Column(orderable=False)
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
