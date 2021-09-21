@@ -5,14 +5,6 @@
 {% load render_table from django_tables2 %}
 {% load django_bootstrap_breadcrumbs %}
 
-{% block additional_head_tags %}
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/toolbox.css' %}">
-{% endblock %}
-
-{% block body_includes %}
-    {% include "main/toolbox.html" %}
-{% endblock %}
-
 {% block page_title %}
     {{ document.title_name }}
 {% endblock %}
@@ -42,6 +34,15 @@
               {% endblocktranslate %}
             </small>
         {% endif %}
+    {% endcard %}
+
+    {% card 'doc_detail_options' _('Options') %}
+        <div align="center">
+            <a class="btn btn-primary btn-sm" href="{% url 'main:edit_transcript' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Transcription' %}</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'main:edit_meta' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Metadata' %}</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'main:document_history' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'View Version History' %}</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'main:document_export' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Export Document' %}</a>
+        </div>
     {% endcard %}
 
     {% card 'doc_detail_transcription' _('Transcript') %}
