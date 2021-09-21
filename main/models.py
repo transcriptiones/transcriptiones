@@ -526,19 +526,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('main:public_profile', kwargs={'username': self.username})
 
     def get_user_state_badge(self):
-        ret_value = '<span class="badge badge-info">User</span>'
+        str_user = _('Benutzer')
+        str_staff = _('Mitarbeiter')
+        str_admin = _('Admin')
+
+        ret_value = f'<span class="badge badge-info">{str_user}</span>'
         if self.is_staff:
-            ret_value = '<span class="badge badge-warning">Staff</span>'
+            ret_value = f'<span class="badge badge-warning">{str_staff}</span>'
         if self.is_superuser:
-            ret_value = '<span class="badge badge-danger">Admin</span>'
+            ret_value = f'<span class="badge badge-danger">{str_admin}</span>'
 
         return mark_safe(ret_value)
 
     def get_user_activity_badge(self):
-        activity_state = '<span class="badge badge-success">Active</span>'
+        str_active = _('Active')
+        str_inactive = _('Inactive')
+        activity_state = f'<span class="badge badge-success">{str_active}</span>'
         if not self.is_active:
-            activity_state = '<span class="badge badge-secondary">Inactive</span>'
+            activity_state = f'<span class="badge badge-secondary">{str_inactive}</span>'
         return mark_safe(activity_state)
+
 
 class UserSubscription(models.Model):
     class SubscriptionType(models.IntegerChoices):
