@@ -3,7 +3,8 @@ from main.models import Institution, RefNumber, SourceType, Author, Language
 
 
 class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
-    """Autocomplete View for Institutions"""
+    """Autocomplete View for Institutions. Used for autocomplete dropdown in upload form. Queryset gets ordered by
+    the institution's name."""
 
     def get_queryset(self):
         qs = Institution.objects.all().order_by('institution_name')
@@ -13,7 +14,8 @@ class InstitutionAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
-    """Autocomplete View for Ref Numbers"""
+    """Autocomplete View for Reference Numbers. Used for autocomplete dropdown in upload form. Queryset gets ordered by
+    the ref numbers's name. Needs a preselected institution in order to work."""
 
     def get_queryset(self):
         qs = RefNumber.objects.all().order_by('ref_number_name')
@@ -30,10 +32,10 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
-    """Autocomplete View for Source Type parents"""
+    """Autocomplete View for Source Type parents. """
 
     def get_queryset(self):
-        qs = SourceType.objects.filter(parent_type=None)
+        qs = SourceType.objects.filter(parent_type=None).order_by('type_name')
 
         if self.q:
             qs = qs.filter(type_name__icontains=self.q)
@@ -41,10 +43,10 @@ class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
 
 
 class SourceTypeChildAutocomplete(autocomplete.Select2QuerySetView):
-    """Autocomplete View for Source Type children"""
+    """Autocomplete View for Source Type children.  Needs a preselected parent source type in order to work."""
 
     def get_queryset(self):
-        qs = SourceType.objects.exclude(parent_type=None)
+        qs = SourceType.objects.exclude(parent_type=None).order_by('type_name')
         selected_parent_type = self.forwarded.get('selection_helper_source_type', None)
 
         if not selected_parent_type:
