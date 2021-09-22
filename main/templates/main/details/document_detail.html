@@ -23,7 +23,7 @@
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a href="{% url 'main:unsubscribe_document' document.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this author' %}</a>
+                <a href="{% url 'main:unsubscribe_document' document.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this document' %}</a>
             {% else %}
                 <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_document' document.pk %}" role="button">{% translate 'Subscribe to this document' %}</a>
             {% endif %}
