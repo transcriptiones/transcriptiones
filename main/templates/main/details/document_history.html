@@ -2,38 +2,30 @@
 {% load static %}
 {% load django_bootstrap_breadcrumbs %}
 {% load i18n %}
+{% load render_table from django_tables2 %}
 {% load transcriptiones %}
 
 {% block page_title %}
-    {{ documenttitle.title_name }}
+    {{ document.title_name }} - {% translate 'Version History' %}
 {% endblock page_title %}
 
-{% block breadcrumb_init %}
-    {% breadcrumb _("Institutions list") "main:institution_list" %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Institutions") "main:institution_list" %}
     {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
     {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
     {% breadcrumb document.title_name document.get_absolute_url %}
     {% breadcrumb _('Versions') '' %}
 {% endblock %}
 
-
 {% block content %}
     {% card 'doc_history_overview' _('Overview') %}
-        <!-- % render_table tables.0 %} -->
-        <!--
-        Institution
-        Signatur
-        -->
+        {% render_table tables.0 %}
     {% endcard %}
 
     {% card 'doc_history_overview' _('Versions') %}
-        <!-- % render_table tables.0 %} -->
-        <!-- Version table with:
-        Version
-        commit message
-        document_utc_add
-        submitted_by
-        -->
+        {% include 'main/filter.html' %}
+        {% render_table tables.1 %}
     {% endcard %}
 
 {% endblock content %}

@@ -2,12 +2,12 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
-
+import uuid
 import main.model_info as m_info
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
-from main.tables.tables_document import DocumentTable
+from main.tables.tables_document import DocumentTable, DocumentVersionHistoryTable
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, SourceTypeFilter, AuthorFilter
 
 
@@ -240,12 +240,47 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         return tables
 
 
-class DocumentHistoryView(DetailView):
+class DocumentHistoryView(MultiTableMixin, DetailView):
     """View to display version history of a DocumentTitle object"""
 
     model = Document
+    slug_field = 'document_slug'
+    slug_url_kwarg = 'doc_slug'
+    my_filter = None
+    table_pagination = {
+        "per_page": 20
+    }
     template_name = "main/details/document_history.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        qs = Document.all_objects.filter(document_id=self.get_object().document_id).order_by('-document_utc_add')
+        self.my_filter = DocumentFilter(request.GET, qs)
+        return super(DocumentHistoryView, self).dispatch(request, *args, **kwargs)
+
+    def get_tables(self):
+        document = self.get_object()
+        data = m_info.get_document_info_overview(document)
+
+        tables = [
+            TitleValueTable(data=data),
+            DocumentVersionHistoryTable(self.my_filter.qs),
+        ]
+        return tables
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.my_filter
+        """
+        if self.request.user.is_authenticated:
+            context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
+                                                                    subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
+                                                                    object_id=self.get_object().id).count() > 0
+        else:
+            context['subscribed'] = False
+        """
+        return context
+
+    """
     def get_object(self):
         institution = self.kwargs.get('inst_slug')
         ref_number = self.kwargs.get('ref_slug')
@@ -259,3 +294,4 @@ class DocumentHistoryView(DetailView):
         versions = self.model.get_versions(self.get_object())
         context['versions'] = versions
         return context
+    """

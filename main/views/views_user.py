@@ -22,7 +22,7 @@ from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeFor
 from main.tokens import account_activation_token
 from main.model_info import get_user_info, get_public_user_info
 from main.tables.tables_base import TitleValueTable
-from main.tables.tables_document import DocumentHistoryTable
+from main.tables.tables_document import DocumentUserHistoryTable
 from main.filters import DocumentFilter
 
 
@@ -100,7 +100,7 @@ def userprofile(request):
     user_table = TitleValueTable(data=get_user_info(request.user))
 
     d_filter = DocumentFilter(request.GET, queryset=contributions)
-    activity_table = DocumentHistoryTable(data=d_filter.qs)
+    activity_table = DocumentUserHistoryTable(data=d_filter.qs)
     RequestConfig(request).configure(activity_table)
 
     return render(request, 'main/users/user_profile.html', {'user_table': user_table, 'activity_table': activity_table, 'filter': d_filter})
@@ -115,7 +115,7 @@ def public_profile(request, username):
     user_table = TitleValueTable(data=get_public_user_info(user))
 
     d_filter = DocumentFilter(request.GET, queryset=contributions)
-    activity_table = DocumentHistoryTable(data=d_filter.qs)
+    activity_table = DocumentUserHistoryTable(data=d_filter.qs)
     RequestConfig(request).configure(activity_table)
 
     subscribed = UserSubscription.objects.filter(user=request.user,

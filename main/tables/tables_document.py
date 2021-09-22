@@ -30,8 +30,8 @@ class DocumentTable(TranscriptionesTable):
                              f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
 
 
-class DocumentHistoryTable(TranscriptionesTable):
-    """The DocumentHistoryTable shows a list of documents"""
+class DocumentUserHistoryTable(TranscriptionesTable):
+    """The DocumentUserHistoryTable shows a list of documents"""
 
     class Meta(TranscriptionesTable.Meta):
         model = Document
@@ -41,6 +41,27 @@ class DocumentHistoryTable(TranscriptionesTable):
     activity_type = tables.Column(orderable=False, accessor='id', verbose_name=_("Action"))
     document_utc_add = tables.Column()
     commit_message = tables.Column(orderable=False)
+
+    def render_activity_type(self, value, record):
+        if record.version_number == 1:
+            return _("Upload")
+        else:
+            return _("Edit")
+
+
+class DocumentVersionHistoryTable(TranscriptionesTable):
+    """The DocumentVersionHistoryTable shows a list of versions of a document"""
+
+    class Meta(TranscriptionesTable.Meta):
+        model = Document
+        fields = ("version_number", "title_name", "activity_type", "document_utc_add", "commit_message", "submitted_by")
+
+    version_number = tables.Column(verbose_name="V.")
+    title_name = tables.LinkColumn()
+    activity_type = tables.Column(orderable=False, accessor='id', verbose_name=_("Action"))
+    document_utc_add = tables.Column()
+    commit_message = tables.Column(orderable=False)
+    submitted_by = tables.Column(orderable=False)
 
     def render_activity_type(self, value, record):
         if record.version_number == 1:
