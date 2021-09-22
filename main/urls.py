@@ -6,13 +6,13 @@ from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, Passwo
 from rest_framework.routers import DefaultRouter
 
 from main.views.views_test import InstitutionViewSet
-from main.views.views_upload_old import AddInstitutionView, AddRefNumberView
-from main.views.views_upload_old import batch_upload, load_ref_numbers
+from main.views.views_upload_old import batch_upload
 from main.views.views_upload_old import EditMetaView
 
 import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
 import main.views.views_browse as v_browse
+import main.views.views_edit as v_edit
 import main.views.views_export as v_export
 import main.views.views_info as v_info
 import main.views.views_messages as v_messages
@@ -162,12 +162,8 @@ urlpatterns = [
     path('transcriptiones_admin/set_user_admin/<int:user_id>', v_admin.set_user_admin, name='admin_set_user_admin'),
     path('transcriptiones_admin/set_user_user/<int:user_id>', v_admin.set_user_user, name='admin_set_user_user'),
 
-    path('upload/addinstitution/', AddInstitutionView.as_view(), name='institution_add'),
-    path('upload/addrefnumber/', AddRefNumberView.as_view(), name='ref_number_add'),
-    path('upload/ajax/load-refnumbers/', load_ref_numbers, name='ajax_load_ref_numbers'),
-
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', EditMetaView.as_view(), name='edit_meta'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_upload.edit_transcription_view, name='edit_transcript'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', v_edit.edit_meta_view, name='edit_meta'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
 
