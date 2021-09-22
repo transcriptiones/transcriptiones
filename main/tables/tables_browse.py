@@ -94,7 +94,7 @@ class AuthorTable(TranscriptionesTable):
         row_attrs = default_row_attrs
 
     def render_no_of_documents(self, value, record):
-        return 0
+        return 0    # TODO
 
     def render_no_of_ref_numbers(self, value, record):
-        return 0
+        return 0    # TODO
