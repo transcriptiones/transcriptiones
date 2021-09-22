@@ -4,7 +4,6 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
-from django.views import generic
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,17 +11,11 @@ from bootstrap_modal_forms.generic import BSModalCreateView
 
 from main.forms.forms_test import InstModelForm, RefnModelForm
 from main.forms.forms_upload import UploadTranscriptionForm, BatchUploadForm
-from main.models import Document, Institution, RefNumber, SourceType, Author, Language
+from main.models import Document, Institution, RefNumber
 
 
 def upload_options(request):
     return render(request, 'main/upload/upload_options.html')
-
-
-class IndexInst(generic.ListView):
-    model = Institution
-    context_object_name = 'insts'
-    template_name = 'main/tests2/inst.html'
 
 
 @login_required
@@ -88,14 +81,6 @@ def upload_transcription_view(request):
                     'comments': ['']}
 
     return render(request, 'main/upload/create_document.html', context)
-
-
-@login_required
-def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
-    document = Document.objects.get(document_slug=doc_slug)
-    form = UploadTranscriptionForm()
-    context = {'document': document, 'form': form}
-    return render(request, 'main/upload/edit_document_transcription.html', context)
 
 
 class ModalCreateInstitutionView(BSModalCreateView):

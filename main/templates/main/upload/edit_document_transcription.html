@@ -14,13 +14,26 @@
 {% endblock %}
 
 {% block page_title %}
-    Edit {{ document.title_name }}
+    {% blocktranslate with title=document.title_name %}
+        Edit '{{ title }}'
+    {% endblocktranslate %}
 {% endblock %}
 
 {% block content %}
-    {% card 'edit_transcript_overview' _('Edit Transcription') %}
-        {{ form.transcription_text }}
-    {% endcard %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {% card 'edit_transcript_overview' _('Edit Transcription') %}
+            {{ form.transcription_text }}
+            {{ form.commit_message|as_crispy_field }}
+        {% endcard %}
 
-    {{ form.media }}
+        {% card 'upload_upload' _('Upload Your Transcription') %}
+            <div class="text-center">
+            <p>{% translate "If you're done updating the transcription, you can save the document." %} </p>
+                <input type="submit" value="{% translate 'Save Changes' %}" class="btn btn-primary">
+            </div>
+        {% endcard %}
+
+        {{ form.media }}
+    </form>
 {% endblock content %}
