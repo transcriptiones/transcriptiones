@@ -164,7 +164,7 @@ def get_extended_help_text(model, field):
     managed here."""
     model_name = model._meta.model_name
     help_text = _('No help text found')
-    print("MMMM: ", model_name)
+    # print("MMMM: ", model_name)
     ###
     # Document
     if model_name == 'document':
