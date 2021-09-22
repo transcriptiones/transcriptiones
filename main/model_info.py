@@ -120,8 +120,11 @@ def get_document_info_manuscript(document):
 
     data = [(get_verbose_field_name(document, 'material'), document.get_material_display()),
             (_('Measurements'), "{width:.2f} / {length:.2f} cm".format(width=doc_width,
-                                                                       length=doc_length)),
-            (get_verbose_field_name(document, 'pages'), document.pages)
+                                                                       length=doc_length)+" "+_("(w/h)")),
+            (get_verbose_field_name(document, 'pages'), document.pages),
+            (get_verbose_field_name(document, 'paging_system'), document.get_paging_system_display()),
+            (get_verbose_field_name(document, 'seal'), mark_safe('<span style="color: green;">&check;</span>') if document.seal else mark_safe('<span style="color: red;">&cross;</span>')),
+            (get_verbose_field_name(document, 'illuminated'), mark_safe('<span style="color: green;">&check;</span>') if document.illuminated else mark_safe('<span style="color: red;">&cross;</span>'))
             ]
     return title_value_list(data)
 
