@@ -82,6 +82,16 @@ def get_document_info_overview(document):
     return title_value_list(data)
 
 
+def get_document_meta_edit_info(document):
+    data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
+             mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
+            (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
+             mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
+            (get_verbose_field_name(document, 'document_utc_update'), document.document_utc_update),
+            ]
+    return title_value_list(data)
+
+
 def get_document_info_metadata(document):
     author_list = document.author.all()
     formatted_author_list = list()

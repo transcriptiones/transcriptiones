@@ -2,13 +2,13 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
-import uuid
+
 import main.model_info as m_info
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
 from main.tables.tables_document import DocumentTable, DocumentVersionHistoryTable
-from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, SourceTypeFilter, AuthorFilter
+from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, AuthorFilter
 
 
 def browse_options(request):

@@ -4,71 +4,64 @@
 {% load transcriptiones %}
 {% load django_bootstrap_breadcrumbs %}
 {% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
 
-{% block breadcrumb_init %}
-    {% breadcrumb _("Institutions list") "main:institution_list" %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Institutions") "main:institution_list" %}
     {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
     {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
     {% breadcrumb document.title_name document.get_absolute_url %}
-    {% breadcrumb _('Edit Metadata') '' %}
+    {% breadcrumb _('Edit metadata') '' %}
 {% endblock %}
 
 {% block page_title %}
-    {{ document.title_name }}
+    {{ document.title_name }} - {% translate 'Edit Metadata' %}
 {% endblock %}
 
 {% block content %}
 
     {% card 'edit_meta_overview' _('Overview') %}
-        <!-- % render_table tables.0 %} -->
+        {% render_table table %}
     {% endcard %}
 
-    <form action="{% url 'main:edit_meta' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug  %}"
-          method="post" id="editMetaForm" class="needs-validation" novalidate>
+    <form action="" method="post">
         {% csrf_token %}
 
-        {% card 'edit_meta_form_1' _('Required Fields') %}
-            {{ form.commit_message|as_crispy_field }}
-        {% endcard %}
-
         {% card 'edit_meta_form_2' _('Content Fields') %}
-            {{ form.author|as_crispy_field }}
+            {{ form.transcription_scope|as_crispy_field }}
             {{ form.doc_start_date|as_crispy_field }}
             {{ form.doc_end_date|as_crispy_field }}
             {{ form.place_name|as_crispy_field }}
+            {{ form.selection_helper_source_type|as_crispy_field }}
+            {{ form.source_type|as_crispy_field }}
+
+            {{ form.author|as_crispy_field }}
             {{ form.language|as_crispy_field }}
-            <!-- { form.source_type_parent|as_crispy_field }} -->
-            <!-- { form.source_type_child|as_crispy_field }} -->
         {% endcard %}
 
         {% card 'edit_meta_form_3' _('Manuscript description') %}
             {{ form.material|as_crispy_field }}
-            <div class="form-row">
-                <div class="form-group col-sm-3">
-                    {% translate 'Measurements' %}
-                </div>
-                <div class="form-group col-sm-1">
-                    <div style="height: 100%; margin: 0px; padding: 0px; text-align: right; vertical-align: middle;"><span class="small">Length</span></div>
-                </div>
-                <div class="form-group col-sm-3">
-                    {{ form.measurements_length }}
-                </div>
-                <div class="form-group col-sm-2">
-                    <div style="height: 100%; margin: 0px; padding: 0px; text-align: right; vertical-align: middle;"><span class="small">Width</span></div>
-                </div>
-                <div class="form-group col-sm-3">
-                    {{ form.measurements_width }}
-                </div>
-            </div>
+            {{ form.measurements_length|as_crispy_field }}
+            {{ form.measurements_width|as_crispy_field }}
             {{ form.pages|as_crispy_field }}
             {{ form.paging_system|as_crispy_field }}
             {{ form.illuminated|as_crispy_field }}
             {{ form.seal|as_crispy_field }}
         {% endcard %}
+
+        {% card 'edit_transcript_commit_message' _('Document your changes') %}
+            {{ form.commit_message|as_crispy_field }}
+        {% endcard %}
+
+        {% card 'save_edit' _('Save Your Changes') %}
+            <div class="text-center">
+            <p>{% translate "If you're done changing the metadata, you can save the document." %} </p>
+                <input type="submit" value="{% translate 'Save Changes' %}" class="btn btn-primary">
+            </div>
+        {% endcard %}
     </form>
 
-{% endblock content %}
+    {{ form.media }}
 
-{% block javascript %}
-<script src="{% static 'upload/editmetascripts.js' %}"></script>
-{% endblock javascript %}
+{% endblock content %}
