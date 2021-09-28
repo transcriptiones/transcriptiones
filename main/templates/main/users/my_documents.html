@@ -1,0 +1,28 @@
+﻿{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Your Documents' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Users") "" %}
+    {% breadcrumb request.user.username "main:profile" %}
+    {% breadcrumb _("Your Documents") "main:my_documents" %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/users/user_options.html' %}
+
+    {% card 'user_profile_activity' _('My Documents') %}
+        {% include 'main/filter.html' %}
+        {% render_table activity_table %}
+    {% endcard %}
+
+    <!-- TODO check table pagination -->
+{% endblock %}
