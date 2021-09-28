@@ -44,7 +44,7 @@ urlpatterns = [
     ##############
     # SEARCH VIEW
     # path('search/', v_search.SearchView.as_view(), name='search'),
-    path('search/', v_search.test_search, name='search'),
+    path('search/', v_search.test_search_2, name='search'),
     path('search_box/<str:query>/', v_search.search_by_box_view, name='search_by_box'),
     path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
 
@@ -89,7 +89,6 @@ urlpatterns = [
     path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
     path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
-    path('search_test/', v_search.test_search, name='search_test'),
     path('api/', include(router.urls)),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
@@ -108,6 +107,7 @@ urlpatterns = [
     path('user/passwordchange/', v_user.CustomPasswordChangeView.as_view(), name='password_change'),
     path('user/passwordchange/done/', PasswordChangeDoneView.as_view(template_name='main/users/password_change_done.html'), name='password_change_done'),
     path('user/profile/', v_user.userprofile, name='profile'),
+    path('user/documents/', v_user.my_documents, name='my_documents'),
     path('user/public/profile/<str:username>/', v_user.public_profile, name='public_profile'),
     path('user/profile/update/', v_user.UserUpdateView.as_view(), name='user_update'),
     path('user/passwordreset/', v_user.CustomPasswordResetView.as_view(), name='password_reset'),
