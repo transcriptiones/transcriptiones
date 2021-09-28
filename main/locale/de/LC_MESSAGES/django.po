@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-20 15:56+0200\n"
-"PO-Revision-Date: 2021-09-20 15:55+0200\n"
+"PO-Revision-Date: 2021-09-23 16:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "Anonym"
 
 #: .\main\model_info.py:143
 msgid "No help text found"
-msgstr ""
+msgstr "Kein Hilfetext gefunden"
 
 #: .\main\model_info.py:149
 msgid "Title of the document"
@@ -962,8 +962,7 @@ msgstr "Letzte Aktualisierung"
 msgid "Upload"
 msgstr "Hochladen"
 
-#: .\main\tables\tables_document.py:55
-#: .\main\templates\main\info\start.html:82
+#: .\main\tables\tables_document.py:55 .\main\templates\main\info\start.html:82
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1198,8 +1197,7 @@ msgstr "Durchsuchen"
 msgid "Browse Options"
 msgstr "Optionen durchsuchen"
 
-#: .\main\templates\main\base.html:119
-#: .\main\templates\main\info\start.html:72
+#: .\main\templates\main\base.html:119 .\main\templates\main\info\start.html:72
 #: .\main\templates\main\search\search_view.html:9
 #: .\main\templates\main\search\search_view.html:22
 #: .\main\templates\main\search\search_view.html:35
