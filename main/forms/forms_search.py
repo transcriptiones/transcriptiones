@@ -2,17 +2,18 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum, auto
-from functools import lru_cache
 from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar, List, Type
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Row, Column, Button
 from django import forms
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
 from django.utils.translation import ugettext_lazy as _
 
+from main.forms.forms_helper import initialize_form_helper
 from main.documents import TranscriptionDocument, ElasticsearchDocument
-from main.models import Document
-
+from main.models import Document, SourceType
 
 DjangoFormSelectFieldOptionsList = List[Tuple[str, str]]
 
@@ -251,28 +252,53 @@ class FilterField(forms.MultiValueField):
         return FilterTriple(Attribute[attribute], Operation[operation], value)
 
 
-class SearchForm(forms.Form):
-    query = forms.CharField(label=False, required=False, widget=forms.widgets.TextInput(attrs={'type': 'search',
-                                                                                               'class': 'form-control',
-                                                                                               'placeholder': 'Suchen...',
-                                                                                               }))
+class AdvancedSearchForm(forms.Form):
+    query = forms.CharField(required=False, label=_('Full Text Search'), help_text=_('Search within the title and contents of documents.'))
+    title_name = forms.CharField(required=False, label=_('Document Title'))
+    ref_number_title = forms.CharField(required=False, label=_('Reference Title'))
+    source_type = forms.ModelChoiceField(required=False, queryset=SourceType.objects.all())
+    location = forms.CharField(required=False, label=_('Location'))
+    seal = forms.BooleanField(required=False, label=_('Document must have seal'))
+    illuminated = forms.BooleanField(required=False, label=_('Document must have illuminations'))
+
+    title_name_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
+    ref_number_title_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
+    location_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
+
+    year_from = forms.IntegerField(required=False, label=_('Published Earliest Year'))
+    year_to = forms.IntegerField(required=False, label=_('Published Latest Year'))
+    manuscript_pages = forms.IntegerField(required=False, label=_('Minimum No. of Pages'))
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for i in range(1, 11):
-            filter_field = FilterField(label=False, required=False)
-            if i == 1:
-                filter_field.widget.divattrs = {}
-            else:
-                filter_field.widget.divattrs = {'class': 'd-none'}
-            self.fields[f'filter_{i}'] = filter_field
-
-    def clean(self):
-        filters = []
-        filter_names = [name for name in self.cleaned_data.keys() if name.startswith('filter_')]
-        for filter_name in filter_names:
-            filter = self.cleaned_data.pop(filter_name, None)
-            if filter is None or not filter.value:
-                continue
-            filters.append(filter)
-        self.cleaned_data['filters'] = filters
+        super(AdvancedSearchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'query',
+            Row(
+                Column('title_name', css_class='form-group col-md-5 mb-0'),
+                Column('title_name_exact', css_class='form-group col-md-1 mb-0'),
+                Column('ref_number_title', css_class='form-group col-md-5 mb-0'),
+                Column('ref_number_title_exact', css_class='form-group col-md-1 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('source_type', css_class='form-group col-md-6 mb-0'),
+                Column('location', css_class='form-group col-md-5 mb-0'),
+                Column('location_exact', css_class='form-group col-md-1 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('year_from', css_class='form-group col-md-4 mb-0'),
+                Column('year_to', css_class='form-group col-md-4 mb-0'),
+                Column('manuscript_pages', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('seal', css_class='form-group col-md-6 mb-0'),
+                Column('illuminated', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', _('Search'), css_class='btn-primary'),
+            Button('clear', 'Clear Form', css_class='btn-secondary', onclick='window.location.href="{}"'.format('/search'))
+        )
+        self.helper.form_method = 'GET'
