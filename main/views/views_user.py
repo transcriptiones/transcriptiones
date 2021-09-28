@@ -107,6 +107,20 @@ def userprofile(request):
 
 
 @login_required
+def my_documents(request):
+    """View for User Documents"""
+    contributions = request.user.contributions(manager='all_objects').all().order_by('-document_utc_add')
+    paginator = Paginator(contributions, 10)
+
+    page_number = request.GET.get('page')
+
+    d_filter = DocumentFilter(request.GET, queryset=contributions)
+    activity_table = DocumentUserHistoryTable(data=d_filter.qs)
+    RequestConfig(request).configure(activity_table)
+
+    return render(request, 'main/users/my_documents.html', {'activity_table': activity_table, 'filter': d_filter})
+
+@login_required
 def public_profile(request, username):
     """View for Public User Profile Page"""
     user = User.objects.get(username=username)

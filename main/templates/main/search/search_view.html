@@ -20,6 +20,7 @@
 
         {% card 'simple_search_form' _('Simple search') %}
             {{ form.query }} <button type="submit">{% translate 'Search' %}</button>
+            {{ form.filter_1 }}
         {% endcard %}
 
         {% card 'advanced_search_form' _('Advanced search') %}
@@ -31,7 +32,8 @@
                         </div>
                     </div>
                 {% endif %}
-            {% endfor %} <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
+            {% endfor %}
+            <div><button type="button" id="addButton" class="btn btn-success">+</button></div>
             <button type="submit">{% translate 'Search' %}</button>
         {% endcard %}
 

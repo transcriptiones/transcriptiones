@@ -142,6 +142,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="user_dropdown">
                                 <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Profile' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:my_documents' %}">{% translate 'My Documents' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:profile' %}">{% translate 'User Information' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:subscriptions' %}">{% translate 'Subscriptions' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:messages' %}">{% translate 'Inbox' %}</a>

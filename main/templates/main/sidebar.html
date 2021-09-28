@@ -57,6 +57,9 @@
             <li class="sidebar-nav-item">
                 <a class="js-scroll-trigger" href="{% url 'main:profile' %}">{% translate 'My Profile' %}</a>
             </li>
+            <li class="sidebar-nav-item">
+                <a class="js-scroll-trigger" href="{% url 'main:my_documents' %}">{% translate 'My Documents' %}</a>
+            </li>
             {% if user.is_superuser %}
                 <li class="sidebar-nav-item">
                     <a class="js-scroll-trigger" href="{% url 'main:admin' %}">{% translate 'Administration' %}</a>

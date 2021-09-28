@@ -93,7 +93,7 @@ class DocumentResultTable(tables.Table):
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
     document_utc_update = tables.DateTimeColumn(orderable=False)
-    transcription_text = tables.Column()
+    # transcription_text = tables.Column()
 
     def render_transcription_text(self, value, record):
         import re
