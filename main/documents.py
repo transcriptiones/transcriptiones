@@ -30,7 +30,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     # author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
 
-    institution_name = fields.TextField(attr="parent_institution.institution_name",
+    institution_name = fields.TextField(attr="parent_ref_number.holding_institution.institution_name",
                                         fields={"keyword": fields.KeywordField()})
 
     ref_number_title = fields.TextField(attr="parent_ref_number.ref_number_title")
