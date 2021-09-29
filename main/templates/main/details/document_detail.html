@@ -9,6 +9,10 @@
     {{ document.title_name }}
 {% endblock %}
 
+{% block additional_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcription_text.css' %}">
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb _("Institutions") "main:institution_list" %}
@@ -46,7 +50,9 @@
     {% endcard %}
 
     {% card 'doc_detail_transcription' _('Transcript') %}
+        <section class="transcription">
         {{ document.transcription_text|safe }}
+        </section>
     {% endcard %}
 
     {% card 'doc_detail_meta_data' _('Content Meta Data') %}
@@ -65,6 +71,8 @@
 {% endblock content %}
 
 {% block extrascripts %}
+     <script src="{% static 'main/js/jquery.scoped.js' %}"></script>
+
     <script>
         $(document).on('click', '.confirm-unsubscribe', function () {
             console.debug('in here');
@@ -77,4 +85,11 @@
             window.location = $("#".concat(caller)).attr("href");
         });
     </script>
+
+    <script>
+    window.onload = function () {
+        console.log('Dokument geladen');
+        $.scoped();
+    }
+</script>
 {% endblock %}

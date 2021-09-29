@@ -1,0 +1,51 @@
+section.transcription {
+    all: unset;
+    font-family: serif;
+}
+
+section.transcription h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+section.transcription h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+section.transcription h3 {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+section.transcription h4 {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+section.transcription h5 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+section.transcription h6 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+section.transcription p {
+
+}
+
+section.transcription ul {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+section.transcription ul li {
+    text-align: left;
+}
+
+section.transcription em {
+    background-color: red;
+}

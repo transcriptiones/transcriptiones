@@ -10,7 +10,9 @@ from main.models import Document, RefNumber, User, UserSubscription, Author, Ins
 
 @login_required
 def subscriptions(request):
-    table = UserSubscriptionTable(data=UserSubscription.objects.filter(user=request.user))
+    subs = UserSubscription.objects.filter(user=request.user)
+    print(subs)
+    table = UserSubscriptionTable(data=subs)
     form = UserSubscriptionOptionsForm()
 
     if request.method == 'POST':

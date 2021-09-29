@@ -193,7 +193,7 @@ class UserSubscriptionTable(tables.Table):
             ref_number = RefNumber.objects.get(id=value)
             return ref_number.ref_number_name + ": " + ref_number.ref_number_title
         if record.subscription_type == UserSubscription.SubscriptionType.DOCUMENT:
-            document = Document.objects.get(id=value)
+            document = Document.all_objects.get(id=value)
             return document.title_name
         if record.subscription_type == UserSubscription.SubscriptionType.INSTITUTION:
             institution = Institution.objects.get(id=value)
@@ -218,7 +218,7 @@ class UserSubscriptionTable(tables.Table):
 
         if record.subscription_type == UserSubscription.SubscriptionType.DOCUMENT:
             url = reverse('main:unsubscribe_document', kwargs={'pk': record.object_id})
-            document = Document.objects.get(id=record.object_id)
+            document = Document.all_objects.get(id=record.object_id)
             url_view = reverse('main:document_detail',
                                kwargs={'inst_slug': document.parent_ref_number.holding_institution.institution_slug,
                                        'ref_slug': document.parent_ref_number.ref_number_slug,
