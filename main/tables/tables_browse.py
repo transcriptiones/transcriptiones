@@ -85,9 +85,10 @@ class SourceTypeTable(TranscriptionesTable):
 
 
 class AuthorTable(TranscriptionesTable):
-    """The SourceTypeTable shows a list of source types"""
-    author_name = tables.LinkColumn()
+    """The AuthorTable shows a list of authors and the number of documents and reference numbers connected to them.
+    Clicking on the name shows a detail page of the author."""
 
+    author_name = tables.LinkColumn()
     no_of_documents = tables.Column(verbose_name=_('No. of Documents'), accessor='id', orderable=False)
     no_of_ref_numbers = tables.Column(verbose_name=_('No. of Ref. Numbers'), accessor='id', orderable=False)
 
@@ -105,3 +106,8 @@ class AuthorTable(TranscriptionesTable):
             if doc.parent_ref_number not in ref_numbers:
                 ref_numbers.append(doc.parent_ref_number)
         return len(ref_numbers)
+
+
+class AdminAuthorTable(AuthorTable):
+    pass
+    # TODO AuthorTable with possibility to delete 'empty' authors
