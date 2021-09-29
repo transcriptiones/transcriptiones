@@ -124,7 +124,7 @@ def delete_all_messages_view(request):
     the_messages = UserMessage.objects.filter(receiving_user=request.user)
     for a_message in the_messages:
         a_message.delete()
-    messages.success(_('All messages have been deleted.'))
+    messages.success(request, _('All messages have been deleted.'))
     return redirect('main:messages')
 
 
