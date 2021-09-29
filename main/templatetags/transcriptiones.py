@@ -33,7 +33,7 @@ class CardNode(template.Node):
 
         output = \
             '<div class="card mt-3 shadow">' \
-            f'  <div class="card-header small text-right" data-toggle="collapse" href="#{card_id}">' \
+            f'  <div class="card-header small text-right" data-toggle="collapse" data-target="#{card_id}">' \
             f'    <a class="card-link">{_(card_title)} </a>' \
             '  </div>' \
             f'  <div id="{card_id}" class="collapse show">' \
