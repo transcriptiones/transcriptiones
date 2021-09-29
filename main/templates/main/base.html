@@ -2,8 +2,10 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 
+ {% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html>
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,7 +35,7 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
         <!-- Custom scripts for this template -->
-        <script type="text/javascript" src="{% static 'main/js/transcriptiones.js' %}"></script>
+        <script src="{% static 'main/js/transcriptiones.js' %}"></script>
 
         <!-- Fontawesome: included as django module -->
         <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -155,8 +157,7 @@
                             </div>
                         </li>
                     {% endif %}
-                    {% include "main/search_box.html" %}
-
+                    <li style="margin-top: 12px;">{% include "main/search_box.html" %}</li>
                 </ul>
             </div>
         </nav>
