@@ -39,11 +39,8 @@ def upload_transcription_view(request):
         form = UploadTranscriptionForm(request.POST)
 
         if form.is_valid():
-
             new_document = form.save(commit=False)
-            print("VALID", new_document.title_name)
             new_document.document_slug = slugify(new_document.title_name)
-            print("SLUG", new_document.document_slug)
             new_document.submitted_by = request.user
             new_document.active = True
             new_document.commit_message = 'Initial commit'

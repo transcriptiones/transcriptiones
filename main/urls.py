@@ -66,7 +66,7 @@ urlpatterns = [
     url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
     url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),
     url(r'^srctype-ch-autocomplete/$', v_autocomplete.SourceTypeChildAutocomplete.as_view(), name='srctype-ch-autocomplete', ),
-    url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(), name='author-autocomplete', ),
+    url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(create_field='author_name'), name='author-autocomplete', ),
     url(r'^language-autocomplete/$', v_autocomplete.LanguageAutocomplete.as_view(), name='language-autocomplete', ),
 
 
