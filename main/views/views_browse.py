@@ -12,6 +12,7 @@ from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, Aut
 
 
 def browse_options(request):
+    """Shows a page with browse options: institutions, authors, Source Types."""
     return render(request, 'main/details/browse_options.html')
 
 
@@ -37,7 +38,7 @@ class AuthorListView(SingleTableMixin, FilterView):
     template_name = "main/details/author_list.html"
 
     def get_queryset(self):
-        return Author.objects.all()
+        return Author.objects.all().order_by('author_name')
 
 
 class AuthorDetailView(MultiTableMixin, DetailView):
@@ -80,6 +81,7 @@ def source_type_list_view(request):
 
 
 def source_type_detail_view(request, pk):
+    """Shows a view with source types. Depends if the source type to show is a parent type or a child type."""
     selected_source_type = SourceType.objects.get(id=pk)
     if selected_source_type.parent_type is None:
         parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
@@ -98,7 +100,8 @@ def source_type_detail_view(request, pk):
 
 
 def source_type_group_detail_view(request, pk):
-    """Show documents of """
+    """Show documents of a a parent source type (e.g. The docs of all source types which have a common parent
+    source type."""
     print("PK", pk)
     selected_source_type = SourceType.objects.get(id=pk)
     parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
