@@ -39,11 +39,13 @@ class InstitutionTable(TranscriptionesTable):
     def __init__(self, *args, **kwargs):
         self.base_columns['no_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                    label_class='far fa-file-alt',
-                                                                                   title=_('Number of documents in this institution'))
+                                                                                   title=_(
+                                                                                       'Number of documents in this institution'))
 
         self.base_columns['no_of_ref_numbers'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                      label_class='far fa-folder-open',
-                                                                                     title=_('Number of reference numbers in this institution'))
+                                                                                     title=_(
+                                                                                         'Number of reference numbers in this institution'))
         super(InstitutionTable, self).__init__(*args, **kwargs)
 
     def render_city(self, value, record):
@@ -74,7 +76,8 @@ class SourceTypeTable(TranscriptionesTable):
     def __init__(self, *args, **kwargs):
         self.base_columns['no_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                    label_class='far fa-file-alt',
-                                                                                   title=_('Number of documents in this institution'))
+                                                                                   title=_(
+                                                                                       'Number of documents in this institution'))
         super(SourceTypeTable, self).__init__(*args, **kwargs)
 
     def render_no_of_documents(self, value, record):
@@ -94,7 +97,11 @@ class AuthorTable(TranscriptionesTable):
         row_attrs = default_row_attrs
 
     def render_no_of_documents(self, value, record):
-        return 0    # TODO
+        return record.document_set.count()
 
     def render_no_of_ref_numbers(self, value, record):
-        return 0    # TODO
+        ref_numbers = list()
+        for doc in record.document_set.all():
+            if doc.parent_ref_number not in ref_numbers:
+                ref_numbers.append(doc.parent_ref_number)
+        return len(ref_numbers)
