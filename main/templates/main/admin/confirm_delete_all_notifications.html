@@ -1,0 +1,19 @@
+{% load i18n %}
+<div class="modal fade" id="confirmUnsubscribeAllModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="confirmUnsubscribeAllModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% translate 'Remove all subscriptions?' %}</h5>
+      </div>
+      <div class="modal-body">
+          {% blocktranslate %}
+          All subscriptions will be removed. Proceed?
+          {% endblocktranslate %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% translate 'Cancel' %}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmUnsubscribeAllButtonModal">{% translate 'Unsubscribe All' %}</button>
+      </div>
+    </div>
+  </div>
+</div>
