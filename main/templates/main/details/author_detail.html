@@ -5,7 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {{ author.author_name }}
+    {% translate 'Author' %}: {{ author.author_name }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -39,11 +39,16 @@
         {% render_table tables.1 %}
     {%  endcard %}
 
-    {% include 'main/admin/confirm_unsubscribe.html' %}
+    <!-- include is not needed for unauthenticated page -->
+    {% if request.user.is_authenticated %}
+        {% include 'main/admin/confirm_unsubscribe.html' %}
+    {% endif %}
 
 {% endblock content %}
 
 {% block extrascripts %}
+    <!-- script is not needed for unauthenticated page -->
+    {% if request.user.is_authenticated %}
     <script>
         $(document).on('click', '.confirm-unsubscribe', function () {
             console.debug('in here');
@@ -56,4 +61,5 @@
             window.location = $("#".concat(caller)).attr("href");
         });
     </script>
+    {% endif %}
 {% endblock %}

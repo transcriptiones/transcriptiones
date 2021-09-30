@@ -5,7 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
+    {% translate 'Ref. No.' %}: {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -40,11 +40,14 @@
         {% render_table tables.1 %}
     {%  endcard %}
 
+    {% if request.user.is_authenticated %}
     {% include 'main/admin/confirm_unsubscribe.html' %}
+    {% endif %}
 
 {% endblock content %}
 
 {% block extrascripts %}
+    {% if request.user.is_authenticated %}
     <script>
         $(document).on('click', '.confirm-unsubscribe', function () {
             $("#confirmUnsubscribeModal").attr("caller-id", $(this).attr("id"));
@@ -55,4 +58,5 @@
             window.location = $("#".concat(caller)).attr("href");
         });
     </script>
+    {% endif %}
 {% endblock %}

@@ -35,8 +35,11 @@
     {% endcard %}
 
     {% card 'source_type_list_card' _('Source Types') %}
-
-        <p>Documents with type '{{ selected }}'</p>
+        <p>
+            {% blocktranslate %}
+            Documents with type '{{ selected }}'
+            {% endblocktranslate %}
+        </p>
         {% render_table table %}
     {% endcard %}
 {% endblock content %}
