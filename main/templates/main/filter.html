@@ -1,6 +1,6 @@
 {% load bootstrap4 %}
 
-<form action="" method="get" class="form form-inline">
+<form action="{{ request.path }}" method="get" class="form form-inline">
     <i class="fas fa-filter"></i>&nbsp;
         {% bootstrap_form filter.form layout='inline' form_group_class='my-small-form' %}
         &nbsp;
