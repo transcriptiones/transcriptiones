@@ -114,7 +114,7 @@ def institution_dropdown_view(request):
     if request.method == 'GET':
         institutions = Institution.objects.all().order_by('institution_name')
         data['select'] = render_to_string(
-            'main/tests2/_inst_dropdown.html',
+            'main/upload/_inst_dropdown.html',
             {'insts': institutions},
             request=request
         )
@@ -127,7 +127,7 @@ def refnumber_dropdown_view(request):
     if request.method == 'GET':
         ref_numbers = RefNumber.objects.all().order_by('ref_number_name')
         data['select'] = render_to_string(
-            'main/tests2/_refn_dropdown.html',
+            'main/upload/_refn_dropdown.html',
             {'refns': ref_numbers},
             request=request
         )
