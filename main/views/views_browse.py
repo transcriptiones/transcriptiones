@@ -12,7 +12,9 @@ from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, Aut
 
 
 def browse_options(request):
-    """Shows a page with browse options: institutions, authors, Source Types."""
+    """Shows a page with browse options: institutions, authors, Source Types. This is a static page and only
+    shows the template. Can be accessed without login."""
+
     return render(request, 'main/details/browse_options.html')
 
 
@@ -125,7 +127,7 @@ class InstitutionDetailView(MultiTableMixin, DetailView):
     template_name = "main/details/institution_detail.html"
 
     def dispatch(self, request, *args, **kwargs):
-        self.my_filter = RefNumberFilter(request.GET, RefNumber.objects.filter(holding_institution=self.get_object()))
+        self.my_filter = RefNumberFilter(request.GET, RefNumber.objects.filter(holding_institution=self.get_object()).order_by('ref_number_name'))
         return super(InstitutionDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_tables(self):
