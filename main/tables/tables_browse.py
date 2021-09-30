@@ -7,8 +7,15 @@ from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 
 class RefNumberTable(TranscriptionesTable):
     """The RefNumberTable shows a list of reference numbers"""
+
     ref_number_name = tables.LinkColumn()
-    number_of_documents = tables.Column(accessor='id')
+    number_of_documents = tables.Column(accessor='id', orderable=False)
+
+    def __init__(self, *args, **kwargs):
+        self.base_columns['number_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
+                                                                                       label_class='far fa-file-alt',
+                                                                                       title=_('Number of documents with this reference number'))
+        super(RefNumberTable, self).__init__(*args, **kwargs)
 
     class Meta(TranscriptionesTable.Meta):
         model = RefNumber
