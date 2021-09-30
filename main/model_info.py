@@ -62,7 +62,8 @@ def get_institution_info(institution):
 
 
 def get_ref_number_info(ref_number):
-    data = [(get_verbose_field_name(ref_number, 'holding_institution'), ref_number.holding_institution),
+    data = [(get_verbose_field_name(ref_number, 'holding_institution'),
+             mark_safe(f'<a href="{ref_number.holding_institution.get_absolute_url()}">{ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(ref_number, 'ref_number_name'), ref_number.ref_number_name),
             (get_verbose_field_name(ref_number, 'ref_number_title'), ref_number.ref_number_title),
             (get_verbose_field_name(ref_number, 'collection_link'),
