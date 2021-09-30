@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.forms import TextInput
 from django.utils.translation import ugettext_lazy as _
 from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
     ChoiceFilter, ModelChoiceFilter, DateFromToRangeFilter
@@ -35,7 +36,12 @@ class InstitutionFilter(FilterSet):
 
 class RefNumberFilter(FilterSet):
     """Filter to filter a reference number table"""
-    ref_number_name = CharFilter(method='multi_filter')
+    ref_number_name = CharFilter(method='multi_filter', label="", widget=TextInput(attrs=
+        {   'placeholder': _('Reference Number or Title contain'),
+            'class': 'form-control',
+            'size': 100,
+        }
+    ))
 
     class Meta:
         model = RefNumber
