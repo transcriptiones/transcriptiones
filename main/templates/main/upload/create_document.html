@@ -15,8 +15,9 @@
 {% endblock %}
 
 {% block content %}
-    {% include "main/tests2/_modal.html" %}
-    {# include "main/tests2/_inst_dropdown.html" #}
+    <button onclick="dodo()">Click me</button>
+
+    {% include "main/upload/_modal.html" %}
 
     <form action="{% url 'main:upload_document' %}" method="post">
         {% csrf_token %}
@@ -101,7 +102,7 @@
 {% endblock content %}
 
 {% block extrascripts %}
-    <!-- I dont understand this?? -->
+    <!-- I dont understand this??
     <script>
         (function($) {
             $('#add-form').click(function() {
@@ -122,6 +123,7 @@
             })
         })($)
     </script>
+    -->
 
     <!-- RESETS THE REF NUMBER DROPDOWN WHEN THE INSTITUTION CHANGES -->
     <script>
@@ -225,8 +227,8 @@
                 asyncSettings: {
                   closeOnSubmit: true,
                   successMessage: asyncSuccessMessageCreate,
-                  dataUrl: "{% url 'main:insts' %}",
-                  dataElementId: "#insts-dropdown",
+                  dataUrl: "{% url 'main:refns' %}",
+                  dataElementId: "#refns-dropdown",
                   dataKey: "select",
                   addModalFormFunction: reinstantiateModalForms
                 }
@@ -241,7 +243,17 @@
           // Hide message
           $(".alert").fadeTo(2000, 500).slideUp(500, function () {
               $(".alert").slideUp(500);
+              console.debug('added reff');
           });
       });
   </script>
+
+    <script>
+    function dodo() {
+        console.debug($('#parent_institution').select2('data'));
+        $('#parent_institution').val('12');
+        $('#parent_institution').trigger('change');
+        console.debug('after')
+    }
+    </script>
 {% endblock extrascripts %}
