@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+
+{% block page_title %}
+    {% translate 'Username Request' %}
+{%  endblock %}
+
+{% block content %}
+
+    {% card 'request_done_card' _('Your Username Has Been Reset') %}
+        <div align="center">
+            <p>{% translate 'Your username has been sent to you successfully.' %}</p>
+            <a href="{% url 'main:login' %}" class="btn btn-primary">{% translate 'Login' %}</a>
+        </div>
+    {% endcard %}
+
+{% endblock %}

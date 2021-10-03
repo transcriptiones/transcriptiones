@@ -5,21 +5,18 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    {% translate 'Registration' %}
+    {% translate 'Username Request' %}
 {%  endblock %}
 
 {% block content %}
-    {% card 'signup_card' _('Register') %}
+    {% card 'signup_card' _('Request Username') %}
         {% if user.is_authenticated %}
             <p>{% translate 'You are already signed in.' %}</p>
             <div id="logout">
                 <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout.' %}</a>
             </div>
         {% else %}
-
                 {% crispy form %}
-
-
         {% endif %}
     {% endcard %}
 {% endblock %}

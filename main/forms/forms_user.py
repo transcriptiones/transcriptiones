@@ -35,9 +35,8 @@ class WriteMessageForm(forms.ModelForm):
         fields = ('receiving_user', 'subject', 'message')
 
 
-
 class UserMessageOptionsForm(forms.ModelForm):
-
+    """TODO Needs to be looked at"""
     def __init__(self, *args, **kwargs):
         super(UserMessageOptionsForm, self).__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
@@ -64,10 +63,11 @@ class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 
     email = forms.EmailField(label='E-Mail', max_length=255, help_text='E-Mail-Adresse')
-    mark_anonymous = forms.BooleanField(label='Anonym publizieren', required=False)
+    # mark_anonymous = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
+        """
         for name in self.fields.keys():
             if isinstance(self.fields[name], forms.BooleanField):
                 self.fields[name].widget.attrs.update({'class': 'form-check-input'})
@@ -79,19 +79,22 @@ class SignUpForm(UserCreationForm):
             if name.startswith('password'):
                 self.fields[name].widget.attrs.update({
                     'placeholder': self.fields[name].label
-                    })
+                    })"""
         self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Register'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'mark_anonymous')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        """
         labels = {
             'username': get_popover_html(User, 'username'),
             'first_name': get_popover_html(User, 'first_name'),
             'last_name': get_popover_html(User, 'last_name'),
             'email': get_popover_html(User, 'email'),
             'mark_anonymous': get_popover_html(User, 'mark_anonymous')
-        }
+        }"""
 
 
 class LoginForm(AuthenticationForm):
@@ -161,4 +164,16 @@ class CustomSetPasswordForm(SetPasswordForm):
                 })
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Reset Password'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
+
+
+class RequestUsernameForm(forms.Form):
+    email_of_user = forms.EmailField(label=_('Your E-Mail Address'), required=True,
+                                     help_text=_('Please enter the e-mail address you registered with. '
+                                                 'We will send you an e-mail with your username.'))
+
+    def __init__(self, *args, **kwargs):
+        super(RequestUsernameForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Request Username'), css_class='btn-primary'))
         self.helper.form_method = 'POST'

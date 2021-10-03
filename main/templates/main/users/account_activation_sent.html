@@ -1,7 +1,15 @@
 {% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+
+{% block page_title %}
+    {% translate 'Login' %}
+{% endblock %}
 
 {% block content %}
-
-<div>Ihre Registrierung war erfolgreich. Sie werden in Kürze eine E-Mail mit einem Bestätigungslink erhalten</div>
-
+    {% card 'info_card' _('Registration Email sent') %}
+    <div align="center">
+        {% translate 'You have been successfully registered. You will receive a confirmation e-mail shortly.' %}
+    </div>
+    {% endcard %}
 {% endblock %}

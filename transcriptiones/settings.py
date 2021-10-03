@@ -166,7 +166,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Email configuration
 # print emails to console for development purposes.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'transcriptiones.dg.unibas.ch'
+
 DEFAULT_FROM_EMAIL = "dominic.weber@librarylab.ethz.ch"     # Change this as soon as we have a domain
+
+NO_REPLY_EMAIL = "no-reply@transcriptiones.ch"
+
 
 # AUTO FIELD
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

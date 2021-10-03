@@ -1,4 +1,34 @@
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.utils.translation import ugettext_lazy as _
+
+from main.tokens import account_activation_token
+from transcriptiones.settings import NO_REPLY_EMAIL
+
+
+def send_username_request_mail(user):
+    subject = _('Transcriptiones: Your User Name')
+    message = _(f'Your Username is: {user.username}')
+    send_transcriptiones_mail(subject, message, NO_REPLY_EMAIL, user.email)
+
+
+def send_registration_confirmation_mail(user, current_site):
+    subject = _('Transcriptiones: Please activate your account')
+    message = render_to_string('main/users/account_activation_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+    send_transcriptiones_mail(subject, message, NO_REPLY_EMAIL, user.email)
+
+
+def send_transcriptiones_mail(subject, message, from_email, to_email):
+    print("SENDING MAIL. TO:", to_email, ", SUBJECT:", subject)
+    send_mail(subject, message, from_email, [to_email])
 
 
 def get_document_subscription_message(user, document):

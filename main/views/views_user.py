@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -7,18 +8,17 @@ from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordRes
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django_tables2 import RequestConfig
 
-from transcriptiones.settings import DEFAULT_FROM_EMAIL
+from main.mail_utils import send_registration_confirmation_mail, send_username_request_mail
 
 from main.models import User, UserSubscription
-from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, CustomPasswordResetForm, CustomSetPasswordForm
+from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, \
+    CustomPasswordResetForm, CustomSetPasswordForm, RequestUsernameForm
 from main.tokens import account_activation_token
 from main.model_info import get_user_info, get_public_user_info
 from main.tables.tables_base import TitleValueTable
@@ -35,15 +35,8 @@ def signup(request):
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
             current_site = get_current_site(request)
-            subject = 'Transcriptiones: Bitte aktivieren Sie Ihren Account'
-            message = render_to_string('main/users/accountactivationemail.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-                })
-            send_mail(subject, message, DEFAULT_FROM_EMAIL, [user.email])
-            return redirect('account_activation_sent')
+            send_registration_confirmation_mail(user, current_site)
+            return redirect('main:account_activation_sent')
 
     else:
         form = SignUpForm()
@@ -56,7 +49,7 @@ class AccountActivationSentView(TemplateView):
 
 
 def activate(request, uidb64, token):
-    """View to check token from confirmation-link. Logs User in and redirects to start"""
+    """View to check token from confirmation-link. Logs User in and redirects to the start page"""
 
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -69,7 +62,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        return redirect('start')
+        messages.success(request, _('Successfully logged in!'))
+        return redirect('main:start')
     else:
         return render(request, 'main/users/account_activation_invalid.html')
 
@@ -181,3 +175,24 @@ class CustomPasswordConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
     template_name = "main/users/password_reset_confirm.html"
     success_url = reverse_lazy('main:password_reset_complete')
+
+
+def request_username_view(request):
+    """Doc"""
+
+    if request.method == 'POST':
+        form = RequestUsernameForm(request.POST)
+        if form.is_valid():
+            try:
+                user = User.objects.get(email=form.cleaned_data['email_of_user'])
+                send_username_request_mail(user)
+                return redirect('main:username_request_done')
+            except User.DoesNotExist:
+                messages.error(_('This e-mail address is not registered.'))
+    else:
+        form = RequestUsernameForm()
+    return render(request, 'main/users/request_username.html', {'form': form})
+
+
+def request_username_done_view(request):
+    return render(request, 'main/users/request_username_done.html')

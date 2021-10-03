@@ -30,6 +30,7 @@
 
         <p class="text-center text-muted">
             {% translate 'Forgot your password?' %} <a href="{% url 'main:password_reset' %}">{% translate 'Reset it here.' %}</a> &nbsp;|&nbsp;
+            {% translate 'Forgot your username?' %} <a href="{% url 'main:username_request' %}">{% translate 'Find out here.' %}</a> &nbsp;|&nbsp;
             {% translate 'No user account?' %} <a href="{% url 'main:signup' %}">{% translate 'Register here.' %}</a>
         </p>
 
