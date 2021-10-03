@@ -1,14 +1,9 @@
 from django.conf.urls import url
-from django.urls import path, include
+from django.urls import path
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, PasswordResetDoneView,\
     PasswordResetCompleteView
-from rest_framework.routers import DefaultRouter
-
-from main.views.views_test import InstitutionViewSet
 from main.views.views_upload_old import batch_upload
-from main.views.views_upload_old import EditMetaView
-
 import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
 import main.views.views_browse as v_browse
@@ -20,9 +15,6 @@ import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
 import main.views.views_upload as v_upload
 import main.views.views_user as v_user
-
-router = DefaultRouter()
-router.register('institutions', InstitutionViewSet)
 
 
 app_name = 'main'
@@ -88,8 +80,6 @@ urlpatterns = [
 
     path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
     path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
-
-    path('api/', include(router.urls)),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
     path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),

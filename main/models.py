@@ -1,5 +1,4 @@
 import uuid
-
 from django.conf import settings
 from django.db import models
 from django.db.models import Q, UniqueConstraint
@@ -8,13 +7,10 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-
 from partial_date import PartialDateField
 from django_countries.fields import CountryField
 from languages_plus.models import Language
 from ckeditor.fields import RichTextField
-
-#TODO replace from i18n_model.models import I18nModel
 from rest_framework import serializers
 
 
@@ -47,6 +43,19 @@ class Institution(models.Model):
                                help_text=_("URL of the web site"))
 
     institution_utc_add = models.DateTimeField(auto_now_add=True)
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                   verbose_name=_("Created by"),
+                                   on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                   related_name="institution_creator")
+
+    last_update_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                       verbose_name=_("Updated by"),
+                                       on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                       related_name="institution_updater",
+                                       blank=True, null=True,
+                                       default=None)
+
     institution_slug = models.SlugField(unique=True)
 
     class Meta:
@@ -58,12 +67,6 @@ class Institution(models.Model):
 
     def get_absolute_url(self):
         return reverse('main:institution_detail', kwargs={'inst_slug': self.institution_slug})
-
-
-class InstitutionSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Institution
-        fields = ['url', 'id', 'institution_name', 'street', 'zip_code']
 
 
 class RefNumber(models.Model):
@@ -90,6 +93,19 @@ class RefNumber(models.Model):
                                       help_text=_("Link to the collection"))
 
     ref_number_utc_add = models.DateTimeField(auto_now_add=True)
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                   verbose_name=_("Created by"),
+                                   on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                   related_name="ref_number_creator")
+
+    last_update_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                       verbose_name=_("Updated by"),
+                                       on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                       related_name="ref_number_updater",
+                                       blank=True, null=True,
+                                       default=None)
+
     ref_number_slug = models.SlugField(unique=True)
 
     class Meta:
@@ -120,6 +136,18 @@ class Author(models.Model):
                                  max_length=100,
                                  blank=True,
                                  help_text=_("Persistent URL to the GND entry of the author."))
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                   verbose_name=_("Created by"),
+                                   on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                   related_name="author_creator")
+
+    last_update_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                       verbose_name=_("Updated by"),
+                                       on_delete=models.PROTECT,  # Users are not supposed to be deletable
+                                       related_name="author_updater",
+                                       blank=True, null=True,
+                                       default=None)
 
     class Meta:
         verbose_name = _("Document author")

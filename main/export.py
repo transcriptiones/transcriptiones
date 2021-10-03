@@ -1,10 +1,14 @@
 import json
 
-def export(document, type='tei'):
 
-    l_type = type.lower()
+def export(document, export_type='tei'):
+    """General export function for all supported types. Takes a type argument to indicate which export function
+    should be executed.
+    Supported types: tei (default), json, html, pdf"""
+
+    l_type = export_type.lower()
     if l_type not in ['tei', 'json', 'html', 'pdf']:
-        raise ValueError("type variable value is invalid")
+        raise ValueError("export_type value is invalid")
 
     export_str = ""
     if l_type == 'tei':
@@ -20,7 +24,8 @@ def export(document, type='tei'):
 
 
 def export_tei(document):
-    username = '123'
+    """Exports a given document within the TEI standard."""
+    username = document.submitted_by.username if document.publish_user else 'Anonymous'
     tei_string = '<TEI xmlns="http://www.tei-c.org/ns/1.0">'\
                  '  <teiHeader>'\
                  '    <titleStmt>'\
@@ -54,10 +59,6 @@ def export_tei(document):
                  f'    {document.transcription_text}'\
                  '  </text>'\
                  '</TEI>'
-
-    username = 'Anonymous'
-    if document.publish_user:
-        username = document.submitted_by.username
 
     illumination_text = 'There are no illuminations in this manuscript.'
     if document.illuminated:

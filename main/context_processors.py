@@ -1,5 +1,3 @@
-from django.conf import settings  # import the settings file
-
 from main.models import UserMessage, UserNotification
 
 
