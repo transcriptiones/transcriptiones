@@ -27,7 +27,7 @@ SECRET_KEY = '2!br_du&%2-^&zbygsfv#y)ekw3a&=kx$i$=vk2sfj45rv2z70'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -104,6 +104,7 @@ DATABASES = {
         'NAME': 'transcriptiones',
         'USER': 'transcriptiones_user',
         'PASSWORD': 'transcriptiones',
+        # 'PASSWORD': 's0uW@nn@KrrackTh1z?GudLöck',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
@@ -166,11 +167,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Email configuration
 # print emails to console for development purposes.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# PRODUCTION SETTINGS
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'transcriptiones.dg.unibas.ch'
-
-DEFAULT_FROM_EMAIL = "dominic.weber@librarylab.ethz.ch"     # Change this as soon as we have a domain
-
+# EMAIL_USE_TLS = False
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 23
 NO_REPLY_EMAIL = "no-reply@transcriptiones.ch"
 
 
