@@ -545,6 +545,12 @@ class User(AbstractBaseUser, PermissionsMixin):
                                                                     'documents were edited by another user?'),
                                                         default=True)
 
+    ui_language = models.CharField(max_length=20,
+                                   verbose_name=_('Default User Interface Language'),
+                                   help_text=_('What is your preferred language?'),
+                                   choices=settings.LANGUAGES,
+                                   default='en')
+
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
