@@ -3,10 +3,16 @@
 {% load i18n %}
 {% load transcriptiones %}
 {% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Username Request' %}
 {%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Request Username") "" %}
+{% endblock %}
 
 {% block content %}
     {% card 'signup_card' _('Request Username') %}

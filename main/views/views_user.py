@@ -45,7 +45,7 @@ def signup(request):
 
 class AccountActivationSentView(TemplateView):
     """View to Inform the User that the confirmation-link has been sent."""
-    template_name = 'main/users/email_templates/account_activation_sent.html'
+    template_name = 'main/users/email_templates/../templates/main/users/account_activation_sent.html'
 
 
 def activate(request, uidb64, token):
@@ -65,7 +65,7 @@ def activate(request, uidb64, token):
         messages.success(request, _('Successfully logged in!'))
         return redirect('main:start')
     else:
-        return render(request, 'main/users/email_templates/account_activation_invalid.html')
+        return render(request, 'main/users/email_templates/../templates/main/users/account_activation_invalid.html')
 
 
 class CustomLoginView(SuccessMessageMixin, LoginView):

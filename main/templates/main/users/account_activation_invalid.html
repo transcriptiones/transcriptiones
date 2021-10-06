@@ -1,21 +1,21 @@
 {% extends 'main/base.html' %}
-{% load static %}
 {% load i18n %}
 {% load transcriptiones %}
-{% load crispy_forms_tags %}
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Reset Password' %}
-{%  endblock %}
+    {% translate 'Login' %}
+{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Reset Password") "" %}
+    {% breadcrumb _("Login") "" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'reset_Card' _('Reset Your Password') %}
-        {% crispy form %}
+    {% card 'info_card' _('Invalid link') %}
+    <div align="center">
+        {% translate 'This activation link is invalid.' %}
+    </div>
     {% endcard %}
 {% endblock %}
