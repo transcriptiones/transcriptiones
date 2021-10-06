@@ -1,9 +1,15 @@
 {% extends 'main/base.html' %}
 {% load i18n %}
 {% load transcriptiones %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
     {% translate 'Logged out' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Login") "" %}
 {% endblock %}
 
 {% block content %}
