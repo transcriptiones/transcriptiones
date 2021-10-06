@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
 from main.models import User, UserMessage
-from main.forms.forms_helper import initialize_form_helper, get_popover_html
+from main.forms.forms_helper import initialize_form_helper
 
 
 class WriteMessageForm(forms.ModelForm):
@@ -62,7 +62,8 @@ class UserSubscriptionOptionsForm(forms.ModelForm):
 class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 
-    email = forms.EmailField(label='E-Mail', max_length=255, help_text='E-Mail-Adresse')
+    email = forms.EmailField(label=_('E-Mail'), max_length=255,
+                             help_text=_('E-Mail-Address. We will send an activation Link to this address.'))
     # mark_anonymous = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
@@ -86,7 +87,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'ui_language', 'email', 'password1', 'password2')
         """
         labels = {
             'username': get_popover_html(User, 'username'),
