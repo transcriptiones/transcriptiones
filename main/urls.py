@@ -98,6 +98,8 @@ urlpatterns = [
     path('user/passwordchange/done/', PasswordChangeDoneView.as_view(template_name='main/users/password_change_done.html'), name='password_change_done'),
     path('user/profile/', v_user.userprofile, name='profile'),
     path('user/documents/', v_user.my_documents, name='my_documents'),
+    path('user/documents/created/', v_user.my_documents, name='my_own_documents'),
+    path('user/documents/drafts/', v_user.my_documents, name='my_document_drafts'),
     path('user/public/profile/<str:username>/', v_user.public_profile, name='public_profile'),
     path('user/profile/update/', v_user.UserUpdateView.as_view(), name='user_update'),
     path('user/passwordreset/', v_user.CustomPasswordResetView.as_view(), name='password_reset'),
@@ -136,6 +138,7 @@ urlpatterns = [
     path('user/messages/reply/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
     path('user/notifications/view/<int:notification_id>/', v_messages.notifications_read_view, name='notifications_read'),
 
+    path('user/messages/compose/', v_messages.message_user_view, name='write_message'),
     path('user/messages/compose/<str:username>/', v_messages.message_user_view, name='message_user'),
 
     ##############

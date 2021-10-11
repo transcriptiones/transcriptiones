@@ -1,0 +1,238 @@
+{% load static %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+ {% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="TRANSCRIPTIONES"> <!-- TODO Add description, keywords -->
+        <meta name="author" content="TRANSCRIPTIONES">
+
+        <title>{% block title_bar %}TRANSCRIPTIONES{% endblock %}</title>
+        <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' type='image/x-icon' %}">
+
+        <!-- Bootstrap core JavaScript -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <!-- <script src="{# static 'assets/js/bootstrap.min.js' #}"></script> -->
+        <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+        <!-- Custom scripts for this template -->
+        <script src="{% static 'main/js/transcriptiones.js' %}"></script>
+
+        <!-- Fontawesome: included as django module -->
+        <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
+        <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
+
+        <!-- simple-line-icons: Used for social media icons in footer -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+
+        <!-- Flags for country dropdown -->
+        <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+
+        <!-- Transcriptiones CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones_base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/scroll_to_top.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/footer.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/breadcrumbs.css' %}">
+
+        {%  block custom_css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
+        {% endblock %}
+
+        {% block additional_css %}
+        {% endblock %}
+
+        {% block additional_javascript %}
+        {% endblock %}
+
+        {% block additional_head_tags %}
+        {% endblock %}
+
+
+    {% block scripts %}
+
+    {% endblock %}
+    </head>
+
+    <body id="page-top">
+        {% block body_includes %}
+        {% endblock %}
+
+        {% block modal_includes %}
+        {% endblock %}
+
+        {% block breadcrumbs %}
+            {% clear_breadcrumbs %}
+            {% breadcrumb "Transcriptiones" "/" %}
+        {% endblock %}
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-sm fixed-top position-absolute text.navbar">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                 <ul class="navbar-nav mr-auto align-items-center">
+                    <li class="navbar-brand">
+                        <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-navbar" href="#" id="upload_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {% translate 'Upload' %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="upload_dropdown">
+                            <a class="dropdown-item" href="{% url 'main:upload_options' %}">{% translate 'Upload Options' %}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'main:upload_document' %}">{% translate 'Upload Single Page' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:upload_multiple' %}">{% translate 'Upload Multiple Pages' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:upload_batch' %}">{% translate 'Guided Batch Upload' %}</a>
+                        </div>
+                    </li>
+                    <!-- <li class="navbar-nav-item d-none d-sm-block"> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-navbar" href="#" id="browse_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {% translate 'Browse' %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="browse_dropdown">
+                            <a class="dropdown-item" href="{% url 'main:browse_options' %}">{% translate 'Browse Options' %}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'main:institution_list' %}">{% translate 'Institutions' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:source_type_list' %}">{% translate 'Source Types' %}</a>
+                            <a class="dropdown-item" href="{% url 'main:author_list' %}">{% translate 'Authors' %}</a>
+                        </div>
+                    </li>
+                    <li class="navbar-nav-item d-none d-sm-block">
+                        <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
+                        </li>
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar" href="{% url 'main:signup' %}">{% translate 'Register' %}</a>
+                        </li>
+                     {% endif %}
+                 </ul>
+            </div>
+
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item dropdown">
+                            {% if user_subscriptions > 0 %}
+                                <a href="{% url 'main:notifications' %}" title="You have {{ user_subscriptions }} notifications"><span class="badge badge-pill badge-danger">{{ user_subscriptions }}</span></a>
+                            {% endif %}
+                            {% if user_messages > 0 %}
+                                <a href="{% url 'main:messages' %}" title="You have {{ user_messages }} messages"><span class="badge badge-pill badge-warning">{{ user_messages }}</span></a> &nbsp;
+                            {% endif %}
+                            <a class="nav-link dropdown-toggle text-navbar" href="#" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="user_dropdown">
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Profile' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:my_documents' %}">{% translate 'My Documents' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:profile' %}">{% translate 'User Information' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:subscriptions' %}">{% translate 'Subscriptions' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:messages' %}">{% translate 'Inbox' %}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Administrator Functions' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:admin' %}">{% translate 'Administration Pages' %}</a>
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">{% translate 'Django Admin' %}</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                    <li style="margin-top: 12px;">{% include "main/search_box.html" %}</li>
+                </ul>
+            </div>
+        </nav>
+        {% include "main/sidebar.html" %}
+        <!-- Content -->
+        {% block base_content %}
+            <section class="content-section">
+                <div class="container text-center">
+                   {% for message in messages %}
+                      <div class="alert {{ message.tags }}" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-sm-10 mx-auto">
+                            {% render_breadcrumbs %}
+                            <div class="content-section-heading">
+                                <h3 class="mb-sm-3">
+                                    {% block page_title %}
+                                        Implement block "page_title"
+                                    {% endblock %}
+                                </h3>
+                            </div>
+                            <div>
+                            </div>
+                            {% block content %}
+                                    <p class="lead mb-5">Implement block "content"</p>
+                                {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#">
+                        <i class="icon-social-facebook"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#">
+                        <i class="icon-social-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="#">
+                        <i class="icon-social-github"></i>
+                    </a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2021</p> <!-- TODO Get these values from a context processor-->
+        </div>
+
+        <!-- Sidebar -->
+        {% include "main/language.html" %}
+    </footer>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% block extrascripts %}{% endblock extrascripts %}
+    <script>
+        $('.alert').hide().fadeIn(500).delay(4000).fadeOut(500);
+    </script>
+</body>
+</html>

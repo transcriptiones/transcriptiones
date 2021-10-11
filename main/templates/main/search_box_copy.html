@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<div class="input-group">
+  <div class="form-outline">
+    <input type="search" id="form1" class="form-control" />
+    <label class="form-label" for="form1">Search</label>
+  </div>
+  <button type="button" class="btn btn-primary">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+
+<form class="form-inline my-2 my-lg-0" action="{% url 'main:search_redirect' %}" method="post">
+    {% csrf_token %}
+  <input class="form-control mr-sm-2" type="search" placeholder="{% translate 'Search' %}" aria-label="{% translate 'Search' %}" name="query">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="search"><i class="fas fa-search"></i></button>
+</form>

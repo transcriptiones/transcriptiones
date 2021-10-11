@@ -1,8 +1,9 @@
 {% load static %}
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load humanize %}
 
- {% get_current_language as LANGUAGE_CODE %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -50,9 +51,10 @@
         <!-- Transcriptiones CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones_base.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/scroll_to_top.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'main/css/sidebar.css' %}">
+
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/footer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/breadcrumbs.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/navbar.css' %}">
 
         {%  block custom_css %}
             <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
@@ -80,88 +82,191 @@
         {% block modal_includes %}
         {% endblock %}
 
+        <!-- Navigation -->
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-md bg-primary fixed-top">
+                <!-- LOGO -->
+                <a class="navbar-brand" href="{% url 'main:start' %}">Transcriptiones</a>
+
+                <!-- TOGGLER -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="" role="button" ><i class="fa fa-bars" aria-hidden="true" style="color:#e6e6ff"></i></span>
+                </button>
+
+                <!-- COLLAPSABLE BAR -->
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <!-- MAIN NAVBAR -->
+                    <ul class="navbar-nav navbar-left-top">
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}" href="{% url 'main:browse_options' %}">{% translate 'Explore' %}</a>
+                        </li>
+
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'upload_options' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
+                        </li>
+
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
+                        </li>
+
+                        <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'about' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
+                        </li>
+                    </ul>
+
+                    <!-- RIGHT PART OF NAVIGATION -->
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <!-- SEARCH BOX -->
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <form action="{% url 'main:search_redirect' %}" method="post">
+                                    {% csrf_token %}
+                                    <input class="form-control" type="text" placeholder="Search...">
+                                </form>
+                            </div>
+                        </li>
+                        <!-- NOTIFICATIONS -->
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown notification">
+                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-bell" style="color: #e6e6f2;"></i>
+                                <!-- red bullet on bell -->
+                                {% if cp_total_new_notifications > 0 %}
+                                    <span class="indicator"></span>
+                                {% endif %}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
+                                <li>
+                                    {% if cp_total_new_notifications == 0 %}
+                                        <div class="notification-title">You have no new notifications.</div>
+                                    {% elif cp_total_new_notifications > 3 %}
+                                        <div class="notification-title">Showing 3 of {{ cp_total_new_notifications }} new notifications.</div>
+                                    {% else %}
+                                        <div class="notification-title">You have {{ cp_total_new_notifications }} new notifications.</div>
+                                    {% endif %}
+                                    <div class="notification-list">
+                                        <div class="list-group">
+                                            {% for notification in cp_user_notifications %}
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="notification-info">
+                                                    <div class="notification-list-user-img">
+                                                        <div class="circle" style="background: {{ notification.user_color }};">
+                                                          <span class="initials">{{ notification.sender.0 }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="notification-list-user-block">
+                                                        <span class="notification-list-user-name">{{ notification.sender }}</span>accepted your invitation to join the team.
+                                                        <div class="notification-date">{{ notification.sending_time|naturaltime }}</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <!-- End notifications -->
+
+                        <!-- Option / Apps Block-->
+                        <li class="nav-item dropdown connection">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-fw fa-th" style="color: #e6e6f2;"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right nav-connections-dropdown">
+                                <li>
+                                    <a class="dropdown-item disabled" href="#"><small>{% translate 'Explore' %}</small></a>
+                                    <a class="dropdown-item" href="{% url 'main:institution_list' %}"><i class="fas fa-university mr-2"></i>{% translate 'Browse By Institution' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:author_list' %}"><i class="fas fa-user mr-2"></i>{% translate 'Browse By Author' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:source_type_list' %}"><i class="fas fa-file mr-2"></i>{% translate 'Browse By Document Type' %}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item disabled" href="#"><small>{% translate 'Participate' %}</small></a>
+                                    {% if request.user.is_authenticated %}
+                                    <a class="dropdown-item" href="{% url 'main:upload_document' %}"><i class="fas fa-angle-up mr-2"></i>{% translate 'Upload Transcription' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:upload_multiple' %}"><i class="fas fa-angle-double-up mr-2"></i>{% translate 'Upload Multi-Page Transcription' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:upload_batch' %}"><i class="fas fa-upload mr-2"></i>{% translate 'Upload Batch (Contact Us)' %}</a>
+                                    {% else %}
+                                    <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login To Participate' %}</a>
+                                    {% endif %}
+                                </li>
+                                <li class="connection-list">
+                                    <div class="row">
+                                        <div class="col-12 "><small>Connect To Transcriptiones</small></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/facebook-new.png"/> <span>Facebook</span></a> </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/twitter.png" alt=""> <span>Twitter</span></a> </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/github.png" alt=""> <span>Dropbox</span></a> </div>
+                                    </div>
+                        </li>
+                                <li>
+                                    <div class="conntection-footer"><a href="#">Contact Us</a></div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- USER SETTINGS -->
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <div>
+                                    <div class="small-circle" style="background: {{ request.user.get_user_color }};">
+                                        <span class="small-initials">{{ request.user.username.0 }}</span>
+                                    </div>
+                                 </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <div class="nav-user-name-img">
+                                        <div class="circle" style="background: {{ request.user.get_user_color }}; display:inline-block; vertical-align:middle;">
+                                            <span class="initials">{{ request.user.username.0 }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="nav-user-name">
+                                            <h5 class="mb-0 text-white nav-user-name-name">{{ request.user.username }}</h5>
+                                            <span class="nav-user-info-text">{{ request.user.email }}</span>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                            </div>
+                        </li>
+                        {% else %}
+                            <li class="nav-item dropdown nav-user">
+                                <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     <div>
+                                        <div class="small-circle">
+                                            <span class="small-initials-symbol"><i class="fas fa-user"></i></span>
+                                        </div>
+                                     </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                    <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login' %}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'main:signup' %}"><i class="fas fa-user mr-2"></i>Register</a>
+                                    <a class="dropdown-item" href="{% url 'main:password_reset' %}"><i class="fas fa-cog mr-2"></i>Forgot Password</a>
+                                    <a class="dropdown-item" href="{% url 'main:username_request' %}"><i class="fas fa-cog mr-2"></i>Forgot Username</a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        {#  {% include "main/sidebar.html" %} #}
+
+        <!-- Breadcrumbs -->
         {% block breadcrumbs %}
             {% clear_breadcrumbs %}
             {% breadcrumb "Transcriptiones" "/" %}
         {% endblock %}
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-sm fixed-top position-absolute text.navbar">
-            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                 <ul class="navbar-nav mr-auto align-items-center">
-                    <li class="navbar-brand">
-                        <a class="nav-link text-navbar" href="{% url 'main:start' %}">Logo</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="upload_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               {% translate 'Upload' %}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="upload_dropdown">
-                            <a class="dropdown-item" href="{% url 'main:upload_options' %}">{% translate 'Upload Options' %}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'main:upload_document' %}">{% translate 'Upload Single Page' %}</a>
-                            <a class="dropdown-item" href="{% url 'main:upload_multiple' %}">{% translate 'Upload Multiple Pages' %}</a>
-                            <a class="dropdown-item" href="{% url 'main:upload_batch' %}">{% translate 'Guided Batch Upload' %}</a>
-                        </div>
-                    </li>
-                    <!-- <li class="navbar-nav-item d-none d-sm-block"> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="browse_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               {% translate 'Browse' %}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="browse_dropdown">
-                            <a class="dropdown-item" href="{% url 'main:browse_options' %}">{% translate 'Browse Options' %}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'main:institution_list' %}">{% translate 'Institutions' %}</a>
-                            <a class="dropdown-item" href="{% url 'main:source_type_list' %}">{% translate 'Source Types' %}</a>
-                            <a class="dropdown-item" href="{% url 'main:author_list' %}">{% translate 'Authors' %}</a>
-                        </div>
-                    </li>
-                    <li class="navbar-nav-item d-none d-sm-block">
-                        <a class="nav-link text-navbar" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
-                    </li>
-                    <li class="navbar-nav-item d-none d-sm-block">
-                        {% if not user.is_authenticated %}
-                            <a class="nav-link text-navbar" href="{% url 'main:login' %}">{% translate 'Login' %}</a>
-                        {% endif %}
-                    </li>
-                 </ul>
-            </div>
-
-            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
-                    {% if user.is_authenticated %}
-
-                        <li class="nav-item dropdown">
-                            {% if user_subscriptions > 0 %}
-                                <a href="{% url 'main:notifications' %}" title="You have {{ user_subscriptions }} notifications"><span class="badge badge-pill badge-danger">{{ user_subscriptions }}</span></a>
-                            {% endif %}
-                            {% if user_messages > 0 %}
-                                <a href="{% url 'main:messages' %}" title="You have {{ user_messages }} messages"><span class="badge badge-pill badge-warning">{{ user_messages }}</span></a> &nbsp;
-                            {% endif %}
-                            <a class="nav-link dropdown-toggle" href="#" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="user_dropdown">
-                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Profile' %}</small></a>
-                                <a class="dropdown-item" href="{% url 'main:my_documents' %}">{% translate 'My Documents' %}</a>
-                                <a class="dropdown-item" href="{% url 'main:profile' %}">{% translate 'User Information' %}</a>
-                                <a class="dropdown-item" href="{% url 'main:subscriptions' %}">{% translate 'Subscriptions' %}</a>
-                                <a class="dropdown-item" href="{% url 'main:messages' %}">{% translate 'Inbox' %}</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Administrator Functions' %}</small></a>
-                                <a class="dropdown-item" href="{% url 'main:admin' %}">{% translate 'Administration Pages' %}</a>
-                                <a class="dropdown-item" href="{% url 'admin:index' %}">{% translate 'Django Admin' %}</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                    <li style="margin-top: 12px;">{% include "main/search_box.html" %}</li>
-                </ul>
-            </div>
-        </nav>
-        {% include "main/sidebar.html" %}
         <!-- Content -->
         {% block base_content %}
             <section class="content-section">

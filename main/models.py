@@ -580,6 +580,16 @@ class User(AbstractBaseUser, PermissionsMixin):
             activity_state = f'<span class="badge badge-secondary">{str_inactive}</span>'
         return mark_safe(activity_state)
 
+    def get_user_color(self):
+        temp_username = self.username
+        while len(temp_username)<6:
+            temp_username += 'x'
+
+        val_r = ord(temp_username[0]) + ord(temp_username[1])
+        val_g = ord(temp_username[2]) + ord(temp_username[3])
+        val_b = ord(temp_username[4]) + ord(temp_username[5])
+        value = '%02x%02x%02x' % (val_r%256, val_g%256, val_b%256)
+        return "#"+value
 
 class UserSubscription(models.Model):
     class SubscriptionType(models.IntegerChoices):

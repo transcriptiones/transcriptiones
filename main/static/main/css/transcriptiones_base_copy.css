@@ -23,7 +23,7 @@ body {
 }
 
 /****************************************/
-/* Top Navigation Menu
+/* Top Navigation Menu */
 .navbar {
   height: 70px;
   right: 0;
@@ -44,7 +44,6 @@ body {
     color: #1D809F;
     background: rgba(255, 255, 255, 0.2);
 }
-*/
 
 /*
 .nav-link {
@@ -52,24 +51,21 @@ body {
 }
 */
 
-/*
 .text-navbar {
   color: #fff;
 }
-*/
-
 
 /****************************************/
-/* Links
+/* Links */
 a {
   color: #1D809F;
 }
-*/
-/*
+
 a:hover, a:focus, a:active {
   color: #155d74;
+    /*color: #ff0000;*/
 }
-*/
+
 /****************************************/
 /* Buttons */
 .btn {
@@ -86,19 +82,4 @@ a:hover, a:focus, a:active {
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background-color: #155d74 !important;
   border-color: #155d74 !important;
-}
-
-.bg-primary {
-  background-color: #1D809F !important;
-}
-
-
-.text-primary {
-  color: #1D809F !important;
-}
-
-/* General Styling, Fonts, etc. */
-body {
-    background-image: url("../images/background_tile.jpg");
-    background-repeat: repeat;
 }

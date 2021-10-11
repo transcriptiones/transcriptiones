@@ -90,6 +90,7 @@ class ModalCreateInstitutionView(BSModalCreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.institution_slug = slugify(self.object.institution_name)
+        self.object.created_by = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -104,6 +105,7 @@ class ModalCreateRefNumberView(BSModalCreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.ref_number_slug = slugify(self.object.ref_number_name + " " + self.object.ref_number_title)
+        self.object.created_by = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
