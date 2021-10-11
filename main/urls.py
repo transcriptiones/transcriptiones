@@ -29,10 +29,6 @@ urlpatterns = [
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),
 
-    # TODO These pages are currently unused
-    path('info/aboutus/',    TemplateView.as_view(template_name='main/info/about_us.html'),   name='about_us'),
-
-
     ##############
     # SEARCH VIEW
     # path('search/', v_search.SearchView.as_view(), name='search'),

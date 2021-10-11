@@ -102,7 +102,7 @@
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'upload_options' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'upload_options,upload_document,upload_multiple,upload_batch' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
@@ -110,7 +110,7 @@
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'about' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'about,tos,guidelines,contact' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
                         </li>
                     </ul>
 
@@ -205,7 +205,7 @@
                                     </div>
                         </li>
                                 <li>
-                                    <div class="conntection-footer"><a href="#">Contact Us</a></div>
+                                    <div class="conntection-footer"><a href="{% url 'main:contact' %}">{% translate 'Contact Us' %}</a></div>
                                 </li>
                             </ul>
                         </li>

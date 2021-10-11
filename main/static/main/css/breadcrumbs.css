@@ -2,7 +2,7 @@
     padding: 7px 7px;
     background-color: whitesmoke;
     border-radius: 5px;
-    border: 1px solid #6b6b6b;
+    border: 1px solid #a4a4a4;
     box-shadow: 1px 1px #888888;
 }
 
@@ -19,6 +19,10 @@
 
 .breadcrumb-item.active {
     color: #000000;
+}
+
+.breadcrumb li a {
+    color: #1D809F;
 }
 
 .breadcrumb li a:hover {

@@ -1,0 +1,39 @@
+{% load transcriptiones %}
+{% load i18n %}
+
+<div class="text-center">
+    <div  class="btn-group" role="group">
+        <button type="button" class="btn btn-primary">{% translate 'About the Project' %}</button>
+        <button type="button" class="btn btn-primary">{% translate 'Guidelines' %}</button>
+        <button type="button" class="btn btn-primary">{% translate 'Terms Of Service' %}</button>
+        <button type="button" class="btn btn-primary">{% translate 'Contact Us' %}</button>
+    </div>
+</div>
+
+{% card 'user_profile_options' _('Information about Transcriptiones') %}
+
+    <div align="center">
+            <table width="100%">
+                <tr>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:guidelines' %}" title="{% translate 'Our Guidelines' %}"><i class="fas fa-arrows-alt"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:tos' %}" title="{% translate 'Our Terms Of Service' %}"><i class="fas fa-asterisk"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:about' %}" title="{% translate 'About the project' %}"><i class="fas fa-info"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'main:contact' %}" title="{% translate 'Contact us' %}"><i class="fas fa-envelope"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="25%"><p class="text-center text-muted small"><a href="{% url 'main:guidelines' %}">Guidelines</a></p></td>
+                    <td width="25%"><p class="text-center text-muted small"><a href="{% url 'main:tos' %}">Terms Of Service</a></p></td>
+                    <td width="25%"><p class="text-center text-muted small"><a href="{% url 'main:about' %}">About</a></p></td>
+                    <td width="25%"><p class="text-center text-muted small"><a href="{% url 'main:contact' %}">Contact</a></p></td>
+                </tr>
+            </table>
+        </div>
+    {% endcard %}

@@ -238,3 +238,8 @@ class EditTranscriptForm(forms.ModelForm):
 
 class BatchUploadForm(forms.Form):
     batch_description = forms.CharField(widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super(BatchUploadForm, self).__init__(*args, **kwargs)
+
+        self.helper = initialize_form_helper()
