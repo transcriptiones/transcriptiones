@@ -112,7 +112,7 @@ class UserMessageTable(TranscriptionesTable):
     """The UserMessageTable shows a list of messages, notifications and contact-messages."""
 
     sending_user = tables.Column(verbose_name='from', orderable=False)
-    subject = tables.LinkColumn('main:messages_read', args=['message', A('pk')], orderable=False)
+    subject = tables.LinkColumn('main:messages_read', args=[A('message_type'), A('pk')], orderable=False)
     sending_time = tables.Column(verbose_name='sent', orderable=False)
 
     class Meta(TranscriptionesTable.Meta):

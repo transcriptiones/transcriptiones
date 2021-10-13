@@ -16,14 +16,14 @@ def messages_view(request):
     user_notifications = UserNotification.objects.filter(user=request.user).order_by('-sending_time')
 
     for msg in user_messages:
-        user_message_data.append({'msg_type': 'MSG',
+        user_message_data.append({'message_type': 'message',
                                   'pk': msg.id,
                                   'viewing_state': msg.viewing_state,
                                   'sending_user': msg.sending_user,
                                   'subject': msg.subject,
                                   'sending_time': msg.sending_time})
     for notif in user_notifications:
-        user_message_data.append({'msg_type': 'NTF',
+        user_message_data.append({'message_type': 'notification',
                                   'pk': notif.id,
                                   'viewing_state': notif.viewing_state,
                                   'sending_user': 'Transcriptiones',
@@ -41,9 +41,19 @@ def messages_view(request):
 
 @login_required
 def messages_read_view(request, message_type, message_id):
-    try:
-        message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
-    except UserMessage.DoesNotExist:
+    message = None
+    if message_type == 'message':
+        try:
+            message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
+        except UserMessage.DoesNotExist:
+            message = None
+    if message_type == 'notification':
+        try:
+            message = UserNotification.objects.get(id=message_id, user=request.user)
+        except UserMessage.DoesNotExist:
+            message = None
+
+    if message is None:
         messages.error(request, _('This message does not exist or does not belong to you.'))
         return HttpResponseRedirect('main:messages')
 
