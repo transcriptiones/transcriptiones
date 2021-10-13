@@ -111,9 +111,10 @@ class UserNotificationTable(tables.Table):
 class UserMessageTable(TranscriptionesTable):
     """The UserMessageTable shows a list of messages, notifications and contact-messages."""
 
-    sending_user = tables.Column(verbose_name='from', orderable=False)
-    subject = tables.LinkColumn('main:messages_read', args=[A('message_type'), A('pk')], orderable=False)
-    sending_time = tables.Column(verbose_name='sent', orderable=False)
+    sending_user = tables.Column(verbose_name=_('From'), orderable=False)
+    subject = tables.LinkColumn('main:messages_read', args=[A('message_type'), A('pk')], verbose_name=_('Subject'),
+                                orderable=False)
+    sending_time = tables.Column(verbose_name=_('Sent At'), orderable=False)
 
     class Meta(TranscriptionesTable.Meta):
         pass
@@ -132,21 +133,6 @@ class UserMessageTable(TranscriptionesTable):
         if record['viewing_state'] == 0:
             return mark_safe(f'<strong>{value.strftime("%b %d %Y %H:%M:%S")}</strong>')
         return value.strftime("%b %d %Y %H:%M:%S")
-    """
-    def render_options(self, value, record):
-        open_url = reverse('main:messages_read', kwargs={'message_type': 'message', 'message_id': record.id})
-        delete_url = reverse('main:messages_delete', kwargs={'message_type': 'message', 'message_id': record.id})
-
-        open_title = _("Open this message")
-        delete_title = _("Delete this message")
-
-        options = f'<a href="{delete_url}" class="confirm-delete" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{record["id"]}">Delete</a>'
-        ""
-        options += f'<a href="{open_url}" class="btn btn-sm btn-primary" title="{open_title}"><i class="fas fa-envelope-open"></i></a> &nbsp;'
-        options += f'<a href="{reply_url}" class="btn btn-sm btn-primary" title="{reply_title}"><i class="fas fa-reply"></i></a> &nbsp;'
-        options += f'<a href="{delete_url}" class="btn btn-sm btn-danger" title="{delete_title}"><i class="fas fa-trash"></i></a> &nbsp;'
-        ""
-        return mark_safe(options)"""
 
 
 class UserSubscriptionTable(tables.Table):

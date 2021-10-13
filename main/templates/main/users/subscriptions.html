@@ -21,11 +21,6 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'subscription_options_card' _('Your subscription options') %}
-            <p>{% translate 'How do you want to to be notified if there are changes in your subscriptions?' %}</p>
-            {% crispy form %}
-    {% endcard %}
-
     {% card 'subscription_card' _('Your subscriptions') %}
         {% if table.data|length > 0 %}
              <p><a class="btn btn-danger btn-sm confirm-unsubscribe-all" href="{% url 'main:unsubscribe_all' %}" data-toggle="modal" data-target="#confirmUnsubscribeAllModal" id="unsubscribeAllButtonXXX">{% translate 'Unsubscribe from all' %}</a></p>
@@ -33,6 +28,11 @@
         {% else %}
             {% translate 'You have no subscriptions. You can subscribe to institutions, documents, reference numbers, authors and users on the respective pages.' %}
         {% endif %}
+    {% endcard %}
+
+    {% card 'subscription_options_card' _('Your subscription options') %}
+            <p>{% translate 'How do you want to to be notified if there are changes in your subscriptions?' %}</p>
+            {% crispy form %}
     {% endcard %}
 
     {% include 'main/admin/confirm_unsubscribe_all.html' %}

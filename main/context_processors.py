@@ -13,13 +13,13 @@ def user_notifications(request):
         new_user_notifications = UserNotification.objects.filter(user=request.user, viewing_state=0).order_by('-sending_time')[:3]
         new_notifications = list()
         for msg in new_messages:
-            new_notifications.append({'url': reverse('main:messages_read', args=[msg.id]),
+            new_notifications.append({'url': reverse('main:messages_read', args=['message', msg.id]),
                                       'sender': msg.sending_user.username,
                                       'user_color': msg.sending_user.get_user_color(),
                                       'subject': msg.subject,
                                       'sending_time': msg.sending_time})
         for msg in new_user_notifications:
-            new_notifications.append({'url': reverse('main:search'),
+            new_notifications.append({'url': reverse('main:messages_read', args=['notifications', msg.id]),
                                       'sender': 'Transcriptiones',
                                       'user_color': '#CCCCCC',
                                       'subject': msg.subject,

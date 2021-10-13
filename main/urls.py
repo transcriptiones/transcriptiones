@@ -126,8 +126,8 @@ urlpatterns = [
     path('user/messages/delete/all', v_messages.delete_all_messages_view, name='messages_delete_all'),
     path('user/messages/delete/<str:message_type>/<int:message_id>', v_messages.messages_delete_view, name='messages_delete'),
     path('user/messages/view/<str:message_type>/<int:message_id>/', v_messages.messages_read_view, name='messages_read'),
-    path('user/messages/reply/<str:message_type>/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
-
+    path('user/messages/reply/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
+    path('user/messages/unread/<str:message_type>/<int:message_id>/', v_messages.messages_mark_unread_view, name='messages_mark_unread'),
     path('user/messages/compose/', v_messages.message_user_view, name='write_message'),
     path('user/messages/compose/<str:username>/', v_messages.message_user_view, name='message_user'),
 

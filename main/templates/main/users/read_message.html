@@ -31,12 +31,41 @@
                 <td>
                     <br/>
                     {% if message_type == 'message' %}
-                    <a href="{% url 'main:messages_reply' 'message' message.id %}" class="btn btn-primary">{% translate 'Reply' %}</a> &nbsp;
+                    <a href="{% url 'main:messages_reply' message.id %}" class="btn btn-primary">{% translate 'Reply' %}</a> &nbsp;
                     {% endif %}
                     <a href="{% url 'main:messages' %}" class="btn btn-primary">{% translate 'Go To Inbox' %}</a> &nbsp;
-                    <a href="{% url 'main:messages_delete' message_type message.id %}" class="btn btn-danger">{% translate 'Delete Message' %}</a>
+                    <a href="{% url 'main:messages_mark_unread' message_type message.id %}" class="btn btn-primary">{% translate 'Mark Unread' %}</a> &nbsp;
+                    <button class="btn btn-danger" type="button" id="do-delete">{% translate 'Delete Message' %}</button>
                 </td>
             </tr>
         </table>
     {% endcard %}
+
+    {% include "bsmodals/confirm.html" %}
+    {% include 'main/confirm_delete.html' %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="{% static 'bsmodals/bsmodals.js' %}"></script>
+    <script>
+        $(document).on('click', '.confirm-delete', function () {
+            $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmDeleteButtonModal', function () {
+            var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+            window.location = $("#".concat(caller)).attr("href");
+        });
+
+        $(document).ready(function() {
+            $('#do-delete').click(function () {
+                bsmodals_confirm('Delete message?', ' Delete message? This cannot be undone.', (result) => {
+                    if (result) {
+                        location.href="{% url 'main:messages_delete' message_type message.id %}"
+                    }
+                }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
+            });
+        });
+
+
+    </script>
 {% endblock %}

@@ -34,7 +34,7 @@
     {% endcard %}
 
     {% card 'message_options_card' _('Your e-mail notification options') %}
-            <p>How do you want to to be notified if you receive messages?</p>
+            <p>{% translate 'How do you want to to be notified if you receive messages?' %}</p>
             {% crispy form %}
     {% endcard %}
 
@@ -72,7 +72,5 @@
                 }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
             });
         });
-
-
     </script>
 {% endblock %}

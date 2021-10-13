@@ -36,12 +36,13 @@ class WriteMessageForm(forms.ModelForm):
 
 
 class UserMessageOptionsForm(forms.ModelForm):
-    """TODO Needs to be looked at"""
+    """Form to edit user message notification policy."""
     def __init__(self, *args, **kwargs):
         super(UserMessageOptionsForm, self).__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Save'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
-    """Form to edit user message notification policy."""
     class Meta:
         model = User
         fields = ('message_notification_policy', )
@@ -52,6 +53,8 @@ class UserSubscriptionOptionsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserSubscriptionOptionsForm, self).__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Save'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
     """Form to edit user notification policy."""
     class Meta:

@@ -162,7 +162,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="notification-list-user-block">
-                                                        <span class="notification-list-user-name">{{ notification.sender }}</span>accepted your invitation to join the team.
+                                                        <span class="notification-list-user-name">{{ notification.sender }}</span> {% translate 'wrote' %}: {{ notification.subject }}
                                                         <div class="notification-date">{{ notification.sending_time|naturaltime }}</div>
                                                     </div>
                                                 </div>
@@ -172,7 +172,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="{% url 'main:messages' %}">{% translate 'View all notifications' %}</a></div>
+                                    <div class="list-footer"> <a href="{% url 'main:messages' %}">{% translate 'View all messages and notifications' %}</a></div>
                                 </li>
                             </ul>
                         </li>

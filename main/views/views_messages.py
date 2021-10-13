@@ -1,16 +1,20 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm, UserSubscriptionOptionsForm
-from main.tables.tables import UserMessageTable, UserNotificationTable
+from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm
+from main.tables.tables import UserMessageTable
 from main.models import User, UserMessage, UserNotification
 
 
 @login_required
 def messages_view(request):
+    """Shows the user message inbox and a form to set the message notification policy. In the model there are two
+    kinds of messages: the Notifications (result of a subscribed object changing) and the Messages (messages from
+    other users or the system). This view shows a table with those combined."""
     user_message_data = list()
     user_messages = UserMessage.objects.filter(receiving_user=request.user).order_by('-sending_time')
     user_notifications = UserNotification.objects.filter(user=request.user).order_by('-sending_time')
@@ -30,32 +34,29 @@ def messages_view(request):
                                   'subject': notif.subject,
                                   'sending_time': notif.sending_time})
 
+    user_message_data = sorted(user_message_data, key=lambda d: d['sending_time'], reverse=True)
     table = UserMessageTable(data=user_message_data)
-    form = UserMessageOptionsForm()
+    form = UserMessageOptionsForm({'message_notification_policy': request.user.message_notification_policy})
 
     if request.method == 'POST':
         form = UserMessageOptionsForm(request.POST)
+        if form.is_valid():
+            request.user.message_notification_policy = form.cleaned_data['message_notification_policy']
+            request.user.save()
+            messages.success(request, _('Your notification policy has been updated.'))
 
     return render(request, 'main/users/messages.html', {'table': table, 'form': form})
 
 
 @login_required
 def messages_read_view(request, message_type, message_id):
-    message = None
-    if message_type == 'message':
-        try:
-            message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
-        except UserMessage.DoesNotExist:
-            message = None
-    if message_type == 'notification':
-        try:
-            message = UserNotification.objects.get(id=message_id, user=request.user)
-        except UserMessage.DoesNotExist:
-            message = None
+    """Shows a message or notification to read. The template provides options to delete the message or mark it as
+    unread. A message can be of the message_type 'message' or 'notification'. """
+    message = get_message(message_type, message_id, request.user)
 
     if message is None:
         messages.error(request, _('This message does not exist or does not belong to you.'))
-        return HttpResponseRedirect('main:messages')
+        return reverse('main:messages')
 
     message.viewing_state = 1
     message.save()
@@ -65,6 +66,8 @@ def messages_read_view(request, message_type, message_id):
 
 @login_required
 def message_user_view(request, username, subject='', message=''):
+    """Allows a user to send a message to another user."""
+
     receiving_user = User.objects.get(username=username)
     form = WriteMessageForm(user=receiving_user, subject=subject, message=message)
 
@@ -82,82 +85,76 @@ def message_user_view(request, username, subject='', message=''):
 
 
 @login_required
-def messages_reply_view(request, message_type, message_id):
-    try:
-        message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
-    except UserMessage.DoesNotExist:
+def messages_mark_unread_view(request, message_type, message_id):
+    message = get_message(message_type, message_id, request.user)
+    if message is None:
         messages.error(request, _('This message does not exist or does not belong to you.'))
-        return HttpResponseRedirect('main:messages')
+        return HttpResponseRedirect(reverse('main:messages'))
+
+    message.viewing_state = 0
+    message.save()
+    return HttpResponseRedirect(reverse('main:messages'))
+
+
+@login_required
+def messages_reply_view(request, message_id):
+    message = get_message('message', message_id, request.user)
+    if message is None:
+        messages.error(request, _('This message does not exist or does not belong to you.'))
+        return redirect('main:messages')
 
     reply_message = f"\n\n\nOn {message.sending_time}, {message.sending_user.username} wrote:\n"
     message_lines = message.message.split("\n")
     for line in message_lines:
         reply_message += ">> " + line + "\n"
 
-    return message_user_view(request, message.sending_user.username, subject='Re: '+message.subject, message=reply_message)
+    return message_user_view(request, message.sending_user.username, subject='Re: ' + message.subject,
+                             message=reply_message)
 
 
 @login_required
 def messages_delete_view(request, message_type, message_id):
-    try:
-        message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
-    except UserMessage.DoesNotExist:
+    """Deletes a single message/notification of the current user."""
+    message = get_message(message_type, message_id, request.user)
+
+    if message is None:
         messages.error(request, _('This message does not exist or does not belong to you.'))
-        return HttpResponseRedirect('main:messages')
+        return redirect('main:messages')
 
     message.delete()
     messages.success(request, _('The message has been deleted.'))
     return redirect('main:messages')
 
 
-"""@login_required
-def notifications_view(request):
-    table = UserNotificationTable(data=UserNotification.objects.filter(user=request.user))
-    form = UserSubscriptionOptionsForm()
-
-    if request.method == 'POST':
-        form = UserSubscriptionOptionsForm(request.POST)
-
-    return render(request, 'main/users/notifications.html', {'table': table, 'form': form})"""
-
-
-"""@login_required
-def notifications_read_view(request, notification_id):
-    try:
-        notification = UserNotification.objects.get(id=notification_id, user=request.user)
-    except UserMessage.DoesNotExist:
-        messages.error(request, _('This notification does not exist or does not belong to you.'))
-        return HttpResponseRedirect('main:notifications')
-
-    notification.viewing_state = 1
-    notification.save()
-
-    return render(request, 'main/users/read_notification.html', {'notification': notification})"""
-
-
-"""@login_required
-def notifications_delete_view(request, notification_id):
-    try:
-        notification = UserNotification.objects.get(id=notification_id, user=request.user)
-    except UserNotification.DoesNotExist:
-        messages.error(request, _('This notification does not exist or does not belong to you.'))
-        return HttpResponseRedirect('main:notifications')
-
-    notification.delete()
-    messages.success(request, _('The notification has been deleted.'))
-    return HttpResponseRedirect('main:notifications')
-"""
-
 @login_required
 def delete_all_messages_view(request):
+    """Deletes all the messages/notifications of the current user."""
     the_messages = UserMessage.objects.filter(receiving_user=request.user)
     for a_message in the_messages:
         a_message.delete()
+
+    the_notifications = UserNotification.objects.filter(user=request.user)
+    for a_notification in the_notifications:
+        a_notification.delete()
+
     messages.success(request, _('All messages have been deleted.'))
     return redirect('main:messages')
 
 
-"""@login_required
-def delete_all_notifications_view(request):
-    return HttpResponse('NIY')
-"""
+def get_message(message_type, message_id, user):
+    """Returns a message object from the notification or message table. Or None if the message does not exist.
+    Note: A message id may exist but not for the currently logged in user. A user can only see his own messages."""
+
+    message = None
+    if message_type == 'message':
+        try:
+            message = UserMessage.objects.get(id=message_id, receiving_user=user)
+        except UserMessage.DoesNotExist:
+            message = None
+    if message_type == 'notification':
+        try:
+            message = UserNotification.objects.get(id=message_id, user=user)
+        except UserMessage.DoesNotExist:
+            message = None
+
+    return message
