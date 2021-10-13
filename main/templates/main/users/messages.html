@@ -66,7 +66,7 @@
             $('#do-delete').click(function () {
                 bsmodals_confirm('Delete message?', ' Delete message? This cannot be undone.', (result) => {
                     if (result) {
-                        location.href="{% url 'main:messages_delete' 1 %}"
+                        location.href="{% url 'main:messages_delete' 'message' 1 %}"
 
                     }
                 }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");

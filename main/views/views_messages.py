@@ -11,7 +11,26 @@ from main.models import User, UserMessage, UserNotification
 
 @login_required
 def messages_view(request):
-    table = UserMessageTable(data=UserMessage.objects.filter(receiving_user=request.user).order_by('-sending_time'))
+    user_message_data = list()
+    user_messages = UserMessage.objects.filter(receiving_user=request.user).order_by('-sending_time')
+    user_notifications = UserNotification.objects.filter(user=request.user).order_by('-sending_time')
+
+    for msg in user_messages:
+        user_message_data.append({'msg_type': 'MSG',
+                                  'pk': msg.id,
+                                  'viewing_state': msg.viewing_state,
+                                  'sending_user': msg.sending_user,
+                                  'subject': msg.subject,
+                                  'sending_time': msg.sending_time})
+    for notif in user_notifications:
+        user_message_data.append({'msg_type': 'NTF',
+                                  'pk': notif.id,
+                                  'viewing_state': notif.viewing_state,
+                                  'sending_user': 'Transcriptiones',
+                                  'subject': notif.subject,
+                                  'sending_time': notif.sending_time})
+
+    table = UserMessageTable(data=user_message_data)
     form = UserMessageOptionsForm()
 
     if request.method == 'POST':
@@ -21,7 +40,7 @@ def messages_view(request):
 
 
 @login_required
-def messages_read_view(request, message_id):
+def messages_read_view(request, message_type, message_id):
     try:
         message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
     except UserMessage.DoesNotExist:
@@ -31,7 +50,7 @@ def messages_read_view(request, message_id):
     message.viewing_state = 1
     message.save()
 
-    return render(request, 'main/users/read_message.html', {'message': message})
+    return render(request, 'main/users/read_message.html', {'message_type': message_type, 'message': message})
 
 
 @login_required
@@ -53,7 +72,7 @@ def message_user_view(request, username, subject='', message=''):
 
 
 @login_required
-def messages_reply_view(request, message_id):
+def messages_reply_view(request, message_type, message_id):
     try:
         message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
     except UserMessage.DoesNotExist:
@@ -69,7 +88,7 @@ def messages_reply_view(request, message_id):
 
 
 @login_required
-def messages_delete_view(request, message_id):
+def messages_delete_view(request, message_type, message_id):
     try:
         message = UserMessage.objects.get(id=message_id, receiving_user=request.user)
     except UserMessage.DoesNotExist:
@@ -81,7 +100,7 @@ def messages_delete_view(request, message_id):
     return redirect('main:messages')
 
 
-@login_required
+"""@login_required
 def notifications_view(request):
     table = UserNotificationTable(data=UserNotification.objects.filter(user=request.user))
     form = UserSubscriptionOptionsForm()
@@ -89,10 +108,10 @@ def notifications_view(request):
     if request.method == 'POST':
         form = UserSubscriptionOptionsForm(request.POST)
 
-    return render(request, 'main/users/notifications.html', {'table': table, 'form': form})
+    return render(request, 'main/users/notifications.html', {'table': table, 'form': form})"""
 
 
-@login_required
+"""@login_required
 def notifications_read_view(request, notification_id):
     try:
         notification = UserNotification.objects.get(id=notification_id, user=request.user)
@@ -103,10 +122,10 @@ def notifications_read_view(request, notification_id):
     notification.viewing_state = 1
     notification.save()
 
-    return render(request, 'main/users/read_notification.html', {'notification': notification})
+    return render(request, 'main/users/read_notification.html', {'notification': notification})"""
 
 
-@login_required
+"""@login_required
 def notifications_delete_view(request, notification_id):
     try:
         notification = UserNotification.objects.get(id=notification_id, user=request.user)
@@ -117,7 +136,7 @@ def notifications_delete_view(request, notification_id):
     notification.delete()
     messages.success(request, _('The notification has been deleted.'))
     return HttpResponseRedirect('main:notifications')
-
+"""
 
 @login_required
 def delete_all_messages_view(request):
@@ -128,7 +147,7 @@ def delete_all_messages_view(request):
     return redirect('main:messages')
 
 
-@login_required
+"""@login_required
 def delete_all_notifications_view(request):
     return HttpResponse('NIY')
-
+"""

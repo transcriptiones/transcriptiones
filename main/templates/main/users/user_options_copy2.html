@@ -1,0 +1,47 @@
+{% load transcriptiones %}
+{% load i18n %}
+
+{% card 'user_profile_options' _('Options') %}
+        <nav class="nav nav-tabs">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle{% if request.resolver_match.url_name in 'profile,user_update,password_change' %} active{% endif %}" href="#" id="uo_profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-user"></i> {% translate 'Profile' %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="uo_profile">
+                    <a class="dropdown-item" href="{% url 'main:profile' %}"><i class="fas fa-user"></i> {% translate 'View Your Profile' %}</a>
+                    <a class="dropdown-item" href="{% url 'main:user_update' %}"><i class="fas fa-user-edit"></i> {% translate 'Edit Profile Information' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-users"></i> {% translate 'View Your Public Profile' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:password_change' %}"><i class="fas fa-unlock"></i> {% translate 'Change Password' %}</a>
+                    <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-sign-out-alt"></i> {% translate 'Logout' %}</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle{% if request.resolver_match.url_name in 'my_own_documents,my_documents,my_document_drafts' %} active{% endif %}" href="#" id="uo_documents" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-file-alt"></i> {% translate 'Documents' %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="uo_documents">
+                    <a class="dropdown-item" href="{% url 'main:my_own_documents' %}"><i class="fas fa-file"></i> {% translate 'Show Documents I created' %}</a>
+                    <a class="dropdown-item" href="{% url 'main:my_documents' %}"><i class="fas fa-file"></i> {% translate 'Show Documents I worked on' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:my_document_drafts' %}"><i class="fas fa-file"></i> {% translate 'Show Document drafts' %}</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle{% if request.resolver_match.url_name in 'messages,write_message,notifications,subscriptions' %} active{% endif %}" href="#" id="uo_messages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-envelope"></i> {% translate 'Messages' %}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="uo_messages">
+                    <a class="dropdown-item" href="{% url 'main:messages' %}"><i class="far fa-envelope"></i> {% translate 'Your Message Inbox' %}</a>
+                    <a class="dropdown-item" href="{% url 'main:write_message' %}"><i class="far fa-envelope"></i> {% translate 'Write A Message' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:notifications' %}"><i class="far fa-envelope"></i> {% translate 'Your Notifications' %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:subscriptions' %}"><i class="far fa-envelope"></i> {% translate 'Your Subscriptions' %}</a>
+                </div>
+            </li>
+        </nav>
+{% endcard %}

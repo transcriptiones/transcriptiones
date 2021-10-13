@@ -20,19 +20,21 @@
 
 {% block content %}
     {% card 'message_card' _('Your Message') %}
-        <table>
-            <tr>
-                <td><strong>{{ message.subject }}</strong></td>
+        <table style="width: 100%;">
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px; font-weight: bold; background: #DCDCDC">{{ message.subject }}</td>
             </tr>
-            <tr>
-                <td>{{ message.message|linebreaksbr }}</td>
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px;">{{ message.message|linebreaksbr }}</td>
             </tr>
             <tr>
                 <td>
                     <br/>
-                    <a href="{% url 'main:messages_reply' message.id %}" class="btn btn-primary">{% translate 'Reply' %}</a> &nbsp;
+                    {% if message_type == 'message' %}
+                    <a href="{% url 'main:messages_reply' 'message' message.id %}" class="btn btn-primary">{% translate 'Reply' %}</a> &nbsp;
+                    {% endif %}
                     <a href="{% url 'main:messages' %}" class="btn btn-primary">{% translate 'Go To Inbox' %}</a> &nbsp;
-                    <a href="{% url 'main:messages_delete' message.id %}" class="btn btn-danger">{% translate 'Delete Message' %}</a>
+                    <a href="{% url 'main:messages_delete' message_type message.id %}" class="btn btn-danger">{% translate 'Delete Message' %}</a>
                 </td>
             </tr>
         </table>

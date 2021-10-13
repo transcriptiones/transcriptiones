@@ -123,10 +123,16 @@ urlpatterns = [
     ##############
     # USER MESSAGES & NOTIFICATIONS
     path('user/messages/', v_messages.messages_view, name='messages'),
+    #path('user/notifications/', v_messages.notifications_view, name='notifications'),
+
     path('user/messages/delete/all', v_messages.delete_all_messages_view, name='messages_delete_all'),
     path('user/messages/delete/<str:message_type>/<int:message_id>', v_messages.messages_delete_view, name='messages_delete'),
+    #path('user/notifications/delete/all', v_messages.delete_all_notifications_view, name='notifications_delete_all'),
+    #path('user/notifications/delete/<int:notification_id>', v_messages.notifications_delete_view, name='notifications_delete'),
+
     path('user/messages/view/<str:message_type>/<int:message_id>/', v_messages.messages_read_view, name='messages_read'),
     path('user/messages/reply/<str:message_type>/<int:message_id>/', v_messages.messages_reply_view, name='messages_reply'),
+    #path('user/notifications/view/<int:notification_id>/', v_messages.notifications_read_view, name='notifications_read'),
 
     path('user/messages/compose/', v_messages.message_user_view, name='write_message'),
     path('user/messages/compose/<str:username>/', v_messages.message_user_view, name='message_user'),

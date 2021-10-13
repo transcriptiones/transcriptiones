@@ -1,11 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
-    PasswordChangeForm, PasswordResetForm, SetPasswordForm
-
-from main.models import User, UserMessage
-from main.forms.forms_helper import initialize_form_helper, get_popover_html
+from main.forms.forms_helper import initialize_form_helper
 
 
 class ContactForm(forms.Form):

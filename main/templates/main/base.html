@@ -57,6 +57,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/footer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/breadcrumbs.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/navbar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/tooltip.css' %}">
 
         <!-- Cookie Banner -->
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/cookies.css' %}">
@@ -153,7 +154,7 @@
                                     <div class="notification-list">
                                         <div class="list-group">
                                             {% for notification in cp_user_notifications %}
-                                            <a href="#" class="list-group-item list-group-item-action">
+                                            <a href="{{ notification.url }}" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
                                                     <div class="notification-list-user-img">
                                                         <div class="circle" style="background: {{ notification.user_color }};">
