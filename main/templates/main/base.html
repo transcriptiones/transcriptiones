@@ -2,8 +2,10 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load humanize %}
+{% load cookielaw_tags %}
 
 {% get_current_language as LANGUAGE_CODE %}
+
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -55,6 +57,10 @@
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/footer.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/breadcrumbs.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/navbar.css' %}">
+
+        <!-- Cookie Banner -->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/cookies.css' %}">
+        <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
 
         {%  block custom_css %}
             <link rel="stylesheet" type="text/css" href="{% static 'main/css/transcriptiones.css' %}">
@@ -165,7 +171,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                    <div class="list-footer"> <a href="{% url 'main:messages' %}">{% translate 'View all notifications' %}</a></div>
                                 </li>
                             </ul>
                         </li>
@@ -232,9 +238,21 @@
                                             <span class="nav-user-info-text">{{ request.user.email }}</span>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Account' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:profile' %}"><i class="fas fa-user mr-2"></i>{% translate 'Account' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:user_update' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Edit User Information' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-user-circle mr-2"></i>{% translate 'View Your Public Profile' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-power-off mr-2"></i>{% translate 'Logout' %}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Messages' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:messages' %}"><i class="fas fa-envelope mr-2"></i>{% translate 'My Inbox' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:subscriptions' %}"><i class="fas fa-file-signature mr-2"></i>{% translate 'My Subscriptions' %}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Documents' %}</small></a>
+                                <a class="dropdown-item" href="{% url 'main:my_documents' %}"><i class="fas fa-file mr-2"></i>{% translate 'My Documents' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:my_document_drafts' %}"><i class="fas fa-file-signature mr-2"></i>{% translate 'My Drafts' %}</a>
+
+
                             </div>
                         </li>
                         {% else %}
@@ -261,14 +279,19 @@
         </div>
         {#  {% include "main/sidebar.html" %} #}
 
+        {% if cookielaw.notset %}{% cookielaw_banner %}{% endif %}
+
         <!-- Breadcrumbs -->
         {% block breadcrumbs %}
             {% clear_breadcrumbs %}
             {% breadcrumb "Transcriptiones" "/" %}
         {% endblock %}
 
+
+
         <!-- Content -->
         {% block base_content %}
+
             <section class="content-section">
                 <div class="container text-center">
                    {% for message in messages %}
@@ -290,6 +313,7 @@
                             </div>
                             <div>
                             </div>
+
                             {% block content %}
                                     <p class="lead mb-5">Implement block "content"</p>
                                 {% endblock %}

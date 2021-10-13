@@ -27,6 +27,6 @@ def user_notifications(request):
         new_notifications = []
         total_new_notifications = 0
 
-    print(new_notifications)
+    # print(new_notifications)
     return {'cp_user_notifications': new_notifications,
             'cp_total_new_notifications': total_new_notifications}
