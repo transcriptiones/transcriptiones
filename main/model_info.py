@@ -37,7 +37,7 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
             (_('User State'), mark_safe(user.get_user_state_badge())),
             (_('Active'), mark_safe(user.get_user_activity_badge())),
-            (get_verbose_field_name(user, 'mark_anonymous'), user.mark_anonymous)
+            (get_verbose_field_name(user, 'mark_anonymous'), mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe('<span style="color: red;">&cross;</span>'))
             ]
     return title_value_list(data)
 

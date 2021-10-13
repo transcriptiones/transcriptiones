@@ -126,19 +126,25 @@ class UserUpdateForm(forms.ModelForm):
     # pass class form-control to form fields
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
+        """for name in self.fields.keys():
             if isinstance(self.fields[name], forms.BooleanField):
                 self.fields[name].widget.attrs.update({'class': 'form-check-input'})
             else:
                 self.fields[name].widget.attrs.update({
                     'class': 'form-control',
-                    })
+                    })"""
 
         self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Save Changes'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
+
+    username = forms.CharField(disabled=True, help_text=_('You cannot change your username'))
+    email = forms.EmailField(disabled=True, help_text=_('You cannot change your email address'))
+    user_orcid = forms.CharField(required=False,)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'mark_anonymous')
+        fields = ('username', 'email', 'first_name', 'last_name', 'user_orcid', 'mark_anonymous')
 
 
 class CustomPasswordResetForm(PasswordResetForm):

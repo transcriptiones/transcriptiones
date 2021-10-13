@@ -45,7 +45,7 @@ def signup(request):
 
 class AccountActivationSentView(TemplateView):
     """View to Inform the User that the confirmation-link has been sent."""
-    template_name = 'main/users/email_templates/../templates/main/users/account_activation_sent.html'
+    template_name = 'main/users/account_activation_sent.html'
 
 
 def activate(request, uidb64, token):
@@ -65,7 +65,7 @@ def activate(request, uidb64, token):
         messages.success(request, _('Successfully logged in!'))
         return redirect('main:start')
     else:
-        return render(request, 'main/users/email_templates/../templates/main/users/account_activation_invalid.html')
+        return render(request, 'main/users/account_activation_invalid.html')
 
 
 class CustomLoginView(SuccessMessageMixin, LoginView):
@@ -87,9 +87,6 @@ def userprofile(request):
     """View for User Profile Page"""
     contributions = request.user.contributions(manager='all_objects').all().order_by('-document_utc_add')
     paginator = Paginator(contributions, 10)
-
-    page_number = request.GET.get('page')
-    contributions_pg = paginator.get_page(page_number)
 
     user_table = TitleValueTable(data=get_user_info(request.user))
 
@@ -113,6 +110,7 @@ def my_documents(request):
     RequestConfig(request).configure(activity_table)
 
     return render(request, 'main/users/my_documents.html', {'activity_table': activity_table, 'filter': d_filter})
+
 
 @login_required
 def public_profile(request, username):
@@ -158,7 +156,8 @@ class UserUpdateView(LoginRequiredMixin, View):
             form = self.form_class(instance=user, data=self.request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('profile')
+                messages.success(self.request, _('Your user information has been updated'))
+                return redirect('main:profile')
             else:
                 return render(self.request, self.template_name, {'form': form})
 
