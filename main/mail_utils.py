@@ -5,7 +5,20 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from main.tokens import account_activation_token
+from main.models import ContactMessage
 from transcriptiones.settings import NO_REPLY_EMAIL
+
+
+def send_contact_message_copy(msg: ContactMessage):
+    """Send a contact message copy to the email address sending it."""
+    subject = _("Thank you for contacting us")
+    plain_message = _("We received the following message from you. "
+                      "We will contact you as soon as possible. "
+                      "Please do not reply to this e-mail address.\n\nYour Message:\n"
+                      f"Subject: {msg.subject}\n"
+                      f"Message: {msg.message}")
+    html_message = ''
+    send_transcriptiones_mail(subject, plain_message, html_message, NO_REPLY_EMAIL, msg.reply_email)
 
 
 def send_daily_notification_mail(user):

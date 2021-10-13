@@ -15,10 +15,16 @@
 
 
 {% block content %}
-
     {% include 'main/info/info_options.html' %}
 
     {% card 'general' _('Write us a message') %}
+        <p>
+            {% url 'main:about' as faq_url %}
+            {% blocktranslate %}
+                Do you have a specific question which is not answered by our <a href="{{ faq_url }}">Frequently Asked Questions</a>?
+                Write us a message! We will get back to you as soon as possible.
+            {% endblocktranslate %}
+        </p>
         {% crispy form %}
     {% endcard %}
 
