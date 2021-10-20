@@ -20,7 +20,7 @@ import main.views.views_user as v_user
 app_name = 'main'
 urlpatterns = [
     # ROOT VIEW
-    path('', TemplateView.as_view(template_name='main/info/start.html'), name='start'),
+    path('', v_info.start_view, name='start'),
 
     ##############
     # INFO PAGES
@@ -33,7 +33,6 @@ urlpatterns = [
     # SEARCH VIEW
     # path('search/', v_search.SearchView.as_view(), name='search'),
     path('search/', v_search.test_search_2, name='search'),
-    path('search_box/<str:query>/', v_search.search_by_box_view, name='search_by_box'),
     path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
 
     ##############
@@ -150,8 +149,4 @@ urlpatterns = [
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', v_edit.edit_meta_view, name='edit_meta'),
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
-
-
-
-
     ]

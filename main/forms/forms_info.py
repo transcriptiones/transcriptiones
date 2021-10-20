@@ -1,7 +1,34 @@
 from django.utils.translation import ugettext_lazy as _
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Row, Column, Field
 from django import forms
 from main.forms.forms_helper import initialize_form_helper
+
+
+class NewsletterSubscribeForm(forms.Form):
+    email_address = forms.EmailField(label=_('Subscribe To Newsletter'))
+
+    def __init__(self, *args, **kwargs):
+        super(NewsletterSubscribeForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+
+        self.helper.form_method = 'POST'
+        self.helper.layout = Layout(
+            Row(
+                Column('email_address', css_class='form-group col-md-10 mb-0'),
+                Column(Submit('submit', _('Subscribe')), css_class='form-group col-md-2 mb-0'),
+                css_class='form-row'
+            ),
+        )
+
+
+class NewsletterUnsubscribeForm(forms.Form):
+    email_address = forms.EmailField(label=_('E-Mail'))
+
+    def __init__(self, *args, **kwargs):
+        super(NewsletterUnsubscribeForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Unsubscribe'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'
 
 
 class ContactForm(forms.Form):

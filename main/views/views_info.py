@@ -3,8 +3,18 @@ from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
 from main.mail_utils import send_contact_message_copy
-from main.forms.forms_info import ContactForm
+from main.forms.forms_info import ContactForm, NewsletterSubscribeForm
 from main.models import ContactMessage
+
+
+def start_view(request):
+    """Shows the main view"""
+    form = NewsletterSubscribeForm()
+
+    if request.method == "POST":
+        form = NewsletterSubscribeForm(request.POST)
+
+    return render(request, 'main/info/start.html', context={'form': form})
 
 
 def contact_view(request):

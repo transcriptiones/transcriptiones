@@ -38,20 +38,21 @@ str_users = "INSERT INTO main_user (`id`, `password`, `last_login`, `is_superuse
             "VALUES "
 
 for user in users:
-    email = f'{user[1]}@host.com'
-    if user[2] != '':
-        email = user[2]
+    if user[1] != 'sorin':
+        email = f'{user[1]}@host.com'
+        if user[2] != '':
+            email = user[2]
 
-    isStaff = "0"
-    isSuperuser = "0"
-    if user[3] == 'A':
-        isStaff = "1"
-        isSuperuser = "1"
-    if user[3] == 'S':
-        isStaff = "1"
+        isStaff = "0"
+        isSuperuser = "0"
+        if user[3] == 'A':
+            isStaff = "1"
+            isSuperuser = "1"
+        if user[3] == 'S':
+            isStaff = "1"
 
-    str_users += f"({user[0]}, '', NULL, {isSuperuser}, '{user[1]}', '', '', '{email}', " \
-                 f"'1', '{isStaff}', '1', NOW(), '0', '1', '1', '0000-1234-5678', '1'),\n"
+        str_users += f"({user[0]}, '', NULL, {isSuperuser}, '{user[1]}', '', '', '{email}', " \
+                     f"'1', '{isStaff}', '1', NOW(), '0', '1', '1', '0000-1234-5678', '1'),\n"
 
 str_users = str_users[:-2]
 str_users += ";"
@@ -68,13 +69,15 @@ doc_titles = ['Brief', 'Akte', 'Dokument', 'Pergament', 'Urkunde', 'Notiz']
 doc_names = ['Colbert', 'Kimmel', 'Conan', 'Meyers', 'Stewart', 'Oliver']
 
 institution_name_parts = ['Universitätsbibliothek', 'Staatsarchiv', 'Sammlung', 'Klosterarchiv', 'Stiftung']
-city_names = [('Aarau', 'ch'), ('Basel', 'ch'), ('Einsiedeln', 'ch'),
-              ('Köln', 'de'), ('Duisburg', 'de'), ('Hamburg', 'de'), ('Bremen', 'de'), ('Berlin', 'de'), 'Wien', 'Biel', 'Winterthur', 'Zürich']
+city_names = [('Aarau', 'ch'), ('Basel', 'ch'), ('Einsiedeln', 'ch'), ('Biel', 'ch'), ('Winterthur', 'ch'),
+              ('Zürich', 'ch'),
+              ('Köln', 'de'), ('Duisburg', 'de'), ('Hamburg', 'de'), ('Bremen', 'de'), ('Berlin', 'de'),
+              ('Wien', 'at')]
 country_codes = ['ch', 'de', 'gb', 'fr']
 institution_names = list()
 for c_name in city_names:
     for i_name in institution_name_parts:
-        institution_names.append(i_name + " " + c_name)
+        institution_names.append(i_name + " " + c_name[0])
 
 str_source_type = "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_type_id`) " \
                   "VALUES (1, 'Historiographische Quellen', NULL),\n " \
@@ -131,23 +134,25 @@ str_source_type = "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_typ
                   "(52, 'Notizen', 11);\n"
 
 str_institution = "INSERT INTO main_institution (id, institution_name, street, zip_code, " \
-                  "city, country, site_url, institution_utc_add, institution_slug) VALUES"
+                  "city, country, site_url, institution_utc_add, institution_slug, created_by_id) VALUES"
 
 str_ref_number = "INSERT INTO main_refnumber (id, ref_number_name, ref_number_title, collection_link, " \
-                 "ref_number_utc_add, ref_number_slug, holding_institution_id) VALUES"
+                 "ref_number_utc_add, ref_number_slug, holding_institution_id, created_by_id) VALUES"
 
 ref_number_idx = 1
 for institution_idx in range(50):
     institution = institution_idx+1
     random_city_number = random.randint(0, len(city_names)-1)
     random_country_number = random.randint(0, len(country_codes)-1)
+    random_user = random.randint(1, len(users))
     str_institution += f"({institution}, '{institution_names[institution_idx]}', 'Street{institution}', '10{institution}', " \
-                       f"'{city_names[random_city_number]}', '{country_codes[random_country_number]}', 'http://www.dummy.ch', NOW(), 'test-institution-{institution}'),\n"
+                       f"'{city_names[random_city_number][0]}', '{city_names[random_city_number][1]}', 'http://www.dummy.ch', NOW(), 'test-institution-{institution}', '{random_user}'),\n"
 
     for ref_number in range(10):
         random_number = random.randint(1000, 9999)
         random_number2 = random.randint(0, len(ref_number_titles)-1)
-        str_ref_number += f"({ref_number_idx}, 'I{institution}-{random_number}-{random_number2}', '{ref_number_titles[random_number2]} {ref_number}', 'http://www.dummy.ch', NOW(), 'i{institution}-refnumber-{ref_number}', '{institution}'),\n"
+        random_user = random.randint(1, len(users))
+        str_ref_number += f"({ref_number_idx}, 'I{institution}-{random_number}-{random_number2}', '{ref_number_titles[random_number2]} {ref_number}', 'http://www.dummy.ch', NOW(), 'i{institution}-refnumber-{ref_number}', '{institution}', '{random_user}'),\n"
         ref_number_idx += 1
 
 str_ref_number = str_ref_number[:-2]
@@ -185,9 +190,10 @@ authors = ['William Shakespeare',
            'René Goscinny',
            'Erle Stanley Gardner']
 
-str_authors = "INSERT INTO main_author (id, author_name, author_gnd) VALUES "
+str_authors = "INSERT INTO main_author (id, author_name, author_gnd, created_by_id) VALUES "
 for author in authors:
-    str_authors += f"(NULL, '{author}', ''),\n"
+    random_user = random.randint(1, len(users))
+    str_authors += f"(NULL, '{author}', '', {random_user}),\n"
 
 str_authors = str_authors[:-2]
 str_authors += ";"
@@ -221,7 +227,7 @@ for filename in os.listdir('dummy_texts'):
     random_user = random.randint(1, len(users))
 
     str_documents += f"(NULL, '{my_uuid}', '{doc_titles[random_number2]} {doc_names[random_number3]}, {document_no}', '{random_year}-01-01 11:15:35.000000', NULL, " \
-                     f"'{city_names[random.randint(0,len(city_names)-1)]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
+                     f"'{city_names[random.randint(0,len(city_names)-1)][0]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
                      f"'{transcription_text}', NOW(), 'document-title-{document_no}', '1', 'generated', " \
                      f"'1', '{parent_ref_number}', '{random_source_type}', '{random_user}', '{random_anonymous}', NOW(), {random_illuminated}, {random_seal});\n"
     document_no += 1
@@ -239,6 +245,7 @@ f.write("DELETE FROM main_institution WHERE 1;\n")
 f.write("DELETE FROM main_author WHERE 1;\n")
 f.write("DELETE FROM main_sourcetype WHERE parent_type_id IS NOT NULL;\n")
 f.write("DELETE FROM main_sourcetype WHERE 1;\n")
+f.write("DELETE FROM django_admin_log WHERE 1;\n")
 f.write("DELETE FROM main_user WHERE username != 'sorin';\n")
 f.write("DELETE FROM main_usersubscription WHERE 1;\n\n")
 f.write("-- USERS\n")

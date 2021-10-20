@@ -128,7 +128,7 @@
                             <div id="custom-search" class="top-search-bar">
                                 <form action="{% url 'main:search_redirect' %}" method="post">
                                     {% csrf_token %}
-                                    <input class="form-control" type="text" placeholder="Search...">
+                                    <input class="form-control" type="text" name="query" placeholder="Search...">
                                 </form>
                             </div>
                         </li>

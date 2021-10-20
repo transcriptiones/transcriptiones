@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.template.defaultfilters import slugify
@@ -9,9 +9,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from bootstrap_modal_forms.generic import BSModalCreateView
 
+from main.mail_utils import send_contact_message_copy
 from main.forms.forms_test import InstModelForm, RefnModelForm
 from main.forms.forms_upload import UploadTranscriptionForm, BatchUploadForm
-from main.models import Document, Institution, RefNumber
+from main.models import Document, Institution, RefNumber, ContactMessage
 
 
 def upload_options(request):
@@ -23,9 +24,18 @@ def upload_multiple_transcriptions_view(request):
     return render(request, 'main/upload/create_multiple_documents.html')
 
 
-@login_required
 def upload_batch_view(request):
     form = BatchUploadForm()
+
+    if request.method == "POST":
+        form = BatchUploadForm(request.POST)
+        if form.is_valid():
+            new_message = ContactMessage.objects.create(reply_email=form.cleaned_data['email_address'],
+                                                        message=form.cleaned_data['batch_description'])
+            send_contact_message_copy(new_message)
+            messages.success(request, _('Your Message has been sent. You received a copy by email.'))
+            return redirect('main:upload_options')
+
     return render(request, 'main/upload/create_batch_contact.html', {'form': form})
 
 

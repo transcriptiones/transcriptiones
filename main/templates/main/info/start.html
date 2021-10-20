@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load static %}
 {% load cookielaw_tags %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}
 {% endblock %}
@@ -39,6 +40,11 @@
                     {% comment %} Translators: Main Page introductory text. {% endcomment %}
                     <p class="lead mb-5">{% translate 'WhatIsTranscriptiones-Text' %} </p>
                     <a class="btn btn-dark btn-xl js-scroll-trigger" href="#procedure">{% translate 'How it works' %}</a>
+                    <div>
+                        <br/><br/>
+                        <h4>{% translate 'Stay Up To Date' %}</h4>
+                        {% crispy form %}
+                    </div>
                 </div>
             </div>
         </div>

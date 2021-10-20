@@ -150,7 +150,9 @@ def search_box_redirect(request):
         if query == '':
             messages.warning(request, 'Please enter a search term')
             return redirect('main:search')
-        return HttpResponseRedirect(reverse('main:search_by_box', kwargs={'query': query}))
+        search_url = reverse('main:search')
+        search_url += "?query=" + query
+        return HttpResponseRedirect(search_url)
 
 
 def search_by_box_view(request, query):

@@ -220,7 +220,7 @@ class Document(models.Model):
 
     author = models.ManyToManyField(Author,
                                     verbose_name=_("Source Participants"),
-                                    blank=True, null=True,
+                                    blank=True,  # null=True,
                                     help_text=_("Authors, Copiers, Editors"))
 
     doc_start_date = PartialDateField(verbose_name=_("Creation period start"),
@@ -243,7 +243,7 @@ class Document(models.Model):
 
     language = models.ManyToManyField(Language,
                                       verbose_name=_("Languages"),
-                                      blank=True, null=True,
+                                      blank=True,  # null=True,
                                       help_text=_("Languages used in the source"))
 
     source_type = models.ForeignKey(SourceType,

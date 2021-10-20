@@ -1,3 +1,4 @@
+from crispy_forms.layout import Submit
 from django import forms
 from bootstrap_modal_forms.forms import BSModalModelForm
 from dal import autocomplete
@@ -69,17 +70,6 @@ class InstitutionForm(BSModalModelForm):
     # Add class form-control to each form field for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(InstitutionForm, self).__init__(*args, **kwargs)
-        """
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].help_text,
-                })
-        
-        self.fields['zip_code'].widget.attrs.update({
-            'max': 99999
-            })
-        """
         self.helper = initialize_form_helper()
 
     class Meta:
@@ -237,9 +227,15 @@ class EditTranscriptForm(forms.ModelForm):
 
 
 class BatchUploadForm(forms.Form):
-    batch_description = forms.CharField(widget=forms.Textarea)
+    email_address = forms.EmailField(label=_('Your E-Mail Address'),
+                                     help_text=_('We will contact you with this email address.'))
+    batch_description = forms.CharField(label=_('Batch Description'),
+                                        help_text=_('Please describe the documents you want to upload.'),
+                                        widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         super(BatchUploadForm, self).__init__(*args, **kwargs)
 
         self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'

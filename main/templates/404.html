@@ -1,0 +1,25 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <style>
+            h1 {color: red}
+            body {
+                background-image: url("http://localhost:8000/{% get_static_prefix %}main/images/sort_asc.png");
+                background-repeat: repeat;
+                background-color: #721c24;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>{% translate 'Page Not Found' %}</h1>
+        <p>{% translate 'The Page you are looking for was not found.' %}</p>
+        <p>
+            <a href=" {% url 'main:start' %}">{% translate 'Go to main page' %}</a>
+        </p>
+    </body>
+</html>

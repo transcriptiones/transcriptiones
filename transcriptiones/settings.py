@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django_bootstrap_breadcrumbs',
     'bootstrap_modal_forms',
     'cookielaw',
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -107,7 +108,7 @@ DATABASES = {
         'NAME': 'transcriptiones',
         'USER': 'transcriptiones_user',
         'PASSWORD': 'transcriptiones',
-        # 'PASSWORD': 's0uW@nn@KrrackTh1z?GudLöck',
+        # 'PASSWORD': 's0uW@nn@KrrackTh1z?gudLöck',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
@@ -131,6 +132,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+# Cron jobs
+CRONJOBS = [
+    ('* * * * *', 'main.cron.send_daily_notification_email'), # 7 o' clock every day
+    ('1 0 * * 0', 'main.cron.send_weekly_notification_email')   # 7 o' clock every monday
 ]
 
 # Configuration for country selection

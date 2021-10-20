@@ -61,7 +61,7 @@ def send_registration_confirmation_mail(user, current_site):
 
 def send_transcriptiones_mail(subject, plain_message, html_message, from_email, to_email):
     """Sends an Email to a single recipient in a plain text and html version."""
-    send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
+    send_mail(subject, plain_message, from_email, [to_email])
 
 
 def get_document_subscription_message(user, document):
