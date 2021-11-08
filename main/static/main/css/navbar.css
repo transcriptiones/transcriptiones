@@ -80,6 +80,14 @@
     min-height: 60px;
 }
 
+.navbar-logo {
+    display: inline-block;
+    height: 1.75rem;
+    padding-left: 1rem;
+    padding-right: 2rem;
+}
+
+/* Not in use anymore?
 .navbar-brand {
     display: inline-block;
     margin-right: 1rem;
@@ -96,6 +104,7 @@
 .navbar-brand:hover {
     color: #ffffff;
 }
+*/
 
 .navbar-right-top {}
 
@@ -108,7 +117,7 @@
 }
 
 .navbar-right-top .nav-item .nav-link {
-    padding: 13px 5px;
+    padding: 13px 0.75rem;
     font-size: 16px;
     line-height: 2;
     color: #82849f
