@@ -32,6 +32,11 @@
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
+.small > ol, ul {
+    list-style-type: none;
+    text-align: center;
+}
+
 /* Port folio items. */
 .portfolio-item {
   display: block;
