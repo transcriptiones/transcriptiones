@@ -32,12 +32,32 @@
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
+.service-icon-portfolio {
+  background-color: #1D809F;
+  color: #fff;
+  height: 7rem;
+  width: 7rem;
+  display: block;
+  line-height: 7.5rem;
+  font-size: 2.25rem;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.service-icon-portfolio a {
+  color: #fff;
+}
+
+.service-icon-portfolio a:hover {
+  color: #e6e6f2;
+}
+
 .small > ol, ul {
     list-style-type: none;
     text-align: center;
 }
 
 /* Port folio items. */
+/* not needed anymore
 .portfolio-item {
   display: block;
   position: relative;
@@ -71,5 +91,4 @@
   font-weight: 300;
   font-size: 1.2rem;
 }
-
-
+*/

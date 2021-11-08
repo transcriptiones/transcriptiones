@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
                     <span class="service-icon rounded-circle mx-auto mb-3">
-                        <i class="fas fa-check-double"></i>
+                        <i class="fas fa-pen"></i>
                     </span>
                     <h4>
                         <strong>{% translate 'Edit' %}</strong>
@@ -99,6 +99,49 @@
     </section>
 
     <!-- Portfolio -->
+    <section class="content-section bg-light text-center" id="portfolio">
+        <div class="container">
+            <div class="content-section-heading">
+                <h2 class="mb-5">{% translate 'Additional Information' %}</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon-portfolio rounded-circle mx-auto mb-3">
+                        <a href="{% url 'main:guidelines' %}">
+                            <i class="fas fa-pencil-ruler"></i>
+                        </a>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'Transcript Guidelines' %}</strong>
+                    </h4>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <span class="service-icon-portfolio rounded-circle mx-auto mb-3">
+                        <a href="{% url 'main:tos' %}">
+                            <i class="fas fa-quote-right"></i>
+                        </a>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'Terms of usage' %}</strong>
+                    </h4>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
+                    <span class="service-icon-portfolio rounded-circle mx-auto mb-3">
+                        <a href="{% url 'main:about' %}">
+                            <i class="fas fa-check-double"></i>
+                        </a>
+                    </span>
+                    <h4>
+                        <strong>{% translate 'About Us' %}</strong>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--
     <section class="content-section" id="portfolio">
         <div class="container">
             <div class="content-section-heading text-center">
@@ -149,4 +192,5 @@
             </div>
         </div>
     </section>
+-->
 {% endblock %}
