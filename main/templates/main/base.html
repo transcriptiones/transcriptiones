@@ -93,7 +93,10 @@
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-md bg-primary fixed-top">
                 <!-- LOGO -->
-                <a class="navbar-brand" href="{% url 'main:start' %}">Transcriptiones</a>
+                <a href="{% url 'main:start' %}">
+                    <img class="navbar-logo" src="{% static 'main/images/logo.png' %}" alt="transcriptiones">
+                </a>
+                <!-- <a class="navbar-brand" href="{% url 'main:start' %}">Transcriptiones</a> -->
 
                 <!-- TOGGLER -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
