@@ -21,6 +21,7 @@ app_name = 'main'
 urlpatterns = [
     # ROOT VIEW
     path('', v_info.start_view, name='start'),
+    path('set_language/<str:language>/', v_info.set_language_view, name='set_tr_language'),
 
     ##############
     # INFO PAGES

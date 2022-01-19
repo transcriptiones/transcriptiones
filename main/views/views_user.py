@@ -34,8 +34,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
-            current_site = get_current_site(request)
-            send_registration_confirmation_mail(user, current_site)
+            send_registration_confirmation_mail(user)
             return redirect('main:account_activation_sent')
 
     else:

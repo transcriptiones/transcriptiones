@@ -6,6 +6,16 @@ from main.mail_utils import send_contact_message_copy
 from main.forms.forms_info import ContactForm, NewsletterSubscribeForm
 from main.models import ContactMessage
 
+from django.utils import translation
+
+
+
+def set_language_view(request, language):
+    translation.activate(language)
+    request.LANGUAGE_CODE = language
+    request.session[translation.LANGUAGE_SESSION_KEY] = language
+    return redirect(request.META['HTTP_REFERER'])
+
 
 def start_view(request):
     """Shows the main view"""

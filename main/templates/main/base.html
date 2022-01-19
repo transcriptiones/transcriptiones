@@ -182,6 +182,28 @@
                         {% endif %}
                         <!-- End notifications -->
 
+                        <!--Language Selection Block-->
+                        <li class="nav-item dropdown connection">
+                             {% get_current_language as LANGUAGE_CODE %}
+
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-globe" style="color: #e6e6f2;"></i> <span style="color: white">{{ LANGUAGE_CODE }}</span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right nav-connections-dropdown">
+                                <li>
+                                     <a class="dropdown-item disabled" href="#"><small>{% translate 'Select Language' %}</small></a>
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <p>
+                                      {{ language.code }} &nbsp;<a class="dropdown-item" href="{% url 'main:set_tr_language' language.code %}">{{ language.name_local }}</a>
+                                        </p>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </li>
+
                         <!-- Option / Apps Block-->
                         <li class="nav-item dropdown connection">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
