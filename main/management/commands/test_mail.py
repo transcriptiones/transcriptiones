@@ -4,33 +4,66 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
-from main.mail_utils import send_transcriptiones_mail
+import main.mail_utils as mail_utils
 
 from django.core.management.base import BaseCommand, CommandError
 
-from main.models import User
+from main.models import User, ContactMessage
 from main.tokens import account_activation_token
-from transcriptiones import settings
+
 
 
 class Command(BaseCommand):
     help = 'Tests if sending an e-mail works.'
 
     def add_arguments(self, parser):
+        parser.add_argument('which_test', type=str)
         parser.add_argument('username', type=str)
         parser.add_argument('to_address', type=str)
 
+
     def handle(self, *args, **options):
+        my_options = ['all', 'contact', 'daily', 'weekly', 'instant', 'pw_reset', 'register', 'batch', 'username']
+        if options['which_test'] not in my_options:
+            self.stdout.write(self.style.ERROR(f'"which_test" must be one of "{", ".join(my_options)}"'))
+
         to_address = options['to_address']
         user = User.objects.get(username=options['username'])
-        self.stdout.write(self.style.SUCCESS('Testing mail settings.'))
-        subject = 'Transcriptiones: Please activate your account'
-        html_message = render_to_string('main/users/email_templates/account_activation_email.html', {
-            'user': user,
-            'domain': 'transcriptiones.ch',
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': account_activation_token.make_token(user),
-        })
-        plain_message = ''
-        send_transcriptiones_mail(subject, 'plain message', html_message, settings.NO_REPLY_EMAIL, to_address)
-        self.stdout.write(self.style.SUCCESS('Tried to send mail.'))
+
+        if options['which_test'] == "contact" or options['which_test'] == "all":
+            msg = ContactMessage()
+            msg.subject = 'Your Contact Subject line'
+            msg.message = 'Your Contact message'
+            msg.reply_email = options['to_address']
+            mail_utils.send_contact_message_copy(msg)
+            self.stdout.write(self.style.SUCCESS('Sent contact mail.'))
+
+        if options['which_test'] == "daily" or options['which_test'] == "all":
+            mail_utils.send_daily_notification_mail(user)
+            self.stdout.write(self.style.SUCCESS('Sent daily mail.'))
+
+        if options['which_test'] == "weekly" or options['which_test'] == "all":
+            mail_utils.send_weekly_notification_mail(user)
+            self.stdout.write(self.style.SUCCESS('Sent weekly mail.'))
+
+        if options['which_test'] == "instant" or options['which_test'] == "all":
+            mail_utils.send_instant_notification_mail(user, 'Something has changed')
+            self.stdout.write(self.style.SUCCESS('Sent instant mail.'))
+
+        if options['which_test'] == "pw_reset" or options['which_test'] == "all":
+            mail_utils.send_password_reset_mail(user)
+            self.stdout.write(self.style.SUCCESS('Sent pasword reset mail.'))
+
+        if options['which_test'] == "register" or options['which_test'] == "all":
+            mail_utils.send_registration_confirmation_mail(user)
+            self.stdout.write(self.style.SUCCESS('Sent registration confirmation mail.'))
+
+        if options['which_test'] == "batch" or options['which_test'] == "all":
+            mail_utils.send_batch_upload_request_mail(options['to_address'])
+            self.stdout.write(self.style.SUCCESS('Sent batch mail.'))
+
+        if options['which_test'] == "username" or options['which_test'] == "all":
+            mail_utils.send_username_request_mail(options['to_address'])
+            self.stdout.write(self.style.SUCCESS('Sent batch mail.'))
+
+        self.stdout.write('Test finished.')
