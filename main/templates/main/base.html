@@ -120,6 +120,10 @@
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'news' %}-active{% endif %}" href="{% url 'main:news' %}">{% translate 'News' %}</a>
+                        </li>
+
+                        <li class="navbar-nav-item d-none d-sm-block">
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'about,tos,guidelines,contact' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
                         </li>
                     </ul>
@@ -268,6 +272,9 @@
                                 <a class="dropdown-item" href="{% url 'main:profile' %}"><i class="fas fa-user mr-2"></i>{% translate 'Account' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:user_update' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Edit User Information' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-user-circle mr-2"></i>{% translate 'View Your Public Profile' %}</a>
+                                {% if request.user.is_superuser %}
+                                    <a class="dropdown-item" href="{% url 'main:admin' %}"><i class="fas fa-user-cog mr-2"></i>{% translate 'Administration' %}</a>
+                                {% endif %}
                                 <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-power-off mr-2"></i>{% translate 'Logout' %}</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item disabled" href="#"><small>{% translate 'Messages' %}</small></a>
@@ -370,7 +377,7 @@
                     </a>
                 </li>
             </ul>
-            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2021</p> <!-- TODO Get these values from a context processor-->
+            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2022</p> <!-- TODO Get these values from a context processor-->
         </div>
 
         <!-- Sidebar -->

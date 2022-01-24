@@ -1,0 +1,47 @@
+﻿{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'News' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("News") "main:news" %}
+{% endblock %}
+
+{% block content %}
+    {% card 'simple_search_form' _('Latest News') %}
+        {% for news in news_data %}
+            <a href="{% url 'main:news' %}" class="no-deco-link">
+                <div class="card bg-light border-dark" style="margin-bottom: 5px;">
+                  <div class="card-header bg-light">
+                      {% if news.message_tags.all %}
+                          Topics:
+                          {% for tag in news.message_tags.all %}
+                              <span class="badge badge-primary">{{ tag.tag_name }}</span>
+                          {% endfor %}
+                      {% endif %}
+                    <span style="float: right; font-size: x-small;">By: {{ news.uploading_user }}</span>
+                  </div>
+                  <div class="card-body">
+
+                      <h5 class="card-title" style="margin: 0; font-weight: bold;">Title</h5>
+                        <small>{{ news.news_time }} ({% blocktranslate with since=news.news_time|timesince %} {{ since }} ago{% endblocktranslate %})<br/></small>
+                     Text
+                  </div>
+                  <div class="card-footer">
+                      <span class="search-result-title">{% translate 'Read this item in another language' %}</span>
+                      <img src="{% static 'flags/de.gif' %}"/> &nbsp;
+                      <img src="{% static 'flags/fr.gif' %}"/> &nbsp;
+                      <img src="{% static 'flags/it.gif' %}"/> &nbsp;
+                  </div>
+                </div>
+                </a>
+        {% endfor %}
+    {% endcard %}
+{% endblock %}

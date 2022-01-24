@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, PasswordResetDoneView,\
     PasswordResetCompleteView
@@ -11,6 +11,7 @@ import main.views.views_edit as v_edit
 import main.views.views_export as v_export
 import main.views.views_info as v_info
 import main.views.views_messages as v_messages
+import main.views.views_news as v_news
 import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
 import main.views.views_upload as v_upload
@@ -29,12 +30,17 @@ urlpatterns = [
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),
+    path('unsubscribe/', v_info.unsubsribe_newsletter_view, name='unsubscribe_newsletter'),
 
     ##############
     # SEARCH VIEW
     # path('search/', v_search.SearchView.as_view(), name='search'),
     path('search/', v_search.test_search_2, name='search'),
     path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
+
+    ##############
+    # News VIEW
+    path('news/', v_news.news_view, name='news'),
 
     ##############
     # UPLOAD PAGES
@@ -150,4 +156,7 @@ urlpatterns = [
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', v_edit.edit_meta_view, name='edit_meta'),
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
+
+    path('api/<string:api_version>/<str:api_request>/', v_admin.admin_view, name='admin'),
+    path('api/<string:api_version>/<str:api_request>/<int:object_id>/<str:action>', v_admin.admin_view, name='admin'),
     ]

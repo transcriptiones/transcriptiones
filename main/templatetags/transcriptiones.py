@@ -4,6 +4,11 @@ from django.template.base import FilterExpression
 register = template.Library()
 
 
+@register.simple_tag
+def get_translated_source_type_name(source_type, language):
+    return source_type.get_translated_name(language)
+
+
 @register.tag
 def card(parser, token):
     """This tag creates a bootstrap card node"""

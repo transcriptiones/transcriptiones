@@ -17,8 +17,9 @@
 {% block content %}
     {% card 'source_type_parent_list_card' _('First Level Source Types') %}
         <p>{% translate 'Select A Source Type to see its children.' %}</p>
+        {% get_current_language as LANGUAGE_CODE %}
         {% for st in source_types %}
-            <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{{ st }}</span></a>
+            <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{% get_translated_source_type_name st LANGUAGE_CODE %}</span></a>
         {% endfor %}
     {% endcard %}
 

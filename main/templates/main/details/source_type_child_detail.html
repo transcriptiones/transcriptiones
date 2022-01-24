@@ -17,28 +17,27 @@
 
 {% block content %}
     {% card 'source_type_parent_list_card' _('Second Level Source Types') %}
+        {% get_current_language as LANGUAGE_CODE %}
         <p>{% translate 'Select A Source Type to see documents of this type or go up one level.' %}</p>
-         <a href="{% url 'main:source_type_detail' selected.parent_type.id %}"><span class="badge badge-info">Go up: {{ selected.parent_type }}</span></a>
+         <a href="{% url 'main:source_type_detail' selected.parent_type.id %}"><span class="badge badge-info">{% translate 'Go up' %}: {% get_translated_source_type_name selected.parent_type LANGUAGE_CODE %}</span></a>
          {% if all %}
-             <span class="badge badge-primary">Show All in: {{ selected.parent_type }}</span>
+             <span class="badge badge-primary">{% translate 'Show All in' %}: {% get_translated_source_type_name selected.parent_type LANGUAGE_CODE %}</span>
          {% else %}
-             <a href="{% url 'main:source_type_group_detail' selected.id %}"><span class="badge badge-secondary">Show All in: {{ selected.parent_type }}</span></a>
+             <a href="{% url 'main:source_type_group_detail' selected.id %}"><span class="badge badge-secondary">{% translate 'Show All in' %}: {% get_translated_source_type_name selected.parent_type LANGUAGE_CODE %}</span></a>
         {% endif %}
         <br/>
         {% for st in source_types %}
             {% if st.id == selected.id and not all %}
-                <span class="badge badge-primary">{{ st }}</span>
+                <span class="badge badge-primary">{% get_translated_source_type_name st LANGUAGE_CODE %}</span>
             {% else %}
-                <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{{ st }}</span></a>
+                <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{% get_translated_source_type_name st LANGUAGE_CODE %}</span></a>
             {% endif %}
         {% endfor %}
     {% endcard %}
 
     {% card 'source_type_list_card' _('Source Types') %}
         <p>
-            {% blocktranslate %}
-            Documents with type '{{ selected }}'
-            {% endblocktranslate %}
+            {% translate 'Documents with type' %}: <strong>{% get_translated_source_type_name selected LANGUAGE_CODE %}</strong>
         </p>
         {% render_table table %}
     {% endcard %}

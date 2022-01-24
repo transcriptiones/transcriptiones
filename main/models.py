@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models import Q, UniqueConstraint
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from partial_date import PartialDateField
@@ -165,6 +165,10 @@ class SourceType(models.Model):
     type_name = models.CharField(verbose_name="archivalienart",
                                  max_length=50,)
 
+    type_name_de = models.CharField(verbose_name="archivalienart", default='', max_length=50)
+    type_name_fr = models.CharField(verbose_name="archivalienart", default='', max_length=50)
+    type_name_it = models.CharField(verbose_name="archivalienart", default='', max_length=50)
+
     parent_type = models.ForeignKey('self',
                                     verbose_name="übergeordnete Archivalienart",
                                     on_delete=models.CASCADE,
@@ -178,6 +182,16 @@ class SourceType(models.Model):
 
     def get_absolute_url(self):
         return reverse('main:source_type_detail', kwargs={'pk': self.pk})
+
+    def get_translated_name(self, language):
+        if language == "de":
+            return self.type_name_de
+        elif language == "fr":
+            return self.type_name_fr
+        elif language == "it":
+            return self.type_name_it
+
+        return self.type_name
 
     def __str__(self):
         return self.type_name
@@ -591,6 +605,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         value = '%02x%02x%02x' % (val_r%256, val_g%256, val_b%256)
         return "#"+value
 
+
 class UserSubscription(models.Model):
     class SubscriptionType(models.IntegerChoices):
         REF_NUMBER = 1, _('Reference number')
@@ -638,3 +653,54 @@ class ContactMessage(models.Model):
 
     state = models.IntegerField(default=0)
     sending_time = models.DateTimeField(auto_now_add=True)
+
+
+class TopicTag(models.Model):
+    tag_name = models.CharField(max_length=50)
+    tag_name_de = models.CharField(max_length=50, default=None, null=True)
+    tag_name_fr = models.CharField(max_length=50, default=None, null=True)
+    tag_name_it = models.CharField(max_length=50, default=None, null=True)
+
+
+class NewsMessage(models.Model):
+    news_title = models.CharField(max_length=100)
+    news_title_de = models.CharField(max_length=100, default=None, null=True)
+    news_title_fr = models.CharField(max_length=100, default=None, null=True)
+    news_title_it = models.CharField(max_length=100, default=None, null=True)
+
+    news_message = models.TextField()
+    news_message_de = models.TextField(default=None, null=True)
+    news_message_fr = models.TextField(default=None, null=True)
+    news_message_it = models.TextField(default=None, null=True)
+
+    news_file = models.CharField(max_length=255)
+
+    news_time = models.DateTimeField(auto_now_add=True)
+    news_state = models.IntegerField(default=0)
+
+    uploading_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    message_tags = models.ManyToManyField(TopicTag)
+
+
+class NewsletterRecipients(models.Model):
+    email_address = models.EmailField()
+    added_at = models.DateTimeField(auto_now_add=True)
+    language = models.CharField(max_length=20,
+                                verbose_name=_('Default User Interface Language'),
+                                help_text=_('What is your preferred language?'),
+                                choices=settings.LANGUAGES,
+                                default='en')
+
+
+class Newsletter(models.Model):
+    subject = models.CharField(max_length=100)
+    user_group = models.IntegerField(default=0)   # Define User groups (Admin, User, ???)
+    plain_text = models.TextField()
+    news_file = models.CharField(max_length=255)
+
+    scheduled_time = models.DateTimeField()
+    state = models.IntegerField(default=0) # Draft / Ready / Sent
+    responsible = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    creation_time = models.DateTimeField(auto_now_add=True)

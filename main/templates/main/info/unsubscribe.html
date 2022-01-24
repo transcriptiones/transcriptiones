@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load transcriptiones %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Unsubscribe From Newsletter' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Unsubscribe" "main:unsubscribe" %}
+{% endblock %}
+
+{% block content %}
+
+    {% card 'general' _('Unsubscribe') %}
+        {% translate 'You can remove your email address from our newsletter list by entering it below.' %}
+        <br/><br/>
+        {% crispy form %}
+    {% endcard %}
+
+{% endblock %}

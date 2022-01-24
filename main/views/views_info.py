@@ -1,20 +1,29 @@
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from main.mail_utils import send_contact_message_copy
-from main.forms.forms_info import ContactForm, NewsletterSubscribeForm
-from main.models import ContactMessage
-
+from main.forms.forms_info import ContactForm, NewsletterSubscribeForm, NewsletterUnsubscribeForm
+from main.models import ContactMessage, NewsletterRecipients
+from django.utils.translation import activate
 from django.utils import translation
 
+from transcriptiones import settings
 
 
 def set_language_view(request, language):
     translation.activate(language)
     request.LANGUAGE_CODE = language
-    request.session[translation.LANGUAGE_SESSION_KEY] = language
-    return redirect(request.META['HTTP_REFERER'])
+
+    response = HttpResponseRedirect(reverse('main:start'))
+
+    if hasattr(request, 'session'):
+        request.session['django_language'] = language
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+
+    return response
 
 
 def start_view(request):
@@ -23,8 +32,35 @@ def start_view(request):
 
     if request.method == "POST":
         form = NewsletterSubscribeForm(request.POST)
+        if form.is_valid():
+            if NewsletterRecipients.objects.filter(email_address=form.cleaned_data['email_address']).count() == 0:
+                NewsletterRecipients.objects.create(email_address=form.cleaned_data['email_address'],
+                                                    language=request.LANGUAGE_CODE)
+                messages.success(request, _('Thank you! You will receive our next newsletter.'))
+                form = NewsletterSubscribeForm()
+            else:
+                messages.warning(request, _('Your address is already in our list.'))
+        else:
+            messages.error(request, _('Please fill in a valid email address.'))
 
     return render(request, 'main/info/start.html', context={'form': form})
+
+
+def unsubsribe_newsletter_view(request):
+    form = NewsletterUnsubscribeForm()
+
+    if request.method == "POST":
+        form = NewsletterUnsubscribeForm(request.POST)
+        if form.is_valid():
+            try:
+                subscription = NewsletterRecipients.objects.get(email_address=form.cleaned_data['email_address'])
+                subscription.delete()
+                messages.success(request, _('You have been unsubscribed.'))
+                return redirect('main:start')
+            except NewsletterRecipients.DoesNotExist:
+                messages.error(request, _("This address is not in our newsletter list."))
+
+    return render(request, 'main/info/unsubscribe.html', context={'form': form})
 
 
 def contact_view(request):
