@@ -16,6 +16,7 @@ import main.views.views_search as v_search
 import main.views.views_subscriptions as v_subscriptions
 import main.views.views_upload as v_upload
 import main.views.views_user as v_user
+import main.views.views_api as v_api
 
 
 app_name = 'main'
@@ -157,6 +158,7 @@ urlpatterns = [
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
-    path('api/<string:api_version>/<str:api_request>/', v_admin.admin_view, name='admin'),
-    path('api/<string:api_version>/<str:api_request>/<int:object_id>/<str:action>', v_admin.admin_view, name='admin'),
+    path('api/documentation/', v_api.api_doc_view, name='api_doc_view'),
+    path('api/<str:api_version>/<str:api_request>/', v_api.api_view, name='api_view'),
+    path('api/<str:api_version>/<str:api_request>/<int:object_id>/', v_api.api_detail_view, name='api_detail_view'),
     ]

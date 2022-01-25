@@ -6,6 +6,7 @@
         <a type="button" href="{% url 'main:about' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'about' %} disabled{% endif %}">{% translate 'About the Project' %}</a>
         <a type="button" href="{% url 'main:guidelines' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'guidelines' %} disabled{% endif %}">{% translate 'Guidelines' %}</a>
         <a type="button" href="{% url 'main:tos' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'tos' %} disabled{% endif %}">{% translate 'Terms Of Service' %}</a>
+        <a type="button" href="{% url 'main:api_doc_view' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'api_doc_view' %} disabled{% endif %}">{% translate 'Transcriptiones API' %}</a>
         <a type="button" href="{% url 'main:contact' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'contact' %} disabled{% endif %}">{% translate 'Contact Us' %}</a>
     </div>
 </div>

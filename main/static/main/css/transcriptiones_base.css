@@ -102,3 +102,8 @@ body {
     background-image: url("../images/background_tile.jpg");
     background-repeat: repeat;
 }
+
+pre {
+    background: #cccccc;
+    padding: 5px;
+}

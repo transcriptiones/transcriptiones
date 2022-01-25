@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+{% load transcriptiones %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'What is Transcriptiones?' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("About") "main:about" %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/info/info_options.html' %}
+
+    {% card 'tr_api' _('Transcriptiones API') %}
+        <div class="text-center">
+            <small class="text-muted">(This text exists in English only)</small>
+        </div>
+
+        <h4>Why an API?</h4>
+        <p>
+            Transcriptiones lets you search for documents and view their transcription. But what if you want to download
+            a bunch of transcriptions in a certain format and use it in your research?<br/><br/>
+            That's what the Transcriptiones <b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface comes into play. With
+            a set of simple commands you can search and download our database. The request results are in JSON format and
+            the transcription exports are TEI or plain text.<br/><br/>
+
+            Example (Request the document list):
+            <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/</code></pre>
+
+            Example Result (First page of the document list):
+            <pre class="pre-scrollable"><code>{
+    "request": {
+        "api": "Transcriptiones API",
+        "documentation": "https://transcriptiones.ch/api/documentation/",
+        "api-version": "v1",
+        "requested-at": "2022-01-25 15:52:11"
+    },
+    "num-results": 456,
+    "num-pages": 46,
+    "page": 1,
+    "result-list": [
+        {
+            "id": 2794,
+            "url": "https://transcriptiones.ch/display/institutions/staatsarchiv-basel/stabs-b3-456/grundungsurkunde-xyz/",
+            "api-request": "/api/v1/documents/2794/",
+            "name": "Gründungsurkunde XYZ"
+        },
+        {
+            "id": 2823,
+            "url": "https://transcriptiones.ch/display/institutions/klosterarchiv-einsiedeln/ein-67-43526/weinumgelt-1654/",
+            "api-request": "/api/v1/documents/2823/",
+            "name": "Winumgelt 1654"
+        },
+        [...] (8 results skipped in this example)
+    }
+}</code></pre>
+
+        This page documents the API and the supported commands
+        </p>
+
+        <h4>Command Structure</h4>
+        <h5>Versions</h5>
+        <p>
+            Currently there is only one version. Its identifier is <b>v1</b>. We might want to adapt our API in the
+            future but we don't want to break existing Scripts. Future versions will thus have a different identifier while
+            the old versions will stay available.
+        </p>
+        <h5>Request A List</h5>
+        <p>
+            You can request a list of a certain type which returns a paginated result of the found objects. You can
+            filter the result by adding parameters.
+        </p>
+        <p>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/?&lt;PARAM&gt;=value</code></pre>
+        </p>
+
+        <h5>Request An Object</h5>
+        <p>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/&lt;ID&gt;/</code></pre>
+        </p>
+        
+        <h5>Request An Export</h5>
+        <p>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/documents/&lt;ID&gt;/&lt;EXPORT&gt;</code></pre>
+        </p>
+    {% endcard %}
+
+{% endblock %}
