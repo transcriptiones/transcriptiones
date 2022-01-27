@@ -26,19 +26,19 @@ class DocumentExportView(LoginRequiredMixin, DetailView):
             file_name = f'transcriptiones_export_{document.id}'
 
             if 'export_tei' in self.request.POST.keys():
-                file_contents = export(document, type='tei')
+                file_contents = export(document, export_type='tei')
                 content_type = 'text/xml'
                 file_ending = 'tei'
             elif 'export_json' in self.request.POST.keys():
-                file_contents = export(document, type='json')
+                file_contents = export(document, export_type='json')
                 content_type = 'application/json'
                 file_ending = 'json'
             elif 'export_html' in self.request.POST.keys():
-                file_contents = export(document, type='html')
+                file_contents = export(document, export_type='html')
                 content_type = 'text/html'
                 file_ending = 'html'
             elif 'export_pdf' in self.request.POST.keys():
-                file_contents = export(document, type='pdf')
+                file_contents = export(document, export_type='pdf')
                 content_type = 'application/pdf'
                 file_ending = 'pdf'
                 file_contents = easy_pdf.rendering.render_to_pdf('main/pdf_export_template.html', {'contents': file_contents})

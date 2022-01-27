@@ -11,7 +11,6 @@ from partial_date import PartialDateField
 from django_countries.fields import CountryField
 from languages_plus.models import Language
 from ckeditor.fields import RichTextField
-from rest_framework import serializers
 
 
 class Institution(models.Model):
@@ -68,6 +67,25 @@ class Institution(models.Model):
     def get_absolute_url(self):
         return reverse('main:institution_detail', kwargs={'inst_slug': self.institution_slug})
 
+    def get_api_list_json(self, version="v1"):
+        api_list_json = {"id": self.id,
+                         "name": self.institution_name,
+                         "url": self.get_absolute_url(),
+                         "api-request": f'/api/{version}/institutions/{self.id}/'}
+
+        return api_list_json
+
+    def get_api_detail_json(self, version="v1"):
+        api_detail_json = {"id": self.id,
+                           "name": self.institution_name,
+                           "url": self.get_absolute_url(),
+                           "refnumbers": []}
+
+        for refnumber in self.refnumber_set.all().order_by('ref_number_title'):
+            api_detail_json["refnumbers"].append({"id": refnumber.id, "api-request": f'/api/{version}/refnumbers/{refnumber.id}/'})
+
+        return api_detail_json
+
 
 class RefNumber(models.Model):
     """Physical Collections are identified by a reference number (RefNumber). These collections can contain multiple
@@ -122,6 +140,24 @@ class RefNumber(models.Model):
     def get_absolute_url(self):
         return reverse('main:ref_number_detail',
                        kwargs={'inst_slug': self.holding_institution.institution_slug, 'ref_slug': self.ref_number_slug})
+
+    def get_api_list_json(self, version="v1"):
+        api_list_json = {"id": self.id,
+                         "name": f"{self.ref_number_name}: {self.ref_number_title}",
+                         "url": self.get_absolute_url(),
+                         "api-request": f'/api/{version}/refnumbers/{self.id}/'}
+        return api_list_json
+
+    def get_api_detail_json(self, version="v1"):
+        api_detail_json = {"id": self.id,
+                           "name": f"{self.ref_number_name}: {self.ref_number_title}",
+                           "url": self.get_absolute_url(),
+                           "documents": []}
+
+        for document in self.document_set.all().order_by('title_name'):
+            api_detail_json["documents"].append({"id": document.id, "api-request": f'/api/{version}/documents/{document.id}/'})
+
+        return api_detail_json
 
 
 class Author(models.Model):
@@ -182,6 +218,21 @@ class SourceType(models.Model):
 
     def get_absolute_url(self):
         return reverse('main:source_type_detail', kwargs={'pk': self.pk})
+
+    def get_api_list_json(self, version="v1", minimal=False):
+        api_list_json = {"id": self.id,
+                         "name": self.type_name,
+                         "url": self.get_absolute_url(),
+                         "api-request": f'/api/{version}/sourcetypes/{self.id}/',
+                         "documents": []
+                         }
+
+        if minimal:
+            del api_list_json["documents"]
+        else:
+            for document in self.document_set.all().order_by('title_name'):
+                api_list_json["documents"].append(document.get_api_list_json(minimal=minimal))
+        return api_list_json
 
     def get_translated_name(self, language):
         if language == "de":
@@ -381,6 +432,70 @@ class Document(models.Model):
                            'doc_slug': self.document_slug,
                            'version_nr': self.version_number
                        })
+
+    def get_api_list_json(self, version="v1", minimal=False):
+        api_list_json = {"id": self.id,
+                         "name": self.title_name,
+                         "url": self.get_absolute_url(),
+                         "api-request": f'/api/{version}/documents/{self.id}/'
+                         }
+
+        if minimal:
+            del api_list_json["url"]
+        return api_list_json
+
+    def get_api_detail_json(self, version="v1"):
+        api_detail_json = {"id": self.id,
+                           "name": self.title_name,
+                           "url": self.get_absolute_url(),
+                           "doc-meta-data": {
+                               "version": self.version_number,
+                               "created": self.document_utc_add.strftime("%Y-%m-%d %H:%M:%S"),
+                               "transcript": {
+                                   "tei": f'/api/{version}/documents/{self.id}/tei',
+                                   "plain": f'/api/{version}/documents/{self.id}/plain'
+                               }
+                           },
+                           "source-meta-data": {
+                               "source-type": {
+                                   "first-level": {
+                                       "id": self.source_type.parent_type.id,
+                                       "name": self.source_type.parent_type.type_name,
+                                       "api-request": f'/api/{version}/sourcetypes/{self.source_type.parent_type.id}'},
+                                   "second-level": {
+                                       "id": self.source_type.id,
+                                       "name": self.source_type.type_name,
+                                       "api-request": f'/api/{version}/sourcetypes/{self.source_type.id}'
+                                   }
+                               },
+                               "pages": {
+                                   "number": self.pages,
+                                   "paging-system": str(self.PaginationType(self.paging_system).label)
+                               },
+
+                               "date": {
+                                   "start": {
+                                       "date": str(self.doc_start_date),
+                                       "precision": "DAY" if self.doc_start_date.precision == 2 else "MONTH" if self.doc_start_date.precision == 1 else "YEAR"
+                                   },
+                                        },
+                               "illuminated": self.illuminated,
+                               "has-seal": self.seal,
+                               "measurements": {"width": self.measurements_width,
+                                                "length": self.measurements_length,
+                                                "unit": "cm"},
+                               "material": str(self.MaterialType(self.material).label),
+                               "languages": list(self.language.values_list('name_en', flat=True)),
+                               "location": self.place_name,
+                               "authors": list(self.author.all().values_list('author_name', flat=True))
+                           }}
+
+        if self.doc_end_date is not None:
+            api_detail_json["source-meta-data"]["date"].update({"end": {
+                                       "date": str(self.doc_end_date),
+                                       "precision": "DAY" if self.doc_end_date.precision == 2 else "MONTH" if self.doc_end_date.precision == 1 else "YEAR"
+                                   }})
+        return api_detail_json
 
     # model method to return queryset of all versions with the same document_id
     def get_versions(self):

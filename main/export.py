@@ -1,4 +1,5 @@
 import json
+import re
 
 
 def export(document, export_type='tei'):
@@ -7,10 +8,12 @@ def export(document, export_type='tei'):
     Supported types: tei (default), json, html, pdf"""
 
     l_type = export_type.lower()
-    if l_type not in ['tei', 'json', 'html', 'pdf']:
+    if l_type not in ['txt', 'tei', 'json', 'html', 'pdf']:
         raise ValueError("export_type value is invalid")
 
     export_str = ""
+    if l_type == 'txt':
+        export_str = export_txt(document)
     if l_type == 'tei':
         export_str = export_tei(document)
     elif l_type == 'json':
@@ -21,6 +24,12 @@ def export(document, export_type='tei'):
         export_str = export_pdf(document)
 
     return export_str
+
+
+def export_txt(document):
+    text = document.transcription_text
+    cleantext = re.sub(re.compile('<.*?>'), '', text)
+    return cleantext
 
 
 def export_tei(document):

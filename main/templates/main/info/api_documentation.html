@@ -25,7 +25,7 @@
         <p>
             Transcriptiones lets you search for documents and view their transcription. But what if you want to download
             a bunch of transcriptions in a certain format and use it in your research?<br/><br/>
-            That's what the Transcriptiones <b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface comes into play. With
+            That's where the Transcriptiones <b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface comes into play. With
             a set of simple commands you can search and download our database. The request results are in JSON format and
             the transcription exports are TEI or plain text.<br/><br/>
 
@@ -62,7 +62,8 @@
 
         This page documents the API and the supported commands
         </p>
-
+        <hr>
+        <hr>
         <h4>Command Structure</h4>
         <h5>Versions</h5>
         <p>
@@ -70,6 +71,11 @@
             future but we don't want to break existing Scripts. Future versions will thus have a different identifier while
             the old versions will stay available.
         </p>
+        <p>
+            In all following examples, replace <code>&lt;VERSION&gt;</code> with <code>v1</code>.
+        </p>
+        <hr>
+        <!-- LISTS -->
         <h5>Request A List</h5>
         <p>
             You can request a list of a certain type which returns a paginated result of the found objects. You can
@@ -78,15 +84,453 @@
         <p>
         Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/?&lt;PARAM&gt;=value</code></pre>
         </p>
+        <p>
+            The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
+            <code>institutions</code> (Archives, Libraries and such which hold documents), <code>refnumbers</code>
+            (Reference numbers of document collections), <code>sourcetypes</code> (The type of a document, ex.: Poetry / Scientific Writings)
+            and <code>documents</code> (actual transcribed documents).
+        </p>
+        <p>
+            There are several <code>&lt;PARAM&gt;</code> filters which can be applied. The following table shows what
+            the parameters mean and to which <code>&lt;TYPE&gt;</code> they can be applied.
 
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col"><code>&lt;PARAM&gt;</code>/<code>&lt;TYPE&gt;</code></th>
+                      <th scope="col"><code>institutions</code></th>
+                      <th scope="col"><code>refnumbers</code></th>
+                      <th scope="col"><code>sourcetypes</code></th>
+                      <th scope="col"><code>documents</code></th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                        <code>page=&lt;num&gt;</code><br/>
+                        <small>Returns the specified page number or an error if out of bounds.</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>query=&lt;search_term&gt;</code><br/>
+                        <small>Ignores cases and returns results containing the query.</small>
+                    </td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Institution name)</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Reference Title)</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Source type name [en])</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Document title)</small></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>institution=&lt;id&gt;</code><br/>
+                        <small>Only returns objects held in this institution.</small>
+                    </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>refnumber=&lt;id&gt;</code><br/>
+                        <small>Only returns objects of this reference number.</small>
+                    </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>sourcetype=&lt;id&gt;</code><br/>
+                        <small>Only returns objects of this sourcetype.</small>
+                    </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>level=&lt;top|bottom&gt;</code><br/>
+                        <small>Source types are in a 2-level hierarchy which you can filter by.</small>
+                    </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>user=&lt;username&gt;</code><br/>
+                        <small>Only returns objects by this user.</small>
+                    </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+            </table>
+            Valid examples to retrieve lists are:
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Example</th>
+                      <th scope="col">Returns</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/</code></td>
+                    <td>Returns the first page of a list of all institutions.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/refnumbers/?page=3</code></td>
+                    <td>Returns the third page (results 21-30) of a list of all reference numbers.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/sourcetypes/?level=top</code></td>
+                    <td>Returns the first level of the Source type hierarchy.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?query=letter&institution=1&sourcetype=3</code></td>
+                    <td>Returns the first page of a list of documents which have 'letter' in their title, belong to the institution with ID '1' and are of the source type with ID '3'.</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            All answers to list requests retrieve a JSON string as a result. The JSON has the following format:
+            <pre class="pre-scrollable"><code>{
+    "request": {...},         <-- Information about the request and the API version
+    "num-results": 456,       <-- Number of hits
+    "num-pages": 46,          <-- Number of pages (10 results per page)
+    "page": 1,                <-- Current page
+    "result-list": [...]      <-- Actual list with max 10 results on a page
+}</code></pre>
+        The result list objects depend on the requested list (for details see below).
+        </p>
+        <hr>
+        <!-- OBJECTS -->
         <h5>Request An Object</h5>
+        <p>
+            You can request an object of a certain type. Objects are called by their respective id.
+        </p>
         <p>
         Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/&lt;ID&gt;/</code></pre>
         </p>
-        
+        <p>
+            The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
+            <code>institutions</code> (Archives, Libraries and such which hold documents), <code>refnumbers</code>
+            (Reference numbers of document collections), <code>sourcetypes</code> (The type of a document, ex.: Poetry / Scientific Writings)
+            and <code>documents</code> (actual transcribed documents).
+        </p>
+        <p>
+            The <code>&lt;ID&gt;</code> is the identification number of an object.
+        </p>
+        <p>
+            Valid examples to retrieve objects are:
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Example</th>
+                      <th scope="col">Returns</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/123/</code></td>
+                    <td>Returns the institution with ID 123.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/234/</code></td>
+                    <td>Returns the document with ID 234.</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            All answers to object requests retrieve a JSON string as a result. The JSON has the following format:
+            <pre class="pre-scrollable"><code>{
+    "request": {...},          <-- Information about the request and the API version
+    "type": "document",        <-- Type of the object
+    "id": 456,                 <-- Id of the object
+    "url": "https://trans...", <-- URL to the object on transcriptiones.ch
+    "page": 1,                 <-- Current page
+    "details": {...}           <-- Object details (see below)
+}</code></pre>
+        The result list objects depend on the requested list (for details see below).
+        </p>
+        <hr>
+        <!-- EXPORTS -->
         <h5>Request An Export</h5>
         <p>
+            For documents, the transcription can be downloaded by supplying the document id and the export type.
+            <code>&lt;EXPORT&gt;</code> can be <code>tei</code> or <code>plain</code>.
+        </p>
+        <p>
         Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/documents/&lt;ID&gt;/&lt;EXPORT&gt;</code></pre>
+        </p>
+        <p>
+            Valid examples to retrieve document transcriptions are:
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th scope="col">Example</th>
+                      <th scope="col">Returns</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/123/tei/</code></td>
+                    <td>Returns the transcription of the document with ID 123 in TEI xml format.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/234/plain/</code></td>
+                    <td>Returns the transcription of the document with ID 234 in plain text format.</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            The TEI transcriptions follow the TEI standard. Plain text is returned in utf-8 encoding.:
+        </p>
+        <hr>
+        <hr>
+        <h4>Object List Details</h4>
+        <p>
+           If you request a list of objects, the returned string is always a JSON-String containing some basic information
+           about the request (API version, # of results, # of pages, current page). It also contains a list with the key
+           <code>"result-list"</code>. This is a list of objects which describe single results. Depending on the type of
+            object, the data varies slightly. Refer to the following table to see which type of object contains which information.
+        </p>
+        <p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"><code>institutions</code></th>
+                        <th scope="col"><code>refnumbers</code></th>
+                        <th scope="col"><code>sourcetypes</code></th>
+                        <th scope="col"><code>documents</code></th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>id</code></td>
+                    <td>Unique identifier of object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>url</code></td>
+                    <td>URL to the transcriptiones page of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>name</code></td>
+                    <td>Name or title of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>api-request</code></td>
+                    <td>API request to get the detail object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+            </table>
+        </p>
+        <p>
+        Example for a <code>document</code> list object:
+        <pre><code  class="pre-scrollable">{
+    "id": 2794,
+    "name": "Document Title",
+    "url": "https://transcriptiones.ch/display/institutions/institution-name/refnumber-name/document-title/",
+    "api-request": "https://transcriptiones.ch/api/v1/documents/2794/"
+}</code></pre>
+        </p>
+        <hr>
+        <hr>
+        <h4>Object Details</h4>
+        <p>
+            The object detail requests return a JSON string containing information about a single object. At transcriptiones,
+            objects are organized in a hierarchy. You'll get information about the objects in the level below. For institutions
+            you'll get a list of reference numbers, for reference numbers you'll get a list of documents.
+            For Source types you'll get a list of source type children if it is a top-level element or a list of documents if it
+            is a bottom-level element.
+        </p>
+        <p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"><code>institutions</code></th>
+                        <th scope="col"><code>refnumbers</code></th>
+                        <th scope="col"><code>sourcetypes</code></th>
+                        <th scope="col"><code>documents</code></th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>id</code></td>
+                    <td>Unique identifier of object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>url</code></td>
+                    <td>URL to the transcriptiones page of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>name</code></td>
+                    <td>Name or title of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>refnumber-ids</code></td>
+                    <td>A list of reference number-ids.</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>document-ids</code></td>
+                    <td>A list of document ids.</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td>(<i class="fas fa-check" style="color: green;"></i>)</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>children</code></td>
+                    <td>A list of source type children.</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td>(<i class="fas fa-check" style="color: green;"></i>)</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                </tr>
+            </table>
+        </p>
+        <p>
+        <h5>The Document Object</h5>
+            The document object is different from the rest. These objects contain actual meta information about the source
+            and are thus more detailed. The following examples shows the structure.
+        </p>
+        <p>
+            <pre class="pre-scrollable"><code>{
+    "request": "{...}",                     <-- request info (the same for all requests)
+    "id": &lt;id&gt;,                             <-- id of the document
+    "name": &lt;name-of-the-document&gt;,         <-- name (=title) of the document
+    "url": &lt;url-to-the-document&gt;,           <-- URL to the document on transcriptiones.ch
+
+    "doc-meta-data": {                      <-- Meta data for the <b>digital</b> document
+        "version": 1,                       <-- Version number of the document
+        "created": "2022-02-02 22:22:22"    <-- Creation time of this version
+        "transcript": {
+            "tei": "...",                   <-- api-request to get the TEI transcript
+            "plain": "..."                  <-- api-request to get the plain text transcript
+        }
+    },
+
+    "source-meta-data": {                   <-- Meta data for the <b>physical</b> document
+        "source-type": {                    <-- All documents have a source type. All source types are organized in two levels
+            "first-level": {
+                "id": 1,
+                "name": "Poetry",
+                "api-request": "..."        <-- api-request to get source type details
+            },
+            "second-level": {
+                "id": 21,
+                "name": "Epic",
+                "api-request": "..."
+            }
+        },
+        "pages": {
+            "number": 12,                   <-- Number of pages in this source
+            "paging-system": "Pagination"   <-- How are the pages numbered: (Pagination, Foliated)
+        },
+        "date": {                           <-- When the document was written (or dated).
+            "start": {                      <-- Start of the dating timespan
+                "date": "1622-11-01",
+                "precision": "MONTH"        <-- Precision of date (DAY, MONTH, YEAR)
+            },
+            "end": {                        <-- End of the dating timespan. Optional.
+                "date": "1623-01-01",
+                "precision": "YEAR"
+            }
+        },
+        "illuminated": False,               <-- Does the source have illuminations? (Boolean)
+        "has-seal": True,                   <-- Does the source have a seal? (Boolean)
+        "measurements": {                   <-- Measurements of book or page(s)
+            "width": "10",
+            "height": "20",
+            "unit": "cm"                    <-- What unit are the measurements in: cm (static)
+        },
+        "material": "Parchment",            <-- On what material is the document written (Paper, Parchment, Papyrus)
+        "languages": ["German"],            <-- Which languages are used (controlled vocabulary)
+        "location": "Basel",                <-- Where the document was written (uncontrolled vocabulary)
+        "authors": ["Jane Doe"]             <-- Who wrote the document (semi-controlled vocabulary)
+    }
+}</code></pre>
+        </p>
+        <hr>
+        <hr>
+        <h4>Error Handling</h4>
+        <p>
+            If you make an invalid API request you'll get an error message. Error messages are plain text and always
+            start with "TRANSCRIPTIONES API ERROR:". Invalid parameters (ex.: as ?sourcetype=2 on an /institutions/ request)
+            are ignored and do not produce an error. Empty results do not produce an error.
+        </p>
+        <p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Error</th>
+                        <th scope="col">Explanation</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><code>Invalid version</code></td>
+                    <td>You supplied an invalid version identifier after /api/. Currently, only "v1" is a valid version.</td>
+                </tr>
+                <tr>
+                    <td><code>Invalid Request</code></td>
+                    <td>You supplied an invalid request identifier after /api/v1/. Currently, <code>institutions</code>,
+                        <code>refnumbers</code>, <code>sourcetypes</code> and <code>documents</code> are valid identifiers.</td>
+                </tr>
+                <tr>
+                    <td><code>Error 404: Page Not Found</code></td>
+                    <td>If your request is not in the format <code>/api/&lt;version&gt;/&lt;request&gt;/</code> or
+                    <code>/api/&lt;version&gt;/&lt;request&gt;/&lt;identifier&gt;/</code> you'll get an ERROR 404.</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+        Example error message:
+        <pre class="pre-scrollable"><code>TRANSCRIPTIONES API ERROR: Invalid Request
+ Valid Command Structure: /&lt;version&gt;/&lt;request&gt;/?param=value
+           Error Details: &lt;request&gt; must be one of: [institutions, refnumbers, sourcetypes, documents]
+
+
+---
+(Get more Information about the TRANSCRIPTIONES API: https://transcriptiones.ch/api/documentation/)</code></pre>
         </p>
     {% endcard %}
 

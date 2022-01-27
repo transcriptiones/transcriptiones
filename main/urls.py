@@ -161,4 +161,6 @@ urlpatterns = [
     path('api/documentation/', v_api.api_doc_view, name='api_doc_view'),
     path('api/<str:api_version>/<str:api_request>/', v_api.api_view, name='api_view'),
     path('api/<str:api_version>/<str:api_request>/<int:object_id>/', v_api.api_detail_view, name='api_detail_view'),
+    path('api/<str:api_version>/documents/<int:object_id>/tei/', v_api.api_tei_export_view, name='api_tei_export'),
+    path('api/<str:api_version>/documents/<int:object_id>/plain/', v_api.api_plain_export_view, name='api_plain_export'),
     ]
