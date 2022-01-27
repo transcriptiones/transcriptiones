@@ -30,7 +30,7 @@
             the transcription exports are TEI or plain text.<br/><br/>
 
             Example (Request the document list):
-            <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=[AuthentificationCode]</code></pre>
+            <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=[AuthenticationCode]</code></pre>
 
             Example Result (First page of the document list):
             <pre class="pre-scrollable"><code>{
@@ -66,7 +66,11 @@
         <hr>
         <h4>Before You Start</h4>
         <p>
-        GET YOUR API KEY
+            For all requests you need to provide an authentication key. You pass it with the <code>auth=KEY</code> parameter.
+            If you have a transcriptiones login you'll find the key on your <a href="{% url 'main:profile' %}">Profile Page</a>.
+            It might not exist yet, but you can always generate one. A key is valid for a month. In this period you can request
+            data from the API without any limitations. After this period you need to renew your key on your profile.<br/><br/>
+            Don't have a login? <a href="{% url 'main:signup' %}">Create one</a>!
         </p>
         <hr>
         <hr>
