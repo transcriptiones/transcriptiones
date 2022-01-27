@@ -203,21 +203,35 @@ def request_username_done_view(request):
 
 @login_required
 def generate_api_secret(request):
-    user = request.user
-    secret_string = user.username + str(user.id) + "This%&Isç%A+Secretç%String1209385btr"
-    md5_string = hashlib.md5(secret_string.encode('utf-8')).hexdigest()
-    request.user.api_auth_key = md5_string
-    current_date = datetime.today()
-    expiration_date = current_date + relativedelta(months=1)
-    request.user.api_auth_key_expiration = expiration_date
+    secret_string = request.user.username + str(request.user.id) + "This%&Isç%A+Secretç%String1209385btr"
+    request.user.api_auth_key = hashlib.md5(secret_string.encode('utf-8')).hexdigest()
+    request.user.api_auth_key_expiration = datetime.today() + relativedelta(months=1)
     request.user.save()
+    messages.success(request, _("An API Key has been generated"))
     return redirect('main:profile')
 
 
 @login_required
 def renew_api_secret(request):
+    if request.user.api_auth_key is None:
+        messages.error(request, _("You need to generate an API key first."))
+        return redirect('main:profile')
+
     current_date = datetime.today()
     expiration_date = current_date + relativedelta(months=1)
     request.user.api_auth_key_expiration = expiration_date
     request.user.save()
+    messages.success(request, _("Your API Key has been renewed"))
+    return redirect('main:profile')
+
+@login_required
+def delete_api_secret(request):
+    if request.user.api_auth_key is None:
+        messages.error(request, _("No API key was found to delete."))
+        return redirect('main:profile')
+
+    request.user.api_auth_key = None
+    request.user.save()
+
+    messages.success(request, _("Your API Key has been deleted"))
     return redirect('main:profile')

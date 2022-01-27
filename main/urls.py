@@ -167,4 +167,5 @@ urlpatterns = [
     path('api/<str:api_version>/documents/<int:object_id>/plain/', v_api.api_plain_export_view, name='api_plain_export'),
     path('user/request_api_key/', v_user.generate_api_secret, name='api_request'),
     path('user/renew_api_key/', v_user.renew_api_secret, name='api_renew'),
+    path('user/delete_api_key/', v_user.delete_api_secret, name='api_delete'),
     ]
