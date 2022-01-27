@@ -20,6 +20,11 @@
 
     {% card 'user_profile_personal' _('My Personal Data') %}
         {% render_table user_table %}
+        {% if not user.api_auth_key %}
+            {% translate 'You do not have an authetification key to use the API. You can generate one:' %} <a class="btn btn-sm btn-primary" href="{% url 'main:api_request' %}" role="button">{%  translate 'Generate An API Key' %}</a>
+        {% else %}
+            {% translate 'Your API key is valid for a month. You can renew it for another month:' %} <a class="btn btn-sm btn-primary" href="{% url 'main:api_renew' %}" role="button">{%  translate 'Renew API Key' %}</a>
+        {% endif %}
     {% endcard %}
 
     {% card 'user_profile_activity' _('My Activity') %}

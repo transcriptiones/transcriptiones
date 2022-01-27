@@ -1,5 +1,10 @@
+import hashlib
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import View, TemplateView
@@ -194,3 +199,25 @@ def request_username_view(request):
 
 def request_username_done_view(request):
     return render(request, 'main/users/request_username_done.html')
+
+
+@login_required
+def generate_api_secret(request):
+    user = request.user
+    secret_string = user.username + str(user.id) + "This%&Isç%A+Secretç%String1209385btr"
+    md5_string = hashlib.md5(secret_string.encode('utf-8')).hexdigest()
+    request.user.api_auth_key = md5_string
+    current_date = datetime.today()
+    expiration_date = current_date + relativedelta(months=1)
+    request.user.api_auth_key_expiration = expiration_date
+    request.user.save()
+    return redirect('main:profile')
+
+
+@login_required
+def renew_api_secret(request):
+    current_date = datetime.today()
+    expiration_date = current_date + relativedelta(months=1)
+    request.user.api_auth_key_expiration = expiration_date
+    request.user.save()
+    return redirect('main:profile')

@@ -680,6 +680,15 @@ class User(AbstractBaseUser, PermissionsMixin):
                                    choices=settings.LANGUAGES,
                                    default='en')
 
+    api_auth_key = models.CharField(max_length=100,
+                                    verbose_name=_('Secret API Key'),
+                                    help_text=_('Use this key for API requests. Do not share!'),
+                                    null=True,
+                                    default=None)
+
+    api_auth_key_expiration = models.DateField(null=True,
+                                               default=None)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'username'

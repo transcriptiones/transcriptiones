@@ -158,9 +158,13 @@ urlpatterns = [
     path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
+    ##############
+    # TRANSCRIPTIONES API
     path('api/documentation/', v_api.api_doc_view, name='api_doc_view'),
     path('api/<str:api_version>/<str:api_request>/', v_api.api_view, name='api_view'),
     path('api/<str:api_version>/<str:api_request>/<int:object_id>/', v_api.api_detail_view, name='api_detail_view'),
     path('api/<str:api_version>/documents/<int:object_id>/tei/', v_api.api_tei_export_view, name='api_tei_export'),
     path('api/<str:api_version>/documents/<int:object_id>/plain/', v_api.api_plain_export_view, name='api_plain_export'),
+    path('user/request_api_key/', v_user.generate_api_secret, name='api_request'),
+    path('user/renew_api_key/', v_user.renew_api_secret, name='api_renew'),
     ]

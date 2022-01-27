@@ -30,7 +30,7 @@
             the transcription exports are TEI or plain text.<br/><br/>
 
             Example (Request the document list):
-            <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/</code></pre>
+            <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=[AuthentificationCode]</code></pre>
 
             Example Result (First page of the document list):
             <pre class="pre-scrollable"><code>{
@@ -64,6 +64,12 @@
         </p>
         <hr>
         <hr>
+        <h4>Before You Start</h4>
+        <p>
+        GET YOUR API KEY
+        </p>
+        <hr>
+        <hr>
         <h4>Command Structure</h4>
         <h5>Versions</h5>
         <p>
@@ -82,7 +88,7 @@
             filter the result by adding parameters.
         </p>
         <p>
-        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/?&lt;PARAM&gt;=value</code></pre>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/?auth=xxx&&lt;PARAM&gt;=value</code></pre>
         </p>
         <p>
             The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
@@ -104,6 +110,15 @@
                       <th scope="col"><code>documents</code></th>
                     </tr>
                 </thead>
+                <tr>
+                    <td>
+                        <code>auth=&lt;api-key&gt;</code><br/>
+                        <small>You need an API Key to access the API. Get it from your <a href="{% url 'main:profile' %}">Profile Page</a> or <a href="{% url 'main:signup' %}">create a login</a> if you don't have one.</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
                 <tr>
                     <td>
                         <code>page=&lt;num&gt;</code><br/>
@@ -183,19 +198,19 @@
                     </tr>
                 </thead>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/?auth=xxx</code></td>
                     <td>Returns the first page of a list of all institutions.</td>
                 </tr>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/refnumbers/?page=3</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/refnumbers/?auth=xxx&page=3</code></td>
                     <td>Returns the third page (results 21-30) of a list of all reference numbers.</td>
                 </tr>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/sourcetypes/?level=top</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/sourcetypes/?auth=xxx&level=top</code></td>
                     <td>Returns the first level of the Source type hierarchy.</td>
                 </tr>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?query=letter&institution=1&sourcetype=3</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=xxx&query=letter&institution=1&sourcetype=3</code></td>
                     <td>Returns the first page of a list of documents which have 'letter' in their title, belong to the institution with ID '1' and are of the source type with ID '3'.</td>
                 </tr>
             </table>
@@ -218,7 +233,7 @@
             You can request an object of a certain type. Objects are called by their respective id.
         </p>
         <p>
-        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/&lt;ID&gt;/</code></pre>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/&lt;TYPE&gt;/&lt;ID&gt;/?auth=xxx</code></pre>
         </p>
         <p>
             The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
@@ -239,11 +254,11 @@
                     </tr>
                 </thead>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/123/</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/institutions/123/?auth=xxx</code></td>
                     <td>Returns the institution with ID 123.</td>
                 </tr>
                 <tr>
-                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/234/</code></td>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/234/?auth=xxx</code></td>
                     <td>Returns the document with ID 234.</td>
                 </tr>
             </table>
@@ -268,7 +283,7 @@
             <code>&lt;EXPORT&gt;</code> can be <code>tei</code> or <code>plain</code>.
         </p>
         <p>
-        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/documents/&lt;ID&gt;/&lt;EXPORT&gt;</code></pre>
+        Command structure: <pre><code>curl -X GET https://transcriptiones.ch/api/&lt;VERSION&gt;/documents/&lt;ID&gt;/&lt;EXPORT&gt;/?auth=xxx</code></pre>
         </p>
         <p>
             Valid examples to retrieve document transcriptions are:
@@ -514,6 +529,18 @@
                     <td><code>Invalid Request</code></td>
                     <td>You supplied an invalid request identifier after /api/v1/. Currently, <code>institutions</code>,
                         <code>refnumbers</code>, <code>sourcetypes</code> and <code>documents</code> are valid identifiers.</td>
+                </tr>
+                <tr>
+                    <td><code>Invalid Authentication</code></td>
+                    <td>You supplied an invalid key for the <code>auth</code> parameter.
+                </tr>
+                <tr>
+                    <td><code>Expired Authentication</code></td>
+                    <td>You supplied an expired key for the <code>auth</code> parameter.
+                </tr>
+                <tr>
+                    <td><code>No Authentication</code></td>
+                    <td>You didn't supply the <code>auth</code> parameter.
                 </tr>
                 <tr>
                     <td><code>Error 404: Page Not Found</code></td>

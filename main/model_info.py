@@ -29,6 +29,10 @@ def get_source_type_info(source_type):
 
 
 def get_user_info(user):
+    api_key_line = ""
+    if user.api_auth_key is not None:
+        api_key_line = mark_safe(user.api_auth_key + "<br>" + _(f'<small>(Expires on {user.api_auth_key_expiration})</small>'))
+
     data = [(get_verbose_field_name(user, 'username'), user.username),
             (get_verbose_field_name(user, 'first_name'), user.first_name),
             (get_verbose_field_name(user, 'last_name'), user.last_name),
@@ -37,7 +41,8 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
             (_('User State'), mark_safe(user.get_user_state_badge())),
             (_('Active'), mark_safe(user.get_user_activity_badge())),
-            (get_verbose_field_name(user, 'mark_anonymous'), mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe('<span style="color: red;">&cross;</span>'))
+            (get_verbose_field_name(user, 'mark_anonymous'), mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe('<span style="color: red;">&cross;</span>')),
+            (get_verbose_field_name(user, 'api_auth_key'), api_key_line)
             ]
     return title_value_list(data)
 
