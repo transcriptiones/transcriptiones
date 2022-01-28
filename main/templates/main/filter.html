@@ -2,11 +2,10 @@
 
 <form action="{{ request.path }}" method="get" class="form form-inline">
     <i class="fas fa-filter"></i>&nbsp;
-        {% bootstrap_form filter.form layout='inline' form_group_class='my-small-form' %}
-        &nbsp;
-        {% bootstrap_button '<i class="fas fa-filter"></i>' %}
-        &nbsp;
-        <a class="btn btn-primary" href='{{ request.path }}'><i class="fas fa-times"></i></a>
-
+    {% bootstrap_form filter.form layout='inline' form_group_class='my-small-form' %}
+    &nbsp;
+    {% bootstrap_button '<i class="fas fa-filter"></i>' %}
+    &nbsp;
+    <a class="btn btn-primary" href='{{ request.path }}'><i class="fas fa-times"></i></a>
 </form>
 <br/>

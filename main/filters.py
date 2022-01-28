@@ -1,8 +1,14 @@
+from dataclasses import field
+
 from django.db.models import Q
 from django.forms import TextInput
+from django.forms.widgets import ChoiceWidget
 from django.utils.translation import ugettext_lazy as _
 from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
     ChoiceFilter, ModelChoiceFilter, DateFromToRangeFilter
+from django_filters.fields import ModelChoiceField
+from django_filters.widgets import LinkWidget, LookupChoiceWidget
+
 from main.models import Institution, RefNumber, Document, User, SourceType, Author
 
 
@@ -50,6 +56,9 @@ class RefNumberFilter(FilterSet):
     def multi_filter(self, queryset, name, value):
         return queryset.filter(Q(ref_number_name__icontains=value) | Q(ref_number_title__icontains=value))
 
+class UserModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return "%s" % (obj.get_full_name())
 
 class DocumentFilter(FilterSet):
     """Filter to filter a document table"""

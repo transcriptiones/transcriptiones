@@ -17,8 +17,8 @@ def get_verbose_field_name(model, field_name):
 
 
 def get_author_info(author):
-    data = [(get_verbose_field_name(author, 'author_name'), author.author_name),
-            (get_verbose_field_name(author, 'author_gnd'), author.author_gnd)]
+    data = [(get_verbose_field_name(author, 'author_name'), author.author_name)]
+    # (get_verbose_field_name(author, 'author_gnd'), author.author_gnd)]
     return title_value_list(data)
 
 

@@ -7,7 +7,7 @@ import main.model_info as m_info
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
-from main.tables.tables_document import DocumentTable, DocumentVersionHistoryTable
+from main.tables.tables_document import DocumentTable, DocumentVersionHistoryTable, MinimalDocumentTable
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, AuthorFilter
 
 
@@ -95,7 +95,7 @@ def source_type_detail_view(request, pk):
     else:
         parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
         document_list = Document.objects.filter(source_type=selected_source_type)
-        table = DocumentTable(data=document_list)
+        table = MinimalDocumentTable(data=document_list)
         RequestConfig(request).configure(table)
         context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
         return render(request, "main/details/source_type_child_detail.html", context=context)

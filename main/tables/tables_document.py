@@ -6,19 +6,11 @@ from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 from main.models import Document
 
 
-class DocumentTable(TranscriptionesTable):
-    """The DocumentTable shows a list of documents"""
-
+class MinimalDocumentTable(TranscriptionesTable):
     class Meta(TranscriptionesTable.Meta):
         model = Document
-        fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
+        fields = ("title_name", "place_name", "doc_start_date", "document_utc_update")
         row_attrs = default_row_attrs
-
-    title_name = tables.LinkColumn()
-    place_name = tables.Column(orderable=False)
-    doc_start_date = tables.Column(orderable=False)
-    source_type = tables.Column(orderable=False)
-    document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
 
     def render_document_utc_update(self, value, record):
         if record.publish_user:
@@ -28,6 +20,22 @@ class DocumentTable(TranscriptionesTable):
         else:
             return mark_safe(f'<small>by anonymous '
                              f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+
+
+class DocumentTable(MinimalDocumentTable):
+    """The DocumentTable shows a list of documents"""
+
+    class Meta(MinimalDocumentTable.Meta):
+        fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
+
+    title_name = tables.LinkColumn()
+    place_name = tables.Column(orderable=False)
+    doc_start_date = tables.Column(orderable=False)
+    source_type = tables.Column(orderable=False)
+    document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
+
+
+
 
 
 class DocumentUserHistoryTable(TranscriptionesTable):
