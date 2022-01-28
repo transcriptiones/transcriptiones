@@ -4,6 +4,7 @@ from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
 
 import main.model_info as m_info
+from main.forms.forms_filter import MyFilterForm
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
@@ -167,6 +168,7 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         self.my_filter = DocumentFilter(request.GET, Document.objects.filter(parent_ref_number=self.get_object()))
+        self.my_filter.form = MyFilterForm()
         return super(RefNumberDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_tables(self):

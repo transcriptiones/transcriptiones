@@ -31,7 +31,9 @@ urlpatterns = [
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),
+    path('info/faq/', TemplateView.as_view(template_name='main/info/faq.html'), name='faq'),
     path('unsubscribe/', v_info.unsubsribe_newsletter_view, name='unsubscribe_newsletter'),
+
 
     ##############
     # SEARCH VIEW

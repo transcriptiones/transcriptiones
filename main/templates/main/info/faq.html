@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+{% load transcriptiones %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Frequently Asked Questions' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Frequently Asked Questions" "main:faq" %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/info/info_options.html' %}
+
+    {% card 'general' _('General Questions') %}
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Is cereal a soup or broth?</h5>
+            <p class="card-text">
+                Many people would say no, and they are right. Broth is defined as “Liquid in which meat, fish, cereal
+                grains, or vegetables have been cooked,” according to Merriam Webster's online dictionary. By this
+                logic, cold cereal in milk can not be considered soup (oatmeal may be able to, but that's a whole
+                other conversation).
+            </p>
+          </div>
+        </div>
+
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Is a Hot Dog a Sandwich?</h5>
+            <p class="card-text">
+                According to Merriam-Webster, a sandwich is "two or more slices of bread or a split roll having a
+                filling in between." By that definition, hot dogs seem to qualify as sandwiches. Many people argue,
+                though, that while the hot dog technically fits the dictionary definition of a sandwich, it's simply
+                not a sandwich. It is its own thing.
+            </p>
+          </div>
+        </div>
+    {% endcard %}
+
+    {% card 'general' _('A whole other set of questions') %}
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">What is the answer to life, the universe, and everything?</h5>
+            <p class="card-text">
+                42
+            </p>
+          </div>
+        </div>
+
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">How much wood would a woodchuck chuck if a woodchuck could chuck wood?</h5>
+            <p class="card-text">
+                New York state wildlife expert Richard Thomas found that a woodchuck could (and does) chuck around 35
+                cubic feet of dirt in the course of digging a burrow. Thomas reasoned that if a woodchuck could chuck
+                wood, he would chuck an amount equivalent to the weight of the dirt, or 700 pounds.
+            </p>
+          </div>
+        </div>
+    {% endcard %}
+
+{% endblock %}
