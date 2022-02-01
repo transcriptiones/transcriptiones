@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block base_content %}
+    <div class="text-center">
+        <img src="{% static 'main/images/404_page_not_found.png' %}" />
+        <br/>
+        <small class="text-muted">
+            (
+            {% blocktrans with link="https://htck.github.io/bayeux/#!/" %}
+                This image has been created with the <u><a href="{{ link }}" target="_blank">Bayeux Historic Tale Construction Kit</a></u>
+            {% endblocktrans %}
+            )
+        </small>
+        <br/><br/>
+        <p>
+        <a href="{% url 'main:start' %}" class="btn btn-primary">{% translate 'Back To Start Page' %}</a>
+        </p>
+    </div>
+
+{% endblock %}

@@ -7,6 +7,10 @@
 from django.contrib import admin
 from django.urls import include, path
 
+handler404 = 'main.views.views_error.custom_page_not_found_view'
+handler500 = 'main.views.views_error.custom_error_view'
+handler403 = 'main.views.views_error.custom_permission_denied_view'
+handler400 = 'main.views.views_error.custom_bad_request_view'
 
 urlpatterns = [
     path('',  include('main.urls')),
