@@ -9,6 +9,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb _("Information") "main:info" %}
     {% breadcrumb _("Guidelines") "main:guidelines" %}
 {% endblock %}
 

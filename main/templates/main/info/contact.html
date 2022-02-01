@@ -10,6 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb _("Information") "main:info" %}
     {% breadcrumb _("Contact") "main:contact" %}
 {% endblock %}
 
@@ -19,7 +20,7 @@
 
     {% card 'general' _('Write us a message') %}
         <p>
-            {% url 'main:about' as faq_url %}
+            {% url 'main:faq' as faq_url %}
             {% blocktranslate %}
                 Do you have a specific question which is not answered by our <a href="{{ faq_url }}">Frequently Asked Questions</a>?
                 Write us a message! We will get back to you as soon as possible.

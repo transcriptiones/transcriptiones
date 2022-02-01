@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% load transcriptiones %}
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Information about Transcriptiones' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Information") "main:info" %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/info/info_options.html' %}
+
+{% endblock %}

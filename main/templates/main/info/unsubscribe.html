@@ -10,6 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb _("Information") "main:info" %}
     {% breadcrumb "Unsubscribe" "main:unsubscribe" %}
 {% endblock %}
 

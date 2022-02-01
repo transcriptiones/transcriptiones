@@ -3,6 +3,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView, PasswordChangeDoneView, PasswordResetDoneView,\
     PasswordResetCompleteView
+
+import main.views.views_error
 from main.views.views_upload_old import batch_upload
 import main.views.views_admin as v_admin
 import main.views.views_autocomplete as v_autocomplete
@@ -27,13 +29,13 @@ urlpatterns = [
 
     ##############
     # INFO PAGES
+    path('info/', TemplateView.as_view(template_name='main/info/blank.html'), name='info'),
     path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),
     path('info/faq/', TemplateView.as_view(template_name='main/info/faq.html'), name='faq'),
-    path('unsubscribe/', v_info.unsubsribe_newsletter_view, name='unsubscribe_newsletter'),
-
+    path('info/unsubscribe/', v_info.unsubsribe_newsletter_view, name='unsubscribe_newsletter'),
 
     ##############
     # SEARCH VIEW
@@ -69,9 +71,9 @@ urlpatterns = [
 
     ##############
     # VIEW DATA PAGES
-    path('display/', v_browse.InstitutionListView.as_view(), name='institution_list'),
+    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
 
-    path('display/institutions/', v_browse.browse_options, name='browse_options'),
+    path('display/', v_browse.browse_options, name='browse_options'),
     path('display/institutions/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
@@ -170,4 +172,11 @@ urlpatterns = [
     path('user/request_api_key/', v_user.generate_api_secret, name='api_request'),
     path('user/renew_api_key/', v_user.renew_api_secret, name='api_renew'),
     path('user/delete_api_key/', v_user.delete_api_secret, name='api_delete'),
+
+    #############
+    # DEBUG VIEWS
+    path('debug/400', main.views.views_error.custom_bad_request_view, name='bad_request'),
+    path('debug/403', main.views.views_error.custom_permission_denied_view, name='permission_denied'),
+    path('debug/404', main.views.views_error.custom_page_not_found_view, name='page_not_found'),
+    path('debug/500', main.views.views_error.custom_error_view, name='server_error'),
     ]
