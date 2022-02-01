@@ -20,10 +20,6 @@
     {% card 'admin_crud' _('Change or Create Database Objects') %}
         <table style="width: 100%;">
             <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "main:admin_inbox" %}" role="button">{% translate 'Contact Messages' %}</a></td>
-                <td><small>{% translate 'Messages sent over the contact form.' %}</small></td>
-            </tr>
-            <tr>
                 <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:index" %}" role="button">{% translate 'Django Administration Interface' %}</a></td>
                 <td><small>{% translate 'The Django Administration Interface lets you add, modify and delete database objects.' %}</small></td>
             </tr>

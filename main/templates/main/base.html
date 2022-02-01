@@ -124,7 +124,7 @@
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'about,tos,guidelines,contact' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'info,about,tos,guidelines,contact,faq,api_doc_view' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
                         </li>
                     </ul>
 
@@ -229,17 +229,9 @@
                                     {% else %}
                                     <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login To Participate' %}</a>
                                     {% endif %}
+                                    <a class="dropdown-item disabled" href="#"><small>{% translate 'Download Transcriptones' %}</small></a>
+                                    <a class="dropdown-item" href="#"><i class="fab fa-github mr-2"></i>{% translate 'Download From GitHub' %}</a>
                                 </li>
-                                <li class="connection-list">
-                                    <div class="row">
-                                        <div class="col-12 "><small>Connect To Transcriptiones</small></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/facebook-new.png"/> <span>Facebook</span></a> </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/twitter.png" alt=""> <span>Twitter</span></a> </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 "> <a href="#" class="connection-item"><img src="https://img.icons8.com/doodle/48/000000/github.png" alt=""> <span>Dropbox</span></a> </div>
-                                    </div>
-                        </li>
                                 <li>
                                     <div class="conntection-footer"><a href="{% url 'main:contact' %}">{% translate 'Contact Us' %}</a></div>
                                 </li>
@@ -360,6 +352,7 @@
     <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
+            <!--
             <ul class="list-inline mb-5">
                 <li class="list-inline-item">
                     <a class="social-link rounded-circle text-white mr-3" href="#">
@@ -377,6 +370,7 @@
                     </a>
                 </li>
             </ul>
+            -->
             <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2022</p> <!-- TODO Get these values from a context processor-->
         </div>
         <!-- Sidebar -->

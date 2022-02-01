@@ -5,11 +5,12 @@
 {% load render_table from django_tables2 %}
 
 {% block page_title %}
-    {% translate 'Source Types' %}
+    {% translate 'Browse Source Type:' %} {% get_translated_source_type_name selected LANGUAGE_CODE %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb _("Browse") "main:browse_options" %}
     {% breadcrumb _("Source Types") "main:source_type_list" %}
     {% breadcrumb selected.parent_type "main:source_type_detail" selected.parent_type.id %}
     {% breadcrumb selected "main:source_type_detail" selected.id %}
