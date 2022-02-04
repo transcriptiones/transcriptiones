@@ -23,3 +23,7 @@ Update routine:
     - Reload language table: `python manage.py loaddata languages_data.json.gz`
   -  Start the daemon`gunicorn transcriptiones.wsgi -D`
 
+I18N routine:
+- Create new language (ex.: fr): python .\manage.py makemessages -l fr
+- Compile messages: django-admin compilemessages
+- Update all language .po-files: django-admin makemessages -a -s
