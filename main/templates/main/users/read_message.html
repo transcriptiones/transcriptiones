@@ -25,7 +25,7 @@
                 <td style="border: 1px solid black; padding: 5px; font-weight: bold; background: #DCDCDC">{{ message.subject }}</td>
             </tr>
             <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
-                <td style="border: 1px solid black; padding: 5px;">{{ message.message|linebreaksbr }}</td>
+                <td style="border: 1px solid black; padding: 5px;">{{ message.message|safe|linebreaksbr }}</td>
             </tr>
             <tr>
                 <td>

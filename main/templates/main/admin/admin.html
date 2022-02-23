@@ -5,7 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Database Functions' %}
+    {% translate 'Admin Functions' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -18,43 +18,58 @@
     {% include 'main/admin/admin_options.html' %}
 
     {% card 'admin_crud' _('Change or Create Database Objects') %}
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:index" %}" role="button">{% translate 'Django Administration Interface' %}</a></td>
-                <td><small>{% translate 'The Django Administration Interface lets you add, modify and delete database objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_document_changelist" %}" role="button">{% translate 'Documents' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete document objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_institution_changelist" %}" role="button">{% translate 'Institutions' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete institution objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_refnumber_changelist" %}" role="button">{% translate 'Reference Numbers' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete reference number objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_sourcetype_changelist" %}" role="button">{% translate 'Source Types' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete source type objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_author_changelist" %}" role="button">{% translate 'Authors' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete author objects.' %}</small></td>
-            </tr>
-            <tr>
-                <td style="width: 35%;"><a class="btn btn-primary" style="width:100%;" href="{% url "admin:main_user_changelist" %}" role="button">{% translate 'Users' %}</a></td>
-                <td><small>{% translate 'Add, modify or delete user objects.' %}</small></td>
-            </tr>
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Database Options' %}</h5>
+              <p class="card-text">{% translate 'You can access the Django administration Interface and manipulate database objects if needed. Use caution!' %}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'admin:main_document_changelist' %}" class="btn btn-warning">{% translate 'Documents' %}</a>
+                <a href="{% url 'admin:main_institution_changelist' %}" class="btn btn-warning">{% translate 'Institutions' %}</a>
+                <a href="{% url 'admin:main_refnumber_changelist' %}" class="btn btn-warning">{% translate 'Reference Numbers' %}</a>
+                <a href="{% url 'admin:main_sourcetype_changelist' %}" class="btn btn-warning">{% translate 'Source Types' %}</a>
+                <a href="{% url 'admin:main_author_changelist' %}" class="btn btn-warning">{% translate 'Authors' %}</a>
+                <a href="{% url 'admin:main_user_changelist' %}" class="btn btn-warning">{% translate 'Users' %}</a>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Django Admin</h5>
+              <p class="card-text">{% translate 'The Django Administration Interface lets you add, modify and delete database objects.' %}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'admin:index' %}" class="btn btn-warning">Django Admin</a>
+            </div>
+          </div>
 
-
-        </table>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">phpMyAdmin</h5>
+              <p class="card-text">{% translate 'You can manipulate the database within phpMyAdmin. Additional Login needed. Use caution!' %}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="http://transcriptiones.ch:8080" class="btn btn-warning">phpMyAdmin</a>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Expert Options' %}</h5>
+              <p class="card-text">{% translate 'These are expert options. Use caution!' %}</p>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{% url 'main:admin_statistics' %}" class="btn btn-primary disabled">{% translate 'View Statistics' %}</a>
+                <a href="{% url 'main:admin_merge_docs' %}" class="btn btn-primary disabled">{% translate 'Merge Documents' %}</a>
+                <a href="{% url 'main:admin_export_json' %}" class="btn btn-primary disabled">{% translate 'Export Database (JSON)' %}</a>
+            </div>
+          </div>
+        </div>
     {% endcard %}
 
-    {% card 'admin_export' _('Export Database Objects') %}
-        <table style="width: 100%;">
-
-        </table>
-    {% endcard %}
 {% endblock %}

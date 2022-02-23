@@ -229,9 +229,8 @@
                                     {% else %}
                                     <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login To Participate' %}</a>
                                     {% endif %}
-                                    <a class="dropdown-item disabled" href="#"><small>{% translate 'Advanced Features' %}</small></a>
-                                    <a class="dropdown-item" href="{% url 'main:api_doc_view' %}"><i class="fas fa-code mr-2"></i></i>{% translate 'Transcriptiones API' %}</a>
-                                    <a class="dropdown-item" href="https://github.com/transcriptiones/"><i class="fab fa-github mr-2"></i>{% translate 'Find us on GitHub' %}</a>
+                                    <a class="dropdown-item disabled" href="#"><small>{% translate 'Download Transcriptones' %}</small></a>
+                                    <a class="dropdown-item" href="#"><i class="fab fa-github mr-2"></i>{% translate 'Download From GitHub' %}</a>
                                 </li>
                                 <li>
                                     <div class="conntection-footer"><a href="{% url 'main:contact' %}">{% translate 'Contact Us' %}</a></div>
@@ -245,7 +244,7 @@
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <div>
                                     <div class="small-circle" style="background: {{ request.user.get_user_color }};">
-                                        <span class="small-initials">{{ request.user.username.0 }}</span>
+                                        <span class="small-initials">{{ request.user.username.0|capfirst }}</span>
                                     </div>
                                  </div>
                             </a>
@@ -253,7 +252,7 @@
                                 <div class="nav-user-info">
                                     <div class="nav-user-name-img">
                                         <div class="circle" style="background: {{ request.user.get_user_color }}; display:inline-block; vertical-align:middle;">
-                                            <span class="initials">{{ request.user.username.0 }}</span>
+                                            <span class="initials">{{ request.user.username.0|capfirst }}</span>
                                         </div>
                                     </div>
                                     <div class="nav-user-name">
@@ -266,7 +265,7 @@
                                 <a class="dropdown-item" href="{% url 'main:user_update' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Edit User Information' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-user-circle mr-2"></i>{% translate 'View Your Public Profile' %}</a>
                                 {% if request.user.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'main:admin_start' %}"><i class="fas fa-user-cog mr-2"></i>{% translate 'Administration' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:admin' %}"><i class="fas fa-user-cog mr-2"></i>{% translate 'Administration' %}</a>
                                 {% endif %}
                                 <a class="dropdown-item" href="{% url 'main:logout' %}"><i class="fas fa-power-off mr-2"></i>{% translate 'Logout' %}</a>
                                 <div class="dropdown-divider"></div>
@@ -284,9 +283,9 @@
                         {% else %}
                             <li class="nav-item dropdown nav-user">
                                 <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                     <div>
+                                     <div style="margin-top: 5px;">
                                         <div class="small-circle">
-                                            <span class="small-initials-symbol"><i class="fas fa-user"></i></span>
+                                            <span class="small-initials-symbol"><i class="fas fa-user" style="margin-top: -5px; padding-top: -5px;"></i></span>
                                         </div>
                                      </div>
                                 </a>
@@ -372,7 +371,7 @@
                 </li>
             </ul>
             -->
-            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2020, 2021, 2022</p> <!-- TODO Get these values from a context processor-->
+            <p class="text-muted small mb-0">Copyright &copy; TRANSCRIPTIONES 2022</p> <!-- TODO Get these values from a context processor-->
         </div>
         <!-- Sidebar -->
     </footer>
@@ -385,10 +384,6 @@
     {% block extrascripts %}{% endblock extrascripts %}
     <script>
         $('.alert').hide().fadeIn(500).delay(4000).fadeOut(500);
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
     </script>
 </body>
 </html>

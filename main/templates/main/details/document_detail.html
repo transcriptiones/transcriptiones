@@ -50,9 +50,8 @@
     {% endcard %}
 
     {% card 'doc_detail_transcription' _('Transcript') %}
-        <section class="transcription">
-        {{ document.transcription_text|safe }}
-        </section>
+        <iframe src="{% url 'main:transcription_iframe' document.id %}" width="100%" height="500px"></iframe>
+
     {% endcard %}
 
     {% card 'doc_detail_meta_data' _('Content Meta Data') %}

@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from main.mail_utils import send_user_message_mail
 from main.forms.forms_user import UserMessageOptionsForm, WriteMessageForm
 from main.tables.tables import UserMessageTable
 from main.models import User, UserMessage, UserNotification
@@ -78,6 +79,7 @@ def message_user_view(request, username, subject='', message=''):
                                                      receiving_user=receiving_user,
                                                      subject=form.cleaned_data['subject'],
                                                      message=form.cleaned_data['message'])
+            send_user_message_mail(request, new_message)
             messages.success(request, _('Your message has been sent.'))
             return redirect('main:messages')
 

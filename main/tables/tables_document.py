@@ -12,6 +12,8 @@ class MinimalDocumentTable(TranscriptionesTable):
         fields = ("title_name", "place_name", "doc_start_date", "document_utc_update")
         row_attrs = default_row_attrs
 
+    title_name = tables.LinkColumn()
+
     def render_document_utc_update(self, value, record):
         if record.publish_user:
             profile_url = reverse("main:public_profile", kwargs={"username": record.submitted_by.username})
@@ -28,7 +30,6 @@ class DocumentTable(MinimalDocumentTable):
     class Meta(MinimalDocumentTable.Meta):
         fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
 
-    title_name = tables.LinkColumn()
     place_name = tables.Column(orderable=False)
     doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)

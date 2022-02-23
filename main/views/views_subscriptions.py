@@ -11,12 +11,17 @@ from main.models import Document, RefNumber, User, UserSubscription, Author, Ins
 @login_required
 def subscriptions(request):
     subs = UserSubscription.objects.filter(user=request.user)
-    print(subs)
     table = UserSubscriptionTable(data=subs)
-    form = UserSubscriptionOptionsForm()
+    form = UserSubscriptionOptionsForm({'notification_policy': request.user.notification_policy,
+                                        'different_editor_subscription': request.user.different_editor_subscription})
 
     if request.method == 'POST':
         form = UserSubscriptionOptionsForm(request.POST)
+        if form.is_valid():
+            request.user.notification_policy = form.cleaned_data["notification_policy"]
+            request.user.different_editor_subscription = form.cleaned_data["different_editor_subscription"]
+            request.user.save()
+            messages.success(request, _("Your Subscription Options have been updated"))
 
     return render(request, 'main/users/subscriptions.html', {'table': table, 'form': form})
 

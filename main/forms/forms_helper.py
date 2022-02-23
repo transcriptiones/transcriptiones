@@ -18,7 +18,7 @@ def initialize_form_helper():
     return helper
 
 
-def get_popover_html(model, field_name, content=None):
+"""def get_popover_html(model, field_name, content=None):
     label = model._meta.get_field(field_name).verbose_name
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
     ret_value = _(label) + f' <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_{field_name}"></i>\
@@ -26,4 +26,11 @@ def get_popover_html(model, field_name, content=None):
                         <p>{tooltip}</p>\
                         </div></div>'
     # TODO: Test mark safe lazy
+    return mark_safe_lazy(ret_value)"""
+
+
+def get_popover_html(model, field_name, content=None):
+    label = model._meta.get_field(field_name).verbose_name
+    tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
+    ret_value = _(label) + f'&nbsp;<span class="badge badge-secondary" type="button" data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">?</span>'
     return mark_safe_lazy(ret_value)

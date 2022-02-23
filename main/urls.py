@@ -144,10 +144,12 @@ urlpatterns = [
 
     ##############
     # ADMIN PAGES
-    path('transcriptiones_admin/', v_admin.admin_view, name='admin'),
+    path('transcriptiones_admin/', v_admin.admin_view, name='admin_start'),
     path('transcriptiones_admin/inbox/', v_admin.admin_inbox_view, name='admin_inbox'),
+    path('transcriptiones_admin/inbox/<int:msg_id>/', v_admin.admin_inbox_message_view, name='admin_inbox_message'),
+    path('transcriptiones_admin/inbox/<int:msg_id>/delete/', v_admin.admin_inbox_message_delete, name='admin_inbox_message_delete'),
+    path('transcriptiones_admin/inbox/<int:msg_id>/answer/', v_admin.admin_inbox_message_answer, name='admin_inbox_message_answer'),
     path('transcriptiones_admin/users/', v_admin.admin_users_view, name='admin_users'),
-    path('transcriptiones_admin/expert/', v_admin.admin_expert_view, name='admin_expert'),
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),
     path('transcriptiones_admin/export/json/', v_admin.admin_export_json_view, name='admin_export_json'),
@@ -172,6 +174,8 @@ urlpatterns = [
     path('user/request_api_key/', v_user.generate_api_secret, name='api_request'),
     path('user/renew_api_key/', v_user.renew_api_secret, name='api_renew'),
     path('user/delete_api_key/', v_user.delete_api_secret, name='api_delete'),
+
+    path('document/transcription/<int:doc_id>/', v_browse.transcription_view, name='transcription_iframe'),
 
     #############
     # DEBUG VIEWS

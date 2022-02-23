@@ -1,4 +1,6 @@
 from dal import autocomplete
+from django.db.models import Q
+
 from main.models import Institution, RefNumber, SourceType, Author, Language
 
 
@@ -77,5 +79,8 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
         qs = Language.objects.all().order_by('name_native')
 
         if self.q:
-            qs = qs.filter(name_native__icontains=self.q)
+            qs = qs.filter(Q(name_native__icontains=self.q) | Q(name_en__icontains=self.q))
         return qs
+
+    def get_result_label(self, result):
+        return f"{result.name_native} ({result.name_en})"

@@ -103,10 +103,13 @@ def get_document_info_metadata(document):
     formatted_author_list = list()
     for a in author_list:
         formatted_author_list.append(f'<a href="{a.get_absolute_url()}">{a.author_name}</a>')
+    period_string = f"{document.doc_start_date}"
+    if document.doc_end_date is not None:
+        period_string += f" - {document.doc_end_date}"
 
-    data = [(get_verbose_field_name(document, 'author'),
-             mark_safe(", ".join(formatted_author_list))),
+    data = [(get_verbose_field_name(document, 'author'), mark_safe(", ".join(formatted_author_list))),
             (get_verbose_field_name(document, 'place_name'), document.place_name),
+            (_("Creation Period"), period_string),
             (get_verbose_field_name(document, 'language'),
              ", ".join(document.language.all().values_list('name_en', flat=True))),
             (get_verbose_field_name(document, 'source_type'),
@@ -287,5 +290,9 @@ def get_extended_help_text(model, field):
             help_text = get_title_text_format(_('Anonymous publishing'), _('Your documents can be published '
                                                                            'anonymously by default. You can change '
                                                                            'this setting any time.'))
+        elif field == 'user_orcid':
+            help_text = get_title_text_format(_('ORCID'), _('ORCID provides a persistent digital identifier that you '
+                                                            'own and control, and that distinguishes you from every '
+                                                            'other researcher.'))
 
     return help_text

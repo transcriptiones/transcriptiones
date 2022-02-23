@@ -1,0 +1,65 @@
+{% load i18n %}
+
+<form action="{{ request.path }}" method="get" class="my-small-form">
+       <div class="form-row">
+            <div class="form-group col-md-6">
+                {% if form_data.filter_applied == True %}
+                    {% blocktranslate with num_of_results=form_data.results %}
+                        You filtered the table. It now contains <strong>{{ num_of_results }}</strong> Documents.
+                    {% endblocktranslate %}
+                {% else %}
+                    {% blocktranslate with num_of_results=form_data.results %}
+                        This table contains a total of <strong>{{ num_of_results }}</strong> Documents.
+                    {% endblocktranslate %}
+                {% endif %}
+            </div>
+           <div class="form-group col-md-6 text-right">
+               <button class="btn btn-sm btn-primary"><i class="fas fa-filter"></i></button>
+               &nbsp;
+                <a class="btn btn-sm btn-primary" href="{{ request.path }}" role="button"><i class="fas fa-times"></i></a>
+            </div>
+       </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Title' %}" value="{{ request.GET.title_name }}"/>
+                <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Title' %}</small>
+            </div>
+            <div class="form-group col-md-4">
+                <input type="text" name="place_name" class="form-control" placeholder="{% translate 'Filter by Creation Location' %}" value="{{ request.GET.place_name }}"/>
+                <small id="locationHelp" class="form-text text-muted">{% translate 'Filter by Creation Location' %}</small>
+            </div>
+            <div class="form-group col-md-4">
+                <select name="source_type" class="form-control" title="" id="id_source_type">
+                    <option value="">--- Filter By Source Type ---</option>
+                    {% for sourcetype in form_data.source_types %}
+                        <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %}>{{ sourcetype.name }}</option>
+                        {% for child_sourcetype in sourcetype.children %}
+                            <option value="{{ child_sourcetype.value }}"{% ifequal request.GET.source_type child_sourcetype.value %} selected="selected"{% endifequal %}>&nbsp;&nbsp;{{ child_sourcetype.name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+                <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Filter by Source Type' %}</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm">
+                <input type="number" class="form-control" name="doc_start_date" id="doc_start_date" value="{{ form_data.set_min }}"/>
+                <small id="dateFromHelp" class="form-text text-muted">{% translate 'Earliest Year of Publication' %}</small>
+            </div>
+            <div class="col-sm">
+                <input type="number" class="form-control" name="doc_end_date" id="doc_end_date" value="{{ form_data.set_max }}"/>
+                <small id="dateToHelp" class="form-text text-muted">{% translate 'Latest Year of Publication' %}</small>
+            </div>
+            <div class="col-sm">
+                <range-selector
+                          id="docDateRangeSlider"
+                          min-range="{{ form_data.min }}"
+                          max-range="{{ form_data.max }}"
+                          preset-min="{{ form_data.set_min }}"
+                          preset-max="{{ form_data.set_max }}"
+                          slider-color="#1D809F"
+                          slider-border-color="#DEE2E6" />
+            </div>
+        </div>
+</form>
+

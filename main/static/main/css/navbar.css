@@ -329,6 +329,7 @@
 .nav-user-name-img {
     display:inline-block;
     margin-left: 10px;
+    margin-top: 10px;
 }
 
 .nav-user-info {
@@ -344,7 +345,8 @@
 }
 
 .nav-user-info-text {
-    font-size: 13px;
+    padding-top: 0px;
+    font-size: 16px;
 }
 .nav-user-dropdown {}
 

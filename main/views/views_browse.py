@@ -1,10 +1,12 @@
+from datetime import date
+
+from django.db.models import Min
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
 
 import main.model_info as m_info
-from main.forms.forms_filter import MyFilterForm
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_browse import RefNumberTable, InstitutionTable, SourceTypeTable, AuthorTable
@@ -67,6 +69,7 @@ class AuthorDetailView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
+        context['form_data'] = get_document_filter_data(self.request, self.my_filter)
         if self.request.user.is_authenticated:
             context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
                                                                     subscription_type=UserSubscription.SubscriptionType.AUTHOR,
@@ -96,9 +99,11 @@ def source_type_detail_view(request, pk):
     else:
         parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
         document_list = Document.objects.filter(source_type=selected_source_type)
-        table = MinimalDocumentTable(data=document_list)
+        my_filter = DocumentFilter(request.GET, document_list)
+        table = MinimalDocumentTable(data=my_filter.qs)
         RequestConfig(request).configure(table)
-        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
+        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type,
+                   'form_data': get_document_filter_data(request, my_filter)}
         return render(request, "main/details/source_type_child_detail.html", context=context)
 
 
@@ -109,9 +114,11 @@ def source_type_group_detail_view(request, pk):
     selected_source_type = SourceType.objects.get(id=pk)
     parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
     document_list = Document.objects.filter(source_type__in=parent_source_type_list)
-    table = DocumentTable(data=document_list)
+    my_filter = DocumentFilter(request.GET, document_list)
+    table = DocumentTable(data=my_filter.qs)
     RequestConfig(request).configure(table)
-    context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type, 'all': True}
+    context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type, 'all': True,
+               'form_data': get_document_filter_data(request, my_filter)}
     return render(request, "main/details/source_type_child_detail.html", context=context)
 
 
@@ -168,7 +175,6 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         self.my_filter = DocumentFilter(request.GET, Document.objects.filter(parent_ref_number=self.get_object()))
-        self.my_filter.form = MyFilterForm()
         return super(RefNumberDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_tables(self):
@@ -184,6 +190,7 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
+        context['form_data'] = get_document_filter_data(self.request, self.my_filter)
         if self.request.user.is_authenticated:
             context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
                                                                     subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
@@ -277,6 +284,7 @@ class DocumentHistoryView(MultiTableMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = self.my_filter
+        context['form_data'] = get_document_filter_data(self.request, self.my_filter)
         """
         if self.request.user.is_authenticated:
             context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
@@ -302,3 +310,38 @@ class DocumentHistoryView(MultiTableMixin, DetailView):
         context['versions'] = versions
         return context
     """
+
+
+def get_document_filter_data(request, doc_filter):
+    """Creates and returns a dict with all the data needed for the manually created
+    document filter form."""
+
+    latest_year = date.today().year
+    try:
+        earliest_doc = Document.objects.filter().values_list('doc_start_date').annotate(Min('doc_start_date')).order_by('doc_start_date')[0]
+        earliest_year = earliest_doc[0].date.year
+    except (IndexError, ValueError) as error:
+        earliest_year = 1000
+
+    form_data = {'results': doc_filter.qs.count(),
+                 'filter_applied': 'title_name' in request.GET.keys(),
+                 'min': earliest_year,
+                 'max': latest_year,
+                 'set_min': request.GET.get('doc_start_date', earliest_year),
+                 'set_max': request.GET.get('doc_end_date', latest_year),
+                 'source_types': list()}
+    for st in SourceType.objects.filter(parent_type=None):
+        new_line = {'name': st.get_translated_name(request.LANGUAGE_CODE),
+                    'value': str(st.id),
+                    'children': list()}
+        for cst in SourceType.objects.filter(parent_type=st.id):
+            new_line['children'].append({'name': cst.get_translated_name(request.LANGUAGE_CODE),
+                                         'value': str(cst.id)})
+        form_data['source_types'].append(new_line)
+
+    return form_data
+
+
+def transcription_view(request, doc_id):
+    document = Document.objects.get(id=doc_id)
+    return render(request, "main/details/transcription.html", {'document': document})

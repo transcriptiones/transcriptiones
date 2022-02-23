@@ -76,21 +76,38 @@ class UserTable(TranscriptionesTable):
         return mark_safe(options)
 
 
-class ContactMessageTable(tables.Table):
-    """The UserMessageTable shows a list of subscriptions to ref numbers, documents or users."""
+class ContactMessageTable(TranscriptionesTable):
+    """The ContactMessageTable shows a list contact messages."""
 
-    class Meta:
+    class Meta(TranscriptionesTable.Meta):
         model = ContactMessage
-        template_name = "django_tables2/bootstrap4.html"
-        fields = ("sending_user", "subject", "sending_time")
-        attrs = {"class": "table table-hover",
-                 'td': {'style': 'text-align: left;'}
-                 }
+        fields = ("state", "reply_email", "subject", "sending_time")
 
+    state = tables.Column(verbose_name='Answered', orderable=False)
     reply_email = tables.Column(verbose_name='from', orderable=False)
-    subject = tables.LinkColumn('main:contact_message_read', args=[A('pk')], orderable=False)
+    subject = tables.LinkColumn('main:admin_inbox_message', args=[A('pk')], orderable=False)
     sending_time = tables.Column(verbose_name='sent', orderable=False)
-    options = tables.Column(accessor='id', verbose_name="", orderable=False)
+    # options = tables.Column(accessor='id', verbose_name="", orderable=False)
+
+    def render_reply_email(self, value, record):
+        if record.state == 0:
+            return mark_safe(f"<strong>{value}</strong>")
+        return value
+
+    def render_subject(self, value, record):
+        if record.state == 0:
+            return mark_safe(f"<strong>{value}</strong>")
+        return value
+
+    def render_sending_time(self, value, record):
+        if record.state == 0:
+            return mark_safe(f'<strong>{value.strftime("%b %d %Y %H:%M:%S")}</strong>')
+        return value.strftime("%b %d %Y %H:%M:%S")
+
+    def render_state(self, value, record):
+        if value == 0:
+            return mark_safe(f'<span style="color: red;">&cross;</span>')
+        return mark_safe(f'<span style="color: green;">&check;</span>')
 
 
 class UserNotificationTable(tables.Table):

@@ -23,8 +23,12 @@
     {% card 'messages_card' _('Contact Form Messages') %}
         {% if table.data|length > 0 %}
              <p>
-                 <a class="btn btn-danger btn-sm" href="{% url 'main:messages_delete_all' %}" role="button">{% translate 'Delete All Messages' %}</a>
-                 <a class="btn btn-primary btn-sm" href="{% url 'main:messages' %}" role="button"><i class="fas fa-sync"></i></a>
+
+                 <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}" role="button"><i class="fas fa-sync"></i></a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}?show=all" role="button">Show All</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}" role="button">Show Unanswered</a>
+                </div>
              </p>
             {% render_table table %}
         {% else %}

@@ -1,0 +1,553 @@
+[
+	{
+		"model": "main.sourcetype", 
+		"pk": 1, 
+		"fields": {
+			"type_name": "Historiographic Writings", 
+			"type_name_de": "Historiographische Schriften", 
+			"type_name_fr": "Historiographic Writings", 
+			"type_name_it": "Historiographic Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 2, 
+		"fields": {
+			"type_name": "Religious Writings", 
+			"type_name_de": "Religiöse Schriften", 
+			"type_name_fr": "Religious Writings", 
+			"type_name_it": "Religious Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 3, 
+		"fields": {
+			"type_name": "Legal Documents", 
+			"type_name_de": "Rechtsdokumente", 
+			"type_name_fr": "Legal Documents", 
+			"type_name_it": "Legal Documents", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 4, 
+		"fields": {
+			"type_name": "Administrative Writings", 
+			"type_name_de": "Verwaltungsschriften", 
+			"type_name_fr": "Administrative Writings", 
+			"type_name_it": "Administrative Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 5, 
+		"fields": {
+			"type_name": "Correspondence", 
+			"type_name_de": "Korrespondenz", 
+			"type_name_fr": "Correspondence", 
+			"type_name_it": "Correspondence", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 6, 
+		"fields": {
+			"type_name": "Scholarly Writings", 
+			"type_name_de": "Wissenschaftliche Schriften", 
+			"type_name_fr": "Scholarly Writings", 
+			"type_name_it": "Scholarly Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 7, 
+		"fields": {
+			"type_name": "Literature", 
+			"type_name_de": "Dichtung", 
+			"type_name_fr": "Literature", 
+			"type_name_it": "Literature", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 8, 
+		"fields": {
+			"type_name": "Political Writings", 
+			"type_name_de": "Politische Schriften", 
+			"type_name_fr": "Political Writings", 
+			"type_name_it": "Political Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 9, 
+		"fields": {
+			"type_name": "Other Writings", 
+			"type_name_de": "Übrige Schriften", 
+			"type_name_fr": "Other Writings", 
+			"type_name_it": "Other Writings", 
+			"parent_type": null
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 10, 
+		"fields": {
+			"type_name": "Chronicles and Annals", 
+			"type_name_de": "Chroniken und Annalen", 
+			"type_name_fr": "Chronicles and Annals", 
+			"type_name_it": "Chronicles and Annals", 
+			"parent_type": 1
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 11, 
+		"fields": {
+			"type_name": "Ego-Documents", 
+			"type_name_de": "Selbstzeugnisse", 
+			"type_name_fr": "Ego-Documents", 
+			"type_name_it": "Ego-Documents", 
+			"parent_type": 1
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 12, 
+		"fields": {
+			"type_name": "Travelogues", 
+			"type_name_de": "Reiseberichte", 
+			"type_name_fr": "Travelogues", 
+			"type_name_it": "Travelogues", 
+			"parent_type": 1
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 13, 
+		"fields": {
+			"type_name": "History Poetry", 
+			"type_name_de": "Geschichtsdichtung", 
+			"type_name_fr": "History Poetry", 
+			"type_name_it": "History Poetry", 
+			"parent_type": 1
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 14, 
+		"fields": {
+			"type_name": "Other Historiographic Writings", 
+			"type_name_de": "Übrige historiographische Schriften", 
+			"type_name_fr": "Other Historiographic Writings", 
+			"type_name_it": "Other Historiographic Writings", 
+			"parent_type": 1
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 15, 
+		"fields": {
+			"type_name": "Hagiographic Writings", 
+			"type_name_de": "Hagiographische Schriften", 
+			"type_name_fr": "Hagiographic Writings", 
+			"type_name_it": "Hagiographic Writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 16, 
+		"fields": {
+			"type_name": "Liturgic Writings", 
+			"type_name_de": "Liturgische Schriften", 
+			"type_name_fr": "Liturgic Writings", 
+			"type_name_it": "Liturgic Writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 17, 
+		"fields": {
+			"type_name": "Dogmatic writings", 
+			"type_name_de": "Dogmatische Schriften", 
+			"type_name_fr": "Dogmatic writings", 
+			"type_name_it": "Dogmatic writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 18, 
+		"fields": {
+			"type_name": "Sermons", 
+			"type_name_de": "Predigten", 
+			"type_name_fr": "Sermons", 
+			"type_name_it": "Sermons", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 19, 
+		"fields": {
+			"type_name": "Memorial Writings", 
+			"type_name_de": "Gedenkschriftgut", 
+			"type_name_fr": "Memorial Writings", 
+			"type_name_it": "Memorial Writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 20, 
+		"fields": {
+			"type_name": "Mystic Writings", 
+			"type_name_de": "Mystische Schriften", 
+			"type_name_fr": "Mystic Writings", 
+			"type_name_it": "Mystic Writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 21, 
+		"fields": {
+			"type_name": "Other Religious Writings", 
+			"type_name_de": "Übrige religi÷se Schriften", 
+			"type_name_fr": "Other Religious Writings", 
+			"type_name_it": "Other Religious Writings", 
+			"parent_type": 2
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 22, 
+		"fields": {
+			"type_name": "Diplomatic Documents", 
+			"type_name_de": "Diplomatische Urkunden", 
+			"type_name_fr": "Diplomatic Documents", 
+			"type_name_it": "Diplomatic Documents", 
+			"parent_type": 3
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 23, 
+		"fields": {
+			"type_name": "Legal Documents of Mundane Institutions", 
+			"type_name_de": "Rechtsdokumente weltlicher Institutionen", 
+			"type_name_fr": "Legal Documents of Mundane Institutions", 
+			"type_name_it": "Legal Documents of Mundane Institutions", 
+			"parent_type": 3
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 24, 
+		"fields": {
+			"type_name": "Legal Documents of Religious Institutions", 
+			"type_name_de": "Rechtsdokumente kirchlicher Institutionen", 
+			"type_name_fr": "Legal Documents of Religious Institutions", 
+			"type_name_it": "Legal Documents of Religious Institutions", 
+			"parent_type": 3
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 25, 
+		"fields": {
+			"type_name": "Personal Contracts", 
+			"type_name_de": "Persönliche Verträge", 
+			"type_name_fr": "Personal Contracts", 
+			"type_name_it": "Personal Contracts", 
+			"parent_type": 3
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 26, 
+		"fields": {
+			"type_name": "Other Legal Documents", 
+			"type_name_de": "Übrige Rechtsdokumente", 
+			"type_name_fr": "Other Legal Documents", 
+			"type_name_it": "Other Legal Documents", 
+			"parent_type": 3
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 27, 
+		"fields": {
+			"type_name": "Property Directories", 
+			"type_name_de": "Besitzverzeichnisse", 
+			"type_name_fr": "Property Directories", 
+			"type_name_it": "Property Directories", 
+			"parent_type": 4
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 28, 
+		"fields": {
+			"type_name": "Person Directories", 
+			"type_name_de": "Personenverzeichnisse", 
+			"type_name_fr": "Person Directories", 
+			"type_name_it": "Person Directories", 
+			"parent_type": 4
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 29, 
+		"fields": {
+			"type_name": "Accounting Books", 
+			"type_name_de": "Rechnungsbⁿcher", 
+			"type_name_fr": "Accounting Books", 
+			"type_name_it": "Accounting Books", 
+			"parent_type": 4
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 30, 
+		"fields": {
+			"type_name": "Official Books", 
+			"type_name_de": "Amtsbücher", 
+			"type_name_fr": "Official Books", 
+			"type_name_it": "Official Books", 
+			"parent_type": 4
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 31, 
+		"fields": {
+			"type_name": "Other Administrative Documents", 
+			"type_name_de": "Übrige Verwaltungsschriften", 
+			"type_name_fr": "Other Administrative Documents", 
+			"type_name_it": "Other Administrative Documents", 
+			"parent_type": 4
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 32, 
+		"fields": {
+			"type_name": "Letters", 
+			"type_name_de": "Briefe", 
+			"type_name_fr": "Letters", 
+			"type_name_it": "Letters", 
+			"parent_type": 5
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 33, 
+		"fields": {
+			"type_name": "Postcards", 
+			"type_name_de": "Postkarten", 
+			"type_name_fr": "Postcards", 
+			"type_name_it": "Postcards", 
+			"parent_type": 5
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 34, 
+		"fields": {
+			"type_name": "Other Correspondence", 
+			"type_name_de": "Übrige Korrespondenz", 
+			"type_name_fr": "Other Correspondence", 
+			"type_name_it": "Other Correspondence", 
+			"parent_type": 5
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 35, 
+		"fields": {
+			"type_name": "Theoretical-theological Writings", 
+			"type_name_de": "Theoretisch-theologische Schriften", 
+			"type_name_fr": "Theoretical-theological Writings", 
+			"type_name_it": "Theoretical-theological Writings", 
+			"parent_type": 6
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 36, 
+		"fields": {
+			"type_name": "Encyclopedic Writings", 
+			"type_name_de": "Enzyklopädische Schriften", 
+			"type_name_fr": "Encyclopedic Writings", 
+			"type_name_it": "Encyclopedic Writings", 
+			"parent_type": 6
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 37, 
+		"fields": {
+			"type_name": "Scientific Writings", 
+			"type_name_de": "Naturwissenschaftliche Schriften", 
+			"type_name_fr": "Scientific Writings", 
+			"type_name_it": "Scientific Writings", 
+			"parent_type": 6
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 38, 
+		"fields": {
+			"type_name": "Philosophical Writings", 
+			"type_name_de": "Philosophische Schriften", 
+			"type_name_fr": "Philosophical Writings", 
+			"type_name_it": "Philosophical Writings", 
+			"parent_type": 6
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 39, 
+		"fields": {
+			"type_name": "Other Scholarly Writings", 
+			"type_name_de": "Übrige wissenschaftliche Schriften", 
+			"type_name_fr": "Other Scholarly Writings", 
+			"type_name_it": "Other Scholarly Writings", 
+			"parent_type": 6
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 40, 
+		"fields": {
+			"type_name": "Narrative Fiction", 
+			"type_name_de": "Epik", 
+			"type_name_fr": "Narrative Fiction", 
+			"type_name_it": "Narrative Fiction", 
+			"parent_type": 7
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 41, 
+		"fields": {
+			"type_name": "Poetry", 
+			"type_name_de": "Lyrik", 
+			"type_name_fr": "Poetry", 
+			"type_name_it": "Poetry", 
+			"parent_type": 7
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 42, 
+		"fields": {
+			"type_name": "Drama", 
+			"type_name_de": "Dramatik", 
+			"type_name_fr": "Drama", 
+			"type_name_it": "Drama", 
+			"parent_type": 7
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 43, 
+		"fields": {
+			"type_name": "Argumentative Writings", 
+			"type_name_de": "Argumentative Schriften", 
+			"type_name_fr": "Argumentative Writings", 
+			"type_name_it": "Argumentative Writings", 
+			"parent_type": 8
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 44, 
+		"fields": {
+			"type_name": "Polemic Writings", 
+			"type_name_de": "Streitschriften", 
+			"type_name_fr": "Polemic Writings", 
+			"type_name_it": "Polemic Writings", 
+			"parent_type": 8
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 45, 
+		"fields": {
+			"type_name": "Other Political Writings", 
+			"type_name_de": "Übrige politische Schriften", 
+			"type_name_fr": "Other Political Writings", 
+			"type_name_it": "Other Political Writings", 
+			"parent_type": 8
+		}
+	}, 
+	
+	{
+		"model": "main.sourcetype", 
+		"pk": 46, 
+		"fields": {
+			"type_name": "Others", 
+			"type_name_de": "Übriges", 
+			"type_name_fr": "Others", 
+			"type_name_it": "Others", 
+			"parent_type": 9
+		}
+	}
+]

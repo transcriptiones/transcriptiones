@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block page_title %}
     {% translate 'Ref. No.' %}: {{ refnumber.ref_number_name }} - {{ refnumber.ref_number_title }}
@@ -11,6 +12,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
+    {% breadcrumb _("Browse") "main:browse_options" %}
     {% breadcrumb _("Institutions") "main:institution_list"%}
     {% breadcrumb refnumber.holding_institution "main:institution_detail" refnumber.holding_institution.institution_slug %}
     {% breadcrumb refnumber "main:ref_number_detail" refnumber.holding_institution.institution_slug refnumber.ref_number_slug %}
@@ -37,7 +39,7 @@
     {%  endcard %}
 
     {% card 'ref_number_documents' _('Documents with this reference number') %}
-        {% include 'main/my-filter.html' %}
+        {% include 'main/document_filter.html' %}
 
         {% render_table tables.1 %}
     {%  endcard %}
@@ -61,4 +63,19 @@
         });
     </script>
     {% endif %}
+
+    <script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js">
+</script>
+
+    <script>
+        window.addEventListener('range-changed', (e) => {
+            const data = e.detail;
+            document.getElementById('doc_start_date').value = data.minRangeValue;
+            document.getElementById('doc_end_date').value = data.maxRangeValue;
+            console.log(data)
+            // data = { sliderId: null, minRangeValue: 0, maxRangeValue: 1000 }
+        });
+    </script>
 {% endblock %}

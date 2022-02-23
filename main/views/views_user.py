@@ -29,6 +29,7 @@ from main.model_info import get_user_info, get_public_user_info
 from main.tables.tables_base import TitleValueTable
 from main.tables.tables_document import DocumentUserHistoryTable
 from main.filters import DocumentFilter
+from main.views.views_browse import get_document_filter_data
 
 
 def signup(request):
@@ -39,9 +40,8 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
-            send_registration_confirmation_mail(user)
+            send_registration_confirmation_mail(request, user)
             return redirect('main:account_activation_sent')
-
     else:
         form = SignUpForm()
     return render(request, 'main/users/signup.html', {'form': form})
@@ -98,7 +98,9 @@ def userprofile(request):
     activity_table = DocumentUserHistoryTable(data=d_filter.qs)
     RequestConfig(request).configure(activity_table)
 
-    return render(request, 'main/users/user_profile.html', {'user_table': user_table, 'activity_table': activity_table, 'filter': d_filter})
+    return render(request, 'main/users/user_profile.html', {'user_table': user_table,
+                                                            'activity_table': activity_table,
+                                                            'form_data': get_document_filter_data(request, d_filter)})
 
 
 @login_required
@@ -131,12 +133,13 @@ def public_profile(request, username):
     subscribed = UserSubscription.objects.filter(user=request.user,
                                                  subscription_type=UserSubscription.SubscriptionType.USER,
                                                  object_id=user.id).count() > 0
+
     return render(request, 'main/users/public_user_profile.html', {'profile_user': user,
                                                                    'user_table': user_table,
                                                                    'activity_table': activity_table,
                                                                    'filter': d_filter,
-                                                                   'subscribed': subscribed})
-
+                                                                   'subscribed': subscribed,
+                                                                   'form_data': get_document_filter_data(request, d_filter)})
 
 class UserUpdateView(LoginRequiredMixin, View):
     """View for changing User Data"""
@@ -168,8 +171,8 @@ class UserUpdateView(LoginRequiredMixin, View):
                 
 class CustomPasswordResetView(PasswordResetView):
     form_class = CustomPasswordResetForm
-    email_template_name = "main/users/password_reset_email.html"
-    subject_template_name = "main/users/password_reset_subject.txt"
+    email_template_name = "main/users/email_templates/password_reset_email.html"
+    subject_template_name = "main/users/email_templates/password_reset_subject.txt"
     template_name = "main/users/password_reset.html"
     success_url = reverse_lazy('main:password_reset_done')
 
@@ -181,7 +184,7 @@ class CustomPasswordConfirmView(PasswordResetConfirmView):
 
 
 def request_username_view(request):
-    """Doc"""
+    """A user might forget his username which he logged in with. He can request it over this for"""
 
     if request.method == 'POST':
         form = RequestUsernameForm(request.POST)

@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Application definition
 
@@ -181,10 +182,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # PRODUCTION SETTINGS
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'smtp.unibas.ch'
-EMAIL_PORT = 23
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = False
+# EMAIL_HOST = 'smtp.unibas.ch'
+# EMAIL_PORT = 23
 NO_REPLY_EMAIL = "no-reply@transcriptiones.ch"
 
 

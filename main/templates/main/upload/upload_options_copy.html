@@ -28,7 +28,17 @@
                 <a href="{% url 'main:upload_document' %}" class="btn btn-primary">{% translate 'Upload Single Page' %}</a>
             </div>
           </div>
-
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{% translate 'Multiple Pages' %}</h5>
+              <p class="card-text">{% translate 'Use this option for large documents. It lets you add page by page. All the uploaded data must belong to one reference number' %}.</p>
+            </div>
+            <div class="card-footer text-center">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="{% translate 'Coming Soon!' %}">
+                    <a href="{% url 'main:upload_multiple' %}" class="btn btn-primary disabled" style="pointer-events: none;">{% translate 'Upload Multiple Pages' %}</a>
+                </span>
+            </div>
+          </div>
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">{% translate 'Batch Upload' %}</h5>

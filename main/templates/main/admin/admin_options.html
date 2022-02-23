@@ -2,9 +2,8 @@
 
 <div class="text-center">
     <div  class="btn-group" role="group">
-        <a type="button" href="{% url 'main:admin' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'admin' %} disabled{% endif %}">{% translate 'Database Functions' %}</a>
-        <a type="button" href="{% url 'main:admin_inbox' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'admin_inbox' %} disabled{% endif %}">{% translate 'Contact Messages' %}</a>
+        <a type="button" href="{% url 'main:admin_start' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'admin_start' %} disabled{% endif %}">{% translate 'Admin Functions' %}</a>
+        <a type="button" href="{% url 'main:admin_inbox' %}" class="btn btn-primary{% if request.resolver_match.url_name in 'admin_inbox,admin_inbox_message,admin_inbox_message_answer' %} disabled{% endif %}">{% translate 'Contact Messages' %}</a>
         <a type="button" href="{% url 'main:admin_users' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'admin_users' %} disabled{% endif %}">{% translate 'User Management' %}</a>
-        <a type="button" href="{% url 'main:admin_expert' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'admin_expert' %} disabled{% endif %}">{% translate 'Expert Functions' %}</a>
     </div>
 </div>

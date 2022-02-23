@@ -5,7 +5,7 @@ from django.forms import TextInput
 from django.forms.widgets import ChoiceWidget
 from django.utils.translation import ugettext_lazy as _
 from django_filters import FilterSet, CharFilter, DateRangeFilter, DateFilter, BooleanFilter, MultipleChoiceFilter, \
-    ChoiceFilter, ModelChoiceFilter, DateFromToRangeFilter
+    ChoiceFilter, ModelChoiceFilter, DateFromToRangeFilter, NumberFilter
 from django_filters.fields import ModelChoiceField
 from django_filters.widgets import LinkWidget, LookupChoiceWidget
 
@@ -64,12 +64,19 @@ class DocumentFilter(FilterSet):
     """Filter to filter a document table"""
     title_name = CharFilter(lookup_expr='icontains')
     place_name = CharFilter(lookup_expr='icontains')
-    doc_start_date = DateFromToRangeFilter()
+    doc_start_date = NumberFilter(method='doc_start_filter')
+    doc_end_date = NumberFilter(method='doc_end_filter')
     source_type = ModelChoiceFilter(queryset=SourceType.objects.all().order_by('type_name'))
 
     class Meta:
         model = Document
         fields = ['title_name', 'source_type', 'place_name', 'doc_start_date']
+
+    def doc_start_filter(self, queryset, name, value):
+        return queryset.filter(doc_start_date__gte=str(value)).filter(Q(doc_end_date__isnull=True) | Q(doc_end_date__gte=str(value)))
+
+    def doc_end_filter(self, queryset, name, value):
+        return queryset.filter(doc_start_date__lte=str(value)).filter(Q(doc_end_date__isnull=True) | Q(doc_end_date__lte=str(value)))
 
 
 class UserFilter(FilterSet):

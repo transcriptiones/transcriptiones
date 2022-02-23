@@ -25,7 +25,7 @@
                 <td><strong>{{ notification.subject }}</strong></td>
             </tr>
             <tr>
-                <td>{{ notification.message|linebreaksbr }}</td>
+                <td>{{ notification.message|linebreaksbr|safe }}</td>
             </tr>
         </table>
     {% endcard %}

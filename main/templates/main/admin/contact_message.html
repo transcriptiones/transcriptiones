@@ -1,0 +1,87 @@
+﻿{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Answer Contact Message' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Administration') "main:admin" %}
+    {% breadcrumb _('Contact Message Inbox') 'main:admin_contact' %}
+    {% breadcrumb _('Message') '' %}
+    {% breadcrumb _('Answer') '' %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'main/admin/admin_options.html' %}
+
+    {% card 'messages_card' _('Message') %}
+        <table style="width: 100%;">
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px; font-weight: bold; background: #DCDCDC">{% translate 'Message' %}</td>
+            </tr>
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px;">
+                    <strong>{{ message.subject }}</strong><br/>
+                    {{ message.message|linebreaksbr }}</td>
+            </tr>
+            <tr><td><br/></td></tr>
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px; font-weight: bold; background: #DCDCDC">{% translate 'Answer' %}</td>
+            </tr>
+            <tr style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);">
+                <td style="border: 1px solid black; padding: 5px;">
+                    {% ifnotequal message.answer_subject '' %}
+                      <strong>{{ message.answer_subject }}</strong><br/>
+                      {{ message.answer|linebreaksbr }}
+                    {% else %}
+                        <span style="color: darkred; font-weight: bold;">{% translate 'This message has not been answered.' %}</span>
+                    {% endifnotequal %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br/>
+                    <a href="{% url 'main:admin_inbox' %}" class="btn btn-primary">{% translate 'Go Back' %}</a> &nbsp;
+                    <a href="{% url 'main:admin_inbox_message_answer' message.id %}" class="btn btn-primary">{% translate 'Answer' %}</a> &nbsp;
+                    <button class="btn btn-danger" type="button" id="do-delete">{% translate 'Delete Contact Message' %}</button>
+                </td>
+            </tr>
+        </table>
+    {% endcard %}
+
+    {% include "bsmodals/confirm.html" %}
+    {% include 'main/confirm_delete.html' %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="{% static 'bsmodals/bsmodals.js' %}"></script>
+    <script>
+        $(document).on('click', '.confirm-delete', function () {
+            $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
+        });
+        $(document).on('click', '#confirmDeleteButtonModal', function () {
+            var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
+            window.location = $("#".concat(caller)).attr("href");
+        });
+
+        $(document).ready(function() {
+            $('#do-delete').click(function () {
+                bsmodals_confirm('Delete contact message?', ' Delete contact message? This cannot be undone.', (result) => {
+                    if (result) {
+                        location.href="{% url 'main:admin_inbox_message_delete' message.id %}"
+                    }
+                }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
+            });
+        });
+
+
+    </script>
+{% endblock %}

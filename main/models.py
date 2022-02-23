@@ -102,7 +102,6 @@ class RefNumber(models.Model):
 
     ref_number_title = models.CharField(verbose_name=_("Title"),
                                         max_length=150,
-                                        blank=True,
                                         help_text=_("Title of the collection"))
 
     collection_link = models.URLField(verbose_name=_("Static URL"),
@@ -537,24 +536,32 @@ class Document(models.Model):
             doc_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
                                                                 object_id=old_doc_id)
             for d_sub in doc_subscriptions:
+
                 UserNotification.objects.create(subscription=d_sub, user=d_sub.user,
-                                                subject=_(f'Document {self.title_name} changed'),
-                                                message='A document changed. For realz!')
+                                                subject=_(f'Document "{self.title_name}" changed'),
+                                                message=_(f'The document changed {self.title_name} changed.\n\n'
+                                                          f'View the document <a href="{self.get_absolute_url()}">here</a>.'))
+                if d_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
+                    print("Immediate Mail")
 
             # Gets all ref_number subscriptions for the current document
             ref_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
                                                                 object_id=old_ref_id)
             for r_sub in ref_subscriptions:
+                ref_number_url = self.parent_ref_number.get_absolute_url()
                 UserNotification.objects.create(subscription=r_sub, user=r_sub.user,
-                                                subject='A ref changed',
-                                                message='A ref changed. For realz!')
+                                                subject=_('A Reference-Number changed'),
+                                                message=_(f'The reference number "{self.parent_ref_number.ref_number_name}" changed.\n\n'
+                                                          f'View the details <a href="{ref_number_url}">here</a>.'))
 
             usr_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.USER,
                                                                 object_id=old_user_id)
             for u_sub in usr_subscriptions:
-                UserNotification.objects.create(subscription=u_sub, user=u_sub.user,
-                                                subject='A usr changed',
-                                                message='A usr changed. For realz!')
+                if self.publish_user:
+                    UserNotification.objects.create(subscription=u_sub, user=u_sub.user,
+                                                    subject=_('A User changed'),
+                                                    message=_(f'The user "{self.submitted_by.username}" changed.\n\n'
+                                                              f'View the details <a href="{reverse("main:public_profile", kwargs={"username": self.submitted_by.username})}">here</a>.'))
 
         super().save(force_update=force_update, *args, **kwargs)
 
@@ -772,6 +779,9 @@ class ContactMessage(models.Model):
     reply_email = models.EmailField()
     subject = models.CharField(max_length=100)
     message = models.TextField()
+    answer_subject = models.CharField(max_length=100, default='')
+    answer = models.TextField(default='')
+
 
     # assignee = models.ForeignKey(User, on_delete=models.CASCADE)
 

@@ -24,15 +24,17 @@ def upload_multiple_transcriptions_view(request):
     return render(request, 'main/upload/create_multiple_documents.html')
 
 
+@login_required
 def upload_batch_view(request):
     form = BatchUploadForm()
 
     if request.method == "POST":
         form = BatchUploadForm(request.POST)
         if form.is_valid():
-            new_message = ContactMessage.objects.create(reply_email=form.cleaned_data['email_address'],
+            new_message = ContactMessage.objects.create(reply_email=request.user.email,
+                                                        subject=form.cleaned_data['batch_title'],
                                                         message=form.cleaned_data['batch_description'])
-            send_contact_message_copy(new_message)
+            send_contact_message_copy(request, new_message)
             messages.success(request, _('Your Message has been sent. You received a copy by email.'))
             return redirect('main:upload_options')
 
@@ -42,6 +44,7 @@ def upload_batch_view(request):
 @login_required
 def upload_transcription_view(request):
     """This view shows the upload form."""
+
     form = UploadTranscriptionForm()
     context = {'insts': Institution.objects.all(), 'form': form}
 
@@ -56,6 +59,11 @@ def upload_transcription_view(request):
             new_document.commit_message = 'Initial commit'
             new_document.version_number = 1
 
+            # User is asked if he wants to stay anonymous. (Anonymous = Field is True)
+            # What we save is if we the publish the user. (Anonymous = Field is False)
+            # Therefore we switch values
+            new_document.publish_user = not new_document.publish_user
+
             if new_document.material == '':
                 new_document.material = None
 
@@ -63,9 +71,19 @@ def upload_transcription_view(request):
                 new_document.paging_system = None
 
             new_document.save()
+
+            for language in form.cleaned_data['language'].all():
+                new_document.language.add(language)
+
+            for author in form.cleaned_data['author'].all():
+                new_document.author.add(author)
+
             messages.success(request, _('The document has been created.'))
             return HttpResponseRedirect(reverse('main:thank_you', kwargs={'doc_id': new_document.id}))
         else:
+            messages.error(request, _("There is an error in your form"))
+            context = {'insts': Institution.objects.all(), 'form': form}
+
             print("NOT VALID")
             print(form.errors)
             what = {'csrfmiddlewaretoken': ['a4spkadinbV0bl0tQWhXvacKNCu5HHwIqz4PwkXnzuOEYvJiuaZslgN4CWaaAsGL'],

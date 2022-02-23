@@ -55,7 +55,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('Sent pasword reset mail.'))
 
         if options['which_test'] == "register" or options['which_test'] == "all":
-            mail_utils.send_registration_confirmation_mail(user)
+            mail_utils.send_registration_confirmation_mail(user, "http://domain.of.installati.on/")
             self.stdout.write(self.style.SUCCESS('Sent registration confirmation mail.'))
 
         if options['which_test'] == "batch" or options['which_test'] == "all":
@@ -63,7 +63,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('Sent batch mail.'))
 
         if options['which_test'] == "username" or options['which_test'] == "all":
-            mail_utils.send_username_request_mail(options['to_address'])
+            mail_utils.send_username_request_mail(user)
             self.stdout.write(self.style.SUCCESS('Sent batch mail.'))
 
         self.stdout.write('Test finished.')

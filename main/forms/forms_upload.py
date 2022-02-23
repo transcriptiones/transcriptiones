@@ -10,6 +10,12 @@ from main.widgets import SourceChildSelect
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
+class LanguageModelMultipleChoiceField(forms.ModelMultipleChoiceField):
+
+    def label_from_instance(self, obj):
+        return f'{obj.name_en} ({obj.name_native})'
+
+
 class UploadTranscriptionForm(forms.ModelForm):
     """This is the upload form to upload a new transcribed document."""
     parent_institution = forms.ModelChoiceField(queryset=Institution.objects.all().order_by('institution_name'),
@@ -32,7 +38,7 @@ class UploadTranscriptionForm(forms.ModelForm):
                                             widget=autocomplete.ModelSelect2Multiple(url='main:author-autocomplete'),
                                             required=False)
 
-    language = forms.ModelMultipleChoiceField(queryset=Language.objects.all().order_by('name_native'),
+    language = LanguageModelMultipleChoiceField(queryset=Language.objects.all().order_by('name_native'),
                                               widget=autocomplete.ModelSelect2Multiple(url='main:language-autocomplete'),
                                               required=False)
 
@@ -43,6 +49,9 @@ class UploadTranscriptionForm(forms.ModelForm):
     class Meta:
         model = Document
         exclude = ('institution_utc_add', 'document_slug', 'version_number', 'commit_message')
+        labels = {
+            'title_name': get_popover_html(Document, 'title_name')
+        }
         """
         labels = {
             'title_name': get_popover_html(Document, 'title_name'),
@@ -99,11 +108,6 @@ class RefNumberForm(forms.ModelForm):
     # Add class form-control to each form input for bootstrap integration
     def __init__(self, *args, **kwargs):
         super(RefNumberForm, self).__init__(*args, **kwargs)
-        """for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].help_text,
-                })"""
         self.helper = initialize_form_helper()
 
     class Meta:
@@ -227,10 +231,10 @@ class EditTranscriptForm(forms.ModelForm):
 
 
 class BatchUploadForm(forms.Form):
-    email_address = forms.EmailField(label=_('Your E-Mail Address'),
-                                     help_text=_('We will contact you with this email address.'))
+    batch_title = forms.CharField(label=_('Message Title'),
+                                  help_text=_('What kind of documents do you want to upload?'))
     batch_description = forms.CharField(label=_('Batch Description'),
-                                        help_text=_('Please describe the documents you want to upload.'),
+                                        help_text=_('Please describe the documents you want to upload. Be as specific as possible'),
                                         widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):

@@ -2,15 +2,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django_tables2 import RequestConfig
 
+from main.mail_utils import send_contact_message_copy, send_contact_message_answer
 from main import models
 import zipfile
 import os
 
 from main.filters import UserFilter
+from main.forms.forms_admin import ContactMessageReplyForm
 from main.models import ContactMessage, User
 from main.tables.tables import ContactMessageTable, UserTable
 
@@ -86,8 +88,56 @@ def admin_view(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_inbox_view(request):
-    table = ContactMessageTable(data=ContactMessage.objects.filter(state=0))
+    show_all = request.GET.get('show', 'unanswered')
+    if show_all == 'all':
+        table = ContactMessageTable(data=ContactMessage.objects.all().order_by('-sending_time'))
+    else:
+        table = ContactMessageTable(data=ContactMessage.objects.filter(state=0).order_by('-sending_time'))
     return render(request, 'main/admin/contact_messages.html', {'table': table})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_view(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    message.save()
+    return render(request, 'main/admin/contact_message.html', {'message': message})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_delete(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    messages.success(request, 'Contact message deleted')
+    message.delete()
+    return redirect('main:admin_inbox')
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_answer(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    answer_string = f'Hello {message.reply_email}\n\nThank you for contacting Trancriptiones.\n\n[ENTER MSG]\n\nYour message:\n'
+    for part in message.message.split("\n"):
+        answer_string += ">> " + part + "\n"
+
+    form = ContactMessageReplyForm({'subject': f'Re: {message.subject}',
+                                    'answer': answer_string})
+
+    if request.method == "POST":
+        if 'cancel' in request.POST.keys():
+            return redirect('main:admin_inbox_message', msg_id=msg_id)
+
+        form = ContactMessageReplyForm(request.POST)
+
+        if form.is_valid():
+            if 'submit' in request.POST.keys():
+                message.answer_subject = form.cleaned_data['subject']
+                message.answer = form.cleaned_data['answer']
+                message.state = 1
+                message.save()
+                send_contact_message_answer(request, message)
+                messages.success(request, "The contact message has been answered")
+                return redirect('main:admin_inbox_message', msg_id=msg_id)
+
+    return render(request, 'main/admin/contact_message_answer.html', {'message': message, 'form': form})
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -100,13 +150,7 @@ def admin_users_view(request):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def admin_expert_view(request):
-    return render(request, 'main/admin/admin_expert.html')
-
-
-@user_passes_test(lambda u: u.is_superuser)
 def admin_statistics_view(request):
-
     return render(request, 'main/admin/statistics.html')
 
 

@@ -52,3 +52,5 @@ class ContactForm(forms.Form):
     reply_to = forms.EmailField(label=_('Reply E-Mail'), help_text=_("We are going to reply to this E-Mail address."))
     message = forms.CharField(widget=forms.Textarea, help_text=_('Please be as specific as you can in your message. '
                                                                  'It will help us to answer your questions!'))
+
+

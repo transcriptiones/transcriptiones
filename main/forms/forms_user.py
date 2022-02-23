@@ -1,3 +1,6 @@
+import re
+
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit
 from django import forms
@@ -5,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
 from main.models import User, UserMessage
-from main.forms.forms_helper import initialize_form_helper
+from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class WriteMessageForm(forms.ModelForm):
@@ -67,38 +70,31 @@ class SignUpForm(UserCreationForm):
 
     email = forms.EmailField(label=_('E-Mail'), max_length=255,
                              help_text=_('E-Mail-Address. We will send an activation Link to this address.'))
-    # mark_anonymous = forms.BooleanField(label='Anonym publizieren', required=False)
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
-        """
-        for name in self.fields.keys():
-            if isinstance(self.fields[name], forms.BooleanField):
-                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
-            else:
-                self.fields[name].widget.attrs.update({
-                    'class': 'form-control',
-                    'placeholder': self.fields[name].help_text,
-                    })
-            if name.startswith('password'):
-                self.fields[name].widget.attrs.update({
-                    'placeholder': self.fields[name].label
-                    })"""
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Register'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
+    def clean_user_orcid(self):
+        data = self.cleaned_data['user_orcid']
+        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
+            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
+        return data
+
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'ui_language', 'email', 'password1', 'password2')
-        """
+        fields = ('username', 'first_name', 'last_name', 'user_orcid', 'ui_language', 'email', 'password1', 'password2')
+
         labels = {
             'username': get_popover_html(User, 'username'),
             'first_name': get_popover_html(User, 'first_name'),
             'last_name': get_popover_html(User, 'last_name'),
+            'user_orcid': get_popover_html(User, 'user_orcid'),
             'email': get_popover_html(User, 'email'),
             'mark_anonymous': get_popover_html(User, 'mark_anonymous')
-        }"""
+        }
 
 
 class LoginForm(AuthenticationForm):
@@ -129,13 +125,6 @@ class UserUpdateForm(forms.ModelForm):
     # pass class form-control to form fields
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-        """for name in self.fields.keys():
-            if isinstance(self.fields[name], forms.BooleanField):
-                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
-            else:
-                self.fields[name].widget.attrs.update({
-                    'class': 'form-control',
-                    })"""
 
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Save Changes'), css_class='btn-primary'))
@@ -143,7 +132,12 @@ class UserUpdateForm(forms.ModelForm):
 
     username = forms.CharField(disabled=True, help_text=_('You cannot change your username'))
     email = forms.EmailField(disabled=True, help_text=_('You cannot change your email address'))
-    user_orcid = forms.CharField(required=False,)
+
+    def clean_user_orcid(self):
+        data = self.cleaned_data['user_orcid']
+        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
+            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
+        return data
 
     class Meta:
         model = User
