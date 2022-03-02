@@ -2,20 +2,15 @@ from datetime import date, timedelta
 from typing import Optional
 
 from django.db.models import QuerySet
-from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields, DEDField
+from django_elasticsearch_dsl import Document as ElasticsearchDocument, fields, DEDField, DateField
 from django_elasticsearch_dsl.registries import registry
 from elasticsearch_dsl import Range, DateRange, IntegerRange
+from partial_date import PartialDate
+from rest_framework.fields import DateTimeField
 
 from main.analyzers import transcript_analyzer
 from main.models import Document, Author, RefNumber, Language
 
-
-class IntegerRangeField(DEDField, IntegerRange):
-    pass
-
-
-class DateRangeField(DEDField, DateRange):
-    pass
 
 
 @registry.register_document
@@ -25,8 +20,8 @@ class TranscriptionDocument(ElasticsearchDocument):
     """
     title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
     # title_name = fields.TextField()
-    year = IntegerRangeField()
-    date = DateRangeField()
+    doc_start_date = DateField()
+    doc_end_date = DateField()
     transcription_text = fields.TextField(analyzer=transcript_analyzer)
     # author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
 
@@ -34,7 +29,8 @@ class TranscriptionDocument(ElasticsearchDocument):
                                         fields={"keyword": fields.KeywordField()})
 
     ref_number_title = fields.TextField(attr="parent_ref_number.ref_number_title")
-    language = fields.KeywordField(multi=True)
+    ref_number_name = fields.TextField(attr="parent_ref_number.ref_number_name")
+    # language = fields.KeywordField(multi=True)
     source_type = fields.KeywordField(attr="source_type.type_name")
     material = fields.KeywordField()
     paging_system = fields.KeywordField()
@@ -43,8 +39,6 @@ class TranscriptionDocument(ElasticsearchDocument):
         model = Document
         fields = [
             'place_name',
-            'measurements_length',
-            'measurements_width',
             'pages',
             'illuminated',
             'seal',
@@ -57,6 +51,17 @@ class TranscriptionDocument(ElasticsearchDocument):
             'number_of_shards': 1,
             'number_of_replicas': 0
         }
+
+    def prepare_doc_start_date(self, instance: PartialDate):
+        return instance.doc_start_date.date
+
+    def prepare_doc_end_date(self, instance: PartialDate):
+        if instance.doc_end_date is not None:
+            if type(instance.doc_end_date) == type(str):
+                return None
+            elif type(instance.doc_end_date) == type(PartialDate):
+                return instance.doc_end_date.date
+        return None
 
     @staticmethod
     def prepare_author(instance: Document) -> list:

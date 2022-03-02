@@ -34,11 +34,12 @@ users = [(1, 'sorin', 'sorin.marti@unibas.ch', 'A'),
 
 str_users = "INSERT INTO main_user (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, " \
             "`last_name`, `email`, `email_confirmed`, `is_staff`, `is_active`, `date_joined`, `mark_anonymous`, " \
-            "`different_editor_subscription`, `notification_policy`, `user_orcid`, `message_notification_policy`)\n " \
+            "`different_editor_subscription`, `notification_policy`, `user_orcid`, `message_notification_policy`," \
+            "`ui_language`)\n " \
             "VALUES "
 
 for user in users:
-    if user[1] != 'sorin':
+    if user[1] != 'sorin' and user[1] != 'yvonne' and user[1] != 'dominic':
         email = f'{user[1]}@host.com'
         if user[2] != '':
             email = user[2]
@@ -52,7 +53,7 @@ for user in users:
             isStaff = "1"
 
         str_users += f"({user[0]}, '', NULL, {isSuperuser}, '{user[1]}', '', '', '{email}', " \
-                     f"'1', '{isStaff}', '1', NOW(), '0', '1', '1', '0000-1234-5678', '1'),\n"
+                     f"'1', '{isStaff}', '1', NOW(), '0', '1', '1', '0000-1234-5678', '1', 'de'),\n"
 
 str_users = str_users[:-2]
 str_users += ";"
@@ -79,59 +80,53 @@ for c_name in city_names:
     for i_name in institution_name_parts:
         institution_names.append(i_name + " " + c_name[0])
 
-str_source_type = "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_type_id`) " \
-                  "VALUES (1, 'Historiographische Quellen', NULL),\n " \
-                  "(2, 'Hagiographische Quellen', NULL),\n" \
-                  "(3, 'Rechtsquellen', NULL),\n " \
-                  "(4, 'Verwaltungsschrifttum', NULL),\n" \
-                  "(5, 'Korrespondenz', NULL),\n " \
-                  "(6, 'Liturgische Schriften', NULL),\n" \
-                  "(7, 'Wissenschaftliches Schrifttum', NULL),\n " \
-                  "(8, 'Dichtung', NULL),\n" \
-                  "(9, 'Politische Schriften', NULL),\n " \
-                  "(10, 'Pläne / Karten', NULL),\n" \
-                  "(11, 'Sonstiges', NULL),\n " \
-                  "(12, 'Annalen', 1),\n " \
-                  "(13, 'Chroniken', 1),\n " \
-                  "(14, 'Biographien', 1),\n " \
-                  "(15, 'Reiseberichte', 1),\n " \
-                  "(16, 'Exempla', 1),\n " \
-                  "(17, 'Geschichtsdichtung', 1),\n " \
-                  "(18, 'Selbstzeugnisse', 1),\n " \
-                  "(19, 'Viten', 2),\n " \
-                  "(20, 'Mirakel- und Translationsberichte', 2),\n " \
-                  "(21, 'Diplomatische Urkunden', 3),\n " \
-                  "(22, 'Weltliche Rechtsquellen', 3),\n " \
-                  "(23, 'Kirchliche Rechtsquellen', 3),\n " \
-                  "(24, 'Persönliche Verträge', 3),\n " \
-                  "(25, 'Urbare', 4),\n " \
-                  "(26, 'Lehnbücher', 4),\n " \
-                  "(27, 'Amts- und Rechnungsbücher', 4),\n " \
-                  "(28, 'Bürgerbücher', 4),\n " \
-                  "(29, 'Zunftakten', 4),\n " \
-                  "(30, 'Matrikeln', 4),\n " \
-                  "(31, 'Ratsbücher', 4),\n " \
-                  "(32, 'Briefe', 5),\n " \
-                  "(33, 'Postkarten', 5),\n " \
-                  "(34, 'Messeregelungen', 6),\n " \
-                  "(35, 'Predigten', 6),\n " \
-                  "(36, 'Memorialbücher', 6),\n " \
-                  "(37, 'Predigtanleitungen', 6),\n " \
-                  "(38, 'Visionen', 6),\n " \
-                  "(39, 'Theoretisch-theologische Schriften', 7),\n " \
-                  "(40, 'Dogmatische Schriften', 7),\n " \
-                  "(41, 'Enzyklopädische Schriften und Summen', 7),\n " \
-                  "(42, 'Medizinische Schriften', 7),\n " \
-                  "(43, 'Philosophische Schriften', 7),\n " \
-                  "(44, 'Sonstige nichttheologische Fachliteratur', 7),\n " \
-                  "(45, 'Epik', 8),\n " \
-                  "(46, 'Lyrik', 8),\n " \
-                  "(47, 'Prosa', 8),\n " \
-                  "(48, 'Spiele', 8),\n " \
-                  "(49, 'Traktate', 9),\n " \
-                  "(50, 'Pamphlete', 9),\n " \
-                  "(51, 'Allgemein', 10),\n " \
-                  "(52, 'Notizen', 11);\n"
+str_source_type =   "INSERT INTO `main_sourcetype` (`id`, `type_name`, `parent_type_id`, `type_name_de`, `type_name_fr`, `type_name_it`) VALUES" \
+                    "(1, 'Historiographic Writings', NULL, 'Historiographische Schriften', 'Historiographic Writings', 'Historiographic Writings')," \
+                    "(2, 'Religious Writings', NULL, 'Religiöse Schriften', 'Religious Writings', 'Religious Writings')," \
+                    "(3, 'Legal Documents', NULL, 'Rechtsdokumente', 'Legal Documents', 'Legal Documents')," \
+                    "(4, 'Administrative Writings', NULL, 'Verwaltungsschriften', 'Administrative Writings', 'Administrative Writings')," \
+                    "(5, 'Correspondence', NULL, 'Korrespondenz', 'Correspondence', 'Correspondence')," \
+                    "(6, 'Scholarly Writings', NULL, 'Wissenschaftliche Schriften', 'Scholarly Writings', 'Scholarly Writings')," \
+                    "(7, 'Literature', NULL, 'Dichtung', 'Literature', 'Literature')," \
+                    "(8, 'Political Writings', NULL, 'Politische Schriften', 'Political Writings', 'Political Writings')," \
+                    "(9, 'Other Writings', NULL, 'Übrige Schriften', 'Other Writings', 'Other Writings')," \
+                    "(10, 'Chronicles and Annals', 1, 'Chroniken und Annalen', 'Chronicles and Annals', 'Chronicles and Annals')," \
+                    "(11, 'Ego-Documents', 1, 'Selbstzeugnisse', 'Ego-Documents', 'Ego-Documents')," \
+                    "(12, 'Travelogues', 1, 'Reiseberichte', 'Travelogues', 'Travelogues')," \
+                    "(13, 'History Poetry', 1, 'Geschichtsdichtung', 'History Poetry', 'History Poetry')," \
+                    "(14, 'Other Historiographic Writings', 1, 'Übrige historiographische Schriften', 'Other Historiographic Writings', 'Other Historiographic Writings')," \
+                    "(15, 'Hagiographic Writings', 2, 'Hagiographische Schriften', 'Hagiographic Writings', 'Hagiographic Writings')," \
+                    "(16, 'Liturgic Writings', 2, 'Liturgische Schriften', 'Liturgic Writings', 'Liturgic Writings')," \
+                    "(17, 'Dogmatic writings', 2, 'Dogmatische Schriften', 'Dogmatic writings', 'Dogmatic writings')," \
+                    "(18, 'Sermons', 2, 'Predigten', 'Sermons', 'Sermons')," \
+                    "(19, 'Memorial Writings', 2, 'Gedenkschriftgut', 'Memorial Writings', 'Memorial Writings')," \
+                    "(20, 'Mystic Writings', 2, 'Mystische Schriften', 'Mystic Writings', 'Mystic Writings')," \
+                    "(21, 'Other Religious Writings', 2, 'Übrige religi÷se Schriften', 'Other Religious Writings', 'Other Religious Writings')," \
+                    "(22, 'Diplomatic Documents', 3, 'Diplomatische Urkunden', 'Diplomatic Documents', 'Diplomatic Documents')," \
+                    "(23, 'Legal Documents of Mundane Institutions', 3, 'Rechtsdokumente weltlicher Institutionen', 'Legal Documents of Mundane Institutions', 'Legal Documents of Mundane Institutions')," \
+                    "(24, 'Legal Documents of Religious Institutions', 3, 'Rechtsdokumente kirchlicher Institutionen', 'Legal Documents of Religious Institutions', 'Legal Documents of Religious Institutions')," \
+                    "(25, 'Personal Contracts', 3, 'Persönliche Verträge', 'Personal Contracts', 'Personal Contracts')," \
+                    "(26, 'Other Legal Documents', 3, 'Übrige Rechtsdokumente', 'Other Legal Documents', 'Other Legal Documents')," \
+                    "(27, 'Property Directories', 4, 'Besitzverzeichnisse', 'Property Directories', 'Property Directories')," \
+                    "(28, 'Person Directories', 4, 'Personenverzeichnisse', 'Person Directories', 'Person Directories')," \
+                    "(29, 'Accounting Books', 4, 'Rechnungsbⁿcher', 'Accounting Books', 'Accounting Books')," \
+                    "(30, 'Official Books', 4, 'Amtsbücher', 'Official Books', 'Official Books')," \
+                    "(31, 'Other Administrative Documents', 4, 'Übrige Verwaltungsschriften', 'Other Administrative Documents', 'Other Administrative Documents')," \
+                    "(32, 'Letters', 5, 'Briefe', 'Letters', 'Letters')," \
+                    "(33, 'Postcards', 5, 'Postkarten', 'Postcards', 'Postcards')," \
+                    "(34, 'Other Correspondence', 5, 'Übrige Korrespondenz', 'Other Correspondence', 'Other Correspondence')," \
+                    "(35, 'Theoretical-theological Writings', 6, 'Theoretisch-theologische Schriften', 'Theoretical-theological Writings', 'Theoretical-theological Writings')," \
+                    "(36, 'Encyclopedic Writings', 6, 'Enzyklopädische Schriften', 'Encyclopedic Writings', 'Encyclopedic Writings')," \
+                    "(37, 'Scientific Writings', 6, 'Naturwissenschaftliche Schriften', 'Scientific Writings', 'Scientific Writings')," \
+                    "(38, 'Philosophical Writings', 6, 'Philosophische Schriften', 'Philosophical Writings', 'Philosophical Writings')," \
+                    "(39, 'Other Scholarly Writings', 6, 'Übrige wissenschaftliche Schriften', 'Other Scholarly Writings', 'Other Scholarly Writings')," \
+                    "(40, 'Narrative Fiction', 7, 'Epik', 'Narrative Fiction', 'Narrative Fiction')," \
+                    "(41, 'Poetry', 7, 'Lyrik', 'Poetry', 'Poetry')," \
+                    "(42, 'Drama', 7, 'Dramatik', 'Drama', 'Drama')," \
+                    "(43, 'Argumentative Writings', 8, 'Argumentative Schriften', 'Argumentative Writings', 'Argumentative Writings')," \
+                    "(44, 'Polemic Writings', 8, 'Streitschriften', 'Polemic Writings', 'Polemic Writings')," \
+                    "(45, 'Other Political Writings', 8, 'Übrige politische Schriften', 'Other Political Writings', 'Other Political Writings')," \
+                    "(46, 'Others', 9, 'Übriges', 'Others', 'Others');"
 
 str_institution = "INSERT INTO main_institution (id, institution_name, street, zip_code, " \
                   "city, country, site_url, institution_utc_add, institution_slug, created_by_id) VALUES"
@@ -218,16 +213,18 @@ for filename in os.listdir('dummy_texts'):
     random_material = random.randint(1, 3)
     random_p_system = random.randint(1, 2)
     random_pages = random.randint(1, 30)
-    random_source_type = random.randint(12, 52)
+    random_source_type = random.randint(10, 46)
     random_illuminated = random.randint(0, 1)
     random_seal = random.randint(0, 1)
     random_anonymous = random.randint(0, 1)
     random_number2 = random.randint(0, len(doc_titles) - 1)
     random_number3 = random.randint(0, len(doc_names) - 1)
     random_user = random.randint(1, len(users))
+    random_lw_value = random.randint(10, 45)
+    random_lw_value_2 = random.randint(10, 45)
 
     str_documents += f"(NULL, '{my_uuid}', '{doc_titles[random_number2]} {doc_names[random_number3]}, {document_no}', '{random_year}-01-01 11:15:35.000000', NULL, " \
-                     f"'{city_names[random.randint(0,len(city_names)-1)][0]}', '{random_material}', NULL, NULL, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
+                     f"'{city_names[random.randint(0,len(city_names)-1)][0]}', '{random_material}', {random_lw_value}, {random_lw_value_2}, {random_pages}, {random_p_system}, 'All things transcribed.', '', " \
                      f"'{transcription_text}', NOW(), 'document-title-{document_no}', '1', 'generated', " \
                      f"'1', '{parent_ref_number}', '{random_source_type}', '{random_user}', '{random_anonymous}', NOW(), {random_illuminated}, {random_seal});\n"
     document_no += 1
@@ -238,6 +235,8 @@ str_documents += ";"
 f = open("test_db_init.sql", "w", encoding="utf8")
 f.write("-- This file sets up a test database for the transcriptiones system.\n\n")
 f.write("-- CLEAN DATABASE\n")
+f.write("DELETE FROM main_contactmessage WHERE 1;\n")
+f.write("DELETE FROM main_document_language WHERE 1;\n")
 f.write("DELETE FROM main_document_author WHERE 1;\n")
 f.write("DELETE FROM main_document WHERE 1;\n")
 f.write("DELETE FROM main_refnumber WHERE 1;\n")
@@ -246,8 +245,11 @@ f.write("DELETE FROM main_author WHERE 1;\n")
 f.write("DELETE FROM main_sourcetype WHERE parent_type_id IS NOT NULL;\n")
 f.write("DELETE FROM main_sourcetype WHERE 1;\n")
 f.write("DELETE FROM django_admin_log WHERE 1;\n")
-f.write("DELETE FROM main_user WHERE username != 'sorin';\n")
-f.write("DELETE FROM main_usersubscription WHERE 1;\n\n")
+f.write("DELETE FROM main_usermessage WHERE 1;\n")
+f.write("DELETE FROM main_usernotification WHERE 1;\n")
+f.write("DELETE FROM main_usersubscription WHERE 1;\n")
+f.write("DELETE FROM main_user WHERE username != 'sorin' AND username != 'yvonne' AND username != 'dominic';\n\n")
+
 f.write("-- USERS\n")
 f.write(str_users)
 f.write("\n\n-- AUTHORS\n")

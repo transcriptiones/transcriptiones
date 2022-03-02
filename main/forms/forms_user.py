@@ -79,6 +79,10 @@ class SignUpForm(UserCreationForm):
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']
+        # Orcid can be empty
+        if data == '':
+            return data
+        # If it is not, it must have the correct form
         if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
             raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
         return data
@@ -100,10 +104,6 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Login'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
@@ -135,6 +135,10 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']
+        # Orcid can be empty
+        if data == '':
+            return data
+        # If it is not, it must have the correct form
         if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
             raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
         return data

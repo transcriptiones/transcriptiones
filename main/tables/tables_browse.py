@@ -81,11 +81,15 @@ class SourceTypeTable(TranscriptionesTable):
         row_attrs = default_row_attrs
 
     def __init__(self, *args, **kwargs):
+        self.language = kwargs.pop("language")
         self.base_columns['no_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                    label_class='far fa-file-alt',
                                                                                    title=_(
                                                                                        'Number of documents in this institution'))
         super(SourceTypeTable, self).__init__(*args, **kwargs)
+
+    def render_type_name(self, value, record):
+        return record.get_translated_name(self.language)
 
     def render_no_of_documents(self, value, record):
         return record.document_set.count()

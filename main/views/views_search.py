@@ -1,17 +1,19 @@
+from datetime import date
+
 from django.contrib import messages
+from django.db.models import Min
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import FormView, ListView
 from django_elasticsearch_dsl_drf.pagination import Paginator
-from django_tables2 import RequestConfig
 from django.utils.translation import ugettext_lazy as _
 from main.documents import TranscriptionDocument
 from main.forms.forms_search import Attribute, AdvancedSearchForm
 from main.tables.tables_document import DocumentResultTable
-from main.models import Document
+from main.models import Document, SourceType
 
-FULLTEXT_FIELDS = ["transcription_text", "title_name", "ref_number_title"]
+FULLTEXT_FIELDS = ["title_name", "transcription_text", "ref_number_title", "ref_number_name"]
 
 
 def test_search_2(request):
@@ -31,18 +33,29 @@ def test_search_2(request):
             can_filter = True
             search_result = TranscriptionDocument.search()
             if not form.cleaned_data['query'] == '':
-                search_result = search_result.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
+                search_result = search_result.query("multi_match", query="*"+form.cleaned_data['query'].lower()+"*", fields=FULLTEXT_FIELDS)
             # The main search field is empty
             else:
                 if not form.cleaned_data['title_name'] == '':
-                    search_result = search_result.query("match", title_name=form.cleaned_data['title_name'])
+                    search_type = "wildcard"
+                    search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
+                    if form.cleaned_data['title_name_exact'] == 'True':
+                        search_type = "match"
+                        search_term = form.cleaned_data['title_name'].lower()
+                    search_result = search_result.query(search_type, title_name=search_term)
                 # Search AND title are empty
                 else:
                     if not form.cleaned_data['ref_number_title'] == '':
-                        search_result = search_result.query("match", title_name=form.cleaned_data['ref_number_title'])
+                        search_type = "wildcard"
+                        search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
+                        if form.cleaned_data['ref_number_title_exact'] == 'True':
+                            search_type = "match"
+                            search_term = form.cleaned_data['ref_number_title'].lower()
+                        search_result = search_result.query(search_type, ref_number_title=search_term)
+                    # Search AND title AND ref_number_title are empty
                     else:
                         if request.GET.get('query', 'None') == '':
-                            messages.warning(request, _('Please enter at least a search query or a title or a location.'))
+                            messages.warning(request, _('Please enter at least a search query or a title or a reference title.'))
                             context = {'form': form,  # The search form
                                        'total': 0,  # Num of total search results
                                        'page_links': None,
@@ -56,17 +69,17 @@ def test_search_2(request):
             if can_filter:
                 if not form.cleaned_data['title_name'] == '':
                     search_type = "wildcard"
-                    search_term = "*"+form.cleaned_data['title_name']+"*"
+                    search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
                     if form.cleaned_data['title_name_exact'] == 'True':
                         search_type = "match"
-                        search_term = form.cleaned_data['title_name']
+                        search_term = form.cleaned_data['title_name'].lower()
                     search_result = search_result.filter(search_type, title_name=search_term)
                 if not form.cleaned_data['ref_number_title'] == '':
                     search_type = "wildcard"
-                    search_term = "*" + form.cleaned_data['ref_number_title'] + "*"
+                    search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
                     if form.cleaned_data['ref_number_title_exact'] == 'True':
                         search_type = "match"
-                        search_term = form.cleaned_data['ref_number_title']
+                        search_term = form.cleaned_data['ref_number_title'].lower()
                     search_result = search_result.filter(search_type, ref_number_title=search_term)
                 if not form.cleaned_data['location'] == '':
                     search_type = "wildcard"
@@ -134,8 +147,11 @@ def test_search_2(request):
 
             for pp in range(min_page, max_page+1):
                 pagination_link_list.append((pp, my_url+'page='+str(pp)))
+        else:
+            messages.error(request, _("There are errors in your search form"))
 
     context = {'form': form,                # The search form
+               'form_data': get_document_filter_data(request),
                'total': total_results,      # Num of total search results
                'page_links': pagination_link_list,
                'current_page': current_page,
@@ -143,6 +159,34 @@ def test_search_2(request):
                'result': enriched_result}   # Search result tuples: (elasticsearch-Document, Django-db-object)
     return render(request, "main/search/search_view_2.html", context)
 
+
+def get_document_filter_data(request):
+    """Creates and returns a dict with all the data needed for the manually created
+    document filter form."""
+
+    latest_year = date.today().year
+    try:
+        earliest_doc = Document.objects.filter().values_list('doc_start_date').annotate(Min('doc_start_date')).order_by('doc_start_date')[0]
+        earliest_year = earliest_doc[0].date.year
+    except (IndexError, ValueError) as error:
+        earliest_year = 1000
+
+    form_data = {'filter_applied': 'title_name' in request.GET.keys(),
+                 'min': earliest_year,
+                 'max': latest_year,
+                 'set_min': request.GET.get('doc_start_date', earliest_year),
+                 'set_max': request.GET.get('doc_end_date', latest_year),
+                 'source_types': list()}
+    for st in SourceType.objects.filter(parent_type=None):
+        new_line = {'name': st.get_translated_name(request.LANGUAGE_CODE),
+                    'value': str(st.id),
+                    'children': list()}
+        for cst in SourceType.objects.filter(parent_type=st.id):
+            new_line['children'].append({'name': cst.get_translated_name(request.LANGUAGE_CODE),
+                                         'value': str(cst.id)})
+        form_data['source_types'].append(new_line)
+
+    return form_data
 
 def search_box_redirect(request):
     if request.method == "POST":

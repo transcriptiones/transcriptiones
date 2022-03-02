@@ -4,10 +4,10 @@
 {%  block email_contents %}
     Hi {{ user.username }}!<br/><br/>
 
-    A warm welcome from the transcriptiones team. Please click the following Link or copy it in your browser to finalize your registration on {{ domain }}.
-    <br/>
-    <a href="http://{{ domain }}{% url 'main:activate' uidb64=uid token=token %}">{% translate 'Click to finalize registration' %}</a>
-    <br/>
-    <small>(http://{{ domain }}{% url 'main:activate' uidb64=uid token=token %})</small>
+    A warm welcome from the transcriptiones team. Please click the following Link or copy it in your browser to finalize your registration on transcriptiones.
+    <br/><br/>
+    <strong><a href="{{ domain }}{% url 'main:activate' uidb64=uid token=token %}">{% translate 'Click to finalize registration' %}</a></strong>
+    <br/><br/><br/>
+    <small>({% translate 'Or copy this link into your browser:' %}&nbsp;{{ domain }}{% url 'main:activate' uidb64=uid token=token %})</small>
 {% endblock %}
 

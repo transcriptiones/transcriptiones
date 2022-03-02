@@ -1,6 +1,26 @@
 from django.test import TestCase
+from django.test import Client
 
 from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification
+
+class UserTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create(username='soma',
+                                   first_name='Sorin',
+                                   last_name='Marti',
+                                   email='soma@you.de',
+                                   is_staff=False,
+                                   is_active=True)
+        user.set_password('12345')
+        user.save()
+
+    def test_login(self):
+        c = Client()
+        logged_in = c.login(username='soma', password='12345')
+        self.assertEqual(logged_in, True)
+
+        logged_in2 = c.login(username='Soma', password='12345')
+        self.assertEqual(logged_in, False)
 
 
 class AnimalTestCase(TestCase):

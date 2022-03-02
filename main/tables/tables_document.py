@@ -2,6 +2,8 @@ import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django_tables2 import A
+
 from main.tables.tables_base import TranscriptionesTable, default_row_attrs
 from main.models import Document
 
@@ -36,9 +38,6 @@ class DocumentTable(MinimalDocumentTable):
     document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
 
 
-
-
-
 class DocumentUserHistoryTable(TranscriptionesTable):
     """The DocumentUserHistoryTable shows a list of documents"""
 
@@ -66,9 +65,12 @@ class DocumentVersionHistoryTable(TranscriptionesTable):
         fields = ("version_number", "title_name", "activity_type", "document_utc_add", "commit_message", "submitted_by")
 
     version_number = tables.Column(verbose_name="V.")
-    title_name = tables.LinkColumn()
+    title_name = tables.LinkColumn('main:document_legacy_detail', args=[A('parent_ref_number__holding_institution__institution_slug'),
+                                                                        A('parent_ref_number__ref_number_slug'),
+                                                                        A('document_slug'),
+                                                                        A('version_number')])
     activity_type = tables.Column(orderable=False, accessor='id', verbose_name=_("Action"))
-    document_utc_add = tables.Column()
+    document_utc_add = tables.Column(verbose_name=_('Last Change'))
     commit_message = tables.Column(orderable=False)
     submitted_by = tables.Column(orderable=False)
 
@@ -77,6 +79,12 @@ class DocumentVersionHistoryTable(TranscriptionesTable):
             return _("Upload")
         else:
             return _("Edit")
+
+    def render_submitted_by(self, value, record):
+        if record.publish_user:
+            return value
+        else:
+            return _('Anonymous')
 
 
 class DocumentResultTable(tables.Table):
@@ -107,7 +115,7 @@ class DocumentResultTable(tables.Table):
     def render_transcription_text(self, value, record):
         import re
         found_idx = [m.start() for m in re.finditer(self.query, value)]
-        print(found_idx)
+        # print(found_idx)
 
         snippets = list()
         for idx in found_idx:

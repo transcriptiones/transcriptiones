@@ -1,11 +1,13 @@
 from datetime import date
 
+from django.contrib import messages
 from django.db.models import Min
 from django.shortcuts import get_object_or_404, render
+from django.utils.translation import get_language
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
 from django_filters.views import FilterView
-
+from django.utils.translation import ugettext_lazy as _
 import main.model_info as m_info
 from main.models import Institution, RefNumber, Document, UserSubscription, SourceType, Author
 from main.tables.tables_base import TitleValueTable
@@ -92,7 +94,7 @@ def source_type_detail_view(request, pk):
     if selected_source_type.parent_type is None:
         parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
         children_source_type_list = SourceType.objects.filter(parent_type=selected_source_type).order_by('type_name')
-        table = SourceTypeTable(data=children_source_type_list)
+        table = SourceTypeTable(data=children_source_type_list, language=get_language())
         RequestConfig(request).configure(table)
         context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
         return render(request, "main/details/source_type_parent_detail.html", context=context)
@@ -219,10 +221,17 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         # if url specifies version_number, get this specific version, else get the active version
         if 'version_nr' in self.kwargs:
             version = self.kwargs.get('version_nr')
+            print("VERSION", version)
+            print("QUERYSET", queryset)
         else:
             version = queryset.get(active=True).version_number
 
-        return get_object_or_404(queryset, version_number=version)
+        try:
+            result = queryset.get(document_slug=document, version_number=version)
+        except Document.DoesNotExist:
+            messages.error(self.request, _("The transcription version you requested is not available."))
+
+        return result
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -343,5 +352,5 @@ def get_document_filter_data(request, doc_filter):
 
 
 def transcription_view(request, doc_id):
-    document = Document.objects.get(id=doc_id)
+    document = Document.all_objects.get(id=doc_id)
     return render(request, "main/details/transcription.html", {'document': document})

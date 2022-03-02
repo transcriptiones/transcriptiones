@@ -83,27 +83,9 @@ def upload_transcription_view(request):
         else:
             messages.error(request, _("There is an error in your form"))
             context = {'insts': Institution.objects.all(), 'form': form}
+            #print("NOT VALID")
+            #print(form.errors)
 
-            print("NOT VALID")
-            print(form.errors)
-            what = {'csrfmiddlewaretoken': ['a4spkadinbV0bl0tQWhXvacKNCu5HHwIqz4PwkXnzuOEYvJiuaZslgN4CWaaAsGL'],
-                    'title_name': ['My First Document'],
-                    'parent_institution': ['1'],
-                    'parent_ref_number': ['1'],
-                    'transcription_scope': ['yxcyc'],
-                    'doc_start_date': ['1916'],
-                    'doc_end_date': [''],
-                    'place_name': ['Basel'],
-                    'transcription_text': ['<p>yxcyxcyxcyxcyxc</p>\r\n'],
-                    'author': ['302'],
-                    'material': [''],
-                    'measurements_length': [''],
-                    'measurements_width': [''],
-                    'pages': [''],
-                    'paging_system': [''],
-                    'illuminated': ['unknown'],
-                    'seal': ['unknown'],
-                    'comments': ['']}
 
     return render(request, 'main/upload/create_document.html', context)
 

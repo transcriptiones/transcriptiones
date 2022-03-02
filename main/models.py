@@ -12,6 +12,8 @@ from django_countries.fields import CountryField
 from languages_plus.models import Language
 from ckeditor.fields import RichTextField
 
+from main.mail_utils import send_instant_notification_mail
+
 
 class Institution(models.Model):
     """An institution is a physical location which holds documents. These documents have a reference number.
@@ -542,7 +544,8 @@ class Document(models.Model):
                                                 message=_(f'The document changed {self.title_name} changed.\n\n'
                                                           f'View the document <a href="{self.get_absolute_url()}">here</a>.'))
                 if d_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
-                    print("Immediate Mail")
+                    # send_instant_notification_mail()
+                    print("Instant mail")
 
             # Gets all ref_number subscriptions for the current document
             ref_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
@@ -553,6 +556,9 @@ class Document(models.Model):
                                                 subject=_('A Reference-Number changed'),
                                                 message=_(f'The reference number "{self.parent_ref_number.ref_number_name}" changed.\n\n'
                                                           f'View the details <a href="{ref_number_url}">here</a>.'))
+                if r_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
+                    # send_instant_notification_mail()
+                    print("Instant mail")
 
             usr_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.USER,
                                                                 object_id=old_user_id)
@@ -562,6 +568,9 @@ class Document(models.Model):
                                                     subject=_('A User changed'),
                                                     message=_(f'The user "{self.submitted_by.username}" changed.\n\n'
                                                               f'View the details <a href="{reverse("main:public_profile", kwargs={"username": self.submitted_by.username})}">here</a>.'))
+                    if u_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
+                        # send_instant_notification_mail()
+                        print("Instant mail")
 
         super().save(force_update=force_update, *args, **kwargs)
 
@@ -661,7 +670,10 @@ class User(AbstractBaseUser, PermissionsMixin):
                                          help_text=_('If selected, your documents will be published anonymously by '
                                                      'default. Can be changed on a document basis.'))
 
-    user_orcid = models.CharField(verbose_name=_('Orcid'), default='', max_length=255,
+    user_orcid = models.CharField(verbose_name=_('Orcid'),
+                                  default='',
+                                  blank=True,
+                                  max_length=255,
                                   help_text=_('User id from https://orcid.org/'))
 
     notification_policy = models.IntegerField(verbose_name=_('Subscription Notification policy'),

@@ -1,5 +1,10 @@
 /* This file contains general CSS valid for all transcriptiones pages. */
 
+.move-left {
+    width: auto;
+    box-shadow: none;
+  }
+
 /****************************************/
 /* General Styling, Fonts, etc. */
 body,

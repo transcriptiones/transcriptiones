@@ -1,5 +1,6 @@
 from dal import autocomplete
 from django.db.models import Q
+from django.utils.translation import get_language
 
 from main.models import Institution, RefNumber, SourceType, Author, Language
 
@@ -36,6 +37,14 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
 class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Source Type parents. """
 
+    def get_result_label(self, result):
+        language = get_language()
+        return result.get_translated_name(language)
+
+    def get_selected_result_label(self, result):
+        language = get_language()
+        return result.get_translated_name(language)
+
     def get_queryset(self):
         qs = SourceType.objects.filter(parent_type=None).order_by('type_name')
 
@@ -46,6 +55,14 @@ class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
 
 class SourceTypeChildAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Source Type children.  Needs a preselected parent source type in order to work."""
+
+    def get_result_label(self, result):
+        language = get_language()
+        return result.get_translated_name(language)
+
+    def get_selected_result_label(self, result):
+        language = get_language()
+        return result.get_translated_name(language)
 
     def get_queryset(self):
         qs = SourceType.objects.exclude(parent_type=None).order_by('type_name')

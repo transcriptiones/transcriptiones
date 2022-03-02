@@ -1,5 +1,8 @@
+from uuid import UUID
+
+from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
 
 from main.models import Document
 
@@ -77,23 +80,42 @@ def get_ref_number_info(ref_number):
     return title_value_list(data)
 
 
+def get_last_change_string(document):
+    if document.publish_user:
+        profile_url = reverse("main:public_profile", kwargs={"username": document.submitted_by.username})
+        update_text = mark_safe(f'<small>by <a href="{profile_url}">{document.submitted_by}</a> '
+                                f'at {document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+    else:
+        update_text = mark_safe(f'<small>by anonymous '
+                                f'at {document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+    return update_text
+
+
+def get_upload_string(document):
+    initial_doc = Document.all_objects.get(document_id=document.document_id, version_number=1)
+    return get_last_change_string(initial_doc)
+
+
 def get_document_info_overview(document):
     data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
              mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
              mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
             (get_verbose_field_name(document, 'transcription_scope'), document.transcription_scope),
-            (get_verbose_field_name(document, 'document_utc_update'), document.document_utc_update),
+            (_("Last Change"), get_last_change_string(document)),
+            (_("Initial Upload"), get_upload_string(document)),
             ]
     return title_value_list(data)
 
 
 def get_document_meta_edit_info(document):
+    updating_user = _("Anonymous")
     data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
              mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
              mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
-            (get_verbose_field_name(document, 'document_utc_update'), document.document_utc_update),
+            (_("Last Change"), get_last_change_string(document)),
+            (_("Initial Upload"), get_upload_string(document)),
             ]
     return title_value_list(data)
 
@@ -111,10 +133,10 @@ def get_document_info_metadata(document):
             (get_verbose_field_name(document, 'place_name'), document.place_name),
             (_("Creation Period"), period_string),
             (get_verbose_field_name(document, 'language'),
-             ", ".join(document.language.all().values_list('name_en', flat=True))),
+             ", ".join(document.language.all().values_list('name_native', flat=True))),
             (get_verbose_field_name(document, 'source_type'),
-             mark_safe(" / ".join([f'<a href="{document.source_type.parent_type.get_absolute_url()}">{document.source_type.parent_type.type_name}</a>',
-                                   f'<a href="{document.source_type.get_absolute_url()}">{document.source_type.type_name}</a>']))),
+             mark_safe(" / ".join([f'<a href="{document.source_type.parent_type.get_absolute_url()}">{document.source_type.parent_type.get_translated_name(get_language())}</a>',
+                                   f'<a href="{document.source_type.get_absolute_url()}">{document.source_type.get_translated_name(get_language())}</a>']))),
             ]
     return title_value_list(data)
 
@@ -146,8 +168,6 @@ def get_document_info_comments(document):
     date = document.document_utc_update
 
     data = [(get_verbose_field_name(document, 'comments'), document.comments),
-            (_('Uploaded'),
-             mark_safe(f'By {user}, on {date}'))
             ]
 
     return title_value_list(data)

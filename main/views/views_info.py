@@ -17,7 +17,11 @@ def set_language_view(request, language):
     translation.activate(language)
     request.LANGUAGE_CODE = language
 
-    response = HttpResponseRedirect(reverse('main:start'))
+    redirect_url = request.META.get('HTTP_REFERER')
+    if redirect_url is None:
+        redirect_url = reverse('main:start')
+
+    response = HttpResponseRedirect(redirect_url)
 
     if hasattr(request, 'session'):
         request.session['django_language'] = language

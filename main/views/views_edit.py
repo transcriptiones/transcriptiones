@@ -72,6 +72,9 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
             document.paging_system = updated_data.paging_system
             document.illuminated = updated_data.illuminated
             document.seal = updated_data.seal
+            document.commit_message = updated_data.commit_message
+            document.submitted_by = request.user
+            document.publish_user = not request.user.is_anonymous
 
             document.save()
             messages.success(request, _('The metadata of the document has been updated.'))

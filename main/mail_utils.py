@@ -6,7 +6,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from main.tokens import account_activation_token
-from main.models import ContactMessage, UserMessage, User
 from transcriptiones import settings
 from transcriptiones.settings import NO_REPLY_EMAIL
 from lxml import html
@@ -30,12 +29,11 @@ def get_base_render_object(request, subject):
     }
 
 
-def create_message(request, subject, paragraphs):
+def create_message(request, subject, message):
     render_object = get_base_render_object(request, subject)
-    render_object["mail_paragraphs"] = paragraphs
+    render_object["mail_paragraphs"] = [message,]
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
-    plain_message = "\n".join(paragraphs)
-    plain_message = plain_message.replace("<br/>", "\n")
+    plain_message = message.replace("<br/>", "\n")
     tree = html.fromstring(plain_message)
     plain_message = clean_html(tree).text_content().strip()
     return plain_message, html_message
@@ -47,67 +45,76 @@ def send_newsletter_subscribe_mail(request, email_address):
     subject = _("Thank you for subscribing to our Newsletter")
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 [_("Thank you for subscribing to transcriptiones.ch. "
-                                                    "We will send you the latest news.")])
+                                                 _("Thank you for subscribing to transcriptiones.ch. "
+                                                    "We will send you the latest news."))
     send_transcriptiones_mail(subject, plain_message, html_message, email_address)
 
 
-def send_user_message_mail(request, message: UserMessage):
-    """Sends a mail after a person subscribed to transcriptiones """
+def send_user_message_mail(request, message):
+    """Sends a mail after a person subscribed to transcriptiones
+        Takes a UserMessage
+     """
 
     subject = _("You received a message")
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 [_(f"You received a message from {message.sending_user.username}.")])
+                                                 _(f"You received a message from {message.sending_user.username}."))
     send_transcriptiones_mail(subject, plain_message, html_message, message.receiving_user.email)
 
 
-def send_contact_message_copy(request, msg: ContactMessage):
-    """Send a contact message copy to the email address sending it."""
+def send_contact_message_copy(request, msg):
+    """Send a contact message copy to the email address sending it.
+        Takes a ContactMessage
+    """
 
     subject = _("Thank you for contacting us")
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 ["We received the following message from you. "
-                                                  "We will contact you as soon as possible. ",
-                                                  "Please do not reply to this e-mail.",
-                                                  "<br/>Your Message:<br/>"
-                                                  f"Subject: <b>{msg.subject}</b><br/>"
-                                                  f"Message: {msg.message}"])
+                                                 "We received the following message from you. "
+                                                 "We will contact you as soon as possible.<br/>"
+                                                 "Please do not reply to this e-mail."
+                                                 "<br/>Your Message:<br/>"
+                                                 f"Subject: <b>{msg.subject}</b><br/>"
+                                                 f"Message: {msg.message}")
     send_transcriptiones_mail(subject, plain_message, html_message, msg.reply_email)
 
 
-def send_contact_message_answer(request, msg: ContactMessage):
-    """Send a contact message copy anser to the email address sending it."""
+def send_contact_message_answer(request, msg):
+    """Send a contact message copy anser to the email address sending it.
+        Takes a ContactMessage
+    """
 
     subject = msg.answer_subject
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 [msg.answer.replace("\n", "<br/>")])
+                                                 msg.answer.replace("\n", "<br/>"))
     send_transcriptiones_mail(subject, plain_message, html_message, msg.reply_email)
 
 
-def send_username_request_mail(request, user: User):
-    """A user might forget his username. He can retrieve it by email by entering his email address."""
+def send_username_request_mail(request, user):
+    """A user might forget his username. He can retrieve it by email by entering his email address.
+        Takes a User
+    """
 
     subject = _('Transcriptiones: Your User Name')
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 [_(f"Your Username is: {user.username}")])
+                                                 _(f"Your Username is: {user.username}"))
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_password_reset_mail(request, user: User):
+def send_password_reset_mail(request, user):
+    """Takes a User"""
     subject = _('Transcriptiones: Password Reset')
     url = ''
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 [_(f"Your Username is: {user.username}. Goto {url} to reset your password.")])
+                                                 _(f"Your Username is: {user.username}. Goto {url} to reset your password."))
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
     plain_message = _(f'Your Username is: {user.username}. Goto LINK to reset your password.')
-    render_object = get_base_render_object(_('Password reset'))
+    render_object = get_base_render_object(request, _('Password reset'))
     render_object["mail_paragraphs"].append(plain_message)
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
@@ -121,7 +128,7 @@ def send_registration_confirmation_mail(request, user):
 
     plain_message = _('Dummy content')      # TODO
 
-    render_object = get_base_render_object(_('Activate your account'))
+    render_object = get_base_render_object(request, _('Activate your account'))
     render_object["mail_paragraphs"].append(plain_message)
     render_object["user"] = user
     render_object["domain"] = host
@@ -132,31 +139,31 @@ def send_registration_confirmation_mail(request, user):
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_daily_notification_mail(user):
+def send_daily_notification_mail(request, user):
     """Sends a mail with the daily notifications of a user."""
     subject = _('Daily digest of your notifications')
     plain_message = _('These are your unread notifications:')   # TODO print notifications
-    render_object = get_base_render_object(_('Today\'s changes'))
+    render_object = get_base_render_object(request, _('Today\'s changes'))
     render_object["mail_paragraphs"].append(plain_message)
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_weekly_notification_mail(user):
+def send_weekly_notification_mail(request, user):
     """Sends a mail with the daily notifications of a user."""
     subject = _('Weekly digest of your notifications')
     plain_message = _('These are your unread notifications:')   # TODO print notifications
-    render_object = get_base_render_object(_('This week\'s changes'))
+    render_object = get_base_render_object(request, _('This week\'s changes'))
     render_object["mail_paragraphs"].append(plain_message)
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_instant_notification_mail(user, notification):
+def send_instant_notification_mail(request, user, notification):
     """Sends a notification email."""
     subject = _('A Message from transcriptiones.ch')
     plain_message = _('You received a message:')                # TODO print message
-    render_object = get_base_render_object(_('You received a message'))
+    render_object = get_base_render_object(request, _('You received a message'))
     render_object["mail_paragraphs"].append(plain_message)
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
@@ -184,7 +191,3 @@ def send_transcriptiones_mail(subject, plain_message, html_message, to_email):
         new_message.attach(banner_image)
 
     new_message.send()
-
-
-
-

@@ -17,7 +17,7 @@
 
 {% block content %}
     {% card 'search_form' _('Search') %}
-        {% crispy form %}
+        {% include 'main/search/search_form.html' %}
     {% endcard %}
 
     {% card 'search_result' _('Search Result') %}
@@ -112,4 +112,21 @@
             {% translate "Please enter a search term above. It needs to be at least 3 characters long."  %}
         {% endif %}
     {% endcard %}
+{% endblock %}
+
+{% block extrascripts %}
+     <script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js">
+</script>
+
+    <script>
+        window.addEventListener('range-changed', (e) => {
+            const data = e.detail;
+            document.getElementById('doc_start_date').value = data.minRangeValue;
+            document.getElementById('doc_end_date').value = data.maxRangeValue;
+            console.log(data)
+            // data = { sliderId: null, minRangeValue: 0, maxRangeValue: 1000 }
+        });
+    </script>
 {% endblock %}

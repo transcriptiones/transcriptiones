@@ -191,7 +191,7 @@ def request_username_view(request):
         if form.is_valid():
             try:
                 user = User.objects.get(email=form.cleaned_data['email_of_user'])
-                send_username_request_mail(user)
+                send_username_request_mail(request, user)
                 return redirect('main:username_request_done')
             except User.DoesNotExist:
                 messages.error(_('This e-mail address is not registered.'))

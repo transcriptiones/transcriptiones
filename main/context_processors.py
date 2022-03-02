@@ -30,7 +30,7 @@ def user_notifications(request):
         new_notifications = new_notifications[:3]
 
         cnt = ContactMessage.objects.filter(state=0).count()
-        print(cnt, request.user.is_superuser)
+        # print(cnt, request.user.is_superuser)
         total_new_notifications = new_messages.count() + new_user_notifications.count()
 
         if request.user.is_superuser and cnt > 0:
