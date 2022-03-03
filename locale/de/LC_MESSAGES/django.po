@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 15:56+0200\n"
+"POT-Creation-Date: 2022-03-02 09:57+0100\n"
 "PO-Revision-Date: 2021-09-20 13:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,22 +19,22 @@ msgstr ""
 "Language: de\n"
 "X-Generator: Poedit 3.0\n"
 
-#: .\transcriptiones\settings.py:135
+#: .\transcriptiones\settings.py:148
 msgid "--- (Select Country) ---"
 msgstr ""
 
-#: .\transcriptiones\settings.py:147
+#: .\transcriptiones\settings.py:161
 msgid "English"
 msgstr "Englisch"
 
-#: .\transcriptiones\settings.py:148
+#: .\transcriptiones\settings.py:162
 msgid "German"
 msgstr "Deutsch"
 
-#: .\transcriptiones\settings.py:149
+#: .\transcriptiones\settings.py:163
 msgid "French"
 msgstr "Französisch"
 
-#: .\transcriptiones\settings.py:150
+#: .\transcriptiones\settings.py:164
 msgid "Italian"
 msgstr "Italienisch"

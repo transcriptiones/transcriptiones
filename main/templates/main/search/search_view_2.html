@@ -30,7 +30,13 @@
                 <a href="{% url 'main:document_detail' entry.1.parent_ref_number.holding_institution.institution_slug entry.1.parent_ref_number.ref_number_slug entry.1.document_slug %}" class="no-deco-link">
                 <div class="card bg-light border-dark" style="margin-bottom: 5px;">
                   <div class="card-header bg-light">
-                      {{ entry.1.parent_ref_number.holding_institution }} / {{ entry.1.parent_ref_number }} -
+                      {{ entry.1.parent_ref_number.holding_institution }}
+                      /
+                      {% if entry.0.meta.highlight.ref_number_name %}
+                          {{ entry.0.meta.highlight.ref_number_name.0|safe }} -
+                      {% else %}
+                          {{ entry.1.parent_ref_number }} -
+                      {% endif %}
                       {% if entry.0.meta.highlight.ref_number_title %}
                           {{ entry.0.meta.highlight.ref_number_title.0|safe }}
                       {% else %}

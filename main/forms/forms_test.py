@@ -12,6 +12,8 @@ class RefnModelForm(BSModalModelForm):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
 
+    holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'))
+
     class Meta:
         model = RefNumber
         fields = [

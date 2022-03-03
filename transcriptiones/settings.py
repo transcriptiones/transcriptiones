@@ -219,7 +219,79 @@ CKEDITOR_CONFIGS = {
             ['SpecialChar', 'Smiley', 'About'],
             ['RemoveFormat', 'Source'],
             ['Maximize']
-        ]
+        ],
+
+        'specialChars': ['\u0363',  # combining latin small letter a
+                         'E\u0363',
+                         'e\u0363',
+                         'I\u0363',
+                         'i\u0363',
+                         'O\u0363',
+                         'o\u0363',
+                         'U\u0363',
+                         'u\u0363',
+                         'V\u0363',
+                         'v\u0363',
+                         '\u0364',  # combining latin small letter e
+                         'A\u0364',
+                         'a\u0364',
+                         'I\u0364',
+                         'i\u0364',
+                         'O\u0364',
+                         'o\u0364',
+                         'U\u0364',
+                         'u\u0364',
+                         'V\u0364',
+                         'v\u0364',
+                         '\u0365',  # combining latin small letter i
+                         'A\u0365',
+                         'a\u0365',
+                         'E\u0365',
+                         'e\u0365',
+                         'O\u0365',
+                         'o\u0365',
+                         'U\u0365',
+                         'u\u0365',
+                         'V\u0365',
+                         'v\u0365',
+                         '\u0366',  # combining latin small letter o
+                         'A\u0366',
+                         'a\u0366',
+                         'E\u0366',
+                         'e\u0366',
+                         'I\u0366',
+                         'i\u0366',
+                         'U\u0366',
+                         'u\u0366',
+                         'V\u0366',
+                         'v\u0366',
+                         '\u0367',  # combining latin small letter u
+                         'A\u0367',
+                         'a\u0367',
+                         'E\u0367',
+                         'e\u0367',
+                         'I\u0367',
+                         'i\u0367',
+                         'O\u0367',
+                         'o\u0367',
+                         '\u036E',  # combining latin small letter v
+                         'A\u036E',
+                         'a\u036E',
+                         'E\u036E',
+                         'e\u036E',
+                         'I\u036E',
+                         'i\u036E',
+                         'O\u036E',
+                         'o\u036E',
+                         '\u00D0',  # latin capital letter eth
+                         '\u00F0',  # latin small letter eth
+                         '\u00DE',  # latin capital letter thorn
+                         '\u00FE',  # latin small letter thorn
+                         '\u00C6',  # latin capital letter AE
+                         '\u00E6',  # latin small letter ae
+                         '\u00D8',  # latin capital letter O with stroke
+                         '\u00F8',  # latin small letter O with stroke
+                         ]
     }
 }
 

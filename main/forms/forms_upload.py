@@ -49,10 +49,7 @@ class UploadTranscriptionForm(forms.ModelForm):
     class Meta:
         model = Document
         exclude = ('institution_utc_add', 'document_slug', 'version_number', 'commit_message')
-        labels = {
-            'title_name': get_popover_html(Document, 'title_name')
-        }
-        """
+
         labels = {
             'title_name': get_popover_html(Document, 'title_name'),
             'parent_institution': 'todo',
@@ -70,7 +67,6 @@ class UploadTranscriptionForm(forms.ModelForm):
             'transcription_text': get_popover_html(Document, 'transcription_text'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
-       """
 
 
 class InstitutionForm(BSModalModelForm):

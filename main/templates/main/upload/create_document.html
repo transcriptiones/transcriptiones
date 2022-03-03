@@ -137,7 +137,7 @@
             "<div ",
             "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
             "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-            "Success: Inst was created. (oh yeah)!",
+            "Success: Institution was created.",
             "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
             "<span aria-hidden='true'>&times;</span>",
             "</button>",
@@ -168,7 +168,7 @@
           function reinstantiateModalForms() {
             createBookAsyncModalForm();
             console.debug('added INSTI');
-            $(':input[name=parent_institution]').val('1').trigger('change');
+            $('input[name=parent_institution]').val('1').trigger('change');
           }
 
           // Hide message
@@ -179,6 +179,12 @@
   </script>
 
     <script>
+        $("#create-refn-async").click( function()
+           {
+             console.debug("Whaat?")
+           }
+        );
+
       $(function () {
           // Create reference number asynchronous button
           // message
@@ -186,7 +192,7 @@
             "<div ",
             "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
             "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-            "Success: REFN was created. (oh yeah)!",
+            "Success: Reference Number was created.",
             "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
             "<span aria-hidden='true'>&times;</span>",
             "</button>",

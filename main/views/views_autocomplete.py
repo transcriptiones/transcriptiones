@@ -20,6 +20,12 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Reference Numbers. Used for autocomplete dropdown in upload form. Queryset gets ordered by
     the ref numbers's name. Needs a preselected institution in order to work."""
 
+    def get_result_label(self, result):
+        return f"{result.ref_number_name} - {result.ref_number_title}"
+
+    def get_selected_result_label(self, result):
+        return f"{result.ref_number_name} - {result.ref_number_title}"
+
     def get_queryset(self):
         qs = RefNumber.objects.all().order_by('ref_number_name')
         selected_institution = self.forwarded.get('parent_institution', None)
@@ -30,7 +36,7 @@ class RefNumberAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(holding_institution=selected_institution)
 
         if self.q:
-            qs = qs.filter(ref_number_title__icontains=self.q, ref_number_name__icontains=self.q)
+            qs = qs.filter(Q(ref_number_title__icontains=self.q) | Q(ref_number_name__icontains=self.q) )
         return qs
 
 

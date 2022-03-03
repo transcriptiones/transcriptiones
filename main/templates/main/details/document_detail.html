@@ -24,6 +24,13 @@
 {% block content %}
 
     {% card 'doc_detail_overview' _('Overview') %}
+        {% if newest %}
+            <div class="rounded" style="background: #f8d7da; padding: 5px; margin-bottom: 20px;">
+                {% blocktranslate with url=newest.get_absolute_url %}
+                    This is not the <a href="{{ url }}">newest version</a> of this document.
+                {% endblocktranslate %}
+            </div>
+        {% endif %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
@@ -41,9 +48,11 @@
     {% endcard %}
 
     {% card 'doc_detail_options' _('Options') %}
-        <div align="center">
-            <a class="btn btn-primary btn-sm" href="{% url 'main:edit_transcript' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Transcription' %}</a>
-            <a class="btn btn-primary btn-sm" href="{% url 'main:edit_meta' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Metadata' %}</a>
+        <div class="text-center">
+            {% if not newest %}
+                <a class="btn btn-primary btn-sm" href="{% url 'main:edit_transcript' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Transcription' %}</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:edit_meta' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Edit Metadata' %}</a>
+            {% endif %}
             <a class="btn btn-primary btn-sm" href="{% url 'main:document_history' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'View Version History' %}</a>
             <a class="btn btn-primary btn-sm" href="{% url 'main:document_export' document.parent_ref_number.holding_institution.institution_slug document.parent_ref_number.ref_number_slug document.document_slug %}" role="button">{% translate 'Export Document' %}</a>
         </div>

@@ -32,5 +32,8 @@ def initialize_form_helper():
 def get_popover_html(model, field_name, content=None):
     label = model._meta.get_field(field_name).verbose_name
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
-    ret_value = _(label) + f'&nbsp;<span class="badge badge-secondary" type="button" data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">?</span>'
+    ret_value = _(label) + f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
+                           f'<i class="fas fa-info-circle"></i>' \
+                           f'</span>'
+    # ret_value = _(label) + f'<i class="fas fa-info-circle" data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}"></i>'
     return mark_safe_lazy(ret_value)

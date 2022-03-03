@@ -15,6 +15,7 @@ class MinimalDocumentTable(TranscriptionesTable):
         row_attrs = default_row_attrs
 
     title_name = tables.LinkColumn()
+    doc_start_date = tables.Column(orderable=False, verbose_name=_("Creation Period"))
 
     def render_document_utc_update(self, value, record):
         if record.publish_user:
@@ -25,6 +26,12 @@ class MinimalDocumentTable(TranscriptionesTable):
             return mark_safe(f'<small>by anonymous '
                              f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
 
+    def render_doc_start_date(self, value, record):
+        ret_value = value.format('%Y', '%m/%Y', '%m/%d/%Y')
+        if record.doc_end_date is not None:
+            ret_value += " - " + record.doc_end_date.format('%Y', '%m/%Y', '%m/%d/%Y')
+        return ret_value
+
 
 class DocumentTable(MinimalDocumentTable):
     """The DocumentTable shows a list of documents"""
@@ -33,7 +40,6 @@ class DocumentTable(MinimalDocumentTable):
         fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
 
     place_name = tables.Column(orderable=False)
-    doc_start_date = tables.Column(orderable=False)
     source_type = tables.Column(orderable=False)
     document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
 

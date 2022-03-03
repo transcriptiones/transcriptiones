@@ -81,6 +81,13 @@ def test_search_2(request):
                         search_type = "match"
                         search_term = form.cleaned_data['ref_number_title'].lower()
                     search_result = search_result.filter(search_type, ref_number_title=search_term)
+                if not form.cleaned_data['ref_number_name'] == '':
+                    search_type = "wildcard"
+                    search_term = "*" + form.cleaned_data['ref_number_name'].lower() + "*"
+                    if form.cleaned_data['ref_number_name_exact'] == 'True':
+                        search_type = "match"
+                        search_term = form.cleaned_data['ref_number_name'].lower()
+                    search_result = search_result.filter(search_type, ref_number_name=search_term)
                 if not form.cleaned_data['location'] == '':
                     search_type = "wildcard"
                     search_term = "*" + form.cleaned_data['location'] + "*"
@@ -102,6 +109,7 @@ def test_search_2(request):
             # SET Highlights
             search_result = search_result.highlight_options(order='score')
             search_result = search_result.highlight('title_name')
+            search_result = search_result.highlight('ref_number_name')
             search_result = search_result.highlight('ref_number_title')
             search_result = search_result.highlight('place_name')
             search_result = search_result.highlight('transcription_text')
@@ -116,7 +124,7 @@ def test_search_2(request):
                 try:
                     doc = Document.objects.get(id=q.meta.id)
                     enriched_result.append([q, doc])
-                    print("Q:", q, q.title_name, q.meta.id) # , q.meta.score
+                    # print("Q:", q, q.title_name, q.meta.id) # , q.meta.score
                     """
                     for hl in q.meta.highlight:
                         print("H", q.meta.highlight[hl])"""
@@ -230,11 +238,11 @@ class SearchView(FormView, ListView):
     def form_valid(self, form):
         self.queryset = TranscriptionDocument.search()
         if form.cleaned_data['query']:
-            print("QUERY: ", form.cleaned_data['query'])
+            # print("QUERY: ", form.cleaned_data['query'])
             self.queryset = self.queryset.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
 
         for tr_filter in form.cleaned_data['filters']:
-            print(tr_filter)
+            # print(tr_filter)
             self.queryset = tr_filter.apply(self.queryset)
         self.queryset = self.queryset.to_queryset()
 

@@ -256,6 +256,7 @@ class AdvancedSearchForm(forms.Form):
     query = forms.CharField(required=False, label=_('Full Text Search'), help_text=_('Search within the title and contents of documents.'))
     title_name = forms.CharField(required=False, label=_('Document Title'))
     ref_number_title = forms.CharField(required=False, label=_('Reference Title'))
+    ref_number_name = forms.CharField(required=False, label=_('Reference Name'))
     source_type = forms.ModelChoiceField(required=False, queryset=SourceType.objects.all())
     location = forms.CharField(required=False, label=_('Location'))
     seal = forms.BooleanField(required=False, label=_('Document must have seal'))
@@ -263,6 +264,7 @@ class AdvancedSearchForm(forms.Form):
 
     title_name_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
     ref_number_title_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
+    ref_number_name_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
     location_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
 
     year_from = forms.IntegerField(required=False, label=_('Published Earliest Year'))
@@ -279,6 +281,8 @@ class AdvancedSearchForm(forms.Form):
                 Column('title_name_exact', css_class='form-group col-md-1 mb-0'),
                 Column('ref_number_title', css_class='form-group col-md-5 mb-0'),
                 Column('ref_number_title_exact', css_class='form-group col-md-1 mb-0'),
+                Column('ref_number_name', css_class='form-group col-md-5 mb-0'),
+                Column('ref_number_name_exact', css_class='form-group col-md-1 mb-0'),
                 css_class='form-row'
             ),
             Row(

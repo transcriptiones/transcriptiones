@@ -1,4 +1,5 @@
 {% load i18n %}
+
 <form action="{{ request.path }}" method="get" class="form-group">
     <!-- Fulltext -->
     <div class="form-row">
@@ -9,23 +10,36 @@
     </div>
     <!-- Title / Reference number -->
     <div class="form-row">
-        <div class="form-group col-md-5">
-            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Title' %}" value="{{ request.GET.title_name }}"/>
-            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Title' %}</small>
+        <div class="form-group col-md-11">
+            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Document Title' %}" value="{{ request.GET.title_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Document Title' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="title_name" class="form-control move-left" value="{{ request.GET.title_name }}"/>
+            <input type="checkbox" name="title_name_exact" class="form-control move-left" value="{{ request.GET.title_name_exact }}"/>
+            <small id="titleHelp" class="form-text text-muted">
+                {% translate 'Exact' %}
+                {% include 'main/search/exact_tooltip.html' %}
+            </small>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Name' %}" value="{{ request.GET.ref_number_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Name' %}</small>
+        </div>
+        <div class="form-group col-md-1">
+            <input type="checkbox" name="ref_number_name_exact" class="form-control move-left" value="{{ request.GET.ref_number_name_exact }}"/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
             </small>
         </div>
         <div class="form-group col-md-5">
-            <input type="text" name="place_name" class="form-control" placeholder="{% translate 'Search by Reference Number or Title' %}" value="{{ request.GET.place_name }}"/>
-            <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Number or Title' %}</small>
+            <input type="text" name="ref_number_title" class="form-control" placeholder="{% translate 'Search by Reference Title' %}" value="{{ request.GET.ref_number_title }}"/>
+            <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="title_name" class="form-control move-left" value="{{ request.GET.title_name }}"/>
+            <input type="checkbox" name="ref_number_title_exact" class="form-control move-left" value="{{ request.GET.ref_number_title_exact }}"/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -46,11 +60,11 @@
             <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Filter by Source Type' %}</small>
         </div>
         <div class="form-group col-md-5">
-            <input type="text" name="place_name" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.place_name }}"/>
+            <input type="text" name="location" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.location }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="title_name" class="form-control move-left" value="{{ request.GET.title_name }}"/>
+            <input type="checkbox" name="location_exact" class="form-control move-left" value="{{ request.GET.location_exact }}"/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -98,46 +112,3 @@
         </div>
     </div>
 </form>
-
-<form method="get"> <div id="div_id_query" class="form-group">
-    <label for="id_query" class="">
-                Full Text Search
-    </label> <div class="">
-    <input type="text" name="query" value="Title" class="textinput textInput form-control" id="id_query"> <small id="hint_id_query" class="form-text text-muted">Search within the title and contents of documents.</small> </div> </div> <div class="form-row form-row"> <div class="form-group col-md-5 mb-0"> <div id="div_id_title_name" class="form-group"> <label for="id_title_name" class="">
-                Document Title
-            </label> <div class=""> <input type="text" name="title_name" class="textinput textInput form-control" id="id_title_name"> </div> </div> </div> <div class="form-group col-md-1 mb-0"> <div id="div_id_title_name_exact" class="form-group"> <label for="id_title_name_exact" class="">
-                Exact
-            </label> <div class=""> <select name="title_name_exact" class="select form-control custom-select" id="id_title_name_exact"> <option value="True" selected="">Yes</option> <option value="False">No</option>
-
-</select> </div> </div> </div> <div class="form-group col-md-5 mb-0"> <div id="div_id_ref_number_title" class="form-group"> <label for="id_ref_number_title" class="">
-                Reference Title
-            </label> <div class=""> <input type="text" name="ref_number_title" class="textinput textInput form-control" id="id_ref_number_title"> </div> </div> </div> <div class="form-group col-md-1 mb-0"> <div id="div_id_ref_number_title_exact" class="form-group"> <label for="id_ref_number_title_exact" class="">
-                Exact
-            </label> <div class=""> <select name="ref_number_title_exact" class="select form-control custom-select" id="id_ref_number_title_exact"> <option value="True" selected="">Yes</option> <option value="False">No</option>
-
-</select> </div> </div> </div> </div>
-<div class="form-row form-row"> <div class="form-group col-md-6 mb-0"> <div id="div_id_source_type" class="form-group"> <label for="id_source_type" class="">
-                Source type
-            </label> <div class=""> <select name="source_type" class="select form-control custom-select" id="id_source_type"> <option value="" selected="">---------</option> <option value="1">Historiographic Writings</option> <option value="2">Religious Writings</option> <option value="3">Legal Documents</option> <option value="4">Administrative Writings</option> <option value="5">Correspondence</option> <option value="6">Scholarly Writings</option> <option value="7">Literature</option> <option value="8">Political Writings</option> <option value="9">Other Writings</option> <option value="10">Chronicles and Annals</option> <option value="11">Ego-Documents</option> <option value="12">Travelogues</option> <option value="13">History Poetry</option> <option value="14">Other Historiographic Writings</option> <option value="15">Hagiographic Writings</option> <option value="16">Liturgic Writings</option> <option value="17">Dogmatic writings</option> <option value="18">Sermons</option> <option value="19">Memorial Writings</option> <option value="20">Mystic Writings</option> <option value="21">Other Religious Writings</option> <option value="22">Diplomatic Documents</option> <option value="23">Legal Documents of Mundane Institutions</option> <option value="24">Legal Documents of Religious Institutions</option> <option value="25">Personal Contracts</option> <option value="26">Other Legal Documents</option> <option value="27">Property Directories</option> <option value="28">Person Directories</option> <option value="29">Accounting Books</option> <option value="30">Official Books</option> <option value="31">Other Administrative Documents</option> <option value="32">Letters</option> <option value="33">Postcards</option> <option value="34">Other Correspondence</option> <option value="35">Theoretical-theological Writings</option> <option value="36">Encyclopedic Writings</option> <option value="37">Scientific Writings</option> <option value="38">Philosophical Writings</option> <option value="39">Other Scholarly Writings</option> <option value="40">Narrative Fiction</option> <option value="41">Poetry</option> <option value="42">Drama</option> <option value="43">Argumentative Writings</option> <option value="44">Polemic Writings</option> <option value="45">Other Political Writings</option> <option value="46">Others</option>
-
-</select> </div> </div> </div> <div class="form-group col-md-5 mb-0"> <div id="div_id_location" class="form-group"> <label for="id_location" class="">
-                Location
-            </label> <div class=""> <input type="text" name="location" class="textinput textInput form-control" id="id_location"> </div> </div> </div> <div class="form-group col-md-1 mb-0"> <div id="div_id_location_exact" class="form-group"> <label for="id_location_exact" class="">
-                Exact
-            </label> <div class=""> <select name="location_exact" class="select form-control custom-select" id="id_location_exact"> <option value="True" selected="">Yes</option> <option value="False">No</option>
-
-</select> </div> </div> </div> </div>
-<div class="form-row form-row"> <div class="form-group col-md-4 mb-0"> <div id="div_id_year_from" class="form-group"> <label for="id_year_from" class="">
-                Published Earliest Year
-            </label> <div class=""> <input type="number" name="year_from" class="numberinput form-control" id="id_year_from"> </div> </div> </div> <div class="form-group col-md-4 mb-0"> <div id="div_id_year_to" class="form-group"> <label for="id_year_to" class="">
-                Published Latest Year
-            </label> <div class=""> <input type="number" name="year_to" class="numberinput form-control" id="id_year_to"> </div> </div> </div> <div class="form-group col-md-4 mb-0"> <div id="div_id_manuscript_pages" class="form-group"> <label for="id_manuscript_pages" class="">
-                Minimum No. of Pages
-            </label> <div class=""> <input type="number" name="manuscript_pages" class="numberinput form-control" id="id_manuscript_pages"> </div> </div> </div> </div>
-<div class="form-row form-row"> <div class="form-group col-md-6 mb-0"> <div class="form-group"> <div id="div_id_seal" class="custom-control custom-checkbox"> <input type="checkbox" name="seal" class="checkboxinput custom-control-input" id="id_seal"> <label for="id_seal" class="custom-control-label">
-                    Document must have seal
-                </label> </div> </div> </div> <div class="form-group col-md-6 mb-0"> <div class="form-group"> <div id="div_id_illuminated" class="custom-control custom-checkbox"> <input type="checkbox" name="illuminated" class="checkboxinput custom-control-input" id="id_illuminated"> <label for="id_illuminated" class="custom-control-label">
-                    Document must have illuminations
-                </label> </div> </div> </div> </div>
-<input type="submit" name="submit" value="Search" class="btn btn-primary btn-primary" id="submit-id-submit">
-<input type="button" name="clear" value="Clear Form" class="btn btn-secondary" id="button-id-clear" onclick="window.location.href=&quot;/search&quot;"> </form>

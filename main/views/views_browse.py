@@ -221,8 +221,6 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         # if url specifies version_number, get this specific version, else get the active version
         if 'version_nr' in self.kwargs:
             version = self.kwargs.get('version_nr')
-            print("VERSION", version)
-            print("QUERYSET", queryset)
         else:
             version = queryset.get(active=True).version_number
 

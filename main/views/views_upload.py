@@ -119,6 +119,12 @@ class ModalCreateRefNumberView(BSModalCreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    """def get_initial(self):
+        initial = {
+            'ref_number_name': self.request.GET.get('name', 'blank value')
+        }
+        return initial"""
+
 
 def institution_dropdown_view(request):
     """Creates a SELECT view for the institutions"""
