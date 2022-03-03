@@ -545,7 +545,8 @@ class Document(models.Model):
                                                           f'View the document <a href="{self.get_absolute_url()}">here</a>.'))
                 if d_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
                     # send_instant_notification_mail()
-                    print("Instant mail")
+                    # TODO print("Instant mail")
+                    pass
 
             # Gets all ref_number subscriptions for the current document
             ref_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.REF_NUMBER,
@@ -558,7 +559,8 @@ class Document(models.Model):
                                                           f'View the details <a href="{ref_number_url}">here</a>.'))
                 if r_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
                     # send_instant_notification_mail()
-                    print("Instant mail")
+                    # TODO print("Instant mail")
+                    pass
 
             usr_subscriptions = UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.USER,
                                                                 object_id=old_user_id)
@@ -570,7 +572,8 @@ class Document(models.Model):
                                                               f'View the details <a href="{reverse("main:public_profile", kwargs={"username": self.submitted_by.username})}">here</a>.'))
                     if u_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
                         # send_instant_notification_mail()
-                        print("Instant mail")
+                        # TODO print("Instant mail")
+                        pass
 
         super().save(force_update=force_update, *args, **kwargs)
 

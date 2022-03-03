@@ -112,7 +112,7 @@ def source_type_detail_view(request, pk):
 def source_type_group_detail_view(request, pk):
     """Show documents of a a parent source type (e.g. The docs of all source types which have a common parent
     source type."""
-    print("PK", pk)
+    # print("PK", pk)
     selected_source_type = SourceType.objects.get(id=pk)
     parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
     document_list = Document.objects.filter(source_type__in=parent_source_type_list)

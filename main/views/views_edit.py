@@ -38,7 +38,8 @@ def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
                                                                                     'ref_slug': ref_slug,
                                                                                     'doc_slug': doc_slug}))
         else:
-            print("invalid")
+            # TODO print("invalid")
+            pass
 
     context = {'document': document, 'form': form}
     return render(request, 'main/upload/edit_document_transcription.html', context)
@@ -82,7 +83,7 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
                                                                                 'ref_slug': ref_slug,
                                                                                 'doc_slug': doc_slug}))
         else:
-            print(form.errors)
+            # TODO print(form.errors)
             messages.error(request, 'FORM INVALID')
 
     return render(request, 'main/upload/edit_meta.html', context)

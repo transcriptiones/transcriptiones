@@ -21,6 +21,6 @@ def send_daily_notification_email():
 
 
 def send_weekly_notification_email():
-    print("Executing a cron job...")
+    # print("Executing a cron job...")
     time.sleep(10)
-    print("Done!")
+    # print("Done!")
