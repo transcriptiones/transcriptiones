@@ -21,6 +21,8 @@
     {% endcard %}
 
     {% card 'search_result' _('Search Result') %}
+        {% get_current_language as LANGUAGE_CODE %}
+
         {% if result %}
             {% include 'main/search/pagination.html' %}
             {% blocktranslate %}
@@ -70,12 +72,12 @@
                       {% endif %}
                   </div>
                   <div class="card-footer">
-                      <span class="search-result-title">Source Type:</span> <i>{% get_translated_source_type_name entry.1.source_type.parent_type 'de' %} &#5125;
+                      <span class="search-result-title">Source Type:</span> <i>{% get_translated_source_type_name entry.1.source_type.parent_type LANGUAGE_CODE %} &#5125;
                       {% if entry.0.meta.highlight.source_type %}
                           {# entry.0.meta.highlight.source_type.0|safe #}
-                          <em>{% get_translated_source_type_name entry.1.source_type 'de' %}</em>
+                          <em>{% get_translated_source_type_name entry.1.source_type LANGUAGE_CODE %}</em>
                       {% else %}
-                          {% get_translated_source_type_name entry.1.source_type 'de' %}
+                          {% get_translated_source_type_name entry.1.source_type LANGUAGE_CODE %}
                       {% endif %}</i> |
                       <span class="search-result-title">Production Location:</span> <i>
                       {% if entry.0.meta.highlight.place_name %}
