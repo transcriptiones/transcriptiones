@@ -11,6 +11,7 @@ from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class LanguageModelMultipleChoiceField(forms.ModelMultipleChoiceField):
+    """Form field for Language objects which renders the label to display the english and native name"""
 
     def label_from_instance(self, obj):
         return f'{obj.name_en} ({obj.name_native})'
@@ -39,8 +40,9 @@ class UploadTranscriptionForm(forms.ModelForm):
                                             required=False)
 
     language = LanguageModelMultipleChoiceField(queryset=Language.objects.all().order_by('name_native'),
-                                              widget=autocomplete.ModelSelect2Multiple(url='main:language-autocomplete'),
-                                              required=False)
+                                                widget=autocomplete.ModelSelect2Multiple(
+                                                    url='main:language-autocomplete'),
+                                                required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -87,7 +89,7 @@ class InstitutionForm(BSModalModelForm):
             'country',
             'site_url',
             'institution_slug']
-        """
+
         labels = {
             'institution_name': get_popover_html(Institution, 'institution_name'),
             'street': get_popover_html(Institution, 'street'),
@@ -95,7 +97,6 @@ class InstitutionForm(BSModalModelForm):
             'country': get_popover_html(Institution, 'country'),
             'site_url': get_popover_html(Institution, 'site_url')
         }
-        """
 
 
 class RefNumberForm(forms.ModelForm):
@@ -113,18 +114,17 @@ class RefNumberForm(forms.ModelForm):
             'ref_number_name',
             'ref_number_title',
             'collection_link']
-        """
+
         labels = {
             'holding_institution': get_popover_html(RefNumber, 'holding_institution'),
             'ref_number_name': get_popover_html(RefNumber, 'ref_number_name'),
             'ref_number_title': get_popover_html(RefNumber, 'ref_number_title'),
             'collection_link': get_popover_html(RefNumber, 'collection_link'),
         }
-        """
 
 
-# Form for editing Metadata
 class EditMetaForm(forms.ModelForm):
+    """Form for editing Metadata"""
     source_type_parent = forms.ModelChoiceField(
         queryset=SourceType.objects.filter(parent_type__isnull=True).order_by('type_name'),
         required=True,
@@ -178,22 +178,14 @@ class EditMetaForm(forms.ModelForm):
 
 
 class EditTranscriptForm(forms.ModelForm):
-    
+    """Form to edit the transcript"""
     # pass .form-control to form fields
     def __init__(self, *args, **kwargs):
         super(EditTranscriptForm, self).__init__(*args, **kwargs)
-        for name in self.fields:
-            if isinstance(self.fields[name], forms.BooleanField):
-                self.fields[name].widget.attrs.update({'class': 'form-check-input'})
-            else:
-                self.fields[name].widget.attrs.update({
-                    'class': 'form-control',
-                    'placeholder': self.fields[name].help_text,
-                    })
 
-    # Override save to prevent m2m-fields from being cleared
     def save(self, commit=True):
-        # Get the unsaved DocumentTitle instance and their m2m-relations
+        """Override save to prevent m2m-fields from being cleared
+        Get the unsaved DocumentTitle instance and their m2m-relations"""
         instance = forms.ModelForm.save(self, False)
         authors = instance.author.all()
         languages = instance.language.all()
@@ -235,7 +227,6 @@ class BatchUploadForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(BatchUploadForm, self).__init__(*args, **kwargs)
-
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
         self.helper.form_method = 'POST'

@@ -1,18 +1,17 @@
+"""forms_user contains Form classes to write user messages and to set the users preferences"""
 import re
-
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
-
 from main.models import User, UserMessage
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 
 class WriteMessageForm(forms.ModelForm):
-    """Form to edit user message notification policy."""
+    """Form to write a message to another user."""
 
     def __init__(self, *args, **kwargs):
         rec_user = kwargs.pop('user', None)
@@ -40,6 +39,7 @@ class WriteMessageForm(forms.ModelForm):
 
 class UserMessageOptionsForm(forms.ModelForm):
     """Form to edit user message notification policy."""
+
     def __init__(self, *args, **kwargs):
         super(UserMessageOptionsForm, self).__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
@@ -52,6 +52,7 @@ class UserMessageOptionsForm(forms.ModelForm):
 
 
 class UserSubscriptionOptionsForm(forms.ModelForm):
+    """Form to edit user notification policy."""
 
     def __init__(self, *args, **kwargs):
         super(UserSubscriptionOptionsForm, self).__init__(*args, **kwargs)
@@ -59,7 +60,6 @@ class UserSubscriptionOptionsForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', _('Save'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
-    """Form to edit user notification policy."""
     class Meta:
         model = User
         fields = ('notification_policy', 'different_editor_subscription')
@@ -102,6 +102,8 @@ class SignUpForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
+    """Login form for transcriptiones users"""
+
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
@@ -110,22 +112,17 @@ class LoginForm(AuthenticationForm):
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):
+    """Form to change a user's password"""
+
     def __init__(self, *args, **kwargs):
         super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].label,
-                })
-
         self.helper = initialize_form_helper()
 
 
 class UserUpdateForm(forms.ModelForm):
-    # pass class form-control to form fields
+    """Form to update user information"""
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Save Changes'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
@@ -149,33 +146,25 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class CustomPasswordResetForm(PasswordResetForm):
-    # pass class form-control to form fields
+    """Form to reset a users password"""
     def __init__(self, *args, **kwargs):
         super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                })
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Reset Password'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
 
 class CustomSetPasswordForm(SetPasswordForm):
-    # pass class form-control to form fields
+    """Form to set a password"""
     def __init__(self, *args, **kwargs):
         super(CustomSetPasswordForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': self.fields[name].label,
-                })
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Reset Password'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
 
 class RequestUsernameForm(forms.Form):
+    """Form to request a user's username by entering his e-mail address"""
     email_of_user = forms.EmailField(label=_('Your E-Mail Address'), required=True,
                                      help_text=_('Please enter the e-mail address you registered with. '
                                                  'We will send you an e-mail with your username.'))

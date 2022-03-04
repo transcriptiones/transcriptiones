@@ -1,19 +1,17 @@
 """Contains all the tables for the transcriptiones app."""
 import django_tables2 as tables
-import django.utils.html as utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django_tables2 import A
-
 from main.models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification, \
     ContactMessage, SourceType, Author
 from main.tables.tables_base import TranscriptionesTable, default_table_attrs, default_row_attrs
 
 
 class UserTable(TranscriptionesTable):
-    """The UserTable shows a list of users. It features the user's state (active/inactive | user/staff/admin) and displays options to
-    activate/deactivate users and change their privileges."""
+    """The UserTable shows a list of users. It features the user's state (active/inactive | user/staff/admin) and
+    displays options to activate/deactivate users and change their privileges."""
 
     def __init__(self, *args, **kwargs):
         temp_user = kwargs.pop("current_user", None)
@@ -28,7 +26,8 @@ class UserTable(TranscriptionesTable):
     state = tables.Column(accessor='id', verbose_name=_("User State"), orderable=False)
     options = tables.Column(accessor='id', verbose_name=_("Options"), orderable=False)
 
-    def render_state(self, value, record):
+    @staticmethod
+    def render_state(value, record):
         activity_state = record.get_user_activity_badge()
         user_state = record.get_user_state_badge()
 
@@ -69,9 +68,9 @@ class UserTable(TranscriptionesTable):
             activate_url = reverse('main:admin_activate_user', kwargs={'user_id': record.id})
             options = f'<a href="{activate_url}" class="btn btn-sm btn-primary" title="{activate_title}"><i class="fas fa-toggle-on"></i></a>'
 
-        make_staff_url = reverse('main:admin_set_user_staff', kwargs={'user_id': record.id})
+        """make_staff_url = reverse('main:admin_set_user_staff', kwargs={'user_id': record.id})
         make_user_url = reverse('main:admin_set_user_user', kwargs={'user_id': record.id})
-        message_url = reverse('main:message_user', kwargs={'username': record.username})
+        message_url = reverse('main:message_user', kwargs={'username': record.username})"""
 
         return mark_safe(options)
 
@@ -83,28 +82,31 @@ class ContactMessageTable(TranscriptionesTable):
         model = ContactMessage
         fields = ("state", "reply_email", "subject", "sending_time")
 
-    state = tables.Column(verbose_name='Answered', orderable=False)
-    reply_email = tables.Column(verbose_name='from', orderable=False)
+    state = tables.Column(verbose_name=_('Answered'), orderable=False)
+    reply_email = tables.Column(verbose_name=_('from'), orderable=False)
     subject = tables.LinkColumn('main:admin_inbox_message', args=[A('pk')], orderable=False)
-    sending_time = tables.Column(verbose_name='sent', orderable=False)
-    # options = tables.Column(accessor='id', verbose_name="", orderable=False)
+    sending_time = tables.Column(verbose_name=_('sent'), orderable=False)
 
-    def render_reply_email(self, value, record):
+    @staticmethod
+    def render_reply_email(value, record):
         if record.state == 0:
             return mark_safe(f"<strong>{value}</strong>")
         return value
 
-    def render_subject(self, value, record):
+    @staticmethod
+    def render_subject(value, record):
         if record.state == 0:
             return mark_safe(f"<strong>{value}</strong>")
         return value
 
-    def render_sending_time(self, value, record):
+    @staticmethod
+    def render_sending_time(value, record):
         if record.state == 0:
             return mark_safe(f'<strong>{value.strftime("%b %d %Y %H:%M:%S")}</strong>')
         return value.strftime("%b %d %Y %H:%M:%S")
 
-    def render_state(self, value, record):
+    @staticmethod
+    def render_state(value, record):
         if value == 0:
             return mark_safe(f'<span style="color: red;">&cross;</span>')
         return mark_safe(f'<span style="color: green;">&check;</span>')
@@ -136,17 +138,20 @@ class UserMessageTable(TranscriptionesTable):
     class Meta(TranscriptionesTable.Meta):
         pass
 
-    def render_sending_user(self, value, record):
+    @staticmethod
+    def render_sending_user(value, record):
         if record['viewing_state'] == 0:
             return mark_safe(f"<strong>{value}</strong>")
         return value
 
-    def render_subject(self, value, record):
+    @staticmethod
+    def render_subject(value, record):
         if record['viewing_state'] == 0:
             return mark_safe(f"<strong>{value}</strong>")
         return value
 
-    def render_sending_time(self, value, record):
+    @staticmethod
+    def render_sending_time(value, record):
         if record['viewing_state'] == 0:
             return mark_safe(f'<strong>{value.strftime("%b %d %Y %H:%M:%S")}</strong>')
         return value.strftime("%b %d %Y %H:%M:%S")
@@ -167,7 +172,8 @@ class UserSubscriptionTable(tables.Table):
     object_id = tables.Column(orderable=False, verbose_name=_('Subscription object'))
     options = tables.Column(orderable=False, accessor='id', verbose_name=_('Options'))
 
-    def render_subscription_type(self, value, record):
+    @staticmethod
+    def render_subscription_type(value, record):
         badge_class = "secondary"
         if value == UserSubscription.SubscriptionType.USER.label:
             badge_class = "success"
@@ -178,7 +184,8 @@ class UserSubscriptionTable(tables.Table):
 
         return mark_safe(f'<span class="badge badge-{badge_class}">{value}</span>')
 
-    def render_object_id(self, value, record):
+    @staticmethod
+    def render_object_id(value, record):
         if record.subscription_type == UserSubscription.SubscriptionType.REF_NUMBER:
             ref_number = RefNumber.objects.get(id=value)
             return ref_number.ref_number_name + ": " + ref_number.ref_number_title
@@ -196,7 +203,8 @@ class UserSubscriptionTable(tables.Table):
             return user.username
         return value
 
-    def render_options(self, value, record):
+    @staticmethod
+    def render_options(value, record):
         url = '#'
         url_view = '#'
         if record.subscription_type == UserSubscription.SubscriptionType.REF_NUMBER:

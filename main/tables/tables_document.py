@@ -1,3 +1,4 @@
+"""tables_document contains table classes to display documents. There are different tables for different views"""
 import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -9,6 +10,8 @@ from main.models import Document
 
 
 class MinimalDocumentTable(TranscriptionesTable):
+    """Minimal document table. Features the document title, its creation location and creation period
+    and its last update information"""
     class Meta(TranscriptionesTable.Meta):
         model = Document
         fields = ("title_name", "place_name", "doc_start_date", "document_utc_update")
@@ -17,7 +20,8 @@ class MinimalDocumentTable(TranscriptionesTable):
     title_name = tables.LinkColumn()
     doc_start_date = tables.Column(orderable=False, verbose_name=_("Creation Period"))
 
-    def render_document_utc_update(self, value, record):
+    @staticmethod
+    def render_document_utc_update(value, record):
         if record.publish_user:
             profile_url = reverse("main:public_profile", kwargs={"username": record.submitted_by.username})
             return mark_safe(f'<small>by <a href="{profile_url}">{record.submitted_by}</a> '
@@ -26,7 +30,8 @@ class MinimalDocumentTable(TranscriptionesTable):
             return mark_safe(f'<small>by anonymous '
                              f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
 
-    def render_doc_start_date(self, value, record):
+    @staticmethod
+    def render_doc_start_date(value, record):
         ret_value = value.format('%Y', '%m/%Y', '%m/%d/%Y')
         if record.doc_end_date is not None:
             ret_value += " - " + record.doc_end_date.format('%Y', '%m/%Y', '%m/%d/%Y')
@@ -80,13 +85,15 @@ class DocumentVersionHistoryTable(TranscriptionesTable):
     commit_message = tables.Column(orderable=False)
     submitted_by = tables.Column(orderable=False)
 
-    def render_activity_type(self, value, record):
+    @staticmethod
+    def render_activity_type(value, record):
         if record.version_number == 1:
             return _("Upload")
         else:
             return _("Edit")
 
-    def render_submitted_by(self, value, record):
+    @staticmethod
+    def render_submitted_by(value, record):
         if record.publish_user:
             return value
         else:
@@ -94,13 +101,12 @@ class DocumentVersionHistoryTable(TranscriptionesTable):
 
 
 class DocumentResultTable(tables.Table):
-    """The DocumentTable shows a list of documents"""
+    """The DocumentTable shows a list of documents. TODO: is this used a"""
 
     def __init__(self, *args, **kwargs):
         temp = kwargs.pop("query")  # Grab from kwargs
         super(DocumentResultTable, self).__init__(*args, **kwargs)
         self.query = temp  # Assign to use later
-
 
     class Meta:
         model = Document

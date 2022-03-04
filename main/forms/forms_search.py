@@ -1,17 +1,15 @@
+"""forms_search contains all Form classes used by the transcriptiones search.
+TODO it is unclear what is really used. Check this class. Also: These are not really forms"""
 from __future__ import annotations
-
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Optional, Union, Sequence, Dict, Tuple, ClassVar, List, Type
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column, Button
 from django import forms
 from django.utils.safestring import mark_safe, SafeString
 from django_elasticsearch_dsl.search import Search
 from django.utils.translation import ugettext_lazy as _
-
-from main.forms.forms_helper import initialize_form_helper
 from main.documents import TranscriptionDocument, ElasticsearchDocument
 from main.models import Document, SourceType
 
@@ -253,6 +251,8 @@ class FilterField(forms.MultiValueField):
 
 
 class AdvancedSearchForm(forms.Form):
+    """Search form. This class is not used to render the form but the validation functionality is used. Because of the
+    ui specifications of the form, the actual render is a template (main/search/search_form.html) which included in the search view"""
     query = forms.CharField(required=False, label=_('Full Text Search'), help_text=_('Search within the title and contents of documents.'))
     title_name = forms.CharField(required=False, label=_('Document Title'))
     ref_number_title = forms.CharField(required=False, label=_('Reference Title'))
@@ -272,6 +272,7 @@ class AdvancedSearchForm(forms.Form):
     manuscript_pages = forms.IntegerField(required=False, label=_('Minimum No. of Pages'))
 
     def __init__(self, *args, **kwargs):
+        """The layout configuration is useless as it is not used."""
         super(AdvancedSearchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(

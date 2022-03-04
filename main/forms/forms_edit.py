@@ -1,3 +1,5 @@
+"""forms_admin contains all Form classes used to edit documents. There are separate forms to
+edit the meta data and the transcription itself"""
 from dal import autocomplete
 from django import forms
 from main.forms.forms_helper import initialize_form_helper
@@ -28,7 +30,6 @@ class EditMetaForm(forms.ModelForm):
     source_type = forms.ModelChoiceField(queryset=SourceType.objects.exclude(parent_type=None).order_by('type_name'),
                                          widget=autocomplete.ModelSelect2(url='main:srctype-ch-autocomplete',
                                                                           forward=['selection_helper_source_type', ]))
-
 
     author = forms.ModelMultipleChoiceField(queryset=Author.objects.all().order_by('author_name'),
                                             widget=autocomplete.ModelSelect2Multiple(url='main:author-autocomplete'),

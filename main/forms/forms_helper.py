@@ -1,3 +1,4 @@
+"""forms_helper contains helper functions to initialize the transcriptiones forms"""
 from django.utils import six
 from crispy_forms.helper import FormHelper
 from django.utils.functional import lazy
@@ -18,22 +19,11 @@ def initialize_form_helper():
     return helper
 
 
-"""def get_popover_html(model, field_name, content=None):
-    label = model._meta.get_field(field_name).verbose_name
-    tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
-    ret_value = _(label) + f' <i class="fas fa-info-circle tooltipster" data-tooltip-content="#tt_{field_name}"></i>\
-                        <div class="tooltip_templates"><div id="tt_{field_name}">\
-                        <p>{tooltip}</p>\
-                        </div></div>'
-    # TODO: Test mark safe lazy
-    return mark_safe_lazy(ret_value)"""
-
-
 def get_popover_html(model, field_name, content=None):
+    """Returns a form label, enhanced with a html tooltip. """
     label = model._meta.get_field(field_name).verbose_name
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
     ret_value = _(label) + f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
                            f'<i class="fas fa-info-circle"></i>' \
                            f'</span>'
-    # ret_value = _(label) + f'<i class="fas fa-info-circle" data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}"></i>'
     return mark_safe_lazy(ret_value)

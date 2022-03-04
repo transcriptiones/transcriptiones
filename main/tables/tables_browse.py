@@ -1,3 +1,5 @@
+"""tables_browse contains classes to display tables to browse the data (Institutions/Reference Numbers/
+SourceTypes/Authors/Documents) """
 import django_tables2 as tables
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
@@ -21,7 +23,8 @@ class RefNumberTable(TranscriptionesTable):
         model = RefNumber
         fields = ("ref_number_name", "ref_number_title",)
 
-    def render_number_of_documents(self, value, record):
+    @staticmethod
+    def render_number_of_documents(value, record):
         return f'{record.document_set.count()} Documents'
 
 
@@ -46,26 +49,27 @@ class InstitutionTable(TranscriptionesTable):
     def __init__(self, *args, **kwargs):
         self.base_columns['no_of_documents'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                    label_class='far fa-file-alt',
-                                                                                   title=_(
-                                                                                       'Number of documents in this institution'))
+                                                                                   title=_('Number of documents in this institution'))
 
         self.base_columns['no_of_ref_numbers'].verbose_name = self.get_af_icon_label(before=_('No. of'),
                                                                                      label_class='far fa-folder-open',
-                                                                                     title=_(
-                                                                                         'Number of reference numbers in this institution'))
+                                                                                     title=_('Number of reference numbers in this institution'))
         super(InstitutionTable, self).__init__(*args, **kwargs)
 
-    def render_city(self, value, record):
+    @staticmethod
+    def render_city(value, record):
         flag = record.country.flag
         return mark_safe(value + f'&nbsp;<img src="{flag}" title="{record.country.name}">')
 
-    def render_no_of_documents(self, value, record):
+    @staticmethod
+    def render_no_of_documents(value, record):
         count = 0
         for ref_number in record.refnumber_set.all():
             count += ref_number.document_set.count()
         return count
 
-    def render_no_of_ref_numbers(self, value, record):
+    @staticmethod
+    def render_no_of_ref_numbers(value, record):
         return record.refnumber_set.count()
 
 
@@ -91,7 +95,8 @@ class SourceTypeTable(TranscriptionesTable):
     def render_type_name(self, value, record):
         return record.get_translated_name(self.language)
 
-    def render_no_of_documents(self, value, record):
+    @staticmethod
+    def render_no_of_documents(value, record):
         return record.document_set.count()
 
 
@@ -108,10 +113,12 @@ class AuthorTable(TranscriptionesTable):
         fields = ("author_name", "no_of_ref_numbers", "no_of_documents")
         row_attrs = default_row_attrs
 
-    def render_no_of_documents(self, value, record):
+    @staticmethod
+    def render_no_of_documents(value, record):
         return record.document_set.count()
 
-    def render_no_of_ref_numbers(self, value, record):
+    @staticmethod
+    def render_no_of_ref_numbers(value, record):
         ref_numbers = list()
         for doc in record.document_set.all():
             if doc.parent_ref_number not in ref_numbers:

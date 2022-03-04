@@ -1,3 +1,5 @@
+import os
+import zipfile
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
@@ -5,30 +7,28 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django_tables2 import RequestConfig
-
-from main.mail_utils import send_contact_message_copy, send_contact_message_answer
-from main import models
-import zipfile
-import os
-
+from main.mail_utils import send_contact_message_answer
 from main.filters import UserFilter
 from main.forms.forms_admin import ContactMessageReplyForm
-from main.models import ContactMessage, User
+from main.models import ContactMessage, User, RefNumber, Author, SourceType, Document, Institution
 from main.tables.tables import ContactMessageTable, UserTable
 
 
-def get_user_or_none(user_id):
+def get_user_or_none(request, user_id):
+    """Returns user object or None if the user is not found.
+    Adds an alert message if user not found."""
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        messages.error(_('User does not exist'))
+        messages.error(request, _('User does not exist'))
         user = None
     return user
 
 
 @user_passes_test(lambda u: u.is_superuser)
 def activate_user(request, user_id):
-    user = get_user_or_none(user_id)
+    """Activate a deactivated user. Admin rights needed"""
+    user = get_user_or_none(request, user_id)
     if user is not None:
         user.is_active = True
         user.save()
@@ -39,7 +39,7 @@ def activate_user(request, user_id):
 @user_passes_test(lambda u: u.is_superuser)
 def deactivate_user(request, user_id):
     # TODO send email
-    user = get_user_or_none(user_id)
+    user = get_user_or_none(request, user_id)
     if user is not None:
         user.is_active = False
         user.save()
@@ -49,7 +49,7 @@ def deactivate_user(request, user_id):
 
 @user_passes_test(lambda u: u.is_superuser)
 def set_user_staff(request, user_id):
-    user = get_user_or_none(user_id)
+    user = get_user_or_none(request, user_id)
     if user is not None:
         user.is_staff = True
         user.is_superuser = False
@@ -60,7 +60,7 @@ def set_user_staff(request, user_id):
 
 @user_passes_test(lambda u: u.is_superuser)
 def set_user_admin(request, user_id):
-    user = get_user_or_none(user_id)
+    user = get_user_or_none(request, user_id)
     if user is not None:
         user.is_staff = True
         user.is_superuser = True
@@ -71,7 +71,7 @@ def set_user_admin(request, user_id):
 
 @user_passes_test(lambda u: u.is_superuser)
 def set_user_user(request, user_id):
-    user = get_user_or_none(user_id)
+    user = get_user_or_none(request, user_id)
     if user is not None:
         user.is_staff = False
         user.is_superuser = False
@@ -164,19 +164,19 @@ def admin_export_json_view(request):
     file_name = "transcriptiones.zip"
     zip_file = zipfile.ZipFile(file_name, mode="w", compression=zipfile.ZIP_DEFLATED)
 
-    data_source_type = serializers.serialize("json", models.SourceType.objects.all())
+    data_source_type = serializers.serialize("json", SourceType.objects.all())
     zip_file.writestr("SourceType.json", data_source_type)
 
-    data_author = serializers.serialize("json", models.Author.objects.all())
+    data_author = serializers.serialize("json", Author.objects.all())
     zip_file.writestr("Author.json", data_author)
 
-    data_documents = serializers.serialize("json", models.Document.objects.all())
+    data_documents = serializers.serialize("json", Document.objects.all())
     zip_file.writestr("Document.json", data_documents)
 
-    data_institutions = serializers.serialize("json", models.Institution.objects.all())
+    data_institutions = serializers.serialize("json", Institution.objects.all())
     zip_file.writestr("Institution.json", data_institutions)
 
-    data_ref_numbers = serializers.serialize("json", models.RefNumber.objects.all())
+    data_ref_numbers = serializers.serialize("json", RefNumber.objects.all())
     zip_file.writestr("RefNumber.json", data_ref_numbers)
 
     zip_file.close()

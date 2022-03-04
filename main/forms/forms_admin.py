@@ -1,3 +1,4 @@
+"""forms_admin contains all Form classes used by transcriptiones admin. """
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit
 from django import forms
@@ -5,7 +6,8 @@ from main.forms.forms_helper import initialize_form_helper
 
 
 class ContactMessageReplyForm(forms.Form):
-    """Form to edit user message notification policy."""
+    """Form to reply to a contact message sent by an unregistered person (by email-address) or a
+    registered user (when requesting a batch upload)"""
 
     def __init__(self, *args, **kwargs):
         super(ContactMessageReplyForm, self).__init__(*args, **kwargs)

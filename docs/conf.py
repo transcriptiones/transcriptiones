@@ -25,11 +25,11 @@ django.setup()
 # -- Project information -----------------------------------------------------
 
 project = 'Transcriptiones'
-copyright = '2021, transcriptiones.ch'
+copyright = '2022, transcriptiones.ch'
 author = 'Dominic Weber, Yvonne Fuchs, Sorin Marti'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.2'
+release = '0.0.3'
 
 
 # -- General configuration ---------------------------------------------------

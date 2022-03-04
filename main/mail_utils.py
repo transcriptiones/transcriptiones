@@ -39,6 +39,16 @@ def create_message(request, subject, message):
     return plain_message, html_message
 
 
+def send_deactivation_mail(request, email_address):
+    """Sends a mail after a user has been deactivated"""
+
+    subject = _("Your account has been deactivated")
+    plain_message, html_message = create_message(request,
+                                                 subject,
+                                                 _("Your account has been deactivated. You cannot login anymore."))
+    send_transcriptiones_mail(subject, plain_message, html_message, email_address)
+
+
 def send_newsletter_subscribe_mail(request, email_address):
     """Sends a mail after a person subscribed to transcriptiones """
 

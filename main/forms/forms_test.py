@@ -1,13 +1,12 @@
+"""TODO"""
 from bootstrap_modal_forms.forms import BSModalModelForm
-from dal import autocomplete
 from django import forms
-
 from main.forms.forms_helper import initialize_form_helper
-from main.models import Institution, \
-    RefNumber, Document, SourceType, Author, Language
+from main.models import Institution, RefNumber
 
 
 class RefnModelForm(BSModalModelForm):
+    """TODO """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
@@ -24,7 +23,7 @@ class RefnModelForm(BSModalModelForm):
 
 
 class InstModelForm(BSModalModelForm):
-
+    """TODO """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()

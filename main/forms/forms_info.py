@@ -1,3 +1,5 @@
+"""forms_info contains all Form classes used by the info pages. These are all forms which are
+used by unregistered persons. The possible actions are: Subsribe/Unsubscribe Newsletter, Send contact message. """
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit, Layout, Row, Column, Field
 from django import forms
@@ -5,6 +7,7 @@ from main.forms.forms_helper import initialize_form_helper
 
 
 class NewsletterSubscribeForm(forms.Form):
+    """Form to display a one line form to enter an email address to subscribe to a newsletter."""
     email_address = forms.EmailField(label=_('Subscribe To Newsletter'))
 
     def __init__(self, *args, **kwargs):
@@ -22,6 +25,7 @@ class NewsletterSubscribeForm(forms.Form):
 
 
 class NewsletterUnsubscribeForm(forms.Form):
+    """For to display a one line form to enter an email address to unsubscribe from a newsletter."""
     email_address = forms.EmailField(label=_('Unsubscribe From Newsletter'))
 
     def __init__(self, *args, **kwargs):
@@ -39,7 +43,7 @@ class NewsletterUnsubscribeForm(forms.Form):
 
 
 class ContactForm(forms.Form):
-    """Form to edit user message notification policy."""
+    """Form to send a contact message without a login."""
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
@@ -47,8 +51,8 @@ class ContactForm(forms.Form):
         self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
-    subject = forms.CharField(label=_('Subject'), initial='Question about transcriptiones.ch',
-                              help_text='Change the subject to something more meaningful, if possible.')
+    subject = forms.CharField(label=_('Subject'), initial=_('Question about transcriptiones.ch'),
+                              help_text=_('Change the subject to something more meaningful, if possible.'))
     reply_to = forms.EmailField(label=_('Reply E-Mail'), help_text=_("We are going to reply to this E-Mail address."))
     message = forms.CharField(widget=forms.Textarea, help_text=_('Please be as specific as you can in your message. '
                                                                  'It will help us to answer your questions!'))

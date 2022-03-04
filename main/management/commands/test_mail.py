@@ -1,17 +1,8 @@
-import os
-
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-
 import main.mail_utils as mail_utils
-
-from django.core.management.base import BaseCommand, CommandError
-
+from django.core.management.base import BaseCommand
 from main.models import User, ContactMessage
-from main.tokens import account_activation_token
 
-
+# TODO rewrite mail test
 
 class Command(BaseCommand):
     help = 'Tests if sending an e-mail works.'
