@@ -14,55 +14,231 @@
 {% endblock %}
 
 {% block content %}
-
+    {% get_current_language as LANGUAGE_CODE %}
     {% include 'main/info/info_options.html' %}
 
-    {% card 'general' _('General Questions') %}
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Is cereal a soup or broth?</h5>
-            <p class="card-text">
-                Many people would say no, and they are right. Broth is defined as “Liquid in which meat, fish, cereal
-                grains, or vegetables have been cooked,” according to Merriam Webster's online dictionary. By this
-                logic, cold cereal in milk can not be considered soup (oatmeal may be able to, but that's a whole
-                other conversation).
-            </p>
-          </div>
-        </div>
+    {% card 'general' _('Frequently Asked Questions') %}
+        {% if LANGUAGE_CODE == 'de' %}
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Wie kann ich mitmachen?</h5>
+                <p class="card-text">
+                    Um Transkriptionen hochladen und überarbeiten zu können, ist eine <a class="strong_link" href="{% url 'main:signup' %}">Registrierung</a> notwendig.
+                    Falls Sie Ihre Transkriptionen anonym veröffentlichen wollen, können Sie dies in Ihrem
+                    <a class="strong_link" href="{% url 'main:profile' %}">Benutzerkonto</a> oder beim Upload angeben.
+                </p>
+              </div>
+            </div>
 
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Is a Hot Dog a Sandwich?</h5>
-            <p class="card-text">
-                According to Merriam-Webster, a sandwich is "two or more slices of bread or a split roll having a
-                filling in between." By that definition, hot dogs seem to qualify as sandwiches. Many people argue,
-                though, that while the hot dog technically fits the dictionary definition of a sandwich, it's simply
-                not a sandwich. It is its own thing.
-            </p>
-          </div>
-        </div>
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Ich habe nur einen kleinen Teil der Quelle transkribiert. Darf ich meine Transkription trotzdem hochladen?</h5>
+                <p class="card-text">
+                    Ja, es sind alle Transkriptionen erwünscht – auch wenn nur ein Ausschnitt einer Quelle bearbeitet
+                    wurde. Wichtig ist, beim Upload möglichst genau anzugeben, welche Teile Sie bereits transkribiert haben.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Meine Transkription ist noch nicht perfekt. Kann ich sie trotzdem hochladen?</h5>
+                <p class="card-text">
+                    Ja, auch Rohfassungen sollen hochgeladen werden. transcriptiones will verhindern, dass
+                    Transkriptionsarbeit mehrfach geleistet wird. Es besteht die Möglichkeit, dass die Transkriptionen
+                    später eigens oder durch andere Nutzer*innen überarbeitet werden.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Bei einer Transkription oder den dazugehörigen Metadaten schlich sich ein Fehler ein. Wie muss ich nun vorgehen?</h5>
+                <p class="card-text">
+                    Die Transkriptionen und grösstenteils auch die Metadaten können eigens oder durch andere Nutzer*innen
+                    überarbeitet werden. Davon ausgenommen sind die Angaben zum Archiv und zur Signatur, welche eine
+                    Zuordnung der Transkription zur richtigen Quelle ermöglichen. Müssen diese Metadaten geändert werden,
+                    <a class="strong_link" href="{% url 'main:contact' %}">kontaktieren Sie bitte das transcriptiones-Team</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Ich möchte eine alte Version wiederherstellen. Wie geht das?</h5>
+                <p class="card-text">
+                    transcriptiones bietet den Nutzer*innen die Möglichkeit, eigene und andere Transkriptionen zu
+                    überarbeiten. Die letzten Versionen lassen sich im Versionsverlauf betrachten. Eine eigenhändige
+                    Wiederherstellung einer alten Version ist nicht möglich. Sollte dies trotzdem nötig sein,
+                    <a class="strong_link" href="{% url 'main:contact' %}">kontaktieren Sie bitte das transcriptiones-Team</a>.
+                    Sollte sich ein*e Nutzer*in nicht <a class="strong_link" href="{% url 'main:tos' %}">regelkonform</a> verhalten,
+                    kann transcriptiones die entsprechende Person sperren.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Ich habe Probleme beim Upload. An wen muss ich mich wenden?</h5>
+                <p class="card-text">
+                    Informationen zum Upload stehen Ihnen <a class="strong_link" href="{% url 'main:guidelines' %}">hier</a> zur Verfügung. Sollte das Problem weiter bestehen,
+                    kann gerne <a class="strong_link" href="{% url 'main:contact' %}">Kontakt</a> mit dem transcriptiones-Team aufgenommen werden.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Ich würde gerne viele Transkriptionen von unterschiedlichen Signaturen zur Verfügung stellen, jedoch möchte ich diese nicht einzeln hochladen. Was kann ich tun?</h5>
+                <p class="card-text">
+                    Gerne übernehmen wir für Sie die Einspeisung grösserer Transkriptionsbestände in die Datenbank.
+                    Bitte melden Sie sich per <a class="strong_link" href="{% url 'main:guidelines' %}">Batch-Upload-Formular</a> beim transcriptiones-Team.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Was passiert mit meiner hochgeladenen Transkription?</h5>
+                <p class="card-text">
+                    Die hochgeladene Transkription ist öffentlich zugänglich und fällt unter die CC0-Lizenz, wodurch
+                    andere Nutzer*innen Ihre Transkription frei verwenden können. Registrierte bzw. eingeloggte
+                    Nutzer*innen können zudem die Transkription ergänzen und überarbeiten. Die Nutzungsbedingungen
+                    finden Sie <a class="strong_link" href="{% url 'main:tos' %}">hier</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Ich würde gerne informiert werden, wenn neue Transkriptionen zu bestimmten Signaturen/Gedächtnisinstitution/von bestimmten Nutzer*innen hinzugefügt werden. Wie mache ich das?</h5>
+                <p class="card-text">
+                    Sofern Sie registriert bzw. eingeloggt sind, können Sie sich in ihrem <a class="strong_link" href="{% url 'main:profile' %}">Benutzerkonto</a> für solche
+                    regelmässige, automatische Benachrichtigungen einschreiben. Die bestehenden
+                    Benachrichtigungsabonnemente können jederzeit beendet werden.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Aufgrund meines Forschungsinteresses wünsche ich mir von transcriptiones ein neues Feature. Kann ich das mitteilen?</h5>
+                <p class="card-text">
+                    Ja, wir nehmen Inputs sehr gerne entgegen, auch wenn wir nicht alle Wünsche (umgehend)
+                    umsetzen können. <a class="strong_link" href="{% url 'main:contact' %}">Schreiben Sie dem transcriptiones-Team</a> Ihre Anregungen.
+                </p>
+              </div>
+            </div>
+        {% else %}
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">How can I participate?</h5>
+                <p class="card-text">
+                    In order to upload and revise transcriptions, registration is necessary. If you want to publish
+                    your transcriptions anonymously, you can indicate this in your user account or when uploading.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">I have only transcribed a small part of the source. Can I still upload my transcription?</h5>
+                <p class="card-text">
+                    Yes, all transcriptions are welcome - even if only a section of a source has been edited.
+                    When uploading, it is important to indicate as precisely as possible which parts you have
+                    already transcribed.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">My transcription is not yet perfect. Can I upload it anyway?</h5>
+                <p class="card-text">
+                    Yes, raw versions should also be uploaded. transcriptiones wants to prevent transcription work
+                    from being done more than once. There is a possibility that the transcriptions will be revised
+                    later by yourself or by other users.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">An error has occurred in a transcription or in the associated metadata. What should I do now?</h5>
+                <p class="card-text">
+                    The transcriptions and most of the metadata can be revised by yourself or by other users.
+                    The only exceptions are the archive and signature details, which are used for assigning the
+                    transcription to the correct source. If this metadata needs to be changed, please contact
+                    the transcriptiones team.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">I would like to restore an old version. How can I do that?</h5>
+                <p class="card-text">
+                    transcriptiones offers users the possibility to revise their own and others’ transcriptions.
+                    The most recent versions can be viewed in the version history. It is not possible to restore an
+                    old version yourself. Should this be necessary, please contact the transcriptiones team.
+                    If a user does not follow the rules, transcriptiones can block the person in question.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">I have problems uploading. Who should I contact?</h5>
+                <p class="card-text">
+                    Information on uploading is available here . If the problem persists, you are welcome
+                    to contact the transcriptiones team.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">I would like to provide many transcriptions of different signatures, but I do not want to upload them individually. What can I do?</h5>
+                <p class="card-text">
+                    We are happy to carry out the uploading of larger transcription collections into the database
+                    for you. Please contact the transcriptiones team using the batch upload form.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">What happens to my uploaded transcription? </h5>
+                <p class="card-text">
+                    The uploaded transcription is accessible to the public and falls under the CC0 licence, which
+                    means that other users can use your transcription freely. Registered or logged-in users can
+                    also add to and revise the transcription. The terms of use can be found here.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">I would like to be informed when new transcriptions are added to certain signatures/memorial institutions/by certain users. How do I do this?</h5>
+                <p class="card-text">
+                    If you are registered and logged in, you can sign up for such regular, automatic notifications in
+                    your user profile. Existing subscriptions can be cancelled at any time.
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Due to my research interest, I would like to propose a new feature to transcriptiones. Can I let you know?</h5>
+                <p class="card-text">
+                    Yes, we are happy to accept input, even if we cannot implement all requests (immediately).
+                    Contact the transcriptiones team with your suggestions.
+                </p>
+              </div>
+            </div>
+        {% endif %}
     {% endcard %}
 
-    {% card 'general' _('A whole other set of questions') %}
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">What is the answer to life, the universe, and everything?</h5>
-            <p class="card-text">
-                42
-            </p>
-          </div>
-        </div>
-
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">How much wood would a woodchuck chuck if a woodchuck could chuck wood?</h5>
-            <p class="card-text">
-                New York state wildlife expert Richard Thomas found that a woodchuck could (and does) chuck around 35
-                cubic feet of dirt in the course of digging a burrow. Thomas reasoned that if a woodchuck could chuck
-                wood, he would chuck an amount equivalent to the weight of the dirt, or 700 pounds.
-            </p>
-          </div>
-        </div>
-    {% endcard %}
 
 {% endblock %}

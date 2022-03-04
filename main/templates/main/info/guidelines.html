@@ -19,14 +19,138 @@
 
     {% card 'general' _('Our Guideline') %}
         {% if LANGUAGE_CODE == 'de' %}
-            <h4>transcriptiones – aus der Community für die Community</h4>
+            <h4>Leitfaden</h4>
             <p>
-            deutsch
+                Bei transcriptiones sind alle Ausfertigungsgrade erwünscht – von der Rohfassung bis hin zur
+                ausgereiften Transkription. Mit Überarbeitungen und der Weiterarbeit an bestehenden Transkriptionen
+                helfen Sie der Community, optimale und umfassende Transkriptionen zu erlangen.
+            </p>
+            <p>
+                Wenn Sie Transkriptionen hochladen möchten oder Bestehendes ergänzen oder korrigieren wollen,
+                dann beachten Sie bitte die nachfolgenden Anleitungen. Häufig gestellte Fragen finden Sie <a class="strong_link" href="{% url 'main:faq' %}">hier</a>.
+            </p>
+            <p>
+                Wenn Ihr Transkriptionsbestand für den Standard-Upload zu umfangreich ist, nehmen Sie
+                bitte per Batch-Upload-Formular mit uns <a class="strong_link" href="{% url 'main:contact' %}">Kontakt</a> auf.
+            </p>
+            <h4>Upload</h4>
+            <p>
+                Beim Upload müssen zunächst die Metadaten angegeben werden. Diejenigen Felder, welche mit
+                Sternchen ausgezeichnet sind, müssen zwingend ausgefüllt werden. Alle anderen Felder dienen zwar
+                der Auffindbarkeit der Transkriptionen in der Datenbank, sind aber fakultativ.
+            </p>
+            <p>
+                Bei der Eingabe einer Gedächtnisinstitution sowie einer Signatur in das Upload-Formular werden
+                bereits bestehende Einheiten in der Datenbank automatisch abgerufen und angezeigt. Falls möglich,
+                wählen Sie daraus die passende Institution bzw. die richtige Signatur aus. Muss ein neues Archiv in
+                die Datenbank hinzugefügt werden, ist dieses so zu betiteln, wie vom Verein Schweizerischer
+                Archivarinnen und Archivare veranschlagt. Vergleichen Sie hierfür:
+                <a class="strong_link" href="https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/">https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/</a>. Braucht es eine neue Signatur,
+                muss diese von der entsprechenden Gedächtnisinstitution exakt übernommen werden.
+            </p>
+            <p>
+                Bei der fakultativen Angabe von Autor*innen bzw. Schreiber*innen werden ebenfalls bereits
+                bestehende Datensätze automatisch abgerufen und angezeigt. Probieren Sie verschiedene Schreibweisen
+                aus und setzen Sie nur wenn wirklich notwendig einen neuen Namen an. Es sei darauf hingewiesen, dass
+                es sich hier nicht um Entitäten (also eindeutig identifizierbare Personen) handelt.
+            </p>
+            <p>
+                Sie können entweder direkt im Editor transkribieren oder eine bestehende Transkription in den Editor
+                kopieren. Stammt die Transkription aus einer formatierten Datei (.doc, .docx, .pdf, .xls, .xlsx,
+                Google Docs, Google Sheets, .odf), werden fast alle Formatierungen
+                (auch Tabellen und Fussnoten) übernommen.
+            </p>
+            <h4>Überarbeitungen und Ergänzungen</h4>
+            <p>
+                Bei transcriptiones unterstützen sich die Community-Mitglieder gegenseitig. In diesem Sinne können
+                Sie die Transkriptionen überarbeiten und erweitern. Es ist jeweils genau zu überprüfen, auf welche
+                Archivalie der*die Ersttranskribent*in Bezug nimmt. Besondere Vorsicht ist geboten, wenn sich in
+                einer Signatur mehrere Dokumente befinden. Alle Ihre vorgenommenen Änderungen sind im Feld
+                ‘Änderungen’ akribisch einzutragen, damit für andere Nutzer*innen transparent wird,
+                was Sie verändert haben.
+            </p>
+            <p>
+                Die vergangenen Versionen einer Transkription können Sie weiter einsehen. Muss eine alte Version
+                wiederhergestellt werden, kontaktieren Sie bitte das transcriptiones-Team mittels des <a class="strong_link" href="{% url 'main:contact' %}">Kontaktformulars</a>.
+                Stellen Sie auf transcriptiones unsachgemässes Verhalten fest, melden Sie dies bitte umgehend mittels
+                desselben Formulars. Der*die betreffende User*in wird von uns gesperrt.
+            </p>
+            <p>
+                Sie haben Fragen zur Eingabe der Metadaten? Sie haben eine Quelle aus dem Ausland transkribiert und
+                wissen nicht, wie Sie das Archiv ausweisen sollen? Ihre Transkriptionen befinden sich in anderen
+                Formaten (z. B. XML bzw. TEI), als oben angegeben? Bitte zögern Sie nicht, uns zu <a class="strong_link" href="{% url 'main:contact' %}">kontaktieren</a> –
+                wir helfen gerne weiter!
+            </p>
+            <h4>Transkriptionsrichtlinien</h4>
+            <p>
+                Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen für die Erstellung einer Transkription
+                die Transkriptionsrichtlinien von Ad fontes ans Herz. Unter diesem Link finden Sie das gesamte
+                Regelwerk: <a class="strong_link" href="https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln">https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln</a>.
             </p>
         {% else %}
-            <h4>transcriptiones – from the community for the community</h4>
+            <h4>Guidelines</h4>
             <p>
-            english
+                At transcriptiones, all levels of completion are welcome – from rough drafts to fully developed
+                transcriptions. By revising and extending existing transcriptions, you help the community
+                to achieve optimal and comprehensive transcriptions.
+            </p>
+            <p>
+                If you would like to upload transcriptions, add to, or correct existing ones, please see the
+                instructions below. Frequently asked questions can be found here.
+            </p>
+            <p>
+                If your collection of transcriptions is too large for the standard upload process, please
+                contact us via the <a class="strong_link" href="{% url 'main:upload_options' %}">batch upload form</a>.
+            </p>
+            <h4>Upload</h4>
+            <p>
+                When uploading a transcription, the form will present you with a range of metadata to be specified.
+                The fields marked with an asterisk must be filled in. All other fields are optional but facilitate
+                finding the transcriptions in the database.
+            </p>
+            <p>
+                When entering a memory institution or a reference number,
+                already existing entries are automatically displayed. If possible,
+                select the appropriate institution or reference number from there. If you need to add a new archive
+                to the database, it needs to be named according to the list by the Association of Swiss Archivists
+                which can be found <a class="strong_link" href="https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/">here</a>.
+            </p>
+            <p>
+                If a new reference number needs to be added, please use the exact form as it is listed by the
+                corresponding institution.
+            </p>
+            <p>
+                When specifying an author or scribe, the existing records are displayed as well. There might be
+                different versions of a name, so please try various spellings and only add a new name if it really is
+                necessary. Be aware, however, that these names do not correspond to entities
+                (i.e. unambiguously identifiable persons).
+            </p>
+            <p>
+                You can either directly transcribe in the editor or paste your transcription from an existing file.
+                If you copy them from a formatted file (doc, .docx, .pdf, .xls, .xlsx, Google Docs, Google Sheets,
+                .odf), almost all formatting as well as tables and footnotes will be preserved.
+            </p>
+            <h4>Edits and Additions</h4>
+            <p>
+                At transcriptiones, community members support each other. In this sense, you can edit and extend
+                all transcriptions. Please check exactly which archival document the initial transcriber is
+                referring to, especially if a reference number contains multiple documents. All changes you have
+                made must be specified in the field ‘Changes’ in order to make the history of edits as transparent
+                as possible.
+
+                You can view the latest versions of a document. If you need to restore an older version, please
+                contact the transcriptiones team via the <a class="strong_link" href="{% url 'main:contact' %}">contact form</a>.
+                If you notice vandalism or other inadequate behaviour, please contact the transcriptiones
+                team via the same form. We will block the user in question.
+
+                Do you have questions about entering metadata? You have transcribed a source from abroad and do
+                not know how to identify the archive? Your transcriptions are in a different format than specified
+                above (e.g. XML or TEI)? Do not hesitate to <a class="strong_link" href="{% url 'main:contact' %}">contact us</a> – we are happy to help!
+            </p>
+            <h4>Transcription Guidelines</h4>
+            <p>
+                In order to achieve some degree of uniformity, we recommend following the transcription guidelines
+                of Ad fontes. The complete guidelines can be found <a class="strong_link" href="https://www.adfontes.uzh.ch/en/tutorium/schriften-lesen/transkriptionsregeln">here</a>.
             </p>
         {% endif %}
     {% endcard %}

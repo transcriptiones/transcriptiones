@@ -123,11 +123,11 @@ def send_password_reset_mail(request, user):
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-    plain_message = _(f'Your Username is: {user.username}. Goto LINK to reset your password.')
+    """# plain_message = _(f'Your Username is: {user.username}. Goto LINK to reset your password.')
     render_object = get_base_render_object(request, _('Password reset'))
     render_object["mail_paragraphs"].append(plain_message)
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
-    send_transcriptiones_mail(subject, plain_message, html_message, user.email)
+    send_transcriptiones_mail(subject, plain_message, html_message, user.email)"""
 
 
 def send_registration_confirmation_mail(request, user):
