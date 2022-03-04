@@ -15,7 +15,7 @@
             <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Document Title' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="title_name_exact" class="form-control move-left" value="{{ request.GET.title_name_exact }}"/>
+            <input type="checkbox" name="title_name_exact" class="form-control move-left" {% if request.GET.title_name_exact %}checked{% endif %}/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -28,7 +28,7 @@
             <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Name' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="ref_number_name_exact" class="form-control move-left" value="{{ request.GET.ref_number_name_exact }}"/>
+            <input type="checkbox" name="ref_number_name_exact" class="form-control move-left" {% if request.GET.ref_number_name_exact %}checked{% endif %}/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -39,7 +39,7 @@
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="ref_number_title_exact" class="form-control move-left" value="{{ request.GET.ref_number_title_exact }}"/>
+            <input type="checkbox" name="ref_number_title_exact" class="form-control move-left" {% if request.GET.ref_number_title_exact %}checked{% endif %}/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -64,7 +64,7 @@
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}</small>
         </div>
         <div class="form-group col-md-1">
-            <input type="checkbox" name="location_exact" class="form-control move-left" value="{{ request.GET.location_exact }}"/>
+            <input type="checkbox" name="location_exact" class="form-control move-left" {% if request.GET.location_exact %}checked{% endif %}/>
             <small id="titleHelp" class="form-text text-muted">
                 {% translate 'Exact' %}
                 {% include 'main/search/exact_tooltip.html' %}
@@ -94,14 +94,14 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <div id="div_id_illuminated" class="custom-control custom-checkbox">
-                <input type="checkbox" name="illuminated" class="checkboxinput custom-control-input" id="id_illuminated">
-                <label for="id_illuminated" class="custom-control-label">Document must have seal</label>
+                <input type="checkbox" name="illuminated" class="checkboxinput custom-control-input" id="id_illuminated" {% if request.GET.illuminated %}checked{% endif %}>
+                <label for="id_illuminated" class="custom-control-label">{% translate 'Document must have illuminations' %}</label>
             </div>
         </div>
         <div class="form-group col-md-6">
-            <div id="div_id_illuminated" class="custom-control custom-checkbox">
-                <input type="checkbox" name="illuminated" class="checkboxinput custom-control-input" id="id_illuminated">
-                <label for="id_illuminated" class="custom-control-label">Document must have illuminations</label>
+            <div id="div_id_seal" class="custom-control custom-checkbox">
+                <input type="checkbox" name="seal" class="checkboxinput custom-control-input" id="id_seal" {% if request.GET.seal %}checked{% endif %}>
+                <label for="id_seal" class="custom-control-label">{% translate 'Document must have seal' %}</label>
             </div>
         </div>
     </div>

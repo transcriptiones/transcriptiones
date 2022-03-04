@@ -70,11 +70,12 @@
                       {% endif %}
                   </div>
                   <div class="card-footer">
-                      <span class="search-result-title">Source Type:</span> <i>{{ entry.1.source_type.parent_type }} &#5125;
+                      <span class="search-result-title">Source Type:</span> <i>{% get_translated_source_type_name entry.1.source_type.parent_type 'de' %} &#5125;
                       {% if entry.0.meta.highlight.source_type %}
-                          {{ entry.0.meta.highlight.source_type.0|safe }}
+                          {# entry.0.meta.highlight.source_type.0|safe #}
+                          <em>{% get_translated_source_type_name entry.1.source_type 'de' %}</em>
                       {% else %}
-                          {{ entry.1.source_type }}
+                          {% get_translated_source_type_name entry.1.source_type 'de' %}
                       {% endif %}</i> |
                       <span class="search-result-title">Production Location:</span> <i>
                       {% if entry.0.meta.highlight.place_name %}

@@ -53,15 +53,17 @@ class TranscriptionDocument(ElasticsearchDocument):
         }
 
     def prepare_doc_start_date(self, instance: PartialDate):
-        return instance.doc_start_date.date
+        return instance.doc_start_date.date.year
 
     def prepare_doc_end_date(self, instance: PartialDate):
         if instance.doc_end_date is not None:
-            if type(instance.doc_end_date) == type(str):
-                return None
-            elif type(instance.doc_end_date) == type(PartialDate):
-                return instance.doc_end_date.date
-        return None
+            if isinstance(instance.doc_end_date, str):
+                return instance.doc_start_date.date.year
+            elif isinstance(instance.doc_end_date, PartialDate):
+                return instance.doc_end_date.date.year
+
+        return instance.doc_start_date.date.year
+
 
     @staticmethod
     def prepare_author(instance: Document) -> list:

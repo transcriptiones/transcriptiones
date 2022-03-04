@@ -138,6 +138,8 @@ class Attribute:
                 forms.Select(choices=Document.MaterialType.choices)),
             cls("Paginierung", 'paging_system', BINARY_OPERATIONS,
                 forms.Select(choices=Document.PaginationType.choices)),
+            cls("Startdatum", 'doc_start_date', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'})),
+            cls("Endatum", 'doc_end_date', NUMERIC_OPERATIONS, forms.NumberInput({'step': '1', 'min': '0'}))
         ]}
 
 
@@ -262,14 +264,14 @@ class AdvancedSearchForm(forms.Form):
     seal = forms.BooleanField(required=False, label=_('Document must have seal'))
     illuminated = forms.BooleanField(required=False, label=_('Document must have illuminations'))
 
-    title_name_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
-    ref_number_title_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
-    ref_number_name_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
-    location_exact = forms.ChoiceField(required=False, choices=[(True, 'Yes'), (False, 'No')], label=_('Exact'))
+    title_name_exact = forms.BooleanField(required=False)
+    ref_number_title_exact = forms.BooleanField(required=False)
+    ref_number_name_exact = forms.BooleanField(required=False)
+    location_exact = forms.BooleanField(required=False)
 
-    year_from = forms.IntegerField(required=False, label=_('Published Earliest Year'))
-    year_to = forms.IntegerField(required=False, label=_('Published Latest Year'))
-    manuscript_pages = forms.IntegerField(required=False, label=_('Minimum No. of Pages'))
+    doc_start_date = forms.IntegerField(required=False, label=_('Published Earliest Year'))
+    doc_end_date = forms.IntegerField(required=False, label=_('Published Latest Year'))
+    #manuscript_pages = forms.IntegerField(required=False, label=_('Minimum No. of Pages'))
 
     def __init__(self, *args, **kwargs):
         """The layout configuration is useless as it is not used."""
@@ -295,7 +297,7 @@ class AdvancedSearchForm(forms.Form):
             Row(
                 Column('year_from', css_class='form-group col-md-4 mb-0'),
                 Column('year_to', css_class='form-group col-md-4 mb-0'),
-                Column('manuscript_pages', css_class='form-group col-md-4 mb-0'),
+                # Column('manuscript_pages', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(

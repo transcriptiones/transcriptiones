@@ -26,6 +26,7 @@ def test_search_2(request):
     pagination_link_list = list()
 
     if request.method == "GET":
+
         form = AdvancedSearchForm(request.GET)
         current_page = int(request.GET.get('page', 1))
 
@@ -39,7 +40,7 @@ def test_search_2(request):
                 if not form.cleaned_data['title_name'] == '':
                     search_type = "wildcard"
                     search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
-                    if form.cleaned_data['title_name_exact'] == 'True':
+                    if form.cleaned_data['title_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['title_name'].lower()
                     search_result = search_result.query(search_type, title_name=search_term)
@@ -48,7 +49,7 @@ def test_search_2(request):
                     if not form.cleaned_data['ref_number_title'] == '':
                         search_type = "wildcard"
                         search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
-                        if form.cleaned_data['ref_number_title_exact'] == 'True':
+                        if form.cleaned_data['ref_number_title_exact']:
                             search_type = "match"
                             search_term = form.cleaned_data['ref_number_title'].lower()
                         search_result = search_result.query(search_type, ref_number_title=search_term)
@@ -70,28 +71,28 @@ def test_search_2(request):
                 if not form.cleaned_data['title_name'] == '':
                     search_type = "wildcard"
                     search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
-                    if form.cleaned_data['title_name_exact'] == 'True':
+                    if form.cleaned_data['title_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['title_name'].lower()
                     search_result = search_result.filter(search_type, title_name=search_term)
                 if not form.cleaned_data['ref_number_title'] == '':
                     search_type = "wildcard"
                     search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
-                    if form.cleaned_data['ref_number_title_exact'] == 'True':
+                    if form.cleaned_data['ref_number_title_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['ref_number_title'].lower()
                     search_result = search_result.filter(search_type, ref_number_title=search_term)
                 if not form.cleaned_data['ref_number_name'] == '':
                     search_type = "wildcard"
                     search_term = "*" + form.cleaned_data['ref_number_name'].lower() + "*"
-                    if form.cleaned_data['ref_number_name_exact'] == 'True':
+                    if form.cleaned_data['ref_number_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['ref_number_name'].lower()
                     search_result = search_result.filter(search_type, ref_number_name=search_term)
                 if not form.cleaned_data['location'] == '':
                     search_type = "wildcard"
                     search_term = "*" + form.cleaned_data['location'] + "*"
-                    if form.cleaned_data['location_exact'] == 'True':
+                    if form.cleaned_data['location_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['location']
                     search_result = search_result.filter(search_type, place_name=search_term)
@@ -101,8 +102,10 @@ def test_search_2(request):
                 if form.cleaned_data['illuminated']:
                     search_result = search_result.filter("match", illuminated=True)
 
-                if not form.cleaned_data['manuscript_pages'] is None:
-                    search_result = search_result.filter("range", pages={'gt': form.cleaned_data['manuscript_pages']-1, 'lte': 99999})
+                if not form.cleaned_data['doc_start_date'] is None:
+                    search_result = search_result.filter("range", doc_end_date={'gte': form.cleaned_data['doc_start_date']})
+                    search_result = search_result.filter("range", doc_start_date={'lte': form.cleaned_data['doc_end_date']})
+
                 if not form.cleaned_data['source_type'] is None:
                     search_result = search_result.filter("match", source_type=form.cleaned_data['source_type'].type_name)
 
