@@ -14,41 +14,125 @@
 {% endblock %}
 
 {% block content %}
-
+    {% get_current_language as LANGUAGE_CODE %}
     {% include 'main/info/info_options.html' %}
 
     {% card 'the_project' _('The Project') %}
-        <h4>What Is Transcriptiones</h4>
-        <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-        takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-        dolor sit amet.
-
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-        </p>
-
-        <h4>How Can You Participate</h4>
-        <p>
-        Takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-        accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-        dolor sit amet.
-
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-        feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
-        delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-        </p>
+        {% if LANGUAGE_CODE == 'de' %}
+            <h4>transcriptiones – aus der Community für die Community</h4>
+            <p>
+                Manuskripte sind essenzielle Quellen für verschiedene Fach- und Interessensbereiche
+                und deren Transkriptionen sind unerlässliche Forschungsrohdaten. Transkriptionen werden
+                allerdings selten publiziert und bleiben oft der Öffentlichkeit vorenthalten.
+            </p>
+            <p>
+                Die Crowdsourcing-Plattform transcriptiones will mehrfach geleistete Transkriptionsarbeit derselben
+                Quelle verhindern und dieser Arbeit die nötige Wertschätzung entgegenbringen.
+            </p>
+            <p>
+                Das Angebot richtet sich dabei an alle Interessierten. Es sind ausdrücklich jegliche Transkriptionen
+                von historischen Handschriften erwünscht – unabhängig vom Archiv oder dem Ausfertigungsgrad.
+            </p>
+            <p>
+                Die bereits hochgeladenen Transkriptionen und Metadaten können eigens oder von anderen
+                Nutzer*innen überarbeitet und erweitert werden.
+            </p>
+            <p>
+                Weitere Informationen zur Nutzung der Plattform finden Sie <a href="{% url 'main:tos' %}">hier</a>.
+                Häufig gestellte Fragen finden Sie <a href="{% url 'main:faq' %}">hier</a>.
+            </p>
+            <h4>Über uns</h4>
+            <p>
+                transcriptiones wurde 2020 von Yvonne Fuchs und Dominic Weber, damals Masterstudierende der Geschichte
+                an der Universität Basel, ins Leben gerufen. Der Prototyp wurde im Rahmen eines Fellowships am ETH
+                Library Lab entwickelt.
+            </p>
+            <p>
+                Ausgebaut und finalisiert wurde die Datenbank dank der grosszügigen
+                finanziellen Unterstützung der Freiwilligen Akademischen Gesellschaft Basel (FAG) und der Max
+                Geldner-Stiftung. Im Zuge dessen wechselte transcriptiones an das Departement Geschichte der
+                Universität Basel und ist seitdem an den Lehrstuhl von Prof. Dr. Lucas Burkart angegliedert.
+            </p>
+            <h4>Dank</h4>
+            <p>
+                Ein ausserordentlicher Dank gebührt Prof. Dr. Lucas Burkart, der über die ganze Projektdauer hinweg
+                das Team betreut und unterstützt hat sowie die Finanzierung und eine langfristige institutionelle
+                Anbindung ermöglichte. Maximiliane Okonnek und dem gesamten ETH Library Lab Team haben wir es zu
+                verdanken, dass wir einen Prototypen entwickeln konnten, der den Grundstein für die weiteren
+                Projektphasen legte.
+                Prof. Dr. Tobias Hodel möchten wir herzlich für seine Academic Supervision und wertvollen
+                Feedbacks danken.
+                Dr. Christiane Sibille hat mit ihren motivierenden Worten und dem Hinweis auf das Fellowship am
+                ETH Library Lab den Weg für das Kommende geebnet.
+            </p>
+            <p>
+                Ein riesiges Dankeschön geht auch an Sorin Marti, der einen Grossteil der Programmierarbeit geleistet
+                hat und massgeblich zum Gelingen dieses Projekts beigetragen hat. Auch möchten wir Nicolas Diener
+                sowie Daniele Roncaglioni (Propulsion Academy), die uns beim Programmieren bzw. bei technischen
+                Anliegen in der Prototypenphase unterstützt haben, herzlich danken.
+            </p>
+            <p>
+                Wir durften mit vielen weiteren Personen grossartige Gespräche führen und dabei interessante Inputs
+                entgegennehmen. Es hat uns sehr gefreut, auf so viele offene Ohren zu stossen!
+                Wir möchten diesen und allen weiteren Unterstützern*innen von Herzen danken!
+            </p>
+            <h4>Links</h4>
+            <p>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="https://dg.philhist.unibas.ch/de/">Departement Geschichte Universität Basel</a></li>
+                    <li class="list-group-item"><a href="https://twitter.com/BaselHistory">Departement Geschichte Universität Basel bei Twitter: @BaselHistory</a></li>
+                    <li class="list-group-item"><a href="https://www.librarylab.ethz.ch/de/project/transcriptiones/">transcriptiones am ETH Library Lab</a></li>
+                    <li class="list-group-item"><a href="https://twitter.com/eth_library_lab">ETH Library Lab bei Instagram: @eth_library_lab</a></li>
+                </ul>
+            </p>
+            <h4>Impressum</h4>
+            <p>
+                Idee, Konzept, Projektleitung: Yvonne Fuchs, Dominic Weber<br/>
+                Herausgeber: Prof. Dr. Lucas Burkart<br/>
+                Academic Supervision: Prof. Dr. Lucas Burkart, Prof. Dr. Tobias Hodel<br/>
+            </p>
+            <p>
+                Entwicklung: Sorin Marti<br/>
+                Entwicklung Prototyp: Yvonne Fuchs, Dominic Weber, Nicolas Diener, Daniele Roncaglioni
+            </p>
+                Übersetzungen: Louis Vogel (en)
+            </p>
+            <p>
+                Projektpartner: Departement Geschichte Universität Basel, ETH Library Lab
+            </p>
+            <p>
+                Finanzierung: Freiwillige Akademische Gesellschaft Basel, Max Geldner-Stiftung
+            </p>
+            <p>
+                Universität Basel<br/>
+                Departement Geschichte, c/o transcriptiones<br/>
+                Hirschgässlein 21<br/>
+                CH-4051 Basel<br/>
+            </p>
+        {% else %}
+            <h4>transcriptiones – from the community for the community</h4>
+            <p>
+                Manuscripts are essential sources for many fields of study and various interests.
+                Therefore, their transcriptions are invaluable research data. However, transcriptions
+                are rarely published and often remain unavailable to the public.
+            </p>
+            <p>
+                The crowdsourcing platform transcriptiones aims to prevent multiple transcription work of the same
+                source and to show this work the necessary appreciation.
+            </p>
+            <p>
+                transcriptiones is open for anyone. We explicitly welcome all transcriptions of historical manuscripts
+                – regardless of the archive or the degree of completion.
+            </p>
+            <p>
+                The transcriptions and metadata that have already been uploaded can be edited and expanded by the
+                original contributor or by other users.
+            </p>
+            <p>
+                You can find more information on how to use transcriptiones <a href="{% url 'main:tos' %}">here</a>.
+                Frequently asked questions can be found <a href="{% url 'main:tos' %}">here</a>.
+            </p>
+        {% endif %}
     {% endcard %}
 
 {% endblock %}

@@ -14,37 +14,21 @@
 {% endblock %}
 
 {% block content %}
-
+    {% get_current_language as LANGUAGE_CODE %}
     {% include 'main/info/info_options.html' %}
 
     {% card 'general' _('Our Guideline') %}
-         <h4>Our Guidelines</h4>
-        <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        </p>
-        <h5>Guideline 1</h5>
-        <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-        </p>
-        <h5>Guideline 2</h5>
-        <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-        </p>
+        {% if LANGUAGE_CODE == 'de' %}
+            <h4>transcriptiones – aus der Community für die Community</h4>
+            <p>
+            deutsch
+            </p>
+        {% else %}
+            <h4>transcriptiones – from the community for the community</h4>
+            <p>
+            english
+            </p>
+        {% endif %}
     {% endcard %}
 
 {% endblock %}
