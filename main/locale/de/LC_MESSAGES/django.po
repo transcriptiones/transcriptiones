@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-04 10:51+0100\n"
-"PO-Revision-Date: 2022-03-04 14:47+0100\n"
+"PO-Revision-Date: 2022-03-04 23:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -102,7 +102,7 @@ msgid ""
 "your questions!"
 msgstr ""
 "Bitte seien Sie in Ihrer Nachricht so spezifisch wie möglich. Die hilft uns, "
-"Ihre Fragen zu beantworten."
+"Ihre Fragen zu beantworten!"
 
 #: .\main\forms\forms_search.py:60
 msgid "Yes"
@@ -118,7 +118,7 @@ msgstr "Volltextsuche"
 
 #: .\main\forms\forms_search.py:256
 msgid "Search within the title and contents of documents."
-msgstr "Suche in Titel des Dokuments und im Transkriptionstext"
+msgstr "Suche in Titel des Dokuments und im Transkriptionstext."
 
 #: .\main\forms\forms_search.py:257
 msgid "Document Title"
@@ -201,7 +201,7 @@ msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
 "Bitte beschreiben Sie die Dokumente, die Sie hochladen möchten. Seien Sie so "
-"spezifisch wie möglich."
+"spezifisch wie möglich"
 
 #: .\main\forms\forms_user.py:46 .\main\forms\forms_user.py:60
 msgid "Save"
@@ -246,11 +246,11 @@ msgstr "Änderungen speichern"
 
 #: .\main\forms\forms_user.py:130
 msgid "You cannot change your username"
-msgstr "Sie können Ihren Benutzernamen nicht ändern."
+msgstr "Sie können Ihren Benutzernamen nicht ändern"
 
 #: .\main\forms\forms_user.py:131
 msgid "You cannot change your email address"
-msgstr "Sie können Ihre E-Mail-Adresse nicht ändern."
+msgstr "Sie können Ihre E-Mail-Adresse nicht ändern"
 
 #: .\main\forms\forms_user.py:153 .\main\forms\forms_user.py:162
 #: .\main\templates\main\users\password_reset.html:9
@@ -339,7 +339,7 @@ msgstr "Sie haben eine Nachricht von {message.sending_user.username} erhalten."
 
 #: .\main\mail_utils.py:80
 msgid "Thank you for contacting us"
-msgstr "Vielen Dank, dass Sie uns kontaktiert haben."
+msgstr "Vielen Dank, dass Sie uns kontaktiert haben"
 
 #: .\main\mail_utils.py:109
 msgid "Transcriptiones: Your User Name"
@@ -792,7 +792,7 @@ msgstr "ORCID"
 msgid ""
 "ORCID provides a persistent digital identifier that you own and control, and "
 "that distinguishes you from every other researcher."
-msgstr "Ihre persönliche ORCID-ID"
+msgstr "Ihre persönliche ORCID-ID."
 
 #: .\main\models.py:22 .\main\models.py:63 .\main\models.py:97
 #: .\main\models.py:761 .\main\templates\main\details\institution_detail.html:8
@@ -1575,8 +1575,9 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"Möchten Sie diesen Benutzer wirklich deaktivieren?<br/>\n"
-"Der Benutzer wird benachrichtigt und kann sich nicht mehr anmelden."
+" Möchten Sie diesen Benutzer wirklich deaktivieren?<br/>\n"
+" Der Benutzer wird benachrichtigt und kann sich nicht mehr anmelden.\n"
+" "
 
 #: .\main\templates\main\admin\confirm_deactivate_user.html:16
 msgid "Deactivate"
@@ -2151,7 +2152,7 @@ msgstr ""
 
 #: .\main\templates\main\details\source_type_child_detail.html:23
 msgid "Go up"
-msgstr "Hoch zu:"
+msgstr "Hoch zu"
 
 #: .\main\templates\main\details\source_type_child_detail.html:25
 #: .\main\templates\main\details\source_type_child_detail.html:27
@@ -2297,7 +2298,7 @@ msgid ""
 msgstr ""
 "\n"
 "                Haben Sie eine Frage, die in unseren <a "
-"href=“%(faq_url)s”>FAQ</a> nicht beantwortet ist?\n"
+"href=“%(faq_url)s”>häufig gestellten Fragen</a> nicht beantwortet ist?\n"
 "                Schreiben Sie uns eine Nachricht! Wir werden Ihnen so bald "
 "als möglich antworten.\n"
 "            "
@@ -2307,14 +2308,12 @@ msgid "Frequently Asked Questions"
 msgstr "Häufig gestellte Fragen"
 
 #: .\main\templates\main\info\faq.html:20
-#, fuzzy
-#| msgid "General Statistics"
 msgid "General Questions"
-msgstr "Allgemeine Statistiken"
+msgstr "Allgemeine Fragen"
 
 #: .\main\templates\main\info\faq.html:46
 msgid "A whole other set of questions"
-msgstr ""
+msgstr "Weitere Fragen"
 
 #: .\main\templates\main\info\guidelines.html:7
 #: .\main\templates\main\info\guidelines.html:13
@@ -2323,14 +2322,10 @@ msgid "Guidelines"
 msgstr "Richtlinien"
 
 #: .\main\templates\main\info\guidelines.html:20
-#, fuzzy
-#| msgid "Our Guidelines"
 msgid "Our Guideline"
 msgstr "Unsere Richtlinien"
 
 #: .\main\templates\main\info\info_options.html:6
-#, fuzzy
-#| msgid "About the project"
 msgid "About the Project"
 msgstr "Über das Projekt"
 
@@ -2344,8 +2339,6 @@ msgid "Terms Of Service"
 msgstr "Nutzungsbedingungen"
 
 #: .\main\templates\main\info\start.html:27
-#, fuzzy
-#| msgid "The place to transcript historical manuscripts"
 msgid "The place to transcribe historical manuscripts"
 msgstr "Der Ort, um historische Manuskripte zu transkribieren"
 
@@ -2358,8 +2351,8 @@ msgid ""
 "You created transcripts and want to share them? You are looking for already "
 "transcribed material? Welcome!"
 msgstr ""
-"Sie haben Transkripte erstellt und möchten diese teilen? Sie suchen bereits "
-"transkribiertes Material? Willkommen!"
+"Sie haben Transkriptionen erstellt und möchten diese teilen? Sie suchen "
+"bereits transkribiertes Material? Willkommen!"
 
 #. Translators: Main Page introductory text.
 #: .\main\templates\main\info\start.html:41
@@ -2373,7 +2366,7 @@ msgstr "So funktioniert es"
 
 #: .\main\templates\main\info\start.html:45
 msgid "Stay Up To Date"
-msgstr ""
+msgstr "Auf dem Laufenden bleiben"
 
 #. Translators: Main Page text about upload procedure.
 #: .\main\templates\main\info\start.html:71
@@ -2392,7 +2385,7 @@ msgstr "HowItWorksEdit-Text"
 
 #: .\main\templates\main\info\start.html:97
 msgid "Additional information"
-msgstr "Zusätzliche Information"
+msgstr "Zusätzliche Informationen"
 
 #: .\main\templates\main\info\start.html:106
 #: .\main\templates\main\info\start.html:149
@@ -2402,7 +2395,7 @@ msgstr "Zusätzliche Informationen"
 #: .\main\templates\main\info\start.html:116
 #: .\main\templates\main\info\start.html:156
 msgid "Transcript Guidelines"
-msgstr "Transkript-Richtlinien"
+msgstr "Transkriptionsrichtlinien"
 
 #: .\main\templates\main\info\start.html:126
 #: .\main\templates\main\info\start.html:176
@@ -2411,8 +2404,6 @@ msgstr "Nutzungsbedingungen"
 
 #: .\main\templates\main\info\start.html:136
 #: .\main\templates\main\info\start.html:187
-#, fuzzy
-#| msgid "About us"
 msgid "About Us"
 msgstr "Über uns"
 
@@ -2429,25 +2420,25 @@ msgid ""
 "You can remove your email address from our newsletter list by entering it "
 "below."
 msgstr ""
+"Sie können Ihre E-Mail-Adresse aus unserer Newsletterliste entfernen indem "
+"Sie sie hier eintragen."
 
 #: .\main\templates\main\news\news_view.html:18
-#, fuzzy
-#| msgid "Last name"
 msgid "Latest News"
-msgstr "Nachname"
+msgstr "Aktuellste Neuigkeiten"
 
 #: .\main\templates\main\news\news_view.html:35
 #, python-format
 msgid " %(since)s ago"
-msgstr ""
+msgstr " vor %(since)s"
 
 #: .\main\templates\main\news\news_view.html:39
 msgid "Read this item in another language"
-msgstr ""
+msgstr "Diesen Artikel in einer anderen Sprache lesen"
 
 #: .\main\templates\main\news\news_view.html:48
 msgid "There are no current news. Please come back later."
-msgstr ""
+msgstr "Es gibt keine weiteren Neuigkeiten. Bitte kommen Sie später wieder."
 
 #: .\main\templates\main\search\exact_tooltip.html:4
 msgid ""
@@ -2459,63 +2450,58 @@ msgid ""
 "word <strong>fun</strong in it.\n"
 "                      "
 msgstr ""
+"\n"
+"                        Falls ausgewählt, wird nach exakt diesen Begriffen "
+"gesucht <br/> <u>Normal:</u> Suche nach <strong>Vers</strong> liefert auch "
+"Resultate für <strong><i>Vers</i>engold</strong> oder <strong><i>Vers</"
+"i>andhandel</strong> <br/> <u>Exakt:</u> Suche nach <strong>Vers</strong> "
+"liefert nur Resultate, die <strong>Vers</strong> enthalten.\n"
+"                      "
 
 #: .\main\templates\main\search\pagination.html:6
 msgid "Previous"
-msgstr ""
+msgstr "Vorherige"
 
 #: .\main\templates\main\search\pagination.html:16
 msgid "Next"
-msgstr ""
+msgstr "Nächste"
 
 #: .\main\templates\main\search\search_form.html:7
 #: .\main\templates\main\search\search_form_copy.html:6
-#, fuzzy
-#| msgid "Simple search"
 msgid "Fulltext search"
-msgstr "Einfache Suche"
+msgstr "Volltextsuche"
 
 #: .\main\templates\main\search\search_form.html:8
 #: .\main\templates\main\search\search_form_copy.html:7
 msgid "Enter a search term"
-msgstr ""
+msgstr "Suchbegriff eingeben"
 
 #: .\main\templates\main\search\search_form.html:14
 #: .\main\templates\main\search\search_form.html:15
-#, fuzzy
-#| msgid "Document"
 msgid "Filter by Document Title"
-msgstr "Dokument"
+msgstr "Nach Dokumententitel filtern"
 
 #: .\main\templates\main\search\search_form.html:27
 #: .\main\templates\main\search\search_form.html:28
-#, fuzzy
-#| msgid "Reference Numbers in this institution"
 msgid "Search by Reference Name"
-msgstr "Signaturen in dieser Institution"
+msgstr "Nach Signatur suchen"
 
 #: .\main\templates\main\search\search_form.html:38
 #: .\main\templates\main\search\search_form.html:39
-#, fuzzy
-#| msgid "Reference Numbers in this institution"
 msgid "Search by Reference Title"
-msgstr "Signaturen in dieser Institution"
+msgstr "Nach Titel der Verzeichniseinheit filtern"
 
 #: .\main\templates\main\search\search_form.html:63
 #: .\main\templates\main\search\search_form.html:64
 #: .\main\templates\main\search\search_form_copy.html:49
 #: .\main\templates\main\search\search_form_copy.html:50
-#, fuzzy
-#| msgid "Creation Location"
 msgid "Search by Location"
-msgstr "Erstellungsort"
+msgstr "Nach Herstellungsort suchen"
 
 #: .\main\templates\main\search\search_form_copy.html:24
 #: .\main\templates\main\search\search_form_copy.html:25
-#, fuzzy
-#| msgid "Reference Numbers in this institution"
 msgid "Search by Reference Number or Title"
-msgstr "Signaturen in dieser Institution"
+msgstr "Nach Signatur oder Titel suchen"
 
 #: .\main\templates\main\search\search_view.html:21
 msgid "Simple search"
@@ -2531,30 +2517,26 @@ msgid "Search results"
 msgstr "Suchergebnisse"
 
 #: .\main\templates\main\search\search_view_2.html:23
-#, fuzzy
-#| msgid "Search results"
 msgid "Search Result"
-msgstr "Suchergebnisse"
+msgstr "Suchergebnis"
 
 #: .\main\templates\main\search\search_view_2.html:26
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        Welcome, %(username)s\n"
-#| "                    "
+#, python-format
 msgid ""
 "\n"
 "                Found %(total)s results.\n"
 "            "
 msgstr ""
 "\n"
-"Willkommen, %(username)s\n"
-"                    "
+"                Total %(total)s Resultat(e) gefunden.\n"
+"            "
 
 #: .\main\templates\main\search\search_view_2.html:118
 msgid ""
 "Please enter a search term above. It needs to be at least 3 characters long."
 msgstr ""
+"Bitte oben einen Suchbegriff eingeben. Dieser muss mindestens 3 Zeichen lang "
+"sein."
 
 #: .\main\templates\main\sidebar.html:10
 msgid "Menu"
@@ -2563,7 +2545,7 @@ msgstr "Menü"
 #: .\main\templates\main\sidebar.html:23
 #: .\main\templates\main\upload\create_batch_contact.html:18
 msgid "Upload Batch"
-msgstr "Batch hochladen"
+msgstr "Batch-Upload"
 
 #: .\main\templates\main\sidebar.html:30
 msgid "Browse by Institution"
@@ -2571,7 +2553,7 @@ msgstr "Nach Institution durchsuchen"
 
 #: .\main\templates\main\sidebar.html:33
 msgid "Browse by Author"
-msgstr "Nach Autor durchsuchen"
+msgstr "Nach Schreiber*in durchsuchen"
 
 #: .\main\templates\main\sidebar.html:36
 msgid "Browse by Document Type"
@@ -2593,7 +2575,6 @@ msgid "My Profile"
 msgstr "Mein Profil"
 
 #: .\main\templates\main\test_dd.html:7
-#, fuzzy
 msgid "Test Dropdown"
 msgstr "Dropdown-Test"
 
@@ -2635,6 +2616,8 @@ msgstr "Laden Sie Ihre Transkription hoch"
 #: .\main\templates\main\upload\create_document.html:93
 msgid "If you're done entering your information, you can upload the document."
 msgstr ""
+"Wenn Sie alle Informationen eingegeben haben, können Sie das Dokument "
+"hochladen."
 
 #: .\main\templates\main\upload\create_institution.html:9
 msgid "Create Institution"
@@ -2666,10 +2649,15 @@ msgid ""
 "        Edit '%(title)s'\n"
 "    "
 msgstr ""
+"\n"
+"       ‘%(title)s bearbeiten’\n"
+"    "
 
 #: .\main\templates\main\upload\edit_document_transcription.html:33
 msgid "If you're done updating the transcription, you can save the document."
 msgstr ""
+"Wenn Sie die Transkription fertig bearbeitet haben, können Sie das Dokument "
+"speichern."
 
 #: .\main\templates\main\upload\edit_document_transcription_copy.html:19
 msgid "Institutions list"
@@ -2684,8 +2672,6 @@ msgid "Transcription"
 msgstr "Transkription"
 
 #: .\main\templates\main\upload\edit_meta.html:15
-#, fuzzy
-#| msgid "Edit Metadata"
 msgid "Edit metadata"
 msgstr "Metadaten bearbeiten"
 
@@ -2698,40 +2684,38 @@ msgid "Manuscript description"
 msgstr "Manuskriptbeschreibung"
 
 #: .\main\templates\main\upload\edit_meta.html:53
-#, fuzzy
-#| msgid "Document authors"
 msgid "Document your changes"
-msgstr "Autoren des Dokuments"
+msgstr "Dokumentieren Sie Ihre Änderungen"
 
 #: .\main\templates\main\upload\edit_meta.html:57
-#, fuzzy
-#| msgid "Save Changes"
 msgid "Save Your Changes"
 msgstr "Änderungen speichern"
 
 #: .\main\templates\main\upload\edit_meta.html:59
 msgid "If you're done changing the metadata, you can save the document."
 msgstr ""
+"Wenn Sie die Metadaten fertig bearbeitet haben, können Sie das Dokument "
+"speichern."
 
 #: .\main\templates\main\upload\export_document.html:9
 msgid "Export document"
-msgstr "Exportdokument"
+msgstr "Dokument exportieren"
 
 #: .\main\templates\main\upload\export_document.html:29
 msgid "Export TEI"
-msgstr "TEI exportieren"
+msgstr "Als TEI exportieren"
 
 #: .\main\templates\main\upload\export_document.html:30
 msgid "Export JSON"
-msgstr "Exportieren JSON"
+msgstr "Als JSON exportieren"
 
 #: .\main\templates\main\upload\export_document.html:31
 msgid "Export HTML"
-msgstr "HTML exportieren"
+msgstr "Als HTML exportieren"
 
 #: .\main\templates\main\upload\export_document.html:32
 msgid "Export PDF"
-msgstr "Export PDF"
+msgstr "Als PDF exportieren"
 
 #: .\main\templates\main\upload\thank_you.html:6
 msgid "Thank you!"
@@ -2743,7 +2727,7 @@ msgstr "Danke für Ihren Beitrag"
 
 #: .\main\templates\main\upload\thank_you.html:14
 msgid "What would you like to do next?"
-msgstr ""
+msgstr "Was wollen Sie als nächstes tun?"
 
 #: .\main\templates\main\upload\thank_you.html:15
 msgid "View Uploaded Document"
@@ -2780,7 +2764,7 @@ msgstr ""
 #: .\main\templates\main\upload\upload_options.html:34
 #: .\main\templates\main\upload\upload_options_copy.html:44
 msgid "Batch Upload"
-msgstr "Sammel-Upload"
+msgstr "Batch-Upload"
 
 #: .\main\templates\main\upload\upload_options.html:35
 #: .\main\templates\main\upload\upload_options_copy.html:45
@@ -2788,6 +2772,8 @@ msgid ""
 "You have loads of transcriptions you want to share? Contact us for a guided "
 "import."
 msgstr ""
+"Sie haben viele Transkriptionen, die Sie hochladen wollen? Kontaktieren Sie "
+"uns für einen geführten Import."
 
 #: .\main\templates\main\upload\upload_options_copy.html:33
 msgid "Multiple Pages"
@@ -2798,62 +2784,56 @@ msgid ""
 "Use this option for large documents. It lets you add page by page. All the "
 "uploaded data must belong to one reference number"
 msgstr ""
-"Verwenden Sie diese Option für große Dokumente. Sie können Seite für Seite "
-"hinzufügen. Alle hochgeladenen Daten müssen zu einer Referenznummer gehören"
+"Verwenden Sie diese Option für grosse Dokumente. Sie können Seite für Seite "
+"hinzufügen. Alle hochgeladenen Daten müssen zu einer Signatur gehören"
 
 #: .\main\templates\main\upload\upload_options_copy.html:37
 msgid "Coming Soon!"
-msgstr ""
+msgstr "Demnächst verfügbar!"
 
 #: .\main\templates\main\users\account_activation_invalid.html:16
 msgid "Invalid link"
-msgstr ""
+msgstr "Ungültiger Link"
 
 #: .\main\templates\main\users\account_activation_invalid.html:18
 msgid "This activation link is invalid."
-msgstr ""
+msgstr "Dieser Aktivierungslink ist ungültig."
 
 #: .\main\templates\main\users\account_activation_sent.html:16
-#, fuzzy
-#| msgid "Registration"
 msgid "Registration Email sent"
-msgstr "Registrierung"
+msgstr "Registrierungsemail wurde verschickt"
 
 #: .\main\templates\main\users\account_activation_sent.html:18
-#, fuzzy
-#| msgid ""
-#| "Your password has been reset successfully. You'll receive an email with a "
-#| "reset link shortly."
 msgid ""
 "You have been successfully registered. You will receive a confirmation e-"
 "mail shortly."
 msgstr ""
-"Ihr Passwort wurde erfolgreich zurückgesetzt. Sie erhalten in Kürze eine E-"
-"Mail mit einem Reset-Link."
+"Ihr Benutzerkonto wurde erfolgreich erstellt. Sie werden in Kürze ein "
+"Bestätigungsmail erhalten."
 
 #: .\main\templates\main\users\email_templates\account_activation_email.html:9
 msgid "Click to finalize registration"
-msgstr ""
+msgstr "Clicken um die Registrierung abzuschliessen"
 
 #: .\main\templates\main\users\email_templates\account_activation_email.html:11
 msgid "Or copy this link into your browser:"
-msgstr ""
+msgstr "Oder kopieren Sie diesen Link in Ihren Browser:"
 
 #: .\main\templates\main\users\login.html:18
 msgid "Login To Your Account"
-msgstr "Einloggen"
+msgstr "Mit Ihrem Benutzerkonto anmelden"
 
 #: .\main\templates\main\users\login.html:23
 msgid ""
 "Your account has no access to this page. Please login with adifferent "
 "account."
 msgstr ""
-"Ihr Konto hat keinen Zugriff auf diese Seite. Bitte melden Sie sich mit "
-"einem anderen Konto an."
+"Ihr Benutzerkonto hat keinen Zugriff auf diese Seite. Bitte melden Sie sich "
+"mit einem anderen Konto an."
 
 #: .\main\templates\main\users\login.html:27
 msgid "You need to be logged in, to view the requested page."
-msgstr "Sie müssen eingeloggt sein, um die angeforderte Seite sehen zu können."
+msgstr "Sie müssen angemeldet sein, um die angeforderte Seite sehen zu können."
 
 #: .\main\templates\main\users\login.html:38
 msgid "Forgot your password?"
@@ -2864,14 +2844,12 @@ msgid "Reset it here."
 msgstr "Setzen Sie es hier zurück."
 
 #: .\main\templates\main\users\login.html:39
-#, fuzzy
-#| msgid "Forgot your password?"
 msgid "Forgot your username?"
-msgstr "Passwort vergessen?"
+msgstr "Benutzername vergessen?"
 
 #: .\main\templates\main\users\login.html:39
 msgid "Find out here."
-msgstr ""
+msgstr "Finden Sie ihn hier wieder heraus."
 
 #: .\main\templates\main\users\login.html:40
 msgid "No user account?"
@@ -2888,7 +2866,7 @@ msgstr "Abgemeldet"
 
 #: .\main\templates\main\users\logout.html:18
 msgid "You have been securely logged out."
-msgstr "Sie wurden sicher ausgeloggt."
+msgstr "Sie wurden sicher abgemeldet."
 
 #: .\main\templates\main\users\logout.html:19
 msgid "Go To Main Page"
@@ -2913,8 +2891,6 @@ msgid "Your e-mail notification options"
 msgstr "Ihre E-Mail-Benachrichtigungsoptionen"
 
 #: .\main\templates\main\users\messages.html:37
-#, fuzzy
-#| msgid "How often do you want to be notified about messages you receive?"
 msgid "How do you want to to be notified if you receive messages?"
 msgstr ""
 "Wie oft möchten Sie über Nachrichten benachrichtigt werden, die Sie erhalten?"
@@ -2927,10 +2903,8 @@ msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 #: .\main\templates\main\users\notifications.html:26
-#, fuzzy
-#| msgid "Notifications"
 msgid "Delete All Notifications"
-msgstr "Benachrichtigungen"
+msgstr "Alle Benachrichtigungen löschen"
 
 #: .\main\templates\main\users\password_change.html:9
 #: .\main\templates\main\users\password_change.html:16
@@ -2943,7 +2917,7 @@ msgstr "Passwort ändern"
 
 #: .\main\templates\main\users\password_change.html:23
 msgid "Change Your Password"
-msgstr "Passwort ändern"
+msgstr "Ändern Sie Ihr Passwort"
 
 #: .\main\templates\main\users\password_change_done.html:7
 #: .\main\templates\main\users\password_change_done.html:18
@@ -2951,8 +2925,6 @@ msgid "Password changed"
 msgstr "Passwort geändert"
 
 #: .\main\templates\main\users\password_change_done.html:13
-#, fuzzy
-#| msgid "Change Password"
 msgid "Change password"
 msgstr "Passwort ändern"
 
@@ -2961,14 +2933,12 @@ msgid "Your password has been sucessfully changed."
 msgstr "Ihr Passwort wurde erfolgreich geändert."
 
 #: .\main\templates\main\users\password_change_done.html:21
-#, fuzzy
-#| msgid "Go To Main Page"
 msgid "Go back to main page"
 msgstr "Zur Hauptseite"
 
 #: .\main\templates\main\users\password_reset.html:18
 msgid "Reset Your Password"
-msgstr "Passwort zurücksetzen"
+msgstr "Setzen Sie Ihr Passwort zurück"
 
 #: .\main\templates\main\users\password_reset_complete.html:7
 #: .\main\templates\main\users\password_reset_done.html:7
@@ -2990,7 +2960,7 @@ msgstr "Passwort neu setzen"
 
 #: .\main\templates\main\users\password_reset_confirm.html:18
 msgid "Set A New Password"
-msgstr "Neues Kennwort festlegen"
+msgstr "Neues Passwort festlegen"
 
 #: .\main\templates\main\users\password_reset_done.html:18
 msgid ""
@@ -3002,18 +2972,14 @@ msgstr ""
 
 #: .\main\templates\main\users\public_user_profile.html:8
 msgid "User "
-msgstr "Benutzer "
+msgstr "Benutzer*in "
 
 #: .\main\templates\main\users\public_user_profile.html:19
 msgid "User Data"
 msgstr "Benutzerdaten"
 
 #: .\main\templates\main\users\public_user_profile.html:25
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        Welcome, %(username)s\n"
-#| "                    "
+#, python-format
 msgid ""
 "\n"
 "                    (This is you. Check your <a href=\"%(profile_url)s"
@@ -3021,21 +2987,16 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"Willkommen, %(username)s\n"
+"                    (Dies sind Sie. Sehen SIe Ihr <a "
+"href=“%(profile_url)s”>öffentliches Profil</a>)\n"
 "                    "
 
 #: .\main\templates\main\users\public_user_profile.html:32
-#, fuzzy
-#| msgid "Unsubscribe from all"
 msgid "Unsubscribe from this user"
-msgstr "Alle Benachrichtigungen abbestellen"
+msgstr "Diese*n Benutzer*in nicht mehr abonnieren"
 
 #: .\main\templates\main\users\public_user_profile.html:38
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        Welcome, %(username)s\n"
-#| "                    "
+#, python-format
 msgid ""
 "\n"
 "                  (Manage your subscriptions <a href=\"%(sub_url)s\">here</"
@@ -3043,8 +3004,8 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"Willkommen, %(username)s\n"
-"                    "
+"                  (Abonnemente <a href=“%(sub_url)s”>hier</a> verwalten)\n"
+"                  "
 
 #: .\main\templates\main\users\public_user_profile.html:46
 msgid "User Activity"
@@ -3064,11 +3025,11 @@ msgstr "Antworten"
 
 #: .\main\templates\main\users\read_message.html:36
 msgid "Go To Inbox"
-msgstr "Gehe zum Posteingang"
+msgstr "Zum Posteingang"
 
 #: .\main\templates\main\users\read_message.html:37
 msgid "Mark Unread"
-msgstr ""
+msgstr "Als ungelesen markieren"
 
 #: .\main\templates\main\users\read_message.html:38
 msgid "Delete Message"
@@ -3076,7 +3037,7 @@ msgstr "Nachricht löschen"
 
 #: .\main\templates\main\users\read_notification.html:10
 msgid "Read Notification"
-msgstr "Mitteilung gelesen"
+msgstr "Benachrichtigung lesen"
 
 #: .\main\templates\main\users\read_notification.html:22
 msgid "Your Notification"
@@ -3084,34 +3045,26 @@ msgstr "Ihre Benachrichtigung"
 
 #: .\main\templates\main\users\request_username.html:9
 #: .\main\templates\main\users\request_username_done.html:7
-#, fuzzy
-#| msgid "Username"
 msgid "Username Request"
-msgstr "Benutzername"
+msgstr "Benutzername anfordern"
 
 #: .\main\templates\main\users\request_username.html:20
 #: .\main\templates\main\users\signup.html:20
 msgid "You are already signed in."
-msgstr ""
+msgstr "Sie sind bereits angemeldet."
 
 #: .\main\templates\main\users\request_username.html:22
 #: .\main\templates\main\users\signup.html:22
-#, fuzzy
-#| msgid "Logout"
 msgid "Logout."
-msgstr "Abmelden"
+msgstr "Abmelden."
 
 #: .\main\templates\main\users\request_username_done.html:17
-#, fuzzy
-#| msgid "Your Password Has Been Reset"
 msgid "Your Username Has Been Reset"
-msgstr "Ihr Passwort wurde zurückgesetzt"
+msgstr "Ihr Benutzername wurde zurückgesetzt"
 
 #: .\main\templates\main\users\request_username_done.html:19
-#, fuzzy
-#| msgid "Your password has been reset successfully."
 msgid "Your username has been sent to you successfully."
-msgstr "Ihr Passwort wurde erfolgreich zurückgesetzt."
+msgstr "Ihr Benutzername wurde erfolgreich zurückgesetzt."
 
 #: .\main\templates\main\users\signup.html:9
 msgid "Registration"
@@ -3120,32 +3073,25 @@ msgstr "Registrierung"
 #: .\main\templates\main\users\subscriptions.html:24
 #: .\main\templates\main\users\user_options_copy.html:59
 msgid "Your subscriptions"
-msgstr "Deine Pakete"
+msgstr "Ihre Abonnemente"
 
 #: .\main\templates\main\users\subscriptions.html:26
 msgid "Unsubscribe from all"
 msgstr "Alle Benachrichtigungen abbestellen"
 
 #: .\main\templates\main\users\subscriptions.html:29
-#, fuzzy
-#| msgid ""
-#| "You have no subscriptions. You can subscribe to documents, reference "
-#| "numbers and users on the respective pages."
 msgid ""
 "You have no subscriptions. You can subscribe to institutions, documents, "
 "reference numbers, authors and users on the respective pages."
 msgstr ""
 "Sie haben keine Abonnements. Auf den jeweiligen Seiten können Sie Dokumente, "
-"Referenznummern und Benutzer abonnieren."
+"Institutionen, Signaturen und Benutzer abonnieren."
 
 #: .\main\templates\main\users\subscriptions.html:33
 msgid "Your subscription options"
 msgstr "Ihre Abonnementoptionen"
 
 #: .\main\templates\main\users\subscriptions.html:34
-#, fuzzy
-#| msgid ""
-#| "How often do you want to be notified about your subscribed documents?"
 msgid ""
 "How do you want to to be notified if there are changes in your subscriptions?"
 msgstr ""
@@ -3153,11 +3099,11 @@ msgstr ""
 
 #: .\main\templates\main\users\update_user.html:9
 msgid "Change User Profile"
-msgstr "Benutzerprofil ändern"
+msgstr "Benutzerprofil anpassen"
 
 #: .\main\templates\main\users\update_user.html:16
 msgid "Update Profile"
-msgstr "Profil aktualisieren"
+msgstr "Profil anpassen"
 
 #: .\main\templates\main\users\update_user.html:23
 msgid "Update Your User Information"
@@ -3165,10 +3111,8 @@ msgstr "Aktualisieren Sie Ihre Benutzerinformationen"
 
 #: .\main\templates\main\users\user_options.html:6
 #: .\main\templates\main\users\user_options_copy.html:84
-#, fuzzy
-#| msgid "Update Profile"
 msgid "Edit Profile"
-msgstr "Profil aktualisieren"
+msgstr "Profil bearbeiten"
 
 #: .\main\templates\main\users\user_options_copy.html:53
 msgid "Your message inbox"
@@ -3176,14 +3120,12 @@ msgstr "Ihr Nachrichteneingang"
 
 #: .\main\templates\main\users\user_options_copy.html:56
 msgid "Your notifications"
-msgstr "Deine Benachrichtigungen"
+msgstr "Ihre Benachrichtigungen"
 
 #: .\main\templates\main\users\user_options_copy.html:63
 #: .\main\templates\main\users\user_options_copy2.html:8
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile"
-msgstr "Mein Profil"
+msgstr "Profil"
 
 #: .\main\templates\main\users\user_options_copy.html:70
 msgid "Change your password"
@@ -3202,36 +3144,26 @@ msgid "Log out"
 msgstr "Abmelden"
 
 #: .\main\templates\main\users\user_options_copy.html:85
-#, fuzzy
-#| msgid "Your Profile"
 msgid "Public Profile"
-msgstr "Dein Profil"
+msgstr "Öffentliches Profil"
 
 #: .\main\templates\main\users\user_options_copy2.html:12
-#, fuzzy
-#| msgid "Update your Profile information"
 msgid "Edit Profile Information"
 msgstr "Aktualisieren Sie Ihre Profilinformationen"
 
 #: .\main\templates\main\users\user_options_copy2.html:26
-#, fuzzy
-#| msgid "The document has been created."
 msgid "Show Documents I created"
-msgstr "Das Dokument wurde erstellt."
+msgstr "Dokumente anzeigen, die ich erstellt habe"
 
 #: .\main\templates\main\users\user_options_copy2.html:27
 msgid "Show Documents I worked on"
-msgstr ""
+msgstr "Dokumente anzeigen, die ich bearbeitet habe"
 
 #: .\main\templates\main\users\user_options_copy2.html:29
-#, fuzzy
-#| msgid "Document authors"
 msgid "Show Document drafts"
-msgstr "Autoren des Dokuments"
+msgstr "Dokumententwürfe anzeigen"
 
 #: .\main\templates\main\users\user_options_copy2.html:38
-#, fuzzy
-#| msgid "Your message inbox"
 msgid "Your Message Inbox"
 msgstr "Ihr Nachrichteneingang"
 
@@ -3241,16 +3173,12 @@ msgid "Write A Message"
 msgstr "Schreiben Sie eine Nachricht"
 
 #: .\main\templates\main\users\user_options_copy2.html:41
-#, fuzzy
-#| msgid "Your Notification"
 msgid "Your Notifications"
-msgstr "Ihre Benachrichtigung"
+msgstr "Ihre Benachrichtigungen"
 
 #: .\main\templates\main\users\user_options_copy2.html:43
-#, fuzzy
-#| msgid "Your subscriptions"
 msgid "Your Subscriptions"
-msgstr "Deine Pakete"
+msgstr "Ihre Abonnemente"
 
 #: .\main\templates\main\users\user_profile.html:8
 msgid "User Profile"
@@ -3264,24 +3192,26 @@ msgstr "Meine persönlichen Daten"
 msgid ""
 "You do not have an authentication key to use the API. You can generate one:"
 msgstr ""
+"Sie haben keinen Authentifizierungs-Key um die API zu benutzen. Sie können "
+"einen Key generieren:"
 
 #: .\main\templates\main\users\user_profile.html:24
 msgid "Generate An API Key"
-msgstr ""
+msgstr "API-Key generieren"
 
 #: .\main\templates\main\users\user_profile.html:26
 msgid "Your API key is valid for a month. You can renew it for another month:"
 msgstr ""
+"Ihr API-Key ist einen Monat lang gültig. Sie können Ihn jeweils für einen "
+"Monat erneuern:"
 
 #: .\main\templates\main\users\user_profile.html:26
 msgid "Renew API Key"
-msgstr ""
+msgstr "API-Key erneuern"
 
 #: .\main\templates\main\users\user_profile.html:26
-#, fuzzy
-#| msgid "Delete All Messages"
 msgid "Delete API Key"
-msgstr "Alle Nachrichten löschen"
+msgstr "API-Key löschen"
 
 #: .\main\templates\main\users\user_profile.html:30
 msgid "My Activity"
@@ -3293,7 +3223,7 @@ msgstr "Nachricht schreiben"
 
 #: .\main\templates\main\users\write_message.html:22
 msgid "Make contact with other users of transcriptiones!"
-msgstr "Nehmen Sie Kontakt mit anderen Nutzern von transcriptions auf!"
+msgstr "Nehmen Sie Kontakt mit anderen Benutzer*innen von transcriptiones auf!"
 
 #: .\main\views\views_admin.py:23
 msgid "User does not exist"
@@ -3317,63 +3247,54 @@ msgstr "Benutzer auf Benutzer geändert"
 
 #: .\main\views\views_admin.py:79
 msgid "User set to admin"
-msgstr "Benutzer auf admin geändert"
+msgstr "Benutzer auf Administrator geändert"
 
 #: .\main\views\views_browse.py:230
 msgid "The transcription version you requested is not available."
-msgstr ""
+msgstr "Die Transkriptionsversion, die Sie angefordert haben, existiert nicht."
 
 #: .\main\views\views_edit.py:30
-#, fuzzy
-#| msgid "The document has been created."
 msgid "The document has been updated."
-msgstr "Das Dokument wurde erstellt."
+msgstr "Das Dokument wurde bearbeitet."
 
 #: .\main\views\views_edit.py:36
 msgid "The transcription did not change. No new version saved."
 msgstr ""
+"Die Transkription hat sich nicht verändert. Es wurde keine neue Version "
+"erstellt."
 
 #: .\main\views\views_edit.py:81
-#, fuzzy
-#| msgid "The document has been created."
 msgid "The metadata of the document has been updated."
-msgstr "Das Dokument wurde erstellt."
+msgstr "Die Metadaten des Dokuments wurden bearbeitet."
 
 #: .\main\views\views_info.py:44
 msgid "Thank you! You will receive our next newsletter."
-msgstr ""
+msgstr "Danke! Sie werden unseren nächsten Newsletter erhalten."
 
 #: .\main\views\views_info.py:47
 msgid "Your address is already in our list."
-msgstr ""
+msgstr "Ihre Adresse ist bereits in unserer Liste."
 
 #: .\main\views\views_info.py:49
-#, fuzzy
-#| msgid "Please enter an e-mail address"
 msgid "Please fill in a valid email address."
-msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 
 #: .\main\views\views_info.py:63
-#, fuzzy
-#| msgid "You have been securely logged out."
 msgid "You have been unsubscribed."
-msgstr "Sie wurden sicher ausgeloggt."
+msgstr "Sie haben den Newsletter abbestellt."
 
 #: .\main\views\views_info.py:66
 msgid "This address is not in our newsletter list."
-msgstr ""
+msgstr "Diese Adresse ist nicht in unserer Newsletter-Liste."
 
 #: .\main\views\views_info.py:82 .\main\views\views_upload.py:38
-#, fuzzy
-#| msgid "Your message has been sent."
 msgid "Your Message has been sent. You received a copy by email."
-msgstr "Ihre Nachricht wurde gesendet."
+msgstr ""
+"Ihre Nachricht wurde gesendet. Sie haben eine Kopie per E-Mail erhalten."
 
 #: .\main\views\views_messages.py:47
-#, fuzzy
-#| msgid "The notification has been deleted."
 msgid "Your notification policy has been updated."
-msgstr "Die Benachrichtigung wurde gelöscht."
+msgstr "Ihre Benachrichtigungseinstellungen wurden angepasst."
 
 #: .\main\views\views_messages.py:59 .\main\views\views_messages.py:93
 #: .\main\views\views_messages.py:105 .\main\views\views_messages.py:123
@@ -3395,16 +3316,16 @@ msgstr "Alle Nachrichten wurden gelöscht."
 #: .\main\views\views_search.py:58
 msgid "Please enter at least a search query or a title or a reference title."
 msgstr ""
+"Bitte geben Sie mindestens einen Suchbegriff, einen Dokumententitel oder den "
+"Titel einer Verzeichniseinheit ein."
 
 #: .\main\views\views_search.py:159
 msgid "There are errors in your search form"
-msgstr ""
+msgstr "Ihr Suchformular ist fehlerhaft"
 
 #: .\main\views\views_subscriptions.py:24
-#, fuzzy
-#| msgid "The notification has been deleted."
 msgid "Your Subscription Options have been updated"
-msgstr "Die Benachrichtigung wurde gelöscht."
+msgstr "Ihre Benachrichtigungseinstellungen wurden angepasst"
 
 #: .\main\views\views_subscriptions.py:36
 #: .\main\views\views_subscriptions.py:50
@@ -3431,14 +3352,10 @@ msgid "Could not remove subscription"
 msgstr "Das Abonnement konnte nicht entfernt werden"
 
 #: .\main\views\views_subscriptions.py:141
-#, fuzzy
-#| msgid "Subscription removed"
 msgid "All subscriptions removed"
-msgstr "Das Abonnement wurde entfernt"
+msgstr "Alle Abonnemente wurden entfernt"
 
 #: .\main\views\views_subscriptions.py:143
-#, fuzzy
-#| msgid "Could not remove subscription"
 msgid "Could not remove subscriptions"
 msgstr "Das Abonnement konnte nicht entfernt werden"
 
@@ -3448,7 +3365,7 @@ msgstr "Das Dokument wurde erstellt."
 
 #: .\main\views\views_upload.py:84
 msgid "There is an error in your form"
-msgstr ""
+msgstr "Ihr Formular ist fehlerhaft"
 
 #: .\main\views\views_upload.py:97
 msgid "Success: Institution was created."
@@ -3463,38 +3380,32 @@ msgid "Successfully logged in!"
 msgstr "Erfolgreich angemeldet!"
 
 #: .\main\views\views_user.py:166
-#, fuzzy
-#| msgid "The notification has been deleted."
 msgid "Your user information has been updated"
-msgstr "Die Benachrichtigung wurde gelöscht."
+msgstr "Ihre Benutzerinsformation wurde angepasst"
 
 #: .\main\views\views_user.py:197
 msgid "This e-mail address is not registered."
-msgstr ""
+msgstr "Diese E-Mail-Adresse ist nicht registriert."
 
 #: .\main\views\views_user.py:213
 msgid "An API Key has been generated"
-msgstr ""
+msgstr "Ein API-Key wurde generiert"
 
 #: .\main\views\views_user.py:220
 msgid "You need to generate an API key first."
-msgstr ""
+msgstr "Sie müssen zuerst einen API-Key generieren."
 
 #: .\main\views\views_user.py:227
-#, fuzzy
-#| msgid "Your message has been sent."
 msgid "Your API Key has been renewed"
-msgstr "Ihre Nachricht wurde gesendet."
+msgstr "Ihr API-Key wurde erneuert"
 
 #: .\main\views\views_user.py:233
 msgid "No API key was found to delete."
-msgstr ""
+msgstr "Es wurde kein API-Key gefunden, der hätte gelöscht werden können."
 
 #: .\main\views\views_user.py:239
-#, fuzzy
-#| msgid "The message has been deleted."
 msgid "Your API Key has been deleted"
-msgstr "Die Nachricht wurde gelöscht."
+msgstr "Ihr API-Key wurde gelöscht"
 
 #, fuzzy
 #~| msgid "Your Message"
