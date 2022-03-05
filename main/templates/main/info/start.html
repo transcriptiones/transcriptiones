@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block base_content %}
+    {% get_current_language as LANGUAGE_CODE %}
     <!-- Header -->
     <header class="masthead d-flex">
         <div class="container text-center my-auto">
@@ -38,7 +39,18 @@
                 <div class="col-lg-10 mx-auto">
                     <h2>{% translate 'You created transcripts and want to share them? You are looking for already transcribed material? Welcome!' %}</h2>
                     {% comment %} Translators: Main Page introductory text. {% endcomment %}
-                    <p class="lead mb-5">{% translate 'WhatIsTranscriptiones-Text' %}</p>
+                    {% if LANGUAGE_CODE == 'de' %}
+                        <p class="lead mb-5">
+                            Dem Motto «aus der Community für die Community» folgend wurde mit
+                            transcriptiones ein Ort geschaffen, an dem Transkriptionen historischer Handschriften
+                            geteilt, betrachtet und bearbeitet werden können.
+                        </p>
+                    {% else %}
+                        <p class="lead mb-5">
+                            According to the motto «from the community for the community», we have created a space
+                            for sharing, viewing, and editing transcriptions of historical manuscripts.
+                        </p>
+                    {% endif %}
                     <a class="btn btn-dark btn-xl js-scroll-trigger" href="#procedure">{% translate 'How it works' %}</a>
                     <div>
                         <br/><br/>
@@ -68,7 +80,21 @@
                         <strong>{% translate 'Upload' %}</strong>
                     </h4>
                     {% comment %} Translators: Main Page text about upload procedure. {% endcomment %}
-                    <p class="mb-0">{% translate 'HowItWorksUpload-Text' %}</p>
+                    {% if LANGUAGE_CODE == 'de' %}
+                        <p class="lead mb-5">
+                            Sie können Ihre Transkription <a href="{% url 'main:upload_document' %}" class="text-white font-weight-bold">hochladen</a>,
+                            indem Sie sie in den Editor kopieren. Formatierungen aus Ihren Textdateien werden automatisch übernommen.
+                            Alternativ können Sie direkt im Editor transkribieren.
+                            Weiter können Sie Ihre Transkription mit einer Reihe von Metadaten anreichern.
+                        </p>
+                    {% else %}
+                        <p class="lead mb-5">
+                            You can <a href="{% url 'main:upload_document' %}" class="text-white font-weight-bold">upload</a> your transcription
+                            by pasting it into the editor. Formatting from your text files will be preserved.
+                            You can also directly transcribe in the editor. Additionally, you can enrich your
+                            transcription with a variety of metadata.
+                        </p>
+                    {% endif %}
                 </div>
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
                     <span class="service-icon rounded-circle mx-auto mb-3">
@@ -80,7 +106,22 @@
                         <strong>{% translate 'Search' %}</strong>
                     </h4>
                     {% comment %} Translators: Main Page text about search functions. {% endcomment %}
-                    <p class="mb-0">{% translate 'HowItWorksSearch-Text' %}</p>
+                    {% if LANGUAGE_CODE == 'de' %}
+                        <p class="lead mb-5">
+                            Hochgeladene Transkriptionen lassen sich unterschiedlich auffinden:
+                            Sie können einerseits <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Entdecken</a>
+                            anwählen und über die Institutionen, Quellentypen oder Autor*innen zur gewünschten
+                            Transkription gelangen, andererseits können Sie eine
+                            <a href="{% url 'main:search' %}" class="text-white font-weight-bold">Volltextsuche</a> starten.
+                        </p>
+                    {% else %}
+                        <p class="lead mb-5">
+                            Uploaded transcriptions can be found in several ways: You can either click
+                            <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Explore</a> to browse the database by
+                            institutions, source types or authors and navigate to the respective transcription.
+                            Or you can use our <a href="{% url 'main:search' %}" class="text-white font-weight-bold">full-text search</a>.
+                        </p>
+                    {% endif %}
                 </div>
                 <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
                     <span class="service-icon rounded-circle mx-auto mb-3">
@@ -90,7 +131,19 @@
                         <strong>{% translate 'Edit' %}</strong>
                     </h4>
                     {% comment %} Translators: Main Page text about edit/correct functions. {% endcomment %}
-                    <p class="mb-0">{% translate 'HowItWorksEdit-Text' %}</p>
+                    {% if LANGUAGE_CODE == 'de' %}
+                        <p class="lead mb-5">
+                            Sie können eigene wie fremde Transkriptionen überarbeiten. Dasselbe gilt für einen grossen
+                            Teil der Metadaten. Der Versionsverlauf zeigt die entsprechenden Veränderungen an.
+                            Ältere Version können vom transcriptiones-Team wiederhergestellt werden.
+                        </p>
+                    {% else %}
+                        <p class="lead mb-5">
+                            You can edit your own transcriptions as well as those of others.
+                            The same applies to most metadata. The version history shows the corresponding changes.
+                            Older versions can be restored by the transcriptiones team.
+                        </p>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-10 mx-auto">

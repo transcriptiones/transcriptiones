@@ -181,6 +181,8 @@ class UserSubscriptionTable(tables.Table):
             badge_class = "warning"
         if value == UserSubscription.SubscriptionType.DOCUMENT.label:
             badge_class = "info"
+        if value == UserSubscription.SubscriptionType.INSTITUTION.label:
+            badge_class = "dark"
 
         return mark_safe(f'<span class="badge badge-{badge_class}">{value}</span>')
 
@@ -226,6 +228,11 @@ class UserSubscriptionTable(tables.Table):
             url = reverse('main:unsubscribe_user', kwargs={'pk': record.object_id})
             user = User.objects.get(id=record.object_id)
             url_view = reverse('main:public_profile', kwargs={'username': user.username})
+
+        if record.subscription_type == UserSubscription.SubscriptionType.INSTITUTION:
+            url = reverse('main:unsubscribe_institution', kwargs={'pk': record.object_id})
+            institution = Institution.objects.get(id=record.object_id)
+            url_view = reverse('main:institution_detail', kwargs={'inst_slug': institution.institution_slug})
 
         html_text = f'<a class="btn btn-danger btn-sm" href="{url}" role="button">Unsubscribe</a> &nbsp;' \
                     f'<a class="btn btn-primary btn-sm" href="{url_view}" role="button">View</a>'
