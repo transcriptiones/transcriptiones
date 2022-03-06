@@ -3,6 +3,7 @@ from uuid import UUID
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.text import format_lazy
 
 from main.models import Document
 
@@ -185,7 +186,8 @@ def get_list(items):
 
 def get_title_text_format(title, text):
     """Formats the title of a tooltip"""
-    return "<b>{}</b><br/>{}".format(title, text)
+    return format_lazy('<b>{title}</b><br/>{text}', title=title, text=text)
+    # return "<b>{}</b><br/>{}".format(title, text)
 
 
 def get_extended_help_text(model, field):
