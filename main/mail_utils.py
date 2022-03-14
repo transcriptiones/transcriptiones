@@ -136,7 +136,7 @@ def send_registration_confirmation_mail(request, user):
     subject = _('Transcriptiones: Activate your account')
     host = f"{request.scheme}://{request.get_host()}"
 
-    plain_message = _('Dummy content')      # TODO
+    plain_message = _('Plain text version of the e-mail goes here. Please scroll down')      # TODO
 
     render_object = get_base_render_object(request, _('Activate your account'))
     render_object["mail_paragraphs"].append(plain_message)
