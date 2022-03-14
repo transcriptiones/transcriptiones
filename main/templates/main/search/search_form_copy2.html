@@ -10,30 +10,48 @@
     </div>
     <!-- Title / Reference number -->
     <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-11">
             <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Document Title' %}" value="{{ request.GET.title_name }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Document Title' %}</small>
         </div>
-
+        <div class="form-group col-md-1">
+            <input type="checkbox" name="title_name_exact" class="form-control move-left" {% if request.GET.title_name_exact %}checked{% endif %}/>
+            <small id="titleHelp" class="form-text text-muted">
+                {% translate 'Exact' %}
+                {% include 'main/search/exact_tooltip.html' %}
+            </small>
+        </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-5">
             <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Name' %}" value="{{ request.GET.ref_number_name }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Name' %}</small>
         </div>
-
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-1">
+            <input type="checkbox" name="ref_number_name_exact" class="form-control move-left" {% if request.GET.ref_number_name_exact %}checked{% endif %}/>
+            <small id="titleHelp" class="form-text text-muted">
+                {% translate 'Exact' %}
+                {% include 'main/search/exact_tooltip.html' %}
+            </small>
+        </div>
+        <div class="form-group col-md-5">
             <input type="text" name="ref_number_title" class="form-control" placeholder="{% translate 'Search by Reference Title' %}" value="{{ request.GET.ref_number_title }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}</small>
         </div>
-
+        <div class="form-group col-md-1">
+            <input type="checkbox" name="ref_number_title_exact" class="form-control move-left" {% if request.GET.ref_number_title_exact %}checked{% endif %}/>
+            <small id="titleHelp" class="form-text text-muted">
+                {% translate 'Exact' %}
+                {% include 'main/search/exact_tooltip.html' %}
+            </small>
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <select name="source_type" class="form-control" title="" id="id_source_type">
                 <option value="">--- Search By Source Type ---</option>
                 {% for sourcetype in form_data.source_types %}
-                    <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %} disabled>{{ sourcetype.name }}</option>
+                    <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %}>{{ sourcetype.name }}</option>
                     {% for child_sourcetype in sourcetype.children %}
                         <option value="{{ child_sourcetype.value }}"{% ifequal request.GET.source_type child_sourcetype.value %} selected="selected"{% endifequal %}>&nbsp;&nbsp;{{ child_sourcetype.name }}</option>
                     {% endfor %}
@@ -41,9 +59,16 @@
             </select>
             <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Filter by Source Type' %}</small>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-5">
             <input type="text" name="location" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.location }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}</small>
+        </div>
+        <div class="form-group col-md-1">
+            <input type="checkbox" name="location_exact" class="form-control move-left" {% if request.GET.location_exact %}checked{% endif %}/>
+            <small id="titleHelp" class="form-text text-muted">
+                {% translate 'Exact' %}
+                {% include 'main/search/exact_tooltip.html' %}
+            </small>
         </div>
     </div>
     <div class="form-row">

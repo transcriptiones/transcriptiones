@@ -38,16 +38,17 @@ def test_search_2(request):
             # The main search field is empty
             else:
                 if not form.cleaned_data['title_name'] == '':
-                    search_type = "wildcard"
-                    search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
+                    search_type = "match"
+                    search_term = form.cleaned_data['title_name'].lower()
                     if form.cleaned_data['title_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['title_name'].lower()
+
                     search_result = search_result.query(search_type, title_name=search_term)
                 # Search AND title are empty
                 else:
                     if not form.cleaned_data['ref_number_title'] == '':
-                        search_type = "wildcard"
+                        search_type = "match"
                         search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
                         if form.cleaned_data['ref_number_title_exact']:
                             search_type = "match"
@@ -69,29 +70,30 @@ def test_search_2(request):
             # A query has been sent.
             if can_filter:
                 if not form.cleaned_data['title_name'] == '':
-                    search_type = "wildcard"
-                    search_term = "*"+form.cleaned_data['title_name'].lower()+"*"
+                    search_type = "match"
+                    search_term = form.cleaned_data['title_name'].lower()
                     if form.cleaned_data['title_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['title_name'].lower()
+
                     search_result = search_result.filter(search_type, title_name=search_term)
                 if not form.cleaned_data['ref_number_title'] == '':
-                    search_type = "wildcard"
-                    search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
+                    search_type = "match"
+                    search_term = form.cleaned_data['ref_number_title'].lower()
                     if form.cleaned_data['ref_number_title_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['ref_number_title'].lower()
                     search_result = search_result.filter(search_type, ref_number_title=search_term)
                 if not form.cleaned_data['ref_number_name'] == '':
-                    search_type = "wildcard"
-                    search_term = "*" + form.cleaned_data['ref_number_name'].lower() + "*"
+                    search_type = "match"
+                    search_term = form.cleaned_data['ref_number_name'].lower()
                     if form.cleaned_data['ref_number_name_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['ref_number_name'].lower()
                     search_result = search_result.filter(search_type, ref_number_name=search_term)
                 if not form.cleaned_data['location'] == '':
-                    search_type = "wildcard"
-                    search_term = "*" + form.cleaned_data['location'] + "*"
+                    search_type = "match"
+                    search_term = form.cleaned_data['location']
                     if form.cleaned_data['location_exact']:
                         search_type = "match"
                         search_term = form.cleaned_data['location']

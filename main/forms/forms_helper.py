@@ -4,7 +4,6 @@ from crispy_forms.helper import FormHelper
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.text import format_lazy
 
 from main import model_info
 
@@ -24,10 +23,7 @@ def get_popover_html(model, field_name, content=None):
     """Returns a form label, enhanced with a html tooltip. """
     label = model._meta.get_field(field_name).verbose_name
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
-    ret_value = format_lazy('{label}&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}"><i class="fas fa-info-circle"></i></span>',
-                            label=_(label), tooltip=tooltip)
-
-    # ret_value = _(label) + f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
-    #                        f'<i class="fas fa-info-circle"></i>' \
-    #                        f'</span>'
+    ret_value = _(label) + f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
+                           f'<i class="fas fa-info-circle"></i>' \
+                           f'</span>'
     return mark_safe_lazy(ret_value)

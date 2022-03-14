@@ -2,6 +2,7 @@ import os
 from email.mime.image import MIMEImage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
@@ -136,14 +137,21 @@ def send_registration_confirmation_mail(request, user):
     subject = _('Transcriptiones: Activate your account')
     host = f"{request.scheme}://{request.get_host()}"
 
-    plain_message = _('Plain text version of the e-mail goes here. Please scroll down')      # TODO
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = account_activation_token.make_token(user)
+    url = reverse('main:activate', kwargs={'uidb64': uid, 'token': token})
+    plain_message = _(f'Hi { user.username }!\n\n'
+                      'A warm welcome from the transcriptiones team. '
+                      'Please click the following Link or copy it in your browser '
+                      'to finalize your registration on transcriptiones.\n\n'
+                      f'Activation-Link: {host}{url}')
 
     render_object = get_base_render_object(request, _('Activate your account'))
     render_object["mail_paragraphs"].append(plain_message)
     render_object["user"] = user
     render_object["domain"] = host
-    render_object["uid"] = urlsafe_base64_encode(force_bytes(user.pk))
-    render_object["token"] = account_activation_token.make_token(user)
+    render_object["uid"] = uid
+    render_object["token"] = token
 
     html_message = render_to_string('main/users/email_templates/account_activation_email.html', render_object)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
