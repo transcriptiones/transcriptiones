@@ -1,5 +1,37 @@
 /* This file contains general CSS valid for all transcriptiones pages. */
 
+/* Tooltip container */
+.tr-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tr-tooltip .tr-tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #fff;
+    color: #1D809F;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: 9px;
+    border-radius: 3px;
+    border: 1px solid #1D809F;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+
+  top: 100%;
+  left: 50%;
+  margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tr-tooltip:hover .tr-tooltiptext {
+  visibility: visible;
+}
+
 .move-left {
     width: auto;
     box-shadow: none;
@@ -62,8 +94,6 @@ body {
   color: #fff;
 }
 */
-
-
 
 /* Links */
 a {

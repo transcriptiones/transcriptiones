@@ -108,15 +108,25 @@
                     <!-- MAIN NAVBAR -->
                     <ul class="navbar-nav navbar-left-top">
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}" href="{% url 'main:browse_options' %}">{% translate 'Explore' %}</a>
+                            <div class="tr-tooltip">
+                                <span class="tr-tooltiptext">{% translate 'Upload Transcriptions' %}</span>
+                                <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'upload_options,upload_document,upload_multiple,upload_batch' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
+                            </div>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'upload_options,upload_document,upload_multiple,upload_batch' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
+                            <div class="tr-tooltip">
+                              <span class="tr-tooltiptext">{% translate 'Explore Institutions and their Documents, Authors and Source Types.' %}</span>
+                            <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}"
+                               href="{% url 'main:browse_options' %}">{% translate 'Directory' %}</a>
+                            </div>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
-                            <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
+                            <div class="tr-tooltip">
+                                <span class="tr-tooltiptext">{% translate 'Go to the search page to perform an advanced search.' %}</span>
+                                <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
+                            </div>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
@@ -132,11 +142,14 @@
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <!-- SEARCH BOX -->
                         <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <form action="{% url 'main:search_redirect' %}" method="post">
-                                    {% csrf_token %}
-                                    <input class="form-control" type="text" name="query" placeholder="Search...">
-                                </form>
+                            <div class="tr-tooltip">
+                                <span class="tr-tooltiptext">{% translate 'Perform A Full Text Search for Documents' %}</span>
+                                <div id="custom-search" class="top-search-bar">
+                                    <form action="{% url 'main:search_redirect' %}" method="post">
+                                        {% csrf_token %}
+                                        <input class="form-control" type="text" name="query" placeholder="Search...">
+                                    </form>
+                                </div>
                             </div>
                         </li>
                         <!-- NOTIFICATIONS -->

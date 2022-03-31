@@ -203,7 +203,7 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
             ['Table', 'HorizontalRule'],
             ['SpecialChar'],
-            ['RemoveFormat', 'Undo', 'Redo', 'Maximize'],
+            ['RemoveFormat', 'Undo', 'Redo', 'Maximize']
         ],
 
         'toolbar_MyFull': [
@@ -220,6 +220,7 @@ CKEDITOR_CONFIGS = {
             ['RemoveFormat', 'Source'],
             ['Maximize']
         ],
+
 
         'specialChars': ['\u0363',  # combining latin small letter a
                          'E\u0363',
