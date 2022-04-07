@@ -1,0 +1,91 @@
+{% load i18n %}
+
+<form action="{{ request.path }}" method="get" class="form-group">
+    <!-- Fulltext -->
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <input type="text" name="query" class="form-control" placeholder="{% translate 'Fulltext search' %}" value="{{ request.GET.query }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Enter a search term' %}</small>
+        </div>
+    </div>
+    <!-- Title / Reference number -->
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Document Title' %}" value="{{ request.GET.title_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Document Title' %}</small>
+        </div>
+        <div class="form-group col-md-6">
+            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Institution' %}" value="{{ request.GET.title_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Institution' %}</small>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Name' %}" value="{{ request.GET.ref_number_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Name' %}</small>
+        </div>
+
+        <div class="form-group col-6">
+            <input type="text" name="ref_number_title" class="form-control" placeholder="{% translate 'Search by Reference Title' %}" value="{{ request.GET.ref_number_title }}"/>
+            <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}</small>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <select name="source_type" class="form-control" title="" id="id_source_type">
+                <option value="">--- Search By Source Type ---</option>
+                {% for sourcetype in form_data.source_types %}
+                    <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %} disabled>{{ sourcetype.name }}</option>
+                    {% for child_sourcetype in sourcetype.children %}
+                        <option value="{{ child_sourcetype.value }}"{% ifequal request.GET.source_type child_sourcetype.value %} selected="selected"{% endifequal %}>&nbsp;&nbsp;{{ child_sourcetype.name }}</option>
+                    {% endfor %}
+                {% endfor %}
+            </select>
+            <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Filter by Source Type' %}</small>
+        </div>
+        <div class="form-group col-6">
+            <input type="text" name="location" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.location }}"/>
+            <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}</small>
+        </div>
+    </div>
+    <div class="form-row align-items-end">
+        <div class="form-group col-6 no-gutters mb-0 pb-0">
+            <div id="div_id_illuminated" class="custom-control custom-checkbox">
+                <input type="checkbox" name="illuminated" class="checkboxinput custom-control-input" id="id_illuminated" {% if request.GET.illuminated %}checked{% endif %}>
+                <label for="id_illuminated" class="custom-control-label">{% translate 'Document must have illuminations' %}</label>
+            </div>
+            <div id="div_id_seal" class="custom-control custom-checkbox">
+                <input type="checkbox" name="seal" class="checkboxinput custom-control-input" id="id_seal" {% if request.GET.seal %}checked{% endif %}>
+                <label for="id_seal" class="custom-control-label">{% translate 'Document must have seal' %}</label>
+            </div>
+        </div>
+        <div class="form-group col-6 no-gutters mb-0 pb-0">
+            <range-selector
+                      id="docDateRangeSlider"
+                      min-range="{{ form_data.min }}"
+                      max-range="{{ form_data.max }}"
+                      preset-min="{{ form_data.set_min }}"
+                      preset-max="{{ form_data.set_max }}"
+                      slider-color="#1D809F"
+                      slider-border-color="#DEE2E6"
+                      inputs-for-labels />
+            <input type="number" class="form-control" name="doc_end_date" id="doc_end_date" value="{{ form_data.set_max }}"/>
+            <input type="number" class="form-control" name="doc_start_date" id="doc_start_date" value="{{ form_data.set_min }}"/>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6 mt-0 pt-0">
+            <small id="xyzHelp" class="form-text text-muted">{% translate 'Choose if your documents need seals or illuminations' %}</small>
+        </div>
+        <div class="form-group col-6 mt-0 pt-0">
+            <small id="dateFromtoHelp" class="form-text text-muted">{% translate 'Earliest and Latest Year of Publication' %}</small>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-12 text-right mt-3">
+            <input type="submit" name="submit" value="Search" class="btn btn-primary btn-primary" id="submit-id-submit">
+            <input type="button" name="clear" value="Clear Form" class="btn btn-secondary" id="button-id-clear" onclick="window.location.href=&quot;/search&quot;">
+        </div>
+    </div>
+</form>

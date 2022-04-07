@@ -40,7 +40,7 @@ urlpatterns = [
     ##############
     # SEARCH VIEW
     # path('search/', v_search.SearchView.as_view(), name='search'),
-    path('search/', v_search.test_search_2, name='search'),
+    path('search/', v_search.test_search_3, name='search'),
     path('search_redirect/', v_search.search_box_redirect, name='search_redirect'),
 
     ##############

@@ -16,6 +16,32 @@ from main.models import Document, SourceType
 FULLTEXT_FIELDS = ["title_name", "transcription_text", "ref_number_title", "ref_number_name"]
 
 
+def test_search_3(request):
+    form = AdvancedSearchForm()
+    enriched_result = None
+    total_results = 0
+    number_of_pages = 0
+    page_size = 10
+    current_page = 1
+    pagination_link_list = list()
+
+    # Form has been sent: search
+    if request.method == "GET":
+        pass
+
+    # No form has been sent.
+    else:
+        pass
+
+    context = {'form': form,  # The search form
+               'form_data': get_document_filter_data(request),
+               'total': total_results,  # Num of total search results
+               'page_links': pagination_link_list,
+               'current_page': current_page,
+               'num_pages': number_of_pages,
+               'result': enriched_result}  # Search result tuples: (elasticsearch-Document, Django-db-object)
+    return render(request, "main/search/search_view_3.html", context)
+
 def test_search_2(request):
     form = AdvancedSearchForm()
     enriched_result = None

@@ -1,0 +1,141 @@
+﻿{% extends "main/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load render_table from django_tables2 %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% translate 'Search' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Search") "main:search" %}
+{% endblock %}
+
+{% block content %}
+    {% card 'search_form' _('Search') %}
+        {% include 'main/search/search_form_2.html' %}
+    {% endcard %}
+
+    {% card 'search_result' _('Search Result') %}
+        {% get_current_language as LANGUAGE_CODE %}
+
+        {% if result %}
+            {% include 'main/search/pagination.html' %}
+            {% blocktranslate %}
+                Found {{ total }} results.
+            {% endblocktranslate %}
+            {% for entry in result %}
+                <a href="{% url 'main:document_detail' entry.1.parent_ref_number.holding_institution.institution_slug entry.1.parent_ref_number.ref_number_slug entry.1.document_slug %}" class="no-deco-link">
+                <div class="card bg-light border-dark" style="margin-bottom: 5px;">
+                  <div class="card-header bg-light">
+                      {{ entry.1.parent_ref_number.holding_institution }}
+                      /
+                      {% if entry.0.meta.highlight.ref_number_name %}
+                          {{ entry.0.meta.highlight.ref_number_name.0|safe }} -
+                      {% else %}
+                          {{ entry.1.parent_ref_number }} -
+                      {% endif %}
+                      {% if entry.0.meta.highlight.ref_number_title %}
+                          {{ entry.0.meta.highlight.ref_number_title.0|safe }}
+                      {% else %}
+                         {{ entry.1.parent_ref_number.ref_number_title }}
+                      {% endif %}
+                      / {{ entry.1.title_name }}
+                    <span style="float: right; font-size: x-small;">Score: {{ entry.0.meta.score }}</span>
+                  </div>
+                  <div class="card-body">
+                      {% if entry.0.meta.highlight.title_name %}
+                        <h5 class="card-title" style="margin: 0; font-weight: bold;">{{ entry.0.meta.highlight.title_name.0|safe }}</h5>
+                      {% else %}
+                           <h5 class="card-title" style="margin: 0; font-weight: bold;">{{ entry.0.title_name }}</h5>
+                      {% endif %}
+                        <small>Published: {{ entry.1.doc_start_date }}
+                            {% if entry.1.doc_end_date %}
+                                - {{  entry.1.doc_end_date }}
+                            {% endif %}
+                            {% if entry.0.language %}
+                                in {{ entry.0.language }}
+                            {% endif %}
+                            <br/>
+                        </small>
+                      {% if entry.0.meta.highlight.transcription_text %}
+                          {% for hl in entry.0.meta.highlight.transcription_text %}
+                            {{ hl|safe }}
+                              {% if not forloop.last %}
+                                  <i>[...]</i>>
+                              {% endif %}
+                          {% endfor %}
+                      {% endif %}
+                  </div>
+                  <div class="card-footer">
+                      <span class="search-result-title">Source Type:</span> <i>{% get_translated_source_type_name entry.1.source_type.parent_type LANGUAGE_CODE %} &#5125;
+                      {% if entry.0.meta.highlight.source_type %}
+                          {# entry.0.meta.highlight.source_type.0|safe #}
+                          <em>{% get_translated_source_type_name entry.1.source_type LANGUAGE_CODE %}</em>
+                      {% else %}
+                          {% get_translated_source_type_name entry.1.source_type LANGUAGE_CODE %}
+                      {% endif %}</i> |
+                      <span class="search-result-title">Production Location:</span> <i>
+                      {% if entry.0.meta.highlight.place_name %}
+                          {{ entry.0.meta.highlight.place_name.0|safe }}
+                      {% else %}
+                          {{ entry.0.place_name }}
+                      {% endif %}</i> |
+
+                      <span class="search-result-title">Seal:</span>
+                      {% if entry.1.seal %}
+                          {% if 'seal' in request.GET %}
+                              <em><span style="color: green;">&check;</span></em>
+                          {% else %}
+                              <span style="color: green;">&check;</span>
+                          {% endif %}
+                      {% else %}
+                          <span style="color: red;">&cross;</span>
+                      {% endif %} |
+
+                      <span class="search-result-title">Illuminated:</span>
+                      {% if entry.1.illuminated %}
+                          {% if 'illuminated' in request.GET %}
+                              <em><span style="color: green;">&check;</span></em>
+                          {% else %}
+                              <span style="color: green;">&check;</span>
+                          {% endif %}
+                      {% else %}
+                           <span style="color: red;">&cross;</span>
+                      {% endif %} |
+                      <span class="search-result-title">Pages:</span>
+                      {{ entry.1.pages }}
+                  </div>
+                </div>
+                </a>
+            {% endfor %}
+            <div class="text-center">
+                {% include 'main/search/pagination.html' %}
+                <small>({{ num_pages }} pages in total.)</small>
+            </div>
+        {% else %}
+            {% translate "Please enter a search term above. It needs to be at least 3 characters long."  %}
+        {% endif %}
+    {% endcard %}
+{% endblock %}
+
+{% block extrascripts %}
+     <script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js">
+</script>
+
+    <script>
+        window.addEventListener('range-changed', (e) => {
+            const data = e.detail;
+            document.getElementById('doc_start_date').value = data.minRangeValue;
+            document.getElementById('doc_end_date').value = data.maxRangeValue;
+            console.log(data)
+            // data = { sliderId: null, minRangeValue: 0, maxRangeValue: 1000 }
+        });
+    </script>
+{% endblock %}
