@@ -99,6 +99,10 @@ h6 {
     width: 100% !important;
 }
 
+.select2-container {
+    min-width: unset !important;
+}
+
 .select2-container .select2-selection__rendered > *:first-child.select2-search--inline {
     width: 100% !important;
 }
@@ -291,6 +295,10 @@ h6 {
     display: none;
 }
 
+.django-ckeditor-widget {
+    width: inherit;
+}
+
 .my-small-form input.form-control {
     font-size: 10px;
 }
@@ -315,4 +323,18 @@ span.search-result-title {
     font-variant: small-caps;
     font-weight: bold;
     font-size: small;
+}
+
+/* Cards for source type selection */
+
+.card-header-st {
+    background-color: white;
+}
+
+.card-link-st {
+    color: #495057 !important;
+}
+
+.card-body-st {
+    border-bottom: 1px solid rgba(0,0,0,0.125);
 }

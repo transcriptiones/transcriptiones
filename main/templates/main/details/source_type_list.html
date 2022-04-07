@@ -15,12 +15,45 @@
 {% endblock %}
 
 {% block content %}
-    {% card 'source_type_parent_list_card' _('First Level Source Types') %}
-        <p>{% translate 'Select A Source Type to see its children.' %}</p>
+    {% card 'source_type_list_card' _('First Level Source Types') %}
+        <p>{% translate 'Click a source type to expand their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
-        {% for st in source_types %}
-            <a href="{% url 'main:source_type_detail' st.id %}"><span class="badge badge-secondary">{% get_translated_source_type_name st LANGUAGE_CODE %}</span></a>
-        {% endfor %}
+        <div id="accordion">
+            <div class="card">
+                {% for st in source_types %}
+                    <div class="card-header card-header-st" id="heading{{ st.pk }}">
+                        <a class="card-link card-link-st" data-toggle="collapse" data-target="#collapse{{ st.pk }}" aria-expanded="false" aria-controls="collapse{{ st.pk }}" style="width: 100%">
+                            {% get_translated_source_type_name st LANGUAGE_CODE %}
+                        </a>
+                    </div>
+
+                    <div id="collapse{{ st.pk }}" class="collapse" aria-labelledby="heading{{ st.pk }}" data-parent="#accordion">
+                        <div class="card-body card-body-st">
+                            <ul class="list-group-flush">
+                                <li class="list-group-item list-group-item-action text-left">
+                                    {% get_translated_source_type_name st LANGUAGE_CODE as translated_type_name %}
+                                <!-- TODO: Fix Parent Source Type View -->
+                                        {% blocktranslate with type_name=translated_type_name %}
+                                            All in "{{ type_name }}"
+                                        {% endblocktranslate %}
+
+                                </li>
+                                {% for child in st.child_type.all %}
+                                    <li class="list-group-item list-group-item-action text-left">
+                                        <a href="{% url 'main:source_type_detail' child.id %}">
+                                            {% get_translated_source_type_name child LANGUAGE_CODE %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
     {% endcard %}
 
 {% endblock content %}
+

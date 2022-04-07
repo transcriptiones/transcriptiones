@@ -221,6 +221,7 @@ CKEDITOR_CONFIGS = {
             ['Maximize']
         ],
 
+        'width': 'auto',
 
         'specialChars': ['\u0363',  # combining latin small letter a
                          'E\u0363',
