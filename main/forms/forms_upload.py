@@ -47,6 +47,11 @@ class UploadTranscriptionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
+        field = 'title_name'
+        #print(field, objprint(self.fields[field]), type(self.fields[field]))
+
+        if self.fields[field].widget.is_required:
+            self.fields[field].widget.attrs["class"] = "my_css_class_for_required_fields"
 
     class Meta:
         model = Document
@@ -54,58 +59,39 @@ class UploadTranscriptionForm(forms.ModelForm):
 
         labels = {
             'title_name': get_popover_html(Document, 'title_name'),
-            'parent_institution': 'todo',
-            'parent_ref_number': get_popover_html(Document, 'parent_ref_number'),
-            'author': get_popover_html(Document, 'author'),
+            # 'parent_institution': no crispy field
+            # 'parent_ref_number': no crispy field
+            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
+            'doc_start_date': get_popover_html(Document, 'doc_start_date'),
+            'doc_end_date': get_popover_html(Document, 'doc_end_date'),
             'place_name': get_popover_html(Document, 'place_name'),
-            'language': get_popover_html(Document, 'language'),
+            # 'selection_helper_source_type': no crispy field
+            # 'source_type': no crispy field
+            'transcription_text': get_popover_html(Document, 'transcription_text'),
+            # 'author': no crispy field
+            # 'language': no crispy field
             'material': get_popover_html(Document, 'material'),
+            'measurements_width': get_popover_html(Document, 'measurements_width'),
+            'measurements_length': get_popover_html(Document, 'measurements_length'),
             'pages': get_popover_html(Document, 'pages'),
             'paging_system': get_popover_html(Document, 'paging_system'),
             'illuminated': get_popover_html(Document, 'illuminated'),
             'seal': get_popover_html(Document, 'seal'),
-            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
+
             'comments': get_popover_html(Document, 'comments'),
-            'transcription_text': get_popover_html(Document, 'transcription_text'),
+
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
 
 
-class InstitutionForm(BSModalModelForm):
-    """Form for adding an Institution which is not yet in the Database"""
 
-    # Add class form-control to each form field for bootstrap integration
+class RefnModelForm(BSModalModelForm):
+    """TODO """
     def __init__(self, *args, **kwargs):
-        super(InstitutionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
 
-    class Meta:
-        model = Institution
-        fields = [
-            'institution_name',
-            'street',
-            'zip_code',
-            'city',
-            'country',
-            'site_url',
-            'institution_slug']
-
-        labels = {
-            'institution_name': get_popover_html(Institution, 'institution_name'),
-            'street': get_popover_html(Institution, 'street'),
-            'city': get_popover_html(Institution, 'city'),
-            'country': get_popover_html(Institution, 'country'),
-            'site_url': get_popover_html(Institution, 'site_url')
-        }
-
-
-class RefNumberForm(forms.ModelForm):
-    """Form for adding a RefNumber which is not yet in the Database"""
-
-    # Add class form-control to each form input for bootstrap integration
-    def __init__(self, *args, **kwargs):
-        super(RefNumberForm, self).__init__(*args, **kwargs)
-        self.helper = initialize_form_helper()
+    holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'))
 
     class Meta:
         model = RefNumber
@@ -120,6 +106,32 @@ class RefNumberForm(forms.ModelForm):
             'ref_number_name': get_popover_html(RefNumber, 'ref_number_name'),
             'ref_number_title': get_popover_html(RefNumber, 'ref_number_title'),
             'collection_link': get_popover_html(RefNumber, 'collection_link'),
+        }
+
+
+class InstModelForm(BSModalModelForm):
+    """TODO """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = initialize_form_helper(option="modal_popup")
+
+    class Meta:
+        model = Institution
+        fields = [
+            'institution_name',
+            'street',
+            'zip_code',
+            'city',
+            'country',
+            'site_url']
+
+        labels = {
+            'institution_name': get_popover_html(Institution, 'institution_name'),
+            'street': get_popover_html(Institution, 'street'),
+            'zip_code': get_popover_html(Institution, 'zip_code'),
+            'city': get_popover_html(Institution, 'city'),
+            'country': get_popover_html(Institution, 'country'),
+            'site_url': get_popover_html(Institution, 'site_url')
         }
 
 

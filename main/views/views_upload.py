@@ -10,8 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from bootstrap_modal_forms.generic import BSModalCreateView
 
 from main.mail_utils import send_contact_message_copy
-from main.forms.forms_test import InstModelForm, RefnModelForm
-from main.forms.forms_upload import UploadTranscriptionForm, BatchUploadForm
+from main.forms.forms_upload import UploadTranscriptionForm, BatchUploadForm, InstModelForm, RefnModelForm
 from main.models import Document, Institution, RefNumber, ContactMessage
 
 
@@ -53,7 +52,22 @@ def upload_transcription_view(request):
 
         if form.is_valid():
             new_document = form.save(commit=False)
-            new_document.document_slug = slugify(new_document.title_name)
+            max_slug_length_title_name = new_document.title_name
+            if len(max_slug_length_title_name) > 50:
+                max_slug_length_title_name = max_slug_length_title_name[:49]
+
+            new_slug = slugify(max_slug_length_title_name)
+            inc_value = 1
+            while Document.objects.filter(document_slug=new_slug).count() != 0:
+                new_slug = new_slug[:40] + f"-{inc_value}"
+                inc_value += 1
+                if inc_value >= 10:
+                    messages.error(request, _("There are many different documents with very similar titles. "
+                                              "Please choose another title or contact transcriptiones."))
+                    context = {'insts': Institution.objects.all(), 'form': form}
+                    return render(request, 'main/upload/create_document.html', context)
+
+            new_document.document_slug = new_slug
             new_document.submitted_by = request.user
             new_document.active = True
             new_document.commit_message = 'Initial commit'
@@ -85,7 +99,6 @@ def upload_transcription_view(request):
             context = {'insts': Institution.objects.all(), 'form': form}
             #print("NOT VALID")
             #print(form.errors)
-
 
     return render(request, 'main/upload/create_document.html', context)
 

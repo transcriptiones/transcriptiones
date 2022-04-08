@@ -1,8 +1,19 @@
 from django import template
 from django.utils.translation import ugettext_lazy as _
 from django.template.base import FilterExpression
+
+from main.forms.forms_helper import get_popover_html_by_model_name, get_help_text_html_by_model_name
+
 register = template.Library()
 
+
+@register.simple_tag
+def get_tooltip_html(model_name, field_name):
+    return get_popover_html_by_model_name(model_name, field_name)
+
+@register.simple_tag
+def get_help_text_html(model_name, field_name):
+    return get_help_text_html_by_model_name(model_name, field_name)
 
 @register.simple_tag
 def get_translated_source_type_name(source_type, language):

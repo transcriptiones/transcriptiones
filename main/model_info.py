@@ -195,14 +195,13 @@ def get_extended_help_text(model, field):
     managed here."""
     model_name = model._meta.model_name
     help_text = _('No help text found')
-    # print("MMMM: ", model_name)
     ###
     # Document
     if model_name == 'document':
         if field == 'title_name':
 
-            help_text = get_title_text_format(_('Title of the document'), ('Use the original document\'s title if '
-                                                                           'possible, use own title otherwise.'))
+            help_text = get_title_text_format(_('Title of the document'), _('Use the original document\'s title if '
+                                                                            'possible, use own title otherwise.'))
         elif field == 'parent_institution':
             help_text = get_title_text_format(_('Institution which holds the manuscript'), _('If the institution is '
                                                                                              'not in the list, you may '
@@ -222,6 +221,9 @@ def get_extended_help_text(model, field):
             help_text = get_title_text_format(_('Place of origin'), _('Where has the document been written? '
                                                                       'Supply a city name if possible, otherwise '
                                                                       'state country or region.'))
+        elif field == 'selection_helper_source_type':
+            help_text = get_title_text_format(_('Type of the document'), _('Which type describes the nature of the '
+                                                                           'described manuscript the best?'))
         elif field == 'source_type':
             help_text = get_title_text_format(_('Type of the document'), _('Which type describes the nature of the '
                                                                            'described manuscript the best?'))
@@ -253,10 +255,16 @@ def get_extended_help_text(model, field):
                                                                                           'on the transcription '
                                                                                           'listing if you choos so.'))
         elif field == 'commit_message':
-            help_text = get_title_text_format(_('Brief description of changes'), _('Please suplly a brief description '
+            help_text = get_title_text_format(_('Brief description of changes'), _('Please supply a brief description '
                                                                                    'of the changes you made. Example: '
                                                                                    '"Corrected typo", "Added authors", '
                                                                                    'etc.'))
+        elif field == 'measurements_length':
+            help_text = get_title_text_format(_('Length of the document'), _('Please write down the length '
+                                                                             '(top to bottom) in centimeters.'))
+        elif field == 'measurements_width':
+            help_text = get_title_text_format(_('Width of the document'), _('Please write down the width (left to '
+                                                                            'right) in centimeters.'))
 
     ###
     # Institution

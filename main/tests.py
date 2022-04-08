@@ -3,6 +3,17 @@ from django.test import Client
 
 from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification
 
+
+class SourcetypeTestCase(TestCase):
+    def test_sourcetype(self):
+        st1 = SourceType.objects.create(type_name='test', parent_type=None)
+        SourceType.objects.create(type_name='test_child1', parent_type=st1)
+        SourceType.objects.create(type_name='test_child2', parent_type=st1)
+
+        parent = SourceType.objects.get(id=st1.id)
+        self.assertEqual(parent.child_type.count(), 2)
+
+
 class UserTestCase(TestCase):
     def setUp(self):
         user = User.objects.create(username='soma',
@@ -93,3 +104,5 @@ class AnimalTestCase(TestCase):
 
     def test_i18n(self):
         pass
+
+
