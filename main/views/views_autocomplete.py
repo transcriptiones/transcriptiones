@@ -94,6 +94,9 @@ class AuthorAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(author_name__icontains=self.q)
         return qs
 
+    def create_object(self, text):
+        return Author.objects.create(author_name=text, created_by=self.request.user)
+
 
 class LanguageAutocomplete(autocomplete.Select2QuerySetView):
     """Autocomplete View for Languages"""
