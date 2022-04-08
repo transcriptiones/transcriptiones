@@ -197,6 +197,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Transcriptiones',
+        'extraPlugins': ','.join(
+            [
+                'autogrow',
+                'linenumbers',
+            ]
+        ),
         'toolbar_Transcriptiones': [
             ['Format'],
             ['Bold', 'Italic', 'Underline', 'Strike'],
