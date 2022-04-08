@@ -260,6 +260,10 @@ class Document(models.Model):
         PAPER = 1, _('Paper')
         PARCHMENT = 2, _('Parchment')
         PAPYRUS = 3, _('Papyrus')
+        METAL = 4, _('Metal')
+        TEXTILE = 5, _('Textile')
+        STONE = 6, _('Stone')
+        WOOD = 7, _('Wood')
 
         __empty__ = _('(Unknown)')
 
