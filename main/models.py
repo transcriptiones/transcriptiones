@@ -264,6 +264,7 @@ class Document(models.Model):
         __empty__ = _('(Unknown)')
 
     class PaginationType(models.IntegerChoices):
+        NONE = 0, _('No page numbering')
         PAGES = 1, _('Pagination')
         FOILS = 2, _('Foliated')
 
@@ -344,7 +345,7 @@ class Document(models.Model):
                                              null=True,
                                              help_text=_("The number of pages of the whole source"))
 
-    paging_system = models.IntegerField(verbose_name=_("Pagination"),
+    paging_system = models.IntegerField(verbose_name=_("Pagination System"),
                                         null=True,
                                         blank=True,
                                         choices=PaginationType.choices,

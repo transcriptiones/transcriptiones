@@ -253,7 +253,7 @@ def get_extended_help_text(model, field):
         elif field == 'publish_user':
             help_text = get_title_text_format(_('Do you want to publish anonymously?'), _('You can hide your username '
                                                                                           'on the transcription '
-                                                                                          'listing if you choos so.'))
+                                                                                          'listing if you choose so.'))
         elif field == 'commit_message':
             help_text = get_title_text_format(_('Brief description of changes'), _('Please supply a brief description '
                                                                                    'of the changes you made. Example: '
