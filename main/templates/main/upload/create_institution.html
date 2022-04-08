@@ -5,7 +5,6 @@
 <form method="post" action="">
   {% csrf_token %}
 
-
   <div class="modal-header">
     <h3 class="modal-title">{% translate 'Create Institution' %}</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,7 +13,6 @@
   </div>
 
   <div class="modal-body">
-      Really?
       {% crispy form %}
   </div>
 
@@ -23,3 +21,11 @@
   </div>
 
 </form>
+
+<script>
+    $('.alert').hide().fadeIn(500).delay(8000).fadeOut(500);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

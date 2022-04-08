@@ -13,23 +13,7 @@
   </div>
 
   <div class="modal-body">
-
-    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
-      {% for error in form.non_field_errors %}
-        {{ error }}
-      {% endfor %}
-    </div>
-
-    {% for field in form %}
-      <div class="form-group">
-        {{ field|as_crispy_field }}
-        <div class="{% if field.errors %} invalid{% endif %}">
-          {% for error in field.errors %}
-            <p class="help-block">{{ error }}</p>
-          {% endfor %}
-        </div>
-      </div>
-    {% endfor %}
+    {% crispy form %}
   </div>
 
   <div class="modal-footer">
@@ -37,3 +21,11 @@
   </div>
 
 </form>
+
+<script>
+    $('.alert').hide().fadeIn(500).delay(8000).fadeOut(500);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
