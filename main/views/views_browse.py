@@ -91,24 +91,27 @@ def source_type_list_view(request):
 def source_type_detail_view(request, pk):
     """Shows a view with source types. Depends if the source type to show is a parent type or a child type."""
     selected_source_type = SourceType.objects.get(id=pk)
+    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+
     if selected_source_type.parent_type is None:
-        parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
         children_source_type_list = SourceType.objects.filter(parent_type=selected_source_type).order_by('type_name')
-        table = SourceTypeTable(data=children_source_type_list, language=get_language())
+        document_list = Document.objects.filter(source_type__in=children_source_type_list)
+        my_filter = DocumentFilter(request.GET, document_list)
+        table = DocumentTable(data=my_filter.qs)
         RequestConfig(request).configure(table)
-        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type}
-        return render(request, "main/details/source_type_parent_detail.html", context=context)
+
     else:
-        parent_source_type_list = SourceType.objects.filter(parent_type=selected_source_type.parent_type).order_by('type_name')
         document_list = Document.objects.filter(source_type=selected_source_type)
         my_filter = DocumentFilter(request.GET, document_list)
         table = MinimalDocumentTable(data=my_filter.qs)
         RequestConfig(request).configure(table)
-        context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type,
-                   'form_data': get_document_filter_data(request, my_filter)}
-        return render(request, "main/details/source_type_child_detail.html", context=context)
+
+    context = {'source_types': parent_source_type_list, 'table': table, 'selected': selected_source_type,
+               'form_data': get_document_filter_data(request, my_filter)}
+    return render(request, "main/details/source_type_child_detail.html", context=context)
 
 
+# deprecated
 def source_type_group_detail_view(request, pk):
     """Show documents of a a parent source type (e.g. The docs of all source types which have a common parent
     source type."""

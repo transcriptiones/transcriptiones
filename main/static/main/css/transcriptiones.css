@@ -331,6 +331,12 @@ span.search-result-title {
     background-color: white;
 }
 
+.card-header-st:hover {
+    color: #404040;
+    text-decoration: none;
+    background-color: #f7f7fb;
+}
+
 .card-link-st {
     color: #495057 !important;
 }

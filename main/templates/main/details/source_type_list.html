@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block content %}
+
     {% card 'source_type_list_card' _('First Level Source Types') %}
         <p>{% translate 'Click a source type to expand their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
@@ -32,15 +33,15 @@
                             <ul class="list-group-flush">
                                 <li class="list-group-item list-group-item-action text-left">
                                     {% get_translated_source_type_name st LANGUAGE_CODE as translated_type_name %}
-                                <!-- TODO: Fix Parent Source Type View -->
+                                        <a href="{% url 'main:source_type_detail' st.pk %}">
                                         {% blocktranslate with type_name=translated_type_name %}
                                             All in "{{ type_name }}"
                                         {% endblocktranslate %}
-
+                                        </a>
                                 </li>
                                 {% for child in st.child_type.all %}
                                     <li class="list-group-item list-group-item-action text-left">
-                                        <a href="{% url 'main:source_type_detail' child.id %}">
+                                        <a href="{% url 'main:source_type_detail' child.pk %}">
                                             {% get_translated_source_type_name child LANGUAGE_CODE %}
                                         </a>
                                     </li>
@@ -51,8 +52,6 @@
                 {% endfor %}
             </div>
         </div>
-
-
     {% endcard %}
 
 {% endblock content %}
