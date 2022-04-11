@@ -20,7 +20,7 @@
 
 {% block content %}
 
-    {% card 'source_type_list_card' _('First Level Source Types') %}
+    {% collapsed_card 'source_type_list_card' _('First Level Source Types') %}
         <p>{% translate 'Click a source type to expand their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
         <div id="accordion">
@@ -56,7 +56,7 @@
                 {% endfor %}
             </div>
         </div>
-    {% endcard %}
+    {% endcollapsedcard %}
 
     {% card 'source_type_documents_card' _('Source Types') %}
         <p>

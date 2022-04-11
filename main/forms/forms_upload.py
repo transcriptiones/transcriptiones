@@ -49,9 +49,8 @@ class UploadTranscriptionForm(forms.ModelForm):
         self.helper = initialize_form_helper()
         field = 'title_name'
         #print(field, objprint(self.fields[field]), type(self.fields[field]))
-
         if self.fields[field].widget.is_required:
-            self.fields[field].widget.attrs["class"] = "my_css_class_for_required_fields"
+            self.fields[field].label = "my_css_class_for_required_fields"
 
     class Meta:
         model = Document
@@ -77,9 +76,7 @@ class UploadTranscriptionForm(forms.ModelForm):
             'paging_system': get_popover_html(Document, 'paging_system'),
             'illuminated': get_popover_html(Document, 'illuminated'),
             'seal': get_popover_html(Document, 'seal'),
-
             'comments': get_popover_html(Document, 'comments'),
-
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
 

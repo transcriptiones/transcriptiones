@@ -21,38 +21,52 @@ def get_translated_source_type_name(source_type, language):
 
 
 @register.tag
+def collapsed_card(parser, token):
+    return create_card(parser, token, collapsed=True, end_tag="endcollapsedcard")
+
+
+@register.tag
 def card(parser, token):
+    return create_card(parser, token)
+
+
+def create_card(parser, token, collapsed=False, end_tag="endcard"):
     """This tag creates a bootstrap card node"""
     try:
         tag_name, card_id, card_title = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("%r takes two arguments: the card id and title" % token.contents.split()[0])
 
-    nodelist = parser.parse(('endcard',))
+    nodelist = parser.parse((end_tag,))
     parser.delete_first_token()
 
     card_id = FilterExpression(card_id, parser)
     card_title = FilterExpression(card_title, parser)
 
-    return CardNode(card_id, card_title, nodelist)
+    return CardNode(card_id, card_title, nodelist, collapsed)
 
 
 class CardNode(template.Node):
-    def __init__(self, card_id, card_title, nodelist):
+    def __init__(self, card_id, card_title, nodelist, collapsed):
         self.card_id = card_id
         self.card_title = card_title
         self.nodelist = nodelist
+        self.collapsed = collapsed
 
     def render(self, context):
         card_id = self.card_id.resolve(context) if self.card_id else 'generic_card_id'
         card_title = self.card_title.resolve(context) if self.card_title else 'Set a Title'
+
+        show_class = ""
+        if not self.collapsed:
+            show_class = " show"
 
         output = \
             '<div class="card mt-3 shadow">' \
             f'  <div class="card-header small text-right" data-toggle="collapse" data-target="#{card_id}">' \
             f'    <a class="card-link">{_(card_title)} </a>' \
             '  </div>' \
-            f'  <div id="{card_id}" class="collapse show">' \
+            f'  <div id="{card_id}" class="collapse{show_class}">' \
             '    <div class="card-body">' \
             '      <div class="row">' \
             '        <div class="col-sm text-left">' \

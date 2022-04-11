@@ -4,6 +4,11 @@ table.table thead th.orderable {
 }
 */
 
+.my_css_class_for_required_fields {
+    font-style: normal;
+    font-size: small;
+}
+
 table.table thead th.asc.orderable {
     background: url('../images/sort_asc.png') no-repeat left;
 }
