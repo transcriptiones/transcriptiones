@@ -20,45 +20,38 @@
 
 {% block content %}
 
-    {% collapsed_card 'source_type_list_card' _('First Level Source Types') %}
+    {% card 'source_type_list_card' _('Source Types') %}
         <p>{% translate 'Click a source type to expand their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
-        <div id="accordion">
-            <div class="card">
-                {% for st in source_types %}
-                    <div class="card-header card-header-st" id="heading{{ st.pk }}">
-                        <a class="card-link card-link-st" data-toggle="collapse" data-target="#collapse{{ st.pk }}" aria-expanded="false" aria-controls="collapse{{ st.pk }}" style="width: 100%">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                    {% for st in source_types %}
+                        <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
                             {% get_translated_source_type_name st LANGUAGE_CODE %}
                         </a>
-                    </div>
-
-                    <div id="collapse{{ st.pk }}" class="collapse" aria-labelledby="heading{{ st.pk }}" data-parent="#accordion">
-                        <div class="card-body card-body-st">
-                            <ul class="list-group-flush">
-                                <li class="list-group-item list-group-item-action text-left">
-                                    {% get_translated_source_type_name st LANGUAGE_CODE as translated_type_name %}
-                                        <a href="{% url 'main:source_type_detail' st.pk %}">
-                                        {% blocktranslate with type_name=translated_type_name %}
-                                            All in "{{ type_name }}"
-                                        {% endblocktranslate %}
-                                        </a>
-                                </li>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="tab-content" id="nav-tabContent">
+                    {% for st in source_types %}
+                        <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
+                            <div class="list-group">
                                 {% for child in st.child_type.all %}
-                                    <li class="list-group-item list-group-item-action text-left">
-                                        <a href="{% url 'main:source_type_detail' child.pk %}">
-                                            {% get_translated_source_type_name child LANGUAGE_CODE %}
-                                        </a>
-                                    </li>
+                                    <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st">
+                                        {% get_translated_source_type_name child LANGUAGE_CODE %}
+                                    </a>
                                 {% endfor %}
-                            </ul>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    {% endcollapsedcard %}
+    {% endcard %}
 
-    {% card 'source_type_documents_card' _('Source Types') %}
+    {% card 'source_type_documents_card' _('Documents') %}
         <p>
             {% translate 'Documents with type' %}: <strong>{% get_translated_source_type_name selected LANGUAGE_CODE %}</strong>
         </p>
@@ -82,4 +75,13 @@
             // data = { sliderId: null, minRangeValue: 0, maxRangeValue: 1000 }
         });
     </script>
+    <script>
+        // scroll to document card, accounting for size of the navbar
+        $(document).ready(function () {
+            $('html, body').animate({
+                scrollTop: $('#source_type_documents_card').offset().top-100
+            }, 'slow');
+        });
+    </script>
+
 {% endblock %}

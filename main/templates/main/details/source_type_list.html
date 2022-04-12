@@ -16,7 +16,40 @@
 
 {% block content %}
 
-    {% card 'source_type_list_card' _('First Level Source Types') %}
+    {% card 'source_type_list_card' _('Source Types') %}
+        <p>{% translate 'Click a source type to expand their child source types.' %}</p>
+        {% get_current_language as LANGUAGE_CODE %}
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                    {% for st in source_types %}
+                        <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
+                            {% get_translated_source_type_name st LANGUAGE_CODE %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="tab-content" id="nav-tabContent">
+                    {% for st in source_types %}
+                        <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
+                            <div class="list-group">
+                                {% for child in st.child_type.all %}
+                                    <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st">
+                                        {% get_translated_source_type_name child LANGUAGE_CODE %}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endcard %}
+
+
+    {% comment %}
+    {% card 'source_type_list_card' _('Source Types') %}
         <p>{% translate 'Click a source type to expand their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
         <div id="accordion">
@@ -53,6 +86,6 @@
             </div>
         </div>
     {% endcard %}
-
+    {% endcomment %}
 {% endblock content %}
 

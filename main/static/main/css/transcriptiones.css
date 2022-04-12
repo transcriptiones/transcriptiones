@@ -330,7 +330,27 @@ span.search-result-title {
     font-size: small;
 }
 
-/* Cards for source type selection */
+/* list group items for source type selection */
+
+.list-group-item-st {
+    font-weight: initial;
+}
+
+.list-group-item-st:hover {
+    background-color: #1D809F;
+    color: white;
+}
+
+.list-group-item-st.active {
+    background-color: #1D809F;
+}
+
+.list-group-item-st.active:hover {
+    background-color: #155d74;
+    color: white;
+}
+
+/* not used anymore
 
 .card-header-st {
     background-color: white;
@@ -349,3 +369,5 @@ span.search-result-title {
 .card-body-st {
     border-bottom: 1px solid rgba(0,0,0,0.125);
 }
+
+ */
