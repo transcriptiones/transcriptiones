@@ -151,3 +151,13 @@ pre {
     background: #cccccc;
     padding: 5px;
 }
+
+/* Custom Fontawesome Class */
+.fa-trans {
+    color: #1D809F;
+    background-color: white;
+}
+
+.fa-trans:hover {
+    background-color: #e6e6f2;
+}

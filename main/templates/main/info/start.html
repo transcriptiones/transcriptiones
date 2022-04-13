@@ -15,7 +15,7 @@
 {% block base_content %}
     {% get_current_language as LANGUAGE_CODE %}
     <!-- Header -->
-    <header class="masthead d-flex">
+    <header class="masthead d-flex flex-column pt-3 pb-0">
         <div class="container text-center my-auto">
             {% for message in messages %}
                   <div class="alert {{ message.tags }}" role="alert" >
@@ -23,11 +23,18 @@
                     {{ message }}
                   </div>
             {% endfor %}
-            <h1 class="mb-1 text-white">TRANSCRIPTIONES</h1>
+            <h1 class="mb-1 text-white">transcriptiones</h1>
             <h3 class="mb-5 text-white">
-                {% translate 'The place to transcribe historical manuscripts' %}
+                {% translate 'Create, share and access transcriptions of historical manuscripts' %}
             </h3>
             <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">{% translate 'More' %}</a>
+        </div>
+        <div class="container mr-1">
+            <div class="row">
+                <div class="col small text-right" style="color: darkgrey">
+                    {%  translate 'Shown documents: Staatsarchiv Basel-Stadt, Reference Numbers: StABS Spital F5, StABS PA 572a A I, StABS Spital Urk. 403' %}
+                </div>
+            </div>
         </div>
         <div class="overlay"></div>
     </header>
@@ -51,12 +58,17 @@
                             for sharing, viewing, and editing transcriptions of historical manuscripts.
                         </p>
                     {% endif %}
-                    <a class="btn btn-dark btn-xl js-scroll-trigger" href="#procedure">{% translate 'How it works' %}</a>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#procedure">{% translate 'How it works' %}</a>
                     <div>
                         <br/><br/>
                         <h4>{% translate 'Stay Up To Date' %}</h4>
                         {% crispy form %}
-                        <small>Please click <a href="{% url 'main:unsubscribe_newsletter' %}" class="">here</a> to unsubscribe.</small>
+                        <small>
+                            {% url 'main:unsubscribe_newsletter' as url_unsub %}
+                            {% blocktranslate %}
+                                Please click <a href="{{ url_unsub }}" class="">here</a> to unsubscribe.
+                            {% endblocktranslate %}
+                        </small>
                     </div>
                 </div>
             </div>
@@ -182,7 +194,7 @@
                 <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
                     <span class="service-icon-portfolio rounded-circle mx-auto mb-3">
                         <a href="{% url 'main:about' %}">
-                            <i class="fas fa-check-double"></i>
+                            <i class="fac fa-trans"></i>
                         </a>
                     </span>
                     <h4>
@@ -247,4 +259,20 @@
         </div>
     </section>
 -->
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        var faTrans = {
+            prefix: 'fac',
+            iconName: 'trans',
+            icon: [
+                200, 200,
+                [],
+                null,
+                'M 12.5 12.5 L 12.5 187.5 L 187.5 187.5 L 187.5 12.5 L 12.5 12.5 z M 86.029297 44.5 L 107.44922 44.5 L 107.44922 70.029297 L 127.0293 70.029297 L 127.0293 90.349609 L 107.44922 90.349609 L 107.44922 122.25977 C 107.44922 131.65977 111.80023 135.18945 117.99023 135.18945 C 120.67023 135.18945 123.50945 134.84977 125.68945 134.00977 L 129.71094 152.15039 C 125.36094 153.83039 119.00078 155.50977 110.80078 155.50977 C 90.050781 155.50977 81.519531 142.23961 81.519531 122.59961 L 81.509766 122.58984 L 81.509766 90.349609 L 70.300781 90.349609 L 70.300781 70.869141 L 83.019531 70.029297 L 86.029297 44.5 z'
+            ]
+        }
+        FontAwesome.library.add(faTrans)
+    </script>
 {% endblock %}
