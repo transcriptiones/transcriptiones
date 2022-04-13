@@ -10,11 +10,13 @@ table.table thead th.orderable {
 }
 
 table.table thead th.asc.orderable {
-    background: url('../images/sort_asc.png') no-repeat left;
+    background: url('../images/sort_asc.png') no-repeat 98%;
+    padding-right: 20px;
 }
 
 table.table thead th.desc.orderable {
-    background: url('../images/sort_desc.png') no-repeat left;
+    background: url('../images/sort_desc.png') no-repeat 98%;
+    padding-right: 20px;
 }
 
 /* START PAGE */
