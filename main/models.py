@@ -163,16 +163,16 @@ class RefNumber(models.Model):
 
 class Author(models.Model):
     """Authors are people who wrote the **original** documents which were transcribed. They are **not** the
-    transcribers of the documents."""
+    transcribers of the documents. They are no longer referred to as authors but as SCRIBES."""
 
-    author_name = models.CharField(verbose_name=_("Name of author"),
+    author_name = models.CharField(verbose_name=_("Name of scribe"),
                                    max_length=150,
                                    help_text=_("Name of the author of the original document."))
 
     author_gnd = models.URLField(verbose_name=_("Link to GND entry"),
                                  max_length=100,
                                  blank=True,
-                                 help_text=_("Persistent URL to the GND entry of the author."))
+                                 help_text=_("Persistent URL to the GND entry of the scribe."))
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    verbose_name=_("Created by"),
@@ -187,8 +187,8 @@ class Author(models.Model):
                                        default=None)
 
     class Meta:
-        verbose_name = _("Document author")
-        verbose_name_plural = _("Document authors")
+        verbose_name = _("Document Scribe")
+        verbose_name_plural = _("Document Scribes")
 
     def get_absolute_url(self):
         return reverse('main:author_detail', kwargs={'pk': self.pk})

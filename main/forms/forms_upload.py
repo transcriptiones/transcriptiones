@@ -49,8 +49,9 @@ class UploadTranscriptionForm(forms.ModelForm):
         self.helper = initialize_form_helper()
         field = 'title_name'
         #print(field, objprint(self.fields[field]), type(self.fields[field]))
-        if self.fields[field].widget.is_required:
+        """if self.fields[field].widget.is_required:
             self.fields[field].label = "my_css_class_for_required_fields"
+        """
 
     class Meta:
         model = Document
