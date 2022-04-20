@@ -34,3 +34,8 @@
     color: #155d74;
     text-decoration: none;
 }
+
+.divider {
+    padding-left: 0.1em;
+    padding-right: 0.2em;
+}

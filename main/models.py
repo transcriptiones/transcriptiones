@@ -290,9 +290,9 @@ class Document(models.Model):
                                           help_text="Reference number of the source")
 
     author = models.ManyToManyField(Author,
-                                    verbose_name=_("Source Participants"),
+                                    verbose_name=_("Scribes"),
                                     blank=True,  # null=True,
-                                    help_text=_("Authors, Copiers, Editors"))
+                                    help_text=_("Scribes of the source"))
 
     doc_start_date = PartialDateField(verbose_name=_("Creation period start"),
                                       help_text=_("When was the document written? Be as specific as possible. <br/>"

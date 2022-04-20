@@ -35,7 +35,8 @@ def get_source_type_info(source_type):
 def get_user_info(user):
     api_key_line = ""
     if user.api_auth_key is not None:
-        api_key_line = mark_safe(user.api_auth_key + "<br>" + _(f'<small>(Expires on {user.api_auth_key_expiration})</small>'))
+        api_key_line = mark_safe(
+            user.api_auth_key + "<br>" + _(f'<small>(Expires on {user.api_auth_key_expiration})</small>'))
 
     data = [(get_verbose_field_name(user, 'username'), user.username),
             (get_verbose_field_name(user, 'first_name'), user.first_name),
@@ -45,7 +46,9 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
             (_('User State'), mark_safe(user.get_user_state_badge())),
             (_('Active'), mark_safe(user.get_user_activity_badge())),
-            (get_verbose_field_name(user, 'mark_anonymous'), mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe('<span style="color: red;">&cross;</span>')),
+            (get_verbose_field_name(user, 'mark_anonymous'),
+             mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe(
+                 '<span style="color: red;">&cross;</span>')),
             (get_verbose_field_name(user, 'api_auth_key'), api_key_line)
             ]
     return title_value_list(data)
@@ -72,7 +75,8 @@ def get_institution_info(institution):
 
 def get_ref_number_info(ref_number):
     data = [(get_verbose_field_name(ref_number, 'holding_institution'),
-             mark_safe(f'<a href="{ref_number.holding_institution.get_absolute_url()}">{ref_number.holding_institution.institution_name}</a>')),
+             mark_safe(
+                 f'<a href="{ref_number.holding_institution.get_absolute_url()}">{ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(ref_number, 'ref_number_name'), ref_number.ref_number_name),
             (get_verbose_field_name(ref_number, 'ref_number_title'), ref_number.ref_number_title),
             (get_verbose_field_name(ref_number, 'collection_link'),
@@ -99,9 +103,11 @@ def get_upload_string(document):
 
 def get_document_info_overview(document):
     data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
-             mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
+             mark_safe(
+                 f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
-             mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
+             mark_safe(
+                 f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
             (get_verbose_field_name(document, 'transcription_scope'), document.transcription_scope),
             (_("Last Change"), get_last_change_string(document)),
             (_("Initial Upload"), get_upload_string(document)),
@@ -112,9 +118,11 @@ def get_document_info_overview(document):
 def get_document_meta_edit_info(document):
     updating_user = _("Anonymous")
     data = [(get_verbose_field_name(document.parent_ref_number.holding_institution, 'institution_name'),
-             mark_safe(f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
+             mark_safe(
+                 f'<a href="{document.parent_ref_number.holding_institution.get_absolute_url()}">{document.parent_ref_number.holding_institution.institution_name}</a>')),
             (get_verbose_field_name(document.parent_ref_number, 'ref_number_name'),
-             mark_safe(f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
+             mark_safe(
+                 f'<a href="{document.parent_ref_number.get_absolute_url()}">{document.parent_ref_number.ref_number_name}</a>')),
             (_("Last Change"), get_last_change_string(document)),
             (_("Initial Upload"), get_upload_string(document)),
             ]
@@ -136,8 +144,9 @@ def get_document_info_metadata(document):
             (get_verbose_field_name(document, 'language'),
              ", ".join(document.language.all().values_list('name_native', flat=True))),
             (get_verbose_field_name(document, 'source_type'),
-             mark_safe(" / ".join([f'<a href="{document.source_type.parent_type.get_absolute_url()}">{document.source_type.parent_type.get_translated_name(get_language())}</a>',
-                                   f'<a href="{document.source_type.get_absolute_url()}">{document.source_type.get_translated_name(get_language())}</a>']))),
+             mark_safe(" / ".join([
+                                      f'<a href="{document.source_type.parent_type.get_absolute_url()}">{document.source_type.parent_type.get_translated_name(get_language())}</a>',
+                                      f'<a href="{document.source_type.get_absolute_url()}">{document.source_type.get_translated_name(get_language())}</a>']))),
             ]
     return title_value_list(data)
 
@@ -152,11 +161,15 @@ def get_document_info_manuscript(document):
 
     data = [(get_verbose_field_name(document, 'material'), document.get_material_display()),
             (_('Measurements'), "{width:.2f} / {length:.2f} cm".format(width=doc_width,
-                                                                       length=doc_length)+" "+_("(w/h)")),
+                                                                       length=doc_length) + " " + _("(w/h)")),
             (get_verbose_field_name(document, 'pages'), document.pages),
             (get_verbose_field_name(document, 'paging_system'), document.get_paging_system_display()),
-            (get_verbose_field_name(document, 'seal'), mark_safe('<span style="color: green;">&check;</span>') if document.seal else mark_safe('<span style="color: red;">&cross;</span>')),
-            (get_verbose_field_name(document, 'illuminated'), mark_safe('<span style="color: green;">&check;</span>') if document.illuminated else mark_safe('<span style="color: red;">&cross;</span>'))
+            (get_verbose_field_name(document, 'seal'),
+             mark_safe('<span style="color: green;">&check;</span>') if document.seal else mark_safe(
+                 '<span style="color: red;">&cross;</span>')),
+            (get_verbose_field_name(document, 'illuminated'),
+             mark_safe('<span style="color: green;">&check;</span>') if document.illuminated else mark_safe(
+                 '<span style="color: red;">&cross;</span>'))
             ]
     return title_value_list(data)
 
@@ -212,27 +225,31 @@ def get_extended_help_text(model, field):
                                                 'you may create a new one.'))
         elif field == 'transcription_scope':
             help_text = get_title_text_format(_('Which parts of the manuscript have been transcribed?'),
-                                              _('Examples {}'.format(get_list([_('Fol. 3r - 10f'), _('Chapter 10')]))))
+                                              _('Examples {}'.format(get_list([_('Fol. 3r - 10v'), _('Chapter 10')]))))
         elif field == 'doc_start_date':
-            help_text = get_title_text_format(_('Dating of the original manuscript'), _('Only the year of creation is '
-                                                                                        'required. Please specify as '
-                                                                                        'precise as possible.'))
+            help_text = get_title_text_format(_('Earliest creation date of the original manuscript'),
+                                              _('Only the year of creation is required. Please specify as precisely as '
+                                                'possible.'))
+        elif field == 'doc_end_date':
+            help_text = get_title_text_format(_('Latest creation date of the original manuscript'),
+                                              _('Optional field. Only the year of creation is required. Please specify '
+                                                'as precisely as possible.'))
         elif field == 'place_name':
             help_text = get_title_text_format(_('Place of origin'), _('Where has the document been written? '
                                                                       'Supply a city name if possible, otherwise '
-                                                                      'state country or region.'))
+                                                                      'use country or region.'))
         elif field == 'selection_helper_source_type':
-            help_text = get_title_text_format(_('Type of the document'), _('Which type describes the nature of the '
-                                                                           'described manuscript the best?'))
+            help_text = get_title_text_format(_('Type of the document'), _('Which type best describes the source? '
+                                                                           'First level of categorization.'))
         elif field == 'source_type':
-            help_text = get_title_text_format(_('Type of the document'), _('Which type describes the nature of the '
-                                                                           'described manuscript the best?'))
+            help_text = get_title_text_format(_('Type of the document'), _('Which type best describes the source? '
+                                                                           'Second level of categorization.'))
         elif field == 'transcription_text':
-            help_text = get_title_text_format(_('Actual transcription of the manuscript'),
+            help_text = get_title_text_format(_('Transcription of the manuscript'),
                                               _('You can enter the transcription directly or copy your contents'
                                                 'from a Word or Excel file. Most formatting is preserved.'))
         elif field == 'author':
-            help_text = get_title_text_format(_('Author(s) of the source'), _('If the author is not in the list, '
+            help_text = get_title_text_format(_('Scribe(s) of the source'), _('If a scribe is not in the list, '
                                                                               'you may create a new one.'))
         elif field == 'language':
             help_text = get_title_text_format(_('Used languages'), _('Languages that are used in the source.'))
@@ -280,7 +297,7 @@ def get_extended_help_text(model, field):
         elif field == 'country':
             help_text = get_title_text_format(_('Country'), _('Choose the country from the drop down menu.'))
         elif field == 'site_url':
-            help_text = get_title_text_format(_('Web site of the institution'), _('Enter a valid URL. Has to start '
+            help_text = get_title_text_format(_('Web site of the institution'), _('Enter a valid URL. Must start '
                                                                                   'with http:// or https://'))
 
     ###
@@ -294,7 +311,10 @@ def get_extended_help_text(model, field):
                                                                        'institution.'))
         elif field == 'ref_number_title':
             help_text = get_title_text_format(_('Title of collection'), _('Reference numbers normally have a title. '
-                                                                          'Please supply the complete title.'))
+                                                                          'Please supply the complete title. '
+                                                                          'If the institution does not supply a title '
+                                                                          'for this reference number, you may supply '
+                                                                          'your own descriptive title.'))
         elif field == 'collection_link':
             help_text = get_title_text_format(_('Collection link'), _('Direct link to the collection in the '
                                                                       'institution\'s catalog. Must start with http:// '
@@ -307,11 +327,9 @@ def get_extended_help_text(model, field):
             help_text = get_title_text_format(_('Username'), _('The name must be unique and can\'t contain any special '
                                                                'characters. It will be shown to other users.'))
         elif field == 'first_name':
-            help_text = get_title_text_format(_('First name'), _('Your given name. This information will not be public '
-                                                                 'unless you choose so.'))
+            help_text = get_title_text_format(_('First name'), _('Your given name. This information will not be public.'))
         elif field == 'last_name':
-            help_text = get_title_text_format(_('Last name'), _('Your family name. This information will not be public '
-                                                                'unless you choose so.'))
+            help_text = get_title_text_format(_('Last name'), _('Your family name. This information will not be public.'))
         elif field == 'email':
             help_text = get_title_text_format(_('Email address'), _('You must choose a valid address. It is used to '
                                                                     'verify your information and activate your '

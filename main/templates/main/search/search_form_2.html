@@ -5,10 +5,10 @@
     <div class="form-row">
         <div class="form-group col-md-12">
 
-            <input type="text" name="query" class="form-control" placeholder="{% translate 'Fulltext search' %}" value="{{ request.GET.query }}"/>
+            <input type="text" name="query" class="form-control" placeholder="{% translate 'Full-text search' %}" value="{{ request.GET.query }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Enter a search term' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Full-text search</b></br>This field searches in the transcription text, the document title, the reference number and the reference number title.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -17,19 +17,19 @@
     <!-- Title / Reference number -->
     <div class="form-row">
         <div class="form-group col-md-6">
-            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Document Title' %}" value="{{ request.GET.title_name }}"/>
-            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Document Title' %}
+            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Search by Document Title' %}" value="{{ request.GET.title_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Document Title' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by document title</b></br>Search terms will be treated exactly.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
         </div>
         <div class="form-group col-md-6">
-            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Filter by Institution' %}" value="{{ request.GET.title_name }}"/>
-            <small id="titleHelp" class="form-text text-muted">{% translate 'Filter by Institution' %}
+            <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Search by Institution' %}" value="{{ request.GET.title_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Institution' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by institution</b></br>Search terms will be treated exactly.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -37,10 +37,10 @@
     </div>
     <div class="form-row">
         <div class="form-group col-6">
-            <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Name' %}" value="{{ request.GET.ref_number_name }}"/>
-            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Name' %}
+            <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Number' %}" value="{{ request.GET.ref_number_name }}"/>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Number' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by reference number</b></br>Search terms will be treated exactly.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -50,7 +50,7 @@
             <input type="text" name="ref_number_title" class="form-control" placeholder="{% translate 'Search by Reference Title' %}" value="{{ request.GET.ref_number_title }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by title of reference number</b></br>Search terms will be treated exactly.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -68,9 +68,9 @@
                     {% endfor %}
                 {% endfor %}
             </select>
-            <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Filter by Source Type' %}
+            <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Search by Source Type' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'tooltiptext' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by source type</b></br>Choose an source type to search by.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -79,7 +79,7 @@
             <input type="text" name="location" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.location }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by location</b></br>Search terms will be treated exactly.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
@@ -114,15 +114,15 @@
         <div class="form-group col-6 mt-0 pt-0">
             <small id="xyzHelp" class="form-text text-muted">{% translate 'Choose if your documents need seals or illuminations' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: "one", "two" and "three"' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Illuminations and seals</b></br>Tick the respective box to restrict the results to illuminated or sealed documents.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>
         </div>
         <div class="form-group col-6 mt-0 pt-0">
-            <small id="dateFromtoHelp" class="form-text text-muted">{% translate 'Earliest and Latest Year of Publication' %}
+            <small id="dateFromtoHelp" class="form-text text-muted">{% translate 'Earliest and Latest Year of Creation' %}
                 &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate 'This searches in the fields: one, two and three' %} ">
+                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Creation Date</b></br>Enter earliest and latest years of creation or use slider.' %} ">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </small>

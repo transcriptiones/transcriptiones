@@ -109,22 +109,22 @@
                     <ul class="navbar-nav navbar-left-top">
                         <li class="navbar-nav-item d-none d-sm-block">
                             <div class="tr-tooltip">
-                                <span class="tr-tooltiptext">{% translate 'Upload Transcriptions' %}</span>
+                                <span class="tr-tooltiptext">{% translate 'Upload transcriptions' %}</span>
                                 <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'upload_options,upload_document,upload_multiple,upload_batch' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
                             </div>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
                             <div class="tr-tooltip">
-                              <span class="tr-tooltiptext">{% translate 'Explore Institutions and their Documents, Authors and Source Types.' %}</span>
+                              <span class="tr-tooltiptext">{% translate 'Explore the collection by institutions, scribes and source types.' %}</span>
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}"
-                               href="{% url 'main:browse_options' %}">{% translate 'Directory' %}</a>
+                               href="{% url 'main:browse_options' %}">{% translate 'Collection' %}</a>
                             </div>
                         </li>
 
                         <li class="navbar-nav-item d-none d-sm-block">
                             <div class="tr-tooltip">
-                                <span class="tr-tooltiptext">{% translate 'Go to the search page to perform an advanced search.' %}</span>
+                                <span class="tr-tooltiptext">{% translate 'Find transcriptions through an advanced search form.' %}</span>
                                 <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
                             </div>
                         </li>
@@ -230,17 +230,17 @@
                             <ul class="dropdown-menu dropdown-menu-right nav-connections-dropdown">
                                 <li>
                                     <a class="dropdown-item disabled" href="#"><small>{% translate 'Explore' %}</small></a>
-                                    <a class="dropdown-item" href="{% url 'main:institution_list' %}"><i class="fas fa-university mr-2"></i>{% translate 'Browse By Institution' %}</a>
-                                    <a class="dropdown-item" href="{% url 'main:author_list' %}"><i class="fas fa-user mr-2"></i>{% translate 'Browse By Author' %}</a>
-                                    <a class="dropdown-item" href="{% url 'main:source_type_list' %}"><i class="fas fa-file mr-2"></i>{% translate 'Browse By Document Type' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:institution_list' %}"><i class="fas fa-university mr-2"></i>{% translate 'Browse by Institution' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:author_list' %}"><i class="fas fa-user mr-2"></i>{% translate 'Browse by Scribe' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:source_type_list' %}"><i class="fas fa-file mr-2"></i>{% translate 'Browse by Source Type' %}</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item disabled" href="#"><small>{% translate 'Participate' %}</small></a>
                                     {% if request.user.is_authenticated %}
                                     <a class="dropdown-item" href="{% url 'main:upload_document' %}"><i class="fas fa-angle-up mr-2"></i>{% translate 'Upload Transcription' %}</a>
                                     <a class="dropdown-item" href="{% url 'main:upload_multiple' %}"><i class="fas fa-angle-double-up mr-2"></i>{% translate 'Upload Multi-Page Transcription' %}</a>
-                                    <a class="dropdown-item" href="{% url 'main:upload_batch' %}"><i class="fas fa-upload mr-2"></i>{% translate 'Upload Batch (Contact Us)' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:upload_batch' %}"><i class="fas fa-upload mr-2"></i>{% translate 'Batch Upload' %}</a>
                                     {% else %}
-                                    <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login To Participate' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login to Participate' %}</a>
                                     {% endif %}
                                     <a class="dropdown-item disabled" href="#"><small>{% translate 'Advanced Features' %}</small></a>
                                     <a class="dropdown-item" href="{% url 'main:api_doc_view' %}"><i class="fas fa-code mr-2"></i></i>{% translate 'Transcriptiones API' %}</a>
@@ -277,7 +277,7 @@
                                 <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Account' %}</small></a>
                                 <a class="dropdown-item" href="{% url 'main:profile' %}"><i class="fas fa-user mr-2"></i>{% translate 'Account' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:user_update' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Edit User Information' %}</a>
-                                <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-user-circle mr-2"></i>{% translate 'View Your Public Profile' %}</a>
+                                <a class="dropdown-item" href="{% url 'main:public_profile' request.user.username %}"><i class="fas fa-user-circle mr-2"></i>{% translate 'View your Public Profile' %}</a>
                                 {% if request.user.is_superuser %}
                                     <a class="dropdown-item" href="{% url 'main:admin_start' %}"><i class="fas fa-user-cog mr-2"></i>{% translate 'Administration' %}</a>
                                 {% endif %}
@@ -287,7 +287,7 @@
                                 <a class="dropdown-item" href="{% url 'main:messages' %}"><i class="fas fa-envelope mr-2"></i>{% translate 'My Inbox' %}</a>
                                 <a class="dropdown-item" href="{% url 'main:subscriptions' %}"><i class="fas fa-file-signature mr-2"></i>{% translate 'My Subscriptions' %}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Your Documents' %}</small></a>
+                                <a class="dropdown-item disabled" href="#"><small>{% translate 'Documents' %}</small></a>
                                 <a class="dropdown-item" href="{% url 'main:my_documents' %}"><i class="fas fa-file mr-2"></i>{% translate 'My Documents' %}</a>
 
 
@@ -323,7 +323,7 @@
         <!-- Breadcrumbs -->
         {% block breadcrumbs %}
             {% clear_breadcrumbs %}
-            {% breadcrumb "Transcriptiones" "/" %}
+            {% breadcrumb "transcriptiones" "/" %}
         {% endblock %}
 
 
