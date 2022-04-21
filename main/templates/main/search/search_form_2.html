@@ -1,16 +1,13 @@
 {% load i18n %}
+{% load transcriptiones %}
 
 <form action="{{ request.path }}" method="get" class="form-group">
     <!-- Fulltext -->
     <div class="form-row">
         <div class="form-group col-md-12">
-
             <input type="text" name="query" class="form-control" placeholder="{% translate 'Full-text search' %}" value="{{ request.GET.query }}"/>
-            <small id="titleHelp" class="form-text text-muted">{% translate 'Enter a search term' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Full-text search</b></br>This field searches in the transcription text, the document title, the reference number and the reference number title.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+            <small id="titleHelp" class="form-text text-muted">{% translate 'Enter a Search Term' %}
+                {% get_static_tooltip_html _('Full-text search') _('This field searches in the transcription text, the document title, the reference number and the reference number title.') %}
             </small>
         </div>
     </div>
@@ -19,19 +16,13 @@
         <div class="form-group col-md-6">
             <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Search by Document Title' %}" value="{{ request.GET.title_name }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Document Title' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by document title</b></br>Search terms will be treated exactly.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by document title') _('Search terms will be treated exactly.') %}
             </small>
         </div>
         <div class="form-group col-md-6">
             <input type="text" name="title_name" class="form-control" placeholder="{% translate 'Search by Institution' %}" value="{{ request.GET.title_name }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Institution' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by institution</b></br>Search terms will be treated exactly.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by institution') _('Search terms will be treated exactly.') %}
             </small>
         </div>
     </div>
@@ -39,20 +30,14 @@
         <div class="form-group col-6">
             <input type="text" name="ref_number_name" class="form-control" placeholder="{% translate 'Search by Reference Number' %}" value="{{ request.GET.ref_number_name }}"/>
             <small id="titleHelp" class="form-text text-muted">{% translate 'Search by Reference Number' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by reference number</b></br>Search terms will be treated exactly.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by reference number') _('Search terms will be treated exactly.') %}
             </small>
         </div>
 
         <div class="form-group col-6">
             <input type="text" name="ref_number_title" class="form-control" placeholder="{% translate 'Search by Reference Title' %}" value="{{ request.GET.ref_number_title }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Reference Title' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by title of reference number</b></br>Search terms will be treated exactly.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by title of reference number') _('Search terms will be treated exactly.') %}
             </small>
         </div>
 
@@ -69,19 +54,13 @@
                 {% endfor %}
             </select>
             <small id="sourceTypeHelp" class="form-text text-muted">{% translate 'Search by Source Type' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by source type</b></br>Choose an source type to search by.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by source zype') _('Choose an source type to search by.') %}
             </small>
         </div>
         <div class="form-group col-6">
             <input type="text" name="location" class="form-control" placeholder="{% translate 'Search by Location' %}" value="{{ request.GET.location }}"/>
             <small id="locationHelp" class="form-text text-muted">{% translate 'Search by Location' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Search by location</b></br>Search terms will be treated exactly.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Search by location') _('Search terms will be treated exactly.') %}
             </small>
         </div>
     </div>
@@ -112,19 +91,13 @@
     </div>
     <div class="form-row">
         <div class="form-group col-6 mt-0 pt-0">
-            <small id="xyzHelp" class="form-text text-muted">{% translate 'Choose if your documents need seals or illuminations' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Illuminations and seals</b></br>Tick the respective box to restrict the results to illuminated or sealed documents.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+            <small id="xyzHelp" class="form-text text-muted">{% translate 'Restrict Results to Sealed and/or Illuminated Documents' %}
+                {% get_static_tooltip_html _('Illuminations and seals') _('Tick the respective box to restrict the results to illuminated or sealed documents.') %}
             </small>
         </div>
         <div class="form-group col-6 mt-0 pt-0">
             <small id="dateFromtoHelp" class="form-text text-muted">{% translate 'Earliest and Latest Year of Creation' %}
-                &nbsp;
-                <span data-toggle="tooltip" data-html="true" data-placement="top" title="{% translate '<b>Creation Date</b></br>Enter earliest and latest years of creation or use slider.' %} ">
-                    <i class="fas fa-info-circle"></i>
-                </span>
+                {% get_static_tooltip_html _('Creation Date') _('Enter the earliest and latest years of creation or use slider.') %}
             </small>
         </div>
     </div>

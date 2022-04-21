@@ -194,7 +194,7 @@ def request_username_view(request):
                 send_username_request_mail(request, user)
                 return redirect('main:username_request_done')
             except User.DoesNotExist:
-                messages.error(_('This e-mail address is not registered.'))
+                messages.error(_('This email address is not registered.'))
     else:
         form = RequestUsernameForm()
     return render(request, 'main/users/request_username.html', {'form': form})

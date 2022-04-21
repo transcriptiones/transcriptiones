@@ -590,7 +590,7 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError(_('Please enter an e-mail address'))
+            raise ValueError(_('Please enter an email address'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -626,13 +626,13 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """Custom user model for the transcriptiones project."""
     class NotificationPolicy(models.IntegerChoices):
-        NONE = 1, _('No notification E-Mails')
+        NONE = 1, _('No notification Emails')
         IMMEDIATE = 2, _('Every time a subscribed document has changed.')
         DAILY = 3, _('Once a day, only if changes happened.')
         WEEKLY = 4, _('Once a week, only if changes happened.')
 
     class MessageNotificationPolicy(models.IntegerChoices):
-        NONE = 1, _('No notification E-Mails')
+        NONE = 1, _('No notification Emails')
         IMMEDIATE = 2, _('Every time a message is sent.')
         DAILY = 3, _('Once a day, only if you received messages.')
 

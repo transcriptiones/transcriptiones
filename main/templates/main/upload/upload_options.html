@@ -15,17 +15,23 @@
 
 {% block content %}
     {% if not request.user.is_authenticated %}
-        <p>(<span class="text-danger"><strong>{% translate 'Important:' %}</strong></span> You need a login to upload a document. <a href="{% url 'main:login'%}">Login</a> or register a <a href="{% url 'main:signup'%}">new account.</a>)</p>
+        <p><span class="text-danger"><strong>{% translate 'Important:' %}</strong></span>
+            {% url 'main:login' as loginurl %}
+            {% url 'main:signup' as signupurl %}
+            {% blocktranslate with loginurl=loginurl signupurl=signupurl %}
+            You need a login to upload a document. <a href="{{ loginurl }}">Login</a> or register a <a href="{{ signupurl }}">new account.</a>
+            {% endblocktranslate %}
+        </p>
     {% endif %}
     {% card 'options_card' _('How do you want to proceed?') %}
         <div class="card-deck">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{% translate 'Single Page' %}</h5>
-              <p class="card-text">{% translate 'Use this option for smaller documents. You can save documents as one page even if there are multiple physical pages.' %}</p>
+              <h5 class="card-title">{% translate 'Single Document' %}</h5>
+              <p class="card-text">{% translate 'Use this option to upload transcriptions through the standard upload form.' %}</p>
             </div>
             <div class="card-footer text-center">
-                <a href="{% url 'main:upload_document' %}" class="btn btn-primary">{% translate 'Upload Single Page' %}</a>
+                <a href="{% url 'main:upload_document' %}" class="btn btn-primary">{% translate 'Upload Single Document' %}</a>
             </div>
           </div>
 

@@ -30,7 +30,7 @@ urlpatterns = [
     ##############
     # INFO PAGES
     path('info/', TemplateView.as_view(template_name='main/info/blank.html'), name='info'),
-    path('info/guidelines/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
+    path('info/instructions/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),
@@ -60,7 +60,7 @@ urlpatterns = [
     path('upload/thanks/<int:doc_id>', v_upload.thanks_view, name='thank_you'),
 
     ##############
-    # AUTOMPLETE VIEWS
+    # AUTOCOMPLETE VIEWS
     url(r'^inst-autocomplete/$', v_autocomplete.InstitutionAutocomplete.as_view(), name='inst-autocomplete', ),
     url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
     url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),

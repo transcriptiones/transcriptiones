@@ -83,7 +83,7 @@ def send_contact_message_copy(request, msg):
                                                  subject,
                                                  "We received the following message from you. "
                                                  "We will contact you as soon as possible.<br/>"
-                                                 "Please do not reply to this e-mail."
+                                                 "Please do not reply to this email."
                                                  "<br/>Your Message:<br/>"
                                                  f"Subject: <b>{msg.subject}</b><br/>"
                                                  f"Message: {msg.message}")

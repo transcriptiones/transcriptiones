@@ -4,22 +4,22 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Guidelines' %}
+    {% translate 'Instructions' %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb _("Information") "main:info" %}
-    {% breadcrumb _("Guidelines") "main:guidelines" %}
+    {% breadcrumb _("Instructions") "main:guidelines" %}
 {% endblock %}
 
 {% block content %}
     {% get_current_language as LANGUAGE_CODE %}
     {% include 'main/info/info_options.html' %}
 
-    {% card 'general' _('Our Guideline') %}
+    {% card 'general' _('Instructions') %}
         {% if LANGUAGE_CODE == 'de' %}
-            <h4>Leitfaden</h4>
+            <h4>Anleitung</h4>
             <p>
                 Bei transcriptiones sind alle Ausfertigungsgrade erwünscht – von der Rohfassung bis hin zur
                 ausgereiften Transkription. Mit Überarbeitungen und der Weiterarbeit an bestehenden Transkriptionen
@@ -31,7 +31,7 @@
             </p>
             <p>
                 Wenn Ihr Transkriptionsbestand für den Standard-Upload zu umfangreich ist, nehmen Sie
-                bitte per Batch-Upload-Formular mit uns <a class="strong_link" href="{% url 'main:contact' %}">Kontakt</a> auf.
+                bitte per <a class="strong_link" href="{% url 'main:upload_batch' %}">Batch-Upload-Formular</a> mit uns Kontakt auf.
             </p>
             <h4>Upload</h4>
             <p>
@@ -44,12 +44,12 @@
                 bereits bestehende Einheiten in der Datenbank automatisch abgerufen und angezeigt. Falls möglich,
                 wählen Sie daraus die passende Institution bzw. die richtige Signatur aus. Muss ein neues Archiv in
                 die Datenbank hinzugefügt werden, ist dieses so zu betiteln, wie vom Verein Schweizerischer
-                Archivarinnen und Archivare veranschlagt. Vergleichen Sie hierfür:
-                <a class="strong_link" href="https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/">https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/</a>. Braucht es eine neue Signatur,
-                muss diese von der entsprechenden Gedächtnisinstitution exakt übernommen werden.
+                Archivarinnen und Archivare veranschlagt. Die Liste der Gedächtnisinstitutionen des VSA-AAS finden Sie
+                <a class="strong_link" href="https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/">hier</a>.
+                Braucht es eine neue Signatur, muss diese von der entsprechenden Gedächtnisinstitution exakt übernommen werden.
             </p>
             <p>
-                Bei der fakultativen Angabe von Autor*innen bzw. Schreiber*innen werden ebenfalls bereits
+                Bei der fakultativen Angabe von Schreiber*innen werden ebenfalls bereits
                 bestehende Datensätze automatisch abgerufen und angezeigt. Probieren Sie verschiedene Schreibweisen
                 aus und setzen Sie nur wenn wirklich notwendig einen neuen Namen an. Es sei darauf hingewiesen, dass
                 es sich hier nicht um Entitäten (also eindeutig identifizierbare Personen) handelt.
@@ -84,11 +84,11 @@
             <h4>Transkriptionsrichtlinien</h4>
             <p>
                 Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen für die Erstellung einer Transkription
-                die Transkriptionsrichtlinien von Ad fontes ans Herz. Unter diesem Link finden Sie das gesamte
-                Regelwerk: <a class="strong_link" href="https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln">https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln</a>.
+                die <a class="strong_link" href="https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln">
+                Transkriptionsrichtlinien von Ad fontes</a> ans Herz.
             </p>
         {% else %}
-            <h4>Guidelines</h4>
+            <h4>Instructions</h4>
             <p>
                 At transcriptiones, all levels of completion are welcome – from rough drafts to fully developed
                 transcriptions. By revising and extending existing transcriptions, you help the community
@@ -96,11 +96,11 @@
             </p>
             <p>
                 If you would like to upload transcriptions, add to, or correct existing ones, please see the
-                instructions below. Frequently asked questions can be found here.
+                instructions below. Frequently asked questions can be found <a class="strong_link" href="{% url 'main:faq' %}">here</a>.
             </p>
             <p>
                 If your collection of transcriptions is too large for the standard upload process, please
-                contact us via the <a class="strong_link" href="{% url 'main:upload_options' %}">batch upload form</a>.
+                contact us via the <a class="strong_link" href="{% url 'main:upload_batch' %}">batch upload form</a>.
             </p>
             <h4>Upload</h4>
             <p>
@@ -120,7 +120,7 @@
                 corresponding institution.
             </p>
             <p>
-                When specifying an author or scribe, the existing records are displayed as well. There might be
+                When specifying a scribe, the existing records are displayed as well. There might be
                 different versions of a name, so please try various spellings and only add a new name if it really is
                 necessary. Be aware, however, that these names do not correspond to entities
                 (i.e. unambiguously identifiable persons).

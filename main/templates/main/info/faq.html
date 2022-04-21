@@ -134,9 +134,9 @@
             <div class="card bg-light mb-3">
               <div class="card-body">
                 <h5 class="card-title">How can I participate?</h5>
-                <p class="card-text">
-                    In order to upload and revise transcriptions, registration is necessary. If you want to publish
-                    your transcriptions anonymously, you can indicate this in your user account or when uploading.
+                <a class="card-text">
+                    In order to upload and revise transcriptions, <a class="strong_link" href="{% url 'main:signup' %}">registration</a> is necessary. If you want to publish
+                    your transcriptions anonymously, you can indicate this in your <a class="strong_link" href="{% url 'main:profile' %}">user account</a> or when uploading.
                 </p>
               </div>
             </div>
@@ -168,9 +168,9 @@
                 <h5 class="card-title">An error has occurred in a transcription or in the associated metadata. What should I do now?</h5>
                 <p class="card-text">
                     The transcriptions and most of the metadata can be revised by yourself or by other users.
-                    The only exceptions are the archive and signature details, which are used for assigning the
-                    transcription to the correct source. If this metadata needs to be changed, please contact
-                    the transcriptiones team.
+                    The only exceptions are the archive and reference number details, which are used for assigning the
+                    transcription to the correct source. If this metadata needs to be changed, please
+                    <a class="strong_link" href="{% url 'main:contact' %}">contact the transcriptiones team</a>.
                 </p>
               </div>
             </div>
@@ -181,8 +181,10 @@
                 <p class="card-text">
                     transcriptiones offers users the possibility to revise their own and others’ transcriptions.
                     The most recent versions can be viewed in the version history. It is not possible to restore an
-                    old version yourself. Should this be necessary, please contact the transcriptiones team.
-                    If a user does not follow the rules, transcriptiones can block the person in question.
+                    old version yourself. Should this be necessary, please
+                    <a class="strong_link" href="{% url 'main:contact' %}">contact the transcriptiones team</a>.
+                    If a user does not follow the <a class="strong_link" href="{% url 'main:tos' %}">rules</a>,
+                    transcriptiones can block the person in question.
                 </p>
               </div>
             </div>
@@ -191,18 +193,20 @@
               <div class="card-body">
                 <h5 class="card-title">I have problems uploading. Who should I contact?</h5>
                 <p class="card-text">
-                    Information on uploading is available here . If the problem persists, you are welcome
-                    to contact the transcriptiones team.
+                    Information on uploading is available <a class="strong_link" href="{% url 'main:guidelines' %}">here</a>.
+                    If the problem persists, you are welcome to <a class="strong_link" href="{% url 'main:contact' %}">
+                    contact the transcriptiones team</a>.
                 </p>
               </div>
             </div>
 
             <div class="card bg-light mb-3">
               <div class="card-body">
-                <h5 class="card-title">I would like to provide many transcriptions of different signatures, but I do not want to upload them individually. What can I do?</h5>
+                <h5 class="card-title">I would like to provide many transcriptions of different reference numbers, but I do not want to upload them individually. What can I do?</h5>
                 <p class="card-text">
                     We are happy to carry out the uploading of larger transcription collections into the database
-                    for you. Please contact the transcriptiones team using the batch upload form.
+                    for you. Please contact the transcriptiones team using the
+                    <a class="strong_link" href="{% url 'main:upload_batch' %}">batch upload form</a>.
                 </p>
               </div>
             </div>
@@ -213,17 +217,18 @@
                 <p class="card-text">
                     The uploaded transcription is accessible to the public and falls under the CC0 licence, which
                     means that other users can use your transcription freely. Registered or logged-in users can
-                    also add to and revise the transcription. The terms of use can be found here.
+                    also add to and revise the transcription. The terms of use can be found
+                    <a class="strong_link" href="{% url 'main:tos' %}">here</a>.
                 </p>
               </div>
             </div>
 
             <div class="card bg-light mb-3">
               <div class="card-body">
-                <h5 class="card-title">I would like to be informed when new transcriptions are added to certain signatures/memorial institutions/by certain users. How do I do this?</h5>
+                <h5 class="card-title">I would like to be informed when new transcriptions are added to certain reference numbers/memorial institutions/by certain users. How do I do this?</h5>
                 <p class="card-text">
                     If you are registered and logged in, you can sign up for such regular, automatic notifications in
-                    your user profile. Existing subscriptions can be cancelled at any time.
+                    your <a class="strong_link" href="{% url 'main:profile' %}">user profile</a>. Existing subscriptions can be cancelled at any time.
                 </p>
               </div>
             </div>
@@ -233,7 +238,7 @@
                 <h5 class="card-title">Due to my research interest, I would like to propose a new feature to transcriptiones. Can I let you know?</h5>
                 <p class="card-text">
                     Yes, we are happy to accept input, even if we cannot implement all requests (immediately).
-                    Contact the transcriptiones team with your suggestions.
+                    <a class="strong_link" href="{% url 'main:contact' %}">Contact the transcriptiones team</a> with your suggestions.
                 </p>
               </div>
             </div>

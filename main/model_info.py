@@ -254,19 +254,19 @@ def get_extended_help_text(model, field):
         elif field == 'language':
             help_text = get_title_text_format(_('Used languages'), _('Languages that are used in the source.'))
         elif field == 'material':
-            help_text = get_title_text_format(_('Material'), _('On what material is the manuscript written?'))
+            help_text = get_title_text_format(_('Material'), _('Optional field. On what material is the manuscript written?'))
         elif field == 'paging_system':
-            help_text = get_title_text_format(_('What page numbering system is used?'), _('Are the pages foliated or '
+            help_text = get_title_text_format(_('What page numbering system is used?'), _('Optional field. Are the pages foliated or '
                                                                                           'paginated?'))
         elif field == 'comments':
-            help_text = get_title_text_format(_('Additional comments'), _('You may enter any comments on the creation '
+            help_text = get_title_text_format(_('Additional comments'), _('Optional field. You may enter any comments on the creation '
                                                                           'of the transcription or its contents.'))
         elif field == 'illuminated':
-            help_text = get_title_text_format(_('Illuminations'), _('Are there illuminations on the document?'))
+            help_text = get_title_text_format(_('Illuminations'), _('Optional field. Are there illuminations on the document?'))
         elif field == 'seal':
-            help_text = get_title_text_format(_('Seals'), _('Are there any seals on the document?'))
+            help_text = get_title_text_format(_('Seals'), _('Optional field. Are there any seals on the document?'))
         elif field == 'pages':
-            help_text = get_title_text_format(_('Number of pages'), _('Enter the total number of pages of the source.'))
+            help_text = get_title_text_format(_('Number of pages'), _('Optional field. Enter the total number of pages of the source.'))
         elif field == 'publish_user':
             help_text = get_title_text_format(_('Do you want to publish anonymously?'), _('You can hide your username '
                                                                                           'on the transcription '
@@ -277,10 +277,10 @@ def get_extended_help_text(model, field):
                                                                                    '"Corrected typo", "Added authors", '
                                                                                    'etc.'))
         elif field == 'measurements_length':
-            help_text = get_title_text_format(_('Length of the document'), _('Please write down the length '
+            help_text = get_title_text_format(_('Length of the document'), _('Optional field. Please write down the length '
                                                                              '(top to bottom) in centimeters.'))
         elif field == 'measurements_width':
-            help_text = get_title_text_format(_('Width of the document'), _('Please write down the width (left to '
+            help_text = get_title_text_format(_('Width of the document'), _('Optional field. Please write down the width (left to '
                                                                             'right) in centimeters.'))
 
     ###
@@ -297,7 +297,7 @@ def get_extended_help_text(model, field):
         elif field == 'country':
             help_text = get_title_text_format(_('Country'), _('Choose the country from the drop down menu.'))
         elif field == 'site_url':
-            help_text = get_title_text_format(_('Web site of the institution'), _('Enter a valid URL. Must start '
+            help_text = get_title_text_format(_('Web site of the institution'), _('Optional Field. Enter a valid URL. Must start '
                                                                                   'with http:// or https://'))
 
     ###
@@ -316,8 +316,8 @@ def get_extended_help_text(model, field):
                                                                           'for this reference number, you may supply '
                                                                           'your own descriptive title.'))
         elif field == 'collection_link':
-            help_text = get_title_text_format(_('Collection link'), _('Direct link to the collection in the '
-                                                                      'institution\'s catalog. Must start with http:// '
+            help_text = get_title_text_format(_('Collection link'), _('Optional Field. Direct link to the collection in '
+                                                                      'the institution\'s catalog. Must start with http:// '
                                                                       'or https://'))
 
     ###
@@ -339,7 +339,7 @@ def get_extended_help_text(model, field):
                                                                            'anonymously by default. You can change '
                                                                            'this setting any time.'))
         elif field == 'user_orcid':
-            help_text = get_title_text_format(_('ORCID'), _('ORCID provides a persistent digital identifier that you '
+            help_text = get_title_text_format(_('ORCID'), _('Optional Field. ORCID provides a persistent digital identifier that you '
                                                             'own and control, and that distinguishes you from every '
                                                             'other researcher.'))
 

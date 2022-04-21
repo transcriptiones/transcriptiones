@@ -1,4 +1,6 @@
 from django import template
+from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.template.base import FilterExpression
 
@@ -6,6 +8,13 @@ from main.forms.forms_helper import get_popover_html_by_model_name, get_help_tex
 
 register = template.Library()
 
+
+@register.simple_tag
+def get_static_tooltip_html(title, text):
+    tooltip = format_lazy('<b>{title}</b><br/>{text}', title=title, text=text)
+    return mark_safe(f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
+                            f'<i class="fas fa-info-circle"></i>' \
+                            f'</span>')
 
 @register.simple_tag
 def get_tooltip_html(model_name, field_name):

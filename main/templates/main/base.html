@@ -116,7 +116,7 @@
 
                         <li class="navbar-nav-item d-none d-sm-block">
                             <div class="tr-tooltip">
-                              <span class="tr-tooltiptext">{% translate 'Explore the collection by institutions, scribes and source types.' %}</span>
+                              <span class="tr-tooltiptext">{% translate 'Explore the collection by institutions, scribes and source types' %}</span>
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}"
                                href="{% url 'main:browse_options' %}">{% translate 'Collection' %}</a>
                             </div>
@@ -124,7 +124,7 @@
 
                         <li class="navbar-nav-item d-none d-sm-block">
                             <div class="tr-tooltip">
-                                <span class="tr-tooltiptext">{% translate 'Find transcriptions through an advanced search form.' %}</span>
+                                <span class="tr-tooltiptext">{% translate 'Find transcriptions through an advanced search form' %}</span>
                                 <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
                             </div>
                         </li>
@@ -143,7 +143,7 @@
                         <!-- SEARCH BOX -->
                         <li class="nav-item">
                             <div class="tr-tooltip">
-                                <span class="tr-tooltiptext">{% translate 'Perform A Full Text Search for Documents' %}</span>
+                                <span class="tr-tooltiptext">{% translate 'Perform a full-text search for documents' %}</span>
                                 <div id="custom-search" class="top-search-bar">
                                     <form action="{% url 'main:search_redirect' %}" method="post">
                                         {% csrf_token %}

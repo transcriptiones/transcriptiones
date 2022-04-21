@@ -164,7 +164,7 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 
 class RequestUsernameForm(forms.Form):
-    """Form to request a user's username by entering his e-mail address"""
+    """Form to request a user's username by entering his email address"""
     email_of_user = forms.EmailField(label=_('Your E-Mail Address'), required=True,
                                      help_text=_('Please enter the e-mail address you registered with. '
                                                  'We will send you an e-mail with your username.'))

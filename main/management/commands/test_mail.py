@@ -5,7 +5,7 @@ from main.models import User, ContactMessage
 # TODO rewrite mail test
 
 class Command(BaseCommand):
-    help = 'Tests if sending an e-mail works.'
+    help = 'Tests if sending an email works.'
 
     def add_arguments(self, parser):
         parser.add_argument('which_test', type=str)

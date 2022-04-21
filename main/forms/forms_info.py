@@ -51,10 +51,10 @@ class ContactForm(forms.Form):
         self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
-    subject = forms.CharField(label=_('Subject'), initial=_('Question about transcriptiones.ch'),
+    subject = forms.CharField(label=_('Subject'), initial=_('Question about transcriptiones'),
                               help_text=_('Change the subject to something more meaningful, if possible.'))
-    reply_to = forms.EmailField(label=_('Reply E-Mail'), help_text=_("We are going to reply to this E-Mail address."))
+    reply_to = forms.EmailField(label=_('Reply Email'), help_text=_("We are going to reply to this email address."))
     message = forms.CharField(widget=forms.Textarea, help_text=_('Please be as specific as you can in your message. '
-                                                                 'It will help us to answer your questions!'))
+                                                                 'This will help us to answer your questions.'))
 
 
