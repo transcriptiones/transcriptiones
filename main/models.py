@@ -96,11 +96,11 @@ class RefNumber(models.Model):
     holding_institution = models.ForeignKey(Institution,
                                             verbose_name=_("Institution"),
                                             on_delete=models.PROTECT,
-                                            help_text=_("Institution associated with this reference number"))
+                                            help_text=_("Institution which holds this reference number and document"))
 
     ref_number_name = models.CharField(verbose_name=_("Reference number"),
                                        max_length=100,
-                                       help_text=_("reference number of the collection containing a document"))
+                                       help_text=_("Reference number of the collection containing a document"))
 
     ref_number_title = models.CharField(verbose_name=_("Title"),
                                         max_length=150,
@@ -378,7 +378,7 @@ class Document(models.Model):
                                      help_text=_("Uploading user"),
                                      editable=False)
 
-    publish_user = models.BooleanField(verbose_name=_("Publish anonymous"),
+    publish_user = models.BooleanField(verbose_name=_("Publish anonymously"),
                                        default=False,
                                        help_text=_("Select this, if you want to publish this document anonymously"))
 

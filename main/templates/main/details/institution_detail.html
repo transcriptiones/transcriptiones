@@ -10,14 +10,14 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Browse") "main:browse_options" %}
+    {% breadcrumb _("Collection") "main:browse_options" %}
     {% breadcrumb _("Institutions") "main:institution_list"%}
     {% breadcrumb institution "main:institution_detail" institution.institution_slug %}
 {% endblock %}
 
 
 {% block content %}
-    {% card 'institution_detail' _('About the institution') %}
+    {% card 'institution_detail' _('About the Institution') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
@@ -34,7 +34,7 @@
         {% endif %}
     {% endcard %}
 
-    {% card 'institution_ref_number' _('Reference Numbers in this institution') %}
+    {% card 'institution_ref_number' _('Reference Numbers in this Institution') %}
         {% include 'main/filter.html' %}
         {% render_table tables.1 %}
     {% endcard %}

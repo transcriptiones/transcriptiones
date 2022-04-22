@@ -11,15 +11,15 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Register") "" %}
+    {% breadcrumb _("Registration") "" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'signup_card' _('Register') %}
+    {% card 'signup_card' _('Registration') %}
         {% if user.is_authenticated %}
             <p>{% translate 'You are already signed in.' %}</p>
             <div id="logout">
-                <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout.' %}</a>
+                <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
             </div>
         {% else %}
 

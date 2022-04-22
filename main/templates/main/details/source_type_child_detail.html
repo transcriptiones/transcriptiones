@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Browse") "main:browse_options" %}
+    {% breadcrumb _("Collection") "main:browse_options" %}
     {% breadcrumb _("Source Types") "main:source_type_list" %}
     {% if selected.parent_type != None %}
         {% breadcrumb selected.parent_type "main:source_type_detail" selected.parent_type.id %}
@@ -21,13 +21,13 @@
 {% block content %}
 
     {% card 'source_type_list_card' _('Source Types') %}
-        <p>{% translate 'Click a source type to expand their child source types.' %}</p>
+        <p>{% translate 'Click a source type to view their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
         <div class="row">
             <div class="col-sm-4">
                 <div class="list-group" id="list-tab" role="tablist">
                     {% for st in source_types %}
-                        <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
+                        <a class="list-group-item list-group-item-action {% if st.pk == selected.id or st.pk == selected.parent_type.id %}active{% endif %} list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
                             {% get_translated_source_type_name st LANGUAGE_CODE %}
                         </a>
                     {% endfor %}
@@ -36,10 +36,18 @@
             <div class="col-sm-8">
                 <div class="tab-content" id="nav-tabContent">
                     {% for st in source_types %}
-                        <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
+                        <div class="tab-pane fade {% if st.pk == selected.id or st.pk == selected.parent_type.id %}active show{% endif %}" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
                             <div class="list-group">
+                                    {% if st.child_type.all|length > 1  %}
+                                    <a href="{% url 'main:source_type_detail' st.pk %}" class="list-group-item list-group-item-action list-group-item-st {% if st.pk == selected.id %}active{% endif %}">
+                                        {% get_translated_source_type_name st LANGUAGE_CODE as type_name %}
+                                        {% blocktranslate with type_name=type_name %}
+                                            All in {{ type_name }}
+                                        {% endblocktranslate %}
+                                    </a>
+                                {% endif %}
                                 {% for child in st.child_type.all %}
-                                    <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st">
+                                    <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st {% if child.pk == selected.id %}active{% endif %}">
                                         {% get_translated_source_type_name child LANGUAGE_CODE %}
                                     </a>
                                 {% endfor %}

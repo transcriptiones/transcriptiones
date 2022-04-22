@@ -5,25 +5,25 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'Author' %}: {{ author.author_name }}
+    {% translate 'Scribe' %}: {{ author.author_name }}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Browse") "main:browse_options" %}
-    {% breadcrumb _("Authors") "main:author_list"%}
+    {% breadcrumb _("Collection") "main:browse_options" %}
+    {% breadcrumb _("Scribe") "main:author_list"%}
     {% breadcrumb author.author_name "main:author_detail" author.pk %}
 {% endblock %}
 
 {% block content %}
 
-    {% card 'author_detail' _('Information about this author') %}
+    {% card 'author_detail' _('Information about this scribe') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
-                <a href="{% url 'main:unsubscribe_author' author.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this author' %}</a>
+                <a href="{% url 'main:unsubscribe_author' author.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this scribe' %}</a>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">{% translate 'Subscribe to this author' %}</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_author' author.pk %}" role="button">{% translate 'Subscribe to this scribe' %}</a>
             {% endif %}
          &nbsp;&nbsp; <small>
               {% url 'main:subscriptions' as sub_url %}
@@ -35,7 +35,7 @@
 
     {%  endcard %}
 
-    {% card 'author_documents' _('Documents from this author') %}
+    {% card 'author_documents' _('Documents from this scribe') %}
         {% include 'main/document_filter.html' %}
         {% render_table tables.1 %}
     {%  endcard %}

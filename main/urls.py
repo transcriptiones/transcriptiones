@@ -53,7 +53,7 @@ urlpatterns = [
     # Upload form for a new document
     path('upload/document/', v_upload.upload_transcription_view, name='upload_document'),
     # Upload form for a new document
-    path('upload/documents/', v_upload.upload_multiple_transcriptions_view, name='upload_multiple'),
+    # path('upload/documents/', v_upload.upload_multiple_transcriptions_view, name='upload_multiple'),
     # Contact form for a batch upload
     path('upload/batch/', v_upload.upload_batch_view, name='upload_batch'),
     # Thank you screen after uploading
@@ -68,12 +68,11 @@ urlpatterns = [
     url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(create_field='author_name'), name='author-autocomplete', ),
     url(r'^language-autocomplete/$', v_autocomplete.LanguageAutocomplete.as_view(), name='language-autocomplete', ),
 
-
     ##############
     # VIEW DATA PAGES
-    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
-
     path('display/', v_browse.browse_options, name='browse_options'),
+
+    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
     path('display/institutions/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),

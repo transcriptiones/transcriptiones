@@ -188,15 +188,6 @@ def get_document_info_comments(document):
 
 
 # EXTENDED HELP TEXTS
-def get_list(items):
-    """Formats a list as <ul>"""
-    formatted_text = '<ul>'
-    for item in items:
-        formatted_text = formatted_text + '<li>' + item + '</li>'
-    formatted_text = formatted_text + '</ul>'
-    return formatted_text
-
-
 def get_title_text_format(title, text):
     """Formats the title of a tooltip"""
     return format_lazy('<b>{title}</b><br/>{text}', title=title, text=text)
@@ -225,7 +216,7 @@ def get_extended_help_text(model, field):
                                                 'you may create a new one.'))
         elif field == 'transcription_scope':
             help_text = get_title_text_format(_('Which parts of the manuscript have been transcribed?'),
-                                              _('Examples {}'.format(get_list([_('Fol. 3r - 10v'), _('Chapter 10')]))))
+                                              _('E. g.: Entire Document, Fol. 3r - 10v, Chapter 10'))
         elif field == 'doc_start_date':
             help_text = get_title_text_format(_('Earliest creation date of the original manuscript'),
                                               _('Only the year of creation is required. Please specify as precisely as '
@@ -260,7 +251,9 @@ def get_extended_help_text(model, field):
                                                                                           'paginated?'))
         elif field == 'comments':
             help_text = get_title_text_format(_('Additional comments'), _('Optional field. You may enter any comments on the creation '
-                                                                          'of the transcription or its contents.'))
+                                                                          'of the transcription or its contents. Here, you may also place '
+                                                                          'links to external resources such as digitizations or editions '
+                                                                          'of the source.'))
         elif field == 'illuminated':
             help_text = get_title_text_format(_('Illuminations'), _('Optional field. Are there illuminations on the document?'))
         elif field == 'seal':
