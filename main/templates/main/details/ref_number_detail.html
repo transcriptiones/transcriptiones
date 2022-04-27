@@ -20,7 +20,7 @@
 
 {% block content %}
 
-    {% card 'ref_number_detail' _('Information about the Reference Number') %}
+    {% card 'ref_number_detail' _('Information about this Reference Number') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}

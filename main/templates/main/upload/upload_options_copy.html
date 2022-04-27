@@ -17,7 +17,7 @@
     {% if not request.user.is_authenticated %}
         <p>(<span class="text-danger"><strong>{% translate 'Important:' %}</strong></span> You need a login to upload a document. <a href="{% url 'main:login'%}">Login</a> or register a <a href="{% url 'main:signup'%}">new account.</a>)</p>
     {% endif %}
-    {% card 'options_card' _('How do you want to proceed?') %}
+    {% card 'options_card' _('How Do You Want to Proceed?') %}
         <div class="card-deck">
           <div class="card">
             <div class="card-body">

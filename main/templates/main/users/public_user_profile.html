@@ -16,7 +16,7 @@
 
 
 {% block content %}
-    {% card 'user_profile_personal' _('User data') %}
+    {% card 'user_profile_personal' _('User Data') %}
         {% render_table user_table %}
         {% if request.user.is_authenticated %}
             {% if request.user.id == profile_user.id %}
@@ -43,7 +43,7 @@
         {% endif %}
     {% endcard %}
 
-    {% card 'user_profile_activity' _('User activity') %}
+    {% card 'user_profile_activity' _('User Activity') %}
         {% include 'main/document_filter.html' %}
         {% render_table activity_table %}
     {% endcard %}

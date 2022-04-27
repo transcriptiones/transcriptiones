@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-27 15:30+0200\n"
+"POT-Creation-Date: 2022-04-27 15:55+0200\n"
 "PO-Revision-Date: 2021-09-20 13:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2122,6 +2122,7 @@ msgstr "Abonnements"
 
 #: main/templates/main/base.html:294 main/templates/main/base_copy.html:150
 #: main/templates/main/sidebar.html:61
+#: main/templates/main/users/my_documents.html:22
 #, fuzzy
 #| msgid "Documents"
 msgid "My Documents"
@@ -2206,7 +2207,7 @@ msgstr "Objet Subscription"
 
 #: main/templates/main/details/author_detail.html:20
 #, fuzzy
-msgid "Information about this scribe"
+msgid "Information about this Scribe"
 msgstr "Informations sur cet auteur"
 
 #: main/templates/main/details/author_detail.html:24
@@ -2232,7 +2233,7 @@ msgstr ""
 
 #: main/templates/main/details/author_detail.html:38
 #, fuzzy
-msgid "Documents from this scribe"
+msgid "Documents from this Scribe"
 msgstr "Documents de cet auteur"
 
 #: main/templates/main/details/author_list.html:8
@@ -2249,7 +2250,7 @@ msgstr "Parcourir les options"
 #: main/templates/main/upload/upload_options.html:26
 #: main/templates/main/upload/upload_options_copy.html:20
 #, fuzzy
-msgid "How do you want to proceed?"
+msgid "How Do You Want to Proceed?"
 msgstr "Comment voulez-vous procéder?"
 
 #: main/templates/main/details/browse_options.html:22
@@ -2331,12 +2332,14 @@ msgstr "Document d’exportation"
 
 #: main/templates/main/details/document_detail.html:66
 #: main/templates/main/upload/create_document.html:83
+#: main/templates/main/upload/edit_meta.html:31
 #, fuzzy
-msgid "Content Meta Data"
+msgid "Content Metadata"
 msgstr "Métadonnées de contenu"
 
 #: main/templates/main/details/document_detail.html:70
 #: main/templates/main/upload/create_document.html:104
+#: main/templates/main/upload/edit_meta.html:43
 #, fuzzy
 msgid "Manuscript Description"
 msgstr "Description du manuscrit"
@@ -2361,7 +2364,7 @@ msgstr "Versions"
 
 #: main/templates/main/details/institution_detail.html:20
 #, fuzzy
-msgid "About the Institution"
+msgid "About this Institution"
 msgstr "À propos de l’institution"
 
 #: main/templates/main/details/institution_detail.html:24
@@ -2390,7 +2393,7 @@ msgstr ""
 
 #: main/templates/main/details/ref_number_detail.html:23
 #, fuzzy
-msgid "Information about the Reference Number"
+msgid "Information about this Reference Number"
 msgstr "Informations sur le numéro de référence"
 
 #: main/templates/main/details/ref_number_detail.html:27
@@ -2565,7 +2568,7 @@ msgstr "Contact"
 
 #: main/templates/main/info/contact.html:21
 #, fuzzy
-msgid "Write us a message"
+msgid "Write us a Message"
 msgstr "Écrivez-nous un message"
 
 #: main/templates/main/info/contact.html:24
@@ -2686,7 +2689,7 @@ msgstr "Compte d'utilisateur"
 
 #: main/templates/main/info/tos.html:20
 #, fuzzy
-msgid "Our Terms Of Service"
+msgid "Our Terms of Service"
 msgstr "Nos conditions d’utilisation"
 
 #: main/templates/main/info/unsubscribe.html:20
@@ -2914,23 +2917,22 @@ msgstr "Numéros de référence dans cette institution"
 
 #: main/templates/main/search/search_view.html:21
 #, fuzzy
-msgid "Simple search"
+msgid "Simple Search"
 msgstr "Recherche simple"
 
 #: main/templates/main/search/search_view.html:26
-msgid "Advanced search"
+#, fuzzy
+#| msgid "Advanced search"
+msgid "Advanced Search"
 msgstr "Recherche avancée"
 
 #: main/templates/main/search/search_view.html:45
 #: main/templates/main/search/search_view.html:51
-msgid "Search results"
-msgstr "Résultats de recherche"
-
 #: main/templates/main/search/search_view_2.html:23
 #: main/templates/main/search/search_view_3.html:23
 #, fuzzy
 #| msgid "Search results"
-msgid "Search Result"
+msgid "Search Results"
 msgstr "Résultats de recherche"
 
 #: main/templates/main/search/search_view_2.html:28
@@ -3011,7 +3013,6 @@ msgid "Required Information"
 msgstr "Informations requises"
 
 #: main/templates/main/upload/create_document.html:127
-#: main/templates/main/upload/edit_document_transcription.html:31
 #, fuzzy
 msgid "Upload Your Transcription"
 msgstr "Téléchargez votre transcription"
@@ -3050,6 +3051,13 @@ msgid ""
 "    "
 msgstr ""
 
+#: main/templates/main/upload/edit_document_transcription.html:31
+#: main/templates/main/upload/edit_meta.html:57
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Save Your Changes"
+msgstr "Sauvegarder les changements"
+
 #: main/templates/main/upload/edit_document_transcription.html:33
 msgid "If you're done updating the transcription, you can save the document."
 msgstr ""
@@ -3060,26 +3068,10 @@ msgstr ""
 msgid "Edit metadata"
 msgstr "Éditer les métadonnées"
 
-#: main/templates/main/upload/edit_meta.html:31
-#, fuzzy
-msgid "Content Fields"
-msgstr "Champs de contenu"
-
-#: main/templates/main/upload/edit_meta.html:43
-#, fuzzy
-msgid "Manuscript description"
-msgstr "Description du manuscrit"
-
 #: main/templates/main/upload/edit_meta.html:53
 #, fuzzy
 msgid "Document your changes"
 msgstr "Auteurs du document"
-
-#: main/templates/main/upload/edit_meta.html:57
-#, fuzzy
-#| msgid "Save Changes"
-msgid "Save Your Changes"
-msgstr "Sauvegarder les changements"
 
 #: main/templates/main/upload/edit_meta.html:59
 msgid "If you're done changing the metadata, you can save the document."
@@ -3112,7 +3104,9 @@ msgid "Thank you!"
 msgstr "Merci !"
 
 #: main/templates/main/upload/thank_you.html:12
-msgid "Thank you for your contribution"
+#, fuzzy
+#| msgid "Thank you for your contribution"
+msgid "Thank You for Your Contribution"
 msgstr "Merci pour votre contribution"
 
 #: main/templates/main/upload/thank_you.html:14
@@ -3204,7 +3198,7 @@ msgid "Coming Soon!"
 msgstr ""
 
 #: main/templates/main/users/account_activation_invalid.html:16
-msgid "Invalid link"
+msgid "Invalid Link"
 msgstr ""
 
 #: main/templates/main/users/account_activation_invalid.html:18
@@ -3214,7 +3208,7 @@ msgstr ""
 #: main/templates/main/users/account_activation_sent.html:16
 #, fuzzy
 #| msgid "Registration"
-msgid "Registration Email sent"
+msgid "Registration Email Sent"
 msgstr "Inscription"
 
 #: main/templates/main/users/account_activation_sent.html:18
@@ -3237,7 +3231,7 @@ msgstr ""
 #: main/templates/main/users/login.html:18
 #, fuzzy
 #| msgid "Login To Your Account"
-msgid "Login to your account"
+msgid "Login to Your Account"
 msgstr "CONNEXION/INSCRIPTION"
 
 #: main/templates/main/users/login.html:23
@@ -3284,8 +3278,13 @@ msgid "Register here."
 msgstr "Inscrivez-vous ici."
 
 #: main/templates/main/users/logout.html:7
-#: main/templates/main/users/logout.html:16
 msgid "Logged out"
+msgstr "Déconnecté"
+
+#: main/templates/main/users/logout.html:16
+#, fuzzy
+#| msgid "Logged out"
+msgid "Logged Out"
 msgstr "Déconnecté"
 
 #: main/templates/main/users/logout.html:18
@@ -3307,7 +3306,7 @@ msgstr "Connectez-vous à nouveau"
 #: main/templates/main/users/notifications.html:24
 #, fuzzy
 #| msgid "Your Inbox"
-msgid "Your inbox"
+msgid "Your Inbox"
 msgstr "Votre Inbox"
 
 #: main/templates/main/users/messages.html:27
@@ -3318,7 +3317,7 @@ msgstr "Supprimer tous les messages"
 #: main/templates/main/users/messages.html:36
 #: main/templates/main/users/notifications.html:33
 #, fuzzy
-msgid "Your email notification options"
+msgid "Your Email Notification Options"
 msgstr "Vos options de notification par e-mail"
 
 #: main/templates/main/users/messages.html:37
@@ -3332,12 +3331,6 @@ msgstr ""
 #, fuzzy
 #| msgid "Documents"
 msgid "Your Documents"
-msgstr "Documents"
-
-#: main/templates/main/users/my_documents.html:22
-#, fuzzy
-#| msgid "Documents"
-msgid "My documents"
 msgstr "Documents"
 
 #: main/templates/main/users/notifications.html:10
@@ -3363,12 +3356,10 @@ msgid "Change Password"
 msgstr "Modifier le mot de passe"
 
 #: main/templates/main/users/password_change.html:23
-#: main/templates/main/users/user_options_copy.html:70
-msgid "Change your password"
-msgstr "Changer votre mot de passe"
+msgid "Change Your Password"
+msgstr "Changez votre mot de passe"
 
 #: main/templates/main/users/password_change_done.html:7
-#: main/templates/main/users/password_change_done.html:18
 msgid "Password changed"
 msgstr "Mot de passe changé"
 
@@ -3377,6 +3368,12 @@ msgstr "Mot de passe changé"
 #| msgid "Change Password"
 msgid "Change password"
 msgstr "Modifier le mot de passe"
+
+#: main/templates/main/users/password_change_done.html:18
+#, fuzzy
+#| msgid "Password changed"
+msgid "Password Changed"
+msgstr "Mot de passe changé"
 
 #: main/templates/main/users/password_change_done.html:20
 #, fuzzy
@@ -3391,7 +3388,7 @@ msgstr "Aller à la page principale"
 #: main/templates/main/users/password_reset.html:18
 #, fuzzy
 #| msgid "Reset Your Password"
-msgid "Reset your password"
+msgid "Reset Your Password"
 msgstr "Réinitialisez votre mot de passe"
 
 #: main/templates/main/users/password_reset_complete.html:7
@@ -3402,7 +3399,7 @@ msgstr "Réinitialiser le mot de passe"
 #: main/templates/main/users/password_reset_complete.html:17
 #: main/templates/main/users/password_reset_done.html:17
 #, fuzzy
-msgid "Your password has been reset"
+msgid "Your Password Has Been Reset"
 msgstr "Votre mot de passe a été réinitialisé"
 
 #: main/templates/main/users/password_reset_complete.html:19
@@ -3415,8 +3412,9 @@ msgstr "Choisir un nouveau mot de passe"
 
 #: main/templates/main/users/password_reset_confirm.html:18
 #, fuzzy
-msgid "Set a new password"
-msgstr "Définir un nouveau mot de passe"
+#| msgid "Set New Password"
+msgid "Set a New Password"
+msgstr "Choisir un nouveau mot de passe"
 
 #: main/templates/main/users/password_reset_done.html:18
 #, fuzzy
@@ -3434,7 +3432,7 @@ msgstr "Utilisateur "
 #: main/templates/main/users/public_user_profile.html:19
 #, fuzzy
 #| msgid "User Data"
-msgid "User data"
+msgid "User Data"
 msgstr "Données d'utilisateur"
 
 #: main/templates/main/users/public_user_profile.html:25
@@ -3469,7 +3467,7 @@ msgstr ""
 #: main/templates/main/users/public_user_profile.html:46
 #, fuzzy
 #| msgid "User Activity"
-msgid "User activity"
+msgid "User Activity"
 msgstr "Activité de l’utilisateur"
 
 #: main/templates/main/users/read_message.html:10
@@ -3480,7 +3478,7 @@ msgstr "Lire le message"
 #: main/templates/main/users/read_message.html:22
 #, fuzzy
 #| msgid "Your Message"
-msgid "Your message"
+msgid "Your Message"
 msgstr "Votre message"
 
 #: main/templates/main/users/read_message.html:34
@@ -3506,9 +3504,7 @@ msgid "Read Notification"
 msgstr "Lire la notification"
 
 #: main/templates/main/users/read_notification.html:22
-#, fuzzy
-#| msgid "Your notifications"
-msgid "Your notification"
+msgid "Your Notification"
 msgstr "Vos notifications"
 
 #: main/templates/main/users/request_username.html:9
@@ -3531,7 +3527,7 @@ msgstr ""
 
 #: main/templates/main/users/request_username_done.html:17
 #, fuzzy
-msgid "Your username has been reset"
+msgid "Your Username Has Been Reset"
 msgstr "Votre mot de passe a été réinitialisé"
 
 #: main/templates/main/users/request_username_done.html:19
@@ -3547,9 +3543,9 @@ msgid "Registration"
 msgstr "Inscription"
 
 #: main/templates/main/users/subscriptions.html:24
-#: main/templates/main/users/user_options_copy.html:59
+#: main/templates/main/users/user_options_copy2.html:43
 #, fuzzy
-msgid "Your subscriptions"
+msgid "Your Subscriptions"
 msgstr "Vos abonnements"
 
 #: main/templates/main/users/subscriptions.html:26
@@ -3568,7 +3564,7 @@ msgstr ""
 
 #: main/templates/main/users/subscriptions.html:33
 #, fuzzy
-msgid "Your subscription options"
+msgid "Your Subscription Options"
 msgstr "Vos options d’abonnement"
 
 #: main/templates/main/users/subscriptions.html:34
@@ -3589,7 +3585,7 @@ msgstr "Mettre à jour le profil"
 
 #: main/templates/main/users/update_user.html:23
 #, fuzzy
-msgid "Update your user information"
+msgid "Update Your User Information"
 msgstr "Mettre à jour vos informations utilisateur"
 
 #: main/templates/main/users/user_options.html:6
@@ -3608,12 +3604,21 @@ msgstr "Votre boîte de réception de message"
 msgid "Your notifications"
 msgstr "Vos notifications"
 
+#: main/templates/main/users/user_options_copy.html:59
+#, fuzzy
+msgid "Your subscriptions"
+msgstr "Vos abonnements"
+
 #: main/templates/main/users/user_options_copy.html:63
 #: main/templates/main/users/user_options_copy2.html:8
 #, fuzzy
 #| msgid "My Profile"
 msgid "Profile"
 msgstr "Mon profil"
+
+#: main/templates/main/users/user_options_copy.html:70
+msgid "Change your password"
+msgstr "Changer votre mot de passe"
 
 #: main/templates/main/users/user_options_copy.html:73
 #, fuzzy
@@ -3680,18 +3685,13 @@ msgstr "Écrire un message"
 msgid "Your Notifications"
 msgstr "Vos notifications"
 
-#: main/templates/main/users/user_options_copy2.html:43
-#, fuzzy
-msgid "Your Subscriptions"
-msgstr "Vos abonnements"
-
 #: main/templates/main/users/user_profile.html:8
 msgid "User Profile"
 msgstr "Profil de l'utilisateur"
 
 #: main/templates/main/users/user_profile.html:21
 #, fuzzy
-msgid "My personal data"
+msgid "My Personal Data"
 msgstr "Mes données personnelles"
 
 #: main/templates/main/users/user_profile.html:24
@@ -3719,7 +3719,7 @@ msgstr "Supprimer tous les messages"
 #: main/templates/main/users/user_profile.html:30
 #, fuzzy
 #| msgid "My Activity"
-msgid "My activity"
+msgid "My Activity"
 msgstr "Mon activité"
 
 #: main/templates/main/users/write_message.html:10
@@ -3728,8 +3728,8 @@ msgstr "Écrire un message"
 
 #: main/templates/main/users/write_message.html:21
 #, fuzzy
-msgid "Write a message"
-msgstr "Écrivez-nous un message"
+msgid "Write a Message"
+msgstr "Écrire un message"
 
 #: main/templates/main/users/write_message.html:22
 #, fuzzy
@@ -3945,6 +3945,40 @@ msgstr ""
 msgid "Your API Key has been deleted"
 msgstr "Le message a été supprimé."
 
+#~ msgid "Search results"
+#~ msgstr "Résultats de recherche"
+
+#, fuzzy
+#~ msgid "Content Fields"
+#~ msgstr "Champs de contenu"
+
+#, fuzzy
+#~ msgid "Manuscript description"
+#~ msgstr "Description du manuscrit"
+
+#, fuzzy
+#~| msgid "Documents"
+#~ msgid "My documents"
+#~ msgstr "Documents"
+
+#, fuzzy
+#~ msgid "Set a new password"
+#~ msgstr "Définir un nouveau mot de passe"
+
+#, fuzzy
+#~| msgid "Your Message"
+#~ msgid "Your message"
+#~ msgstr "Votre message"
+
+#, fuzzy
+#~| msgid "Your notifications"
+#~ msgid "Your notification"
+#~ msgstr "Vos notifications"
+
+#, fuzzy
+#~ msgid "Write a message"
+#~ msgstr "Écrivez-nous un message"
+
 #, fuzzy
 #~ msgid "Fol. 3r - 10f"
 #~ msgstr "Fol. 3r - 10f"
@@ -4074,12 +4108,6 @@ msgstr "Le message a été supprimé."
 #~ msgid "Transcription"
 #~ msgstr "Transcription"
 
-#~ msgid "Change Your Password"
-#~ msgstr "Changez votre mot de passe"
-
-#~ msgid "Your Notification"
-#~ msgstr "Vos notifications"
-
 #, fuzzy
 #~| msgid "Logout"
 #~ msgid "Logout."
@@ -4110,11 +4138,6 @@ msgstr "Le message a été supprimé."
 #, fuzzy
 #~ msgid "HowItWorksEdit-Text"
 #~ msgstr "HowItWorksEdit-Text"
-
-#, fuzzy
-#~| msgid "Your Message"
-#~ msgid "Your Message:"
-#~ msgstr "Votre message"
 
 #, fuzzy
 #~| msgid "Thank you for your contribution"

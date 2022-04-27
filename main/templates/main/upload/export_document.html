@@ -23,7 +23,7 @@
         <p>
             You can export the transcriptions in different formats. Please choose below:
         </p>
-        <div align="center">
+        <div class="text-center">
             <form method="POST">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary" name="export_tei">{%  translate 'Export TEI' %}</button>

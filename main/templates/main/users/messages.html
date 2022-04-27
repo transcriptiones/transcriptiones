@@ -21,7 +21,7 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'messages_card' _('Your inbox') %}
+    {% card 'messages_card' _('Your Inbox') %}
         {% if table.data|length > 0 %}
              <p>
                  <button class="btn btn-danger btn-sm" type="button" id="do-delete-all">{% translate 'Delete all Messages' %}</button>
@@ -33,7 +33,7 @@
         {% endif %}
     {% endcard %}
 
-    {% card 'message_options_card' _('Your email notification options') %}
+    {% card 'message_options_card' _('Your Email Notification Options') %}
             <p>{% translate 'How do you want to to be notified if you receive messages?' %}</p>
             {% crispy form %}
     {% endcard %}

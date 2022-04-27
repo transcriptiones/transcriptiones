@@ -17,7 +17,7 @@
 
 {% block content %}
 
-    {% card 'author_detail' _('Information about this scribe') %}
+    {% card 'author_detail' _('Information about this Scribe') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
@@ -35,7 +35,7 @@
 
     {%  endcard %}
 
-    {% card 'author_documents' _('Documents from this scribe') %}
+    {% card 'author_documents' _('Documents from this Scribe') %}
         {% include 'main/document_filter.html' %}
         {% render_table tables.1 %}
     {%  endcard %}

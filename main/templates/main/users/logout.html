@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    {% card 'logged_out_card' _('Logged out') %}
+    {% card 'logged_out_card' _('Logged Out') %}
         <div class="text-center">
             <p>{% translate 'You have been securely logged out.' %}</p>
             <a href="{% url 'main:start' %}" class="btn btn-primary">{% translate 'Go to Main Page' %}</a>

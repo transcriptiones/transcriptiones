@@ -17,7 +17,7 @@
 
 
 {% block content %}
-    {% card 'institution_detail' _('About the Institution') %}
+    {% card 'institution_detail' _('About this Institution') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}

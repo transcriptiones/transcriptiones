@@ -21,7 +21,7 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'subscription_card' _('Your subscriptions') %}
+    {% card 'subscription_card' _('Your Subscriptions') %}
         {% if table.data|length > 0 %}
              <p><a class="btn btn-danger btn-sm confirm-unsubscribe-all" href="{% url 'main:unsubscribe_all' %}" data-toggle="modal" data-target="#confirmUnsubscribeAllModal" id="unsubscribeAllButtonXXX">{% translate 'Unsubscribe from all' %}</a></p>
             {% render_table table %}
@@ -30,7 +30,7 @@
         {% endif %}
     {% endcard %}
 
-    {% card 'subscription_options_card' _('Your subscription options') %}
+    {% card 'subscription_options_card' _('Your Subscription Options') %}
             <p>{% translate 'How do you want to to be notified if there are changes in your subscriptions?' %}</p>
             {% crispy form %}
     {% endcard %}

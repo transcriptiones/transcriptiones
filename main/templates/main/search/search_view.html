@@ -18,12 +18,12 @@
     <form id="searchForm" action="." method="post">
         {% csrf_token %}
 
-        {% card 'simple_search_form' _('Simple search') %}
+        {% card 'simple_search_form' _('Simple Search') %}
             {{ form.query }} <button type="submit">{% translate 'Search' %}</button>
             {{ form.filter_1 }}
         {% endcard %}
 
-        {% card 'advanced_search_form' _('Advanced search') %}
+        {% card 'advanced_search_form' _('Advanced Search') %}
             {% for field in form %}
                 {% if not forloop.first %}
                     <div class="row">
@@ -42,13 +42,13 @@
 
     {% if table %}
 
-        {% card 'search_results_test' _('Search results') %}
+        {% card 'search_results_test' _('Search Results') %}
             {% render_table table %}
         {% endcard %}
     {% endif %}
 
     {% if results_xx %}
-       {% card 'search_results' _('Search results') %}
+       {% card 'search_results' _('Search Results') %}
           <span>{{ results.count }} Suchresultat{% if results.count != 1 %}e{% endif %}</span>
           {% for result in results %}
                 <a href="{{ result.get_absolute_url }}" class="row display-list-element">
