@@ -14,9 +14,9 @@
 
 {% block content %}
     {% card 'logged_out_card' _('Logged out') %}
-        <div align="center">
+        <div class="text-center">
             <p>{% translate 'You have been securely logged out.' %}</p>
-            <a href="{% url 'main:start' %}" class="btn btn-primary">{% translate 'Go To Main Page' %}</a>
+            <a href="{% url 'main:start' %}" class="btn btn-primary">{% translate 'Go to Main Page' %}</a>
             <a href="{% url 'main:login' %}" class="btn btn-primary">{% translate 'Login again' %}</a>
         </div>
     {% endcard %}

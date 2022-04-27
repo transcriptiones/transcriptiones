@@ -21,10 +21,10 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'messages_card' _('Your Inbox') %}
+    {% card 'messages_card' _('Your inbox') %}
         {% if table.data|length > 0 %}
              <p>
-                 <button class="btn btn-danger btn-sm" type="button" id="do-delete-all">{% translate 'Delete All Messages' %}</button>
+                 <button class="btn btn-danger btn-sm" type="button" id="do-delete-all">{% translate 'Delete all Messages' %}</button>
                  <a class="btn btn-primary btn-sm" href="{% url 'main:messages' %}" role="button"><i class="fas fa-sync"></i></a>
              </p>
             {% render_table table %}

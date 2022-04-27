@@ -15,16 +15,16 @@
 
 {% block content %}
 
-{% card 'login_Card' _('Login To Your Account') %}
-    <div align="center">
+{% card 'login_Card' _('Login to your account') %}
+    <div class="text-center">
     {% if next %}
         {% if user.is_authenticated %}
             <p>
-                {% translate 'Your account has no access to this page. Please login with adifferent account.' %}
+                {% translate 'Your account has no access to this page. Please login with a different account.' %}
             </p>
         {% else %}
             <p>
-                {% translate 'You need to be logged in, to view the requested page.' %}
+                {% translate 'You need to be logged in to view the requested page.' %}
             </p>
         {% endif %}
     {% endif %}

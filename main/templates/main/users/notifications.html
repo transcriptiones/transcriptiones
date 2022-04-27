@@ -21,7 +21,7 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'messages_card' _('Your Inbox') %}
+    {% card 'messages_card' _('Your inbox') %}
         {% if table.data|length > 0 %}
              <p><a class="btn btn-danger btn-sm" href="{% url 'main:notifications_delete_all' %}" role="button">{% translate 'Delete All Notifications' %}</a></p>
             {% render_table table %}

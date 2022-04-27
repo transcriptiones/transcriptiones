@@ -168,7 +168,7 @@ def admin_export_json_view(request):
     zip_file.writestr("SourceType.json", data_source_type)
 
     data_author = serializers.serialize("json", Author.objects.all())
-    zip_file.writestr("Author.json", data_author)
+    zip_file.writestr("Scribe.json", data_author)
 
     data_documents = serializers.serialize("json", Document.objects.all())
     zip_file.writestr("Document.json", data_documents)

@@ -11,7 +11,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Request Username") "" %}
+    {% breadcrumb _("Request username") "" %}
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         {% if user.is_authenticated %}
             <p>{% translate 'You are already signed in.' %}</p>
             <div id="logout">
-                <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout.' %}</a>
+                <a class="btn btn-secondary" href="{% url 'main:logout' %}">{% translate 'Logout' %}</a>
             </div>
         {% else %}
                 {% crispy form %}

@@ -20,7 +20,7 @@
 
     {% include 'main/users/user_options.html' %}
 
-    {% card 'update_user' _('Update Your User Information') %}
+    {% card 'update_user' _('Update your user information') %}
         <form method="post" action="{% url 'main:user_update' %}">
             {% csrf_token %}
             {% crispy form %}

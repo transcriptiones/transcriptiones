@@ -84,8 +84,8 @@ urlpatterns = [
     path('display/source_types/<int:pk>/', v_browse.source_type_detail_view, name='source_type_detail'),
     path('display/source_types/<int:pk>/all/', v_browse.source_type_group_detail_view, name='source_type_group_detail'),
 
-    path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
-    path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
+    path('display/scribes/', v_browse.AuthorListView.as_view(), name='author_list'),
+    path('display/scribes/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
     path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),
@@ -122,12 +122,12 @@ urlpatterns = [
     path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
     path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
     path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
-    path('subscribe/author/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
+    path('subscribe/scribe/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
     path('unsubscribe/institution/<int:pk>/', v_subscriptions.unsubscribe_institution_view, name='unsubscribe_institution'),
     path('unsubscribe/ref_number/<int:pk>/', v_subscriptions.unsubscribe_ref_number_view, name='unsubscribe_ref_number'),
     path('unsubscribe/document/<int:pk>/', v_subscriptions.unsubscribe_document_view, name='unsubscribe_document'),
     path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
-    path('unsubscribe/author/<int:pk>/', v_subscriptions.unsubscribe_author_view, name='unsubscribe_author'),
+    path('unsubscribe/scribe/<int:pk>/', v_subscriptions.unsubscribe_author_view, name='unsubscribe_author'),
     path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
     ##############

@@ -167,7 +167,7 @@ class Author(models.Model):
 
     author_name = models.CharField(verbose_name=_("Name of scribe"),
                                    max_length=150,
-                                   help_text=_("Name of the author of the original document."))
+                                   help_text=_("Name of the scribe of the original document."))
 
     author_gnd = models.URLField(verbose_name=_("Link to GND entry"),
                                  max_length=100,
@@ -493,7 +493,7 @@ class Document(models.Model):
                                "material": str(self.MaterialType(self.material).label),
                                "languages": list(self.language.values_list('name_en', flat=True)),
                                "location": self.place_name,
-                               "authors": list(self.author.all().values_list('author_name', flat=True))
+                               "scribes": list(self.author.all().values_list('author_name', flat=True))
                            }}
 
         if self.doc_end_date is not None:

@@ -26,7 +26,7 @@
              <p><a class="btn btn-danger btn-sm confirm-unsubscribe-all" href="{% url 'main:unsubscribe_all' %}" data-toggle="modal" data-target="#confirmUnsubscribeAllModal" id="unsubscribeAllButtonXXX">{% translate 'Unsubscribe from all' %}</a></p>
             {% render_table table %}
         {% else %}
-            {% translate 'You have no subscriptions. You can subscribe to institutions, documents, reference numbers, authors and users on the respective pages.' %}
+            {% translate 'You have no subscriptions. You can subscribe to institutions, documents, reference numbers, scribes and users on the respective pages.' %}
         {% endif %}
     {% endcard %}
 
