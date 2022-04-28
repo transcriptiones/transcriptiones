@@ -28,7 +28,7 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        {% card 'edit_meta_form_2' _('Content Fields') %}
+        {% card 'edit_meta_form_2' _('Content Metadata') %}
             {{ form.transcription_scope|as_crispy_field }}
             {{ form.doc_start_date|as_crispy_field }}
             {{ form.doc_end_date|as_crispy_field }}
@@ -40,7 +40,7 @@
             {{ form.language|as_crispy_field }}
         {% endcard %}
 
-        {% card 'edit_meta_form_3' _('Manuscript description') %}
+        {% card 'edit_meta_form_3' _('Manuscript Description') %}
             {{ form.material|as_crispy_field }}
             {{ form.measurements_length|as_crispy_field }}
             {{ form.measurements_width|as_crispy_field }}

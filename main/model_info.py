@@ -1,9 +1,12 @@
 from uuid import UUID
 
+import dateutil.utils
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.utils.text import format_lazy
+from datetime import date
+
 
 from main.models import Document
 
@@ -34,9 +37,11 @@ def get_source_type_info(source_type):
 
 def get_user_info(user):
     api_key_line = ""
+    api_auth_key_expired = True if user.api_auth_key_expiration <= date.today() else False
+
     if user.api_auth_key is not None:
         api_key_line = mark_safe(
-            user.api_auth_key + "<br>" + _(f'<small>(Expires on {user.api_auth_key_expiration})</small>'))
+            user.api_auth_key + "<br>" + _(f'<small {" style=color:red" if api_auth_key_expired else ""}>({"Expired" if api_auth_key_expired else "Expires"} on {user.api_auth_key_expiration})</small>'))
 
     data = [(get_verbose_field_name(user, 'username'), user.username),
             (get_verbose_field_name(user, 'first_name'), user.first_name),
@@ -188,15 +193,6 @@ def get_document_info_comments(document):
 
 
 # EXTENDED HELP TEXTS
-def get_list(items):
-    """Formats a list as <ul>"""
-    formatted_text = '<ul>'
-    for item in items:
-        formatted_text = formatted_text + '<li>' + item + '</li>'
-    formatted_text = formatted_text + '</ul>'
-    return formatted_text
-
-
 def get_title_text_format(title, text):
     """Formats the title of a tooltip"""
     return format_lazy('<b>{title}</b><br/>{text}', title=title, text=text)
@@ -225,7 +221,7 @@ def get_extended_help_text(model, field):
                                                 'you may create a new one.'))
         elif field == 'transcription_scope':
             help_text = get_title_text_format(_('Which parts of the manuscript have been transcribed?'),
-                                              _('Examples {}'.format(get_list([_('Fol. 3r - 10v'), _('Chapter 10')]))))
+                                              _('E. g.: Entire Document, Fol. 3r - 10v, Chapter 10'))
         elif field == 'doc_start_date':
             help_text = get_title_text_format(_('Earliest creation date of the original manuscript'),
                                               _('Only the year of creation is required. Please specify as precisely as '
@@ -260,7 +256,9 @@ def get_extended_help_text(model, field):
                                                                                           'paginated?'))
         elif field == 'comments':
             help_text = get_title_text_format(_('Additional comments'), _('Optional field. You may enter any comments on the creation '
-                                                                          'of the transcription or its contents.'))
+                                                                          'of the transcription or its contents. Here, you may also place '
+                                                                          'links to external resources such as digitizations or editions '
+                                                                          'of the source.'))
         elif field == 'illuminated':
             help_text = get_title_text_format(_('Illuminations'), _('Optional field. Are there illuminations on the document?'))
         elif field == 'seal':
@@ -274,7 +272,7 @@ def get_extended_help_text(model, field):
         elif field == 'commit_message':
             help_text = get_title_text_format(_('Brief description of changes'), _('Please supply a brief description '
                                                                                    'of the changes you made. Example: '
-                                                                                   '"Corrected typo", "Added authors", '
+                                                                                   '"Corrected typo", "Added scribes", '
                                                                                    'etc.'))
         elif field == 'measurements_length':
             help_text = get_title_text_format(_('Length of the document'), _('Optional field. Please write down the length '

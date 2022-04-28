@@ -33,7 +33,7 @@
                     {% if message_type == 'message' %}
                     <a href="{% url 'main:messages_reply' message.id %}" class="btn btn-primary">{% translate 'Reply' %}</a> &nbsp;
                     {% endif %}
-                    <a href="{% url 'main:messages' %}" class="btn btn-primary">{% translate 'Go To Inbox' %}</a> &nbsp;
+                    <a href="{% url 'main:messages' %}" class="btn btn-primary">{% translate 'Go to Inbox' %}</a> &nbsp;
                     <a href="{% url 'main:messages_mark_unread' message_type message.id %}" class="btn btn-primary">{% translate 'Mark Unread' %}</a> &nbsp;
                     <button class="btn btn-danger" type="button" id="do-delete">{% translate 'Delete Message' %}</button>
                 </td>

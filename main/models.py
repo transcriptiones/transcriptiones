@@ -96,11 +96,11 @@ class RefNumber(models.Model):
     holding_institution = models.ForeignKey(Institution,
                                             verbose_name=_("Institution"),
                                             on_delete=models.PROTECT,
-                                            help_text=_("Institution associated with this reference number"))
+                                            help_text=_("Institution which holds this reference number and document"))
 
     ref_number_name = models.CharField(verbose_name=_("Reference number"),
                                        max_length=100,
-                                       help_text=_("reference number of the collection containing a document"))
+                                       help_text=_("Reference number of the collection containing a document"))
 
     ref_number_title = models.CharField(verbose_name=_("Title"),
                                         max_length=150,
@@ -167,7 +167,7 @@ class Author(models.Model):
 
     author_name = models.CharField(verbose_name=_("Name of scribe"),
                                    max_length=150,
-                                   help_text=_("Name of the author of the original document."))
+                                   help_text=_("Name of the scribe of the original document."))
 
     author_gnd = models.URLField(verbose_name=_("Link to GND entry"),
                                  max_length=100,
@@ -378,7 +378,7 @@ class Document(models.Model):
                                      help_text=_("Uploading user"),
                                      editable=False)
 
-    publish_user = models.BooleanField(verbose_name=_("Publish anonymous"),
+    publish_user = models.BooleanField(verbose_name=_("Publish anonymously"),
                                        default=False,
                                        help_text=_("Select this, if you want to publish this document anonymously"))
 
@@ -487,13 +487,13 @@ class Document(models.Model):
                                         },
                                "illuminated": self.illuminated,
                                "has-seal": self.seal,
-                               "measurements": {"width": self.measurements_width,
-                                                "length": self.measurements_length,
+                               "measurements": {"width": str(self.measurements_width),
+                                                "length": str(self.measurements_length),
                                                 "unit": "cm"},
                                "material": str(self.MaterialType(self.material).label),
                                "languages": list(self.language.values_list('name_en', flat=True)),
                                "location": self.place_name,
-                               "authors": list(self.author.all().values_list('author_name', flat=True))
+                               "scribes": list(self.author.all().values_list('author_name', flat=True))
                            }}
 
         if self.doc_end_date is not None:

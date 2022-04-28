@@ -53,7 +53,7 @@ urlpatterns = [
     # Upload form for a new document
     path('upload/document/', v_upload.upload_transcription_view, name='upload_document'),
     # Upload form for a new document
-    path('upload/documents/', v_upload.upload_multiple_transcriptions_view, name='upload_multiple'),
+    # path('upload/documents/', v_upload.upload_multiple_transcriptions_view, name='upload_multiple'),
     # Contact form for a batch upload
     path('upload/batch/', v_upload.upload_batch_view, name='upload_batch'),
     # Thank you screen after uploading
@@ -68,12 +68,11 @@ urlpatterns = [
     url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(create_field='author_name'), name='author-autocomplete', ),
     url(r'^language-autocomplete/$', v_autocomplete.LanguageAutocomplete.as_view(), name='language-autocomplete', ),
 
-
     ##############
     # VIEW DATA PAGES
-    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
-
     path('display/', v_browse.browse_options, name='browse_options'),
+
+    path('display/institutions/', v_browse.InstitutionListView.as_view(), name='institution_list'),
     path('display/institutions/<slug:inst_slug>/', v_browse.InstitutionDetailView.as_view(), name='institution_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/', v_browse.RefNumberDetailView.as_view(), name='ref_number_detail'),
     path('display/institutions/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/', v_browse.DocumentDetailView.as_view(), name='document_detail'),
@@ -85,8 +84,8 @@ urlpatterns = [
     path('display/source_types/<int:pk>/', v_browse.source_type_detail_view, name='source_type_detail'),
     path('display/source_types/<int:pk>/all/', v_browse.source_type_group_detail_view, name='source_type_group_detail'),
 
-    path('display/authors/', v_browse.AuthorListView.as_view(), name='author_list'),
-    path('display/authors/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
+    path('display/scribes/', v_browse.AuthorListView.as_view(), name='author_list'),
+    path('display/scribes/<int:pk>/', v_browse.AuthorDetailView.as_view(), name='author_detail'),
 
     path('insti_idx/', v_upload.upload_transcription_view, name='index_inst'),
     path('instis/create/', v_upload.ModalCreateInstitutionView.as_view(), name='create_inst'),
@@ -123,12 +122,12 @@ urlpatterns = [
     path('subscribe/ref_number/<int:pk>/', v_subscriptions.subscribe_ref_number_view, name='subscribe_ref_number'),
     path('subscribe/document/<int:pk>/', v_subscriptions.subscribe_document_view, name='subscribe_document'),
     path('subscribe/user/<int:pk>/', v_subscriptions.subscribe_user_view, name='subscribe_user'),
-    path('subscribe/author/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
+    path('subscribe/scribe/<int:pk>/', v_subscriptions.subscribe_author_view, name='subscribe_author'),
     path('unsubscribe/institution/<int:pk>/', v_subscriptions.unsubscribe_institution_view, name='unsubscribe_institution'),
     path('unsubscribe/ref_number/<int:pk>/', v_subscriptions.unsubscribe_ref_number_view, name='unsubscribe_ref_number'),
     path('unsubscribe/document/<int:pk>/', v_subscriptions.unsubscribe_document_view, name='unsubscribe_document'),
     path('unsubscribe/user/<int:pk>/', v_subscriptions.unsubscribe_user_view, name='unsubscribe_user'),
-    path('unsubscribe/author/<int:pk>/', v_subscriptions.unsubscribe_author_view, name='unsubscribe_author'),
+    path('unsubscribe/scribe/<int:pk>/', v_subscriptions.unsubscribe_author_view, name='unsubscribe_author'),
     path('unsubscribe/all/', v_subscriptions.unsubscribe_all_view, name='unsubscribe_all'),
 
     ##############

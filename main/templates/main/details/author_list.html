@@ -5,17 +5,17 @@
 {% load render_table from django_tables2 %}
 
 {% block page_title %}
-    {% translate 'Browse Authors' %}
+    {% translate 'Browse Scribes' %}
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Browse") "main:browse_options" %}
-    {% breadcrumb _("Authors") "main:author_list" %}
+    {% breadcrumb _("Collection") "main:browse_options" %}
+    {% breadcrumb _("Scribes") "main:author_list" %}
 {% endblock %}
 
 {% block content %}
-    {% card 'authors_list_card' _('Authors') %}
+    {% card 'authors_list_card' _('Scribes') %}
         {% include 'main/filter.html' %}
         {% render_table table %}
     {% endcard %}

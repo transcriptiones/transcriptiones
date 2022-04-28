@@ -12,7 +12,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _("Browse") "main:browse_options" %}
+    {% breadcrumb _("Collection") "main:browse_options" %}
     {% breadcrumb _("Institutions") "main:institution_list"%}
     {% breadcrumb refnumber.holding_institution "main:institution_detail" refnumber.holding_institution.institution_slug %}
     {% breadcrumb refnumber "main:ref_number_detail" refnumber.holding_institution.institution_slug refnumber.ref_number_slug %}
@@ -20,7 +20,7 @@
 
 {% block content %}
 
-    {% card 'ref_number_detail' _('Information about the reference number') %}
+    {% card 'ref_number_detail' _('Information about this Reference Number') %}
         {% render_table tables.0 %}
         {% if request.user.is_authenticated %}
             {% if subscribed %}
@@ -38,7 +38,7 @@
 
     {%  endcard %}
 
-    {% card 'ref_number_documents' _('Documents with this reference number') %}
+    {% card 'ref_number_documents' _('Documents with this Reference Number') %}
         {% include 'main/document_filter.html' %}
 
         {% render_table tables.1 %}
