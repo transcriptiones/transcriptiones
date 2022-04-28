@@ -33,11 +33,46 @@
             {{ form.doc_start_date|as_crispy_field }}
             {{ form.doc_end_date|as_crispy_field }}
             {{ form.place_name|as_crispy_field }}
-            {{ form.selection_helper_source_type|as_crispy_field }}
-            {{ form.source_type|as_crispy_field }}
 
-            {{ form.author|as_crispy_field }}
-            {{ form.language|as_crispy_field }}
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    {% get_tooltip_html 'document' 'selection_helper_source_type' %}*
+                </div>
+                <div class="form-group col-sm-9">
+                    {{ form.selection_helper_source_type }}
+                    {% get_help_text_html 'document' 'selection_helper_source_type' %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    {% get_tooltip_html 'document' 'source_type' %}*
+                </div>
+                <div class="form-group col-sm-9">
+                    {{ form.source_type }}
+                    {% get_help_text_html 'document' 'source_type' %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    {% get_tooltip_html 'document' 'author' %}*
+                </div>
+                <div class="form-group col-sm-9">
+                    {{ form.author }}
+                    {% get_help_text_html 'document' 'author' %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    {% get_tooltip_html 'document' 'language' %}*
+                </div>
+                <div class="form-group col-sm-9">
+                    {{ form.language }}
+                    {% get_help_text_html 'document' 'language' %}
+                </div>
+            </div>
         {% endcard %}
 
         {% card 'edit_meta_form_3' _('Manuscript Description') %}

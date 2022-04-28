@@ -57,7 +57,11 @@ def get_help_text_html_by_model_name(model_name, field_name):
         if field_name == "parent_ref_number":
             text = Document._meta.get_field("parent_ref_number").help_text
         if field_name == "source_type":
-            text = Document._meta.get_field("source_type").help_text
+            text = _("Child source type")
         if field_name == "selection_helper_source_type":
-            text = "Parent source type"
+            text = _("Parent source type")
+        if field_name == "author":
+            text = Document._meta.get_field("author").help_text
+        if field_name == "language":
+            text = Document._meta.get_field("language").help_text
     return mark_safe(f'<small id="hint_id_{field_name}" class="form-text text-muted">{text}</small>')

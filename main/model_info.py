@@ -239,7 +239,9 @@ def get_extended_help_text(model, field):
                                                                            'First level of categorization.'))
         elif field == 'source_type':
             help_text = get_title_text_format(_('Type of the document'), _('Which type best describes the source? '
-                                                                           'Second level of categorization.'))
+                                                                           'Second level of categorization. '
+                                                                           'Select a parent source type before filling '
+                                                                           'out this field.'))
         elif field == 'transcription_text':
             help_text = get_title_text_format(_('Transcription of the manuscript'),
                                               _('You can enter the transcription directly or copy your contents'

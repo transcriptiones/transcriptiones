@@ -159,8 +159,8 @@ urlpatterns = [
     path('transcriptiones_admin/set_user_admin/<int:user_id>', v_admin.set_user_admin, name='admin_set_user_admin'),
     path('transcriptiones_admin/set_user_user/<int:user_id>', v_admin.set_user_user, name='admin_set_user_user'),
 
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmeta/', v_edit.edit_meta_view, name='edit_meta'),
-    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscript/', v_edit.edit_transcription_view, name='edit_transcript'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/editmetadata/', v_edit.edit_meta_view, name='edit_meta'),
+    path('upload/<slug:inst_slug>/<slug:ref_slug>/<slug:doc_slug>/edittranscription/', v_edit.edit_transcription_view, name='edit_transcript'),
     path('upload/batch/', batch_upload, name='batch_upload'),
 
     ##############

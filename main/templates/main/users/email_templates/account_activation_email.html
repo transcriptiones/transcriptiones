@@ -2,9 +2,11 @@
 {% load i18n %}
 
 {%  block email_contents %}
+    {% blocktranslate %}
     Hi {{ user.username }}!<br/><br/>
 
     A warm welcome from the transcriptiones team. Please click the following Link or copy it in your browser to finalize your registration on transcriptiones.
+    {% endblocktranslate %}
     <br/><br/>
     <strong><a href="{{ domain }}{% url 'main:activate' uidb64=uid token=token %}">{% translate 'Click to finalize registration' %}</a></strong>
     <br/><br/><br/>

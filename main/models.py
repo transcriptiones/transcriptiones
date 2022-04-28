@@ -278,7 +278,7 @@ class Document(models.Model):
                                    default=uuid.uuid1,
                                    editable=False,
                                    help_text=_("ID of the first Version of this document. Is kept constant between "
-                                               "versions of this document."))
+                                               "versions of this document"))
 
     title_name = models.CharField(verbose_name=_("Title"),
                                   max_length=200,
@@ -310,7 +310,7 @@ class Document(models.Model):
     place_name = models.CharField(verbose_name=_("Creation Location"),
                                   max_length=150,
                                   blank=False,
-                                  help_text=_("The City/Place where the source was created."))
+                                  help_text=_("The City/Place where the source was created"))
 
     language = models.ManyToManyField(Language,
                                       verbose_name=_("Languages"),
@@ -360,10 +360,10 @@ class Document(models.Model):
 
     comments = models.TextField(verbose_name=_("Editorial comments"),
                                 blank=True,
-                                help_text=_("Add editorial comments or remarks on the contents of the document."))
+                                help_text=_("Add editorial comments or remarks on the contents of the document"))
 
     transcription_text = RichTextField(verbose_name=_("Transcript"),
-                                       help_text=_("Formatted text of your transcript."))
+                                       help_text=_("Formatted text of your transcript"))
 
     document_utc_add = models.DateTimeField(verbose_name=_("Upload date"),
                                             auto_now_add=True)
@@ -389,7 +389,7 @@ class Document(models.Model):
     commit_message = models.CharField(verbose_name=_("Changes"),
                                       max_length=255,
                                       default="initial",
-                                      help_text=_("A brief description of the applied changes."))
+                                      help_text=_("A brief description of the applied changes"))
 
     version_number = models.IntegerField(verbose_name=_("version number"),
                                          default=1,
