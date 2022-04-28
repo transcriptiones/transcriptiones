@@ -8,6 +8,8 @@ from django.urls import reverse
 from django.views.generic import FormView, ListView
 from django_elasticsearch_dsl_drf.pagination import Paginator
 from django.utils.translation import ugettext_lazy as _
+from elasticsearch_dsl import Q
+
 from main.documents import TranscriptionDocument
 from main.forms.forms_search import Attribute, AdvancedSearchForm
 from main.tables.tables_document import DocumentResultTable
@@ -21,13 +23,44 @@ def test_search_3(request):
     enriched_result = None
     total_results = 0
     number_of_pages = 0
-    page_size = 10
+    page_size = 100
     current_page = 1
     pagination_link_list = list()
 
     # Form has been sent: search
     if request.method == "GET":
-        pass
+        form = AdvancedSearchForm(request.GET)
+        if form.is_valid():
+            if not form.cleaned_data['source_type'] == '' and form.cleaned_data['source_type'] is not None:
+                if form.cleaned_data['source_type'].parent_type is None:
+                    print("Would search for children: ", form.cleaned_data['source_type'].source_type_set.all())
+                print("Source Type,,,", form.cleaned_data['source_type'], form.cleaned_data['source_type'].id)
+        else:
+            print("Form not valid")
+
+        print("Search")
+        search_result = TranscriptionDocument.search()
+        # search_result = search_result.query("match", title_name="*brief*con*")
+        #search_result = search_result.query("multi_match", query="achthunder", fields=FULLTEXT_FIELDS)
+        search_result.query = Q('match', title_name='*dokument*') &\
+                              (Q('match', source_type='Other Political Writings') | Q('match', source_type='Argumentative Writings') |
+                               Q('match', source_type='Polemic Writings'))
+        search_result.query()
+
+        paginator = Paginator(search_result, page_size)
+        result_page = paginator.page(current_page)
+        enriched_result = list()
+        for q in result_page:
+            try:
+                doc = Document.objects.get(id=q.meta.id)
+                enriched_result.append([q, doc])
+                # print("Q:", q, q.title_name, q.meta.id) # , q.meta.score
+                """
+                for hl in q.meta.highlight:
+                    print("H", q.meta.highlight[hl])"""
+            except Document.DoesNotExist:
+                # Old versions get found by elasticsearch but are not part of the resut
+                total_results -= 1
 
     # No form has been sent.
     else:

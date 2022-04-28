@@ -47,7 +47,7 @@
             <select name="source_type" class="form-control" title="" id="id_source_type">
                 <option value="">--- Search By Source Type ---</option>
                 {% for sourcetype in form_data.source_types %}
-                    <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %} disabled>{{ sourcetype.name }}</option>
+                    <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %}>{{ sourcetype.name }}</option>
                     {% for child_sourcetype in sourcetype.children %}
                         <option value="{{ child_sourcetype.value }}"{% ifequal request.GET.source_type child_sourcetype.value %} selected="selected"{% endifequal %}>&nbsp;&nbsp;{{ child_sourcetype.name }}</option>
                     {% endfor %}
