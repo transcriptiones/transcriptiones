@@ -206,6 +206,11 @@ class SourceType(models.Model):
     type_name_fr = models.CharField(verbose_name="archivalienart", default='', max_length=50)
     type_name_it = models.CharField(verbose_name="archivalienart", default='', max_length=50)
 
+    type_description = models.CharField(default='', max_length=200)
+    type_description_de = models.CharField(default='', max_length=200)
+    type_description_fr = models.CharField(default='', max_length=200)
+    type_description_it = models.CharField(default='', max_length=200)
+
     parent_type = models.ForeignKey('self',
                                     verbose_name="übergeordnete Archivalienart",
                                     on_delete=models.CASCADE,
