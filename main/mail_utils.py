@@ -120,7 +120,7 @@ def send_password_reset_mail(request, user):
     url = ''
     plain_message, html_message = create_message(request,
                                                  subject,
-                                                 _(f"Your Username is: {user.username}. Goto {url} to reset your password."))
+                                                 _(f"Your Username is: {user.username}. Go to {url} to reset your password."))
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
