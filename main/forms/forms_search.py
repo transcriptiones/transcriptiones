@@ -257,6 +257,7 @@ class AdvancedSearchForm(forms.Form):
     ui specifications of the form, the actual render is a template (main/search/search_form.html) which included in the search view"""
     query = forms.CharField(required=False, label=_('Full Text Search'), help_text=_('Search within the title and contents of documents.'))
     title_name = forms.CharField(required=False, label=_('Document Title'))
+    institution_name = forms.CharField(required=False, label=_('Institution Name'))
     ref_number_title = forms.CharField(required=False, label=_('Reference Title'))
     ref_number_name = forms.CharField(required=False, label=_('Reference Name'))
     source_type = forms.ModelChoiceField(required=False, queryset=SourceType.objects.all())

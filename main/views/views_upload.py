@@ -97,8 +97,6 @@ def upload_transcription_view(request):
         else:
             messages.error(request, _("There is an error in your form"))
             context = {'insts': Institution.objects.all(), 'form': form}
-            #print("NOT VALID")
-            #print(form.errors)
 
     return render(request, 'main/upload/create_document.html', context)
 

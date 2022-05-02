@@ -8,9 +8,8 @@ from elasticsearch_dsl import Range, DateRange, IntegerRange
 from partial_date import PartialDate
 from rest_framework.fields import DateTimeField
 
-from main.analyzers import transcript_analyzer
-from main.models import Document, Author, RefNumber, Language
-
+from main.analyzers import transcript_analyzer, default_analyzer
+from main.models import Document, Author, RefNumber, Language, Institution
 
 
 @registry.register_document
@@ -18,7 +17,7 @@ class TranscriptionDocument(ElasticsearchDocument):
     """Elasticsearch index mapping for DocumentTitle models.
     Intended for user search, not storage or internal search.
     """
-    title_name = fields.TextField(fields={"keyword": fields.KeywordField()})
+    title_name = fields.TextField(fields={"keyword": fields.KeywordField()}, analyzer=default_analyzer)
     # title_name = fields.TextField()
     doc_start_date = DateField()
     doc_end_date = DateField()
@@ -26,19 +25,20 @@ class TranscriptionDocument(ElasticsearchDocument):
     # author = fields.TextField(multi=True, fields={"keyword": fields.KeywordField()})
 
     institution_name = fields.TextField(attr="parent_ref_number.holding_institution.institution_name",
-                                        fields={"keyword": fields.KeywordField()})
+                                        fields={"keyword": fields.KeywordField()},
+                                        analyzer=default_analyzer)
 
-    ref_number_title = fields.TextField(attr="parent_ref_number.ref_number_title")
+    ref_number_title = fields.TextField(attr="parent_ref_number.ref_number_title", analyzer=default_analyzer)
     ref_number_name = fields.TextField(attr="parent_ref_number.ref_number_name")
     # language = fields.KeywordField(multi=True)
     source_type = fields.KeywordField(attr="source_type.type_name")
     material = fields.KeywordField()
     paging_system = fields.KeywordField()
+    place_name = fields.TextField(fields={"keyword": fields.KeywordField()}, analyzer=default_analyzer)
 
     class Django:
         model = Document
         fields = [
-            'place_name',
             'pages',
             'illuminated',
             'seal',
@@ -119,6 +119,11 @@ class TranscriptionDocument(ElasticsearchDocument):
 
     @staticmethod
     def get_instances_from_related(related_instance):
+        if isinstance(related_instance, Institution):
+            docs = list()
+            for ref_set in related_instance.refnumber_set.all():
+                docs += ref_set.document_set.all()
+            return docs
         if isinstance(related_instance, Author):
             return related_instance.document_set.all()
         if isinstance(related_instance, RefNumber):

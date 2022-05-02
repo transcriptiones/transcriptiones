@@ -18,6 +18,8 @@
 
     {% include "main/upload/_modal.html" %}
 
+    <!-- <button onclick="myFunction()">Click me</button> -->
+
     <form action="{% url 'main:upload_document' %}" method="post">
         {% csrf_token %}
         {% card 'upload_required' _('Required Information') %}
@@ -275,5 +277,14 @@
             $('#hint_id_title_name').text(`(${length}/200 characters used)`);
         });
       });
+
   </script>
+    <script>
+        function myFunction() {
+           $("#id_parent_institution").select2("trigger", "select", {
+                data: { id: "5" }
+            });
+           console.log("Did it 2")
+        }
+    </script>
 {% endblock extrascripts %}

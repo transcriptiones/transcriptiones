@@ -3,7 +3,18 @@
 For further information see: https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html
 """
 
-from elasticsearch_dsl import analyzer, token_filter, char_filter
+from elasticsearch_dsl import analyzer, token_filter, char_filter, tokenizer
+
+default_analyzer = analyzer(
+    'my_default_analyzer',
+    filter=[
+        "lowercase",
+        token_filter('custom_ngram', 'ngram', min_gram=3, max_gram=4),
+        token_filter('custom_edge_ngram', 'edge_ngram', min_gram=4, max_gram=5),
+    ],
+    tokenizer="standard"
+)
+
 
 transcript_analyzer = analyzer(
     'transcript_analyzer',
@@ -12,6 +23,8 @@ transcript_analyzer = analyzer(
         "lowercase",
         token_filter('german_stop', 'stop', stopwords='_german_'),
         token_filter('german_snowball', 'snowball', language='German2'),
+        token_filter('custom_ngram', 'ngram', min_gram=3, max_gram=4),
+        token_filter('custom_edge_ngram', 'edge_ngram', min_gram=4, max_gram=5),
     ],
     char_filter=[
         "html_strip",

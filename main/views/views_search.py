@@ -1,4 +1,5 @@
 from datetime import date
+from functools import reduce
 
 from django.contrib import messages
 from django.db.models import Min
@@ -17,50 +18,114 @@ from main.models import Document, SourceType
 
 FULLTEXT_FIELDS = ["title_name", "transcription_text", "ref_number_title", "ref_number_name"]
 
-
 def test_search_3(request):
     form = AdvancedSearchForm()
     enriched_result = None
     total_results = 0
     number_of_pages = 0
-    page_size = 100
+    page_size = 10
     current_page = 1
     pagination_link_list = list()
 
     # Form has been sent: search
     if request.method == "GET":
         form = AdvancedSearchForm(request.GET)
+        current_page = int(request.GET.get('page', 1))
         if form.is_valid():
+            search_qs = list()
+            search_result = TranscriptionDocument.search()
+
+            if form.cleaned_data['query'] != '':
+                search_qs.append(Q('multi_match', query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS))
+            # Title
+            if form.cleaned_data['title_name'] != '':
+                search_qs.append(Q('match', title_name=form.cleaned_data['title_name']))
+            # Title
+            if form.cleaned_data['ref_number_name'] != '':
+                search_qs.append(Q('match', ref_number_name=form.cleaned_data['ref_number_name']))
+            # Title
+            if form.cleaned_data['institution_name'] != '':
+                search_qs.append(Q('match', institution_name=form.cleaned_data['institution_name']))
+            # Title
+            if form.cleaned_data['ref_number_title'] != '':
+                search_qs.append(Q('match', ref_number_title=form.cleaned_data['ref_number_title']))
+            # Title
+            if form.cleaned_data['location'] != '':
+                search_qs.append(Q('match', place_name=form.cleaned_data['location']))
+            # Title
+            if form.cleaned_data['doc_start_date'] != '':
+                search_qs.append(Q('range', doc_start_date={'gte': form.cleaned_data['doc_start_date']}))
+            if form.cleaned_data['doc_end_date'] != '':
+                search_qs.append(Q('range', doc_start_date={'lte': form.cleaned_data['doc_end_date']}))
+            if form.cleaned_data['seal']:
+                search_qs.append(Q("match", seal=True))
+            if form.cleaned_data['illuminated']:
+                search_qs.append(Q("match", illuminated=True))
             if not form.cleaned_data['source_type'] == '' and form.cleaned_data['source_type'] is not None:
                 if form.cleaned_data['source_type'].parent_type is None:
-                    print("Would search for children: ", form.cleaned_data['source_type'].source_type_set.all())
-                print("Source Type,,,", form.cleaned_data['source_type'], form.cleaned_data['source_type'].id)
+                    st_list = list()
+                    for s_type in SourceType.objects.filter(parent_type=form.cleaned_data['source_type']):
+                        st_list.append(Q('match', source_type=s_type.type_name))
+
+                    the_st_list = reduce(lambda x, y: x | y, st_list)
+                    search_qs.append(the_st_list)
+
+                else:
+                    search_qs.append(Q('match', source_type=form.cleaned_data['source_type'].type_name))
+
+            # Query the index
+            the_bw_list = reduce(lambda x, y: x & y, search_qs)
+            the_query = the_bw_list
+
+            search_result.query = the_query
+            search_result.query()
+
+            # SET Highlights
+            search_result = search_result.highlight_options(order='score')
+            search_result = search_result.highlight('title_name')
+            search_result = search_result.highlight('institution_name')
+            search_result = search_result.highlight('ref_number_name')
+            search_result = search_result.highlight('ref_number_title')
+            search_result = search_result.highlight('place_name')
+            search_result = search_result.highlight('transcription_text')
+            search_result = search_result.highlight('source_type')
+            total_results = search_result.count()
+            paginator = Paginator(search_result, page_size)
+            number_of_pages = paginator.num_pages
+            result_page = paginator.page(current_page)
+
+            enriched_result = list()
+            for q in result_page:
+                try:
+                    doc = Document.objects.get(id=q.meta.id)
+                    enriched_result.append([q, doc])
+                except Document.DoesNotExist:
+                    # Old versions get found by elasticsearch but are not part of the result
+                    print("Error: retrieving one of the docs!")
+                    total_results -= 1
+
+            my_url = reverse('main:search')
+            my_url += "?"
+            for key in request.GET.keys():
+                if key != "page":
+                    my_url += key + "=" + request.GET[key] + "&"
+
+            min_page = 1
+            max_page = number_of_pages
+
+            if number_of_pages > 10:
+                min_page = current_page - 5
+                if min_page < 1:
+                    min_page = 1
+
+                max_page = current_page + 5
+                if max_page > number_of_pages:
+                    max_page = number_of_pages
+
+            for pp in range(min_page, max_page + 1):
+                pagination_link_list.append((pp, my_url + 'page=' + str(pp)))
         else:
             print("Form not valid")
-
-        print("Search")
-        search_result = TranscriptionDocument.search()
-        # search_result = search_result.query("match", title_name="*brief*con*")
-        #search_result = search_result.query("multi_match", query="achthunder", fields=FULLTEXT_FIELDS)
-        search_result.query = Q('match', title_name='*dokument*') &\
-                              (Q('match', source_type='Other Political Writings') | Q('match', source_type='Argumentative Writings') |
-                               Q('match', source_type='Polemic Writings'))
-        search_result.query()
-
-        paginator = Paginator(search_result, page_size)
-        result_page = paginator.page(current_page)
-        enriched_result = list()
-        for q in result_page:
-            try:
-                doc = Document.objects.get(id=q.meta.id)
-                enriched_result.append([q, doc])
-                # print("Q:", q, q.title_name, q.meta.id) # , q.meta.score
-                """
-                for hl in q.meta.highlight:
-                    print("H", q.meta.highlight[hl])"""
-            except Document.DoesNotExist:
-                # Old versions get found by elasticsearch but are not part of the resut
-                total_results -= 1
 
     # No form has been sent.
     else:
@@ -74,162 +139,6 @@ def test_search_3(request):
                'num_pages': number_of_pages,
                'result': enriched_result}  # Search result tuples: (elasticsearch-Document, Django-db-object)
     return render(request, "main/search/search_view_3.html", context)
-
-def test_search_2(request):
-    form = AdvancedSearchForm()
-    enriched_result = None
-    total_results = 0
-    number_of_pages = 0
-    page_size = 10
-    current_page = 1
-    pagination_link_list = list()
-
-    if request.method == "GET":
-
-        form = AdvancedSearchForm(request.GET)
-        current_page = int(request.GET.get('page', 1))
-
-        if form.is_valid():
-            can_filter = True
-            search_result = TranscriptionDocument.search()
-            if not form.cleaned_data['query'] == '':
-                search_result = search_result.query("multi_match", query="*"+form.cleaned_data['query'].lower()+"*", fields=FULLTEXT_FIELDS)
-            # The main search field is empty
-            else:
-                if not form.cleaned_data['title_name'] == '':
-                    search_type = "match"
-                    search_term = form.cleaned_data['title_name'].lower()
-                    if form.cleaned_data['title_name_exact']:
-                        search_type = "match"
-                        search_term = form.cleaned_data['title_name'].lower()
-
-                    search_result = search_result.query(search_type, title_name=search_term)
-                # Search AND title are empty
-                else:
-                    if not form.cleaned_data['ref_number_title'] == '':
-                        search_type = "match"
-                        search_term = "*" + form.cleaned_data['ref_number_title'].lower() + "*"
-                        if form.cleaned_data['ref_number_title_exact']:
-                            search_type = "match"
-                            search_term = form.cleaned_data['ref_number_title'].lower()
-                        search_result = search_result.query(search_type, ref_number_title=search_term)
-                    # Search AND title AND ref_number_title are empty
-                    else:
-                        if request.GET.get('query', 'None') == '':
-                            messages.warning(request, _('Please enter at least a search query or a title or a reference title.'))
-                            context = {'form': form,  # The search form
-                                       'total': 0,  # Num of total search results
-                                       'page_links': None,
-                                       'current_page': 0,
-                                       'num_pages': 0,
-                                       'result': None}
-                            return render(request, "main/search/search_view_2.html", context)
-                        can_filter = False
-
-            # A query has been sent.
-            if can_filter:
-                if not form.cleaned_data['title_name'] == '':
-                    search_type = "match"
-                    search_term = form.cleaned_data['title_name'].lower()
-                    if form.cleaned_data['title_name_exact']:
-                        search_type = "match"
-                        search_term = form.cleaned_data['title_name'].lower()
-
-                    search_result = search_result.filter(search_type, title_name=search_term)
-                if not form.cleaned_data['ref_number_title'] == '':
-                    search_type = "match"
-                    search_term = form.cleaned_data['ref_number_title'].lower()
-                    if form.cleaned_data['ref_number_title_exact']:
-                        search_type = "match"
-                        search_term = form.cleaned_data['ref_number_title'].lower()
-                    search_result = search_result.filter(search_type, ref_number_title=search_term)
-                if not form.cleaned_data['ref_number_name'] == '':
-                    search_type = "match"
-                    search_term = form.cleaned_data['ref_number_name'].lower()
-                    if form.cleaned_data['ref_number_name_exact']:
-                        search_type = "match"
-                        search_term = form.cleaned_data['ref_number_name'].lower()
-                    search_result = search_result.filter(search_type, ref_number_name=search_term)
-                if not form.cleaned_data['location'] == '':
-                    search_type = "match"
-                    search_term = form.cleaned_data['location']
-                    if form.cleaned_data['location_exact']:
-                        search_type = "match"
-                        search_term = form.cleaned_data['location']
-                    search_result = search_result.filter(search_type, place_name=search_term)
-
-                if form.cleaned_data['seal']:
-                    search_result = search_result.filter("match", seal=True)
-                if form.cleaned_data['illuminated']:
-                    search_result = search_result.filter("match", illuminated=True)
-
-                if not form.cleaned_data['doc_start_date'] is None:
-                    search_result = search_result.filter("range", doc_end_date={'gte': form.cleaned_data['doc_start_date']})
-                    search_result = search_result.filter("range", doc_start_date={'lte': form.cleaned_data['doc_end_date']})
-
-                if not form.cleaned_data['source_type'] is None:
-                    search_result = search_result.filter("match", source_type=form.cleaned_data['source_type'].type_name)
-
-            # SET Highlights
-            search_result = search_result.highlight_options(order='score')
-            search_result = search_result.highlight('title_name')
-            search_result = search_result.highlight('ref_number_name')
-            search_result = search_result.highlight('ref_number_title')
-            search_result = search_result.highlight('place_name')
-            search_result = search_result.highlight('transcription_text')
-            search_result = search_result.highlight('source_type')
-            total_results = search_result.count()
-            paginator = Paginator(search_result, page_size)
-            result_page = paginator.page(current_page)
-            number_of_pages = paginator.num_pages
-
-            enriched_result = list()
-            for q in result_page:
-                try:
-                    doc = Document.objects.get(id=q.meta.id)
-                    enriched_result.append([q, doc])
-                    # print("Q:", q, q.title_name, q.meta.id) # , q.meta.score
-                    """
-                    for hl in q.meta.highlight:
-                        print("H", q.meta.highlight[hl])"""
-                except Document.DoesNotExist:
-                    # Old versions get found by elasticsearch but are not part of the resut
-                    total_results -= 1
-
-            my_url = reverse('main:search')
-            my_url += "?"
-            for key in request.GET.keys():
-                if key != "page":
-                    my_url += key + "=" + request.GET[key] + "&"
-
-            # print("PAGINATION BASE", my_url)
-            # print("CURRENT", current_page)
-
-            min_page = 1
-            max_page = number_of_pages
-
-            if number_of_pages > 10:
-                min_page = current_page-5
-                if min_page < 1:
-                    min_page = 1
-
-                max_page = current_page + 5
-                if max_page > number_of_pages:
-                    max_page = number_of_pages
-
-            for pp in range(min_page, max_page+1):
-                pagination_link_list.append((pp, my_url+'page='+str(pp)))
-        else:
-            messages.error(request, _("There are errors in your search form"))
-
-    context = {'form': form,                # The search form
-               'form_data': get_document_filter_data(request),
-               'total': total_results,      # Num of total search results
-               'page_links': pagination_link_list,
-               'current_page': current_page,
-               'num_pages': number_of_pages,
-               'result': enriched_result}   # Search result tuples: (elasticsearch-Document, Django-db-object)
-    return render(request, "main/search/search_view_2.html", context)
 
 
 def get_document_filter_data(request):
@@ -260,6 +169,7 @@ def get_document_filter_data(request):
 
     return form_data
 
+
 def search_box_redirect(request):
     if request.method == "POST":
         query = request.POST.get('query', '')
@@ -274,23 +184,6 @@ def search_box_redirect(request):
 def search_by_box_view(request, query):
     my_url = reverse('main:search')
     my_url += "?query=" + query
-
-
-# TODO
-def old_search_by_box_view(request, query):
-    form = AdvancedSearchForm()
-    queryset = TranscriptionDocument.search()
-    queryset = queryset.query("multi_match", query=query,
-                              fields=FULLTEXT_FIELDS)
-    queryset = queryset.to_queryset()
-
-    my_url = reverse('main:search')
-    my_url += "?query="+query
-
-    table = DocumentResultTable(data=queryset, query=query)
-
-    context = {'form': form, 'ATTRIBUTES': Attribute.members, 'results': queryset, 'table': table}
-    return render(request, "main/search/search_view.html", context)
 
 
 class SearchView(FormView, ListView):
