@@ -1,5 +1,6 @@
 from dal import autocomplete
 from django.db.models import Q
+from django.utils.html import format_html
 from django.utils.translation import get_language
 
 from main.models import Institution, RefNumber, SourceType, Author, Language
@@ -45,7 +46,9 @@ class SourceTypeAutocomplete(autocomplete.Select2QuerySetView):
 
     def get_result_label(self, result):
         language = get_language()
-        return result.get_translated_name(language)
+        return format_html('{}<br/><small>{}</small>',
+                           result.get_translated_name(language),
+                           result.get_translated_description(language))
 
     def get_selected_result_label(self, result):
         language = get_language()
@@ -64,7 +67,9 @@ class SourceTypeChildAutocomplete(autocomplete.Select2QuerySetView):
 
     def get_result_label(self, result):
         language = get_language()
-        return result.get_translated_name(language)
+        return format_html('{}<br/><small>{}</small>',
+                           result.get_translated_name(language),
+                           result.get_translated_description(language))
 
     def get_selected_result_label(self, result):
         language = get_language()

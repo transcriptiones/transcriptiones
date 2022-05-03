@@ -28,6 +28,9 @@ def get_help_text_html(model_name, field_name):
 def get_translated_source_type_name(source_type, language):
     return source_type.get_translated_name(language)
 
+@register.simple_tag
+def get_translated_source_type_description(source_type, language):
+    return source_type.get_translated_description(language)
 
 @register.tag
 def collapsed_card(parser, token):

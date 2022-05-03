@@ -25,11 +25,13 @@ class EditMetaForm(forms.ModelForm):
     selection_helper_source_type = forms.ModelChoiceField(
                                         label=_('First level Source Type'),
                                         queryset=SourceType.objects.filter(parent_type=None).order_by('type_name'),
-                                        widget=autocomplete.ModelSelect2(url='main:srctype-autocomplete'))
+                                        widget=autocomplete.ModelSelect2(url='main:srctype-autocomplete',
+                                                                         attrs={'data-html': True}))
 
     source_type = forms.ModelChoiceField(queryset=SourceType.objects.exclude(parent_type=None).order_by('type_name'),
                                          widget=autocomplete.ModelSelect2(url='main:srctype-ch-autocomplete',
-                                                                          forward=['selection_helper_source_type', ]))
+                                                                          forward=['selection_helper_source_type', ],
+                                                                          attrs={'data-html': True}))
 
     author = forms.ModelMultipleChoiceField(queryset=Author.objects.all().order_by('author_name'),
                                             widget=autocomplete.ModelSelect2Multiple(url='main:author-autocomplete'),

@@ -250,6 +250,16 @@ class SourceType(models.Model):
 
         return self.type_name
 
+    def get_translated_description(self, language):
+        if language == "de":
+            return self.type_description_de
+        elif language == "fr":
+            return self.type_description_fr
+        elif language == "it":
+            return self.type_description_it
+
+        return self.type_description
+
     def __str__(self):
         return self.type_name
 

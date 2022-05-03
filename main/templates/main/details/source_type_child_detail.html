@@ -28,7 +28,8 @@
                 <div class="list-group" id="list-tab" role="tablist">
                     {% for st in source_types %}
                         <a class="list-group-item list-group-item-action {% if st.pk == selected.id or st.pk == selected.parent_type.id %}active{% endif %} list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
-                            {% get_translated_source_type_name st LANGUAGE_CODE %}
+                            {% get_translated_source_type_name st LANGUAGE_CODE %}<br/>
+                            <small>{% get_translated_source_type_description st LANGUAGE_CODE %}</small>
                         </a>
                     {% endfor %}
                 </div>
@@ -48,7 +49,8 @@
                                 {% endif %}
                                 {% for child in st.child_type.all %}
                                     <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st {% if child.pk == selected.id %}active{% endif %}">
-                                        {% get_translated_source_type_name child LANGUAGE_CODE %}
+                                        {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
+                                        <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>
                                     </a>
                                 {% endfor %}
                             </div>
