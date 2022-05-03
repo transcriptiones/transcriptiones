@@ -443,3 +443,37 @@
 .avatar.bg-primary i {
     font-size: 14px
 }
+
+@media screen and (max-width:991px) {
+    .navbar-collapse {
+        overflow-y: scroll;
+        max-height: 50vh;
+    }
+
+    .navbar-nav {
+        text-align: end;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .nav-item {
+        border-right: none !important;
+    }
+
+    .nav-link {
+        padding-right: 0 !important;
+    }
+
+    .top-search-bar {
+        padding-right: 0 !important;
+    }
+
+    .tr-tooltiptext {
+        display: none;
+    }
+
+    .dropdown-menu {
+        text-align: end;
+    }
+
+}

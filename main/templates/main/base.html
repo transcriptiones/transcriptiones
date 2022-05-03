@@ -91,7 +91,7 @@
 
         <!-- Navigation -->
         <div class="dashboard-header">
-            <nav class="navbar navbar-expand-md bg-primary fixed-top">
+            <nav class="navbar navbar-expand-lg bg-primary fixed-top">
                 <!-- LOGO -->
                 <a href="{% url 'main:start' %}">
                     <img class="navbar-logo" src="{% static 'main/images/logo.png' %}" alt="transcriptiones">
@@ -107,14 +107,14 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!-- MAIN NAVBAR -->
                     <ul class="navbar-nav navbar-left-top">
-                        <li class="navbar-nav-item d-none d-sm-block">
+                        <li class="navbar-nav-item">
                             <div class="tr-tooltip">
                                 <span class="tr-tooltiptext">{% translate 'Upload transcriptions' %}</span>
                                 <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'upload_options,upload_document,upload_multiple,upload_batch' %}-active{% endif %}" href="{% url 'main:upload_options' %}">{% translate 'Participate' %}</a>
                             </div>
                         </li>
 
-                        <li class="navbar-nav-item d-none d-sm-block">
+                        <li class="navbar-nav-item">
                             <div class="tr-tooltip">
                               <span class="tr-tooltiptext">{% translate 'Explore the collection by institutions, scribes and source types' %}</span>
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'browse_options,institution_list,institution_detail,author_list,author_detail,source_type_list,source_type_detail' %}-active{% endif %}"
@@ -122,18 +122,18 @@
                             </div>
                         </li>
 
-                        <li class="navbar-nav-item d-none d-sm-block">
+                        <li class="navbar-nav-item">
                             <div class="tr-tooltip">
                                 <span class="tr-tooltiptext">{% translate 'Find transcriptions through an advanced search form' %}</span>
                                 <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'search' %}-active{% endif %}" href="{% url 'main:search' %}">{% translate 'Search' %}</a>
                             </div>
                         </li>
 
-                        <li class="navbar-nav-item d-none d-sm-block">
+                        <li class="navbar-nav-item">
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name == 'news' %}-active{% endif %}" href="{% url 'main:news' %}">{% translate 'News' %}</a>
                         </li>
 
-                        <li class="navbar-nav-item d-none d-sm-block">
+                        <li class="navbar-nav-item">
                             <a class="nav-link text-navbar{% if request.resolver_match.url_name in 'info,about,tos,guidelines,contact,faq,api_doc_view' %}-active{% endif %}" href="{% url 'main:about' %}">{% translate 'About' %}</a>
                         </li>
                     </ul>
