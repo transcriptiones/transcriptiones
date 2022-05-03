@@ -78,6 +78,13 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
             document.publish_user = not request.user.is_anonymous
 
             document.save()
+
+            for language in form.cleaned_data['language'].all():
+                document.language.add(language)
+
+            for author in form.cleaned_data['author'].all():
+                document.author.add(author)
+
             messages.success(request, _('The metadata of the document has been updated.'))
             return HttpResponseRedirect(reverse('main:document_detail', kwargs={'inst_slug': inst_slug,
                                                                                 'ref_slug': ref_slug,
