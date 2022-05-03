@@ -12,7 +12,7 @@ default_row_attrs = {'data-href': lambda record: record.get_absolute_url}
 class TranscriptionesTable(tables.Table):
     """The TranscriptionesTable is the base table class. It defines css styles and default table attributes."""
     class Meta:
-        template_name = "django_tables2/bootstrap4.html"
+        template_name = "django_tables2/bootstrap-responsive.html"
         attrs = default_table_attrs
 
     @staticmethod
@@ -24,7 +24,7 @@ class TitleValueTable(tables.Table):
     """The TitleValueTable provides a simple two column table with a title and a value"""
 
     class Meta:
-        template_name = "django_tables2/bootstrap4.html"
+        template_name = "django_tables2/bootstrap-responsive.html"
         attrs = {"class": "table table-sm",
                  'thead': {
                      'style': 'display: none;'}

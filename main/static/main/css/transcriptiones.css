@@ -352,6 +352,29 @@ span.search-result-title {
     color: white;
 }
 
+/* responsive vertical stacking of button group */
+@media screen and (max-width:767px) {
+    .btn-group-responsive {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-group-responsive>.btn {
+        border-radius: 0;
+    }
+
+    .btn-group-responsive>.btn:first-child {
+        border-top-left-radius: 0.25em !important;
+        border-top-right-radius: 0.25em !important;
+    }
+
+    .btn-group-responsive>.btn:last-child {
+        border-bottom-left-radius: 0.25em !important;
+        border-bottom-right-radius: 0.25em !important;
+    }
+
+}
+
 /* not used anymore
 
 .card-header-st {

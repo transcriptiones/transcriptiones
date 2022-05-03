@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <div class="text-center">
-    <div  class="btn-group" role="group">
+    <div  class="btn-group btn-group-responsive" role="group">
         <a type="button" href="{% url 'main:about' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'about' %} disabled{% endif %}">{% translate 'About the Project' %}</a>
         <a type="button" href="{% url 'main:guidelines' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'guidelines' %} disabled{% endif %}">{% translate 'Instructions' %}</a>
         <a type="button" href="{% url 'main:faq' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'faq' %} disabled{% endif %}">{% translate 'FAQ' %}</a>
