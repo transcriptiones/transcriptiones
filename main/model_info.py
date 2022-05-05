@@ -2,6 +2,7 @@ from uuid import UUID
 
 import dateutil.utils
 from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.utils.text import format_lazy
@@ -104,6 +105,12 @@ def get_last_change_string(document):
 def get_upload_string(document):
     initial_doc = Document.all_objects.get(document_id=document.document_id, version_number=1)
     return get_last_change_string(initial_doc)
+
+
+def get_version_url_string(document, request):
+    url = f"{request.scheme}://{request.get_host()}{document.get_absolute_version_url()}"
+    url_text = format_html('<small>{} <i class="fas fa-clipboard" title="{}" id="toclipboard" data-copy="{}"></i></small>', url, _('Copy to clipboard'), url)
+    return url_text
 
 
 def get_document_info_overview(document):

@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib import messages
 from django.db.models import Min
 from django.shortcuts import get_object_or_404, render
+from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 from django.views.generic import DetailView
 from django_tables2 import MultiTableMixin, SingleTableMixin, RequestConfig
@@ -238,7 +239,7 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         context = super().get_context_data(**kwargs)
 
         # if view should display legacy version, add newest version to context
-        if 'version_nr' in self.kwargs:
+        if 'version_nr' in self.kwargs and self.kwargs['version_nr'] != self.get_object().get_versions().latest().version_number:
             newest = self.get_object().get_versions().latest()
             context['newest'] = newest
 
@@ -254,8 +255,11 @@ class DocumentDetailView(MultiTableMixin, DetailView):
     def get_tables(self):
         document = self.get_object()
 
+        overview_data = m_info.get_document_info_overview(document)
+        overview_data.append({'title': _('Static version URL'), 'value': m_info.get_version_url_string(document, self.request)})
+
         tables = [
-            TitleValueTable(data=m_info.get_document_info_overview(document)),
+            TitleValueTable(data=overview_data),
             TitleValueTable(data=m_info.get_document_info_metadata(document)),
             TitleValueTable(data=m_info.get_document_info_manuscript(document)),
             TitleValueTable(data=m_info.get_document_info_comments(document)),

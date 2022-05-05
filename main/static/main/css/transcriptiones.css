@@ -375,6 +375,15 @@ span.search-result-title {
 
 }
 
+.fa-clipboard {
+    color: #1D809F;
+}
+
+.fa-clipboard:hover {
+    color: #155d74;
+    cursor: pointer;
+}
+
 /* not used anymore
 
 .card-header-st {

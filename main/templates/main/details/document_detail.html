@@ -99,5 +99,13 @@
         console.log('Dokument geladen');
         $.scoped();
     }
-</script>
+    </script>
+
+    <script>
+
+    $(document).on('click', '#toclipboard', function(){
+        var Text = $( this ).attr( "data-copy" );
+        navigator.clipboard.writeText(Text);
+    });
+    </script>
 {% endblock %}
