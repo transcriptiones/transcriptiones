@@ -68,7 +68,7 @@ class UserSubscriptionOptionsForm(forms.ModelForm):
 class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 
-    email = forms.EmailField(label=_('E-Mail'), max_length=255,
+    email = forms.EmailField(label=get_popover_html(User, 'email'), max_length=255,
                              help_text=_('E-Mail-Address. We will send an activation Link to this address.'))
 
     def __init__(self, *args, **kwargs):
@@ -96,7 +96,6 @@ class SignUpForm(UserCreationForm):
             'first_name': get_popover_html(User, 'first_name'),
             'last_name': get_popover_html(User, 'last_name'),
             'user_orcid': get_popover_html(User, 'user_orcid'),
-            'email': get_popover_html(User, 'email'),
             'mark_anonymous': get_popover_html(User, 'mark_anonymous')
         }
 
@@ -127,8 +126,8 @@ class UserUpdateForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', _('Save Changes'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
 
-    username = forms.CharField(disabled=True, help_text=_('You cannot change your username'))
-    email = forms.EmailField(disabled=True, help_text=_('You cannot change your email address'))
+    username = forms.CharField(disabled=True, help_text=_('You cannot change your username'), label=get_popover_html(User, 'username'))
+    email = forms.EmailField(disabled=True, help_text=_('You cannot change your email address'), label=get_popover_html(User, 'email'))
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']
@@ -143,6 +142,13 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'user_orcid', 'mark_anonymous')
+
+        labels = {
+            'first_name': get_popover_html(User, 'first_name'),
+            'last_name': get_popover_html(User, 'last_name'),
+            'user_orcid': get_popover_html(User, 'user_orcid'),
+            'mark_anonymous': get_popover_html(User, 'mark_anonymous'),
+        }
 
 
 class CustomPasswordResetForm(PasswordResetForm):

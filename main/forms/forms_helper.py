@@ -4,6 +4,7 @@ from django.utils import six
 from crispy_forms.helper import FormHelper
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from main import model_info
@@ -32,14 +33,13 @@ def get_popover_html(model, field_name, content=None):
         label = field_name
 
         if field_name == "parent_institution":
-            label = "Institution"
+            label = _("Institution")
         elif field_name == "selection_helper_source_type":
-            label = "Parent Source Type"
+            label = _("Parent Source Type")
 
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
-    ret_value = _(label) + f'&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" title="{tooltip}">' \
-                            f'<i class="fas fa-info-circle"></i>' \
-                            f'</span>'
+    ret_value = format_lazy('{label}&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" '\
+                            'title="{tooltip}"><i class="fas fa-info-circle"></i></span>', label=label, tooltip=tooltip)
     return mark_safe_lazy(ret_value)
 
 

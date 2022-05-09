@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from main.mail_utils import send_contact_message_copy, send_newsletter_subscribe_mail
 from main.forms.forms_info import ContactForm, NewsletterSubscribeForm, NewsletterUnsubscribeForm
-from main.models import ContactMessage, NewsletterRecipients
+from main.models import ContactMessage, NewsletterRecipients, SourceType
 from django.utils.translation import activate
 from django.utils import translation
 
@@ -83,3 +83,9 @@ def contact_view(request):
             return redirect('main:about')
 
     return render(request, 'main/info/contact.html', context={'form': form})
+
+
+def guidelines_view(request):
+    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+    context = {'source_types': parent_source_type_list}
+    return render(request, 'main/info/guidelines.html', context=context)

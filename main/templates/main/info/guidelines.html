@@ -46,7 +46,14 @@
                 die Datenbank hinzugefügt werden, ist dieses so zu betiteln, wie vom Verein Schweizerischer
                 Archivarinnen und Archivare veranschlagt. Die Liste der Gedächtnisinstitutionen des VSA-AAS finden Sie
                 <a class="strong_link" href="https://vsa-aas.ch/die-archive/archivadressen/archivadressen-schweiz/">hier</a>.
+            </p>
+            <p>
                 Braucht es eine neue Signatur, muss diese von der entsprechenden Gedächtnisinstitution exakt übernommen werden.
+                Beim Anlegen einer neuen Signatur wird neben der eigentlichen Signatur auch nach dem Titel der Verzeichniseinheit
+                gefragt. Bitte übernehmen Sie auch diese von der entsprechenden Gedächtnisinstitution. Beachten Sie zudem,
+                dass der Titel der Verzeichniseinheit und der Titel des transkribierten Dokuments oftmals nicht die selben sind.
+                So kann beispielsweise eine Verzeichniseinheit mit dem Titel "Briefe XY" die Dokumente "Brief A" und "Brief B"
+                beinhalten.
             </p>
             <p>
                 Bei der fakultativen Angabe von Schreiber*innen werden ebenfalls bereits
@@ -55,10 +62,50 @@
                 es sich hier nicht um Entitäten (also eindeutig identifizierbare Personen) handelt.
             </p>
             <p>
+                Beim Upload eines Dokuments werden Sie ausserdem aufgefordert, einen Quellentyp anzugeben. Diese
+                Klassifizierung basiert auf formalen und inhaltlichen Aspekten des Originaldokuments. Die Liste der
+                verfügbaren Quellentypen ist zweistufig organisiert und im folgenden Schema erläutert.
+            </p>
+            <div class="row">
+            <div class="col-sm-4">
+                <div class="list-group  mb-4" id="list-tab" role="tablist">
+                    {% for st in source_types %}
+                        <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
+                            {% get_translated_source_type_name st LANGUAGE_CODE %}<br/>
+                            <small>{% get_translated_source_type_description st LANGUAGE_CODE %}</small>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="tab-content" id="nav-tabContent">
+                    {% for st in source_types %}
+                        <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
+                            <div class="list-group">
+                                {% for child in st.child_type.all %}
+                                    <span class="list-group-item">
+                                        {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
+                                        <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+            <p>
                 Sie können entweder direkt im Editor transkribieren oder eine bestehende Transkription in den Editor
                 kopieren. Stammt die Transkription aus einer formatierten Datei (.doc, .docx, .pdf, .xls, .xlsx,
                 Google Docs, Google Sheets, .odf), werden fast alle Formatierungen
                 (auch Tabellen und Fussnoten) übernommen.
+            </p>
+            <h4>Transkriptionen finden</h4>
+            <p>
+                Hochgeladene Transkriptionen lassen sich unterschiedlich auffinden: Sie können einerseits die
+                Schaltfläche <a class="strong_link" href="{% url 'main:browse_options' %}">Bestand</a> anwählen und
+                über die Institutionen, Quellentypen oder Schreiber*innen zur gewünschten Transkription gelangen,
+                andererseits können Sie eine <a class="strong_link" href="{% url 'main:search' %}">Feldsuche</a> starten.
             </p>
             <h4>Überarbeitungen und Ergänzungen</h4>
             <p>
@@ -70,7 +117,9 @@
                 was Sie verändert haben.
             </p>
             <p>
-                Die vergangenen Versionen einer Transkription können Sie weiter einsehen. Muss eine alte Version
+                Die vergangenen Versionen einer Transkription können Sie weiter einsehen. Jede Version hat eine statische
+                URL, mit welche diese spezifische Version erreicht, verlinkt oder zitiert werden kann. Dieselbe URL ohne
+                die angehängte Versionsnummer führt immer zur neuesten Version dieser Transkription. Muss eine alte Version
                 wiederhergestellt werden, kontaktieren Sie bitte das transcriptiones-Team mittels des <a class="strong_link" href="{% url 'main:contact' %}">Kontaktformulars</a>.
                 Stellen Sie auf transcriptiones unsachgemässes Verhalten fest, melden Sie dies bitte umgehend mittels
                 desselben Formulars. Der*die betreffende User*in wird von uns gesperrt.
@@ -85,7 +134,34 @@
             <p>
                 Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen für die Erstellung einer Transkription
                 die <a class="strong_link" href="https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln">
-                Transkriptionsrichtlinien von Ad fontes</a> ans Herz.
+                Transkriptionsrichtlinien von Ad fontes</a> ans Herz.<br/>
+                Grundsätzlich gilt laut Ad fontes: "Die Textwiedergabe soll möglichst genau erfolgen, so dass die
+                Textschichten der Quelle erkennbar sind. Die Transkription soll über die Wiedergabe des
+                sachlich-historischen Inhaltes hinaus die sprachliche (inkl. orthographische) Form des Originals wiedergeben."
+            </p>
+            <h4>Abonnemente</h4>
+            <p>
+                Wenn Sie sich für eine Gedächtnisinstitution, eine Signatur oder bestimmte Schreiber*innen besonders
+                interessieren, können Sie diese abonnieren. Mit einem solchen Abonnement werden Sie per E-Mail
+                benachrichtigt, wenn zu dieser Einheit ein neues Dokument hinzugefügt wurde oder ein bestehendes
+                Dokument darin bearbeitet wurde. Weiter können Sie jene User*innen abonnieren, welche nicht anonym
+                publizieren. Sie werden daraufhin benachrichtigt, wenn diese Person neue Arbeiten getätigt hat.
+                Um Abonnemente abschliessen zu können, müssen Sie <a class="strong_link" href="{% url 'main:signup' %}">registriert</a>
+                und <a class="strong_link" href="{% url 'main:login' %}">angemeldet</a> sein. In Ihrem
+                <a class="strong_link" href="{% url 'main:subscriptions' %}">Benutzerkonto</a> können Sie Ihre Abonnemente
+                beenden sowie angeben, mit welcher Frequenz sie per E-Mail über die Veränderungen benachrichtigt werden möchten.
+            </p>
+            <h4>Direktnachrichten zwischen User*innen</h4>
+            <p>
+                Sofern ein*e User*in nicht anonym publiziert, können Sie dieser Person eine Direktnachricht senden und
+                sich so über die Transkription oder die Quelle austauschen. Die Benutzernamen der beitragenden User*innen
+                sind auf der Ebene der Signaturen und Dokumente angegeben. Klicken Sie auf den entsprechenden
+                Benutzernamen, um dieser Person eine Direktnachricht zu schreiben. Um diese Funktion nützen zu können,
+                müssen Sie <a class="strong_link" href="{% url 'main:signup' %}">registriert</a> und
+                <a class="strong_link" href="{% url 'main:login' %}">angemeldet</a> sein. In Ihrem
+                <a class="strong_link" href="{% url 'main:messages' %}">Benutzerkonto</a> können Sie die erhaltenen
+                Nachrichten lesen und beantworten. Weiter können Sie dort angeben, mit welcher Frequenz sie über die
+                neuen Nachrichten per E-Mail benachrichtigt werden möchten.
             </p>
         {% else %}
             <h4>Instructions</h4>
@@ -117,7 +193,11 @@
             </p>
             <p>
                 If a new reference number needs to be added, please use the exact form as it is listed by the
-                corresponding institution.
+                corresponding institution. Upon adding a new reference number, you will also be asked to supply a title
+                of said reference entry. Please use the same title as it is listed by the corresponding institution, if
+                possible. Note as well, that the title of the reference number and the title of the transcribed document
+                might not be the same. A reference number with the title "Letters XY", for example, could contain Documents
+                with titles such as "Letter A" and "Letter B".
             </p>
             <p>
                 When specifying a scribe, the existing records are displayed as well. There might be
@@ -126,9 +206,49 @@
                 (i.e. unambiguously identifiable persons).
             </p>
             <p>
+                When uploading a document, you will also be asked to specify its source type. This classification is based
+                on the content and formal aspects of the original documents. The list of source types to choose from is
+                organized in two layers. Please refer to the following schema to find out about the available source types.
+            </p>
+            <div class="row">
+            <div class="col-sm-6">
+                <div class="list-group  mb-4" id="list-tab" role="tablist">
+                    {% for st in source_types %}
+                        <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
+                            {% get_translated_source_type_name st LANGUAGE_CODE %}<br/>
+                            <small>{% get_translated_source_type_description st LANGUAGE_CODE %}</small>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="tab-content" id="nav-tabContent">
+                    {% for st in source_types %}
+                        <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
+                            <div class="list-group">
+                                {% for child in st.child_type.all %}
+                                    <span class="list-group-item">
+                                        {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
+                                        <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+            <p>
                 You can either directly transcribe in the editor or paste your transcription from an existing file.
                 If you copy them from a formatted file (doc, .docx, .pdf, .xls, .xlsx, Google Docs, Google Sheets,
                 .odf), almost all formatting as well as tables and footnotes will be preserved.
+            </p>
+            <h4>Finding Transcriptions</h4>
+            <p>
+                Uploaded transcriptions can be found in different ways: On the one hand, you can click on the
+                <a class="strong_link" href="{% url 'main:browse_options' %}">collection</a> button and go to the
+                desired transcription via the institutions, source types or writers, on the other hand, you can start a
+                <a class="strong_link" href="{% url 'main:search' %}">field search</a>.
             </p>
             <h4>Edits and Additions</h4>
             <p>
@@ -137,12 +257,16 @@
                 referring to, especially if a reference number contains multiple documents. All changes you have
                 made must be specified in the field ‘Changes’ in order to make the history of edits as transparent
                 as possible.
-
-                You can view the latest versions of a document. If you need to restore an older version, please
+            </p>
+            <p>
+                You can view the latest versions of a document. Each version of a transcription has a static URL which
+                allows for easy linking and citing of a certain version. The same URL without its version number will always
+                direct to the latest version of that transcription. If you need to restore an older version, please
                 contact the transcriptiones team via the <a class="strong_link" href="{% url 'main:contact' %}">contact form</a>.
                 If you notice vandalism or other inadequate behaviour, please contact the transcriptiones
                 team via the same form. We will block the user in question.
-
+            </p>
+            <p>
                 Do you have questions about entering metadata? You have transcribed a source from abroad and do
                 not know how to identify the archive? Your transcriptions are in a different format than specified
                 above (e.g. XML or TEI)? Do not hesitate to <a class="strong_link" href="{% url 'main:contact' %}">contact us</a> – we are happy to help!
@@ -150,7 +274,33 @@
             <h4>Transcription Guidelines</h4>
             <p>
                 In order to achieve some degree of uniformity, we recommend following the transcription guidelines
-                of Ad fontes. The complete guidelines can be found <a class="strong_link" href="https://www.adfontes.uzh.ch/en/tutorium/schriften-lesen/transkriptionsregeln">here</a>.
+                of Ad fontes. The complete guidelines can be found <a class="strong_link" href="https://www.adfontes.uzh.ch/en/tutorium/schriften-lesen/transkriptionsregeln">here</a>.<br/>
+                These are the basic rules according to Ad fontes: "The text should be followed as exactly as possible,
+                so that the text layers of the source are recognizable. The transcription should reproduce the
+                linguistic (including orthographic) form of the original, and not just the historical-factual content."
+            </p>
+            <h4>Subscriptions</h4>
+            <p>
+                If you are particularly interested in an institution, a signature, or specific writers, you can
+                subscribe to them. With such a subscription, you will be notified by e-mail when a new document has
+                been added to this unit or an existing document has been edited in it. Furthermore, you can subscribe
+                to those users who do not publish anonymously. You will be notified when this person has published
+                new work. To subscribe, you must be <a class="strong_link" href="{% url 'main:signup' %}">registered</a>
+                and <a class="strong_link" href="{% url 'main:login' %}">signed in</a>. In your
+                <a class="strong_link" href="{% url 'main:subscriptions' %}">user account</a>, you can cancel your
+                subscriptions as well as specify how often you would like to be notified by e-mail about the changes.
+            </p>
+            <h4>Direct messages between users</h4>
+            <p>
+                If a user does not publish anonymously, you can send a direct message to that person and exchange
+                information about the transcription or the source. The usernames of the contributing users are
+                indicated at the signature and document levels. Click on the corresponding username to write a
+                direct message to this person. To use this function, you must be
+                <a class="strong_link" href="{% url 'main:signup' %}">registered</a> and
+                <a class="strong_link" href="{% url 'main:login' %}">logged in</a>. In your
+                <a class="strong_link" href="{% url 'main:messages' %}">user account</a>, you can read and reply to the
+                received messages. Furthermore, you can specify how often you would like to be notified about the new
+                messages by e-mail.
             </p>
         {% endif %}
     {% endcard %}

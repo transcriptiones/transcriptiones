@@ -14,6 +14,7 @@ from main.tables.tables_base import TitleValueTable
 def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
     document = Document.objects.get(document_slug=doc_slug)
     document.commit_message = ''
+    document.publish_user = request.user.mark_anonymous
     old_transcription = document.transcription_text
     form = EditTranscriptionForm(instance=document)
 
@@ -49,6 +50,7 @@ def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
 def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
     document = Document.objects.get(document_slug=doc_slug)
     document.commit_message = ''
+    document.publish_user = request.user.mark_anonymous
     form = EditMetaForm(instance=document)
     form.fields['selection_helper_source_type'].initial = document.source_type.parent_type
     table = TitleValueTable(data=m_info.get_document_meta_edit_info(document))

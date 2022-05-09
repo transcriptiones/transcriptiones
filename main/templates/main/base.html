@@ -147,7 +147,7 @@
                                 <div id="custom-search" class="top-search-bar">
                                     <form action="{% url 'main:search_redirect' %}" method="post">
                                         {% csrf_token %}
-                                        <input class="form-control" type="text" name="query" placeholder="Search...">
+                                        <input class="form-control" type="text" name="query" placeholder="{% translate 'Search...' %}">
                                     </form>
                                 </div>
                             </div>
@@ -165,11 +165,19 @@
                             <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                                 <li>
                                     {% if cp_total_new_notifications == 0 %}
-                                        <div class="notification-title">You have no new notifications.</div>
+                                        <div class="notification-title">{% translate 'You have no new notifications.' %}</div>
                                     {% elif cp_total_new_notifications > 3 %}
-                                        <div class="notification-title">Showing 3 of {{ cp_total_new_notifications }} new notifications.</div>
+                                        <div class="notification-title">
+                                            {% blocktranslate with cp_total_new_notifications=cp_total_new_notifications %}
+                                            Showing 3 of {{ cp_total_new_notifications }} new notifications.
+                                            {% endblocktranslate %}
+                                        </div>
                                     {% else %}
-                                        <div class="notification-title">You have {{ cp_total_new_notifications }} new notifications.</div>
+                                        <div class="notification-title">
+                                            {% blocktranslate with cp_total_new_notifications=cp_total_new_notifications %}
+                                            You have {{ cp_total_new_notifications }} new notifications.
+                                            {% endblocktranslate %}
+                                        </div>
                                     {% endif %}
                                     <div class="notification-list">
                                         <div class="list-group">
@@ -308,9 +316,9 @@
                                 <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                     <a class="dropdown-item" href="{% url 'main:login' %}"><i class="fas fa-user mr-2"></i>{% translate 'Login' %}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'main:signup' %}"><i class="fas fa-user mr-2"></i>Register</a>
-                                    <a class="dropdown-item" href="{% url 'main:password_reset' %}"><i class="fas fa-cog mr-2"></i>Forgot Password</a>
-                                    <a class="dropdown-item" href="{% url 'main:username_request' %}"><i class="fas fa-cog mr-2"></i>Forgot Username</a>
+                                    <a class="dropdown-item" href="{% url 'main:signup' %}"><i class="fas fa-user mr-2"></i>{% translate 'Register' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:password_reset' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Forgot Password?' %}</a>
+                                    <a class="dropdown-item" href="{% url 'main:username_request' %}"><i class="fas fa-cog mr-2"></i>{% translate 'Forgot Username?' %}</a>
                                 </div>
                             </li>
                         {% endif %}

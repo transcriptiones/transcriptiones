@@ -5,7 +5,10 @@
 {% load render_table from django_tables2 %}
 
 {% block page_title %}
-    {% translate 'Browse Source Type:' %} {% get_translated_source_type_name selected LANGUAGE_CODE %}
+    {% get_translated_source_type_name selected LANGUAGE_CODE as selected_type_name %}
+    {% blocktranslate with selected_type_name=selected_type_name %}
+        Browse Source Type {{ selected_type_name }}
+    {% endblocktranslate %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -24,8 +27,8 @@
         <p>{% translate 'Click a source type to view their child source types.' %}</p>
         {% get_current_language as LANGUAGE_CODE %}
         <div class="row">
-            <div class="col-sm-4">
-                <div class="list-group" id="list-tab" role="tablist">
+            <div class="col-sm-6">
+                <div class="list-group mb-4" id="list-tab" role="tablist">
                     {% for st in source_types %}
                         <a class="list-group-item list-group-item-action {% if st.pk == selected.id or st.pk == selected.parent_type.id %}active{% endif %} list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
                             {% get_translated_source_type_name st LANGUAGE_CODE %}<br/>
@@ -34,7 +37,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <div class="tab-content" id="nav-tabContent">
                     {% for st in source_types %}
                         <div class="tab-pane fade {% if st.pk == selected.id or st.pk == selected.parent_type.id %}active show{% endif %}" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">

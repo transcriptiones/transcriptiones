@@ -343,7 +343,7 @@ class Document(models.Model):
                                    blank=True,
                                    null=True,
                                    choices=MaterialType.choices,
-                                   help_text=_("Is the manuscript on paper, papyrus or parchment?"))
+                                   help_text=_("Which material is the Document written on?"))
 
     measurements_length = models.DecimalField(verbose_name=_("Height"),
                                               max_digits=5,
@@ -418,7 +418,7 @@ class Document(models.Model):
     illuminated = models.BooleanField(verbose_name=_("Illuminations"),
                                       blank=True,
                                       null=True,
-                                      help_text=_("Does the source contain painted miniatures (=illuminations)?"))
+                                      help_text=_("Does the source contain painted miniatures (illuminations)?"))
 
     objects = DocumentManager()  # Only current versions
     all_objects = models.Manager()  # Absolutely all objects, even outdated versions
@@ -560,8 +560,8 @@ class Document(models.Model):
             for d_sub in doc_subscriptions:
 
                 UserNotification.objects.create(subscription=d_sub, user=d_sub.user,
-                                                subject=_(f'Document "{self.title_name}" changed'),
-                                                message=_(f'The document changed {self.title_name} changed.\n\n'
+                                                subject=_(f'Document "{self.title_name}" has changed'),
+                                                message=_(f'The document {self.title_name} has changed.\n\n'
                                                           f'View the document <a href="{self.get_absolute_url()}">here</a>.'))
                 if d_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
                     # send_instant_notification_mail()
@@ -574,8 +574,8 @@ class Document(models.Model):
             for r_sub in ref_subscriptions:
                 ref_number_url = self.parent_ref_number.get_absolute_url()
                 UserNotification.objects.create(subscription=r_sub, user=r_sub.user,
-                                                subject=_('A Reference-Number changed'),
-                                                message=_(f'The reference number "{self.parent_ref_number.ref_number_name}" changed.\n\n'
+                                                subject=_('A Reference Number has changed'),
+                                                message=_(f'The reference number "{self.parent_ref_number.ref_number_name}" has changed.\n\n'
                                                           f'View the details <a href="{ref_number_url}">here</a>.'))
                 if r_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
                     # send_instant_notification_mail()
@@ -587,7 +587,7 @@ class Document(models.Model):
             for u_sub in usr_subscriptions:
                 if self.publish_user:
                     UserNotification.objects.create(subscription=u_sub, user=u_sub.user,
-                                                    subject=_('A User changed'),
+                                                    subject=_('A User has made changes'),
                                                     message=_(f'The user "{self.submitted_by.username}" changed.\n\n'
                                                               f'View the details <a href="{reverse("main:public_profile", kwargs={"username": self.submitted_by.username})}">here</a>.'))
                     if u_sub.user.notification_policy == User.NotificationPolicy.IMMEDIATE.value:
@@ -648,7 +648,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class MessageNotificationPolicy(models.IntegerChoices):
         NONE = 1, _('No notification Emails')
-        IMMEDIATE = 2, _('Every time a message is sent.')
+        IMMEDIATE = 2, _('Every time a message is received.')
         DAILY = 3, _('Once a day, only if you received messages.')
 
     username = models.CharField(verbose_name=_('Username'),
@@ -740,8 +740,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         return reverse('main:public_profile', kwargs={'username': self.username})
 
     def get_user_state_badge(self):
-        str_user = _('Benutzer')
-        str_staff = _('Mitarbeiter')
+        str_user = _('User')
+        str_staff = _('Staff')
         str_admin = _('Admin')
 
         ret_value = f'<span class="badge badge-info">{str_user}</span>'
@@ -777,7 +777,7 @@ class UserSubscription(models.Model):
         REF_NUMBER = 1, _('Reference number')
         DOCUMENT = 2, _('Document')
         USER = 3, _('User')
-        AUTHOR = 4, _('Author')
+        AUTHOR = 4, _('Scribe')
         INSTITUTION = 5, _('Institution')
         SOURCE_TYPE = 6, _('Source Type')
 

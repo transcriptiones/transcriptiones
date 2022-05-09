@@ -2,6 +2,7 @@
 import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from django_tables2 import A
 
@@ -24,11 +25,12 @@ class MinimalDocumentTable(TranscriptionesTable):
     def render_document_utc_update(value, record):
         if record.publish_user:
             profile_url = reverse("main:public_profile", kwargs={"username": record.submitted_by.username})
-            return mark_safe(f'<small>by <a href="{profile_url}">{record.submitted_by}</a> '
-                             f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+            return mark_safe(format_lazy(_('<small>by <a href="{profile_url}">{submitted_by}</a> at {time}</small>'),
+                               profile_url=profile_url, submitted_by=record.submitted_by,
+                               time=value.strftime("%Y-%m-%d %H:%M:%S")))
         else:
-            return mark_safe(f'<small>by anonymous '
-                             f'at {value.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+            return mark_safe(format_lazy(_('<small>by anonymous at {time}</small>'),
+                                         time=value.strftime("%Y-%m-%d %H:%M:%S")))
 
     @staticmethod
     def render_doc_start_date(value, record):

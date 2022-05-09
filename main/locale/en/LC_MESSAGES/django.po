@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-28 11:33+0200\n"
-"PO-Revision-Date: 2022-04-28 11:34+0200\n"
+"POT-Creation-Date: 2022-05-09 17:21+0200\n"
+"PO-Revision-Date: 2022-05-06 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr ""
 
-#: main/filters.py:85 main/models.py:764
+#: main/filters.py:85 main/models.py:743 main/models.py:779
 msgid "User"
 msgstr ""
 
-#: main/filters.py:86
+#: main/filters.py:86 main/models.py:744
 msgid "Staff"
 msgstr ""
 
-#: main/filters.py:87 main/models.py:730
+#: main/filters.py:87 main/models.py:745
 msgid "Admin"
 msgstr ""
 
@@ -53,17 +53,27 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: main/forms/forms_edit.py:26 main/forms/forms_upload.py:30
+#: main/forms/forms_edit.py:31 main/forms/forms_upload.py:30
 msgid "First level Source Type"
 msgstr ""
 
+#: main/forms/forms_helper.py:36 main/models.py:22 main/models.py:63
+#: main/models.py:97 main/models.py:781
+#: main/templates/main/details/institution_detail.html:8
+msgid "Institution"
+msgstr ""
+
+#: main/forms/forms_helper.py:38
+#, fuzzy
+#| msgid "Second Level Source Types"
+msgid "Parent Source Type"
+msgstr "Second Level Source Types"
+
 #: main/forms/forms_helper.py:60
-#| msgid "Source type"
 msgid "Child source type"
 msgstr ""
 
 #: main/forms/forms_helper.py:62
-#| msgid "Source type"
 msgid "Parent source type"
 msgstr ""
 
@@ -85,13 +95,12 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: main/forms/forms_info.py:51 main/forms/forms_upload.py:241
+#: main/forms/forms_info.py:51 main/forms/forms_upload.py:243
 #: main/forms/forms_user.py:23
 msgid "Send Message"
 msgstr ""
 
 #: main/forms/forms_info.py:54
-#| msgid "Information about Transcriptiones"
 msgid "Question about transcriptiones"
 msgstr ""
 
@@ -100,19 +109,14 @@ msgid "Change the subject to something more meaningful, if possible."
 msgstr ""
 
 #: main/forms/forms_info.py:56
-#| msgid "Reply E-Mail"
 msgid "Reply Email"
 msgstr ""
 
 #: main/forms/forms_info.py:56
-#| msgid "We are going to reply to this E-Mail address."
 msgid "We are going to reply to this email address."
 msgstr ""
 
 #: main/forms/forms_info.py:57
-#| msgid ""
-#| "Please be as specific as you can in your message. It will help us to "
-#| "answer your questions!"
 msgid ""
 "Please be as specific as you can in your message. This will help us to "
 "answer your questions."
@@ -139,41 +143,44 @@ msgid "Document Title"
 msgstr ""
 
 #: main/forms/forms_search.py:260
-msgid "Reference Title"
+msgid "Institution Name"
 msgstr ""
 
 #: main/forms/forms_search.py:261
-#| msgid "Reference Number"
+msgid "Reference Title"
+msgstr ""
+
+#: main/forms/forms_search.py:262
 msgid "Reference Name"
 msgstr ""
 
-#: main/forms/forms_search.py:263 main/tables/tables_browse.py:36
+#: main/forms/forms_search.py:264 main/tables/tables_browse.py:36
 msgid "Location"
 msgstr ""
 
-#: main/forms/forms_search.py:264
+#: main/forms/forms_search.py:265
 #: main/templates/main/search/search_form.html:79
 #: main/templates/main/search/search_form_2.html:75
 #: main/templates/main/search/search_form_copy2.html:104
 msgid "Document must have seal"
 msgstr ""
 
-#: main/forms/forms_search.py:265
+#: main/forms/forms_search.py:266
 #: main/templates/main/search/search_form.html:73
 #: main/templates/main/search/search_form_2.html:71
 #: main/templates/main/search/search_form_copy2.html:98
 msgid "Document must have illuminations"
 msgstr ""
 
-#: main/forms/forms_search.py:272
+#: main/forms/forms_search.py:273
 msgid "Published Earliest Year"
 msgstr ""
 
-#: main/forms/forms_search.py:273
+#: main/forms/forms_search.py:274
 msgid "Published Latest Year"
 msgstr ""
 
-#: main/forms/forms_search.py:308 main/templates/main/base.html:128
+#: main/forms/forms_search.py:309 main/templates/main/base.html:128
 #: main/templates/main/base_copy.html:121
 #: main/templates/main/info/start.html:118
 #: main/templates/main/search/search_view.html:9
@@ -191,22 +198,19 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: main/forms/forms_upload.py:232
-#| msgid "Message"
+#: main/forms/forms_upload.py:234
 msgid "Message Title"
 msgstr ""
 
-#: main/forms/forms_upload.py:233
-#| msgid "Please describe the documents you want to upload."
+#: main/forms/forms_upload.py:235
 msgid "What kind of documents do you want to upload?"
 msgstr ""
 
-#: main/forms/forms_upload.py:234
+#: main/forms/forms_upload.py:236
 msgid "Batch Description"
 msgstr ""
 
-#: main/forms/forms_upload.py:235
-#| msgid "Please describe the documents you want to upload."
+#: main/forms/forms_upload.py:237
 msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
@@ -215,19 +219,16 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: main/forms/forms_user.py:71
-msgid "E-Mail"
-msgstr ""
-
 #: main/forms/forms_user.py:72
 msgid "E-Mail-Address. We will send an activation Link to this address."
 msgstr ""
 
-#: main/forms/forms_user.py:77 main/templates/main/base_copy.html:128
+#: main/forms/forms_user.py:77 main/templates/main/base.html:320
+#: main/templates/main/base_copy.html:128
 msgid "Register"
 msgstr ""
 
-#: main/forms/forms_user.py:110 main/templates/main/base.html:310
+#: main/forms/forms_user.py:109 main/templates/main/base.html:318
 #: main/templates/main/base_copy.html:125 main/templates/main/sidebar.html:73
 #: main/templates/main/users/account_activation_invalid.html:7
 #: main/templates/main/users/account_activation_invalid.html:12
@@ -240,21 +241,21 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: main/forms/forms_user.py:127
-#: main/templates/main/upload/edit_document_transcription.html:34
-#: main/templates/main/upload/edit_meta.html:95
+#: main/forms/forms_user.py:126
+#: main/templates/main/upload/edit_document_transcription.html:38
+#: main/templates/main/upload/edit_meta.html:96
 msgid "Save Changes"
 msgstr ""
 
-#: main/forms/forms_user.py:130
+#: main/forms/forms_user.py:129
 msgid "You cannot change your username"
 msgstr ""
 
-#: main/forms/forms_user.py:131
+#: main/forms/forms_user.py:130
 msgid "You cannot change your email address"
 msgstr ""
 
-#: main/forms/forms_user.py:153 main/forms/forms_user.py:162
+#: main/forms/forms_user.py:159 main/forms/forms_user.py:168
 #: main/templates/main/users/password_reset.html:9
 #: main/templates/main/users/password_reset.html:14
 #: main/templates/main/users/password_reset_complete.html:12
@@ -263,17 +264,17 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
-#: main/forms/forms_user.py:168
+#: main/forms/forms_user.py:174
 msgid "Your E-Mail Address"
 msgstr ""
 
-#: main/forms/forms_user.py:169
+#: main/forms/forms_user.py:175
 msgid ""
 "Please enter the e-mail address you registered with. We will send you an e-"
 "mail with your username."
 msgstr ""
 
-#: main/forms/forms_user.py:175
+#: main/forms/forms_user.py:181
 #: main/templates/main/users/request_username.html:18
 #: main/templates/main/users/request_username_done.html:12
 msgid "Request Username"
@@ -304,7 +305,6 @@ msgid ""
 msgstr ""
 
 #: main/mail_utils.py:46
-#| msgid "Your user information has been updated"
 msgid "Your account has been deactivated"
 msgstr ""
 
@@ -313,7 +313,6 @@ msgid "Your account has been deactivated. You cannot login anymore."
 msgstr ""
 
 #: main/mail_utils.py:56
-#| msgid "Unsubscribe From Newsletter"
 msgid "Thank you for subscribing to our Newsletter"
 msgstr ""
 
@@ -342,7 +341,6 @@ msgstr ""
 
 #: main/mail_utils.py:113
 #, python-brace-format
-#| msgid "Your Username is: ???"
 msgid "Your Username is: {user.username}"
 msgstr ""
 
@@ -352,7 +350,6 @@ msgstr ""
 
 #: main/mail_utils.py:123
 #, python-brace-format
-#| msgid "Your Username is: {user.username}. Goto LINK to reset your password."
 msgid "Your Username is: {user.username}. Go to {url} to reset your password."
 msgstr ""
 
@@ -402,432 +399,407 @@ msgstr ""
 msgid "You received a message:"
 msgstr ""
 
-#: main/model_info.py:44
+#: main/model_info.py:45
 msgid ""
 "<small {\" style=color:red\" if api_auth_key_expired else \"\"}>({\"Expired"
 "\" if api_auth_key_expired else \"Expires\"} on {user."
 "api_auth_key_expiration})</small>"
 msgstr ""
 
-#: main/model_info.py:52 main/tables/tables.py:26
+#: main/model_info.py:53 main/tables/tables.py:26
 msgid "User State"
 msgstr ""
 
-#: main/model_info.py:53 main/model_info.py:66 main/models.py:669
-#: main/models.py:741
+#: main/model_info.py:54 main/model_info.py:67 main/models.py:684
+#: main/models.py:756
 msgid "Active"
 msgstr ""
 
-#: main/model_info.py:65
+#: main/model_info.py:66
 msgid "Year joined"
 msgstr ""
 
-#: main/model_info.py:73
+#: main/model_info.py:74
 msgid "Zip / City"
 msgstr ""
 
-#: main/model_info.py:117 main/model_info.py:131
-#: main/tables/tables_document.py:84
-#| msgid "Last name"
+#: main/model_info.py:97 main/tables/tables_document.py:28
+#, python-brace-format
+msgid ""
+"<small>by <a href=\"{profile_url}\">{submitted_by}</a> at {time}</small>"
+msgstr ""
+
+#: main/model_info.py:101 main/tables/tables_document.py:32
+#, python-brace-format
+msgid "<small>by anonymous at {time}</small>"
+msgstr ""
+
+#: main/model_info.py:113
+msgid "Copy to clipboard"
+msgstr ""
+
+#: main/model_info.py:125 main/model_info.py:139
+#: main/tables/tables_document.py:86
 msgid "Last Change"
 msgstr ""
 
-#: main/model_info.py:118 main/model_info.py:132
-#| msgid "Batch Upload"
+#: main/model_info.py:126 main/model_info.py:140
 msgid "Initial Upload"
 msgstr ""
 
-#: main/model_info.py:124 main/model_info.py:186
-#: main/tables/tables_document.py:100
+#: main/model_info.py:132 main/model_info.py:194
+#: main/tables/tables_document.py:102
 msgid "Anonymous"
 msgstr ""
 
-#: main/model_info.py:148 main/tables/tables_document.py:21
-#| msgid "Creation period end"
+#: main/model_info.py:156 main/tables/tables_document.py:22
 msgid "Creation Period"
 msgstr ""
 
-#: main/model_info.py:168
+#: main/model_info.py:176
 msgid "Measurements"
 msgstr ""
 
-#: main/model_info.py:169
+#: main/model_info.py:177
 msgid "(w/h)"
 msgstr ""
 
-#: main/model_info.py:206
+#: main/model_info.py:214
 msgid "No help text found"
 msgstr ""
 
-#: main/model_info.py:212
+#: main/model_info.py:219
 msgid "Title of the document"
 msgstr ""
 
-#: main/model_info.py:212
-msgid "Use the original document's title if possible, use own title otherwise."
-msgstr ""
-
-#: main/model_info.py:215
-msgid "Institution which holds the manuscript"
-msgstr ""
-
-#: main/model_info.py:215
-msgid "If the institution is not in the list, you may create a new one."
-msgstr ""
-
 #: main/model_info.py:219
-msgid "Reference number as indicated by the holding institution."
-msgstr ""
-
-#: main/model_info.py:220
-msgid "If the reference number is not in the list, you may create a new one."
-msgstr ""
-
-#: main/model_info.py:223
-msgid "Which parts of the manuscript have been transcribed?"
+msgid ""
+"Title of the source document, which is transcribed here. Use the original "
+"document's title if possible, use an own title otherwise."
 msgstr ""
 
 #: main/model_info.py:224
+msgid "Institution which holds the manuscript"
+msgstr ""
+
+#: main/model_info.py:224
+msgid "If the institution is not in the list, you may create a new one."
+msgstr ""
+
+#: main/model_info.py:228
+msgid "Reference number as indicated by the holding institution."
+msgstr ""
+
+#: main/model_info.py:229
+msgid "If the reference number is not in the list, you may create a new one."
+msgstr ""
+
+#: main/model_info.py:232
+msgid "Which parts of the manuscript have been transcribed?"
+msgstr ""
+
+#: main/model_info.py:233
 msgid "E. g.: Entire Document, Fol. 3r - 10v, Chapter 10"
 msgstr ""
 
-#: main/model_info.py:226
-#| msgid "Dating of the original manuscript"
+#: main/model_info.py:235
 msgid "Earliest creation date of the original manuscript"
 msgstr ""
 
-#: main/model_info.py:227
-#| msgid ""
-#| "Only the year of creation is required. Please specify as precise as "
-#| "possible."
+#: main/model_info.py:236
 msgid ""
 "Only the year of creation is required. Please specify as precisely as "
 "possible."
 msgstr ""
 
-#: main/model_info.py:230
-#| msgid "Dating of the original manuscript"
+#: main/model_info.py:239
 msgid "Latest creation date of the original manuscript"
 msgstr ""
 
-#: main/model_info.py:231
-#| msgid ""
-#| "Only the year of creation is required. Please specify as precise as "
-#| "possible."
+#: main/model_info.py:240
 msgid ""
 "Optional field. Only the year of creation is required. Please specify as "
 "precisely as possible."
 msgstr ""
 
-#: main/model_info.py:234
+#: main/model_info.py:243
 msgid "Place of origin"
 msgstr ""
 
-#: main/model_info.py:234
-#| msgid ""
-#| "Where has the document been written? Supply a city name if possible, "
-#| "otherwise state country or region."
+#: main/model_info.py:243
 msgid ""
 "Where has the document been written? Supply a city name if possible, "
 "otherwise use country or region."
 msgstr ""
 
-#: main/model_info.py:238 main/model_info.py:241
+#: main/model_info.py:247 main/model_info.py:250
 msgid "Type of the document"
 msgstr ""
 
-#: main/model_info.py:238
+#: main/model_info.py:247
 msgid "Which type best describes the source? First level of categorization."
 msgstr ""
 
-#: main/model_info.py:241
+#: main/model_info.py:250
 msgid ""
 "Which type best describes the source? Second level of categorization. Select "
 "a parent source type before filling out this field."
 msgstr ""
 
-#: main/model_info.py:246
-#| msgid "Actual transcription of the manuscript"
+#: main/model_info.py:255
 msgid "Transcription of the manuscript"
 msgstr ""
 
-#: main/model_info.py:247
+#: main/model_info.py:256
 msgid ""
 "You can enter the transcription directly or copy your contentsfrom a Word or "
 "Excel file. Most formatting is preserved."
 msgstr ""
 
-#: main/model_info.py:250
-#| msgid "Author(s) of the source"
+#: main/model_info.py:259
 msgid "Scribe(s) of the source"
 msgstr ""
 
-#: main/model_info.py:250
-#| msgid "If the author is not in the list, you may create a new one."
+#: main/model_info.py:259
 msgid "If a scribe is not in the list, you may create a new one."
 msgstr ""
 
-#: main/model_info.py:253
+#: main/model_info.py:262
 msgid "Used languages"
 msgstr ""
 
-#: main/model_info.py:253
+#: main/model_info.py:262
 msgid "Languages that are used in the source."
 msgstr ""
 
-#: main/model_info.py:255
+#: main/model_info.py:264
 msgid "Material"
 msgstr ""
 
-#: main/model_info.py:255
-#| msgid "On what material is the manuscript written?"
+#: main/model_info.py:264
 msgid "Optional field. On what material is the manuscript written?"
 msgstr ""
 
-#: main/model_info.py:257
+#: main/model_info.py:266
 msgid "What page numbering system is used?"
 msgstr ""
 
-#: main/model_info.py:257
-#| msgid "Are the pages foliated or paginated?"
+#: main/model_info.py:266
 msgid "Optional field. Are the pages foliated or paginated?"
 msgstr ""
 
-#: main/model_info.py:260
+#: main/model_info.py:269
 msgid "Additional comments"
 msgstr ""
 
-#: main/model_info.py:260
+#: main/model_info.py:269
 msgid ""
 "Optional field. You may enter any comments on the creation of the "
 "transcription or its contents. Here, you may also place links to external "
 "resources such as digitizations or editions of the source."
 msgstr ""
 
-#: main/model_info.py:265 main/models.py:403
+#: main/model_info.py:274 main/models.py:418
 msgid "Illuminations"
 msgstr ""
 
-#: main/model_info.py:265
-#| msgid "Are there illuminations on the document?"
+#: main/model_info.py:274
 msgid "Optional field. Are there illuminations on the document?"
 msgstr ""
 
-#: main/model_info.py:267
+#: main/model_info.py:276
 msgid "Seals"
 msgstr ""
 
-#: main/model_info.py:267
-#| msgid "Are there any seals on the document?"
+#: main/model_info.py:276
 msgid "Optional field. Are there any seals on the document?"
 msgstr ""
 
-#: main/model_info.py:269 main/models.py:347
+#: main/model_info.py:278 main/models.py:362
 msgid "Number of pages"
 msgstr ""
 
-#: main/model_info.py:269
-#| msgid "Enter the total number of pages of the source."
+#: main/model_info.py:278
 msgid "Optional field. Enter the total number of pages of the source."
 msgstr ""
 
-#: main/model_info.py:271
+#: main/model_info.py:280
 msgid "Do you want to publish anonymously?"
 msgstr ""
 
-#: main/model_info.py:271
-#| msgid ""
-#| "You can hide your username on the transcription listing if you choos so."
+#: main/model_info.py:280
 msgid ""
 "You can hide your username on the transcription listing if you choose so."
 msgstr ""
 
-#: main/model_info.py:275
+#: main/model_info.py:284
 msgid "Brief description of changes"
 msgstr ""
 
-#: main/model_info.py:275
-#| msgid ""
-#| "Please suplly a brief description of the changes you made. Example: "
-#| "\"Corrected typo\", \"Added authors\", etc."
+#: main/model_info.py:284
 msgid ""
-"Please supply a brief description of the changes you made. Example: "
-"\"Corrected typo\", \"Added scribes\", etc."
+"Please supply a brief description of the changes you made. Examples: "
+"Corrected typo, Added scribes, etc."
 msgstr ""
 
-#: main/model_info.py:280
-#| msgid "Type of the document"
+#: main/model_info.py:289
 msgid "Length of the document"
 msgstr ""
 
-#: main/model_info.py:280
+#: main/model_info.py:289
 msgid ""
 "Optional field. Please write down the length (top to bottom) in centimeters."
 msgstr ""
 
-#: main/model_info.py:283
-#| msgid "Title of the document"
+#: main/model_info.py:292
 msgid "Width of the document"
 msgstr ""
 
-#: main/model_info.py:283
+#: main/model_info.py:292
 msgid ""
 "Optional field. Please write down the width (left to right) in centimeters."
 msgstr ""
 
-#: main/model_info.py:290
+#: main/model_info.py:299
 msgid "Name of the institution"
 msgstr ""
 
-#: main/model_info.py:290
+#: main/model_info.py:299
 msgid "Enter the complete name."
 msgstr ""
 
-#: main/model_info.py:292
+#: main/model_info.py:301
 msgid "Street Name"
 msgstr ""
 
-#: main/model_info.py:292
+#: main/model_info.py:301
 msgid "Enter the street name with the number."
 msgstr ""
 
-#: main/model_info.py:294
+#: main/model_info.py:303
 msgid "Zip Code"
 msgstr ""
 
-#: main/model_info.py:294
+#: main/model_info.py:303
 msgid "Enter the zip code of the institution."
 msgstr ""
 
-#: main/model_info.py:296 main/models.py:34 main/models.py:36
+#: main/model_info.py:305 main/models.py:34 main/models.py:36
 msgid "City"
 msgstr ""
 
-#: main/model_info.py:296
+#: main/model_info.py:305
 msgid "Enter the city."
 msgstr ""
 
-#: main/model_info.py:298 main/models.py:38 main/models.py:39
+#: main/model_info.py:307 main/models.py:38 main/models.py:39
 msgid "Country"
 msgstr ""
 
-#: main/model_info.py:298
+#: main/model_info.py:307
 msgid "Choose the country from the drop down menu."
 msgstr ""
 
-#: main/model_info.py:300
+#: main/model_info.py:309
 msgid "Web site of the institution"
 msgstr ""
 
-#: main/model_info.py:300
-#| msgid "Enter a valid URL. Has to start with http:// or https://"
+#: main/model_info.py:309
 msgid "Optional Field. Enter a valid URL. Must start with http:// or https://"
 msgstr ""
 
-#: main/model_info.py:307
+#: main/model_info.py:316
 msgid "Holding institution"
 msgstr ""
 
-#: main/model_info.py:307
+#: main/model_info.py:316
 msgid "The institution which holds the document with this reference number."
 msgstr ""
 
-#: main/model_info.py:310 main/models.py:288
+#: main/model_info.py:319 main/models.py:303
 msgid "Reference Number"
 msgstr ""
 
-#: main/model_info.py:310
+#: main/model_info.py:319
 msgid "Reference Number as it is supplied by the institution."
 msgstr ""
 
-#: main/model_info.py:313
+#: main/model_info.py:322
 msgid "Title of collection"
 msgstr ""
 
-#: main/model_info.py:313
+#: main/model_info.py:322
 msgid ""
-"Reference numbers normally have a title. Please supply the complete title. "
-"If the institution does not supply a title for this reference number, you "
-"may supply your own descriptive title."
+"Reference numbers usually have a title. Please supply the complete title. If "
+"the institution does not supply a title for this reference number, you may "
+"supply an own descriptive title. Please note that this might not be the same "
+"as the title of the transcribed document."
 msgstr ""
 
-#: main/model_info.py:319
+#: main/model_info.py:330
 msgid "Collection link"
 msgstr ""
 
-#: main/model_info.py:319
-#| msgid ""
-#| "Direct link to the collection in the institution's catalog. Must start "
-#| "with http:// or https://"
+#: main/model_info.py:330
 msgid ""
 "Optional Field. Direct link to the collection in the institution's catalog. "
 "Must start with http:// or https://"
 msgstr ""
 
-#: main/model_info.py:327 main/models.py:639
+#: main/model_info.py:338 main/models.py:654
 msgid "Username"
 msgstr ""
 
-#: main/model_info.py:327
+#: main/model_info.py:338
 msgid ""
 "The name must be unique and can't contain any special characters. It will be "
 "shown to other users."
 msgstr ""
 
-#: main/model_info.py:330 main/models.py:645
+#: main/model_info.py:341 main/models.py:660
 msgid "First name"
 msgstr ""
 
-#: main/model_info.py:330
-#| msgid ""
-#| "Your given name. This information will not be public unless you choose so."
+#: main/model_info.py:341
 msgid "Your given name. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:332 main/models.py:650
+#: main/model_info.py:343 main/models.py:665
 msgid "Last name"
 msgstr ""
 
-#: main/model_info.py:332
-#| msgid ""
-#| "Your family name. This information will not be public unless you choose "
-#| "so."
+#: main/model_info.py:343
 msgid "Your family name. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:334
+#: main/model_info.py:345
 msgid "Email address"
 msgstr ""
 
-#: main/model_info.py:334
+#: main/model_info.py:345
 msgid ""
 "You must choose a valid address. It is used to verify your information and "
 "activate your account. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:338
+#: main/model_info.py:349
 msgid "Anonymous publishing"
 msgstr ""
 
-#: main/model_info.py:338
+#: main/model_info.py:349
 msgid ""
 "Your documents can be published anonymously by default. You can change this "
 "setting any time."
 msgstr ""
 
-#: main/model_info.py:342
+#: main/model_info.py:353
 msgid "ORCID"
 msgstr ""
 
-#: main/model_info.py:342
+#: main/model_info.py:353
 msgid ""
 "Optional Field. ORCID provides a persistent digital identifier that you own "
 "and control, and that distinguishes you from every other researcher."
-msgstr ""
-
-#: main/models.py:22 main/models.py:63 main/models.py:97 main/models.py:766
-#: main/templates/main/details/institution_detail.html:8
-msgid "Institution"
 msgstr ""
 
 #: main/models.py:25
@@ -878,20 +850,18 @@ msgid "Institutions"
 msgstr ""
 
 #: main/models.py:99
-#| msgid "The institution which holds the document with this reference number."
 msgid "Institution which holds this reference number and document"
 msgstr ""
 
-#: main/models.py:101 main/models.py:762
+#: main/models.py:101 main/models.py:777
 msgid "Reference number"
 msgstr ""
 
 #: main/models.py:103
-#| msgid "reference number of the collection containing a document"
 msgid "Reference number of the collection containing a document"
 msgstr ""
 
-#: main/models.py:105 main/models.py:283
+#: main/models.py:105 main/models.py:298
 msgid "Title"
 msgstr ""
 
@@ -916,12 +886,10 @@ msgid "reference numbers"
 msgstr ""
 
 #: main/models.py:168
-#| msgid "Name of author"
 msgid "Name of scribe"
 msgstr ""
 
 #: main/models.py:170
-#| msgid "Name of the author of the original document."
 msgid "Name of the scribe of the original document."
 msgstr ""
 
@@ -930,467 +898,440 @@ msgid "Link to GND entry"
 msgstr ""
 
 #: main/models.py:175
-#| msgid "Persistent URL to the GND entry of the author."
 msgid "Persistent URL to the GND entry of the scribe."
 msgstr ""
 
 #: main/models.py:190
-#| msgid "Document Title"
 msgid "Document Scribe"
 msgstr ""
 
 #: main/models.py:191
-#| msgid "Document Title"
 msgid "Document Scribes"
 msgstr ""
 
-#: main/models.py:217
+#: main/models.py:222
 msgid "Source type"
 msgstr ""
 
-#: main/models.py:218
+#: main/models.py:223
 msgid "Source types"
 msgstr ""
 
-#: main/models.py:260
+#: main/models.py:275
 msgid "Paper"
 msgstr ""
 
-#: main/models.py:261
+#: main/models.py:276
 msgid "Parchment"
 msgstr ""
 
-#: main/models.py:262
+#: main/models.py:277
 msgid "Papyrus"
 msgstr ""
 
-#: main/models.py:263
+#: main/models.py:278
 msgid "Metal"
 msgstr ""
 
-#: main/models.py:264
+#: main/models.py:279
 msgid "Textile"
 msgstr ""
 
-#: main/models.py:265
+#: main/models.py:280
 msgid "Stone"
 msgstr ""
 
-#: main/models.py:266
+#: main/models.py:281
 msgid "Wood"
 msgstr ""
 
-#: main/models.py:268 main/models.py:275
+#: main/models.py:283 main/models.py:290
 msgid "(Unknown)"
 msgstr ""
 
-#: main/models.py:271
+#: main/models.py:286
 msgid "No page numbering"
 msgstr ""
 
-#: main/models.py:272
+#: main/models.py:287
 msgid "Pagination"
 msgstr ""
 
-#: main/models.py:273
+#: main/models.py:288
 msgid "Foliated"
 msgstr ""
 
-#: main/models.py:277
+#: main/models.py:292
 msgid "Document UUID"
 msgstr ""
 
-#: main/models.py:280
-#| msgid ""
-#| "ID of the first Version of this document. Is kept constant between "
-#| "versions of this document."
+#: main/models.py:295
 msgid ""
 "ID of the first Version of this document. Is kept constant between versions "
 "of this document"
 msgstr ""
 
-#: main/models.py:285
+#: main/models.py:300
 msgid "Title of the Document"
 msgstr ""
 
-#: main/models.py:293 main/templates/main/details/author_list.html:14
+#: main/models.py:308 main/templates/main/details/author_list.html:14
 #: main/templates/main/details/author_list.html:18
 #: main/templates/main/details/browse_options.html:39
-#| msgid "Subscribe"
 msgid "Scribes"
 msgstr ""
 
-#: main/models.py:295
-#| msgid "Type of the source"
+#: main/models.py:310
 msgid "Scribes of the source"
 msgstr ""
 
-#: main/models.py:297
+#: main/models.py:312
 msgid "Creation period start"
 msgstr ""
 
-#: main/models.py:298
+#: main/models.py:313
 msgid ""
 "When was the document written? Be as specific as possible. <br/>Valid "
 "fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY ('23.07.1643')"
 msgstr ""
 
-#: main/models.py:302
+#: main/models.py:317
 msgid "Creation period end"
 msgstr ""
 
-#: main/models.py:305
+#: main/models.py:320
 msgid ""
 "If the document was created over a time span, please indicate the end time. "
 "<br/>Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY "
 "('23.07.1643')"
 msgstr ""
 
-#: main/models.py:310
+#: main/models.py:325
 msgid "Creation Location"
 msgstr ""
 
-#: main/models.py:313
-#| msgid "The City/Place where the source was created."
+#: main/models.py:328
 msgid "The City/Place where the source was created"
 msgstr ""
 
-#: main/models.py:316
+#: main/models.py:331
 msgid "Languages"
 msgstr ""
 
-#: main/models.py:318
+#: main/models.py:333
 msgid "Languages used in the source"
 msgstr ""
 
-#: main/models.py:321 main/models.py:767
+#: main/models.py:336 main/models.py:782
 msgid "Source Type"
 msgstr ""
 
-#: main/models.py:325
+#: main/models.py:340
 msgid "Type of the source"
 msgstr ""
 
-#: main/models.py:327
+#: main/models.py:342
 msgid "Writing material"
 msgstr ""
 
-#: main/models.py:331
-msgid "Is the manuscript on paper, papyrus or parchment?"
+#: main/models.py:346
+msgid "Which material is the Document written on?"
 msgstr ""
 
-#: main/models.py:333
+#: main/models.py:348
 msgid "Height"
 msgstr ""
 
-#: main/models.py:338
+#: main/models.py:353
 msgid "Height in centimeters (cm)"
 msgstr ""
 
-#: main/models.py:340
+#: main/models.py:355
 msgid "Width"
 msgstr ""
 
-#: main/models.py:345
+#: main/models.py:360
 msgid "Width in centimeters (cm)"
 msgstr ""
 
-#: main/models.py:350
+#: main/models.py:365
 msgid "The number of pages of the whole source"
 msgstr ""
 
-#: main/models.py:352
-#| msgid "Pagination"
+#: main/models.py:367
 msgid "Pagination System"
 msgstr ""
 
-#: main/models.py:356
+#: main/models.py:371
 msgid "How are the pages numbered?"
 msgstr ""
 
-#: main/models.py:358
+#: main/models.py:373
 msgid "Transcribed parts of the document"
 msgstr ""
 
-#: main/models.py:359
+#: main/models.py:374
 msgid "List of the transcribed pages/chapters, etc."
 msgstr ""
 
-#: main/models.py:361
+#: main/models.py:376
 msgid "Editorial comments"
 msgstr ""
 
-#: main/models.py:363
-#| msgid "Add editorial comments or remarks on the contents of the document."
+#: main/models.py:378
 msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 
-#: main/models.py:365 main/templates/main/details/document_detail.html:61
-#: main/templates/main/upload/create_document.html:79
+#: main/models.py:380 main/templates/main/details/document_detail.html:61
+#: main/templates/main/upload/create_document.html:81
 msgid "Transcript"
 msgstr ""
 
-#: main/models.py:366
-#| msgid "Formatted text of your transcript."
+#: main/models.py:381
 msgid "Formatted text of your transcript"
 msgstr ""
 
-#: main/models.py:368
+#: main/models.py:383
 msgid "Upload date"
 msgstr ""
 
-#: main/models.py:371
+#: main/models.py:386
 msgid "Update date"
 msgstr ""
 
-#: main/models.py:375
+#: main/models.py:390
 msgid "Submitted by"
 msgstr ""
 
-#: main/models.py:378
+#: main/models.py:393
 msgid "Uploading user"
 msgstr ""
 
-#: main/models.py:381
-#| msgid "Publish anonymous"
+#: main/models.py:396
 msgid "Publish anonymously"
 msgstr ""
 
-#: main/models.py:383
+#: main/models.py:398
 msgid "Select this, if you want to publish this document anonymously"
 msgstr ""
 
-#: main/models.py:389
+#: main/models.py:404
 msgid "Changes"
 msgstr ""
 
-#: main/models.py:392
-#| msgid "A brief description of the applied changes."
+#: main/models.py:407
 msgid "A brief description of the applied changes"
 msgstr ""
 
-#: main/models.py:394
+#: main/models.py:409
 msgid "version number"
 msgstr ""
 
-#: main/models.py:396
+#: main/models.py:411
 msgid "Version number"
 msgstr ""
 
-#: main/models.py:398
+#: main/models.py:413
 msgid "Seal"
 msgstr ""
 
-#: main/models.py:401
+#: main/models.py:416
 msgid "Are there any seals on this page?"
 msgstr ""
 
-#: main/models.py:406
-msgid "Does the source contain painted miniatures (=illuminations)?"
+#: main/models.py:421
+msgid "Does the source contain painted miniatures (illuminations)?"
 msgstr ""
 
-#: main/models.py:412
+#: main/models.py:427
 msgid "document"
 msgstr ""
 
-#: main/models.py:413
+#: main/models.py:428
 msgid "documents"
-msgstr ""
-
-#: main/models.py:548
-#, python-brace-format
-#| msgid "Document {self.title_name} changed"
-msgid "Document \"{self.title_name}\" changed"
-msgstr ""
-
-#: main/models.py:549
-#, python-brace-format
-#| msgid "Document {self.title_name} changed"
-msgid ""
-"The document changed {self.title_name} changed.\n"
-"\n"
-msgstr ""
-
-#: main/models.py:562
-#| msgid "Reference Number"
-msgid "A Reference-Number changed"
 msgstr ""
 
 #: main/models.py:563
 #, python-brace-format
+msgid "Document \"{self.title_name}\" has changed"
+msgstr ""
+
+#: main/models.py:564
+#, python-brace-format
 msgid ""
-"The reference number \"{self.parent_ref_number.ref_number_name}\" changed.\n"
+"The document {self.title_name} has changed.\n"
 "\n"
 msgstr ""
 
-#: main/models.py:575
-#| msgid "Password changed"
-msgid "A User changed"
+#: main/models.py:577
+msgid "A Reference Number has changed"
 msgstr ""
 
-#: main/models.py:576
+#: main/models.py:578
 #, python-brace-format
-#| msgid "Document {self.title_name} changed"
+msgid ""
+"The reference number \"{self.parent_ref_number.ref_number_name}\" has "
+"changed.\n"
+"\n"
+msgstr ""
+
+#: main/models.py:590
+msgid "A User has made changes"
+msgstr ""
+
+#: main/models.py:591
+#, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr ""
 
-#: main/models.py:593
-#| msgid "Please enter an e-mail address"
+#: main/models.py:608
 msgid "Please enter an email address"
 msgstr ""
 
-#: main/models.py:619
+#: main/models.py:634
 msgid "All superusers must have is_staff = True."
 msgstr ""
 
-#: main/models.py:621
+#: main/models.py:636
 msgid "All superusers must have is_superuser = True"
 msgstr ""
 
-#: main/models.py:629 main/models.py:635
-#| msgid "No notification E-Mails"
+#: main/models.py:644 main/models.py:650
 msgid "No notification Emails"
 msgstr ""
 
-#: main/models.py:630
+#: main/models.py:645
 msgid "Every time a subscribed document has changed."
 msgstr ""
 
-#: main/models.py:631
+#: main/models.py:646
 msgid "Once a day, only if changes happened."
 msgstr ""
 
-#: main/models.py:632
+#: main/models.py:647
 msgid "Once a week, only if changes happened."
 msgstr ""
 
-#: main/models.py:636
-msgid "Every time a message is sent."
+#: main/models.py:651
+msgid "Every time a message is received."
 msgstr ""
 
-#: main/models.py:637
+#: main/models.py:652
 msgid "Once a day, only if you received messages."
 msgstr ""
 
-#: main/models.py:643
+#: main/models.py:658
 msgid "Provide a user name"
 msgstr ""
 
-#: main/models.py:653
+#: main/models.py:668
 msgid "Enter your last name"
 msgstr ""
 
-#: main/models.py:655
+#: main/models.py:670
 msgid "Email"
 msgstr ""
 
-#: main/models.py:659
+#: main/models.py:674
 msgid "Enter your email address"
 msgstr ""
 
-#: main/models.py:661
+#: main/models.py:676
 msgid "Email confirmed"
 msgstr ""
 
-#: main/models.py:663
+#: main/models.py:678
 msgid "Has the user confirmed the email address?"
 msgstr ""
 
-#: main/models.py:665
+#: main/models.py:680
 msgid "Staff status"
 msgstr ""
 
-#: main/models.py:667
+#: main/models.py:682
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 
-#: main/models.py:671
+#: main/models.py:686
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 
-#: main/models.py:673
+#: main/models.py:688
 msgid "Date joined"
 msgstr ""
 
-#: main/models.py:676
+#: main/models.py:691
 msgid "Mark anonymous by default"
 msgstr ""
 
-#: main/models.py:678
+#: main/models.py:693
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
 msgstr ""
 
-#: main/models.py:681
+#: main/models.py:696
 msgid "Orcid"
 msgstr ""
 
-#: main/models.py:685
+#: main/models.py:700
 msgid "User id from https://orcid.org/"
 msgstr ""
 
-#: main/models.py:687
+#: main/models.py:702
 msgid "Subscription Notification policy"
 msgstr ""
 
-#: main/models.py:690
+#: main/models.py:705
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 
-#: main/models.py:693
+#: main/models.py:708
 msgid "Message Notification policy"
 msgstr ""
 
-#: main/models.py:696
+#: main/models.py:711
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 
-#: main/models.py:699
+#: main/models.py:714
 msgid "Subscription to owned documents"
 msgstr ""
 
-#: main/models.py:700
+#: main/models.py:715
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 
-#: main/models.py:705 main/models.py:844
+#: main/models.py:720 main/models.py:859
 msgid "Default User Interface Language"
 msgstr ""
 
-#: main/models.py:706 main/models.py:845
+#: main/models.py:721 main/models.py:860
 msgid "What is your preferred language?"
 msgstr ""
 
-#: main/models.py:711
+#: main/models.py:726
 msgid "Secret API Key"
 msgstr ""
 
-#: main/models.py:712
+#: main/models.py:727
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: main/models.py:728
-msgid "Benutzer"
-msgstr ""
-
-#: main/models.py:729
-msgid "Mitarbeiter"
-msgstr ""
-
-#: main/models.py:742
+#: main/models.py:757
 msgid "Inactive"
 msgstr ""
 
-#: main/models.py:763 main/templates/main/details/document_detail.html:21
+#: main/models.py:778 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr ""
 
-#: main/models.py:765
-msgid "Author"
+#: main/models.py:780 main/templates/main/details/author_detail.html:8
+#: main/templates/main/details/author_detail.html:14
+msgid "Scribe"
 msgstr ""
 
 #: main/tables/tables.py:27 main/tables/tables.py:173
@@ -1422,12 +1363,10 @@ msgid "Activate this user"
 msgstr ""
 
 #: main/tables/tables.py:85
-#| msgid "Answer"
 msgid "Answered"
 msgstr ""
 
 #: main/tables/tables.py:86
-#| msgid "From"
 msgid "from"
 msgstr ""
 
@@ -1472,15 +1411,15 @@ msgstr ""
 msgid "No. of Ref. Numbers"
 msgstr ""
 
-#: main/tables/tables_document.py:49
+#: main/tables/tables_document.py:51
 msgid "Last update"
 msgstr ""
 
-#: main/tables/tables_document.py:60 main/tables/tables_document.py:83
+#: main/tables/tables_document.py:62 main/tables/tables_document.py:85
 msgid "Action"
 msgstr ""
 
-#: main/tables/tables_document.py:66 main/tables/tables_document.py:91
+#: main/tables/tables_document.py:68 main/tables/tables_document.py:93
 #: main/templates/main/base_copy.html:97 main/templates/main/info/start.html:92
 #: main/templates/main/sidebar.html:13
 #: main/templates/main/upload/create_document.html:13
@@ -1489,9 +1428,17 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: main/tables/tables_document.py:68 main/tables/tables_document.py:93
+#: main/tables/tables_document.py:70 main/tables/tables_document.py:95
 #: main/templates/main/info/start.html:143
 msgid "Edit"
+msgstr ""
+
+#: main/templates/django_tables2/bootstrap4-responsive.html:66
+msgid "previous"
+msgstr ""
+
+#: main/templates/django_tables2/bootstrap4-responsive.html:86
+msgid "next"
 msgstr ""
 
 #: main/templates/main/admin/admin.html:8
@@ -1504,7 +1451,7 @@ msgstr ""
 #: main/templates/main/admin/contact_message.html:15
 #: main/templates/main/admin/contact_message_answer.html:15
 #: main/templates/main/admin/contact_messages.html:15
-#: main/templates/main/base.html:285 main/templates/main/sidebar.html:65
+#: main/templates/main/base.html:293 main/templates/main/sidebar.html:65
 msgid "Administration"
 msgstr ""
 
@@ -1526,8 +1473,8 @@ msgid ""
 "objects if needed. Use caution!"
 msgstr ""
 
-#: main/templates/main/admin/admin.html:28 main/templates/main/base.html:293
-#: main/templates/main/details/source_type_child_detail.html:62
+#: main/templates/main/admin/admin.html:28 main/templates/main/base.html:301
+#: main/templates/main/details/source_type_child_detail.html:67
 #: main/templates/main/users/user_options_copy2.html:23
 msgid "Documents"
 msgstr ""
@@ -1539,8 +1486,8 @@ msgstr ""
 #: main/templates/main/admin/admin.html:31
 #: main/templates/main/base_copy.html:116
 #: main/templates/main/details/browse_options.html:30
-#: main/templates/main/details/source_type_child_detail.html:14
-#: main/templates/main/details/source_type_child_detail.html:23
+#: main/templates/main/details/source_type_child_detail.html:17
+#: main/templates/main/details/source_type_child_detail.html:26
 #: main/templates/main/details/source_type_list.html:14
 #: main/templates/main/details/source_type_list.html:19
 #: main/templates/main/details/source_type_parent_detail.html:14
@@ -1729,11 +1676,10 @@ msgid "General Statistics"
 msgstr ""
 
 #: main/templates/main/base.html:112
-#| msgid "Upload Transcriptions"
 msgid "Upload transcriptions"
 msgstr ""
 
-#: main/templates/main/base.html:113 main/templates/main/base.html:237
+#: main/templates/main/base.html:113 main/templates/main/base.html:245
 msgid "Participate"
 msgstr ""
 
@@ -1748,9 +1694,8 @@ msgstr ""
 #: main/templates/main/details/institution_detail.html:13
 #: main/templates/main/details/institution_list.html:13
 #: main/templates/main/details/ref_number_detail.html:15
-#: main/templates/main/details/source_type_child_detail.html:13
+#: main/templates/main/details/source_type_child_detail.html:16
 #: main/templates/main/details/source_type_list.html:13
-#| msgid "Collection link"
 msgid "Collection"
 msgstr ""
 
@@ -1773,98 +1718,121 @@ msgstr ""
 msgid "Perform a full-text search for documents"
 msgstr ""
 
-#: main/templates/main/base.html:185
+#: main/templates/main/base.html:150
+msgid "Search..."
+msgstr ""
+
+#: main/templates/main/base.html:168
+#, fuzzy
+#| msgid "Your notifications"
+msgid "You have no new notifications."
+msgstr "Your notifications"
+
+#: main/templates/main/base.html:171
+#, python-format
+msgid ""
+"\n"
+"                                            Showing 3 of "
+"%(cp_total_new_notifications)s new notifications.\n"
+"                                            "
+msgstr ""
+
+#: main/templates/main/base.html:177
+#, python-format
+msgid ""
+"\n"
+"                                            You have "
+"%(cp_total_new_notifications)s new notifications.\n"
+"                                            "
+msgstr ""
+
+#: main/templates/main/base.html:193
 msgid "wrote"
 msgstr ""
 
-#: main/templates/main/base.html:195
+#: main/templates/main/base.html:203
 msgid "View all messages and notifications"
 msgstr ""
 
-#: main/templates/main/base.html:212
+#: main/templates/main/base.html:220
 msgid "Select Language"
 msgstr ""
 
-#: main/templates/main/base.html:232
+#: main/templates/main/base.html:240
 msgid "Explore"
 msgstr ""
 
-#: main/templates/main/base.html:233
+#: main/templates/main/base.html:241
 #: main/templates/main/details/browse_options.html:25
 #: main/templates/main/sidebar.html:30
 msgid "Browse by Institution"
 msgstr ""
 
-#: main/templates/main/base.html:234
+#: main/templates/main/base.html:242
 #: main/templates/main/details/browse_options.html:34
-#| msgid "Browse Source Types"
 msgid "Browse by Source Type"
 msgstr ""
 
-#: main/templates/main/base.html:235
+#: main/templates/main/base.html:243
 #: main/templates/main/details/browse_options.html:43
-#| msgid "Browse by Author"
 msgid "Browse by Scribe"
 msgstr ""
 
-#: main/templates/main/base.html:239
+#: main/templates/main/base.html:247
 #: main/templates/main/upload/create_document.html:8
-#: main/templates/main/upload/create_document.html:132
+#: main/templates/main/upload/create_document.html:134
 msgid "Upload Transcription"
 msgstr ""
 
-#: main/templates/main/base.html:244
+#: main/templates/main/base.html:252
 #: main/templates/main/upload/upload_options.html:40
 #: main/templates/main/upload/upload_options_copy.html:44
 msgid "Batch Upload"
 msgstr ""
 
-#: main/templates/main/base.html:246
-#| msgid "Login To Participate"
+#: main/templates/main/base.html:254
 msgid "Login to Participate"
 msgstr ""
 
-#: main/templates/main/base.html:248
-#| msgid "Advanced search"
+#: main/templates/main/base.html:256
 msgid "Advanced Features"
 msgstr ""
 
-#: main/templates/main/base.html:249
+#: main/templates/main/base.html:257
 #: main/templates/main/info/api_documentation.html:20
 #: main/templates/main/info/info_options.html:10
 msgid "Transcriptiones API"
 msgstr ""
 
-#: main/templates/main/base.html:250
+#: main/templates/main/base.html:258
 msgid "Find us on GitHub"
 msgstr ""
 
-#: main/templates/main/base.html:253
+#: main/templates/main/base.html:261
 #: main/templates/main/info/info_options.html:11
 #: main/templates/main/upload/upload_options.html:44
 #: main/templates/main/upload/upload_options_copy.html:48
 msgid "Contact Us"
 msgstr ""
 
-#: main/templates/main/base.html:280
+#: main/templates/main/base.html:288
 msgid "Your Account"
 msgstr ""
 
-#: main/templates/main/base.html:281
+#: main/templates/main/base.html:289
 #: main/templates/main/users/user_options.html:5
 msgid "Account"
 msgstr ""
 
-#: main/templates/main/base.html:282
+#: main/templates/main/base.html:290
 msgid "Edit User Information"
 msgstr ""
 
-#: main/templates/main/base.html:283
-#| msgid "View Your Public Profile"
+#: main/templates/main/base.html:291
 msgid "View your Public Profile"
 msgstr ""
 
-#: main/templates/main/base.html:287 main/templates/main/base_copy.html:159
+#: main/templates/main/base.html:295 main/templates/main/base_copy.html:159
 #: main/templates/main/sidebar.html:69 main/templates/main/users/login.html:33
 #: main/templates/main/users/logout.html:12
 #: main/templates/main/users/request_username.html:22
@@ -1874,7 +1842,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: main/templates/main/base.html:289 main/templates/main/users/messages.html:10
+#: main/templates/main/base.html:297 main/templates/main/users/messages.html:10
 #: main/templates/main/users/messages.html:17
 #: main/templates/main/users/read_message.html:17
 #: main/templates/main/users/user_options.html:8
@@ -1884,19 +1852,30 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: main/templates/main/base.html:290
+#: main/templates/main/base.html:298
 msgid "My Inbox"
 msgstr ""
 
-#: main/templates/main/base.html:291
+#: main/templates/main/base.html:299
 msgid "My Subscriptions"
 msgstr ""
 
-#: main/templates/main/base.html:294 main/templates/main/base_copy.html:150
+#: main/templates/main/base.html:302 main/templates/main/base_copy.html:150
 #: main/templates/main/sidebar.html:61
 #: main/templates/main/users/my_documents.html:22
+#: main/templates/main/users/user_options.html:10
 msgid "My Documents"
 msgstr ""
+
+#: main/templates/main/base.html:321
+msgid "Forgot Password?"
+msgstr ""
+
+#: main/templates/main/base.html:322
+#, fuzzy
+#| msgid "Your username"
+msgid "Forgot Username?"
+msgstr "Your username"
 
 #: main/templates/main/base_copy.html:100
 msgid "Upload Options"
@@ -1960,24 +1939,15 @@ msgstr ""
 msgid "Django Admin"
 msgstr ""
 
-#: main/templates/main/details/author_detail.html:8
-#: main/templates/main/details/author_detail.html:14
-#| msgid "Subscribe"
-msgid "Scribe"
-msgstr ""
-
 #: main/templates/main/details/author_detail.html:20
-#| msgid "Information about this author"
 msgid "Information about this Scribe"
 msgstr ""
 
 #: main/templates/main/details/author_detail.html:24
-#| msgid "Unsubscribe from this user"
 msgid "Unsubscribe from this scribe"
 msgstr ""
 
 #: main/templates/main/details/author_detail.html:26
-#| msgid "Subscribe to this document"
 msgid "Subscribe to this scribe"
 msgstr ""
 
@@ -1993,40 +1963,30 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/details/author_detail.html:38
-#| msgid "Documents from this author"
 msgid "Documents from this Scribe"
 msgstr ""
 
 #: main/templates/main/details/author_list.html:8
-#| msgid "Browse Source Types"
 msgid "Browse Scribes"
 msgstr ""
 
 #: main/templates/main/details/browse_options.html:7
-#| msgid "Browse Options"
 msgid "Browse Collection"
 msgstr ""
 
 #: main/templates/main/details/browse_options.html:17
 #: main/templates/main/upload/upload_options.html:26
 #: main/templates/main/upload/upload_options_copy.html:20
-#| msgid "How do you want to proceed?"
 msgid "How Do You Want to Proceed?"
 msgstr ""
 
 #: main/templates/main/details/browse_options.html:22
-#| msgid ""
-#| "Institutions are holders of documents such as archives, collections or "
-#| "libraries."
 msgid ""
 "Institutions are holders of documents. Archives, collections or libraries "
 "for example."
 msgstr ""
 
 #: main/templates/main/details/browse_options.html:31
-#| msgid ""
-#| "Each document has an assigned type. This is a classification of the "
-#| "documents nature, such as Vitae, historiographical sources, etc."
 msgid ""
 "Each document has an assigned type. This is a classification of the document "
 "content and structure. Letters, Sermons or Historiographic Writings for "
@@ -2035,8 +1995,8 @@ msgstr ""
 
 #: main/templates/main/details/browse_options.html:40
 msgid ""
-"Each document has a scribe associated with it. This is the scribe of the "
-"actual source, not the creator of the transcription."
+"Each document has one or more scribes associated with it. These are the "
+"scribes of the actual source, not the creators of the transcription."
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:26
@@ -2047,11 +2007,6 @@ msgstr ""
 
 #: main/templates/main/details/document_detail.html:29
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                    (This is you. Check your <a href=\"%(profile_url)s"
-#| "\">Private Profile</a>)\n"
-#| "                    "
 msgid ""
 "\n"
 "                    This is not the <a href=\"%(url)s\">newest version</a> "
@@ -2090,20 +2045,19 @@ msgid "Export Document"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:66
-#: main/templates/main/upload/create_document.html:83
+#: main/templates/main/upload/create_document.html:85
 #: main/templates/main/upload/edit_meta.html:31
-#| msgid "Content Meta Data"
 msgid "Content Metadata"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:70
-#: main/templates/main/upload/create_document.html:106
+#: main/templates/main/upload/create_document.html:108
 #: main/templates/main/upload/edit_meta.html:78
 msgid "Manuscript Description"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:74
-#: main/templates/main/upload/create_document.html:116
+#: main/templates/main/upload/create_document.html:118
 msgid "Comments and Links"
 msgstr ""
 
@@ -2118,7 +2072,6 @@ msgid "Versions"
 msgstr ""
 
 #: main/templates/main/details/institution_detail.html:20
-#| msgid "About the institution"
 msgid "About this Institution"
 msgstr ""
 
@@ -2131,7 +2084,6 @@ msgid "Subscribe to this institution"
 msgstr ""
 
 #: main/templates/main/details/institution_detail.html:37
-#| msgid "Reference Numbers in this institution"
 msgid "Reference Numbers in this Institution"
 msgstr ""
 
@@ -2144,7 +2096,6 @@ msgid "Ref. No."
 msgstr ""
 
 #: main/templates/main/details/ref_number_detail.html:23
-#| msgid "Information about the reference number"
 msgid "Information about this Reference Number"
 msgstr ""
 
@@ -2157,40 +2108,41 @@ msgid "Subscribe to this reference number"
 msgstr ""
 
 #: main/templates/main/details/ref_number_detail.html:41
-#| msgid "Documents with this reference number"
 msgid "Documents with this Reference Number"
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:8
-#: main/templates/main/details/source_type_parent_detail.html:8
-msgid "Browse Source Type:"
+#: main/templates/main/details/source_type_child_detail.html:9
+#, python-format
+msgid ""
+"\n"
+"        Browse Source Type %(selected_type_name)s\n"
+"    "
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:24
+#: main/templates/main/details/source_type_child_detail.html:27
 #: main/templates/main/details/source_type_list.html:20
-#| msgid "Select A Source Type to see its children."
 msgid "Click a source type to view their child source types."
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:44
-#: main/templates/main/details/source_type_list.html:40
+#: main/templates/main/details/source_type_child_detail.html:48
+#: main/templates/main/details/source_type_list.html:41
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                        Welcome, %(username)s\n"
-#| "                    "
 msgid ""
 "\n"
 "                                            All in %(type_name)s\n"
 "                                        "
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:64
+#: main/templates/main/details/source_type_child_detail.html:69
 msgid "Documents with type"
 msgstr ""
 
 #: main/templates/main/details/source_type_list.html:8
 msgid "Browse Source Types"
+msgstr ""
+
+#: main/templates/main/details/source_type_parent_detail.html:8
+msgid "Browse Source Type:"
 msgstr ""
 
 #: main/templates/main/details/source_type_parent_detail.html:19
@@ -2203,10 +2155,6 @@ msgstr ""
 
 #: main/templates/main/document_filter.html:7
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                Type your answer to <strong>%(reply_email)s</strong>\n"
-#| "            "
 msgid ""
 "\n"
 "                        You filtered the table. It now contains <strong>"
@@ -2216,10 +2164,6 @@ msgstr ""
 
 #: main/templates/main/document_filter.html:11
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                Type your answer to <strong>%(reply_email)s</strong>\n"
-#| "            "
 msgid ""
 "\n"
 "                        This table contains a total of <strong>"
@@ -2236,7 +2180,6 @@ msgstr ""
 
 #: main/templates/main/document_filter.html:28
 #: main/templates/main/document_filter.html:29
-#| msgid "Creation Location"
 msgid "Filter by Creation Location"
 msgstr ""
 
@@ -2244,7 +2187,6 @@ msgstr ""
 #: main/templates/main/search/search_form.html:42
 #: main/templates/main/search/search_form_copy.html:46
 #: main/templates/main/search/search_form_copy2.html:60
-#| msgid "First level Source Type"
 msgid "Filter by Source Type"
 msgstr ""
 
@@ -2311,7 +2253,6 @@ msgid "Contact"
 msgstr ""
 
 #: main/templates/main/info/contact.html:21
-#| msgid "Write us a message"
 msgid "Write us a Message"
 msgstr ""
 
@@ -2334,7 +2275,6 @@ msgstr ""
 #: main/templates/main/info/guidelines.html:13
 #: main/templates/main/info/guidelines.html:20
 #: main/templates/main/info/info_options.html:7
-#| msgid "Institutions"
 msgid "Instructions"
 msgstr ""
 
@@ -2352,7 +2292,6 @@ msgid "Terms Of Service"
 msgstr ""
 
 #: main/templates/main/info/start.html:28
-#| msgid "The place to transcribe historical manuscripts"
 msgid "Create, share and access transcriptions of historical manuscripts"
 msgstr ""
 
@@ -2383,11 +2322,6 @@ msgstr ""
 
 #: main/templates/main/info/start.html:68
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                    (This is you. Check your <a href=\"%(profile_url)s"
-#| "\">Private Profile</a>)\n"
-#| "                    "
 msgid ""
 "\n"
 "                                Please click <a href=\"%(url_unsub)s\" class="
@@ -2424,7 +2358,6 @@ msgid "User Account"
 msgstr ""
 
 #: main/templates/main/info/tos.html:20
-#| msgid "Our Terms Of Service"
 msgid "Our Terms of Service"
 msgstr ""
 
@@ -2473,7 +2406,6 @@ msgstr ""
 #: main/templates/main/search/search_form.html:7
 #: main/templates/main/search/search_form_copy.html:6
 #: main/templates/main/search/search_form_copy2.html:7
-#| msgid "Full Text Search"
 msgid "Fulltext search"
 msgstr ""
 
@@ -2487,7 +2419,6 @@ msgstr ""
 #: main/templates/main/search/search_form.html:15
 #: main/templates/main/search/search_form_copy2.html:14
 #: main/templates/main/search/search_form_copy2.html:15
-#| msgid "Document Title"
 msgid "Filter by Document Title"
 msgstr ""
 
@@ -2495,7 +2426,6 @@ msgstr ""
 #: main/templates/main/search/search_form.html:22
 #: main/templates/main/search/search_form_copy2.html:27
 #: main/templates/main/search/search_form_copy2.html:28
-#| msgid "Reference Number or Title contain"
 msgid "Search by Reference Name"
 msgstr ""
 
@@ -2505,7 +2435,6 @@ msgstr ""
 #: main/templates/main/search/search_form_2.html:39
 #: main/templates/main/search/search_form_copy2.html:38
 #: main/templates/main/search/search_form_copy2.html:39
-#| msgid "Reference Number or Title contain"
 msgid "Search by Reference Title"
 msgstr ""
 
@@ -2517,13 +2446,11 @@ msgstr ""
 #: main/templates/main/search/search_form_copy.html:50
 #: main/templates/main/search/search_form_copy2.html:63
 #: main/templates/main/search/search_form_copy2.html:64
-#| msgid "Creation Location"
 msgid "Search by Location"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:8
 #: main/templates/main/search/search_form_2.html:10
-#| msgid "Full Text Search"
 msgid "Full-text search"
 msgstr ""
 
@@ -2539,12 +2466,10 @@ msgstr ""
 
 #: main/templates/main/search/search_form_2.html:17
 #: main/templates/main/search/search_form_2.html:18
-#| msgid "Document Title"
 msgid "Search by Document Title"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:19
-#| msgid "Document Title"
 msgid "Search by document title"
 msgstr ""
 
@@ -2558,38 +2483,31 @@ msgstr ""
 
 #: main/templates/main/search/search_form_2.html:23
 #: main/templates/main/search/search_form_2.html:24
-#| msgid "Browse by Institution"
 msgid "Search by Institution"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:25
-#| msgid "Browse by Institution"
 msgid "Search by institution"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:31
 #: main/templates/main/search/search_form_2.html:32
-#| msgid "Reference Number or Title contain"
 msgid "Search by Reference Number"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:33
-#| msgid "Reference Number or Title contain"
 msgid "Search by reference number"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:40
-#| msgid "Reference Number or Title contain"
 msgid "Search by title of reference number"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:56
-#| msgid "First level Source Type"
 msgid "Search by Source Type"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:57
-#| msgid "First level Source Type"
 msgid "Search by source zype"
 msgstr ""
 
@@ -2598,7 +2516,6 @@ msgid "Choose an source type to search by."
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:63
-#| msgid "Creation Location"
 msgid "Search by location"
 msgstr ""
 
@@ -2607,7 +2524,6 @@ msgid "Restrict Results to Sealed and/or Illuminated Documents"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:95
-#| msgid "Illuminations"
 msgid "Illuminations and seals"
 msgstr ""
 
@@ -2622,7 +2538,6 @@ msgid "Earliest and Latest Year of Creation"
 msgstr ""
 
 #: main/templates/main/search/search_form_2.html:100
-#| msgid "Creation Location"
 msgid "Creation Date"
 msgstr ""
 
@@ -2642,17 +2557,14 @@ msgstr ""
 
 #: main/templates/main/search/search_form_copy.html:24
 #: main/templates/main/search/search_form_copy.html:25
-#| msgid "Reference Number or Title contain"
 msgid "Search by Reference Number or Title"
 msgstr ""
 
 #: main/templates/main/search/search_view.html:21
-#| msgid "Simple search"
 msgid "Simple Search"
 msgstr ""
 
 #: main/templates/main/search/search_view.html:26
-#| msgid "Advanced search"
 msgid "Advanced Search"
 msgstr ""
 
@@ -2660,7 +2572,6 @@ msgstr ""
 #: main/templates/main/search/search_view.html:51
 #: main/templates/main/search/search_view_2.html:23
 #: main/templates/main/search/search_view_3.html:23
-#| msgid "Search Result"
 msgid "Search Results"
 msgstr ""
 
@@ -2674,7 +2585,7 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/search/search_view_2.html:121
-#: main/templates/main/search/search_view_3.html:121
+#: main/templates/main/search/search_view_3.html:125
 msgid ""
 "Please enter a search term above. It needs to be at least 3 characters long."
 msgstr ""
@@ -2717,23 +2628,24 @@ msgid "Upload Large Amount Of Transcriptions"
 msgstr ""
 
 #: main/templates/main/upload/create_batch_contact.html:20
-#| msgid ""
-#| "We would like to help you, to bring your transcriptions online as easy as "
-#| "possible. Please fill out the following form and we'll be in touch!"
 msgid ""
 "We would like to help you bring your transcriptions online as easy as "
 "possible. Please fill out the following form and we'll be in touch!"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:23
+#: main/templates/main/upload/create_document.html:25
 msgid "Required Information"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:129
-msgid "Upload Your Transcription"
+#: main/templates/main/upload/create_document.html:50
+msgid "Add"
 msgstr ""
 
 #: main/templates/main/upload/create_document.html:131
+msgid "Upload Your Transcription"
+msgstr ""
+
+#: main/templates/main/upload/create_document.html:133
 msgid "If you're done entering your information, you can upload the document."
 msgstr ""
 
@@ -2763,12 +2675,17 @@ msgid ""
 "    "
 msgstr ""
 
-#: main/templates/main/upload/edit_document_transcription.html:31
-#: main/templates/main/upload/edit_meta.html:92
+#: main/templates/main/upload/edit_document_transcription.html:30
+#: main/templates/main/upload/edit_meta.html:88
+msgid "Document your changes"
+msgstr ""
+
+#: main/templates/main/upload/edit_document_transcription.html:35
+#: main/templates/main/upload/edit_meta.html:93
 msgid "Save Your Changes"
 msgstr ""
 
-#: main/templates/main/upload/edit_document_transcription.html:33
+#: main/templates/main/upload/edit_document_transcription.html:37
 msgid "If you're done updating the transcription, you can save the document."
 msgstr ""
 
@@ -2776,11 +2693,7 @@ msgstr ""
 msgid "Edit metadata"
 msgstr ""
 
-#: main/templates/main/upload/edit_meta.html:88
-msgid "Document your changes"
-msgstr ""
-
-#: main/templates/main/upload/edit_meta.html:94
+#: main/templates/main/upload/edit_meta.html:95
 msgid "If you're done changing the metadata, you can save the document."
 msgstr ""
 
@@ -2809,7 +2722,6 @@ msgid "Thank you!"
 msgstr ""
 
 #: main/templates/main/upload/thank_you.html:12
-#| msgid "Thank you for your contribution"
 msgid "Thank You for Your Contribution"
 msgstr ""
 
@@ -2822,12 +2734,10 @@ msgid "View Uploaded Document"
 msgstr ""
 
 #: main/templates/main/upload/thank_you.html:16
-#| msgid "View Your Profile"
 msgid "View your Profile"
 msgstr ""
 
 #: main/templates/main/upload/thank_you.html:17
-#| msgid "Upload another document"
 msgid "Upload another Document"
 msgstr ""
 
@@ -2846,7 +2756,6 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/upload/upload_options.html:30
-#| msgid "Merge Documents"
 msgid "Single Document"
 msgstr ""
 
@@ -2856,7 +2765,6 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/upload/upload_options.html:34
-#| msgid "Upload Multiple Documents"
 msgid "Upload Single Document"
 msgstr ""
 
@@ -2892,7 +2800,6 @@ msgid "Coming Soon!"
 msgstr ""
 
 #: main/templates/main/users/account_activation_invalid.html:16
-#| msgid "Invalid link"
 msgid "Invalid Link"
 msgstr ""
 
@@ -2901,14 +2808,10 @@ msgid "This activation link is invalid."
 msgstr ""
 
 #: main/templates/main/users/account_activation_sent.html:16
-#| msgid "Registration Email sent"
 msgid "Registration Email Sent"
 msgstr ""
 
 #: main/templates/main/users/account_activation_sent.html:18
-#| msgid ""
-#| "You have been successfully registered. You will receive a confirmation e-"
-#| "mail shortly."
 msgid ""
 "You have been successfully registered. You will receive a confirmation email "
 "shortly."
@@ -2956,22 +2859,21 @@ msgid ""
 "    If you did not try to reset your password, you can ignore this email.\n"
 msgstr ""
 
+#: main/templates/main/users/email_templates/password_reset_subject.txt:2
+msgid "Transcriptiones: Passwort zurücksetzen"
+msgstr ""
+
 #: main/templates/main/users/login.html:18
-#| msgid "Login To Your Account"
 msgid "Login to Your Account"
 msgstr ""
 
 #: main/templates/main/users/login.html:23
-#| msgid ""
-#| "Your account has no access to this page. Please login with adifferent "
-#| "account."
 msgid ""
 "Your account has no access to this page. Please login with a different "
 "account."
 msgstr ""
 
 #: main/templates/main/users/login.html:27
-#| msgid "You need to be logged in, to view the requested page."
 msgid "You need to be logged in to view the requested page."
 msgstr ""
 
@@ -3004,7 +2906,6 @@ msgid "Logged out"
 msgstr ""
 
 #: main/templates/main/users/logout.html:16
-#| msgid "Logged out"
 msgid "Logged Out"
 msgstr ""
 
@@ -3013,7 +2914,6 @@ msgid "You have been securely logged out."
 msgstr ""
 
 #: main/templates/main/users/logout.html:19
-#| msgid "Go To Main Page"
 msgid "Go to Main Page"
 msgstr ""
 
@@ -3023,18 +2923,15 @@ msgstr ""
 
 #: main/templates/main/users/messages.html:24
 #: main/templates/main/users/notifications.html:24
-#| msgid "Your Inbox"
 msgid "Your Inbox"
 msgstr ""
 
 #: main/templates/main/users/messages.html:27
-#| msgid "Delete All Messages"
 msgid "Delete all Messages"
 msgstr ""
 
 #: main/templates/main/users/messages.html:36
 #: main/templates/main/users/notifications.html:33
-#| msgid "Your e-mail notification options"
 msgid "Your Email Notification Options"
 msgstr ""
 
@@ -3080,7 +2977,6 @@ msgid "Change password"
 msgstr ""
 
 #: main/templates/main/users/password_change_done.html:18
-#| msgid "Password changed"
 msgid "Password Changed"
 msgstr ""
 
@@ -3093,7 +2989,6 @@ msgid "Go back to main page"
 msgstr ""
 
 #: main/templates/main/users/password_reset.html:18
-#| msgid "Reset Your Password"
 msgid "Reset Your Password"
 msgstr ""
 
@@ -3104,7 +2999,6 @@ msgstr ""
 
 #: main/templates/main/users/password_reset_complete.html:17
 #: main/templates/main/users/password_reset_done.html:17
-#| msgid "Your Password Has Been Reset"
 msgid "Your Password Has Been Reset"
 msgstr ""
 
@@ -3117,14 +3011,10 @@ msgid "Set New Password"
 msgstr ""
 
 #: main/templates/main/users/password_reset_confirm.html:18
-#| msgid "Set New Password"
 msgid "Set a New Password"
 msgstr ""
 
 #: main/templates/main/users/password_reset_done.html:18
-#| msgid ""
-#| "Your password has been reset successfully. You'll receive an email with a "
-#| "reset link shortly."
 msgid ""
 "Your password has been reset successfully. You will receive an email with a "
 "reset link shortly."
@@ -3135,17 +3025,11 @@ msgid "User "
 msgstr ""
 
 #: main/templates/main/users/public_user_profile.html:19
-#| msgid "User Data"
 msgid "User Data"
 msgstr ""
 
 #: main/templates/main/users/public_user_profile.html:25
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                    (This is you. Check your <a href=\"%(profile_url)s"
-#| "\">Private Profile</a>)\n"
-#| "                    "
 msgid ""
 "\n"
 "                    (This is you. Check your <a href=\"%(profile_url)s"
@@ -3167,7 +3051,6 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/users/public_user_profile.html:46
-#| msgid "User Activity"
 msgid "User Activity"
 msgstr ""
 
@@ -3176,7 +3059,6 @@ msgid "Read Message"
 msgstr ""
 
 #: main/templates/main/users/read_message.html:22
-#| msgid "Your Message:"
 msgid "Your Message"
 msgstr ""
 
@@ -3185,7 +3067,6 @@ msgid "Reply"
 msgstr ""
 
 #: main/templates/main/users/read_message.html:36
-#| msgid "Go To Inbox"
 msgid "Go to Inbox"
 msgstr ""
 
@@ -3211,7 +3092,6 @@ msgid "Username Request"
 msgstr ""
 
 #: main/templates/main/users/request_username.html:14
-#| msgid "Request Username"
 msgid "Request username"
 msgstr ""
 
@@ -3221,7 +3101,6 @@ msgid "You are already signed in."
 msgstr ""
 
 #: main/templates/main/users/request_username_done.html:17
-#| msgid "Your Username Has Been Reset"
 msgid "Your Username Has Been Reset"
 msgstr ""
 
@@ -3245,16 +3124,12 @@ msgid "Unsubscribe from all"
 msgstr ""
 
 #: main/templates/main/users/subscriptions.html:29
-#| msgid ""
-#| "You have no subscriptions. You can subscribe to institutions, documents, "
-#| "reference numbers, authors and users on the respective pages."
 msgid ""
 "You have no subscriptions. You can subscribe to institutions, documents, "
 "reference numbers, scribes and users on the respective pages."
 msgstr ""
 
 #: main/templates/main/users/subscriptions.html:33
-#| msgid "Your subscription options"
 msgid "Your Subscription Options"
 msgstr ""
 
@@ -3272,7 +3147,6 @@ msgid "Update Profile"
 msgstr ""
 
 #: main/templates/main/users/update_user.html:23
-#| msgid "Update Your User Information"
 msgid "Update Your User Information"
 msgstr ""
 
@@ -3359,7 +3233,6 @@ msgid "User Profile"
 msgstr ""
 
 #: main/templates/main/users/user_profile.html:21
-#| msgid "My Personal Data"
 msgid "My Personal Data"
 msgstr ""
 
@@ -3373,8 +3246,6 @@ msgid "Generate An API Key"
 msgstr ""
 
 #: main/templates/main/users/user_profile.html:26
-#| msgid ""
-#| "Your API key is valid for a month. You can renew it for another month:"
 msgid "API keys are valid for one month. You can renew it for another month:"
 msgstr ""
 
@@ -3387,7 +3258,6 @@ msgid "Delete API Key"
 msgstr ""
 
 #: main/templates/main/users/user_profile.html:30
-#| msgid "My Activity"
 msgid "My Activity"
 msgstr ""
 
@@ -3396,7 +3266,6 @@ msgid "Write Message"
 msgstr ""
 
 #: main/templates/main/users/write_message.html:21
-#| msgid "Write A Message"
 msgid "Write a Message"
 msgstr ""
 
@@ -3428,20 +3297,23 @@ msgstr ""
 msgid "User set to admin"
 msgstr ""
 
-#: main/views/views_browse.py:233
-#| msgid "The transcription did not change. No new version saved."
+#: main/views/views_browse.py:234
 msgid "The transcription version you requested is not available."
 msgstr ""
 
-#: main/views/views_edit.py:30
+#: main/views/views_browse.py:259
+msgid "Static version URL"
+msgstr ""
+
+#: main/views/views_edit.py:31
 msgid "The document has been updated."
 msgstr ""
 
-#: main/views/views_edit.py:36
+#: main/views/views_edit.py:37
 msgid "The transcription did not change. No new version saved."
 msgstr ""
 
-#: main/views/views_edit.py:81
+#: main/views/views_edit.py:90
 msgid "The metadata of the document has been updated."
 msgstr ""
 
@@ -3490,17 +3362,15 @@ msgstr ""
 msgid "All messages have been deleted."
 msgstr ""
 
-#: main/views/views_search.py:86
-#| msgid "Please enter at least a search query or a title or a location."
+#: main/views/views_search_copy.py:162
 msgid "Please enter at least a search query or a title or a reference title."
 msgstr ""
 
-#: main/views/views_search.py:190
+#: main/views/views_search_copy.py:266
 msgid "There are errors in your search form"
 msgstr ""
 
 #: main/views/views_subscriptions.py:24
-#| msgid "Your user information has been updated"
 msgid "Your Subscription Options have been updated"
 msgstr ""
 
@@ -3546,11 +3416,11 @@ msgstr ""
 msgid "There is an error in your form"
 msgstr ""
 
-#: main/views/views_upload.py:110
+#: main/views/views_upload.py:108
 msgid "Success: Institution was created."
 msgstr ""
 
-#: main/views/views_upload.py:125
+#: main/views/views_upload.py:123
 msgid "Success: RefNumber was created."
 msgstr ""
 
@@ -3563,7 +3433,6 @@ msgid "Your user information has been updated"
 msgstr ""
 
 #: main/views/views_user.py:197
-#| msgid "This e-mail address is not registered."
 msgid "This email address is not registered."
 msgstr ""
 
@@ -3610,11 +3479,6 @@ msgstr ""
 #~| msgid "Your Message"
 #~ msgid "Your message"
 #~ msgstr "Your Message"
-
-#, fuzzy
-#~| msgid "Your notifications"
-#~ msgid "Your notification"
-#~ msgstr "Your notifications"
 
 #, fuzzy
 #~| msgid "Write us a message"
@@ -3705,9 +3569,6 @@ msgstr ""
 #~ "If you are looking for a certain creator of a document, you can browse by "
 #~ "author."
 
-#~ msgid "Second Level Source Types"
-#~ msgstr "Second Level Source Types"
-
 #~ msgid ""
 #~ "Select A Source Type to see documents of this type or go up one level."
 #~ msgstr ""
@@ -3736,9 +3597,6 @@ msgstr ""
 
 #~ msgid "Edit transcription"
 #~ msgstr "Edit transcription"
-
-#~ msgid "Institutions list"
-#~ msgstr "Institutions list"
 
 #~ msgid "Required fields"
 #~ msgstr "Required fields"
@@ -3820,9 +3678,6 @@ msgstr ""
 
 #~ msgid "We will contact you with this email address."
 #~ msgstr "We will contact you with this email address."
-
-#~ msgid "Your username"
-#~ msgstr "Your username"
 
 #~ msgid "Uploaded"
 #~ msgstr "Uploaded"

@@ -2,7 +2,7 @@
 edit the meta data and the transcription itself"""
 from dal import autocomplete
 from django import forms
-from main.forms.forms_helper import initialize_form_helper
+from main.forms.forms_helper import initialize_form_helper, get_popover_html
 from main.models import Document, Author, Language, SourceType
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +16,12 @@ class EditTranscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ('transcription_text', 'commit_message')
+        fields = ('transcription_text', 'commit_message', 'publish_user')
+
+        labels = {
+            'commit_message': get_popover_html(Document, 'commit_message'),
+            'publish_user': get_popover_html(Document, 'publish_user'),
+        }
 
 
 class EditMetaForm(forms.ModelForm):
@@ -50,3 +55,20 @@ class EditMetaForm(forms.ModelForm):
         model = Document
         exclude = ('title_name', 'parent_ref_number', 'transcription_text', 'institution_utc_add',
                    'document_slug', 'version_number')
+
+        labels = {
+            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
+            'doc_start_date': get_popover_html(Document, 'doc_start_date'),
+            'doc_end_date': get_popover_html(Document, 'doc_end_date'),
+            'place_name': get_popover_html(Document, 'place_name'),
+            'transcription_text': get_popover_html(Document, 'transcription_text'),
+            'material': get_popover_html(Document, 'material'),
+            'measurements_width': get_popover_html(Document, 'measurements_width'),
+            'measurements_length': get_popover_html(Document, 'measurements_length'),
+            'pages': get_popover_html(Document, 'pages'),
+            'paging_system': get_popover_html(Document, 'paging_system'),
+            'illuminated': get_popover_html(Document, 'illuminated'),
+            'seal': get_popover_html(Document, 'seal'),
+            'commit_message': get_popover_html(Document, 'commit_message'),
+            'publish_user': get_popover_html(Document, 'publish_user'),
+        }

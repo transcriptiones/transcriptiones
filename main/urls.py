@@ -30,7 +30,7 @@ urlpatterns = [
     ##############
     # INFO PAGES
     path('info/', TemplateView.as_view(template_name='main/info/blank.html'), name='info'),
-    path('info/instructions/', TemplateView.as_view(template_name='main/info/guidelines.html'), name='guidelines'),
+    path('info/instructions/', v_info.guidelines_view, name='guidelines'),
     path('info/tos/',        TemplateView.as_view(template_name='main/info/tos.html'),        name='tos'),
     path('info/about/',      TemplateView.as_view(template_name='main/info/about.html'),      name='about'),
     path('info/contact/', v_info.contact_view, name='contact'),

@@ -94,11 +94,12 @@ def get_ref_number_info(ref_number):
 def get_last_change_string(document):
     if document.publish_user:
         profile_url = reverse("main:public_profile", kwargs={"username": document.submitted_by.username})
-        update_text = mark_safe(f'<small>by <a href="{profile_url}">{document.submitted_by}</a> '
-                                f'at {document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+        update_text = mark_safe(format_lazy(_('<small>by <a href="{profile_url}">{submitted_by}</a> at {time}</small>'),
+                                profile_url=profile_url, submitted_by=document.submitted_by,
+                                time=document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")))
     else:
-        update_text = mark_safe(f'<small>by anonymous '
-                                f'at {document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")}</small>')
+        update_text = mark_safe(format_lazy(_('<small>by anonymous at {time}</small>'),
+                                            time=document.document_utc_add.strftime("%Y-%m-%d %H:%M:%S")))
     return update_text
 
 
@@ -215,9 +216,10 @@ def get_extended_help_text(model, field):
     # Document
     if model_name == 'document':
         if field == 'title_name':
-
-            help_text = get_title_text_format(_('Title of the document'), _('Use the original document\'s title if '
-                                                                            'possible, use own title otherwise.'))
+            help_text = get_title_text_format(_('Title of the document'), _('Title of the source document, which is '
+                                                                            'transcribed here. Use the original '
+                                                                            'document\'s title if possible, use an own '
+                                                                            'title otherwise.'))
         elif field == 'parent_institution':
             help_text = get_title_text_format(_('Institution which holds the manuscript'), _('If the institution is '
                                                                                              'not in the list, you may '
@@ -280,8 +282,8 @@ def get_extended_help_text(model, field):
                                                                                           'listing if you choose so.'))
         elif field == 'commit_message':
             help_text = get_title_text_format(_('Brief description of changes'), _('Please supply a brief description '
-                                                                                   'of the changes you made. Example: '
-                                                                                   '"Corrected typo", "Added scribes", '
+                                                                                   'of the changes you made. Examples: '
+                                                                                   'Corrected typo, Added scribes, '
                                                                                    'etc.'))
         elif field == 'measurements_length':
             help_text = get_title_text_format(_('Length of the document'), _('Optional field. Please write down the length '
@@ -317,11 +319,13 @@ def get_extended_help_text(model, field):
             help_text = get_title_text_format(_('Reference Number'), _('Reference Number as it is supplied by the '
                                                                        'institution.'))
         elif field == 'ref_number_title':
-            help_text = get_title_text_format(_('Title of collection'), _('Reference numbers normally have a title. '
+            help_text = get_title_text_format(_('Title of collection'), _('Reference numbers usually have a title. '
                                                                           'Please supply the complete title. '
                                                                           'If the institution does not supply a title '
                                                                           'for this reference number, you may supply '
-                                                                          'your own descriptive title.'))
+                                                                          'an own descriptive title. Please note '
+                                                                          'that this might not be the same as the '
+                                                                          'title of the transcribed document.'))
         elif field == 'collection_link':
             help_text = get_title_text_format(_('Collection link'), _('Optional Field. Direct link to the collection in '
                                                                       'the institution\'s catalog. Must start with http:// '
