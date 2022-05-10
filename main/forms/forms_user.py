@@ -6,6 +6,7 @@ from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
+
 from main.models import User, UserMessage
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
@@ -69,7 +70,21 @@ class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 
     email = forms.EmailField(label=get_popover_html(User, 'email'), max_length=255,
-                             help_text=_('E-Mail-Address. We will send an activation Link to this address.'))
+                             help_text=_('E-Mail-Address. We will send an activation link to this address.'))
+
+    password1 = forms.CharField(
+        label=get_popover_html(User, 'password1'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Choose your transcriptiones password.'),
+    )
+
+    password2 = forms.CharField(
+        label=get_popover_html(User, 'password2'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Enter the same password as before, for verification.'),
+    )
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -96,7 +111,8 @@ class SignUpForm(UserCreationForm):
             'first_name': get_popover_html(User, 'first_name'),
             'last_name': get_popover_html(User, 'last_name'),
             'user_orcid': get_popover_html(User, 'user_orcid'),
-            'mark_anonymous': get_popover_html(User, 'mark_anonymous')
+            'mark_anonymous': get_popover_html(User, 'mark_anonymous'),
+            'ui_language': get_popover_html(User, 'ui_language'),
         }
 
 
@@ -112,6 +128,26 @@ class LoginForm(AuthenticationForm):
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     """Form to change a user's password"""
+    old_password = forms.CharField(
+        label=get_popover_html(User, 'old_password'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
+        help_text=_('Enter your old transcriptiones password.')
+    )
+
+    new_password1 = forms.CharField(
+        label=get_popover_html(User, 'new_password1'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Set a new password for transcriptiones.'),
+    )
+
+    new_password2 = forms.CharField(
+        label=get_popover_html(User, 'new_password2'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Enter the same password as before, for verification.'),
+    )
 
     def __init__(self, *args, **kwargs):
         super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
@@ -161,6 +197,21 @@ class CustomPasswordResetForm(PasswordResetForm):
 
 
 class CustomSetPasswordForm(SetPasswordForm):
+
+    new_password1 = forms.CharField(
+        label=get_popover_html(User, 'new_password1'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Set a new password for transcriptiones.'),
+    )
+
+    new_password2 = forms.CharField(
+        label=get_popover_html(User, 'new_password2'),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text=_('Enter the same password as before, for verification.'),
+    )
+
     """Form to set a password"""
     def __init__(self, *args, **kwargs):
         super(CustomSetPasswordForm, self).__init__(*args, **kwargs)

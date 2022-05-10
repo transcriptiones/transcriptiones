@@ -1,13 +1,15 @@
 from uuid import UUID
 
 import dateutil.utils
+import six
+from django.contrib.auth.password_validation import password_validators_help_texts, password_validators_help_text_html
 from django.urls import reverse
-from django.utils.html import format_html
+from django.utils.functional import lazy
+from django.utils.html import format_html, format_html_join, strip_tags, escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.utils.text import format_lazy
 from datetime import date
-
 
 from main.models import Document
 
@@ -207,6 +209,15 @@ def get_title_text_format(title, text):
     # return "<b>{}</b><br/>{}".format(title, text)
 
 
+def _get_password_validator_text_format(password_validators=None):
+    help_texts = password_validators_help_texts(password_validators)
+    help_items = format_html_join(' ', '{}', ((help_text,) for help_text in help_texts))
+    return help_items
+
+
+get_password_validator_text_format = lazy(_get_password_validator_text_format, str)
+
+
 def get_extended_help_text(model, field):
     """Form fields have an extended help text with more information on what to put in the field. Those help texts are
     managed here."""
@@ -353,5 +364,16 @@ def get_extended_help_text(model, field):
             help_text = get_title_text_format(_('ORCID'), _('Optional Field. ORCID provides a persistent digital identifier that you '
                                                             'own and control, and that distinguishes you from every '
                                                             'other researcher.'))
+        elif field == 'ui_language':
+            help_text = get_title_text_format(_('Default website language'), _('Choose the default language in which '
+                                                                               'the transcriptiones web interface '
+                                                                               'will be presented to you. You can '
+                                                                               'change the language at any time.'))
+        elif field == 'password1' or field == 'new_password1':
+            help_text = get_title_text_format(_('Password'), get_password_validator_text_format())
+        elif field == 'password2' or field == 'new_password2':
+            help_text = get_title_text_format(_('Confirm password'), _('Enter the password again for confirmation.'))
+        elif field == 'old_password':
+            help_text = get_title_text_format(_('Your old password'), _('Enter your old password for verification.'))
 
     return help_text

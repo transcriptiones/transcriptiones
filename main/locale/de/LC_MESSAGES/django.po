@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 17:21+0200\n"
-"PO-Revision-Date: 2022-05-09 17:21+0200\n"
+"POT-Creation-Date: 2022-05-10 14:58+0200\n"
+"PO-Revision-Date: 2022-05-10 15:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -67,11 +67,31 @@ msgstr "Institution"
 msgid "Parent Source Type"
 msgstr "Quellentyp (erste Ebene)"
 
-#: main/forms/forms_helper.py:60
+#: main/forms/forms_helper.py:40 main/model_info.py:373
+msgid "Password"
+msgstr "Passwort"
+
+#: main/forms/forms_helper.py:42
+msgid "Confirm Password"
+msgstr "Passwort bestätigen"
+
+#: main/forms/forms_helper.py:44
+msgid "New Password"
+msgstr "Neues Passwort"
+
+#: main/forms/forms_helper.py:46
+msgid "Confirm New Password"
+msgstr "Neues Passwort bestätigen"
+
+#: main/forms/forms_helper.py:48
+msgid "Old password"
+msgstr "Altes Passwort"
+
+#: main/forms/forms_helper.py:70
 msgid "Child source type"
 msgstr "Quellentyp (zweite Ebene)"
 
-#: main/forms/forms_helper.py:62
+#: main/forms/forms_helper.py:72
 msgid "Parent source type"
 msgstr "Quellentyp (erste Ebene)"
 
@@ -94,7 +114,7 @@ msgid "Unsubscribe"
 msgstr "Abbestellen"
 
 #: main/forms/forms_info.py:51 main/forms/forms_upload.py:243
-#: main/forms/forms_user.py:23
+#: main/forms/forms_user.py:24
 msgid "Send Message"
 msgstr "Nachricht senden"
 
@@ -217,22 +237,31 @@ msgstr ""
 "Bitte beschreiben Sie die Dokumente, die Sie hochladen möchten. Seien Sie so "
 "spezifisch wie möglich"
 
-#: main/forms/forms_user.py:46 main/forms/forms_user.py:60
+#: main/forms/forms_user.py:47 main/forms/forms_user.py:61
 msgid "Save"
 msgstr "Speichern"
 
-#: main/forms/forms_user.py:72
-msgid "E-Mail-Address. We will send an activation Link to this address."
+#: main/forms/forms_user.py:73
+msgid "E-Mail-Address. We will send an activation link to this address."
 msgstr ""
 "E-Mail-Adresse. Wir werden einen Aktivierungslink an diese Adresse "
 "verschicken."
 
-#: main/forms/forms_user.py:77 main/templates/main/base.html:320
+#: main/forms/forms_user.py:79
+msgid "Choose your transcriptiones password."
+msgstr "Setzen Sie Ihr transcriptiones-Passwort."
+
+#: main/forms/forms_user.py:86 main/forms/forms_user.py:149
+#: main/forms/forms_user.py:212
+msgid "Enter the same password as before, for verification."
+msgstr "Wiederholen Sie zur Bestätigung das Password."
+
+#: main/forms/forms_user.py:92 main/templates/main/base.html:320
 #: main/templates/main/base_copy.html:128
 msgid "Register"
 msgstr "Registrieren"
 
-#: main/forms/forms_user.py:109 main/templates/main/base.html:318
+#: main/forms/forms_user.py:125 main/templates/main/base.html:318
 #: main/templates/main/base_copy.html:125 main/templates/main/sidebar.html:73
 #: main/templates/main/users/account_activation_invalid.html:7
 #: main/templates/main/users/account_activation_invalid.html:12
@@ -245,21 +274,29 @@ msgstr "Registrieren"
 msgid "Login"
 msgstr "Anmelden"
 
-#: main/forms/forms_user.py:126
+#: main/forms/forms_user.py:135
+msgid "Enter your old transcriptiones password."
+msgstr "Geben Sie Ihr altes transcriptiones-Passwort ein."
+
+#: main/forms/forms_user.py:142 main/forms/forms_user.py:205
+msgid "Set a new password for transcriptiones."
+msgstr "Setzen Sie ein neues Passwort für transcriptiones."
+
+#: main/forms/forms_user.py:162
 #: main/templates/main/upload/edit_document_transcription.html:38
 #: main/templates/main/upload/edit_meta.html:96
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: main/forms/forms_user.py:129
+#: main/forms/forms_user.py:165
 msgid "You cannot change your username"
 msgstr "Sie können Ihren Benutzernamen nicht ändern"
 
-#: main/forms/forms_user.py:130
+#: main/forms/forms_user.py:166
 msgid "You cannot change your email address"
 msgstr "Sie können Ihre E-Mail-Adresse nicht ändern"
 
-#: main/forms/forms_user.py:159 main/forms/forms_user.py:168
+#: main/forms/forms_user.py:195 main/forms/forms_user.py:219
 #: main/templates/main/users/password_reset.html:9
 #: main/templates/main/users/password_reset.html:14
 #: main/templates/main/users/password_reset_complete.html:12
@@ -268,11 +305,11 @@ msgstr "Sie können Ihre E-Mail-Adresse nicht ändern"
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: main/forms/forms_user.py:174
+#: main/forms/forms_user.py:225
 msgid "Your E-Mail Address"
 msgstr "Ihre E-Mail-Adresse"
 
-#: main/forms/forms_user.py:175
+#: main/forms/forms_user.py:226
 msgid ""
 "Please enter the e-mail address you registered with. We will send you an e-"
 "mail with your username."
@@ -280,7 +317,7 @@ msgstr ""
 "Bitte geben Sie die E-Mail-Adresse an, mit der Sie sich registriert haben. "
 "Wir werden Ihnen Ihren Benutzernamen an diese Adresse senden."
 
-#: main/forms/forms_user.py:181
+#: main/forms/forms_user.py:232
 #: main/templates/main/users/request_username.html:18
 #: main/templates/main/users/request_username_done.html:12
 msgid "Request Username"
@@ -420,7 +457,7 @@ msgstr "Eine Nachricht von transcriptiones.ch"
 msgid "You received a message:"
 msgstr "Sie haben eine Nachricht erhalten:"
 
-#: main/model_info.py:45
+#: main/model_info.py:47
 msgid ""
 "<small {\" style=color:red\" if api_auth_key_expired else \"\"}>({\"Expired"
 "\" if api_auth_key_expired else \"Expires\"} on {user."
@@ -430,74 +467,74 @@ msgstr ""
 "if api_auth_key_expired else “Läuft ab”} am {user.api_auth_key_expiration})</"
 "small>"
 
-#: main/model_info.py:53 main/tables/tables.py:26
+#: main/model_info.py:55 main/tables/tables.py:26
 msgid "User State"
 msgstr "Benutzerstatus"
 
-#: main/model_info.py:54 main/model_info.py:67 main/models.py:684
+#: main/model_info.py:56 main/model_info.py:69 main/models.py:684
 #: main/models.py:756
 msgid "Active"
 msgstr "Aktiv"
 
-#: main/model_info.py:66
+#: main/model_info.py:68
 msgid "Year joined"
 msgstr "Beigetreten im Jahr"
 
-#: main/model_info.py:74
+#: main/model_info.py:76
 msgid "Zip / City"
 msgstr "Plz / Ort"
 
-#: main/model_info.py:97 main/tables/tables_document.py:28
+#: main/model_info.py:99 main/tables/tables_document.py:28
 #, python-brace-format
 msgid ""
 "<small>by <a href=\"{profile_url}\">{submitted_by}</a> at {time}</small>"
 msgstr ""
 "<small>von <a href=“{profile_url}”>{submitted_by}</a> um {time}</small>"
 
-#: main/model_info.py:101 main/tables/tables_document.py:32
+#: main/model_info.py:103 main/tables/tables_document.py:32
 #, python-brace-format
 msgid "<small>by anonymous at {time}</small>"
 msgstr "<small>anonym um {time}</small>"
 
-#: main/model_info.py:113
+#: main/model_info.py:115
 msgid "Copy to clipboard"
 msgstr "In die Zwischenablage kopieren"
 
-#: main/model_info.py:125 main/model_info.py:139
+#: main/model_info.py:127 main/model_info.py:141
 #: main/tables/tables_document.py:86
 msgid "Last Change"
 msgstr "Letzte Änderung"
 
-#: main/model_info.py:126 main/model_info.py:140
+#: main/model_info.py:128 main/model_info.py:142
 msgid "Initial Upload"
 msgstr "Ursprünglich hochgeladen"
 
-#: main/model_info.py:132 main/model_info.py:194
+#: main/model_info.py:134 main/model_info.py:196
 #: main/tables/tables_document.py:102
 msgid "Anonymous"
 msgstr "Anonym"
 
-#: main/model_info.py:156 main/tables/tables_document.py:22
+#: main/model_info.py:158 main/tables/tables_document.py:22
 msgid "Creation Period"
 msgstr "Herstellungszeitraum"
 
-#: main/model_info.py:176
+#: main/model_info.py:178
 msgid "Measurements"
 msgstr "Abmessungen"
 
-#: main/model_info.py:177
+#: main/model_info.py:179
 msgid "(w/h)"
 msgstr "(b/h)"
 
-#: main/model_info.py:214
+#: main/model_info.py:225
 msgid "No help text found"
 msgstr "Kein Hilfetext gefunden"
 
-#: main/model_info.py:219
+#: main/model_info.py:230
 msgid "Title of the document"
 msgstr "Titel des Dokuments"
 
-#: main/model_info.py:219
+#: main/model_info.py:230
 msgid ""
 "Title of the source document, which is transcribed here. Use the original "
 "document's title if possible, use an own title otherwise."
@@ -506,39 +543,39 @@ msgstr ""
 "den Titel, wie er im Originaldokument verzeichnet ist. Geben Sie einen "
 "eigenen Titel an, falls das Originaldokument keinen Titel trägt."
 
-#: main/model_info.py:224
+#: main/model_info.py:235
 msgid "Institution which holds the manuscript"
 msgstr "Institution, die das Manuskript besitzt"
 
-#: main/model_info.py:224
+#: main/model_info.py:235
 msgid "If the institution is not in the list, you may create a new one."
 msgstr ""
 "Falls die Institution nicht in der Liste enthalten ist, können Sie eine neue "
 "erstellen."
 
-#: main/model_info.py:228
+#: main/model_info.py:239
 msgid "Reference number as indicated by the holding institution."
 msgstr "Signatur gemäss der betreffenden Institution."
 
-#: main/model_info.py:229
+#: main/model_info.py:240
 msgid "If the reference number is not in the list, you may create a new one."
 msgstr ""
 "Falls die Signatur nicht in der Liste enthalten ist, können Sie eine neue "
 "erstellen."
 
-#: main/model_info.py:232
+#: main/model_info.py:243
 msgid "Which parts of the manuscript have been transcribed?"
 msgstr "Welche Teile des Manuskripts wurden transkribiert?"
 
-#: main/model_info.py:233
+#: main/model_info.py:244
 msgid "E. g.: Entire Document, Fol. 3r - 10v, Chapter 10"
 msgstr "Z. B.: Gesamtes Dokument, Fols. 3r - 10v, Kapitel 10"
 
-#: main/model_info.py:235
+#: main/model_info.py:246
 msgid "Earliest creation date of the original manuscript"
 msgstr "Frühestes Herstellungsdatum des Originaldokuments"
 
-#: main/model_info.py:236
+#: main/model_info.py:247
 msgid ""
 "Only the year of creation is required. Please specify as precisely as "
 "possible."
@@ -546,11 +583,11 @@ msgstr ""
 "Es wird nur das Herstellungsjahr benötigt. Bitte geben Sie das Datum so "
 "genau wie möglich an."
 
-#: main/model_info.py:239
+#: main/model_info.py:250
 msgid "Latest creation date of the original manuscript"
 msgstr "Spätestes Herstellungsdatum des Originaldokuments"
 
-#: main/model_info.py:240
+#: main/model_info.py:251
 msgid ""
 "Optional field. Only the year of creation is required. Please specify as "
 "precisely as possible."
@@ -558,11 +595,11 @@ msgstr ""
 "Optionales Feld. Es wird nur das Herstellungsjahr benötigt. Bitte geben Sie "
 "das Datum so genau wie möglich an."
 
-#: main/model_info.py:243
+#: main/model_info.py:254
 msgid "Place of origin"
 msgstr "Herstellungsort"
 
-#: main/model_info.py:243
+#: main/model_info.py:254
 msgid ""
 "Where has the document been written? Supply a city name if possible, "
 "otherwise use country or region."
@@ -570,17 +607,17 @@ msgstr ""
 "Wo wurde das Dokument geschrieben? Geben Sie nach Möglichkeit eine Ortschaft "
 "an, ansonsten Land oder Region angeben."
 
-#: main/model_info.py:247 main/model_info.py:250
+#: main/model_info.py:258 main/model_info.py:261
 msgid "Type of the document"
 msgstr "Quellentyp"
 
-#: main/model_info.py:247
+#: main/model_info.py:258
 msgid "Which type best describes the source? First level of categorization."
 msgstr ""
 "Welche Quellentyp beschreibt das Originaldokument am besten? Erste Ebene der "
 "Kategorisierung."
 
-#: main/model_info.py:250
+#: main/model_info.py:261
 msgid ""
 "Which type best describes the source? Second level of categorization. Select "
 "a parent source type before filling out this field."
@@ -589,11 +626,11 @@ msgstr ""
 "der Kategorisierung. Füllen Sie die erste Ebene aus, bevor Sie dieses Feld "
 "ausfüllen."
 
-#: main/model_info.py:255
+#: main/model_info.py:266
 msgid "Transcription of the manuscript"
 msgstr "Transkription des Manuskripts"
 
-#: main/model_info.py:256
+#: main/model_info.py:267
 msgid ""
 "You can enter the transcription directly or copy your contentsfrom a Word or "
 "Excel file. Most formatting is preserved."
@@ -601,45 +638,45 @@ msgstr ""
 "Sie können die Transkription direkt eingeben oder Ihre Inhalte aus einer "
 "Word- oder Excel-Datei kopieren. Die meisten Formatierungen bleiben erhalten."
 
-#: main/model_info.py:259
+#: main/model_info.py:270
 msgid "Scribe(s) of the source"
 msgstr "Schreiber*innen des Originaldokuments"
 
-#: main/model_info.py:259
+#: main/model_info.py:270
 msgid "If a scribe is not in the list, you may create a new one."
 msgstr ""
 "Falls eine Person nicht in der Liste enthalten ist, können Sie eine neue "
 "hinzufügen."
 
-#: main/model_info.py:262
+#: main/model_info.py:273
 msgid "Used languages"
 msgstr "Verwendete Sprachen"
 
-#: main/model_info.py:262
+#: main/model_info.py:273
 msgid "Languages that are used in the source."
 msgstr "Sprachen, die in der Quelle verwendet werden."
 
-#: main/model_info.py:264
+#: main/model_info.py:275
 msgid "Material"
 msgstr "Material"
 
-#: main/model_info.py:264
+#: main/model_info.py:275
 msgid "Optional field. On what material is the manuscript written?"
 msgstr "Optionales Feld. Auf welchem Material ist das Manuskript geschrieben?"
 
-#: main/model_info.py:266
+#: main/model_info.py:277
 msgid "What page numbering system is used?"
 msgstr "Welches Seitennummerierungssystem wird verwendet?"
 
-#: main/model_info.py:266
+#: main/model_info.py:277
 msgid "Optional field. Are the pages foliated or paginated?"
 msgstr "Optionales Feld. Sind die Seiten foliiert oder paginiert?"
 
-#: main/model_info.py:269
+#: main/model_info.py:280
 msgid "Additional comments"
 msgstr "Weitere Kommentare"
 
-#: main/model_info.py:269
+#: main/model_info.py:280
 msgid ""
 "Optional field. You may enter any comments on the creation of the "
 "transcription or its contents. Here, you may also place links to external "
@@ -649,46 +686,46 @@ msgstr ""
 "Originaldokuments einfügen. Ausserdem können Sie hier Links zu externen "
 "Ressourcen wie Digitalisaten oder Editionen platzieren."
 
-#: main/model_info.py:274 main/models.py:418
+#: main/model_info.py:285 main/models.py:418
 msgid "Illuminations"
 msgstr "Illuminationen"
 
-#: main/model_info.py:274
+#: main/model_info.py:285
 msgid "Optional field. Are there illuminations on the document?"
 msgstr "Optionales Feld. Ist das Dokument illuminiert?"
 
-#: main/model_info.py:276
+#: main/model_info.py:287
 msgid "Seals"
 msgstr "Siegel"
 
-#: main/model_info.py:276
+#: main/model_info.py:287
 msgid "Optional field. Are there any seals on the document?"
 msgstr "Optionales Feld. Gibt es Siegel auf dem Dokument?"
 
-#: main/model_info.py:278 main/models.py:362
+#: main/model_info.py:289 main/models.py:362
 msgid "Number of pages"
 msgstr "Seitenzahl"
 
-#: main/model_info.py:278
+#: main/model_info.py:289
 msgid "Optional field. Enter the total number of pages of the source."
 msgstr "Optionales Feld. Geben Sie die Gesamtzahl der Seiten der Quelle ein."
 
-#: main/model_info.py:280
+#: main/model_info.py:291
 msgid "Do you want to publish anonymously?"
 msgstr "Möchten Sie diese Transkription anonym veröffentlichen?"
 
-#: main/model_info.py:280
+#: main/model_info.py:291
 msgid ""
 "You can hide your username on the transcription listing if you choose so."
 msgstr ""
 "Sie können Ihren Benutzernamen in der Transkriptionsliste ausblenden, falls "
 "Sie dies wollen."
 
-#: main/model_info.py:284
+#: main/model_info.py:295
 msgid "Brief description of changes"
 msgstr "Kurze Beschreibung Ihrer Änderungen"
 
-#: main/model_info.py:284
+#: main/model_info.py:295
 msgid ""
 "Please supply a brief description of the changes you made. Examples: "
 "Corrected typo, Added scribes, etc."
@@ -697,99 +734,99 @@ msgstr ""
 "Änderungen an. Beispiel: Tippfehler korrigiert, Schreiber*innen hinzugefügt "
 "usw."
 
-#: main/model_info.py:289
+#: main/model_info.py:300
 msgid "Length of the document"
 msgstr "Länge des Dokuments"
 
-#: main/model_info.py:289
+#: main/model_info.py:300
 msgid ""
 "Optional field. Please write down the length (top to bottom) in centimeters."
 msgstr ""
 "Optionales Feld. Bitte geben Sie die Länge (von oben nach unten) des "
 "Originaldokuments in Zentimetern an."
 
-#: main/model_info.py:292
+#: main/model_info.py:303
 msgid "Width of the document"
 msgstr "Breite des Dokuments"
 
-#: main/model_info.py:292
+#: main/model_info.py:303
 msgid ""
 "Optional field. Please write down the width (left to right) in centimeters."
 msgstr ""
 "Optionales Feld. Bitte geben Sie die Breite (von links nach rechts) des "
 "Originaldokuments in Zentimetern an."
 
-#: main/model_info.py:299
+#: main/model_info.py:310
 msgid "Name of the institution"
 msgstr "Name der Institution"
 
-#: main/model_info.py:299
+#: main/model_info.py:310
 msgid "Enter the complete name."
 msgstr "Geben Sie den vollständigen Namen ein."
 
-#: main/model_info.py:301
+#: main/model_info.py:312
 msgid "Street Name"
 msgstr "Strasse"
 
-#: main/model_info.py:301
+#: main/model_info.py:312
 msgid "Enter the street name with the number."
 msgstr "Geben Sie die Strasse mit der Hausnummer ein."
 
-#: main/model_info.py:303
+#: main/model_info.py:314
 msgid "Zip Code"
 msgstr "Postleitzahl"
 
-#: main/model_info.py:303
+#: main/model_info.py:314
 msgid "Enter the zip code of the institution."
 msgstr "Geben Sie die Postleitzahl der Institution ein."
 
-#: main/model_info.py:305 main/models.py:34 main/models.py:36
+#: main/model_info.py:316 main/models.py:34 main/models.py:36
 msgid "City"
 msgstr "Stadt"
 
-#: main/model_info.py:305
+#: main/model_info.py:316
 msgid "Enter the city."
 msgstr "Geben Sie die Stadt ein."
 
-#: main/model_info.py:307 main/models.py:38 main/models.py:39
+#: main/model_info.py:318 main/models.py:38 main/models.py:39
 msgid "Country"
 msgstr "Land"
 
-#: main/model_info.py:307
+#: main/model_info.py:318
 msgid "Choose the country from the drop down menu."
 msgstr "Wählen Sie das Land aus dem Dropdown-Menü aus."
 
-#: main/model_info.py:309
+#: main/model_info.py:320
 msgid "Web site of the institution"
 msgstr "Website der Institution"
 
-#: main/model_info.py:309
+#: main/model_info.py:320
 msgid "Optional Field. Enter a valid URL. Must start with http:// or https://"
 msgstr ""
 "Optionales Feld. Geben Sie eine gültige URL ein. Muss mit http:// oder "
 "https:// beginnen"
 
-#: main/model_info.py:316
+#: main/model_info.py:327
 msgid "Holding institution"
 msgstr "Institution"
 
-#: main/model_info.py:316
+#: main/model_info.py:327
 msgid "The institution which holds the document with this reference number."
 msgstr "Die Institution, die das Dokument mit dieser Signatur besitzt."
 
-#: main/model_info.py:319 main/models.py:303
+#: main/model_info.py:330 main/models.py:303
 msgid "Reference Number"
 msgstr "Signatur"
 
-#: main/model_info.py:319
+#: main/model_info.py:330
 msgid "Reference Number as it is supplied by the institution."
 msgstr "Signatur, wie sie von der Institution zur Verfügung gestellt wird."
 
-#: main/model_info.py:322
+#: main/model_info.py:333
 msgid "Title of collection"
 msgstr "Titel der Sammlung"
 
-#: main/model_info.py:322
+#: main/model_info.py:333
 msgid ""
 "Reference numbers usually have a title. Please supply the complete title. If "
 "the institution does not supply a title for this reference number, you may "
@@ -802,11 +839,11 @@ msgstr ""
 "dass der Titel der Verzeichniseinheit nicht der gleiche sein muss wie der "
 "Titel des transkribierten Dokuments."
 
-#: main/model_info.py:330
+#: main/model_info.py:341
 msgid "Collection link"
 msgstr "Link zur Verzeichniseinheit"
 
-#: main/model_info.py:330
+#: main/model_info.py:341
 msgid ""
 "Optional Field. Direct link to the collection in the institution's catalog. "
 "Must start with http:// or https://"
@@ -814,11 +851,11 @@ msgstr ""
 "Optionales Feld. Direkter Link zur Verzeichniseinheit im Katalog der "
 "Institution. Muss mit http:// oder https:// beginnen"
 
-#: main/model_info.py:338 main/models.py:654
+#: main/model_info.py:349 main/models.py:654
 msgid "Username"
 msgstr "Benutzername"
 
-#: main/model_info.py:338
+#: main/model_info.py:349
 msgid ""
 "The name must be unique and can't contain any special characters. It will be "
 "shown to other users."
@@ -826,27 +863,27 @@ msgstr ""
 "Der Name muss einmalig sein und darf keine Sonderzeichen enthalten. Er wird "
 "anderen Benutzern angezeigt."
 
-#: main/model_info.py:341 main/models.py:660
+#: main/model_info.py:352 main/models.py:660
 msgid "First name"
 msgstr "Vorname"
 
-#: main/model_info.py:341
+#: main/model_info.py:352
 msgid "Your given name. This information will not be public."
 msgstr "Ihr Vorname. Diese Information ist nicht öffentlich einsehbar."
 
-#: main/model_info.py:343 main/models.py:665
+#: main/model_info.py:354 main/models.py:665
 msgid "Last name"
 msgstr "Nachname"
 
-#: main/model_info.py:343
+#: main/model_info.py:354
 msgid "Your family name. This information will not be public."
 msgstr "Ihr Nachname. Diese Information ist nicht öffentlich einsehbar."
 
-#: main/model_info.py:345
+#: main/model_info.py:356
 msgid "Email address"
 msgstr "E-Mail-Adresse"
 
-#: main/model_info.py:345
+#: main/model_info.py:356
 msgid ""
 "You must choose a valid address. It is used to verify your information and "
 "activate your account. This information will not be public."
@@ -855,11 +892,11 @@ msgstr ""
 "Ihre Informationen zu überprüfen und Ihr Konto zu aktivieren. Die E-Mail-"
 "Adresse ist nicht öffentlich einsehbar."
 
-#: main/model_info.py:349
+#: main/model_info.py:360
 msgid "Anonymous publishing"
 msgstr "Anonym veröffentlichen"
 
-#: main/model_info.py:349
+#: main/model_info.py:360
 msgid ""
 "Your documents can be published anonymously by default. You can change this "
 "setting any time."
@@ -867,11 +904,11 @@ msgstr ""
 "Ihre Dokumente können standardmässig anonym veröffentlicht werden. Sie "
 "können diese Einstellung jederzeit ändern."
 
-#: main/model_info.py:353
+#: main/model_info.py:364
 msgid "ORCID"
 msgstr "ORCID"
 
-#: main/model_info.py:353
+#: main/model_info.py:364
 msgid ""
 "Optional Field. ORCID provides a persistent digital identifier that you own "
 "and control, and that distinguishes you from every other researcher."
@@ -879,6 +916,34 @@ msgstr ""
 "Optionales Feld. ORCID ordnet Ihnen eine persistente Identifikationsnummer "
 "zu, welche Sie besitzen und kontrollieren, und mit welcher Sie von allen "
 "anderen auf ORCID registrierten Forscher*innen unterscheidbar sind."
+
+#: main/model_info.py:368
+msgid "Default website language"
+msgstr "Standardsprache der Benutzeroberfläche"
+
+#: main/model_info.py:368
+msgid ""
+"Choose the default language in which the transcriptiones web interface will "
+"be presented to you. You can change the language at any time."
+msgstr ""
+"Wählen Sie die Standardsprache in welcher Ihnen das transcriptiones Web-"
+"Interface anzezeigt wird. Sie können die Sprache jederzeit ändern."
+
+#: main/model_info.py:375
+msgid "Confirm password"
+msgstr "Passwort bestätigen"
+
+#: main/model_info.py:375
+msgid "Enter the password again for confirmation."
+msgstr "Geben Sie zur Überprüfung das Passwort erneut ein."
+
+#: main/model_info.py:377
+msgid "Your old password"
+msgstr "Ihr altes Passwort"
+
+#: main/model_info.py:377
+msgid "Enter your old password for verification."
+msgstr "Geben Sie zur Verifizierung Ihr altes Passwort ein."
 
 #: main/models.py:25
 msgid "Complete name of the institution"
@@ -3095,7 +3160,7 @@ msgstr ""
 "Falls sie diese E-Mails nicht mehr erhalten möchte, bitte besuchen Sie "
 "transcriptiones.ch und passen Sie Ihre Einstellungen an.\n"
 
-#: main/templates/main/users/email_templates/password_reset_email.html:2
+#: main/templates/main/users/email_templates/password_reset_email.html:3
 #, python-format
 msgid ""
 "\n"
@@ -3112,10 +3177,6 @@ msgstr ""
 "    %(protocol)s://%(domain)s%(reseturl)s\n"
 "    Falls Sie nicht versucht haben, Ihr Passwort zurückzusetzen, können Sie "
 "diese E-Mail ignorieren.\n"
-
-#: main/templates/main/users/email_templates/password_reset_subject.txt:2
-msgid "Transcriptiones: Passwort zurücksetzen"
-msgstr "transcriptiones: Passwort zurücksetzen"
 
 #: main/templates/main/users/login.html:18
 msgid "Login to Your Account"
@@ -3735,6 +3796,12 @@ msgstr "Es wurde kein API-Key gefunden, der hätte gelöscht werden können."
 #: main/views/views_user.py:239
 msgid "Your API Key has been deleted"
 msgstr "Ihr API-Key wurde gelöscht"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Passwort bestätigen"
+
+#~ msgid "Transcriptiones: Passwort zurücksetzen"
+#~ msgstr "transcriptiones: Passwort zurücksetzen"
 
 #~ msgid "E-Mail"
 #~ msgstr "E-Mail"

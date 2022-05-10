@@ -36,6 +36,16 @@ def get_popover_html(model, field_name, content=None):
             label = _("Institution")
         elif field_name == "selection_helper_source_type":
             label = _("Parent Source Type")
+        elif field_name == "password1":
+            label = _('Password')
+        elif field_name == 'password2':
+            label = _('Confirm Password')
+        elif field_name == "new_password1":
+            label = _('New Password')
+        elif field_name == 'new_password2':
+            label = _('Confirm New Password')
+        elif field_name == 'old_password':
+            label = _('Old password')
 
     tooltip = model_info.get_extended_help_text(model, field_name) if content is None else content
     ret_value = format_lazy('{label}&nbsp;<span data-toggle="tooltip" data-html="true" data-placement="top" '\
