@@ -101,3 +101,19 @@
     {{ form.media }}
 
 {% endblock content %}
+
+{% block extrascripts %}
+    <!-- RESETS THE SOURCE TYPE DROPDOWN WHEN THE PARENT TYPE CHANGES -->
+    <script>
+        $(document).ready(function() {
+            // Bind on continent field change
+            $(':input[name$=selection_helper_source_type]').on('change', function() {
+                // Get the field prefix, ie. if this comes from a formset form
+                var prefix = $(this).getFormPrefix();
+
+                // Clear the autocomplete with the same prefix
+                $(':input[name=' + prefix + 'source_type]').val(null).trigger('change');
+            });
+        });
+    </script>
+{% endblock extrascripts %}

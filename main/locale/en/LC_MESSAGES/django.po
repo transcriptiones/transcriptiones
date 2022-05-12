@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-10 14:58+0200\n"
+"POT-Creation-Date: 2022-05-12 16:15+0200\n"
 "PO-Revision-Date: 2022-05-06 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -60,6 +60,7 @@ msgstr ""
 #: main/forms/forms_helper.py:36 main/models.py:22 main/models.py:63
 #: main/models.py:97 main/models.py:781
 #: main/templates/main/details/institution_detail.html:8
+#: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
 msgstr ""
 
@@ -125,7 +126,7 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: main/forms/forms_info.py:51 main/forms/forms_upload.py:243
+#: main/forms/forms_info.py:51 main/forms/forms_upload.py:245
 #: main/forms/forms_user.py:24
 msgid "Send Message"
 msgstr ""
@@ -228,19 +229,23 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: main/forms/forms_upload.py:234
-msgid "Message Title"
-msgstr ""
-
-#: main/forms/forms_upload.py:235
-msgid "What kind of documents do you want to upload?"
+#: main/forms/forms_upload.py:92 main/forms/forms_upload.py:118
+msgid "Create"
 msgstr ""
 
 #: main/forms/forms_upload.py:236
-msgid "Batch Description"
+msgid "Message Title"
 msgstr ""
 
 #: main/forms/forms_upload.py:237
+msgid "What kind of documents do you want to upload?"
+msgstr ""
+
+#: main/forms/forms_upload.py:238
+msgid "Batch Description"
+msgstr ""
+
+#: main/forms/forms_upload.py:239
 msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
@@ -766,6 +771,7 @@ msgid "The institution which holds the document with this reference number."
 msgstr ""
 
 #: main/model_info.py:330 main/models.py:303
+#: main/templates/main/upload/create_document_backup.html:40
 msgid "Reference Number"
 msgstr ""
 
@@ -1162,7 +1168,8 @@ msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 
 #: main/models.py:380 main/templates/main/details/document_detail.html:61
-#: main/templates/main/upload/create_document.html:81
+#: main/templates/main/upload/create_document.html:78
+#: main/templates/main/upload/create_document_backup.html:58
 msgid "Transcript"
 msgstr ""
 
@@ -1502,6 +1509,7 @@ msgstr ""
 #: main/templates/main/base_copy.html:97 main/templates/main/info/start.html:92
 #: main/templates/main/sidebar.html:13
 #: main/templates/main/upload/create_document.html:13
+#: main/templates/main/upload/create_document_backup.html:13
 #: main/templates/main/upload/upload_options.html:12
 #: main/templates/main/upload/upload_options_copy.html:12
 msgid "Upload"
@@ -1724,6 +1732,10 @@ msgid "Go Back"
 msgstr ""
 
 #: main/templates/main/admin/contact_message.html:54
+msgid "Mark as \"answered\"\""
+msgstr ""
+
+#: main/templates/main/admin/contact_message.html:55
 msgid "Delete Contact Message"
 msgstr ""
 
@@ -1739,7 +1751,7 @@ msgstr ""
 msgid "Contact Form Messages"
 msgstr ""
 
-#: main/templates/main/admin/contact_messages.html:35
+#: main/templates/main/admin/contact_messages.html:34
 #: main/templates/main/users/messages.html:32
 #: main/templates/main/users/notifications.html:29
 msgid ""
@@ -1859,7 +1871,9 @@ msgstr ""
 
 #: main/templates/main/base.html:247
 #: main/templates/main/upload/create_document.html:8
-#: main/templates/main/upload/create_document.html:134
+#: main/templates/main/upload/create_document.html:131
+#: main/templates/main/upload/create_document_backup.html:8
+#: main/templates/main/upload/create_document_backup.html:94
 msgid "Upload Transcription"
 msgstr ""
 
@@ -1962,6 +1976,7 @@ msgstr ""
 
 #: main/templates/main/base_copy.html:102 main/templates/main/sidebar.html:17
 #: main/templates/main/upload/create_document.html:14
+#: main/templates/main/upload/create_document_backup.html:14
 #: main/templates/main/upload/upload_options_copy.html:28
 msgid "Upload Single Page"
 msgstr ""
@@ -2124,19 +2139,21 @@ msgid "Export Document"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:66
-#: main/templates/main/upload/create_document.html:85
+#: main/templates/main/upload/create_document.html:82
 #: main/templates/main/upload/edit_meta.html:31
 msgid "Content Metadata"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:70
-#: main/templates/main/upload/create_document.html:108
+#: main/templates/main/upload/create_document.html:105
+#: main/templates/main/upload/create_document_backup.html:68
 #: main/templates/main/upload/edit_meta.html:78
 msgid "Manuscript Description"
 msgstr ""
 
 #: main/templates/main/details/document_detail.html:74
-#: main/templates/main/upload/create_document.html:118
+#: main/templates/main/upload/create_document.html:115
+#: main/templates/main/upload/create_document_backup.html:78
 msgid "Comments and Links"
 msgstr ""
 
@@ -2712,20 +2729,42 @@ msgid ""
 "possible. Please fill out the following form and we'll be in touch!"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:25
+#: main/templates/main/upload/create_document.html:22
+#: main/templates/main/upload/create_document_backup.html:23
 msgid "Required Information"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:50
+#: main/templates/main/upload/create_document.html:34
+#: main/templates/main/upload/create_document.html:47
 msgid "Add"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:131
+#: main/templates/main/upload/create_document.html:128
+#: main/templates/main/upload/create_document_backup.html:91
 msgid "Upload Your Transcription"
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:133
+#: main/templates/main/upload/create_document.html:130
+#: main/templates/main/upload/create_document_backup.html:93
 msgid "If you're done entering your information, you can upload the document."
+msgstr ""
+
+#: main/templates/main/upload/create_document.html:182
+#: main/views/views_upload.py:108
+msgid "Success: Institution was created."
+msgstr ""
+
+#: main/templates/main/upload/create_document.html:235
+#: main/views/views_upload.py:123
+msgid "Success: RefNumber was created."
+msgstr ""
+
+#: main/templates/main/upload/create_document.html:286
+msgid "200 characters used"
+msgstr ""
+
+#: main/templates/main/upload/create_document_backup.html:62
+msgid "Content Meta Data"
 msgstr ""
 
 #: main/templates/main/upload/create_institution.html:9
@@ -2778,6 +2817,13 @@ msgstr ""
 
 #: main/templates/main/upload/export_document.html:9
 msgid "Export document"
+msgstr ""
+
+#: main/templates/main/upload/export_document.html:29
+#: main/templates/main/upload/export_document.html:30
+#: main/templates/main/upload/export_document.html:31
+#: main/templates/main/upload/export_document.html:32
+msgid "This feature is not available yet. It will be implemented soon."
 msgstr ""
 
 #: main/templates/main/upload/export_document.html:29
@@ -2936,6 +2982,10 @@ msgid ""
 "    Go to the following link to reset your password.\n"
 "    %(protocol)s://%(domain)s%(reseturl)s\n"
 "    If you did not try to reset your password, you can ignore this email.\n"
+msgstr ""
+
+#: main/templates/main/users/email_templates/password_reset_subject.txt:3
+msgid "Transcriptiones: Passwort zurücksetzen"
 msgstr ""
 
 #: main/templates/main/users/login.html:18
@@ -3489,14 +3539,6 @@ msgstr ""
 
 #: main/views/views_upload.py:98
 msgid "There is an error in your form"
-msgstr ""
-
-#: main/views/views_upload.py:108
-msgid "Success: Institution was created."
-msgstr ""
-
-#: main/views/views_upload.py:123
-msgid "Success: RefNumber was created."
 msgstr ""
 
 #: main/views/views_user.py:69 main/views/views_user.py:79

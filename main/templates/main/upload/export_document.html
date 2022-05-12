@@ -26,10 +26,10 @@
         <div class="text-center">
             <form method="POST">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary" name="export_tei">{%  translate 'Export TEI' %}</button>
-                <button type="submit" class="btn btn-primary" name="export_json">{%  translate 'Export JSON' %}</button>
-                <button type="submit" class="btn btn-primary" name="export_html">{%  translate 'Export HTML' %}</button>
-                <button type="submit" class="btn btn-primary" name="export_pdf">{%  translate 'Export PDF' %}</button>
+                <button type="submit" class="btn btn-primary disabled" name="export_tei" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export TEI' %}</button>
+                <button type="submit" class="btn btn-primary disabled" name="export_json" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export JSON' %}</button>
+                <button type="submit" class="btn btn-primary disabled" name="export_html" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export HTML' %}</button>
+                <button type="submit" class="btn btn-primary disabled" name="export_pdf" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export PDF' %}</button>
             </form>
         </div>
     {% endcard %}

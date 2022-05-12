@@ -11,10 +11,15 @@ register = template.Library()
 
 @register.filter
 def safe_em_only(text):
-    first_index_1 = text.find("<")
-    first_index_2 = text.find(">")
-    if first_index_2 < first_index_1:
-        text = text[first_index_2+1:]
+    first_opening_bracket = text.find("<")
+    first_closing_bracket = text.find(">")
+    if first_closing_bracket < first_opening_bracket:
+        text = text[first_closing_bracket+1:]
+
+    last_opening_bracket = text.rfind("<")
+    last_closing_bracket = text.rfind(">")
+    if last_closing_bracket < last_opening_bracket:
+        text = text[:last_opening_bracket-1]
 
     temp_text = text.replace("<em>", "SOMETHING_WHICH_IS_NEVER_FOUND_START")
     temp_text = temp_text.replace("</em>", "SOMETHING_WHICH_IS_NEVER_FOUND_STOP")

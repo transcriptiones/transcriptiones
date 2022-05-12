@@ -70,7 +70,7 @@
                           {% for hl in entry.0.meta.highlight.transcription_text %}
                             {{ hl|safe_em_only|safe }}
                               {% if not forloop.last %}
-                                  <i>[...]</i>>
+                                  <i>[...]</i>
                               {% endif %}
                           {% endfor %}
                       {% endif %}

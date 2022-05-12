@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-10 14:58+0200\n"
+"POT-Creation-Date: 2022-05-12 16:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,10 +30,8 @@ msgstr "Anglais"
 msgid "German"
 msgstr "Allemand"
 
-#: transcriptiones/settings.py:163
-msgid "French"
-msgstr "Français"
+#~ msgid "French"
+#~ msgstr "Français"
 
-#: transcriptiones/settings.py:164
-msgid "Italian"
-msgstr "Italian"
+#~ msgid "Italian"
+#~ msgstr "Italian"
