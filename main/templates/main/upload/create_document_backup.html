@@ -18,8 +18,6 @@
 
     {% include "main/upload/_modal.html" %}
 
-    <button onclick="myFunction()">Click me</button>
-
     <form action="{% url 'main:upload_document' %}" method="post">
         {% csrf_token %}
         {% card 'upload_required' _('Required Information') %}
@@ -27,27 +25,25 @@
 
             <div class="form-row">
                 <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'parent_institution' %}*
+                    {% translate 'Institution' %}*
                 </div>
                 <div class="form-group col-sm-7">
                     {{ form.parent_institution }}
-                    {% get_help_text_html 'document' 'parent_institution' %}
                 </div>
                 <div class="form-group col-sm-2">
-                    <button id="create-inst-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>{% translate "Add" %}</button>
+                    <button id="create-inst-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>Add</button>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'parent_ref_number' %}*
+                    {% translate 'Reference Number' %}*
                 </div>
                 <div class="form-group col-sm-7">
                     {{ form.parent_ref_number }}
-                    {% get_help_text_html 'document' 'parent_ref_number' %}
                 </div>
                 <div class="form-group col-sm-2">
-                    <button id="create-refn-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>{% translate "Add" %}</button>
+                    <button id="create-refn-async" class="btn btn-primary" style="width: 100%;" type="button" name="button"><span class="fa fa-plus mr-2"></span>Add</button>
                 </div>
             </div>
 
@@ -55,53 +51,17 @@
             {{ form.doc_start_date|as_crispy_field }}
             {{ form.doc_end_date|as_crispy_field }}
             {{ form.place_name|as_crispy_field }}
-
-            <div class="form-row">
-                <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'selection_helper_source_type' %}*
-                </div>
-                <div class="form-group col-sm-9">
-                    {{ form.selection_helper_source_type }}
-                    {% get_help_text_html 'document' 'selection_helper_source_type' %}
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'source_type' %}*
-                </div>
-                <div class="form-group col-sm-9">
-                    {{ form.source_type }}
-                    {% get_help_text_html 'document' 'source_type' %}
-                </div>
-            </div>
-
+            {{ form.selection_helper_source_type|as_crispy_field }}
+            {{ form.source_type|as_crispy_field }}
         {% endcard %}
 
         {% card 'upload_transcript' _('Transcript') %}
             {{ form.transcription_text }}
         {% endcard %}
 
-        {% card 'upload_metadata' _('Content Metadata') %}
-            <div class="form-row">
-                <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'author' %}*
-                </div>
-                <div class="form-group col-sm-9">
-                    {{ form.author }}
-                    {% get_help_text_html 'document' 'author' %}
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-sm-3">
-                    {% get_tooltip_html 'document' 'language' %}*
-                </div>
-                <div class="form-group col-sm-9">
-                    {{ form.language }}
-                    {% get_help_text_html 'document' 'language' %}
-                </div>
-            </div>
+        {% card 'upload_metadata' _('Content Meta Data') %}
+            {{ form.author|as_crispy_field }}
+            {{ form.language|as_crispy_field }}
 
         {% endcard %}
 
@@ -197,7 +157,7 @@
                   closeOnSubmit: true,
                   successMessage: asyncSuccessMessageCreate,
                   dataUrl: "{% url 'main:insts' %}",
-                  dataElementId: "#insts-dropdown",
+                  dataElementId: "#id_holding_institution",
                   dataKey: "select",
                   addModalFormFunction: reinstantiateModalForms
                 }
@@ -208,6 +168,7 @@
           function reinstantiateModalForms() {
             createBookAsyncModalForm();
             console.debug('added INSTI');
+            $('input[name=parent_institution]').val('1').trigger('change');
           }
 
           // Hide message
@@ -218,6 +179,12 @@
   </script>
 
     <script>
+        $("#create-refn-async").click( function()
+           {
+             console.debug("Whaat?")
+           }
+        );
+
       $(function () {
           // Create reference number asynchronous button
           // message
@@ -263,36 +230,5 @@
               $(".alert").slideUp(500);
           });
       });
-
-      $(function() {
-        $("#id_title_name").on("change paste keyup", function() {
-            var length = $(this).val().length;
-            $('#hint_id_title_name').text(`(${length}/200 characters used)`);
-        });
-      });
-
   </script>
-    <script>
-        function myFunction() {
-            let parent_inst_select = $('#id_parent_institution');
-            $.ajax({
-                type: 'GET',
-                url: '{% url 'main:inst-autocomplete-id' 40 %}'
-            }).then(function (data) {
-                // create the option and append to Select2
-                var option = new Option(data.selected, data.id, true, true);
-                parent_inst_select.append(data).trigger('change');
-
-                // manually trigger the `select2:select` event
-                parent_inst_select.trigger({
-                    type: 'select2:select',
-                    params: {
-                        data: data
-                    }
-                });
-            });
-
-           console.log("Did it 2")
-        }
-    </script>
 {% endblock extrascripts %}

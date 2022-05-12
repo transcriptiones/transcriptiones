@@ -1,9 +1,26 @@
+import json
+
 from dal import autocomplete
 from django.db.models import Q
 from django.utils.html import format_html
+from django.http import HttpResponse
 from django.utils.translation import get_language
 
 from main.models import Institution, RefNumber, SourceType, Author, Language
+
+
+def institution_id_view(request, inst_id):
+    inst = Institution.objects.get(pk=inst_id)
+    return HttpResponse(json.dumps({"id": str(inst.pk),
+                                    "text": str(inst.institution_name),
+                                    "selected_text": str(inst.institution_name)}), content_type='application/json')
+
+
+def ref_number_id_view(request, ref_id):
+    refn = RefNumber.objects.get(pk=ref_id)
+    return HttpResponse(json.dumps({"id": str(refn.pk),
+                                    "text": f"{refn.ref_number_title} - {refn.ref_number_name}",
+                                    "selected_text": f"{refn.ref_number_title} - {refn.ref_number_name}"}), content_type='application/json')
 
 
 class InstitutionAutocomplete(autocomplete.Select2QuerySetView):

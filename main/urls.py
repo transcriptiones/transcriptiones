@@ -62,6 +62,7 @@ urlpatterns = [
     ##############
     # AUTOCOMPLETE VIEWS
     url(r'^inst-autocomplete/$', v_autocomplete.InstitutionAutocomplete.as_view(), name='inst-autocomplete', ),
+    path('inst-autocomplete-id/<int:inst_id>/', v_autocomplete.institution_id_view, name='inst-autocomplete-id', ),
     url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
     url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),
     url(r'^srctype-ch-autocomplete/$', v_autocomplete.SourceTypeChildAutocomplete.as_view(), name='srctype-ch-autocomplete', ),
@@ -148,6 +149,7 @@ urlpatterns = [
     path('transcriptiones_admin/inbox/<int:msg_id>/', v_admin.admin_inbox_message_view, name='admin_inbox_message'),
     path('transcriptiones_admin/inbox/<int:msg_id>/delete/', v_admin.admin_inbox_message_delete, name='admin_inbox_message_delete'),
     path('transcriptiones_admin/inbox/<int:msg_id>/answer/', v_admin.admin_inbox_message_answer, name='admin_inbox_message_answer'),
+    path('transcriptiones_admin/inbox/<int:msg_id>/mark/', v_admin.admin_inbox_message_mark, name='admin_inbox_message_mark'),
     path('transcriptiones_admin/users/', v_admin.admin_users_view, name='admin_users'),
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),

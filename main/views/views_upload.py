@@ -124,6 +124,7 @@ class ModalCreateRefNumberView(BSModalCreateView):
     success_url = reverse_lazy('main:upload_document')
 
     def form_valid(self, form):
+        print("FORM VALID")
         self.object = form.save(commit=False)
         self.object.ref_number_slug = slugify(self.object.ref_number_name + " " + self.object.ref_number_title)
         self.object.created_by = self.request.user

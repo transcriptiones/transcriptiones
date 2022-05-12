@@ -84,12 +84,11 @@ class UploadTranscriptionForm(forms.ModelForm):
         }
 
 
-
 class RefnModelForm(BSModalModelForm):
     """TODO """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = initialize_form_helper()
+        self.helper = initialize_form_helper(option="modal_popup")
 
     holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'))
 
@@ -114,6 +113,7 @@ class InstModelForm(BSModalModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper(option="modal_popup")
+        self.helper.add_input(Submit('cancel', _('Cancel'), css_class='btn-secondary', formnovalidate='formnovalidate'))
 
     class Meta:
         model = Institution

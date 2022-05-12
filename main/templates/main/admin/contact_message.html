@@ -51,6 +51,7 @@
                     <br/>
                     <a href="{% url 'main:admin_inbox' %}" class="btn btn-primary">{% translate 'Go Back' %}</a> &nbsp;
                     <a href="{% url 'main:admin_inbox_message_answer' message.id %}" class="btn btn-primary">{% translate 'Answer' %}</a> &nbsp;
+                    <a href="{% url 'main:admin_inbox_message_mark' message.id %}" class="btn btn-primary">{% translate 'Mark as "answered""' %}</a> &nbsp;
                     <button class="btn btn-danger" type="button" id="do-delete">{% translate 'Delete Contact Message' %}</button>
                 </td>
             </tr>
@@ -81,7 +82,6 @@
                 }, yes_text = "Delete", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
             });
         });
-
 
     </script>
 {% endblock %}

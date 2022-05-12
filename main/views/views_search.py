@@ -11,7 +11,7 @@ from django_elasticsearch_dsl_drf.pagination import Paginator
 from django.utils.translation import ugettext_lazy as _
 from elasticsearch_dsl import Q
 
-from main.documents import TranscriptionDocument
+from main.documents import TranscriptionDocument, TranscriptionDocumentStrict
 from main.forms.forms_search import Attribute, AdvancedSearchForm
 from main.tables.tables_document import DocumentResultTable
 from main.models import Document, SourceType
@@ -69,7 +69,6 @@ def test_search_3(request):
 
                     the_st_list = reduce(lambda x, y: x | y, st_list)
                     search_qs.append(the_st_list)
-
                 else:
                     search_qs.append(Q('match', source_type=form.cleaned_data['source_type'].type_name))
 

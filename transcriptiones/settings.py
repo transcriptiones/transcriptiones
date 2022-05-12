@@ -160,8 +160,8 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = (
     ('en-us', _('English')),
     ('de', _('German')),
-    ('fr', _('French')),
-    ('it', _('Italian')),
+    # ('fr', _('French')),
+    # ('it', _('Italian')),
 )
 
 TIME_ZONE = 'Europe/Zurich'
