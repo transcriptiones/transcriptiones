@@ -68,7 +68,7 @@
                         </small>
                       {% if entry.0.meta.highlight.transcription_text %}
                           {% for hl in entry.0.meta.highlight.transcription_text %}
-                            {{ hl|safe }}
+                            {{ hl|safe_em_only|safe }}
                               {% if not forloop.last %}
                                   <i>[...]</i>>
                               {% endif %}

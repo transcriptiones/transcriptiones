@@ -1,4 +1,5 @@
 from django import template
+from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -7,6 +8,15 @@ from django.template.base import FilterExpression
 from main.forms.forms_helper import get_popover_html_by_model_name, get_help_text_html_by_model_name
 
 register = template.Library()
+
+@register.filter
+def safe_em_only(text):
+    temp_text = text.replace("<em>", "SOMETHING_WHICH_IS_NEVER_FOUND_START")
+    temp_text = temp_text.replace("</em>", "SOMETHING_WHICH_IS_NEVER_FOUND_STOP")
+    temp_text = strip_tags(temp_text)
+    temp_text = temp_text.replace("SOMETHING_WHICH_IS_NEVER_FOUND_START", "<em>")
+    temp_text = temp_text.replace("SOMETHING_WHICH_IS_NEVER_FOUND_STOP", "</em>")
+    return temp_text
 
 
 @register.simple_tag

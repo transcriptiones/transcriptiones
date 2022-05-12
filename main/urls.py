@@ -62,8 +62,9 @@ urlpatterns = [
     ##############
     # AUTOCOMPLETE VIEWS
     url(r'^inst-autocomplete/$', v_autocomplete.InstitutionAutocomplete.as_view(), name='inst-autocomplete', ),
-    path('inst-autocomplete-id/<int:inst_id>/', v_autocomplete.institution_id_view, name='inst-autocomplete-id', ),
+    path('inst-autocomplete-id/', v_autocomplete.institution_id_view, name='inst-autocomplete-id', ),
     url(r'^refn-autocomplete/$', v_autocomplete.RefNumberAutocomplete.as_view(), name='refn-autocomplete', ),
+    path('refn-autocomplete-id/', v_autocomplete.refnumber_id_view, name='refn-autocomplete-id', ),
     url(r'^srctype-autocomplete/$', v_autocomplete.SourceTypeAutocomplete.as_view(), name='srctype-autocomplete', ),
     url(r'^srctype-ch-autocomplete/$', v_autocomplete.SourceTypeChildAutocomplete.as_view(), name='srctype-ch-autocomplete', ),
     url(r'^author-autocomplete/$', v_autocomplete.AuthorAutocomplete.as_view(create_field='author_name'), name='author-autocomplete', ),

@@ -124,18 +124,18 @@ class ModalCreateRefNumberView(BSModalCreateView):
     success_url = reverse_lazy('main:upload_document')
 
     def form_valid(self, form):
-        print("FORM VALID")
         self.object = form.save(commit=False)
         self.object.ref_number_slug = slugify(self.object.ref_number_name + " " + self.object.ref_number_title)
         self.object.created_by = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-    """def get_initial(self):
+
+    def get_initial(self):
         initial = {
-            'ref_number_name': self.request.GET.get('name', 'blank value')
+            'holding_institution': Institution.objects.get(pk=int(self.request.GET.get('institution', 1)))
         }
-        return initial"""
+        return initial
 
 
 def institution_dropdown_view(request):

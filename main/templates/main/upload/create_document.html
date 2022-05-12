@@ -15,10 +15,7 @@
 {% endblock %}
 
 {% block content %}
-
     {% include "main/upload/_modal.html" %}
-
-    <button onclick="myFunction()">Click me</button>
 
     <form action="{% url 'main:upload_document' %}" method="post">
         {% csrf_token %}
@@ -141,158 +138,159 @@
 {% endblock content %}
 
 {% block extrascripts %}
-    <!-- RESETS THE REF NUMBER DROPDOWN WHEN THE INSTITUTION CHANGES -->
     <script>
         $(document).ready(function() {
-            // Bind on continent field change
+            /////////////////////////////////////////////////////////////
+            // RESETS THE REF NUMBER DROPDOWN WHEN THE INSTITUTION CHANGES
             $(':input[name$=parent_institution]').on('change', function() {
                 // Get the field prefix, ie. if this comes from a formset form
-                var prefix = $(this).getFormPrefix();
-                console.debug('PREFIX: '+prefix)
+                let prefix = $(this).getFormPrefix();
+                $('#id_parent_ref_number').prop('disabled', false)
+                $('#create-refn-async').prop('disabled', false)
+
                 // Clear the autocomplete with the same prefix
                 $(':input[name=' + prefix + 'parent_ref_number]').val(null).trigger('change');
-            });
-        });
-    </script>
 
-    <!-- RESETS THE SOURCE TYPE DROPDOWN WHEN THE PARENT TYPE CHANGES -->
-    <script>
-        $(document).ready(function() {
-            // Bind on continent field change
+                var old_element = document.getElementById("create-refn-async");
+                var new_element = old_element.cloneNode(true);
+                old_element.parentNode.replaceChild(new_element, old_element);
+                createRefNumberAsyncModalForm();
+            });
+
+            // Disable the Ref number before anything has been selected
+            $('#id_parent_ref_number').prop('disabled', true)
+            $('#create-refn-async').prop('disabled', true)
+
+            /////////////////////////////////////////////////////////////
+            // RESETS THE SOURCE TYPE DROPDOWN WHEN THE PARENT TYPE CHANGES
             $(':input[name$=selection_helper_source_type]').on('change', function() {
                 // Get the field prefix, ie. if this comes from a formset form
-                var prefix = $(this).getFormPrefix();
-
+                let prefix = $(this).getFormPrefix();
+                $('#id_source_type').prop('disabled', false)
                 // Clear the autocomplete with the same prefix
                 $(':input[name=' + prefix + 'source_type]').val(null).trigger('change');
             });
-        });
-    </script>
 
-  <script>
-      $(function () {
-          // Create institution asynchronous button
-          // message
-          var asyncSuccessMessageCreate = [
-            "<div ",
-            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-            "Success: Institution was created.",
-            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-            "<span aria-hidden='true'>&times;</span>",
-            "</button>",
-            "</div>",
-            "<script>",
-            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-            "<\/script>"
-          ].join("");
+            // Disable child source_type before anything has been selected
+            $('#id_source_type').prop('disabled', true)
 
-          // modal form
-          function createBookAsyncModalForm() {
-            $("#create-inst-async").modalForm({
-                formURL: "{% url 'main:create_inst' %}",
-                modalID: "#create-modal",
-                asyncUpdate: true,
-                asyncSettings: {
-                  closeOnSubmit: true,
-                  successMessage: asyncSuccessMessageCreate,
-                  dataUrl: "{% url 'main:insts' %}",
-                  dataElementId: "#insts-dropdown",
-                  dataKey: "select",
-                  addModalFormFunction: reinstantiateModalForms
-                }
-            });
-          }
-          createBookAsyncModalForm();
+            /////////////////////////////////////////////////////////////
+            // CREATE INSTITUTION BUTTONS
+            let asyncInstitutionSuccessMessageCreate = [
+                "<div ",
+                "class='async-create-message alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+                "{% translate 'Success: Institution was created.' %}",
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+                "<span aria-hidden='true'>&times;</span>",
+                "</button>",
+                "</div>",
+                "<script>",
+                "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+                "<\/script>"
+              ].join("");
 
-          function reinstantiateModalForms() {
-            createBookAsyncModalForm();
-            console.debug('added INSTI');
-          }
-
-          // Hide message
-          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
-              $(".alert").slideUp(500);
-          });
-      });
-  </script>
-
-    <script>
-      $(function () {
-          // Create reference number asynchronous button
-          // message
-          var asyncSuccessMessageCreate = [
-            "<div ",
-            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-            "Success: Reference Number was created.",
-            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-            "<span aria-hidden='true'>&times;</span>",
-            "</button>",
-            "</div>",
-            "<script>",
-            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-            "<\/script>"
-          ].join("");
-
-          // modal form
-          function createBookAsyncModalForm() {
-            $("#create-refn-async").modalForm({
-                formURL: "{% url 'main:create_refn' %}",
-                modalID: "#create-modal",
-                asyncUpdate: true,
-                asyncSettings: {
-                  closeOnSubmit: true,
-                  successMessage: asyncSuccessMessageCreate,
-                  dataUrl: "{% url 'main:refns' %}",
-                  dataElementId: "#refns-dropdown",
-                  dataKey: "select",
-                  addModalFormFunction: reinstantiateModalForms
-                }
-            });
-          }
-          createBookAsyncModalForm();
-
-          function reinstantiateModalForms() {
-            createBookAsyncModalForm();
-            console.debug('added reff');
-          }
-
-          // Hide message
-          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
-              $(".alert").slideUp(500);
-          });
-      });
-
-      $(function() {
-        $("#id_title_name").on("change paste keyup", function() {
-            var length = $(this).val().length;
-            $('#hint_id_title_name').text(`(${length}/200 characters used)`);
-        });
-      });
-
-  </script>
-    <script>
-        function myFunction() {
-            let parent_inst_select = $('#id_parent_institution');
-            $.ajax({
-                type: 'GET',
-                url: '{% url 'main:inst-autocomplete-id' 40 %}'
-            }).then(function (data) {
-                // create the option and append to Select2
-                var option = new Option(data.selected, data.id, true, true);
-                parent_inst_select.append(data).trigger('change');
-
-                // manually trigger the `select2:select` event
-                parent_inst_select.trigger({
-                    type: 'select2:select',
-                    params: {
-                        data: data
+            function createInstitutionAsyncModalForm() {
+                $("#create-inst-async").modalForm({
+                    formURL: "{% url 'main:create_inst' %}",
+                    modalID: "#create-modal",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                      closeOnSubmit: true,
+                      successMessage: asyncInstitutionSuccessMessageCreate,
+                      dataUrl: "{% url 'main:insts' %}",
+                      dataElementId: "#id_parent_institution",
+                      dataKey: "select",
+                      addModalFormFunction: reinstantiateInstitutionModalForms
                     }
                 });
+            }
+            createInstitutionAsyncModalForm();
+
+            function reinstantiateInstitutionModalForms() {
+                createInstitutionAsyncModalForm();
+                let parent_inst_select = $('#id_parent_institution');
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url 'main:inst-autocomplete-id' %}'
+                }).then(function (data) {
+                    // create the option and append to Select2
+                    let option = new Option(data.text, data.id, true, true);
+                    parent_inst_select.append(option).trigger('change');
+
+                    // manually trigger the `select2:select` event
+                    parent_inst_select.trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+                });
+            }
+
+            /////////////////////////////////////////////////////////////
+            // CREATE REF-NUMBER BUTTONS
+            let asyncRefNumberSuccessMessageCreate = [
+                "<div ",
+                "class='async-create-message alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+                "{% translate 'Success: RefNumber was created.' %}",
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+                "<span aria-hidden='true'>&times;</span>",
+                "</button>",
+                "</div>",
+                "<script>",
+                "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+                "<\/script>"
+              ].join("");
+
+            function createRefNumberAsyncModalForm() {
+                $("#create-refn-async").modalForm({
+                    formURL: "{% url 'main:create_refn' %}?institution="+$('#id_parent_institution').select2('data')[0].id,
+                    modalID: "#create-modal",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                      closeOnSubmit: true,
+                      successMessage: asyncRefNumberSuccessMessageCreate,
+                      dataUrl: "{% url 'main:refns' %}",
+                      dataElementId: "#id_parent_ref_number",
+                      dataKey: "select",
+                      addModalFormFunction: reinstantiateRefNumberModalForms
+                    }
+                });
+            }
+            //createRefNumberAsyncModalForm();
+
+            function reinstantiateRefNumberModalForms() {
+                createRefNumberAsyncModalForm();
+                let parent_ref_select = $('#id_parent_ref_number');
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url 'main:refn-autocomplete-id' %}'
+                }).then(function (data) {
+                    // create the option and append to Select2
+                    let option = new Option(data.text, data.id, true, true);
+                    parent_ref_select.append(option).trigger('change');
+
+                    // manually trigger the `select2:select` event
+                    parent_ref_select.trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+                });
+            }
+
+
+            $("#id_title_name").on("change paste keyup", function() {
+                let length = $(this).val().length;
+                $('#hint_id_title_name').text(`(${length}/{% translate '200 characters used' %})`);
             });
 
-           console.log("Did it 2")
-        }
+        });
     </script>
+
+    <script>
+
+  </script>
+
 {% endblock extrascripts %}

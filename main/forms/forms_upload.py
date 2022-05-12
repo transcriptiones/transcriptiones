@@ -89,8 +89,10 @@ class RefnModelForm(BSModalModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper(option="modal_popup")
+        self.helper.add_input(Submit('submit', _('Create'), css_class='btn-secondary'))
 
-    holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'))
+    holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'),
+                                                 disabled=True)
 
     class Meta:
         model = RefNumber
@@ -113,7 +115,7 @@ class InstModelForm(BSModalModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper(option="modal_popup")
-        self.helper.add_input(Submit('cancel', _('Cancel'), css_class='btn-secondary', formnovalidate='formnovalidate'))
+        self.helper.add_input(Submit('submit', _('Create'), css_class='btn-secondary'))
 
     class Meta:
         model = Institution

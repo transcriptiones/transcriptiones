@@ -88,6 +88,7 @@ def test_search_3(request):
             search_result = search_result.highlight('place_name')
             search_result = search_result.highlight('transcription_text')
             search_result = search_result.highlight('source_type')
+
             total_results = search_result.count()
             paginator = Paginator(search_result, page_size)
             number_of_pages = paginator.num_pages

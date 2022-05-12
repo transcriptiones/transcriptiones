@@ -9,18 +9,27 @@ from django.utils.translation import get_language
 from main.models import Institution, RefNumber, SourceType, Author, Language
 
 
-def institution_id_view(request, inst_id):
-    inst = Institution.objects.get(pk=inst_id)
+def institution_id_view(request):
+    inst = Institution.objects.all().order_by('-institution_utc_add')[0]
     return HttpResponse(json.dumps({"id": str(inst.pk),
                                     "text": str(inst.institution_name),
                                     "selected_text": str(inst.institution_name)}), content_type='application/json')
+
+
+def refnumber_id_view(request):
+    refn = RefNumber.objects.all().order_by('-ref_number_utc_add')[0]
+    return HttpResponse(json.dumps({"id": str(refn.pk),
+                                    "text": f"{refn.ref_number_title} - {refn.ref_number_name}",
+                                    "selected_text": f"{refn.ref_number_title} - {refn.ref_number_name}"}),
+                        content_type='application/json')
 
 
 def ref_number_id_view(request, ref_id):
     refn = RefNumber.objects.get(pk=ref_id)
     return HttpResponse(json.dumps({"id": str(refn.pk),
                                     "text": f"{refn.ref_number_title} - {refn.ref_number_name}",
-                                    "selected_text": f"{refn.ref_number_title} - {refn.ref_number_name}"}), content_type='application/json')
+                                    "selected_text": f"{refn.ref_number_title} - {refn.ref_number_name}"}),
+                        content_type='application/json')
 
 
 class InstitutionAutocomplete(autocomplete.Select2QuerySetView):

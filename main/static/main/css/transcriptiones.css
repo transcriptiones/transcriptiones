@@ -384,6 +384,15 @@ span.search-result-title {
     cursor: pointer;
 }
 
+
+.async-create-message {
+    position:fixed;
+    top:0;
+    z-index:10000;
+    width:100%;
+    border-radius:0;
+}
+
 /* not used anymore
 
 .card-header-st {
