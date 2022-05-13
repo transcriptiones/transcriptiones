@@ -851,6 +851,25 @@ class NewsMessage(models.Model):
 
     message_tags = models.ManyToManyField(TopicTag)
 
+    def get_translated_title(self, language):
+        if language == "de":
+            return self.news_title_de
+        elif language == "fr":
+            return self.news_title_fr
+        elif language == "it":
+            return self.news_title_it
+
+        return self.news_title
+
+    def get_translated_text(self, language):
+        if language == "de":
+            return self.news_message_de
+        elif language == "fr":
+            return self.news_message_fr
+        elif language == "it":
+            return self.news_message_it
+
+        return self.news_message
 
 class NewsletterRecipients(models.Model):
     email_address = models.EmailField()

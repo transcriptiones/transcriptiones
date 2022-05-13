@@ -36,21 +36,36 @@ def get_static_tooltip_html(title, text):
                             f'<i class="fas fa-info-circle"></i>' \
                             f'</span>')
 
+
 @register.simple_tag
 def get_tooltip_html(model_name, field_name):
     return get_popover_html_by_model_name(model_name, field_name)
+
 
 @register.simple_tag
 def get_help_text_html(model_name, field_name):
     return get_help_text_html_by_model_name(model_name, field_name)
 
+
+@register.simple_tag
+def get_translated_news_title(news_item, language):
+    return news_item.get_translated_title(language)
+
+
+@register.simple_tag
+def get_translated_news_text(news_item, language):
+    return news_item.get_translated_text(language)
+
+
 @register.simple_tag
 def get_translated_source_type_name(source_type, language):
     return source_type.get_translated_name(language)
 
+
 @register.simple_tag
 def get_translated_source_type_description(source_type, language):
     return source_type.get_translated_description(language)
+
 
 @register.tag
 def collapsed_card(parser, token):

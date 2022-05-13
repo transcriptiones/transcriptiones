@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    {% card 'simple_search_form' _('Latest News') %}
+    {% card 'latest_news_card' _('Latest News') %}
         {% if news_data %}
             {% for news in news_data %}
                 <a href="{% url 'main:news' %}" class="no-deco-link">
@@ -31,7 +31,7 @@
                       </div>
                       <div class="card-body">
 
-                          <h5 class="card-title" style="margin: 0; font-weight: bold;">Title</h5>
+                          <h5 class="card-title" style="margin: 0; font-weight: bold;">{{ news.get_translated_title }}</h5>
                             <small>{{ news.news_time }} ({% blocktranslate with since=news.news_time|timesince %} {{ since }} ago{% endblocktranslate %})<br/></small>
                          Text
                       </div>
