@@ -246,7 +246,7 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         if self.request.user.is_authenticated:
             context['subscribed'] = UserSubscription.objects.filter(user=self.request.user,
                                                                     subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
-                                                                    object_id=self.get_object().id).count() > 0
+                                                                    object_id=self.get_object().get_versions().latest().id).count() > 0
         else:
             context['subscribed'] = False
 

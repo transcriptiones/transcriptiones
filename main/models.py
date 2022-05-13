@@ -597,6 +597,12 @@ class Document(models.Model):
 
         super().save(force_update=force_update, *args, **kwargs)
 
+        # Update document subscription to make sure further changes trigger notifications.
+        UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
+                                        object_id=old_doc_id).update(object_id=self.pk)
+
+
+
 
 class UserManager(BaseUserManager):
     """Custom UserManager for transcriptiones."""

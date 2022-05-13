@@ -58,7 +58,7 @@ class DocumentUserHistoryTable(TranscriptionesTable):
         model = Document
         fields = ("title_name", "activity_type", "document_utc_add", "commit_message")
 
-    title_name = tables.LinkColumn()
+    title_name = tables.Column(linkify=lambda record: record.get_absolute_version_url())
     activity_type = tables.Column(orderable=False, accessor='id', verbose_name=_("Action"))
     document_utc_add = tables.Column()
     commit_message = tables.Column(orderable=False)

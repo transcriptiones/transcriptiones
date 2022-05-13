@@ -57,7 +57,7 @@ def subscribe_ref_number_view(request, pk):
 @login_required
 def subscribe_document_view(request, pk):
     try:
-        document = Document.objects.get(pk=pk)
+        document = Document.all_objects.get(pk=pk).get_versions().latest()
         UserSubscription.objects.create(user=request.user,
                                         subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
                                         object_id=document.id)
@@ -108,7 +108,8 @@ def unsubscribe_ref_number_view(request, pk):
 
 @login_required
 def unsubscribe_document_view(request, pk):
-    return do_unsubscribe(request, pk, UserSubscription.SubscriptionType.DOCUMENT)
+    latest_version_id = Document.all_objects.get(id=pk).get_versions().latest().id
+    return do_unsubscribe(request, latest_version_id, UserSubscription.SubscriptionType.DOCUMENT)
 
 
 @login_required
