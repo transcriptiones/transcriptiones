@@ -366,3 +366,5 @@ MigrationBackup/
 cloud_sql_proxy
 
 .DS_store
+
+.idea/
