@@ -27,11 +27,6 @@
         {% endif %}
     {% endcard %}
 
-    {% card 'user_profile_activity' _('My Activity') %}
-        {% include 'main/document_filter.html' %}
-        {% render_table activity_table %}
-    {% endcard %}
-
     <!-- TODO check table pagination -->
 {% endblock %}
 

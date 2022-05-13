@@ -207,6 +207,7 @@ CKEDITOR_CONFIGS = {
             ['Format'],
             ['Bold', 'Italic', 'Underline', 'Strike'],
             ['NumberedList', 'BulletedList'],
+            ['Outdent', 'Indent'],
             ['Table', 'HorizontalRule'],
             ['SpecialChar'],
             ['RemoveFormat', 'Undo', 'Redo', 'Maximize']
@@ -299,6 +300,7 @@ CKEDITOR_CONFIGS = {
                          '\u00E6',  # latin small letter ae
                          '\u00D8',  # latin capital letter O with stroke
                          '\u00F8',  # latin small letter O with stroke
+                         '\u0249',  # latin small letter j with stroke
                          ]
     }
 }

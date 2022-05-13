@@ -94,13 +94,7 @@ def userprofile(request):
 
     user_table = TitleValueTable(data=get_user_info(request.user))
 
-    d_filter = DocumentFilter(request.GET, queryset=contributions)
-    activity_table = DocumentUserHistoryTable(data=d_filter.qs)
-    RequestConfig(request).configure(activity_table)
-
-    return render(request, 'main/users/user_profile.html', {'user_table': user_table,
-                                                            'activity_table': activity_table,
-                                                            'form_data': get_document_filter_data(request, d_filter)})
+    return render(request, 'main/users/user_profile.html', {'user_table': user_table})
 
 
 @login_required
@@ -115,7 +109,10 @@ def my_documents(request):
     activity_table = DocumentUserHistoryTable(data=d_filter.qs)
     RequestConfig(request).configure(activity_table)
 
-    return render(request, 'main/users/my_documents.html', {'activity_table': activity_table, 'filter': d_filter})
+    return render(request, 'main/users/my_documents.html', {'activity_table': activity_table,
+                                                            'form_data': get_document_filter_data(request, d_filter),
+                                                            'filter': d_filter, # Dont need anymore
+                                                            })
 
 
 @login_required

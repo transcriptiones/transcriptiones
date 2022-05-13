@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 16:15+0200\n"
+"POT-Creation-Date: 2022-05-13 14:37+0200\n"
 "PO-Revision-Date: 2021-09-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,15 +23,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr "Numeri di riferimento in questa istituzione"
 
-#: main/filters.py:85 main/models.py:743 main/models.py:779
+#: main/filters.py:85 main/models.py:745 main/models.py:781
 msgid "User"
 msgstr "Utente"
 
-#: main/filters.py:86 main/models.py:744
+#: main/filters.py:86 main/models.py:746
 msgid "Staff"
 msgstr ""
 
-#: main/filters.py:87 main/models.py:745
+#: main/filters.py:87 main/models.py:747
 msgid "Admin"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgid "First level Source Type"
 msgstr "Tipo di origine di primo livello"
 
 #: main/forms/forms_helper.py:36 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:781
+#: main/models.py:97 main/models.py:783
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -513,8 +513,8 @@ msgstr ""
 msgid "User State"
 msgstr "Stato utente"
 
-#: main/model_info.py:56 main/model_info.py:69 main/models.py:684
-#: main/models.py:756
+#: main/model_info.py:56 main/model_info.py:69 main/models.py:686
+#: main/models.py:758
 msgid "Active"
 msgstr "Attivo"
 
@@ -919,7 +919,7 @@ msgstr ""
 "Link diretto alla collezione nel catalogo dell'istituzione. Deve iniziare "
 "con http:// o https://"
 
-#: main/model_info.py:349 main/models.py:654
+#: main/model_info.py:349 main/models.py:656
 msgid "Username"
 msgstr "Nome utente"
 
@@ -932,7 +932,7 @@ msgstr ""
 "Il nome deve essere univoco e non può contenere caratteri speciali. Verrà "
 "mostrato ad altri utenti."
 
-#: main/model_info.py:352 main/models.py:660
+#: main/model_info.py:352 main/models.py:662
 msgid "First name"
 msgstr "Nome"
 
@@ -943,7 +943,7 @@ msgstr ""
 "Il tuo nome. Queste informazioni non saranno pubbliche a meno che tu non lo "
 "scelga."
 
-#: main/model_info.py:354 main/models.py:665
+#: main/model_info.py:354 main/models.py:667
 msgid "Last name"
 msgstr "Cognome"
 
@@ -1083,7 +1083,7 @@ msgid "Institution which holds this reference number and document"
 msgstr ""
 "L'istituzione che detiene il documento con questo numero di riferimento."
 
-#: main/models.py:101 main/models.py:777
+#: main/models.py:101 main/models.py:779
 msgid "Reference number"
 msgstr "Riferimento"
 
@@ -1287,7 +1287,7 @@ msgstr "Lingue"
 msgid "Languages used in the source"
 msgstr "Lingue utilizzate nella fonte"
 
-#: main/models.py:336 main/models.py:782
+#: main/models.py:336 main/models.py:784
 #, fuzzy
 msgid "Source Type"
 msgstr "Tipo di origine"
@@ -1362,7 +1362,7 @@ msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 "Aggiungi commenti editoriali o osservazioni sul contenuto del documento."
 
-#: main/models.py:380 main/templates/main/details/document_detail.html:61
+#: main/models.py:380 main/templates/main/details/document_detail.html:64
 #: main/templates/main/upload/create_document.html:78
 #: main/templates/main/upload/create_document_backup.html:58
 msgid "Transcript"
@@ -1482,106 +1482,106 @@ msgid ""
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:608
+#: main/models.py:610
 #, fuzzy
 msgid "Please enter an email address"
 msgstr "Inserisci un indirizzo e-mail"
 
-#: main/models.py:634
+#: main/models.py:636
 #, fuzzy
 msgid "All superusers must have is_staff = True."
 msgstr "Tutti i superutenti devono avere is_staff = True."
 
-#: main/models.py:636
+#: main/models.py:638
 #, fuzzy
 msgid "All superusers must have is_superuser = True"
 msgstr "Tutti i superutenti devono avere is_superuser = True"
 
-#: main/models.py:644 main/models.py:650
+#: main/models.py:646 main/models.py:652
 #, fuzzy
 msgid "No notification Emails"
 msgstr "Nessuna e-mail di notifica"
 
-#: main/models.py:645
+#: main/models.py:647
 #, fuzzy
 msgid "Every time a subscribed document has changed."
 msgstr "Ogni volta che un documento sottoscritto è cambiato."
 
-#: main/models.py:646
+#: main/models.py:648
 #, fuzzy
 msgid "Once a day, only if changes happened."
 msgstr "Una volta al giorno, solo se si sono verificati cambiamenti."
 
-#: main/models.py:647
+#: main/models.py:649
 #, fuzzy
 msgid "Once a week, only if changes happened."
 msgstr "Una volta alla settimana, solo se si sono verificati cambiamenti."
 
-#: main/models.py:651
+#: main/models.py:653
 #, fuzzy
 msgid "Every time a message is received."
 msgstr "Ogni volta che viene inviato un messaggio."
 
-#: main/models.py:652
+#: main/models.py:654
 #, fuzzy
 msgid "Once a day, only if you received messages."
 msgstr "Una volta al giorno, solo se hai ricevuto messaggi."
 
-#: main/models.py:658
+#: main/models.py:660
 #, fuzzy
 msgid "Provide a user name"
 msgstr "Fornire un nome utente"
 
-#: main/models.py:668
+#: main/models.py:670
 msgid "Enter your last name"
 msgstr "Inserisci il tuo cognome"
 
-#: main/models.py:670
+#: main/models.py:672
 msgid "Email"
 msgstr "Email"
 
-#: main/models.py:674
+#: main/models.py:676
 msgid "Enter your email address"
 msgstr "Inserisci il tuo indirizzo email"
 
-#: main/models.py:676
+#: main/models.py:678
 #, fuzzy
 msgid "Email confirmed"
 msgstr "Email confermata"
 
-#: main/models.py:678
+#: main/models.py:680
 #, fuzzy
 msgid "Has the user confirmed the email address?"
 msgstr "L'utente ha confermato l'indirizzo e-mail?"
 
-#: main/models.py:680
+#: main/models.py:682
 #, fuzzy
 msgid "Staff status"
 msgstr "Stato del personale"
 
-#: main/models.py:682
+#: main/models.py:684
 #, fuzzy
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "L'utente ha lo stato di staff e può quindi accedere alla pagina di "
 "amministrazione?"
 
-#: main/models.py:686
+#: main/models.py:688
 #, fuzzy
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr "L'utente è attivo? Gli utenti vengono disattivati anziché eliminati."
 
-#: main/models.py:688
+#: main/models.py:690
 #, fuzzy
 msgid "Date joined"
 msgstr "Data di adesione"
 
-#: main/models.py:691
+#: main/models.py:693
 #, fuzzy
 msgid "Mark anonymous by default"
 msgstr "Contrassegna anonimo per impostazione predefinita"
 
-#: main/models.py:693
+#: main/models.py:695
 #, fuzzy
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
@@ -1591,43 +1591,43 @@ msgstr ""
 "anonimo per impostazione predefinita. Può essere modificato su base "
 "documentale."
 
-#: main/models.py:696
+#: main/models.py:698
 #, fuzzy
 msgid "Orcid"
 msgstr "Orcido"
 
-#: main/models.py:700
+#: main/models.py:702
 #, fuzzy
 msgid "User id from https://orcid.org/"
 msgstr "ID utente da https://orcid.org/"
 
-#: main/models.py:702
+#: main/models.py:704
 #, fuzzy
 msgid "Subscription Notification policy"
 msgstr "Criteri di notifica della sottoscrizione"
 
-#: main/models.py:705
+#: main/models.py:707
 #, fuzzy
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Con quale frequenza vuoi essere avvisato dei tuoi documenti sottoscritti?"
 
-#: main/models.py:708
+#: main/models.py:710
 #, fuzzy
 msgid "Message Notification policy"
 msgstr "Criteri di notifica dei messaggi"
 
-#: main/models.py:711
+#: main/models.py:713
 #, fuzzy
 msgid "How often do you want to be notified about messages you receive?"
 msgstr "Con quale frequenza vuoi ricevere notifiche sui messaggi che ricevi?"
 
-#: main/models.py:714
+#: main/models.py:716
 #, fuzzy
 msgid "Subscription to owned documents"
 msgstr "Sottoscrizione di documenti di proprietà"
 
-#: main/models.py:715
+#: main/models.py:717
 #, fuzzy
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
@@ -1635,40 +1635,40 @@ msgstr ""
 "Vuoi essere avvisato quando i tuoi documenti sono stati modificati da un "
 "altro utente?"
 
-#: main/models.py:720 main/models.py:859
+#: main/models.py:722 main/models.py:861
 msgid "Default User Interface Language"
 msgstr ""
 
-#: main/models.py:721 main/models.py:860
+#: main/models.py:723 main/models.py:862
 msgid "What is your preferred language?"
 msgstr ""
 
-#: main/models.py:726
+#: main/models.py:728
 msgid "Secret API Key"
 msgstr ""
 
-#: main/models.py:727
+#: main/models.py:729
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: main/models.py:757
+#: main/models.py:759
 #, fuzzy
 #| msgid "Active"
 msgid "Inactive"
 msgstr "Attivo"
 
-#: main/models.py:778 main/templates/main/details/document_detail.html:21
+#: main/models.py:780 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr "Documento"
 
-#: main/models.py:780 main/templates/main/details/author_detail.html:8
+#: main/models.py:782 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 #, fuzzy
 msgid "Scribe"
 msgstr "Oggetto Subscription"
 
 #: main/tables/tables.py:27 main/tables/tables.py:173
-#: main/templates/main/details/document_detail.html:50
+#: main/templates/main/details/document_detail.html:53
 #: main/templates/main/upload/export_document.html:22
 #: main/templates/main/users/user_options_copy.html:4
 #: main/templates/main/users/user_options_copy2.html:4
@@ -1831,7 +1831,7 @@ msgstr ""
 "modificare ed eliminare oggetti di database."
 
 #: main/templates/main/admin/admin.html:28 main/templates/main/base.html:301
-#: main/templates/main/details/source_type_child_detail.html:67
+#: main/templates/main/details/source_type_child_detail.html:69
 #: main/templates/main/users/user_options_copy2.html:23
 msgid "Documents"
 msgstr "Documenti"
@@ -1844,8 +1844,8 @@ msgstr "Numeri di riferimento"
 #: main/templates/main/admin/admin.html:31
 #: main/templates/main/base_copy.html:116
 #: main/templates/main/details/browse_options.html:30
-#: main/templates/main/details/source_type_child_detail.html:17
-#: main/templates/main/details/source_type_child_detail.html:26
+#: main/templates/main/details/source_type_child_detail.html:18
+#: main/templates/main/details/source_type_child_detail.html:28
 #: main/templates/main/details/source_type_list.html:14
 #: main/templates/main/details/source_type_list.html:19
 #: main/templates/main/details/source_type_parent_detail.html:14
@@ -2060,7 +2060,7 @@ msgstr ""
 
 #: main/templates/main/admin/statistics.html:7
 #, fuzzy
-msgid "Transcriptiones Statistics"
+msgid "transcriptiones Statistics"
 msgstr "Trascrizioni Statistiche"
 
 #: main/templates/main/admin/statistics.html:11
@@ -2088,7 +2088,7 @@ msgstr ""
 #: main/templates/main/details/institution_detail.html:13
 #: main/templates/main/details/institution_list.html:13
 #: main/templates/main/details/ref_number_detail.html:15
-#: main/templates/main/details/source_type_child_detail.html:16
+#: main/templates/main/details/source_type_child_detail.html:17
 #: main/templates/main/details/source_type_list.html:13
 #, fuzzy
 msgid "Collection"
@@ -2218,7 +2218,7 @@ msgstr "Ricerca avanzata"
 #: main/templates/main/info/api_documentation.html:20
 #: main/templates/main/info/info_options.html:10
 #, fuzzy
-msgid "Transcriptiones API"
+msgid "transcriptiones API"
 msgstr "Trascrizione"
 
 #: main/templates/main/base.html:258
@@ -2271,7 +2271,7 @@ msgstr "Esci"
 #: main/templates/main/base.html:297 main/templates/main/users/messages.html:10
 #: main/templates/main/users/messages.html:17
 #: main/templates/main/users/read_message.html:17
-#: main/templates/main/users/user_options.html:8
+#: main/templates/main/users/user_options.html:9
 #: main/templates/main/users/user_options_copy.html:64
 #: main/templates/main/users/user_options_copy2.html:35
 #: main/templates/main/users/write_message.html:17
@@ -2293,7 +2293,7 @@ msgstr "Abbonamenti"
 #: main/templates/main/base.html:302 main/templates/main/base_copy.html:150
 #: main/templates/main/sidebar.html:61
 #: main/templates/main/users/my_documents.html:22
-#: main/templates/main/users/user_options.html:10
+#: main/templates/main/users/user_options.html:6
 #, fuzzy
 #| msgid "Documents"
 msgid "My Documents"
@@ -2358,7 +2358,7 @@ msgstr "Informazioni utente"
 #: main/templates/main/base_copy.html:152
 #: main/templates/main/users/subscriptions.html:10
 #: main/templates/main/users/subscriptions.html:17
-#: main/templates/main/users/user_options.html:9
+#: main/templates/main/users/user_options.html:10
 #: main/templates/main/users/user_options_copy.html:66
 msgid "Subscriptions"
 msgstr "Abbonamenti"
@@ -2399,7 +2399,7 @@ msgid "Subscribe to this scribe"
 msgstr "Parti trascritte del documento"
 
 #: main/templates/main/details/author_detail.html:30
-#: main/templates/main/details/document_detail.html:43
+#: main/templates/main/details/document_detail.html:46
 #: main/templates/main/details/institution_detail.html:30
 #: main/templates/main/details/ref_number_detail.html:33
 #, python-format
@@ -2456,13 +2456,13 @@ msgid ""
 "scribes of the actual source, not the creators of the transcription."
 msgstr ""
 
-#: main/templates/main/details/document_detail.html:26
+#: main/templates/main/details/document_detail.html:29
 #: main/templates/main/details/document_history.html:22
 #: main/templates/main/upload/edit_meta.html:24
 msgid "Overview"
 msgstr "Panoramica"
 
-#: main/templates/main/details/document_detail.html:29
+#: main/templates/main/details/document_detail.html:32
 #, fuzzy, python-format
 msgid ""
 "\n"
@@ -2474,17 +2474,17 @@ msgstr ""
 "Benvenuto, %(username)s\n"
 "                    "
 
-#: main/templates/main/details/document_detail.html:37
+#: main/templates/main/details/document_detail.html:40
 #, fuzzy
 msgid "Unsubscribe from this document"
 msgstr "Parti trascritte del documento"
 
-#: main/templates/main/details/document_detail.html:39
+#: main/templates/main/details/document_detail.html:42
 #, fuzzy
 msgid "Subscribe to this document"
 msgstr "Parti trascritte del documento"
 
-#: main/templates/main/details/document_detail.html:53
+#: main/templates/main/details/document_detail.html:56
 #: main/templates/main/toolbox.html:5
 #: main/templates/main/upload/edit_document_transcription.html:14
 #: main/templates/main/upload/edit_document_transcription.html:26
@@ -2492,30 +2492,30 @@ msgstr "Parti trascritte del documento"
 msgid "Edit Transcription"
 msgstr "Modifica trascrizione"
 
-#: main/templates/main/details/document_detail.html:54
+#: main/templates/main/details/document_detail.html:57
 #: main/templates/main/toolbox.html:10
 #: main/templates/main/upload/edit_meta.html:19
 msgid "Edit Metadata"
 msgstr "Modifica metadati"
 
-#: main/templates/main/details/document_detail.html:56
+#: main/templates/main/details/document_detail.html:59
 msgid "View Version History"
 msgstr ""
 
-#: main/templates/main/details/document_detail.html:57
+#: main/templates/main/details/document_detail.html:60
 #: main/templates/main/upload/export_document.html:18
 #, fuzzy
 msgid "Export Document"
 msgstr "Esporta documento"
 
-#: main/templates/main/details/document_detail.html:66
+#: main/templates/main/details/document_detail.html:69
 #: main/templates/main/upload/create_document.html:82
 #: main/templates/main/upload/edit_meta.html:31
 #, fuzzy
 msgid "Content Metadata"
 msgstr "Metadati del contenuto"
 
-#: main/templates/main/details/document_detail.html:70
+#: main/templates/main/details/document_detail.html:73
 #: main/templates/main/upload/create_document.html:105
 #: main/templates/main/upload/create_document_backup.html:68
 #: main/templates/main/upload/edit_meta.html:78
@@ -2523,7 +2523,7 @@ msgstr "Metadati del contenuto"
 msgid "Manuscript Description"
 msgstr "Descrizione del manoscritto"
 
-#: main/templates/main/details/document_detail.html:74
+#: main/templates/main/details/document_detail.html:77
 #: main/templates/main/upload/create_document.html:115
 #: main/templates/main/upload/create_document_backup.html:78
 #, fuzzy
@@ -2599,12 +2599,12 @@ msgid ""
 "    "
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:27
+#: main/templates/main/details/source_type_child_detail.html:29
 #: main/templates/main/details/source_type_list.html:20
 msgid "Click a source type to view their child source types."
 msgstr ""
 
-#: main/templates/main/details/source_type_child_detail.html:48
+#: main/templates/main/details/source_type_child_detail.html:50
 #: main/templates/main/details/source_type_list.html:41
 #, fuzzy, python-format
 msgid ""
@@ -2616,7 +2616,7 @@ msgstr ""
 "Benvenuto, %(username)s\n"
 "                    "
 
-#: main/templates/main/details/source_type_child_detail.html:69
+#: main/templates/main/details/source_type_child_detail.html:71
 #, fuzzy
 msgid "Documents with type"
 msgstr "Autore del documento"
@@ -2722,7 +2722,7 @@ msgstr "Vai alla pagina principale"
 #: main/templates/main/info/about.html:7
 #: main/templates/main/info/api_documentation.html:7
 #, fuzzy
-msgid "What is Transcriptiones?"
+msgid "What is transcriptiones?"
 msgstr "Che cos'è le trascrizioni?"
 
 #: main/templates/main/info/about.html:12
@@ -2745,7 +2745,7 @@ msgstr "Il Progetto"
 
 #: main/templates/main/info/blank.html:7
 #, fuzzy
-msgid "Information about Transcriptiones"
+msgid "Information about transcriptiones"
 msgstr "Informazioni sulle trascrizioni"
 
 #: main/templates/main/info/contact.html:8
@@ -3297,29 +3297,37 @@ msgstr ""
 msgid "Export document"
 msgstr "Esporta documento"
 
-#: main/templates/main/upload/export_document.html:29
-#: main/templates/main/upload/export_document.html:30
-#: main/templates/main/upload/export_document.html:31
-#: main/templates/main/upload/export_document.html:32
+#: main/templates/main/upload/export_document.html:24
+#, fuzzy
+msgid ""
+"You can export the transcriptions in different formats. Please choose below:"
+msgstr ""
+"Puoi nascondere il tuo nome utente nell'elenco di trascrizione se lo "
+"desideri."
+
+#: main/templates/main/upload/export_document.html:33
+#: main/templates/main/upload/export_document.html:36
+#: main/templates/main/upload/export_document.html:39
+#: main/templates/main/upload/export_document.html:42
 msgid "This feature is not available yet. It will be implemented soon."
 msgstr ""
 
-#: main/templates/main/upload/export_document.html:29
+#: main/templates/main/upload/export_document.html:34
 #, fuzzy
 msgid "Export TEI"
 msgstr "Esporta TEI"
 
-#: main/templates/main/upload/export_document.html:30
+#: main/templates/main/upload/export_document.html:37
 #, fuzzy
 msgid "Export JSON"
 msgstr "Esporta JSON"
 
-#: main/templates/main/upload/export_document.html:31
+#: main/templates/main/upload/export_document.html:40
 #, fuzzy
 msgid "Export HTML"
 msgstr "Esporta HTML"
 
-#: main/templates/main/upload/export_document.html:32
+#: main/templates/main/upload/export_document.html:43
 msgid "Export PDF"
 msgstr "Esporta in PDF"
 
@@ -3486,7 +3494,7 @@ msgstr ""
 
 #: main/templates/main/users/email_templates/password_reset_subject.txt:3
 #, fuzzy
-msgid "Transcriptiones: Passwort zurücksetzen"
+msgid "transcriptiones: Passwort zurücksetzen"
 msgstr "Trascrizioni Statistiche"
 
 #: main/templates/main/users/login.html:18
@@ -3606,7 +3614,7 @@ msgstr "Notifiche"
 #: main/templates/main/users/password_change.html:9
 #: main/templates/main/users/password_change.html:16
 #: main/templates/main/users/password_change.html:32
-#: main/templates/main/users/user_options.html:7
+#: main/templates/main/users/user_options.html:8
 #: main/templates/main/users/user_options_copy.html:83
 #: main/templates/main/users/user_options_copy2.html:16
 msgid "Change Password"
@@ -3844,7 +3852,7 @@ msgstr "Aggiorna Profilo"
 msgid "Update Your User Information"
 msgstr "Aggiornare le informazioni utente"
 
-#: main/templates/main/users/user_options.html:6
+#: main/templates/main/users/user_options.html:7
 #: main/templates/main/users/user_options_copy.html:84
 #, fuzzy
 #| msgid "Update Profile"
@@ -3972,12 +3980,6 @@ msgstr ""
 msgid "Delete API Key"
 msgstr "Elimina tutti i messaggi"
 
-#: main/templates/main/users/user_profile.html:30
-#, fuzzy
-#| msgid "My Activity"
-msgid "My Activity"
-msgstr "La mia Attività"
-
 #: main/templates/main/users/write_message.html:10
 #, fuzzy
 msgid "Write Message"
@@ -4022,6 +4024,11 @@ msgstr "Utente impostato su utente"
 msgid "User set to admin"
 msgstr "Utente impostato su admin"
 
+#: main/views/views_admin.py:146
+#, fuzzy
+msgid "Contact message marked \"answered\""
+msgstr "Messaggi di contatto"
+
 #: main/views/views_browse.py:234
 msgid "The transcription version you requested is not available."
 msgstr ""
@@ -4031,16 +4038,16 @@ msgstr ""
 msgid "Static version URL"
 msgstr "URL statico"
 
-#: main/views/views_edit.py:31
+#: main/views/views_edit.py:41
 #, fuzzy
 msgid "The document has been updated."
 msgstr "Il documento è stato creato."
 
-#: main/views/views_edit.py:37
+#: main/views/views_edit.py:47
 msgid "The transcription did not change. No new version saved."
 msgstr ""
 
-#: main/views/views_edit.py:90
+#: main/views/views_edit.py:100
 #, fuzzy
 msgid "The metadata of the document has been updated."
 msgstr "Il documento è stato creato."
@@ -4164,38 +4171,43 @@ msgstr ""
 msgid "Successfully logged in!"
 msgstr "Effettua il login con successo!"
 
-#: main/views/views_user.py:166
+#: main/views/views_user.py:163
 #, fuzzy
 msgid "Your user information has been updated"
 msgstr "La notifica è stata eliminata."
 
-#: main/views/views_user.py:197
+#: main/views/views_user.py:194
 #, fuzzy
 msgid "This email address is not registered."
 msgstr "Il messaggio è stato eliminato."
 
-#: main/views/views_user.py:213
+#: main/views/views_user.py:210
 msgid "An API Key has been generated"
 msgstr ""
 
-#: main/views/views_user.py:220
+#: main/views/views_user.py:217
 msgid "You need to generate an API key first."
 msgstr ""
 
-#: main/views/views_user.py:227
+#: main/views/views_user.py:224
 #, fuzzy
 #| msgid "Your message has been sent."
 msgid "Your API Key has been renewed"
 msgstr "Il tuo messaggio è stato spedito."
 
-#: main/views/views_user.py:233
+#: main/views/views_user.py:230
 msgid "No API key was found to delete."
 msgstr ""
 
-#: main/views/views_user.py:239
+#: main/views/views_user.py:236
 #, fuzzy
 msgid "Your API Key has been deleted"
 msgstr "Il messaggio è stato eliminato."
+
+#, fuzzy
+#~| msgid "My Activity"
+#~ msgid "My Activity"
+#~ msgstr "La mia Attività"
 
 #, fuzzy
 #~| msgid "Password changed"

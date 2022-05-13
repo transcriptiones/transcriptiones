@@ -143,7 +143,7 @@ def admin_inbox_message_answer(request, msg_id):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_inbox_message_mark(request, msg_id):
     message = get_object_or_404(ContactMessage, id=msg_id)
-    messages.success(request, 'Contact message marked "answered"')
+    messages.success(request, _('Contact message marked "answered"'))
     message.state = 1
     message.save()
     return redirect('main:admin_inbox')

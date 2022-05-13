@@ -1,5 +1,5 @@
 mail_logo_url       --> http://www.transcriptiones.ch
-mail_title          --> Wilkommen bei Transcriptiones
+mail_title          --> Wilkommen bei transcriptiones
 mail_paragraphs     ["text 1", "text 2"]
 mail_greetings      --> Mit freundlichen Gr&uuml;ssen</br>Ihr transcriptiones-Team
 mail_disclaimer

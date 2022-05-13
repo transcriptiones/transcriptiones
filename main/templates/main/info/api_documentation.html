@@ -4,7 +4,7 @@
 {% load django_bootstrap_breadcrumbs %}
 
 {% block page_title %}
-    {% translate 'What is Transcriptiones?' %}
+    {% translate 'What is transcriptiones?' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -17,16 +17,16 @@
 
     {% include 'main/info/info_options.html' %}
 
-    {% card 'tr_api' _('Transcriptiones API') %}
+    {% card 'tr_api' _('transcriptiones API') %}
         <div class="text-center">
             <small class="text-muted">(This text exists in English only)</small>
         </div>
 
         <h4>Why an API?</h4>
         <p>
-            Transcriptiones lets you search for documents and view their transcription. But what if you want to download
+            transcriptiones lets you search for documents and view their transcription. But what if you want to download
             a bunch of transcriptions in a certain format and use it in your research?<br/><br/>
-            That's where the Transcriptiones <b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface comes into play. With
+            That's where the transcriptiones <b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface comes into play. With
             a set of simple commands you can search and download our database. The request results are in JSON format and
             the transcription exports are TEI or plain text.<br/><br/>
 
@@ -36,7 +36,7 @@
             Example Result (First page of the document list):
             <pre class="pre-scrollable"><code>{
     "request": {
-        "api": "Transcriptiones API",
+        "api": "transcriptiones API",
         "documentation": "https://transcriptiones.ch/api/documentation/",
         "api-version": "v1",
         "requested-at": "2022-01-25 15:52:11"

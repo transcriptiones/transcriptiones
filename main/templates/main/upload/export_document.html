@@ -21,15 +21,26 @@
 {% block content %}
     {% card 'user_profile_options' _('Options') %}
         <p>
-            You can export the transcriptions in different formats. Please choose below:
+            {% translate "You can export the transcriptions in different formats. Please choose below:" %}
         </p>
         <div class="text-center">
             <form method="POST">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary disabled" name="export_tei" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export TEI' %}</button>
-                <button type="submit" class="btn btn-primary disabled" name="export_json" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export JSON' %}</button>
-                <button type="submit" class="btn btn-primary disabled" name="export_html" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export HTML' %}</button>
-                <button type="submit" class="btn btn-primary disabled" name="export_pdf" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">{%  translate 'Export PDF' %}</button>
+                {% comment %}
+                    TODO: To enable a Button after implementing export, remove style attr and wrapping span.
+                {% endcomment %}
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
+                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_tei" disabled>{%  translate 'Export TEI' %}</button>
+                </span>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
+                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_json" disabled>{%  translate 'Export JSON' %}</button>
+                </span>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
+                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_html" disabled>{%  translate 'Export HTML' %}</button>
+                </span>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
+                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_pdf" disabled>{%  translate 'Export PDF' %}</button>
+                </span>
             </form>
         </div>
     {% endcard %}

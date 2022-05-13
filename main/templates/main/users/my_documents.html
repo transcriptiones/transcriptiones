@@ -20,9 +20,23 @@
     {% include 'main/users/user_options.html' %}
 
     {% card 'user_profile_activity' _('My Documents') %}
-        {% include 'main/filter.html' %}
+        {% include 'main/document_filter.html' %}
         {% render_table activity_table %}
     {% endcard %}
 
     <!-- TODO check table pagination -->
+{% endblock %}
+
+{% block extrascripts %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js"></script>
+
+    <script>
+        window.addEventListener('range-changed', (e) => {
+            const data = e.detail;
+            document.getElementById('doc_start_date').value = data.minRangeValue;
+            document.getElementById('doc_end_date').value = data.maxRangeValue;
+            console.log(data)
+            // data = { sliderId: null, minRangeValue: 0, maxRangeValue: 1000 }
+        });
+    </script>
 {% endblock %}

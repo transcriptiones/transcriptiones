@@ -16,6 +16,8 @@ def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
     document.commit_message = ''
     document.publish_user = request.user.mark_anonymous
     old_transcription = document.transcription_text
+    old_languages = document.language.all()
+    old_authors = document.author.all()
     form = EditTranscriptionForm(instance=document)
 
     if request.method == "POST":
@@ -27,7 +29,15 @@ def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
                 document.transcription_text = updated_data.transcription_text
                 document.commit_message = updated_data.commit_message
                 document.submitted_by = request.user
+                document.publish_user = not updated_data.publish_user
                 document.save()
+
+                for language in old_languages:
+                    document.language.add(language)
+
+                for author in old_authors:
+                    document.author.add(author)
+
                 messages.success(request, _('The document has been updated.'))
                 return HttpResponseRedirect(reverse('main:document_detail', kwargs={'inst_slug': inst_slug,
                                                                                     'ref_slug': ref_slug,
@@ -77,7 +87,7 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
             document.seal = updated_data.seal
             document.commit_message = updated_data.commit_message
             document.submitted_by = request.user
-            document.publish_user = not request.user.is_anonymous
+            document.publish_user = not updated_data.publish_user
 
             document.save()
 

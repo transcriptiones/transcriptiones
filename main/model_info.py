@@ -40,7 +40,7 @@ def get_source_type_info(source_type):
 
 def get_user_info(user):
     api_key_line = ""
-    api_auth_key_expired = True if user.api_auth_key_expiration <= date.today() else False
+    api_auth_key_expired = True if user.api_auth_key_expiration and user.api_auth_key_expiration <= date.today() else False
 
     if user.api_auth_key is not None:
         api_key_line = mark_safe(

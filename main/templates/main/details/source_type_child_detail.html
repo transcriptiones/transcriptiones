@@ -12,13 +12,15 @@
 {% endblock %}
 
 {% block breadcrumbs %}
+    {% get_translated_source_type_name selected LANGUAGE_CODE as selected_type_name %}
     {{ block.super }}
     {% breadcrumb _("Collection") "main:browse_options" %}
     {% breadcrumb _("Source Types") "main:source_type_list" %}
     {% if selected.parent_type != None %}
-        {% breadcrumb selected.parent_type "main:source_type_detail" selected.parent_type.id %}
+        {% get_translated_source_type_name selected.parent_type LANGUAGE_CODE as selected_parent_type_name %}
+        {% breadcrumb selected_parent_type_name "main:source_type_detail" selected.parent_type.id %}
     {% endif %}
-    {% breadcrumb selected "main:source_type_detail" selected.id %}
+    {% breadcrumb selected_type_name "main:source_type_detail" selected.id %}
 {% endblock %}
 
 {% block content %}

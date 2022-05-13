@@ -31,7 +31,7 @@ def messages_view(request):
         user_message_data.append({'message_type': 'notification',
                                   'pk': notif.id,
                                   'viewing_state': notif.viewing_state,
-                                  'sending_user': 'Transcriptiones',
+                                  'sending_user': 'transcriptiones',
                                   'subject': notif.subject,
                                   'sending_time': notif.sending_time})
 

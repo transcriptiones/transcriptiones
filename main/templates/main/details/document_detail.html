@@ -19,6 +19,9 @@
     {% breadcrumb document.parent_ref_number.holding_institution document.parent_ref_number.holding_institution.get_absolute_url %}
     {% breadcrumb document.parent_ref_number document.parent_ref_number.get_absolute_url %}
     {% breadcrumb _('Document') '' %}
+    {% if newest %}
+        {% breadcrumb document.version_number '' %} <!-- TODO: Make a nice label-string -->
+    {% endif %}
 {% endblock %}
 
 {% block content %}
