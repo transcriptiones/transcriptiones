@@ -541,8 +541,11 @@ class Document(models.Model):
 
             # Save a new version alongside any old ones
             self.pk = None
-            # Set all old versions to be inactive
-            type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk).update(active=False)
+            # Set all old versions to be inactive. We need to loop here, so that the post_save signal is emitted
+            # and the search index is updated for all versions.
+            for document in type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk):
+                document.active = False
+                document.save(force_update=True)
             # increment version_number by 1
             try:
                 self.get_versions().latest()
@@ -597,9 +600,10 @@ class Document(models.Model):
 
         super().save(force_update=force_update, *args, **kwargs)
 
-        # Update document subscription to make sure further changes trigger notifications.
-        UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
-                                        object_id=old_doc_id).update(object_id=self.pk)
+        if not force_update:
+            # Update document subscription to make sure further changes trigger notifications.
+            UserSubscription.objects.filter(subscription_type=UserSubscription.SubscriptionType.DOCUMENT,
+                                            object_id=old_doc_id).update(object_id=self.pk)
 
 
 
