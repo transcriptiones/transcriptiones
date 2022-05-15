@@ -157,9 +157,11 @@
                 createRefNumberAsyncModalForm();
             });
 
-            // Disable the Ref number before anything has been selected
-            $('#id_parent_ref_number').prop('disabled', true)
-            $('#create-refn-async').prop('disabled', true)
+            // Disable the Ref number if nothing is selected
+            if ($('#id_parent_institution').children().length < 2) {
+                $('#id_parent_ref_number').prop('disabled', true);
+                $('#create-refn-async').prop('disabled', true);
+            };
 
             /////////////////////////////////////////////////////////////
             // RESETS THE SOURCE TYPE DROPDOWN WHEN THE PARENT TYPE CHANGES
@@ -172,7 +174,9 @@
             });
 
             // Disable child source_type before anything has been selected
-            $('#id_source_type').prop('disabled', true)
+            if ($('#id_selection_helper_source_type').children().length < 2) {
+                $('#id_source_type').prop('disabled', true);
+            };
 
             /////////////////////////////////////////////////////////////
             // CREATE INSTITUTION BUTTONS
