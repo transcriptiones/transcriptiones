@@ -135,7 +135,11 @@ def test_search_3(request):
                'form_data': get_document_filter_data(request),
                'total': total_results,  # Num of total search results
                'page_links': pagination_link_list,
+               'first_page': my_url + 'page=1',
+               'previous_page': my_url + 'page=' + str(current_page - 1),
                'current_page': current_page,
+               'next_page': my_url + 'page=' + str(current_page + 1),
+               'last_page': my_url + 'page=' + str(number_of_pages),
                'num_pages': number_of_pages,
                'result': enriched_result}  # Search result tuples: (elasticsearch-Document, Django-db-object)
     return render(request, "main/search/search_view_3.html", context)

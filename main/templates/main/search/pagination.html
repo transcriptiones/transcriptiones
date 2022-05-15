@@ -3,7 +3,10 @@
 <nav aria-label="Search result pages">
     <ul class="pagination justify-content-center">
         <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
-          <a class="page-link" href="#">{% translate 'Previous' %}</a>
+          <a class="page-link" href="{{ first_page }}">«« {% translate 'first' %}</a>
+        </li>
+        <li class="page-item{% if current_page == 1 %} disabled{% endif %}">
+          <a class="page-link" href="{{ previous_page }}">« {% translate 'previous' %}</a>
         </li>
         {% for link in page_links %}
             {% if link.0 == current_page %}
@@ -13,7 +16,10 @@
             {% endif %}
         {% endfor %}
         <li class="page-item{% if num_pages == current_page %} disabled{% endif %}">
-          <a class="page-link" href="#">{% translate 'Next' %}</a>
+          <a class="page-link" href="{{ next_page }}">{% translate 'next' %} »</a>
+        </li>
+        <li class="page-item{% if num_pages == current_page %} disabled{% endif %}">
+          <a class="page-link" href="{{ last_page }}">{% translate 'last' %} »»</a>
         </li>
     </ul>
 </nav>
