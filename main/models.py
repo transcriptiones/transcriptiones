@@ -260,8 +260,16 @@ class SourceType(models.Model):
 
         return self.type_description
 
+    def sorted_children(self, language):
+        if language == 'en-us':
+            sort_field = 'type_name'
+        else:
+            sort_field = 'type_name_' + language
+        return self.child_type.order_by(sort_field)
+
     def __str__(self):
         return self.type_name
+
 
 
 class DocumentManager(models.Manager):

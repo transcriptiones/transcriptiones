@@ -17,6 +17,15 @@ from main.tables.tables_document import DocumentTable, DocumentVersionHistoryTab
 from main.filters import InstitutionFilter, RefNumberFilter, DocumentFilter, AuthorFilter
 
 
+def get_order_field(request):
+    """Returns field name to order by. Model field names need to be named according to the respective
+    language standards."""
+    if request.LANGUAGE_CODE == 'en-us':
+        return 'type_name'
+    else:
+        return 'type_name_' + request.LANGUAGE_CODE
+
+
 def browse_options(request):
     """Shows a page with browse options: institutions, authors, Source Types. This is a static page and only
     shows the template. Can be accessed without login."""
@@ -84,7 +93,10 @@ class AuthorDetailView(MultiTableMixin, DetailView):
 
 def source_type_list_view(request):
     """Creates a list view for all parent source types."""
-    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+    type_list = list(SourceType.objects.filter(parent_type=None).exclude(type_name__istartswith='other').order_by(
+        get_order_field(request)))
+    other_list = list(SourceType.objects.filter(parent_type=None, type_name__istartswith='other'))
+    parent_source_type_list = type_list + other_list
     context = {'source_types': parent_source_type_list}
     return render(request, "main/details/source_type_list.html", context=context)
 
@@ -92,13 +104,19 @@ def source_type_list_view(request):
 def source_type_detail_view(request, pk):
     """Shows a view with source types. Depends if the source type to show is a parent type or a child type."""
     selected_source_type = SourceType.objects.get(id=pk)
-    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+    type_list = list(SourceType.objects.filter(parent_type=None).exclude(type_name__istartswith='other').order_by(
+        get_order_field(request)))
+    other_list = list(SourceType.objects.filter(parent_type=None, type_name__istartswith='other'))
+    parent_source_type_list = type_list + other_list
 
     if selected_source_type.parent_type is None:
-        children_source_type_list = SourceType.objects.filter(parent_type=selected_source_type).order_by('type_name')
+        children_type_list = list(SourceType.objects.filter(parent_type=selected_source_type).exclude(type_name__istartswith='other').order_by(
+            get_order_field(request)))
+        children_other_list = list(SourceType.objects.filter(parent_type=selected_source_type, type_name__istartswith='other'))
+        children_source_type_list = children_type_list + children_other_list
         document_list = Document.objects.filter(source_type__in=children_source_type_list)
         my_filter = DocumentFilter(request.GET, document_list)
-        table = DocumentTable(data=my_filter.qs)
+        table = DocumentTable(data=my_filter.qs, language=request.LANGUAGE_CODE)
         RequestConfig(request).configure(table)
 
     else:

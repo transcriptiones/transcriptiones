@@ -138,6 +138,7 @@ def public_profile(request, username):
                                                                    'subscribed': subscribed,
                                                                    'form_data': get_document_filter_data(request, d_filter)})
 
+
 class UserUpdateView(LoginRequiredMixin, View):
     """View for changing User Data"""
 

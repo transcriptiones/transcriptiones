@@ -67,6 +67,11 @@ def get_translated_source_type_description(source_type, language):
     return source_type.get_translated_description(language)
 
 
+@register.simple_tag
+def get_sorted_child_types(source_type, language):
+    return source_type.sorted_children(language)
+
+
 @register.tag
 def collapsed_card(parser, token):
     return create_card(parser, token, collapsed=True, end_tag="endcollapsedcard")

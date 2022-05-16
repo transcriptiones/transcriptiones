@@ -86,6 +86,9 @@ def contact_view(request):
 
 
 def guidelines_view(request):
-    parent_source_type_list = SourceType.objects.filter(parent_type=None).order_by('type_name')
+    parent_source_type_list = SourceType.objects.filter(parent_type=None).exclude(
+        type_name__istartswith='other').order_by('type_name')
+    parent_source_type_list = parent_source_type_list.union(
+        SourceType.objects.filter(parent_type=None, type_name__istartswith='other'))
     context = {'source_types': parent_source_type_list}
     return render(request, 'main/info/guidelines.html', context=context)

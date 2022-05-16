@@ -43,6 +43,11 @@ class MinimalDocumentTable(TranscriptionesTable):
 class DocumentTable(MinimalDocumentTable):
     """The DocumentTable shows a list of documents"""
 
+    def __init__(self, *args, **kwargs):
+        language = kwargs.pop('language')
+        super(DocumentTable, self).__init__(*args, **kwargs)
+        self.language = language
+
     class Meta(MinimalDocumentTable.Meta):
         fields = ("title_name", "place_name", "doc_start_date", "source_type", "document_utc_update")
 
@@ -50,6 +55,8 @@ class DocumentTable(MinimalDocumentTable):
     source_type = tables.Column(orderable=False)
     document_utc_update = tables.DateTimeColumn(orderable=False, verbose_name=_('Last update'))
 
+    def render_source_type(self, value, record):
+        return value.get_translated_name(self.language)
 
 class DocumentUserHistoryTable(TranscriptionesTable):
     """The DocumentUserHistoryTable shows a list of documents"""

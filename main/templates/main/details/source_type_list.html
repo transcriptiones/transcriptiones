@@ -43,7 +43,8 @@
                                         {% endblocktranslate %}
                                     </a>
                                 {% endif %}
-                                {% for child in st.child_type.all %}
+                                {% get_sorted_child_types st LANGUAGE_CODE as children %}
+                                {% for child in children %}
                                     <a href="{% url 'main:source_type_detail' child.pk %}" class="list-group-item list-group-item-action list-group-item-st">
                                         {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
                                         <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>
