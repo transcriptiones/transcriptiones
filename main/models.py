@@ -543,7 +543,7 @@ class Document(models.Model):
             self.pk = None
             # Set all old versions to be inactive. We need to loop here, so that the post_save signal is emitted
             # and the search index is updated for all versions.
-            for document in type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk):
+            for document in type(self).all_objects.filter(document_id=self.document_id).exclude(pk=self.pk).filter(active=True):
                 document.active = False
                 document.save(force_update=True)
             # increment version_number by 1

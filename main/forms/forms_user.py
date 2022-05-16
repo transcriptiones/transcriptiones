@@ -70,7 +70,7 @@ class SignUpForm(UserCreationForm):
     """Form to sign up for transcriptiones"""
 
     email = forms.EmailField(label=get_popover_html(User, 'email'), max_length=255,
-                             help_text=_('E-Mail-Address. We will send an activation link to this address.'))
+                             help_text=_('Email address. We will send an activation link to this address.'))
 
     password1 = forms.CharField(
         label=get_popover_html(User, 'password1'),
@@ -163,7 +163,7 @@ class UserUpdateForm(forms.ModelForm):
         self.helper.form_method = 'POST'
 
     username = forms.CharField(disabled=True, help_text=_('You cannot change your username'), label=get_popover_html(User, 'username'))
-    email = forms.EmailField(disabled=True, help_text=_('You cannot change your email address'), label=get_popover_html(User, 'email'))
+    email = forms.EmailField(disabled=True, help_text=_('You can change your email address in the respective form'), label=get_popover_html(User, 'email')) # TODO: Include url to email change form
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']
@@ -222,9 +222,9 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 class RequestUsernameForm(forms.Form):
     """Form to request a user's username by entering his email address"""
-    email_of_user = forms.EmailField(label=_('Your E-Mail Address'), required=True,
-                                     help_text=_('Please enter the e-mail address you registered with. '
-                                                 'We will send you an e-mail with your username.'))
+    email_of_user = forms.EmailField(label=_('Your Email Address'), required=True,
+                                     help_text=_('Please enter the email address you registered with. '
+                                                 'We will send you an email with your username.'))
 
     def __init__(self, *args, **kwargs):
         super(RequestUsernameForm, self).__init__(*args, **kwargs)

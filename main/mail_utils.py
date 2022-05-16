@@ -107,7 +107,7 @@ def send_username_request_mail(request, user):
         Takes a User
     """
 
-    subject = _('Transcriptiones: Your User Name')
+    subject = _('transcriptiones: Your User Name')
     plain_message, html_message = create_message(request,
                                                  subject,
                                                  _(f"Your Username is: {user.username}"))
@@ -116,7 +116,7 @@ def send_username_request_mail(request, user):
 
 def send_password_reset_mail(request, user):
     """Takes a User"""
-    subject = _('Transcriptiones: Password Reset')
+    subject = _('transcriptiones: Password Reset')
     url = ''
     plain_message, html_message = create_message(request,
                                                  subject,
@@ -134,7 +134,7 @@ def send_password_reset_mail(request, user):
 def send_registration_confirmation_mail(request, user):
     """After a user registers, he gets an account activation email."""
 
-    subject = _('Transcriptiones: Activate your account')
+    subject = _('transcriptiones: Activate your account')
     host = f"{request.scheme}://{request.get_host()}"
 
     uid = urlsafe_base64_encode(force_bytes(user.pk))

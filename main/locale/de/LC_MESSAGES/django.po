@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-13 14:37+0200\n"
-"PO-Revision-Date: 2022-05-12 18:32+0200\n"
+"POT-Creation-Date: 2022-05-16 12:16+0200\n"
+"PO-Revision-Date: 2022-05-16 12:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr "Signatur oder Titel der Verzeichniseinheit enthält"
 
-#: main/filters.py:85 main/models.py:745 main/models.py:781
+#: main/filters.py:85 main/models.py:753 main/models.py:789
 msgid "User"
 msgstr "Benutzer*in"
 
-#: main/filters.py:86 main/models.py:746
+#: main/filters.py:86 main/models.py:754
 msgid "Staff"
 msgstr "Mitarbeiter*in"
 
-#: main/filters.py:87 main/models.py:747
+#: main/filters.py:87 main/models.py:755
 msgid "Admin"
 msgstr "Administrator*in"
 
@@ -58,7 +58,7 @@ msgid "First level Source Type"
 msgstr "Quellentyp (übergeordnet)"
 
 #: main/forms/forms_helper.py:36 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:783
+#: main/models.py:97 main/models.py:791
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -115,7 +115,7 @@ msgid "Unsubscribe"
 msgstr "Abbestellen"
 
 #: main/forms/forms_info.py:51 main/forms/forms_upload.py:245
-#: main/forms/forms_user.py:24
+#: main/forms/forms_user.py:27
 msgid "Send Message"
 msgstr "Nachricht senden"
 
@@ -242,31 +242,31 @@ msgstr ""
 "Bitte beschreiben Sie die Dokumente, die Sie hochladen möchten. Seien Sie so "
 "spezifisch wie möglich"
 
-#: main/forms/forms_user.py:47 main/forms/forms_user.py:61
+#: main/forms/forms_user.py:50 main/forms/forms_user.py:64
 msgid "Save"
 msgstr "Speichern"
 
-#: main/forms/forms_user.py:73
-msgid "E-Mail-Address. We will send an activation link to this address."
+#: main/forms/forms_user.py:76
+msgid "Email address. We will send an activation link to this address."
 msgstr ""
 "E-Mail-Adresse. Wir werden einen Aktivierungslink an diese Adresse "
 "verschicken."
 
-#: main/forms/forms_user.py:79
+#: main/forms/forms_user.py:82
 msgid "Choose your transcriptiones password."
 msgstr "Setzen Sie Ihr transcriptiones-Passwort."
 
-#: main/forms/forms_user.py:86 main/forms/forms_user.py:149
-#: main/forms/forms_user.py:212
+#: main/forms/forms_user.py:89 main/forms/forms_user.py:152
+#: main/forms/forms_user.py:215
 msgid "Enter the same password as before, for verification."
 msgstr "Wiederholen Sie zur Bestätigung das Password."
 
-#: main/forms/forms_user.py:92 main/templates/main/base.html:320
+#: main/forms/forms_user.py:95 main/templates/main/base.html:320
 #: main/templates/main/base_copy.html:128
 msgid "Register"
 msgstr "Registrieren"
 
-#: main/forms/forms_user.py:125 main/templates/main/base.html:318
+#: main/forms/forms_user.py:128 main/templates/main/base.html:318
 #: main/templates/main/base_copy.html:125 main/templates/main/sidebar.html:73
 #: main/templates/main/users/account_activation_invalid.html:7
 #: main/templates/main/users/account_activation_invalid.html:12
@@ -279,29 +279,29 @@ msgstr "Registrieren"
 msgid "Login"
 msgstr "Anmelden"
 
-#: main/forms/forms_user.py:135
+#: main/forms/forms_user.py:138
 msgid "Enter your old transcriptiones password."
 msgstr "Geben Sie Ihr altes transcriptiones-Passwort ein."
 
-#: main/forms/forms_user.py:142 main/forms/forms_user.py:205
+#: main/forms/forms_user.py:145 main/forms/forms_user.py:208
 msgid "Set a new password for transcriptiones."
 msgstr "Setzen Sie ein neues Passwort für transcriptiones."
 
-#: main/forms/forms_user.py:162
+#: main/forms/forms_user.py:165
 #: main/templates/main/upload/edit_document_transcription.html:38
 #: main/templates/main/upload/edit_meta.html:96
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: main/forms/forms_user.py:165
+#: main/forms/forms_user.py:168
 msgid "You cannot change your username"
 msgstr "Sie können Ihren Benutzernamen nicht ändern"
 
-#: main/forms/forms_user.py:166
-msgid "You cannot change your email address"
-msgstr "Sie können Ihre E-Mail-Adresse nicht ändern"
+#: main/forms/forms_user.py:169
+msgid "You can change your email address in the respective form"
+msgstr "Sie können Ihre E-Mail-Adresse im entsprechenden Formular ändern"
 
-#: main/forms/forms_user.py:195 main/forms/forms_user.py:219
+#: main/forms/forms_user.py:198 main/forms/forms_user.py:222
 #: main/templates/main/users/password_reset.html:9
 #: main/templates/main/users/password_reset.html:14
 #: main/templates/main/users/password_reset_complete.html:12
@@ -310,19 +310,19 @@ msgstr "Sie können Ihre E-Mail-Adresse nicht ändern"
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: main/forms/forms_user.py:225
-msgid "Your E-Mail Address"
+#: main/forms/forms_user.py:228
+msgid "Your Email Address"
 msgstr "Ihre E-Mail-Adresse"
 
-#: main/forms/forms_user.py:226
+#: main/forms/forms_user.py:229
 msgid ""
-"Please enter the e-mail address you registered with. We will send you an e-"
-"mail with your username."
+"Please enter the email address you registered with. We will send you an "
+"email with your username."
 msgstr ""
 "Bitte geben Sie die E-Mail-Adresse an, mit der Sie sich registriert haben. "
 "Wir werden Ihnen Ihren Benutzernamen an diese Adresse senden."
 
-#: main/forms/forms_user.py:232
+#: main/forms/forms_user.py:235
 #: main/templates/main/users/request_username.html:18
 #: main/templates/main/users/request_username_done.html:12
 msgid "Request Username"
@@ -391,7 +391,7 @@ msgid "Thank you for contacting us"
 msgstr "Vielen Dank, dass Sie uns kontaktiert haben"
 
 #: main/mail_utils.py:110
-msgid "Transcriptiones: Your User Name"
+msgid "transcriptiones: Your User Name"
 msgstr "transcriptiones: Ihr Benutzername"
 
 #: main/mail_utils.py:113
@@ -400,7 +400,7 @@ msgid "Your Username is: {user.username}"
 msgstr "Ihr Benutzername ist: {user.username}"
 
 #: main/mail_utils.py:119
-msgid "Transcriptiones: Password Reset"
+msgid "transcriptiones: Password Reset"
 msgstr "transcriptiones: Passwort zurücksetzen"
 
 #: main/mail_utils.py:123
@@ -411,7 +411,7 @@ msgstr ""
 "zurückzusetzen."
 
 #: main/mail_utils.py:137
-msgid "Transcriptiones: Activate your account"
+msgid "transcriptiones: Activate your account"
 msgstr "transcriptiones: Aktivieren Sie Ihr Benutzerkonto"
 
 #: main/mail_utils.py:143
@@ -476,8 +476,8 @@ msgstr ""
 msgid "User State"
 msgstr "Benutzerstatus"
 
-#: main/model_info.py:56 main/model_info.py:69 main/models.py:686
-#: main/models.py:758
+#: main/model_info.py:56 main/model_info.py:69 main/models.py:694
+#: main/models.py:766
 msgid "Active"
 msgstr "Aktiv"
 
@@ -857,7 +857,7 @@ msgstr ""
 "Optionales Feld. Direkter Link zur Verzeichniseinheit im Katalog der "
 "Institution. Muss mit http:// oder https:// beginnen"
 
-#: main/model_info.py:349 main/models.py:656
+#: main/model_info.py:349 main/models.py:664
 msgid "Username"
 msgstr "Benutzername"
 
@@ -869,7 +869,7 @@ msgstr ""
 "Der Name muss einmalig sein und darf keine Sonderzeichen enthalten. Er wird "
 "anderen Benutzern angezeigt."
 
-#: main/model_info.py:352 main/models.py:662
+#: main/model_info.py:352 main/models.py:670
 msgid "First name"
 msgstr "Vorname"
 
@@ -877,7 +877,7 @@ msgstr "Vorname"
 msgid "Your given name. This information will not be public."
 msgstr "Ihr Vorname. Diese Information ist nicht öffentlich einsehbar."
 
-#: main/model_info.py:354 main/models.py:667
+#: main/model_info.py:354 main/models.py:675
 msgid "Last name"
 msgstr "Nachname"
 
@@ -1002,7 +1002,7 @@ msgstr "Institutionen"
 msgid "Institution which holds this reference number and document"
 msgstr "Die Institution, die das Dokument mit dieser Signatur besitzt"
 
-#: main/models.py:101 main/models.py:779
+#: main/models.py:101 main/models.py:787
 msgid "Reference number"
 msgstr "Signatur"
 
@@ -1179,7 +1179,7 @@ msgstr "Sprachen"
 msgid "Languages used in the source"
 msgstr "In der Quelle verwendete Sprachen"
 
-#: main/models.py:336 main/models.py:784
+#: main/models.py:336 main/models.py:792
 msgid "Source Type"
 msgstr "Quellentyp"
 
@@ -1313,12 +1313,12 @@ msgstr "Dokument"
 msgid "documents"
 msgstr "Dokumente"
 
-#: main/models.py:563
+#: main/models.py:566
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr "Dokument “{self.title_name}” wurde verändert"
 
-#: main/models.py:564
+#: main/models.py:567
 #, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
@@ -1327,11 +1327,11 @@ msgstr ""
 "Das Dokument {self.title_name} wurde verändert.\n"
 "\n"
 
-#: main/models.py:577
+#: main/models.py:580
 msgid "A Reference Number has changed"
 msgstr "Eine Signatur wurde verändert"
 
-#: main/models.py:578
+#: main/models.py:581
 #, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1341,11 +1341,11 @@ msgstr ""
 "Die Signatur “{self.parent_ref_number.ref_number_name}” wurde verändert.\n"
 "\n"
 
-#: main/models.py:590
+#: main/models.py:593
 msgid "A User has made changes"
 msgstr "Ein Benutzer hat Änderungen vorgenommen"
 
-#: main/models.py:591
+#: main/models.py:594
 #, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
@@ -1354,91 +1354,91 @@ msgstr ""
 "Der Benutzer “{self.submitted_by.username}” hat Änderungen vorgenommen.\n"
 "\n"
 
-#: main/models.py:610
+#: main/models.py:618
 msgid "Please enter an email address"
 msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
 
-#: main/models.py:636
+#: main/models.py:644
 msgid "All superusers must have is_staff = True."
 msgstr "Alle Superuser müssen is_staff = True haben."
 
-#: main/models.py:638
+#: main/models.py:646
 msgid "All superusers must have is_superuser = True"
 msgstr "Alle Superuser müssen is_superuser = True haben"
 
-#: main/models.py:646 main/models.py:652
+#: main/models.py:654 main/models.py:660
 msgid "No notification Emails"
 msgstr "Keine Benachrichtigungs-E-Mails"
 
-#: main/models.py:647
+#: main/models.py:655
 msgid "Every time a subscribed document has changed."
 msgstr "Jedes Mal, wenn sich ein abonniertes Dokument geändert hat."
 
-#: main/models.py:648
+#: main/models.py:656
 msgid "Once a day, only if changes happened."
 msgstr "Einmal am Tag, nur wenn Änderungen stattgefunden haben."
 
-#: main/models.py:649
+#: main/models.py:657
 msgid "Once a week, only if changes happened."
 msgstr "Einmal pro Woche, nur wenn Änderungen stattgefunden haben."
 
-#: main/models.py:653
+#: main/models.py:661
 msgid "Every time a message is received."
 msgstr "Jedes Mal, wenn eine Nachricht empfangen wird."
 
-#: main/models.py:654
+#: main/models.py:662
 msgid "Once a day, only if you received messages."
 msgstr "Einmal täglich, nur wenn Sie Nachrichten erhalten haben."
 
-#: main/models.py:660
+#: main/models.py:668
 msgid "Provide a user name"
 msgstr "Geben Sie einen Benutzernamen an"
 
-#: main/models.py:670
+#: main/models.py:678
 msgid "Enter your last name"
 msgstr "Geben Sie Ihren Nachnamen ein"
 
-#: main/models.py:672
+#: main/models.py:680
 msgid "Email"
 msgstr "E-Mail"
 
-#: main/models.py:676
+#: main/models.py:684
 msgid "Enter your email address"
 msgstr "Geben Sie Ihre E-Mail-Adresse ein"
 
-#: main/models.py:678
+#: main/models.py:686
 msgid "Email confirmed"
 msgstr "E-Mail bestätigt"
 
-#: main/models.py:680
+#: main/models.py:688
 msgid "Has the user confirmed the email address?"
 msgstr "Hat der Benutzer die E-Mail-Adresse bestätigt?"
 
-#: main/models.py:682
+#: main/models.py:690
 msgid "Staff status"
 msgstr "Mitarbeiterstatus"
 
-#: main/models.py:684
+#: main/models.py:692
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "Hat der/die Benutzer*in einen Mitarbeiterstatus und kann sich somit auf der "
 "Admin-Seite anmelden?"
 
-#: main/models.py:688
+#: main/models.py:696
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 "Ist das Benutzerkonto aktiv? Benutzerkonten werden deaktiviert statt "
 "gelöscht."
 
-#: main/models.py:690
+#: main/models.py:698
 msgid "Date joined"
 msgstr "Beitrittsdatum"
 
-#: main/models.py:693
+#: main/models.py:701
 msgid "Mark anonymous by default"
 msgstr "Standardmässig anonym veröffentlichen"
 
-#: main/models.py:695
+#: main/models.py:703
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
@@ -1446,68 +1446,68 @@ msgstr ""
 "Wenn diese Option ausgewählt ist, werden Ihre Dokumente standardmässig "
 "anonym veröffentlicht. Kann für jedes Dokument angepasst werden."
 
-#: main/models.py:698
+#: main/models.py:706
 msgid "Orcid"
 msgstr "ORCID"
 
-#: main/models.py:702
+#: main/models.py:710
 msgid "User id from https://orcid.org/"
 msgstr "Benutzer-ID von https://orcid.org/"
 
-#: main/models.py:704
+#: main/models.py:712
 msgid "Subscription Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Abonnementen"
 
-#: main/models.py:707
+#: main/models.py:715
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Wie oft möchten Sie über Ihre abonnierten Dokumente benachrichtigt werden?"
 
-#: main/models.py:710
+#: main/models.py:718
 msgid "Message Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Nachrichten"
 
-#: main/models.py:713
+#: main/models.py:721
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 "Wie oft möchten Sie über empfangene Nachrichten, benachrichtigt werden?"
 
-#: main/models.py:716
+#: main/models.py:724
 msgid "Subscription to owned documents"
 msgstr "Eigene Dokumente abonnieren"
 
-#: main/models.py:717
+#: main/models.py:725
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 "Möchten Sie benachrichtigt werden, wenn Ihre Dokumente von einem/einer "
 "anderen Benutzer*in bearbeitet wurden?"
 
-#: main/models.py:722 main/models.py:861
+#: main/models.py:730 main/models.py:888
 msgid "Default User Interface Language"
 msgstr "Standardsprache der Benutzeroberfläche"
 
-#: main/models.py:723 main/models.py:862
+#: main/models.py:731 main/models.py:889
 msgid "What is your preferred language?"
 msgstr "Was ist Ihre präferierte Sprache?"
 
-#: main/models.py:728
+#: main/models.py:736
 msgid "Secret API Key"
 msgstr "Geheimer API-Key"
 
-#: main/models.py:729
+#: main/models.py:737
 msgid "Use this key for API requests. Do not share!"
 msgstr "Benutzen Sie diesen Key für Ihre API-Requests. Nicht weitergeben!"
 
-#: main/models.py:759
+#: main/models.py:767
 msgid "Inactive"
 msgstr "Deaktiviert"
 
-#: main/models.py:780 main/templates/main/details/document_detail.html:21
+#: main/models.py:788 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr "Dokument"
 
-#: main/models.py:782 main/templates/main/details/author_detail.html:8
+#: main/models.py:790 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 msgid "Scribe"
 msgstr "Schreiber*in"
@@ -1613,10 +1613,12 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: main/templates/django_tables2/bootstrap4-responsive.html:66
+#: main/templates/main/search/pagination.html:9
 msgid "previous"
 msgstr "Vorherige"
 
 #: main/templates/django_tables2/bootstrap4-responsive.html:86
+#: main/templates/main/search/pagination.html:19
 msgid "next"
 msgstr "Nächste"
 
@@ -1874,8 +1876,6 @@ msgstr ""
 "deren Profilseite senden."
 
 #: main/templates/main/admin/statistics.html:7
-#, fuzzy
-#| msgid "Transcriptiones Statistics"
 msgid "transcriptiones Statistics"
 msgstr "transcriptiones-Statistiken"
 
@@ -2018,10 +2018,8 @@ msgstr "Expertenfunktionen"
 #: main/templates/main/base.html:257
 #: main/templates/main/info/api_documentation.html:20
 #: main/templates/main/info/info_options.html:10
-#, fuzzy
-#| msgid "Transcriptiones API"
 msgid "transcriptiones API"
-msgstr "Transcriptiones API"
+msgstr "transcriptiones API"
 
 #: main/templates/main/base.html:258
 msgid "Find us on GitHub"
@@ -2479,10 +2477,8 @@ msgstr "Zurück zur Startseite"
 
 #: main/templates/main/info/about.html:7
 #: main/templates/main/info/api_documentation.html:7
-#, fuzzy
-#| msgid "What is Transcriptiones?"
 msgid "What is transcriptiones?"
-msgstr "Was ist Transcriptiones?"
+msgstr "Was ist transcriptiones?"
 
 #: main/templates/main/info/about.html:12
 #: main/templates/main/info/api_documentation.html:12
@@ -2500,10 +2496,8 @@ msgid "The Project"
 msgstr "Das Projekt"
 
 #: main/templates/main/info/blank.html:7
-#, fuzzy
-#| msgid "Information about Transcriptiones"
 msgid "Information about transcriptiones"
-msgstr "Informationen zu Transcriptiones"
+msgstr "Informationen zu transcriptiones"
 
 #: main/templates/main/info/contact.html:8
 #: main/templates/main/info/contact.html:14 main/templates/main/sidebar.html:45
@@ -2677,12 +2671,12 @@ msgstr ""
 "                      "
 
 #: main/templates/main/search/pagination.html:6
-msgid "Previous"
-msgstr "Vorherige"
+msgid "first"
+msgstr "Erste"
 
-#: main/templates/main/search/pagination.html:16
-msgid "Next"
-msgstr "Nächste"
+#: main/templates/main/search/pagination.html:22
+msgid "last"
+msgstr "Letzte"
 
 #: main/templates/main/search/search_form.html:7
 #: main/templates/main/search/search_form_copy.html:6
@@ -2953,17 +2947,17 @@ msgstr ""
 "Wenn Sie alle Informationen eingegeben haben, können Sie das Dokument "
 "hochladen."
 
-#: main/templates/main/upload/create_document.html:182
+#: main/templates/main/upload/create_document.html:186
 #: main/views/views_upload.py:108
 msgid "Success: Institution was created."
 msgstr "Erfolg: Institution wurde erstellt."
 
-#: main/templates/main/upload/create_document.html:235
+#: main/templates/main/upload/create_document.html:239
 #: main/views/views_upload.py:123
 msgid "Success: RefNumber was created."
 msgstr "Erfolg: Signatur wurde erstellt."
 
-#: main/templates/main/upload/create_document.html:286
+#: main/templates/main/upload/create_document.html:290
 msgid "200 characters used"
 msgstr "200 Zeichen verwendet"
 
@@ -3031,14 +3025,11 @@ msgid "Export document"
 msgstr "Dokument exportieren"
 
 #: main/templates/main/upload/export_document.html:24
-#, fuzzy
-#| msgid ""
-#| "You can hide your username on the transcription listing if you choose so."
 msgid ""
 "You can export the transcriptions in different formats. Please choose below:"
 msgstr ""
-"Sie können Ihren Benutzernamen in der Transkriptionsliste ausblenden, falls "
-"Sie dies wollen."
+"Sie können Transkriptionen in verschiedenen Formaten exportieren. Wählen Sie "
+"das gewünschte Format."
 
 #: main/templates/main/upload/export_document.html:33
 #: main/templates/main/upload/export_document.html:36
@@ -3244,9 +3235,7 @@ msgstr ""
 "diese E-Mail ignorieren.\n"
 
 #: main/templates/main/users/email_templates/password_reset_subject.txt:3
-#, fuzzy
-#| msgid "Transcriptiones: Passwort zurücksetzen"
-msgid "transcriptiones: Passwort zurücksetzen"
+msgid "transcriptiones: Reset Password"
 msgstr "transcriptiones: Passwort zurücksetzen"
 
 #: main/templates/main/users/login.html:18
@@ -3698,10 +3687,8 @@ msgid "User set to admin"
 msgstr "Benutzer*in auf Administrator*in geändert"
 
 #: main/views/views_admin.py:146
-#, fuzzy
-#| msgid "Contact Messages"
 msgid "Contact message marked \"answered\""
-msgstr "Kontaktnachrichten"
+msgstr "Kontaktnachricht als \"beantwortet\""
 
 #: main/views/views_browse.py:234
 msgid "The transcription version you requested is not available."
@@ -3797,19 +3784,19 @@ msgstr "Abonnement hinzugefügt"
 msgid "Could not add subscription"
 msgstr "Das Abonnement konnte nicht hinzugefügt werden"
 
-#: main/views/views_subscriptions.py:128
+#: main/views/views_subscriptions.py:129
 msgid "Subscription removed"
 msgstr "Das Abonnement wurde entfernt"
 
-#: main/views/views_subscriptions.py:130
+#: main/views/views_subscriptions.py:131
 msgid "Could not remove subscription"
 msgstr "Das Abonnement konnte nicht entfernt werden"
 
-#: main/views/views_subscriptions.py:141
+#: main/views/views_subscriptions.py:142
 msgid "All subscriptions removed"
 msgstr "Alle Abonnemente wurden entfernt"
 
-#: main/views/views_subscriptions.py:143
+#: main/views/views_subscriptions.py:144
 msgid "Could not remove subscriptions"
 msgstr "Die Abonnemente konnten nicht entfernt werden"
 
@@ -3861,6 +3848,15 @@ msgstr "Es wurde kein API-Key gefunden, der hätte gelöscht werden können."
 #: main/views/views_user.py:236
 msgid "Your API Key has been deleted"
 msgstr "Ihr API-Key wurde gelöscht"
+
+#~ msgid "transcriptiones: Passwort zurücksetzen"
+#~ msgstr "transcriptiones: Passwort zurücksetzen"
+
+#~ msgid "Previous"
+#~ msgstr "Vorherige"
+
+#~ msgid "Next"
+#~ msgstr "Nächste"
 
 #~ msgid "My Activity"
 #~ msgstr "Meine Aktivität"
