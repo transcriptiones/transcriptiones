@@ -231,3 +231,15 @@ class RequestUsernameForm(forms.Form):
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Request Username'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
+
+
+class ChangeEmailForm(forms.Form):
+    """Form to request a user's username by entering his email address"""
+    new_email_of_user = forms.EmailField(label=_('Your New Email Address'), required=True,
+                                         help_text=_('Please enter the email address you want to use for transcriptiones.'))
+
+    def __init__(self, *args, **kwargs):
+        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+        self.helper = initialize_form_helper()
+        self.helper.add_input(Submit('submit', _('Change Address'), css_class='btn-primary'))
+        self.helper.form_method = 'POST'

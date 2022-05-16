@@ -17,6 +17,7 @@
 {% block content %}
     {% card 'latest_news_card' _('Latest News') %}
         {% if news_data %}
+            {% get_current_language as LANGUAGE_CODE %}
             {% for news in news_data %}
                 <a href="{% url 'main:news' %}" class="no-deco-link">
                     <div class="card bg-light border-dark" style="margin-bottom: 5px;">
@@ -31,15 +32,9 @@
                       </div>
                       <div class="card-body">
 
-                          <h5 class="card-title" style="margin: 0; font-weight: bold;">{{ news.get_translated_title }}</h5>
+                          <h5 class="card-title" style="margin: 0; font-weight: bold;">{% get_translated_news_title news LANGUAGE_CODE %}</h5>
                             <small>{{ news.news_time }} ({% blocktranslate with since=news.news_time|timesince %} {{ since }} ago{% endblocktranslate %})<br/></small>
-                         Text
-                      </div>
-                      <div class="card-footer">
-                          <span class="search-result-title">{% translate 'Read this item in another language' %}</span>
-                          <img src="{% static 'flags/de.gif' %}"/> &nbsp;
-                          <img src="{% static 'flags/fr.gif' %}"/> &nbsp;
-                          <img src="{% static 'flags/it.gif' %}"/> &nbsp;
+                         {% get_translated_news_text news LANGUAGE_CODE %}
                       </div>
                     </div>
                     </a>

@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import View, TemplateView
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,11 +19,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator
 from django_tables2 import RequestConfig
 
-from main.mail_utils import send_registration_confirmation_mail, send_username_request_mail
+from main.mail_utils import send_registration_confirmation_mail, send_username_request_mail, send_changed_address_mail
 
 from main.models import User, UserSubscription
 from main.forms.forms_user import SignUpForm, LoginForm, CustomPasswordChangeForm, UserUpdateForm, \
-    CustomPasswordResetForm, CustomSetPasswordForm, RequestUsernameForm
+    CustomPasswordResetForm, CustomSetPasswordForm, RequestUsernameForm, ChangeEmailForm
 from main.tokens import account_activation_token
 from main.model_info import get_user_info, get_public_user_info
 from main.tables.tables_base import TitleValueTable
@@ -200,6 +200,31 @@ def request_username_view(request):
 
 def request_username_done_view(request):
     return render(request, 'main/users/request_username_done.html')
+
+
+@login_required()
+def change_email_view(request):
+    if request.method == 'POST':
+        form = ChangeEmailForm(request.POST)
+        if form.is_valid():
+            try:
+                existing_users_with_this_email = User.objects.get(email=form.cleaned_data['new_email_of_user'])
+                messages.error(request, _('This address is already in use!'))
+            except User.DoesNotExist:
+                request.user.email = form.cleaned_data['new_email_of_user']
+                request.user.save()
+                send_changed_address_mail(request, request.user)
+                logout(request)
+                return redirect('main:change_email_request_done')
+
+    else:
+        form = ChangeEmailForm({"new_email_of_user": request.user.email})
+
+    return render(request, 'main/users/change_email.html', context={"form": form})
+
+
+def request_email_change_done_view(request):
+    return render(request, 'main/users/change_email_done.html')
 
 
 @login_required

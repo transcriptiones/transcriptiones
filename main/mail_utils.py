@@ -102,6 +102,14 @@ def send_contact_message_answer(request, msg):
     send_transcriptiones_mail(subject, plain_message, html_message, msg.reply_email)
 
 
+def send_changed_address_mail(request, user):
+    subject = _('transcriptiones: New Email address')
+    plain_message, html_message = create_message(request,
+                                                 subject,
+                                                 _(f"Your New Email address is: {user.email}"))
+    send_transcriptiones_mail(subject, plain_message, html_message, user.email)
+
+
 def send_username_request_mail(request, user):
     """A user might forget his username. He can retrieve it by email by entering his email address.
         Takes a User

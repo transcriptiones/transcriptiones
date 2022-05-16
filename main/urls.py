@@ -110,12 +110,14 @@ urlpatterns = [
     path('user/documents/drafts/', v_user.my_documents, name='my_document_drafts'),
     path('user/public/profile/<str:username>/', v_user.public_profile, name='public_profile'),
     path('user/profile/update/', v_user.UserUpdateView.as_view(), name='user_update'),
+    path('user/profile/email_update/', v_user.change_email_view, name='user_email_update'),
     path('user/passwordreset/', v_user.CustomPasswordResetView.as_view(), name='password_reset'),
     path('user/passwordreset/done/', PasswordResetDoneView.as_view(template_name='main/users/password_reset_done.html'), name='password_reset_done'),
     path('user/reset/<uidb64>/<token>/', v_user.CustomPasswordConfirmView.as_view(), name='password_reset_confirm'),
     path('user/reset/done/', PasswordResetCompleteView.as_view(template_name='main/users/password_reset_complete.html'), name='password_reset_complete'),
     path('user/usernamerequest/', v_user.request_username_view, name='username_request'),
     path('user/usernamerequest/done', v_user.request_username_done_view, name='username_request_done'),
+    path('user/emailchange/done', v_user.request_email_change_done_view, name='change_email_request_done'),
 
     ##############
     # USER SUBSCRIPTIONS

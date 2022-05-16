@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Email Address Changed' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _("Email Address Changed") "" %}
+{% endblock %}
+
+{% block content %}
+
+    {% card 'change_done_card' _('Your Email Address Has Been Changed') %}
+        <div class="text-center">
+            <p>{% translate 'Your Email Address Has Been Changed. We sent an email to the new address. Please login with the new address.' %}</p>
+            <a href="{% url 'main:login' %}" class="btn btn-primary">{% translate 'Login' %}</a>
+        </div>
+    {% endcard %}
+
+{% endblock %}

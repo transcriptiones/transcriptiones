@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Change Email Address' %}
+{%  endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Users" "" %}
+    {% breadcrumb request.user.username "main:profile" %}
+    {% breadcrumb _("Change Email Address") "" %}
+{% endblock %}
+
+{% block content %}
+    {% card 'change_e_card' _('Change Email Address') %}
+        {% if user.is_authenticated %}
+            {% crispy form %}
+        {% endif %}
+    {% endcard %}
+{% endblock %}
