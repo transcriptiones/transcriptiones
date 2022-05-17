@@ -16,7 +16,7 @@
 
     {% card 'change_done_card' _('Your Email Address Has Been Changed') %}
         <div class="text-center">
-            <p>{% translate 'Your Email Address Has Been Changed. We sent an email to the new address. Please login with the new address.' %}</p>
+            <p>{% translate 'Your email address has been changed. We sent an email to the new address and you have been logged out. Please log in again.' %}</p>
             <a href="{% url 'main:login' %}" class="btn btn-primary">{% translate 'Login' %}</a>
         </div>
     {% endcard %}

@@ -82,7 +82,8 @@
                     {% for st in source_types %}
                         <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
                             <div class="list-group">
-                                {% for child in st.child_type.all %}
+                                {% get_sorted_child_types st LANGUAGE_CODE as children %}
+                                {% for child in children %}
                                     <span class="list-group-item">
                                         {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
                                         <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>
@@ -226,7 +227,8 @@
                     {% for st in source_types %}
                         <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
                             <div class="list-group">
-                                {% for child in st.child_type.all %}
+                                {% get_sorted_child_types st LANGUAGE_CODE as children %}
+                                {% for child in children %}
                                     <span class="list-group-item">
                                         {% get_translated_source_type_name child LANGUAGE_CODE %}<br/>
                                         <small>{% get_translated_source_type_description child LANGUAGE_CODE %}</small>

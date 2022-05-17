@@ -68,8 +68,8 @@ def get_translated_source_type_description(source_type, language):
 
 
 @register.simple_tag
-def get_sorted_child_types(source_type, language):
-    return source_type.sorted_children(language)
+def get_sorted_child_types(source_type, language, others_end=True):
+    return source_type.sorted_children(language, others_end)
 
 
 @register.tag

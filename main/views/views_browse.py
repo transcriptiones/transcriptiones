@@ -110,11 +110,7 @@ def source_type_detail_view(request, pk):
     parent_source_type_list = type_list + other_list
 
     if selected_source_type.parent_type is None:
-        children_type_list = list(SourceType.objects.filter(parent_type=selected_source_type).exclude(type_name__istartswith='other').order_by(
-            get_order_field(request)))
-        children_other_list = list(SourceType.objects.filter(parent_type=selected_source_type, type_name__istartswith='other'))
-        children_source_type_list = children_type_list + children_other_list
-        document_list = Document.objects.filter(source_type__in=children_source_type_list)
+        document_list = Document.objects.filter(source_type__in=selected_source_type.child_type.all())
         my_filter = DocumentFilter(request.GET, document_list)
         table = DocumentTable(data=my_filter.qs, language=request.LANGUAGE_CODE)
         RequestConfig(request).configure(table)

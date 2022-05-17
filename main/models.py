@@ -260,12 +260,19 @@ class SourceType(models.Model):
 
         return self.type_description
 
-    def sorted_children(self, language):
+    def sorted_children(self, language, others_end=True):
         if language == 'en-us':
-            sort_field = 'type_name'
+            order_field = 'type_name'
         else:
-            sort_field = 'type_name_' + language
-        return self.child_type.order_by(sort_field)
+            order_field = 'type_name_' + language
+
+        if not others_end:
+            return self.child_type.order_by(order_field)
+
+        children_type_list = list(self.child_type.exclude(type_name__istartswith='other').order_by(order_field))
+        children_other_list = list(self.child_type.filter(type_name__istartswith='other'))
+        children_source_type_list = children_type_list + children_other_list
+        return children_source_type_list
 
     def __str__(self):
         return self.type_name
