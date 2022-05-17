@@ -74,7 +74,7 @@ class AuthorDetailView(MultiTableMixin, DetailView):
 
         tables = [
             TitleValueTable(data=data),
-            DocumentTable(self.my_filter.qs)
+            DocumentTable(self.my_filter.qs, language=self.request.LANGUAGE_CODE)
         ]
         return tables
 
@@ -203,7 +203,7 @@ class RefNumberDetailView(MultiTableMixin, DetailView):
 
         tables = [
             TitleValueTable(data=data),
-            DocumentTable(self.my_filter.qs),
+            DocumentTable(self.my_filter.qs, language=self.request.LANGUAGE_CODE),
         ]
         return tables
 
