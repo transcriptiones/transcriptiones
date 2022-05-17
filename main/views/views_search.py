@@ -6,19 +6,19 @@ from django.db.models import Min
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import FormView, ListView
 from django_elasticsearch_dsl_drf.pagination import Paginator
-from django.utils.translation import ugettext_lazy as _
 from elasticsearch_dsl import Q
 
 from main.documents import TranscriptionDocument, TranscriptionDocumentStrict
-from main.forms.forms_search import Attribute, AdvancedSearchForm
-from main.tables.tables_document import DocumentResultTable
+from main.forms.forms_search import AdvancedSearchForm
 from main.models import Document, SourceType
 
 FULLTEXT_FIELDS = ["title_name", "transcription_text", "ref_number_title", "ref_number_name"]
 
-def test_search_3(request):
+
+def transcriptiones_search(request):
+    """View for the transcriptiones search.
+    This needs two indexes: transcriptiones_idx and transcriptiones_idx_strict"""
     form = AdvancedSearchForm()
     enriched_result = None
     total_results = 0
@@ -26,14 +26,18 @@ def test_search_3(request):
     page_size = 10
     current_page = 1
     pagination_link_list = list()
+    my_url = reverse('main:search')
 
     # Form has been sent: search
     if request.method == "GET":
         form = AdvancedSearchForm(request.GET)
         current_page = int(request.GET.get('page', 1))
         if form.is_valid():
+            strict_search = form.cleaned_data['strict_search']
             search_qs = list()
             search_result = TranscriptionDocument.search()
+            if strict_search:
+                search_result = TranscriptionDocumentStrict.search()
 
             if form.cleaned_data['query'] != '':
                 search_qs.append(Q('multi_match', query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS))
@@ -104,7 +108,6 @@ def test_search_3(request):
                     print("Error: retrieving one of the docs!")
                     total_results -= 1
 
-            my_url = reverse('main:search')
             my_url += "?"
             for key in request.GET.keys():
                 if key != "page":
@@ -188,29 +191,3 @@ def search_box_redirect(request):
 def search_by_box_view(request, query):
     my_url = reverse('main:search')
     my_url += "?query=" + query
-
-
-class SearchView(FormView, ListView):
-    template_name = "main/search/search_view.html"
-    #form_class = SearchForm
-    queryset = []
-    context_object_name = "results"
-
-    def form_valid(self, form):
-        self.queryset = TranscriptionDocument.search()
-        if form.cleaned_data['query']:
-            # print("QUERY: ", form.cleaned_data['query'])
-            self.queryset = self.queryset.query("multi_match", query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS)
-
-        for tr_filter in form.cleaned_data['filters']:
-            # print(tr_filter)
-            self.queryset = tr_filter.apply(self.queryset)
-        self.queryset = self.queryset.to_queryset()
-
-        return self.get(self.request)
-
-    def get_context_data(self, **kwargs):
-        """Add context variables."""
-        context = super().get_context_data(**kwargs)
-        context['ATTRIBUTES'] = Attribute.members
-        return context

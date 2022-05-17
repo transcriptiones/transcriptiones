@@ -102,8 +102,13 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-12 text-right mt-3">
-            <input type="submit" name="submit" value="Search" class="btn btn-primary btn-primary" id="submit-id-submit">
+        <div class="form-group col-5 m-3">
+             <label class="checkbox-inline">
+              <input type="checkbox" {% if request.GET.strict_search == 'on' %}checked{% endif %} name="strict_search" data-size="small" data-width="100" data-toggle="toggle" data-on="Strict" data-off="Normal"> <small>{% translate 'Toggle for normal/strict search' %}</small>
+            </label>
+        </div>
+        <div class="form-group col-6 text-right mt-3">
+            <input type="submit" name="submit" value="Search" class="btn btn-primary" id="submit-id-submit">
             <input type="button" name="clear" value="Clear Form" class="btn btn-secondary" id="button-id-clear" onclick="window.location.href=&quot;/search&quot;">
         </div>
     </div>

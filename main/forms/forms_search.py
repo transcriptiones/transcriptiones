@@ -264,6 +264,7 @@ class AdvancedSearchForm(forms.Form):
     location = forms.CharField(required=False, label=_('Location'))
     seal = forms.BooleanField(required=False, label=_('Document must have seal'))
     illuminated = forms.BooleanField(required=False, label=_('Document must have illuminations'))
+    strict_search = forms.BooleanField(required=False, label='Activate Strict Search') # Dummy
 
     title_name_exact = forms.BooleanField(required=False)
     ref_number_title_exact = forms.BooleanField(required=False)
