@@ -110,7 +110,24 @@ class ModalCreateInstitutionView(BSModalCreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.institution_slug = slugify(self.object.institution_name)
+
+        max_slug_length_institution_name = self.object.institution_name
+        if len(max_slug_length_institution_name) > 50:
+            max_slug_length_institution_name = max_slug_length_institution_name[:49]
+
+        new_slug = slugify(max_slug_length_institution_name)
+        inc_value = 1
+        while Institution.objects.filter(institution_slug=new_slug).count() != 0:
+            new_slug = new_slug[:40] + f"-{inc_value}"
+            inc_value += 1
+            if inc_value >= 10:
+                messages.error(self.request, _("There are many different institutions with very similar titles. "
+                                               "Please choose another title or contact transcriptiones."))
+                context = {'insts': Institution.objects.all(), 'form': form}
+                return render(self.request, 'main/upload/create_document.html', context) # TODO: proper redirect after 10 similar institutions
+
+
+        self.object.institution_slug = new_slug
         self.object.created_by = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
@@ -125,7 +142,24 @@ class ModalCreateRefNumberView(BSModalCreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.ref_number_slug = slugify(self.object.ref_number_name + " " + self.object.ref_number_title)
+
+        max_slug_length_reference_number = self.object.ref_number_name + " " + self.object.ref_number_title
+        if len(max_slug_length_reference_number) > 50:
+            max_slug_length_reference_number = max_slug_length_reference_number[:49]
+
+        new_slug = slugify(max_slug_length_reference_number)
+        inc_value = 1
+        while RefNumber.objects.filter(ref_number_slug=new_slug).count() != 0:
+            new_slug = new_slug[:40] + f"-{inc_value}"
+            inc_value += 1
+            if inc_value >= 10:
+                messages.error(self.request, _("There are many different reference numbers with very similar titles. "
+                                               "Please choose another title or contact transcriptiones."))
+                context = {'insts': Institution.objects.all(), 'form': form}
+                return render(self.request, 'main/upload/create_document.html',
+                              context)  # TODO: proper redirect after 10 similar Refnumbers
+
+        self.object.ref_number_slug = new_slug
         self.object.created_by = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
