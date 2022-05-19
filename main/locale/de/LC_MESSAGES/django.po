@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-17 13:25+0200\n"
-"PO-Revision-Date: 2022-05-17 13:25+0200\n"
+"PO-Revision-Date: 2022-05-19 15:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -493,9 +493,9 @@ msgid ""
 "\" if api_auth_key_expired else \"Expires\"} on {user."
 "api_auth_key_expiration})</small>"
 msgstr ""
-"<small {“ style=color:red” if api_auth_key_expired else “”}>({“Abgelaufen” "
-"if api_auth_key_expired else “Läuft ab”} am {user.api_auth_key_expiration})</"
-"small>"
+"<small {\" style=color:red\" if api_auth_key_expired else \"\"}"
+">({\"Abgelaufen\" if api_auth_key_expired else \"Läuft ab\"} am {user."
+"api_auth_key_expiration})</small>"
 
 #: main/model_info.py:55 main/tables/tables.py:26
 msgid "User State"
@@ -519,7 +519,7 @@ msgstr "Plz / Ort"
 msgid ""
 "<small>by <a href=\"{profile_url}\">{submitted_by}</a> at {time}</small>"
 msgstr ""
-"<small>von <a href=“{profile_url}”>{submitted_by}</a> um {time}</small>"
+"<small>von <a href=\"{profile_url}\">{submitted_by}</a> um {time}</small>"
 
 #: main/model_info.py:103 main/tables/tables_document.py:32
 #, python-brace-format
@@ -1341,7 +1341,7 @@ msgstr "Dokumente"
 #: main/models.py:581
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
-msgstr "Dokument “{self.title_name}” wurde verändert"
+msgstr "Dokument \"{self.title_name}\" wurde verändert"
 
 #: main/models.py:582
 #, python-brace-format
@@ -1363,7 +1363,7 @@ msgid ""
 "changed.\n"
 "\n"
 msgstr ""
-"Die Signatur “{self.parent_ref_number.ref_number_name}” wurde verändert.\n"
+"Die Signatur \"{self.parent_ref_number.ref_number_name}\" wurde verändert.\n"
 "\n"
 
 #: main/models.py:608
@@ -1376,7 +1376,7 @@ msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr ""
-"Der Benutzer “{self.submitted_by.username}” hat Änderungen vorgenommen.\n"
+"Der Benutzer \"{self.submitted_by.username}\" hat Änderungen vorgenommen.\n"
 "\n"
 
 #: main/models.py:633
@@ -2611,8 +2611,8 @@ msgid ""
 "                            "
 msgstr ""
 "\n"
-"                                Klicken Sie <a href=%(url_unsub)s "
-"class=“”>hier</a> um den Newsletter abzubestellen.\n"
+"                                Klicken Sie <a href=%(url_unsub)s class="
+"\"\">hier</a> um den Newsletter abzubestellen.\n"
 "                            "
 
 #: main/templates/main/info/start.html:162
@@ -3125,9 +3125,9 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"            Um ein Dokument hochzuladen, müssen Sie angemeldet sein. <a "
-"href=“%(loginurl)s”>Melden Sie sich an</a> oder legen Sie ein <a "
-"href=“%(signupurl)s”>neues Benutzerkonto</a> an.\n"
+"            Um ein Dokument hochzuladen, müssen Sie angemeldet sein. <a href="
+"\"%(loginurl)s\">Melden Sie sich an</a> oder legen Sie ein <a href="
+"\"%(signupurl)s\">neues Benutzerkonto</a> an.\n"
 "            "
 
 #: main/templates/main/upload/upload_options.html:30
