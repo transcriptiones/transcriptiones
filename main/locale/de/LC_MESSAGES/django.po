@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-17 13:25+0200\n"
-"PO-Revision-Date: 2022-05-19 15:22+0200\n"
+"POT-Creation-Date: 2022-05-26 17:06+0200\n"
+"PO-Revision-Date: 2022-05-26 17:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -204,7 +204,7 @@ msgstr "Spätestes Herstellungsjahr"
 #: main/forms/forms_search.py:310 main/templates/main/base.html:128
 #: main/templates/main/base_copy.html:121
 #: main/templates/main/info/start.html:118
-#: main/templates/main/search/search_form_2.html:111
+#: main/templates/main/search/search_form_2.html:114
 #: main/templates/main/search/search_view.html:9
 #: main/templates/main/search/search_view.html:14
 #: main/templates/main/search/search_view.html:22
@@ -1151,6 +1151,10 @@ msgstr ""
 msgid "Title of the Document"
 msgstr "Titel des Dokuments"
 
+#: main/models.py:320
+msgid "Reference number of the source"
+msgstr "Signatur der Quelle"
+
 #: main/models.py:323 main/templates/main/details/author_list.html:14
 #: main/templates/main/details/author_list.html:18
 #: main/templates/main/details/browse_options.html:39
@@ -1418,6 +1422,10 @@ msgstr "Einmal täglich, nur wenn Sie Nachrichten erhalten haben."
 #: main/models.py:683
 msgid "Provide a user name"
 msgstr "Geben Sie einen Benutzernamen an"
+
+#: main/models.py:688
+msgid "Enter your first name(s)"
+msgstr "Geben Sie Ihre(n) Vorname(n) ein"
 
 #: main/models.py:693
 msgid "Enter your last name"
@@ -2587,8 +2595,8 @@ msgstr ""
 
 #: main/templates/main/info/start.html:47
 msgid ""
-"You created transcripts and want to share them? You are looking for already "
-"transcribed material? Welcome!"
+"Have you created transcriptions and want to share them? You are looking for "
+"already transcribed material? Welcome!"
 msgstr ""
 "Sie haben Transkriptionen erstellt und möchten diese teilen? Sie suchen "
 "bereits transkribiertes Material? Willkommen!"
@@ -2850,11 +2858,23 @@ msgstr "Exakt"
 msgid "Normal"
 msgstr "Normal"
 
-#: main/templates/main/search/search_form_2.html:107
+#: main/templates/main/search/search_form_2.html:108
 msgid "Toggle for normal/strict search"
 msgstr "Umschalten zwischen normaler/exakter Suche"
 
-#: main/templates/main/search/search_form_2.html:112
+#: main/templates/main/search/search_form_2.html:109
+msgid "Search Mode"
+msgstr "Suchmodus"
+
+#: main/templates/main/search/search_form_2.html:109
+msgid ""
+"The normal search uses sequences of four characters for all text-based "
+"searches. The exact search is based on entire words."
+msgstr ""
+"Die normale Suche verwendet Sequenzen à vier Zeichen für alle textbasierten "
+"Suchfelder. Die exakte Suche basiert auf ganzen Wörtern."
+
+#: main/templates/main/search/search_form_2.html:115
 msgid "Clear Form"
 msgstr "Formular leeren"
 
@@ -2901,11 +2921,28 @@ msgstr ""
 "            "
 
 #: main/templates/main/search/search_view_2.html:121
-#: main/templates/main/search/search_view_3.html:130
 msgid ""
 "Please enter a search term above. It needs to be at least 3 characters long."
 msgstr ""
 "Bitte oben einen Suchbegriff eingeben. Dieser muss mindestens 3 Zeichen lang "
+"sein."
+
+#: main/templates/main/search/search_view_3.html:128
+#, python-format
+msgid ""
+"\n"
+"                    (%(num_pages)s pages in total.)\n"
+"                    "
+msgstr ""
+"\n"
+"                    (Total %(num_pages)s Seiten.)\n"
+"                    "
+
+#: main/templates/main/search/search_view_3.html:134
+msgid ""
+"Please enter a search term above. It needs to be at least 4 characters long."
+msgstr ""
+"Bitte oben einen Suchbegriff eingeben. Dieser muss mindestens 4 Zeichen lang "
 "sein."
 
 #: main/templates/main/sidebar.html:10
@@ -2985,7 +3022,7 @@ msgid "Success: Institution was created."
 msgstr "Erfolg: Institution wurde erstellt."
 
 #: main/templates/main/upload/create_document.html:239
-#: main/views/views_upload.py:123
+#: main/views/views_upload.py:140
 msgid "Success: RefNumber was created."
 msgstr "Erfolg: Signatur wurde erstellt."
 
@@ -3786,6 +3823,24 @@ msgstr "Das Dokument wurde erstellt."
 #: main/views/views_upload.py:98
 msgid "There is an error in your form"
 msgstr "Ihr Formular ist fehlerhaft"
+
+#: main/views/views_upload.py:124
+msgid ""
+"There are many different institutions with very similar titles. Please "
+"choose another title or contact transcriptiones."
+msgstr ""
+"Es existieren bereits viele verschiedene Institutionen mit sehr ähnlichen "
+"Titeln. Bitte wählen Sie einen anderen Titel oder kontaktieren Sie das "
+"transcriptiones-Team."
+
+#: main/views/views_upload.py:156
+msgid ""
+"There are many different reference numbers with very similar titles. Please "
+"choose another title or contact transcriptiones."
+msgstr ""
+"Es existieren bereits viele verschiedene Signaturen mit sehr ähnlichen "
+"Titeln. Bitte wählen Sie einen anderen Titel oder kontaktieren Sie das "
+"transcriptiones-Team."
 
 #: main/views/views_user.py:69 main/views/views_user.py:79
 msgid "Successfully logged in!"
