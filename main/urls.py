@@ -154,6 +154,7 @@ urlpatterns = [
     path('transcriptiones_admin/inbox/<int:msg_id>/delete/', v_admin.admin_inbox_message_delete, name='admin_inbox_message_delete'),
     path('transcriptiones_admin/inbox/<int:msg_id>/answer/', v_admin.admin_inbox_message_answer, name='admin_inbox_message_answer'),
     path('transcriptiones_admin/inbox/<int:msg_id>/mark/', v_admin.admin_inbox_message_mark, name='admin_inbox_message_mark'),
+    path('transcriptiones_admin/inbox/<int:msg_id>/mark_spam/', v_admin.admin_inbox_message_mark_spam, name='admin_inbox_message_mark_spam'),
     path('transcriptiones_admin/users/', v_admin.admin_users_view, name='admin_users'),
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),

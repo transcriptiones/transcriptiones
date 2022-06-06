@@ -108,7 +108,9 @@ class ContactMessageTable(TranscriptionesTable):
     @staticmethod
     def render_state(value, record):
         if value == 0:
-            return mark_safe(f'<span style="color: red;">&cross;</span>')
+            return mark_safe(f'<span style="color: red;">&cross;</span><a class="btn-sm btn-danger" href="{reverse("main:admin_inbox_message_mark_spam", kwargs={"msg_id": record.id})}">{_("Mark Spam")}</a>')
+        if record.state == 2:
+            return _("Marked Spam")
         return mark_safe(f'<span style="color: green;">&check;</span>')
 
 

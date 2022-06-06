@@ -150,6 +150,14 @@ def admin_inbox_message_mark(request, msg_id):
 
 
 @user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_mark_spam(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    messages.success(request, _('Contact message marked "spam"'))
+    message.state = 2
+    message.save()
+    return redirect('main:admin_inbox')
+
+@user_passes_test(lambda u: u.is_superuser)
 def admin_users_view(request):
     u_filter = UserFilter(request.GET, queryset=User.objects.all())
     table = UserTable(data=u_filter.qs, current_user=request.user)
