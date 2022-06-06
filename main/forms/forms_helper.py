@@ -1,4 +1,5 @@
 """forms_helper contains helper functions to initialize the transcriptiones forms"""
+import re
 from django.core.exceptions import FieldDoesNotExist
 from django.utils import six
 from crispy_forms.helper import FormHelper
@@ -75,3 +76,32 @@ def get_help_text_html_by_model_name(model_name, field_name):
         if field_name == "language":
             text = Document._meta.get_field("language").help_text
     return mark_safe(f'<small id="hint_id_{field_name}" class="form-text text-muted">{text}</small>')
+
+
+def get_clean_partial_date(data):
+    # The date is a full date
+    if re.match(r'([0-3]|)[0-9]\.([0-1]|)[0-9]\.[0-9]{2,4}', data) is not None:
+        data_split = data.split(".")
+        data = f"{data_split[2]}-{data_split[1]}-{data_split[0]}"
+
+    # The date is a partial date without day
+    if re.match(r'([0-1]|)[0-9]\.[0-9]{2,4}', data) is not None:
+        data_split = data.split(".")
+        data = f"{data_split[1]}-{data_split[0]}"
+
+    return data
+
+
+def get_user_readable_partial_date(value):
+    value = str(value)
+    # The date is a full date
+    if re.match(r'[0-9]{2,4}-([0-1]|)[0-9]-([0-3]|)[0-9]', value) is not None:
+        data_split = value.split("-")
+        value = f"{data_split[2]}.{data_split[1]}.{data_split[0]}"
+
+    # The date is a partial date without day
+    if re.match(r'[0-9]{2,4}-([0-1]|)[0-9]', value) is not None:
+        data_split = value.split(".")
+        value = f"{data_split[1]}-{data_split[0]}"
+
+    return value

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 import main.model_info as m_info
+from main.forms.forms_helper import get_user_readable_partial_date
 from main.forms.forms_edit import EditTranscriptionForm, EditMetaForm
 from main.models import Document
 from main.tables.tables_base import TitleValueTable
@@ -61,7 +62,9 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
     document = Document.objects.get(document_slug=doc_slug)
     document.commit_message = ''
     document.publish_user = request.user.mark_anonymous
-    form = EditMetaForm(instance=document)
+    form = EditMetaForm(instance=document,
+                        initial={'doc_start_date': get_user_readable_partial_date(document.doc_start_date),
+                                 'doc_end_date': get_user_readable_partial_date(document.doc_end_date)})
     form.fields['selection_helper_source_type'].initial = document.source_type.parent_type
     table = TitleValueTable(data=m_info.get_document_meta_edit_info(document))
     context = {'document': document, 'table': table, 'form': form}

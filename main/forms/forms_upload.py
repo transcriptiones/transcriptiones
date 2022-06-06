@@ -1,3 +1,5 @@
+import re
+
 from crispy_forms.layout import Submit
 from django import forms
 from bootstrap_modal_forms.forms import BSModalModelForm
@@ -7,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from main.models import Institution, RefNumber, Document, SourceType, Author, Language
 from main.widgets import SourceChildSelect
-from main.forms.forms_helper import initialize_form_helper, get_popover_html
+from main.forms.forms_helper import initialize_form_helper, get_popover_html, get_clean_partial_date
 
 
 class LanguageModelMultipleChoiceField(forms.ModelMultipleChoiceField):
@@ -54,6 +56,16 @@ class UploadTranscriptionForm(forms.ModelForm):
         """if self.fields[field].widget.is_required:
             self.fields[field].label = "my_css_class_for_required_fields"
         """
+
+    def clean_doc_start_date(self):
+        data = self.cleaned_data['doc_start_date']
+        new_data = get_clean_partial_date(data)
+        return new_data
+
+    def clean_doc_end_date(self):
+        data = self.cleaned_data['doc_end_date']
+        new_data = get_clean_partial_date(data)
+        return new_data
 
     class Meta:
         model = Document

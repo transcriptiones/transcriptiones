@@ -2,7 +2,7 @@
 edit the meta data and the transcription itself"""
 from dal import autocomplete
 from django import forms
-from main.forms.forms_helper import initialize_form_helper, get_popover_html
+from main.forms.forms_helper import initialize_form_helper, get_popover_html, get_clean_partial_date
 from main.models import Document, Author, Language, SourceType
 from django.utils.translation import ugettext_lazy as _
 
@@ -50,6 +50,16 @@ class EditMetaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
+
+    def clean_doc_start_date(self):
+        data = self.cleaned_data['doc_start_date']
+        new_data = get_clean_partial_date(data)
+        return new_data
+
+    def clean_doc_end_date(self):
+        data = self.cleaned_data['doc_end_date']
+        new_data = get_clean_partial_date(data)
+        return new_data
 
     class Meta:
         model = Document
