@@ -317,7 +317,7 @@ class Document(models.Model):
     parent_ref_number = models.ForeignKey(RefNumber,
                                           verbose_name=_("Reference Number"),
                                           on_delete=models.PROTECT,
-                                          help_text="Reference number of the source")
+                                          help_text=_("Reference number of the source"))
 
     author = models.ManyToManyField(Author,
                                     verbose_name=_("Scribes"),
@@ -685,7 +685,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(verbose_name=_('First name'),
                                   max_length=150,
                                   blank=False,
-                                  help_text='Enter your first name(s)')
+                                  help_text=_('Enter your first name(s)'))
 
     last_name = models.CharField(verbose_name=_('Last name'),
                                  max_length=150,

@@ -124,7 +124,11 @@
             {% endfor %}
             <div class="text-center">
                 {% include 'main/search/pagination.html' %}
-                <small>({{ num_pages }} pages in total.)</small>
+                <small>
+                    {% blocktranslate %}
+                    ({{ num_pages }} pages in total.)
+                    {% endblocktranslate %}
+                </small>
             </div>
         {% else %}
             {% translate "Please enter a search term above. It needs to be at least 4 characters long."  %}

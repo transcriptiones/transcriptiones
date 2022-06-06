@@ -104,7 +104,10 @@
     <div class="form-row">
         <div class="form-group col-5 m-3">
              <label class="checkbox-inline">
-              <input type="checkbox" {% if request.GET.strict_search == 'on' %}checked{% endif %} name="strict_search" data-size="small" data-width="100" data-toggle="toggle" data-on="{% translate 'Strict' %}" data-off="{% translate 'Normal' %}"> <small>{% translate 'Toggle for normal/strict search' %}</small>
+              <input type="checkbox" {% if request.GET.strict_search == 'on' %}checked{% endif %} name="strict_search" data-size="small" data-width="100" data-toggle="toggle" data-on="{% translate 'Strict' %}" data-off="{% translate 'Normal' %}">
+                 <small>{% translate 'Toggle for normal/strict search' %}
+                     {% get_static_tooltip_html _('Search Mode') _('The normal search uses sequences of four characters for all text-based searches. The exact search is based on entire words.') %}
+                 </small>
             </label>
         </div>
         <div class="form-group col-6 text-right mt-3">

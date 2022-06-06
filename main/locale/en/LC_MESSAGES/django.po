@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-17 13:25+0200\n"
-"PO-Revision-Date: 2022-05-17 14:23+0200\n"
+"POT-Creation-Date: 2022-05-26 17:06+0200\n"
+"PO-Revision-Date: 2022-05-26 17:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -202,7 +202,7 @@ msgstr ""
 #: main/forms/forms_search.py:310 main/templates/main/base.html:128
 #: main/templates/main/base_copy.html:121
 #: main/templates/main/info/start.html:118
-#: main/templates/main/search/search_form_2.html:111
+#: main/templates/main/search/search_form_2.html:114
 #: main/templates/main/search/search_view.html:9
 #: main/templates/main/search/search_view.html:14
 #: main/templates/main/search/search_view.html:22
@@ -395,7 +395,6 @@ msgstr ""
 
 #: main/mail_utils.py:109
 #, python-brace-format
-#| msgid "Your Username is: {user.username}. Goto LINK to reset your password."
 msgid "Your New Email address is: {user.email}"
 msgstr ""
 
@@ -1066,6 +1065,10 @@ msgstr ""
 msgid "Title of the Document"
 msgstr ""
 
+#: main/models.py:320
+msgid "Reference number of the source"
+msgstr ""
+
 #: main/models.py:323 main/templates/main/details/author_list.html:14
 #: main/templates/main/details/author_list.html:18
 #: main/templates/main/details/browse_options.html:39
@@ -1316,6 +1319,10 @@ msgstr ""
 
 #: main/models.py:683
 msgid "Provide a user name"
+msgstr ""
+
+#: main/models.py:688
+msgid "Enter your first name(s)"
 msgstr ""
 
 #: main/models.py:693
@@ -2402,8 +2409,8 @@ msgstr ""
 
 #: main/templates/main/info/start.html:47
 msgid ""
-"You created transcripts and want to share them? You are looking for already "
-"transcribed material? Welcome!"
+"Have you created transcriptions and want to share them? You are looking for "
+"already transcribed material? Welcome!"
 msgstr ""
 
 #: main/templates/main/info/start.html:61
@@ -2644,11 +2651,22 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: main/templates/main/search/search_form_2.html:107
+#: main/templates/main/search/search_form_2.html:108
 msgid "Toggle for normal/strict search"
 msgstr ""
 
-#: main/templates/main/search/search_form_2.html:112
+#: main/templates/main/search/search_form_2.html:109
+#| msgid "Search results"
+msgid "Search Mode"
+msgstr ""
+
+#: main/templates/main/search/search_form_2.html:109
+msgid ""
+"The normal search uses sequences of four characters for all text-based "
+"searches. The exact search is based on entire words."
+msgstr ""
+
+#: main/templates/main/search/search_form_2.html:115
 msgid "Clear Form"
 msgstr ""
 
@@ -2692,9 +2710,21 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/search/search_view_2.html:121
-#: main/templates/main/search/search_view_3.html:130
 msgid ""
 "Please enter a search term above. It needs to be at least 3 characters long."
+msgstr ""
+
+#: main/templates/main/search/search_view_3.html:128
+#, python-format
+msgid ""
+"\n"
+"                    (%(num_pages)s pages in total.)\n"
+"                    "
+msgstr ""
+
+#: main/templates/main/search/search_view_3.html:134
+msgid ""
+"Please enter a search term above. It needs to be at least 4 characters long."
 msgstr ""
 
 #: main/templates/main/sidebar.html:10
@@ -2766,7 +2796,7 @@ msgid "Success: Institution was created."
 msgstr ""
 
 #: main/templates/main/upload/create_document.html:239
-#: main/views/views_upload.py:123
+#: main/views/views_upload.py:140
 msgid "Success: RefNumber was created."
 msgstr ""
 
@@ -3495,6 +3525,18 @@ msgstr ""
 msgid "There is an error in your form"
 msgstr ""
 
+#: main/views/views_upload.py:124
+msgid ""
+"There are many different institutions with very similar titles. Please "
+"choose another title or contact transcriptiones."
+msgstr ""
+
+#: main/views/views_upload.py:156
+msgid ""
+"There are many different reference numbers with very similar titles. Please "
+"choose another title or contact transcriptiones."
+msgstr ""
+
 #: main/views/views_user.py:69 main/views/views_user.py:79
 msgid "Successfully logged in!"
 msgstr ""
@@ -3530,9 +3572,6 @@ msgstr ""
 #: main/views/views_user.py:262
 msgid "Your API Key has been deleted"
 msgstr ""
-
-#~ msgid "Search results"
-#~ msgstr "Search results"
 
 #~ msgid "Content Fields"
 #~ msgstr "Content Fields"
