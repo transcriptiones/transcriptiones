@@ -6,6 +6,7 @@
         <a type="button" href="{% url 'main:my_documents' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'my_documents' %} disabled{% endif %}">{% translate 'My Documents' %}</a>
         <a type="button" href="{% url 'main:user_update' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'user_update' %} disabled{% endif %}">{% translate 'Edit Profile' %}</a>
         <a type="button" href="{% url 'main:password_change' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'password_change' %} disabled{% endif %}">{% translate 'Change Password' %}</a>
+        <a type="button" href="{% url 'main:user_email_update' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'user_email_update' %} disabled{% endif %}">{% translate 'Change Email Address' %}</a>
         <a type="button" href="{% url 'main:messages' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'messages' %} disabled{% endif %}">{% translate 'Messages' %}</a>
         <a type="button" href="{% url 'main:subscriptions' %}" class="btn btn-primary{% if request.resolver_match.url_name == 'subscriptions' %} disabled{% endif %}">{% translate 'Subscriptions' %}</a>
     </div>

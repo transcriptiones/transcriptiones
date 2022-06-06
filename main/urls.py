@@ -99,7 +99,8 @@ urlpatterns = [
     # USER VIEWS
     path('user/signup/', v_user.signup, name='signup'),
     path('user/activationsent/', v_user.AccountActivationSentView.as_view(), name='account_activation_sent'),
-    path('user/activate/<uidb64>/<token>/', v_user.activate, name='activate'),
+    path('user/activate/<uidb64>/<token>/', v_user.show_activation_page, name='activate'),
+    path('user/activate/', v_user.activate, name='activate_user'),
     path('user/login/', v_user.CustomLoginView.as_view(), name='login'),
     path('user/logout/', LogoutView.as_view(template_name='main/users/logout.html'), name='logout'),
     path('user/passwordchange/', v_user.CustomPasswordChangeView.as_view(), name='password_change'),

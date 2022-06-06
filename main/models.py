@@ -699,7 +699,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                               help_text=_('Enter your email address'))
 
     email_confirmed = models.BooleanField(_('Email confirmed'),
-                                          default=True,     # TODO Why?
+                                          default=True,     # Why is this true? But this is no problem, as it gets set
+                                                            # to false when creating user
                                           help_text=_('Has the user confirmed the email address?'))
 
     is_staff = models.BooleanField(verbose_name=_('Staff status'),
@@ -707,7 +708,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                                    help_text=_('Does the user have staff status and can thus login to the admin page?'))
 
     is_active = models.BooleanField(verbose_name=_('Active'),
-                                    default=True,
+                                    default=True,           # Why is this true? But this is no problem, as it gets set
+                                                            # to false when creating user
                                     help_text=_('Is the user active? Users get deactivated instead of deleted.'))
 
     date_joined = models.DateTimeField(verbose_name=_('Date joined'),

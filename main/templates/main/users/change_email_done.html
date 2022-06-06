@@ -16,7 +16,12 @@
 
     {% card 'change_done_card' _('Your Email Address Has Been Changed') %}
         <div class="text-center">
-            <p>{% translate 'Your email address has been changed. We sent an email to the new address and you have been logged out. Please log in again.' %}</p>
+            <p>
+                {% blocktranslate with email_address=logged_out_user.email %}
+                    Your email address has been changed to <strong>{{ email_address }}</strong>.
+                    We sent an email to the new address and you have been logged out. Please log in again.
+                {% endblocktranslate %}
+            </p>
             <a href="{% url 'main:login' %}" class="btn btn-primary">{% translate 'Login' %}</a>
         </div>
     {% endcard %}

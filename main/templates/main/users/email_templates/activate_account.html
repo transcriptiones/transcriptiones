@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+
+{% block page_title %}
+    Activate Your Account
+{% endblock %}
+
+{%  block content %}
+    {% card 'info_card' _('Welcome! Please Confirm Account activation') %}
+        <div class="text-center">
+            <p>
+                {% translate 'Thank you for registering an account on transcriptiones.ch. Please activate your account by pressing the button below.' %}
+            </p>
+            <form method="POST" action="{% url 'main:activate_user' %}">
+                {% csrf_token %}
+                <input type="hidden" name="uid" value="{{ uid }}" />
+                <input type="hidden" name="token" value="{{ token }}" />
+                <input type="submit" class="btn btn-primary" value="Activate Your Account">
+            </form>
+        </div>
+    {% endcard %}
+{% endblock content %}

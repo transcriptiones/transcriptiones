@@ -36,14 +36,15 @@ def signup(request):
     """View for display and handling of SignUpForm.
     Sends Link to confirm email"""
 
+    form = SignUpForm()
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
             send_registration_confirmation_mail(request, user)
             return redirect('main:account_activation_sent')
-    else:
-        form = SignUpForm()
+
     return render(request, 'main/users/signup.html', {'form': form})
 
 
@@ -52,24 +53,32 @@ class AccountActivationSentView(TemplateView):
     template_name = 'main/users/account_activation_sent.html'
 
 
-def activate(request, uidb64, token):
+def show_activation_page(request, uidb64, token):
+    return render(request, 'main/users/email_templates/activate_account.html', context={"uid": uidb64, "token": token})
+
+
+def activate(request):
     """View to check token from confirmation-link. Logs User in and redirects to the start page"""
 
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
+    if request.method == "POST":
+        uidb64 = request.POST.get("uid", None)
+        token = request.POST.get("token", None)
 
-    if user is not None and account_activation_token.check_token(user, token):
-        user.email_confirmed = True
-        user.is_active = True
-        user.save()
-        login(request, user)
-        messages.success(request, _('Successfully logged in!'))
-        return redirect('main:start')
-    else:
-        return render(request, 'main/users/account_activation_invalid.html')
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and account_activation_token.check_token(user, token):
+            user.email_confirmed = True
+            user.is_active = True
+            user.save()
+            login(request, user)
+            messages.success(request, _('Successfully logged in!'))
+            return redirect('main:start')
+
+    return render(request, 'main/users/account_activation_invalid.html')
 
 
 class CustomLoginView(SuccessMessageMixin, LoginView):
@@ -214,7 +223,6 @@ def change_email_view(request):
                 request.user.email = form.cleaned_data['new_email_of_user']
                 request.user.save()
                 send_changed_address_mail(request, request.user)
-                logout(request)
                 return redirect('main:change_email_request_done')
 
     else:
@@ -224,7 +232,9 @@ def change_email_view(request):
 
 
 def request_email_change_done_view(request):
-    return render(request, 'main/users/change_email_done.html')
+    user = request.user
+    logout(request)
+    return render(request, 'main/users/change_email_done.html', context={'logged_out_user': user})
 
 
 @login_required
