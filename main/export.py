@@ -77,10 +77,17 @@ def export_tei(document):
     if document.seal:
         seal_text = 'There are seals in this manuscript.'
 
+    pages_text = document.get_paging_system_display()
+    if document.paging_system == 1:
+        pages_text = str(document.pages) + ' page(s)'
+    elif document.paging_system == 2:
+        pages_text = str(document.pages) + ' folio(s)'
+
+
     with open('main/templates/main/tei_template.xml') as base_file:
         text = base_file.read()
         text = text.replace('{{ SOURCE_TITLE }}', document.title_name)
-        text = text.replace('{{ PARTICIPANT_LIST }}', get_xml_list('author', ['Hans Muster', 'Petra Polio'],
+        text = text.replace('{{ PARTICIPANT_LIST }}', get_xml_list('author', document.author.all().values_list('author_name', flat=True),
                                                                    number_of_spaces=16))
         text = text.replace('{{ UPLOADING_USER }}', username)
         text = text.replace('{{ DISTRIBUTOR }}', 'TRANSCRIPTIONES.CH')
@@ -91,8 +98,8 @@ def export_tei(document):
         text = text.replace('{{ TRANSCRIPTION_SCOPE }}', document.transcription_scope)
         text = text.replace('{{ INSTITUTION_NAME }}', document.parent_ref_number.holding_institution.institution_name)
         text = text.replace('{{ REF_NUMBER }}', document.parent_ref_number.ref_number_name)
-        text = text.replace('{{ WRITING_MATERIAL }}', str(document.material))
-        text = text.replace('{{ NUMBER_OF_PAGES }}', str(document.pages))
+        text = text.replace('{{ WRITING_MATERIAL }}', document.get_material_display())
+        text = text.replace('{{ NUMBER_OF_PAGES }}', pages_text)
         text = text.replace('{{ DOC_HEIGHT }}', str(document.measurements_length))
         text = text.replace('{{ DOC_WIDTH }}', str(document.measurements_width))
         text = text.replace('{{ HAS_ILLUMINATIONS }}', illumination_text)

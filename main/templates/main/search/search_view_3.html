@@ -30,8 +30,10 @@
 
         {% if result %}
             {% include 'main/search/pagination.html' %}
-            {% blocktranslate %}
-                Found {{ total }} results.
+            {% blocktranslate count results=total %}
+                Found {{ results }} result
+                {% plural %}
+                Found {{ results }} results
             {% endblocktranslate %}
             {% for entry in result %}
                 <a href="{% url 'main:document_detail' entry.1.parent_ref_number.holding_institution.institution_slug entry.1.parent_ref_number.ref_number_slug entry.1.document_slug %}" class="no-deco-link">
@@ -125,8 +127,10 @@
             <div class="text-center">
                 {% include 'main/search/pagination.html' %}
                 <small>
-                    {% blocktranslate %}
-                    ({{ num_pages }} pages in total.)
+                    {% blocktranslate count num_pages=num_pages %}
+                        ({{ num_pages }} page in total)
+                        {% plural %}
+                        ({{ num_pages }} pages in total)
                     {% endblocktranslate %}
                 </small>
             </div>

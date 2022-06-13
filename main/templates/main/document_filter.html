@@ -4,12 +4,16 @@
        <div class="form-row">
             <div class="form-group col-md-6">
                 {% if form_data.filter_applied == True %}
-                    {% blocktranslate with num_of_results=form_data.results %}
-                        You filtered the table. It now contains <strong>{{ num_of_results }}</strong> Documents.
+                    {% blocktranslate count num_of_results=form_data.results %}
+                        You have filtered the table. It now contains <strong>{{ num_of_results }}</strong> Document
+                        {% plural %}
+                        You have filtered the table. It now contains <strong>{{ num_of_results }}</strong> Documents
                     {% endblocktranslate %}
                 {% else %}
-                    {% blocktranslate with num_of_results=form_data.results %}
-                        This table contains a total of <strong>{{ num_of_results }}</strong> Documents.
+                    {% blocktranslate count num_of_results=form_data.results %}
+                        This table contains <strong>{{ num_of_results }}</strong> Document
+                        {% plural %}
+                        This table contains a total of <strong>{{ num_of_results }}</strong> Documents
                     {% endblocktranslate %}
                 {% endif %}
             </div>
@@ -30,7 +34,7 @@
             </div>
             <div class="form-group col-md-4">
                 <select name="source_type" class="form-control" title="" id="id_source_type">
-                    <option value="">--- Filter By Source Type ---</option>
+                    <option value="">{% translate '--- Filter By Source Type ---' %}</option>
                     {% for sourcetype in form_data.source_types %}
                         <option value="{{ sourcetype.value }}" style="font-weight: bold;"{% ifequal request.GET.source_type sourcetype.value %} selected="selected"{% endifequal %}>{{ sourcetype.name }}</option>
                         {% for child_sourcetype in sourcetype.children %}

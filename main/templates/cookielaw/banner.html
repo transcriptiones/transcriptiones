@@ -1,16 +1,21 @@
 {% load i18n %}
+{% load static %}
 
 <div id="CookielawBanner">
     <div class="cookie-content">
         <div class="card">
   <div class="card-header">
-    transcriptiones Cookies
+    {% translate 'transcriptiones Cookies' %}
   </div>
   <div class="card-body">
-    <h5 class="card-title">transcriptiones Cookie Policy</h5>
-      <p class="card-text">transcriptiones saves session information to cookies to provide its service. We <strong>don't</strong> use any tracking mechanisms or 3rd party cookies. Please confirm that you received this information by pressing the button below.</p>
-      <p>Learn more by reading our <a href="{% url 'main:tos' %}">Terms Of Service</a></p>
-      <a href="javascript:Cookielaw.accept();" class="btn btn-primary">Accept necessary system cookies</a>
+    <h5 class="card-title">{% translate 'transcriptiones Cookie Policy' %}</h5>
+      <p class="card-text">
+          {% url 'main:tos' as tosurl %}
+          {% blocktranslate with tosurl=tosurl %}
+              transcriptiones saves session information to cookies to provide its service. We <strong>don't</strong> use any tracking mechanisms or 3rd party cookies. Please confirm that you received this information by pressing the button below.</p>
+              <p>Learn more by reading our <a href="{{ tosurl }}">Terms Of Service</a></p>
+          {% endblocktranslate %}
+      <a href="javascript:Cookielaw.accept();" class="btn btn-primary">{% translate 'Accept necessary system cookies' %}</a>
 
   </div>
 </div>

@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models import Q, UniqueConstraint
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, get_language
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from partial_date import PartialDateField
@@ -275,7 +275,8 @@ class SourceType(models.Model):
         return children_source_type_list
 
     def __str__(self):
-        return self.type_name
+        language = get_language()
+        return self.get_translated_name(language)
 
 
 
@@ -744,8 +745,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                                                         default=True)
 
     ui_language = models.CharField(max_length=20,
-                                   verbose_name=_('Default User Interface Language'),
-                                   help_text=_('What is your preferred language?'),
+                                   verbose_name=_('Communication Language'),
+                                   help_text=_('What is your preferred language for email communication?'),
                                    choices=settings.LANGUAGES,
                                    default='en')
 

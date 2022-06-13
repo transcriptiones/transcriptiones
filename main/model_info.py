@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.utils.functional import lazy
 from django.utils.html import format_html, format_html_join, strip_tags, escape
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _, get_language
+from django.utils.translation import ugettext_lazy as _, get_language, get_language_info
 from django.utils.text import format_lazy
 from datetime import date
 
@@ -52,8 +52,9 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'email'), user.email),
             (get_verbose_field_name(user, 'date_joined'), user.date_joined),
             (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
+            (get_verbose_field_name(user, 'ui_language'), get_language_info(user.ui_language)['name_local']),
             (_('User State'), mark_safe(user.get_user_state_badge())),
-            (_('Active'), mark_safe(user.get_user_activity_badge())),
+            (_('Activity Status'), mark_safe(user.get_user_activity_badge())),
             (get_verbose_field_name(user, 'mark_anonymous'),
              mark_safe('<span style="color: green;">&check;</span>') if user.mark_anonymous else mark_safe(
                  '<span style="color: red;">&cross;</span>')),
@@ -66,7 +67,7 @@ def get_public_user_info(user):
     data = [(get_verbose_field_name(user, 'username'), user.username),
             (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
             (_('Year joined'), user.date_joined.year),
-            (_('Active'), mark_safe(user.get_user_activity_badge())),
+            (_('Activity Status'), mark_safe(user.get_user_activity_badge())),
             ]
     return title_value_list(data)
 
@@ -365,10 +366,9 @@ def get_extended_help_text(model, field):
                                                             'own and control, and that distinguishes you from every '
                                                             'other researcher.'))
         elif field == 'ui_language':
-            help_text = get_title_text_format(_('Default website language'), _('Choose the default language in which '
-                                                                               'the transcriptiones web interface '
-                                                                               'will be presented to you. You can '
-                                                                               'change the language at any time.'))
+            help_text = get_title_text_format(_('Preferred Communication Language'), _('Choose the default language in which '
+                                                                                       'you would like to receive emails from '
+                                                                                       'transcriptiones.'))
         elif field == 'password1' or field == 'new_password1':
             help_text = get_title_text_format(_('Password'), get_password_validator_text_format())
         elif field == 'password2' or field == 'new_password2':

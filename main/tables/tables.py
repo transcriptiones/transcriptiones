@@ -2,6 +2,7 @@
 import django_tables2 as tables
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from django_tables2 import A
 from main.models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification, \
@@ -119,7 +120,7 @@ class UserNotificationTable(tables.Table):
 
     class Meta:
         model = UserNotification
-        template_name = "django_tables2/bootstrap4.html"
+        template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("subject", "message", "sending_time")
         attrs = {"class": "table table-hover",
                  'td': {'style': 'text-align: left;'}
@@ -164,7 +165,7 @@ class UserSubscriptionTable(tables.Table):
 
     class Meta:
         model = UserSubscription
-        template_name = "django_tables2/bootstrap4.html"
+        template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("subscription_type", "object_id",)
         attrs = {"class": "table table-hover",
                  'td': {'style': 'text-align: left;'}
@@ -236,8 +237,10 @@ class UserSubscriptionTable(tables.Table):
             institution = Institution.objects.get(id=record.object_id)
             url_view = reverse('main:institution_detail', kwargs={'inst_slug': institution.institution_slug})
 
-        html_text = f'<a class="btn btn-danger btn-sm" href="{url}" role="button">Unsubscribe</a> &nbsp;' \
-                    f'<a class="btn btn-primary btn-sm" href="{url_view}" role="button">View</a>'
+        html_text = format_lazy('<a class="btn btn-danger btn-sm" href="{url}" role="button">{unsubscribe}</a> &nbsp;' \
+                                '<a class="btn btn-primary btn-sm" href="{url_view}" role="button">{view}</a>',
+                                url=url, url_view=url_view, unsubscribe=_('Unsubscribe'), view=_('View'))
+
         return mark_safe(html_text)
 
 

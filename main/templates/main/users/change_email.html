@@ -17,6 +17,9 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include 'main/users/user_options.html' %}
+
     {% card 'change_e_card' _('Change Email Address') %}
         {% if user.is_authenticated %}
             {% crispy form %}

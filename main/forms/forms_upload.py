@@ -9,7 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from main.models import Institution, RefNumber, Document, SourceType, Author, Language
 from main.widgets import SourceChildSelect
-from main.forms.forms_helper import initialize_form_helper, get_popover_html, get_clean_partial_date
+from main.forms.forms_helper import initialize_form_helper, get_popover_html, get_clean_partial_date, \
+    get_help_text_html_by_model_name
 
 
 class LanguageModelMultipleChoiceField(forms.ModelMultipleChoiceField):
@@ -47,6 +48,18 @@ class UploadTranscriptionForm(forms.ModelForm):
                                                 widget=autocomplete.ModelSelect2Multiple(
                                                     url='main:language-autocomplete'),
                                                 required=False)
+
+    seal = forms.NullBooleanField(label=get_popover_html(Document, 'seal'),
+                                  help_text=Document._meta.get_field("seal").help_text,
+                                  widget=forms.Select(
+                                      choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]
+                                  ))
+
+    illuminated = forms.NullBooleanField(label=get_popover_html(Document, 'illuminated'),
+                                         help_text=Document._meta.get_field("illuminated").help_text,
+                                         widget=forms.Select(
+                                             choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]
+                                         ))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -89,8 +102,8 @@ class UploadTranscriptionForm(forms.ModelForm):
             'measurements_length': get_popover_html(Document, 'measurements_length'),
             'pages': get_popover_html(Document, 'pages'),
             'paging_system': get_popover_html(Document, 'paging_system'),
-            'illuminated': get_popover_html(Document, 'illuminated'),
-            'seal': get_popover_html(Document, 'seal'),
+            # 'illuminated': get_popover_html(Document, 'illuminated'),
+            # 'seal': get_popover_html(Document, 'seal'),
             'comments': get_popover_html(Document, 'comments'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }

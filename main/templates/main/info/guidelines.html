@@ -67,7 +67,7 @@
                 verfügbaren Quellentypen ist zweistufig organisiert und im folgenden Schema erläutert.
             </p>
             <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="list-group  mb-4" id="list-tab" role="tablist">
                     {% for st in source_types %}
                         <a class="list-group-item list-group-item-action list-group-item-st" id="list-{{ st.pk }}-list" data-toggle="list" href="#list-{{ st.pk }}" role="tab" aria-controls="{{ st.pk }}">
@@ -77,7 +77,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <div class="tab-content" id="nav-tabContent">
                     {% for st in source_types %}
                         <div class="tab-pane fade" id="list-{{ st.pk }}" role="tabpanel" aria-labelledby="list-{{ st.pk }}-list">
@@ -119,7 +119,7 @@
             </p>
             <p>
                 Die vergangenen Versionen einer Transkription können Sie weiter einsehen. Jede Version hat eine statische
-                URL, mit welche diese spezifische Version erreicht, verlinkt oder zitiert werden kann. Dieselbe URL ohne
+                URL, mit welcher diese spezifische Version erreicht, verlinkt oder zitiert werden kann. Dieselbe URL ohne
                 die angehängte Versionsnummer führt immer zur neuesten Version dieser Transkription. Muss eine alte Version
                 wiederhergestellt werden, kontaktieren Sie bitte das transcriptiones-Team mittels des <a class="strong_link" href="{% url 'main:contact' %}">Kontaktformulars</a>.
                 Stellen Sie auf transcriptiones unsachgemässes Verhalten fest, melden Sie dies bitte umgehend mittels
@@ -138,7 +138,9 @@
                 Transkriptionsrichtlinien von Ad fontes</a> ans Herz.<br/>
                 Grundsätzlich gilt laut Ad fontes: "Die Textwiedergabe soll möglichst genau erfolgen, so dass die
                 Textschichten der Quelle erkennbar sind. Die Transkription soll über die Wiedergabe des
-                sachlich-historischen Inhaltes hinaus die sprachliche (inkl. orthographische) Form des Originals wiedergeben."
+                sachlich-historischen Inhaltes hinaus die sprachliche (inkl. orthographische) Form des Originals wiedergeben."<br/>
+                Das Markieren von Seitenumbrüchen ist für das Erweitern und Überarbeiten von Transkriptionen sehr hilfreich.
+                Bitte markieren Sie diese wenn möglich – vorzugsweise mit //// oder horizontaler Linie sowie der Seiten- bzw. Folionummer.
             </p>
             <h4>Abonnemente</h4>
             <p>
@@ -279,7 +281,9 @@
                 of Ad fontes. The complete guidelines can be found <a class="strong_link" href="https://www.adfontes.uzh.ch/en/tutorium/schriften-lesen/transkriptionsregeln">here</a>.<br/>
                 These are the basic rules according to Ad fontes: "The text should be followed as exactly as possible,
                 so that the text layers of the source are recognizable. The transcription should reproduce the
-                linguistic (including orthographic) form of the original, and not just the historical-factual content."
+                linguistic (including orthographic) form of the original, and not just the historical-factual content."<br/>
+                Marking page breaks of the original source facilitates further extension of the transcription.
+                Please mark them if possible, preferably using //// or horizontal lines as well as the page/folio number.
             </p>
             <h4>Subscriptions</h4>
             <p>

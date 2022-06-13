@@ -177,12 +177,13 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'user_orcid', 'mark_anonymous')
+        fields = ('username', 'email', 'first_name', 'last_name', 'user_orcid', 'ui_language', 'mark_anonymous')
 
         labels = {
             'first_name': get_popover_html(User, 'first_name'),
             'last_name': get_popover_html(User, 'last_name'),
             'user_orcid': get_popover_html(User, 'user_orcid'),
+            'ui_language':get_popover_html(User, 'ui_language'),
             'mark_anonymous': get_popover_html(User, 'mark_anonymous'),
         }
 

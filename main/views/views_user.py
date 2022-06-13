@@ -36,7 +36,7 @@ def signup(request):
     """View for display and handling of SignUpForm.
     Sends Link to confirm email"""
 
-    form = SignUpForm()
+    form = SignUpForm(initial={'ui_language': request.LANGUAGE_CODE})
 
     if request.method == 'POST':
         form = SignUpForm(request.POST)
