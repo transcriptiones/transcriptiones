@@ -126,7 +126,7 @@ def get_api_object_response(request, api_request, object_id):
     elif api_request == REQUESTS[2]:
         api_object = SourceType.objects.get(id=object_id)
     elif api_request == REQUESTS[3]:
-        api_object = Document.objects.get(id=object_id)
+        api_object = Document.all_objects.get(id=object_id)
     else:
         return get_error_response("Invalid Request")
     detail_json = api_object.get_api_detail_json()

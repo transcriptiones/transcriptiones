@@ -482,11 +482,17 @@ class Document(models.Model):
         return api_list_json
 
     def get_api_detail_json(self, version="v1"):
+        is_latest_version = True
+        if not self.active:
+            is_latest_version = False
+
         api_detail_json = {"id": self.id,
                            "name": self.title_name,
-                           "url": self.get_absolute_url(),
+                           "url": self.get_absolute_version_url(),
                            "doc-meta-data": {
                                "version": self.version_number,
+                               "is_latest_version": is_latest_version,
+                               "latest_version_url": self.get_absolute_url(),
                                "created": self.document_utc_add.strftime("%Y-%m-%d %H:%M:%S"),
                                "transcript": {
                                    "tei": f'/api/{version}/documents/{self.id}/tei',
@@ -507,7 +513,7 @@ class Document(models.Model):
                                },
                                "pages": {
                                    "number": self.pages,
-                                   "paging-system": str(self.PaginationType(self.paging_system).label)
+                                   "paging-system": str(self.PaginationType(self.paging_system).label) if self.paging_system is not None else None,
                                },
 
                                "date": {
@@ -521,7 +527,7 @@ class Document(models.Model):
                                "measurements": {"width": str(self.measurements_width),
                                                 "length": str(self.measurements_length),
                                                 "unit": "cm"},
-                               "material": str(self.MaterialType(self.material).label),
+                               "material": str(self.MaterialType(self.material).label) if self.material is not None else None,
                                "languages": list(self.language.values_list('name_en', flat=True)),
                                "location": self.place_name,
                                "scribes": list(self.author.all().values_list('author_name', flat=True))
