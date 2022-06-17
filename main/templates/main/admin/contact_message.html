@@ -12,10 +12,9 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% breadcrumb _('Administration') "main:admin" %}
-    {% breadcrumb _('Contact Message Inbox') 'main:admin_contact' %}
+    {% breadcrumb _('Administration') "main:admin_start" %}
+    {% breadcrumb _('Contact Message Inbox') 'main:admin_inbox' %}
     {% breadcrumb _('Message') '' %}
-    {% breadcrumb _('Answer') '' %}
 {% endblock %}
 
 {% block content %}
