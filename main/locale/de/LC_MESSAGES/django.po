@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-13 15:46+0200\n"
-"PO-Revision-Date: 2022-06-13 15:56+0200\n"
+"POT-Creation-Date: 2022-06-17 10:27+0200\n"
+"PO-Revision-Date: 2022-06-17 10:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr "Signatur oder Titel der Verzeichniseinheit enthält"
 
-#: main/filters.py:85 main/models.py:771 main/models.py:807
+#: main/filters.py:85 main/models.py:777 main/models.py:813
 msgid "User"
 msgstr "Benutzer*in"
 
-#: main/filters.py:86 main/models.py:772
+#: main/filters.py:86 main/models.py:778
 msgid "Staff"
 msgstr "Mitarbeiter*in"
 
-#: main/filters.py:87 main/models.py:773
+#: main/filters.py:87 main/models.py:779
 msgid "Admin"
 msgstr "Administrator*in"
 
@@ -53,12 +53,12 @@ msgstr "Antwort senden"
 msgid "Subject"
 msgstr "Betreff"
 
-#: main/forms/forms_edit.py:31 main/forms/forms_upload.py:33
+#: main/forms/forms_edit.py:32 main/forms/forms_upload.py:33
 msgid "First level Source Type"
 msgstr "Quellentyp (übergeordnet)"
 
 #: main/forms/forms_helper.py:37 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:809
+#: main/models.py:97 main/models.py:815
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -297,8 +297,8 @@ msgid "Set a new password for transcriptiones."
 msgstr "Setzen Sie ein neues Passwort für transcriptiones."
 
 #: main/forms/forms_user.py:162
-#: main/templates/main/upload/edit_document_transcription.html:38
-#: main/templates/main/upload/edit_meta.html:96
+#: main/templates/main/upload/edit_document_transcription.html:53
+#: main/templates/main/upload/edit_meta.html:95
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
@@ -888,7 +888,7 @@ msgstr ""
 "Optionales Feld. Direkter Link zur Verzeichniseinheit im Katalog der "
 "Institution. Muss mit http:// oder https:// beginnen"
 
-#: main/model_info.py:350 main/models.py:680
+#: main/model_info.py:350 main/models.py:686
 msgid "Username"
 msgstr "Benutzername"
 
@@ -900,7 +900,7 @@ msgstr ""
 "Der Name muss einmalig sein und darf keine Sonderzeichen enthalten. Er wird "
 "anderen Benutzern angezeigt."
 
-#: main/model_info.py:353 main/models.py:686
+#: main/model_info.py:353 main/models.py:692
 msgid "First name"
 msgstr "Vorname"
 
@@ -908,7 +908,7 @@ msgstr "Vorname"
 msgid "Your given name. This information will not be public."
 msgstr "Ihr Vorname. Diese Information ist nicht öffentlich einsehbar."
 
-#: main/model_info.py:355 main/models.py:691
+#: main/model_info.py:355 main/models.py:697
 msgid "Last name"
 msgstr "Nachname"
 
@@ -1033,7 +1033,7 @@ msgstr "Institutionen"
 msgid "Institution which holds this reference number and document"
 msgstr "Die Institution, die das Dokument mit dieser Signatur besitzt"
 
-#: main/models.py:101 main/models.py:805
+#: main/models.py:101 main/models.py:811
 msgid "Reference number"
 msgstr "Signatur"
 
@@ -1210,7 +1210,7 @@ msgstr "Sprachen"
 msgid "Languages used in the source"
 msgstr "In der Quelle verwendete Sprachen"
 
-#: main/models.py:352 main/models.py:810
+#: main/models.py:352 main/models.py:816
 msgid "Source Type"
 msgstr "Quellentyp"
 
@@ -1344,12 +1344,12 @@ msgstr "Dokument"
 msgid "documents"
 msgstr "Dokumente"
 
-#: main/models.py:582
+#: main/models.py:588
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr "Dokument \"{self.title_name}\" wurde verändert"
 
-#: main/models.py:583
+#: main/models.py:589
 #, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
@@ -1358,11 +1358,11 @@ msgstr ""
 "Das Dokument {self.title_name} wurde verändert.\n"
 "\n"
 
-#: main/models.py:596
+#: main/models.py:602
 msgid "A Reference Number has changed"
 msgstr "Eine Signatur wurde verändert"
 
-#: main/models.py:597
+#: main/models.py:603
 #, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1372,11 +1372,11 @@ msgstr ""
 "Die Signatur \"{self.parent_ref_number.ref_number_name}\" wurde verändert.\n"
 "\n"
 
-#: main/models.py:609
+#: main/models.py:615
 msgid "A User has made changes"
 msgstr "Ein Benutzer hat Änderungen vorgenommen"
 
-#: main/models.py:610
+#: main/models.py:616
 #, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
@@ -1385,99 +1385,99 @@ msgstr ""
 "Der Benutzer \"{self.submitted_by.username}\" hat Änderungen vorgenommen.\n"
 "\n"
 
-#: main/models.py:634
+#: main/models.py:640
 msgid "Please enter an email address"
 msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
 
-#: main/models.py:660
+#: main/models.py:666
 msgid "All superusers must have is_staff = True."
 msgstr "Alle Superuser müssen is_staff = True haben."
 
-#: main/models.py:662
+#: main/models.py:668
 msgid "All superusers must have is_superuser = True"
 msgstr "Alle Superuser müssen is_superuser = True haben"
 
-#: main/models.py:670 main/models.py:676
+#: main/models.py:676 main/models.py:682
 msgid "No notification Emails"
 msgstr "Keine Benachrichtigungs-E-Mails"
 
-#: main/models.py:671
+#: main/models.py:677
 msgid "Every time a subscribed document has changed."
 msgstr "Jedes Mal, wenn sich ein abonniertes Dokument geändert hat."
 
-#: main/models.py:672
+#: main/models.py:678
 msgid "Once a day, only if changes happened."
 msgstr "Einmal am Tag, nur wenn Änderungen stattgefunden haben."
 
-#: main/models.py:673
+#: main/models.py:679
 msgid "Once a week, only if changes happened."
 msgstr "Einmal pro Woche, nur wenn Änderungen stattgefunden haben."
 
-#: main/models.py:677
+#: main/models.py:683
 msgid "Every time a message is received."
 msgstr "Jedes Mal, wenn eine Nachricht empfangen wird."
 
-#: main/models.py:678
+#: main/models.py:684
 msgid "Once a day, only if you received messages."
 msgstr "Einmal täglich, nur wenn Sie Nachrichten erhalten haben."
 
-#: main/models.py:684
+#: main/models.py:690
 msgid "Provide a user name"
 msgstr "Geben Sie einen Benutzernamen an"
 
-#: main/models.py:689
+#: main/models.py:695
 msgid "Enter your first name(s)"
 msgstr "Geben Sie Ihre(n) Vorname(n) ein"
 
-#: main/models.py:694
+#: main/models.py:700
 msgid "Enter your last name"
 msgstr "Geben Sie Ihren Nachnamen ein"
 
-#: main/models.py:696
+#: main/models.py:702
 msgid "Email"
 msgstr "E-Mail"
 
-#: main/models.py:700
+#: main/models.py:706
 msgid "Enter your email address"
 msgstr "Geben Sie Ihre E-Mail-Adresse ein"
 
-#: main/models.py:702
+#: main/models.py:708
 msgid "Email confirmed"
 msgstr "E-Mail bestätigt"
 
-#: main/models.py:705
+#: main/models.py:711
 msgid "Has the user confirmed the email address?"
 msgstr "Hat der Benutzer die E-Mail-Adresse bestätigt?"
 
-#: main/models.py:707
+#: main/models.py:713
 msgid "Staff status"
 msgstr "Mitarbeiterstatus"
 
-#: main/models.py:709
+#: main/models.py:715
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "Hat der/die Benutzer*in einen Mitarbeiterstatus und kann sich somit auf der "
 "Admin-Seite anmelden?"
 
-#: main/models.py:711 main/models.py:784
+#: main/models.py:717 main/models.py:790
 msgid "Active"
 msgstr "Aktiv"
 
-#: main/models.py:714
+#: main/models.py:720
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 "Ist das Benutzerkonto aktiv? Benutzerkonten werden deaktiviert statt "
 "gelöscht."
 
-#: main/models.py:716
+#: main/models.py:722
 msgid "Date joined"
 msgstr "Beitrittsdatum"
 
-#: main/models.py:719
+#: main/models.py:725
 msgid "Mark anonymous by default"
 msgstr "Standardmässig anonym veröffentlichen"
 
-#: main/models.py:721
+#: main/models.py:727
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
@@ -1485,77 +1485,77 @@ msgstr ""
 "Wenn diese Option ausgewählt ist, werden Ihre Dokumente standardmässig "
 "anonym veröffentlicht. Kann für jedes Dokument angepasst werden."
 
-#: main/models.py:724
+#: main/models.py:730
 msgid "Orcid"
 msgstr "ORCID"
 
-#: main/models.py:728
+#: main/models.py:734
 msgid "User id from https://orcid.org/"
 msgstr "Benutzer-ID von https://orcid.org/"
 
-#: main/models.py:730
+#: main/models.py:736
 msgid "Subscription Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Abonnementen"
 
-#: main/models.py:733
+#: main/models.py:739
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Wie oft möchten Sie über Ihre abonnierten Dokumente benachrichtigt werden?"
 
-#: main/models.py:736
+#: main/models.py:742
 msgid "Message Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Nachrichten"
 
-#: main/models.py:739
+#: main/models.py:745
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 "Wie oft möchten Sie über empfangene Nachrichten, benachrichtigt werden?"
 
-#: main/models.py:742
+#: main/models.py:748
 msgid "Subscription to owned documents"
 msgstr "Eigene Dokumente abonnieren"
 
-#: main/models.py:743
+#: main/models.py:749
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 "Möchten Sie benachrichtigt werden, wenn Ihre Dokumente von einem/einer "
 "anderen Benutzer*in bearbeitet wurden?"
 
-#: main/models.py:748
+#: main/models.py:754
 msgid "Communication Language"
 msgstr "Kommunikationssprache"
 
-#: main/models.py:749
+#: main/models.py:755
 msgid "What is your preferred language for email communication?"
 msgstr "Was ist Ihre präferierte Sprache für die Kommunikation per E-Mail?"
 
-#: main/models.py:754
+#: main/models.py:760
 msgid "Secret API Key"
 msgstr "Geheimer API-Key"
 
-#: main/models.py:755
+#: main/models.py:761
 msgid "Use this key for API requests. Do not share!"
 msgstr "Benutzen Sie diesen Key für Ihre API-Requests. Nicht weitergeben!"
 
-#: main/models.py:785
+#: main/models.py:791
 msgid "Inactive"
 msgstr "Deaktiviert"
 
-#: main/models.py:806 main/templates/main/details/document_detail.html:21
+#: main/models.py:812 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr "Dokument"
 
-#: main/models.py:808 main/templates/main/details/author_detail.html:8
+#: main/models.py:814 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 msgid "Scribe"
 msgstr "Schreiber*in"
 
-#: main/models.py:906
+#: main/models.py:912
 msgid "Default User Interface Language"
 msgstr "Standardsprache der Benutzeroberfläche"
 
-#: main/models.py:907
+#: main/models.py:913
 msgid "What is your preferred language?"
 msgstr "Was ist Ihre präferierte Sprache?"
 
@@ -2366,7 +2366,7 @@ msgstr "Inhaltliche Metadaten"
 #: main/templates/main/details/document_detail.html:73
 #: main/templates/main/upload/create_document.html:119
 #: main/templates/main/upload/create_document_backup.html:68
-#: main/templates/main/upload/edit_meta.html:78
+#: main/templates/main/upload/edit_meta.html:77
 msgid "Manuscript Description"
 msgstr "Manuskriptbeschreibung"
 
@@ -3114,15 +3114,16 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #: main/templates/main/upload/create_document.html:81
+#: main/templates/main/upload/edit_document_transcription.html:29
 #, python-format
 msgid ""
 "\n"
 "                    Your transcription goes into the following text field. "
-"You can either copy and paste existing\n"
-"                    transcriptions from files in various text and "
-"spreadsheet formats. This will preserve most formatting,\n"
+"You can copy and paste an existing\n"
+"                    transcription from a variety of text and spreadsheet "
+"formats. This will preserve most formatting,\n"
 "                    including tables and footnotes. Or you can type directly "
-"in the editor. More instructions and\n"
+"in the editor. Further instructions and\n"
 "                    guidelines for using the upload form can be found <a "
 "class=\"strong_link\" href=\"%(guide_url)s\">here</a>.<br/>\n"
 "                    In order to achieve some degree of uniformity, we "
@@ -3139,15 +3140,14 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"Ihre Transkription wird im folgenden Textfeld eingetragen. Sie können "
-"entweder bestehende Transkriptionen aus verschiedenen Text- und "
-"Tabellenformaten in den Editor kopieren. Dabei werden die meisten "
-"Formatierungen, inklusive Tabellen und Fussnoten, übernommen. Oder Sie "
-"können direkt in den Editor transkribieren. Mehr Anleitungen und "
-"Hilfestellungen zu diesem Formular finden Sie <a class=\"strong_link\" href="
-"\"%(guide_url)s\">hier</a>.<br/>\n"
-"Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen ans Herz nach "
-"folgenden grundsätzlichen Regel von Ad fontes zu transkribieren: \"Die "
+"Tragen Sie Ihre Transkription in das folgende Textfeld ein. Sie können eine "
+"bestehende Transkription aus einem beliebigen Text- oder Tabellenformat in "
+"den Editor kopieren. Dabei werden die meisten Formatierungen, inklusive "
+"Tabellen und Fussnoten, übernommen. Oder Sie können direkt in den Editor "
+"transkribieren. Weitere Anleitungen und Hilfestellungen zu diesem Formular "
+"finden Sie <a class=\"strong_link\" href=\"%(guide_url)s\">hier</a>.<br/>\n"
+"Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen ans Herz, nach "
+"der folgenden grundsätzlichen Regel von Ad fontes zu transkribieren: \"Die "
 "Textwiedergabe soll möglichst genau erfolgen, so dass die Textschichten der "
 "Quelle erkennbar sind. Die Transkription soll über die Wiedergabe des "
 "sachlich-historischen Inhaltes hinaus die sprachliche (inkl. "
@@ -3215,17 +3215,17 @@ msgstr ""
 "       ‘%(title)s bearbeiten’\n"
 "    "
 
-#: main/templates/main/upload/edit_document_transcription.html:30
-#: main/templates/main/upload/edit_meta.html:88
+#: main/templates/main/upload/edit_document_transcription.html:44
+#: main/templates/main/upload/edit_meta.html:87
 msgid "Document your changes"
 msgstr "Dokumentieren Sie Ihre Änderungen"
 
-#: main/templates/main/upload/edit_document_transcription.html:35
-#: main/templates/main/upload/edit_meta.html:93
+#: main/templates/main/upload/edit_document_transcription.html:50
+#: main/templates/main/upload/edit_meta.html:92
 msgid "Save Your Changes"
 msgstr "Änderungen speichern"
 
-#: main/templates/main/upload/edit_document_transcription.html:37
+#: main/templates/main/upload/edit_document_transcription.html:52
 msgid "If you're done updating the transcription, you can save the document."
 msgstr ""
 "Wenn Sie die Transkription fertig bearbeitet haben, können Sie das Dokument "
@@ -3235,7 +3235,7 @@ msgstr ""
 msgid "Edit metadata"
 msgstr "Metadaten bearbeiten"
 
-#: main/templates/main/upload/edit_meta.html:95
+#: main/templates/main/upload/edit_meta.html:94
 msgid "If you're done changing the metadata, you can save the document."
 msgstr ""
 "Wenn Sie die Metadaten fertig bearbeitet haben, können Sie das Dokument "
@@ -3253,9 +3253,8 @@ msgstr ""
 "das gewünschte Format."
 
 #: main/templates/main/upload/export_document.html:33
-#: main/templates/main/upload/export_document.html:36
-#: main/templates/main/upload/export_document.html:39
-#: main/templates/main/upload/export_document.html:42
+#: main/templates/main/upload/export_document.html:37
+#: main/templates/main/upload/export_document.html:40
 msgid "This feature is not available yet. It will be implemented soon."
 msgstr ""
 "Diese Funktion ist noch nicht verfügbar. Sie wird demnächst implementiert."
@@ -3264,15 +3263,15 @@ msgstr ""
 msgid "Export TEI"
 msgstr "Als TEI exportieren"
 
-#: main/templates/main/upload/export_document.html:37
+#: main/templates/main/upload/export_document.html:36
 msgid "Export JSON"
 msgstr "Als JSON exportieren"
 
-#: main/templates/main/upload/export_document.html:40
+#: main/templates/main/upload/export_document.html:38
 msgid "Export HTML"
 msgstr "Als HTML exportieren"
 
-#: main/templates/main/upload/export_document.html:43
+#: main/templates/main/upload/export_document.html:41
 msgid "Export PDF"
 msgstr "Als PDF exportieren"
 
@@ -4061,6 +4060,48 @@ msgstr "Es wurde kein API-Key gefunden, der hätte gelöscht werden können."
 #: main/views/views_user.py:272
 msgid "Your API Key has been deleted"
 msgstr "Ihr API-Key wurde gelöscht"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    Your transcription goes into the following text "
+#~ "field. You can either copy and paste existing\n"
+#~ "                    transcriptions from files in various text and "
+#~ "spreadsheet formats. This will preserve most formatting,\n"
+#~ "                    including tables and footnotes. Or you can type "
+#~ "directly in the editor. More instructions and\n"
+#~ "                    guidelines for using the upload form can be found <a "
+#~ "class=\"strong_link\" href=\"%(guide_url)s\">here</a>.<br/>\n"
+#~ "                    In order to achieve some degree of uniformity, we "
+#~ "recommend following the basic rules\n"
+#~ "                    according to Ad fontes: \"The text should be followed "
+#~ "as exactly as possible, so that the text layers\n"
+#~ "                    of the source are recognizable. The transcription "
+#~ "should reproduce the linguistic (including\n"
+#~ "                    orthographic) form of the original, and not just the "
+#~ "historical-factual content.\" The complete\n"
+#~ "                    guidelines of Ad fontes can be found <a class="
+#~ "\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/schriften-"
+#~ "lesen/transkriptionsregeln\">here</a>.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "Tragen Sie Ihre Transkription in das folgende Textfeld ein. Sie können "
+#~ "eine bestehend Transkription aus einem beliebigen Text- oder "
+#~ "Tabellenformat in den Editor kopieren. Dabei werden die meisten "
+#~ "Formatierungen, inklusive Tabellen und Fussnoten, übernommen. Oder Sie "
+#~ "können direkt in den Editor transkribieren. Weitere Anleitungen und "
+#~ "Hilfestellungen zu diesem Formular finden Sie <a class=\"strong_link\" "
+#~ "href=\"%(guide_url)s\">hier</a>.<br/>\n"
+#~ "Um eine gewisse Einheitlichkeit zu erreichen, legen wir Ihnen ans Herz, "
+#~ "nach der folgenden grundsätzlichen Regel von Ad fontes zu transkribieren: "
+#~ "\"Die Textwiedergabe soll möglichst genau erfolgen, so dass die "
+#~ "Textschichten der Quelle erkennbar sind. Die Transkription soll über die "
+#~ "Wiedergabe des sachlich-historischen Inhaltes hinaus die sprachliche "
+#~ "(inkl. orthographische) Form des Originals wiedergeben.\" Die "
+#~ "vollständigen Transkriptionsregeln von Ad fontes finden Sie <a class="
+#~ "\"strong_link\" href=\"https://www.adfontes.uzh.ch/tutorium/schriften-"
+#~ "lesen/transkriptionsregeln\">hier</a>."
 
 #~ msgid "Default website language"
 #~ msgstr "Standardsprache der Benutzeroberfläche"

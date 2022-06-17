@@ -16,9 +16,10 @@ class EditTranscriptionForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ('transcription_text', 'commit_message', 'publish_user')
+        fields = ('transcription_text', 'transcription_scope', 'commit_message', 'publish_user')
 
         labels = {
+            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
             'commit_message': get_popover_html(Document, 'commit_message'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
@@ -64,10 +65,9 @@ class EditMetaForm(forms.ModelForm):
     class Meta:
         model = Document
         exclude = ('title_name', 'parent_ref_number', 'transcription_text', 'institution_utc_add',
-                   'document_slug', 'version_number')
+                   'document_slug', 'version_number', 'transcription_scope')
 
         labels = {
-            'transcription_scope': get_popover_html(Document, 'transcription_scope'),
             'doc_start_date': get_popover_html(Document, 'doc_start_date'),
             'doc_end_date': get_popover_html(Document, 'doc_end_date'),
             'place_name': get_popover_html(Document, 'place_name'),

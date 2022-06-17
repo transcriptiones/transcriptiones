@@ -24,10 +24,25 @@
     <form action="" method="post">
         {% csrf_token %}
         {% card 'edit_transcript_overview' _('Edit Transcription') %}
+            <p>
+                {% url 'main:guidelines' as guide_url %}
+                {% blocktranslate with guide_url=guide_url %}
+                    Your transcription goes into the following text field. You can copy and paste an existing
+                    transcription from a variety of text and spreadsheet formats. This will preserve most formatting,
+                    including tables and footnotes. Or you can type directly in the editor. Further instructions and
+                    guidelines for using the upload form can be found <a class="strong_link" href="{{ guide_url }}">here</a>.<br/>
+                    In order to achieve some degree of uniformity, we recommend following the basic rules
+                    according to Ad fontes: "The text should be followed as exactly as possible, so that the text layers
+                    of the source are recognizable. The transcription should reproduce the linguistic (including
+                    orthographic) form of the original, and not just the historical-factual content." The complete
+                    guidelines of Ad fontes can be found <a class="strong_link" href="https://www.adfontes.uzh.ch/en/tutorium/schriften-lesen/transkriptionsregeln">here</a>.
+                {% endblocktranslate %}
+            </p>
             {{ form.transcription_text }}
         {% endcard %}
 
         {% card 'edit_transcript_commit_message' _('Document your changes') %}
+            {{ form.transcription_scope|as_crispy_field }}
             {{ form.commit_message|as_crispy_field }}
             {{ form.publish_user|as_crispy_field }}
         {% endcard %}
