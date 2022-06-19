@@ -159,6 +159,8 @@ urlpatterns = [
     path('transcriptiones_admin/statistics/', v_admin.admin_statistics_view, name='admin_statistics'),
     path('transcriptiones_admin/merge_doc/', v_admin.admin_merge_docs_view, name='admin_merge_docs'),
     path('transcriptiones_admin/export/json/', v_admin.admin_export_json_view, name='admin_export_json'),
+    path('transcriptiones_admin/send_newsletter/', v_admin.send_newsletter_view, name='admin_send_newsletter'),
+
     # ADMIN FUNCTIONS
     path('transcriptiones_admin/activate_user/<int:user_id>', v_admin.activate_user, name='admin_activate_user'),
     path('transcriptiones_admin/deactivate_user/<int:user_id>', v_admin.deactivate_user, name='admin_deactivate_user'),

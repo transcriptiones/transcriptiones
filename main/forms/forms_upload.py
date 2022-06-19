@@ -61,6 +61,8 @@ class UploadTranscriptionForm(forms.ModelForm):
                                              choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]
                                          ))
 
+    # TODO illuminated = forms.NullBooleanField(widget=forms.Select(choices=((True, _('Yes')), (),)))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()

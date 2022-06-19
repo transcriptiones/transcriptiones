@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+{% load transcriptiones %}
+{% load crispy_forms_tags %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block page_title %}
+    {% translate 'Send Newsletter' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb _('Administration') "main:admin" %}
+    {% breadcrumb _('Send Newsletter') '' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'main/admin/admin_options.html' %}
+
+    {% card 'admin_crud' _('Create and send a Newsletter') %}
+        <form action="{% url 'main:admin_send_newsletter' %}" method="post">
+            {% csrf_token %}
+            {{ form.plain_text }}
+        </form>
+         {{ form.media }}
+        <input type="submit" value="{% translate 'Send Test Newsletter' %}" class="btn btn-primary">
+        <input type="submit" value="{% translate 'Send Newsletter' %}" class="btn btn-primary">
+    {% endcard %}
+
+{% endblock %}

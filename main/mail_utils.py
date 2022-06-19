@@ -13,11 +13,9 @@ from lxml import html
 from lxml.html.clean import clean_html
 
 
-def get_base_render_object(request, subject):
-    """Returns an object to render a html message. Used for all messages """
-
+def get_basest_base_render_object():
+    """Returns an object to render a html message. Used for messages sent by the cron job"""
     return {
-        'mail_logo_url': request.get_host(),
         'mail_greetings': _('Best regards') + "<br/>" + _('Your transcriptiones team'),
         'mail_disclaimer': _('This email was sent to you by transcriptiones.ch.') + "<br/>" +
                            _('You received this email because you registered an account on our web site. '
@@ -25,14 +23,38 @@ def get_base_render_object(request, subject):
                            "<br/>" +
                            _('If you don\'t want to receive our emails, please visit transcriptiones.ch '
                              'and update your settings.'),
-        'mail_title': subject,
         'mail_paragraphs': []
     }
+
+
+def get_base_render_object(request, subject):
+    """Returns an object to render a html message. Used for all messages """
+
+    basest_base = get_basest_base_render_object()
+    basest_base.update({
+        'mail_logo_url': request.get_host(),
+        'mail_title': subject,
+    })
+    return basest_base
 
 
 def create_message(request, subject, message):
     render_object = get_base_render_object(request, subject)
     render_object["mail_paragraphs"] = [message,]
+    html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
+    plain_message = message.replace("<br/>", "\n")
+    tree = html.fromstring(plain_message)
+    plain_message = clean_html(tree).text_content().strip()
+    return plain_message, html_message
+
+
+def create_message_without_request(subject, message):
+    render_object = get_basest_base_render_object()
+    render_object.update({
+        'subject': subject,
+        'mail_logo_url': 'https://transcriptiones.ch'
+    })
+    render_object["mail_paragraphs"] = [message, ]
     html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
     plain_message = message.replace("<br/>", "\n")
     tree = html.fromstring(plain_message)
@@ -165,23 +187,17 @@ def send_registration_confirmation_mail(request, user):
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_daily_notification_mail(request, user):
+def send_daily_notification_mail(user, notification_message):
     """Sends a mail with the daily notifications of a user."""
     subject = _('Daily digest of your notifications')
-    plain_message = _('These are your unread notifications:')   # TODO print notifications
-    render_object = get_base_render_object(request, _('Today\'s changes'))
-    render_object["mail_paragraphs"].append(plain_message)
-    html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
+    plain_message, html_message = create_message_without_request(subject, notification_message)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_weekly_notification_mail(request, user):
+def send_weekly_notification_mail(user, notification_message):
     """Sends a mail with the daily notifications of a user."""
     subject = _('Weekly digest of your notifications')
-    plain_message = _('These are your unread notifications:')   # TODO print notifications
-    render_object = get_base_render_object(request, _('This week\'s changes'))
-    render_object["mail_paragraphs"].append(plain_message)
-    html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
+    plain_message, html_message = create_message_without_request(subject, notification_message)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 

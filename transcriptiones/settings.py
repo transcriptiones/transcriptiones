@@ -137,9 +137,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Cron jobs
 CRONJOBS = [
-    ('* * * * *', 'main.cron.send_daily_notification_email'), # 7 o' clock every day
-    ('1 0 * * 0', 'main.cron.send_weekly_notification_email')   # 7 o' clock every monday
-    # ('0 * * * *', )
+    ('0 7 * * *', 'main.cron.send_daily_notification_email'),   # 7 o' clock every day
+    ('0 7 * * 1', 'main.cron.send_weekly_notification_email'),   # 7 o' clock every monday
+    ('45 16 * * 1', 'main.cron.send_administration_email'),     # 16:45 every day
 ]
 
 # Configuration for country selection

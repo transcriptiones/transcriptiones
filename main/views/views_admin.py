@@ -9,7 +9,7 @@ from django.core import serializers
 from django_tables2 import RequestConfig
 from main.mail_utils import send_contact_message_answer
 from main.filters import UserFilter
-from main.forms.forms_admin import ContactMessageReplyForm
+from main.forms.forms_admin import ContactMessageReplyForm, SendNewsletterForm
 from main.models import ContactMessage, User, RefNumber, Author, SourceType, Document, Institution
 from main.tables.tables import ContactMessageTable, UserTable
 
@@ -202,5 +202,10 @@ def admin_export_json_view(request):
     response['Content-Disposition'] = f'attachment; filename={file_name}'
     os.remove(file_name)
     return response
+
+
+def send_newsletter_view(request):
+    form = SendNewsletterForm()
+    return render(request, 'main/admin/send_newsletter.html', context={"form": form})
 
 

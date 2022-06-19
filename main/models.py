@@ -918,10 +918,9 @@ class NewsletterRecipients(models.Model):
 class Newsletter(models.Model):
     subject = models.CharField(max_length=100)
     user_group = models.IntegerField(default=0)   # Define User groups (Admin, User, ???)
-    plain_text = models.TextField()
-    news_file = models.CharField(max_length=255)
+    plain_text = RichTextField()
+    news_file = models.CharField(max_length=255, null=True, default=None)
 
-    scheduled_time = models.DateTimeField()
     state = models.IntegerField(default=0) # Draft / Ready / Sent
     responsible = models.ForeignKey(User, on_delete=models.CASCADE)
 

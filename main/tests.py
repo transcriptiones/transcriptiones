@@ -1,7 +1,25 @@
 from django.test import TestCase
 from django.test import Client
 
-from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification
+from cron import send_weekly_notification_email
+from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification, \
+    UserManager
+
+
+class MailTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create(username='soma',
+                                   first_name='Sorin',
+                                   last_name='Marti',
+                                   email='soma@you.de',
+                                   is_staff=False,
+                                   is_active=True)
+        user.set_password('12345')
+        user.notification_policy = User.NotificationPolicy.WEEKLY
+        user.save()
+
+    def test_weekly(self):
+        send_weekly_notification_email()
 
 
 class SourcetypeTestCase(TestCase):
@@ -25,13 +43,16 @@ class UserTestCase(TestCase):
         user.set_password('12345')
         user.save()
 
+
+
     def test_login(self):
         c = Client()
         logged_in = c.login(username='soma', password='12345')
         self.assertEqual(logged_in, True)
 
-        logged_in2 = c.login(username='Soma', password='12345')
-        self.assertEqual(logged_in, False)
+        manager = UserManager()
+        user = manager.create_user("test@email.de")
+        print(user)
 
 
 class AnimalTestCase(TestCase):
