@@ -223,8 +223,8 @@ def send_transcriptiones_mail(subject, plain_message, html_message, to_email):
     )
 
     new_message.attach_alternative(html_message, "text/html")
-    new_message.content_subtype = 'html'
-    new_message.mixed_subtype = 'related'
+    # new_message.content_subtype = 'html'
+    # new_message.mixed_subtype = 'related'
     img_path = os.path.join(settings.STATIC_ROOT, 'main', 'images', 'logo_blue.png')
 
     with open(img_path, 'rb') as banner_image:

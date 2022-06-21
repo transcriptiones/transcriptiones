@@ -19,12 +19,15 @@ def send_daily_notification_email():
         send_daily_notification_mail(notification["user"], notification["text"])
 
 
-def send_weekly_notification_email():
+def send_weekly_notification_email(user=None):
     print("send weekly")
     """For each user with a weekly notification policy, all changes in all subscriptions are counted and parsed into
      HTML and sent as an e-mail."""
     datetime_a_week_ago = timezone.now() - datetime.timedelta(days=7)
     users_to_notify = User.objects.filter(notification_policy=User.NotificationPolicy.WEEKLY)
+    if user is not None:
+        print(f"ONLY SENDING TEST TO USER {user.username}")
+        users_to_notify = [user, ]
 
     notification_list = get_notification_list_since(users_to_notify, datetime_a_week_ago)
     for notification in notification_list:
