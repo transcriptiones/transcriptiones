@@ -39,6 +39,7 @@ def transcriptiones_search(request):
             if strict_search:
                 search_result = TranscriptionDocumentStrict.search()
 
+            search_qs.append(Q('match', active=True))
             if form.cleaned_data['query'] != '':
                 search_qs.append(Q('multi_match', query=form.cleaned_data['query'], fields=FULLTEXT_FIELDS))
             # Title

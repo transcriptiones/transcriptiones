@@ -42,6 +42,7 @@ class TranscriptionDocument(ElasticsearchDocument):
             'pages',
             'illuminated',
             'seal',
+            'active',
         ]
         related_models = [Author, RefNumber, Language]
 
@@ -162,6 +163,7 @@ class TranscriptionDocumentStrict(ElasticsearchDocument):
             'pages',
             'illuminated',
             'seal',
+            'active',
         ]
         related_models = [Author, RefNumber, Language]
 
