@@ -31,7 +31,6 @@ def send_weekly_notification_email(user=None):
 
     notification_list = get_notification_list_since(users_to_notify, datetime_a_week_ago)
     for notification in notification_list:
-        print("Sending Mail")
         send_weekly_notification_mail(notification["user"], notification["text"])
 
 
@@ -108,6 +107,8 @@ def get_notification_list_since(users_to_notify, past_datetime):
             changelist += f"  <li>{n}</li>\n"
         changelist += "</ul>"
 
-        user_email_texts.append({"user": usr,
-                                 "text": changelist})
+        if total_documents_changed > 0:
+            user_email_texts.append({"user": usr,
+                                     "text": changelist})
+
     return user_email_texts
