@@ -1,4 +1,5 @@
 import pypandoc
+from django.utils.text import slugify
 
 
 def create_related_objects(listname, formdata, relatedclass, namefield):
@@ -42,3 +43,18 @@ def convert_docx_html(dirpath, docname):
     # Wrap this in if-statement or try-except-block to check for file-ending
     dochtml = pypandoc.convert_file()
     return dochtml
+
+
+def transcriptiones_slugify(string, model_class, slug_field):
+    if len(string) > 50:
+        string = string[:49]
+    new_slug = slugify(string)
+
+    inc_value = 1
+    while model_class.objects.filter(**{slug_field: new_slug}).count() != 0:
+        new_slug = new_slug[:40] + f"-{inc_value}"
+        inc_value += 1
+        if inc_value >= 10:
+            return None
+
+    return new_slug
