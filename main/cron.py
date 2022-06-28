@@ -54,7 +54,7 @@ def get_notification_list_since(users_to_notify, past_datetime):
                                              f"<strong>{doc_in_subscription.title_name}</strong>.")
                     if changes.count() > 0:
                         notification_message += _(f"The last commit message is: <i>{changes.last().commit_message}</i>")
-                    total_documents_changed += 1
+                        total_documents_changed += 1
                 except Document.DoesNotExist:
                     notification_message = _("There is a problem with your subscription.")
 
