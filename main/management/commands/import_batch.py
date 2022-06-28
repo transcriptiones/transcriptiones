@@ -154,7 +154,7 @@ class Command(BaseCommand):
                                 try:
                                     author = Author.objects.get(author_name=scribe)
                                 except Author.DoesNotExist:
-                                    author = Author.objects.create(author_name=scribe)
+                                    author = Author.objects.create(author_name=scribe, created_by=adding_user)
 
                                 if author is not None:
                                     the_document.author.add(author)
