@@ -65,6 +65,9 @@ class Command(BaseCommand):
                     self.stderr.write(f'Error: column {key} not found in data')
                     return
 
+            insts_created = 0
+            insts_skipped = 0
+
             for new_institution in rows:
                 try:
                     Institution.objects.create(institution_name=new_institution["institution_name"],
@@ -76,9 +79,14 @@ class Command(BaseCommand):
                                                created_by=adding_user,
                                                institution_slug=transcriptiones_slugify(new_institution["institution_name"], Institution, 'institution_slug'))
                     self.stdout.write(f'Created institution {new_institution["institution_name"]}')
+                    insts_created += 1
                 except IntegrityError as e:
                     self.stderr.write(f'Error: Failed to create: {new_institution["institution_name"]}')
                     self.stderr.write(f'Reason: {e}')
+                    insts_skipped += 1
+
+            self.stdout.write(f'{insts_created} Institutions created')
+            self.stdout.write(f'{insts_skipped} Institutions skipped')
 
         if options['object_type'] == 'refnumber':
             self.stdout.write('Trying to import reference numbers')
@@ -87,6 +95,9 @@ class Command(BaseCommand):
                 if key not in rows[0]:
                     self.stderr.write(f'Error: column {key} not found in data')
                     return
+
+            refs_created = 0
+            refs_skipped = 0
 
             for new_refnumber in rows:
                 try:
@@ -98,25 +109,36 @@ class Command(BaseCommand):
                                              created_by=adding_user,
                                              ref_number_slug=transcriptiones_slugify(new_refnumber["ref_number_name"], RefNumber, 'ref_number_slug'))
                     self.stdout.write(f'Created RefNumber {new_refnumber["ref_number_name"]}')
+                    refs_created += 1
                 except IntegrityError as e:
                     self.stderr.write(f'Error: Failed to create: {new_refnumber["ref_number_name"]}')
                     self.stderr.write(f'Reason: {e}')
+                    refs_skipped += 1
                 except Institution.DoesNotExist:
                     self.stderr.write(f'Error: Failed to create: {new_refnumber["ref_number_name"]}')
                     self.stderr.write(f'Reason: Referenced institution does not exist')
+                    refs_skipped += 1
                 except DataError as e:
                     self.stderr.write(f'Error: Failed to create: {new_refnumber["ref_number_name"]}')
                     self.stderr.write(f'Reason: {e}')
+                    refs_skipped += 1
+
+            self.stdout.write(f'{refs_created} Reference Numbers created')
+            self.stdout.write(f'{refs_skipped} Reference Numbers skipped')
+
 
         if options['object_type'] == 'document':
             self.stdout.write('Trying to import documents')
             required_keys = ("title_name", "parent_ref_number", "doc_start_date", "doc_end_date", "place_name",
-                             "transcription_scope", "source_type_id", "transcription_text", "comments")
+                             "transcription_scope", "source_type_id", "transcription_text", "comments", "publish_user")
             additional_keys = ("scribes", "language")
             for key in required_keys:
                 if key not in rows[0]:
                     self.stderr.write(f'Error: column {key} not found in data')
                     return
+
+            docs_created = 0
+            docs_skipped = 0
 
             for new_document in rows:
                 try:
@@ -137,35 +159,41 @@ class Command(BaseCommand):
                                             document_slug=transcriptiones_slugify(new_document["title_name"], Document, 'document_slug'),
                                             commit_message='Initial commit',
                                             comments=new_document["comments"],
+                                            publish_user=new_document["publish_user"],
                                             version_number=1)
                     if end_date is not None:
                         the_document.doc_end_date = end_date
 
-                    the_document.save()
+                    the_document.save(trigger_notifications=False)
 
                     if "language" in new_document:
                         the_document.language.add(Language.objects.get(iso_639_1=new_document["language"]))
 
                     if "scribes" in new_document:
-                        if new_document["scribes"] != "Unbekannt":
-                            scribe_list = new_document["scribes"].split(",")
-                            for scribe in scribe_list:
-                                scribe = scribe.strip()
-                                try:
-                                    author = Author.objects.get(author_name=scribe)
-                                except Author.DoesNotExist:
-                                    author = Author.objects.create(author_name=scribe, created_by=adding_user)
-
-                                if author is not None:
-                                    the_document.author.add(author)
+                        scribe_list = new_document["scribes"].split(",")
+                        for scribe in scribe_list:
+                            scribe = scribe.strip()
+                            try:
+                                author = Author.objects.get(author_name=scribe)
+                            except Author.DoesNotExist:
+                                author = Author.objects.create(author_name=scribe, created_by=adding_user)
+                            if author is not None:
+                                the_document.author.add(author)
 
                     self.stdout.write(f'Created Document {new_document["title_name"]}')
+                    docs_created += 1
                 except IntegrityError as e:
                     self.stderr.write(f'Error: Failed to create: {new_document["title_name"]}')
                     self.stderr.write(f'Reason: {e}')
+                    docs_skipped += 1
                 except RefNumber.DoesNotExist:
                     self.stderr.write(f'Error: Failed to create: {new_document["title_name"]}')
                     self.stderr.write(f'Reason: Referenced refnumber does not exist')
+                    docs_skipped += 1
                 except DataError as e:
                     self.stderr.write(f'Error: Failed to create: {new_document["title_name"]}')
                     self.stderr.write(f'Reason: {e}')
+                    docs_skipped += 1
+
+            self.stdout.write(f'{docs_created} Documents created')
+            self.stdout.write(f'{docs_skipped} Documents skipped')
