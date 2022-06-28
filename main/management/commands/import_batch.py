@@ -150,10 +150,11 @@ class Command(BaseCommand):
                         if new_document["scribes"] != "Unbekannt":
                             scribe_list = new_document["scribes"].split(",")
                             for scribe in scribe_list:
+                                scribe = scribe.strip()
                                 try:
                                     author = Author.objects.get(author_name=scribe)
                                 except Author.DoesNotExist:
-                                    author = None
+                                    author = Author.objects.create(author_name=scribe)
 
                                 if author is not None:
                                     the_document.author.add(author)
