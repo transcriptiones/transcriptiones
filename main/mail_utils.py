@@ -201,13 +201,11 @@ def send_weekly_notification_mail(user, notification_message):
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
-def send_instant_notification_mail(request, user, notification):
+def send_instant_notification_mail(user, notification):
     """Sends a notification email."""
     subject = _('A Message from transcriptiones.ch')
-    plain_message = _('You received a message:')                # TODO print message
-    render_object = get_base_render_object(request, _('You received a message'))
-    render_object["mail_paragraphs"].append(plain_message)
-    html_message = render_to_string('main/users/email_templates/base_mail.html', render_object)
+    notification_message = f"<strong>{notification.subject}</strong><br/>{notification.text}"
+    plain_message, html_message = create_message_without_request(subject, notification_message)
     send_transcriptiones_mail(subject, plain_message, html_message, user.email)
 
 
