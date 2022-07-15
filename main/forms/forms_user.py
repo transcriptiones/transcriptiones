@@ -1,8 +1,10 @@
 """forms_user contains Form classes to write user messages and to set the users preferences"""
 import re
 from django.core.exceptions import ValidationError
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Field
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
@@ -91,6 +93,14 @@ class SignUpForm(UserCreationForm):
         self.helper = initialize_form_helper()
         self.helper.add_input(Submit('submit', _('Register'), css_class='btn-primary'))
         self.helper.form_method = 'POST'
+        tos_url = reverse('main:tos')
+        self.fields['tos_accepted'] = forms.BooleanField(
+            label=_('Accept Terms of Service'),
+            required=True,
+            help_text=mark_safe(_(f'In order to sign up you are required to accept the '
+                                  f'<a href="{tos_url}" target="_blank" rel="noopener noreferrer">terms and conditions</a> and agree that '
+                                  'all uploaded transcriptions will be will be subject to a '
+                                  '<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0-Licence</a>.')))
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']

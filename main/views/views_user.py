@@ -41,6 +41,8 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            # remove field tos_accepted from form data to prevent ValueError
+            form.cleaned_data.pop('tos_accepted')
             user = User.objects.create_user(**form.cleaned_data)
             send_registration_confirmation_mail(request, user)
             return redirect('main:account_activation_sent')
