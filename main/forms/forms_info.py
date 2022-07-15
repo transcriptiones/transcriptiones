@@ -1,5 +1,6 @@
 """forms_info contains all Form classes used by the info pages. These are all forms which are
 used by unregistered persons. The possible actions are: Subsribe/Unsubscribe Newsletter, Send contact message. """
+from captcha.fields import CaptchaField
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit, Layout, Row, Column, Field
 from django import forms
@@ -56,5 +57,6 @@ class ContactForm(forms.Form):
     reply_to = forms.EmailField(label=_('Reply Email'), help_text=_("We are going to reply to this email address."))
     message = forms.CharField(widget=forms.Textarea, help_text=_('Please be as specific as you can in your message. '
                                                                  'This will help us to answer your questions.'))
+    captcha = CaptchaField()
 
 

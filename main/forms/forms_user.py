@@ -1,5 +1,7 @@
 """forms_user contains Form classes to write user messages and to set the users preferences"""
 import re
+
+from captcha.fields import CaptchaField
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -15,6 +17,8 @@ from main.forms.forms_helper import initialize_form_helper, get_popover_html
 
 class WriteMessageForm(forms.ModelForm):
     """Form to write a message to another user."""
+
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         rec_user = kwargs.pop('user', None)
@@ -100,7 +104,7 @@ class SignUpForm(UserCreationForm):
             help_text=mark_safe(_(f'In order to sign up you are required to accept the '
                                   f'<a href="{tos_url}" target="_blank" rel="noopener noreferrer">terms and conditions</a> and agree that '
                                   'all uploaded transcriptions will be will be subject to a '
-                                  '<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0-Licence</a>.')))
+                                  '<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0 licence</a>.')))
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']

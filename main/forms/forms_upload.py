@@ -1,5 +1,6 @@
 import re
 
+from captcha.fields import CaptchaField
 from crispy_forms.layout import Submit
 from django import forms
 from bootstrap_modal_forms.forms import BSModalModelForm
@@ -265,6 +266,7 @@ class BatchUploadForm(forms.Form):
     batch_description = forms.CharField(label=_('Batch Description'),
                                         help_text=_('Please describe the documents you want to upload. Be as specific as possible'),
                                         widget=forms.Textarea)
+    captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
         super(BatchUploadForm, self).__init__(*args, **kwargs)
