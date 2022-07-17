@@ -27,11 +27,11 @@
                     {% endblocktranslate %}
                 </small>
             {% else %}
-                <a class="btn btn-primary btn-sm" href="{% url 'main:message_user' profile_user.username %}" role="button">Message this user</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:message_user' profile_user.username %}" role="button">{% translate 'Message this user' %}</a>
                 {% if subscribed %}
                     <a href="{% url 'main:unsubscribe_user' profile_user.pk %}" class="btn btn-primary btn-sm confirm-unsubscribe" data-toggle="modal" data-target="#confirmUnsubscribeModal" id="unsubscribeButtonXXX">{% translate 'Unsubscribe from this user' %}</a>
                 {% else %}
-                    <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">Subscribe to this user</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'main:subscribe_user' profile_user.pk %}" role="button">{% translate 'Subscribe to this user' %}</a>
                 {% endif %}
                 <small>
                   {% url 'main:subscriptions' as sub_url %}

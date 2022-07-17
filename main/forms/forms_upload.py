@@ -53,14 +53,14 @@ class UploadTranscriptionForm(forms.ModelForm):
     seal = forms.NullBooleanField(label=get_popover_html(Document, 'seal'),
                                   help_text=Document._meta.get_field("seal").help_text,
                                   widget=forms.Select(
-                                      choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]
-                                  ))
+                                      choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]),
+                                  required=False)
 
     illuminated = forms.NullBooleanField(label=get_popover_html(Document, 'illuminated'),
                                          help_text=Document._meta.get_field("illuminated").help_text,
                                          widget=forms.Select(
-                                             choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]
-                                         ))
+                                             choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]),
+                                         required=False)
 
     # TODO illuminated = forms.NullBooleanField(widget=forms.Select(choices=((True, _('Yes')), (),)))
 
@@ -120,7 +120,7 @@ class RefnModelForm(BSModalModelForm):
         self.helper.add_input(Submit('submit', _('Create'), css_class='btn-secondary'))
 
     holding_institution = forms.ModelChoiceField(queryset=Institution.objects.order_by('institution_name'),
-                                                 disabled=True)
+                                                 disabled=True, label=get_popover_html(RefNumber, 'holding_institution'))
 
     class Meta:
         model = RefNumber
@@ -131,7 +131,6 @@ class RefnModelForm(BSModalModelForm):
             'collection_link']
 
         labels = {
-            'holding_institution': get_popover_html(RefNumber, 'holding_institution'),
             'ref_number_name': get_popover_html(RefNumber, 'ref_number_name'),
             'ref_number_title': get_popover_html(RefNumber, 'ref_number_title'),
             'collection_link': get_popover_html(RefNumber, 'collection_link'),

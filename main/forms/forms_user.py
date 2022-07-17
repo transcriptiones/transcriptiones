@@ -101,10 +101,10 @@ class SignUpForm(UserCreationForm):
         self.fields['tos_accepted'] = forms.BooleanField(
             label=_('Accept Terms of Service'),
             required=True,
-            help_text=mark_safe(_(f'In order to sign up you are required to accept the '
-                                  f'<a href="{tos_url}" target="_blank" rel="noopener noreferrer">terms and conditions</a> and agree that '
-                                  'all uploaded transcriptions will be will be subject to a '
-                                  '<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0 licence</a>.')))
+            help_text=mark_safe(_('In order to sign up you are required to accept the %s and agree that '
+                                  'all uploaded transcriptions will be will be subject to a %s.') %
+                                  (_(f'<a href="{tos_url}" target="_blank" rel="noopener noreferrer">terms and conditions</a>'),
+                                   _('<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0 licence</a>'))))
 
     def clean_user_orcid(self):
         data = self.cleaned_data['user_orcid']

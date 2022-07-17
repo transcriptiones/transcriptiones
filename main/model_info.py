@@ -181,11 +181,13 @@ def get_document_info_manuscript(document):
             (get_verbose_field_name(document, 'pages'), document.pages),
             (get_verbose_field_name(document, 'paging_system'), document.get_paging_system_display()),
             (get_verbose_field_name(document, 'seal'),
-             mark_safe('<span style="color: green;">&check;</span>') if document.seal else mark_safe(
-                 '<span style="color: red;">&cross;</span>')),
+             mark_safe('<span style="color: green;">&check;</span>') if document.seal is True else (mark_safe(
+                 '<span style="color: red;">&cross;</span>') if document.seal is False else mark_safe(
+                 '<span style="color: orange; font-style: italic; font-weight: bold">?</span>'))),
             (get_verbose_field_name(document, 'illuminated'),
-             mark_safe('<span style="color: green;">&check;</span>') if document.illuminated else mark_safe(
-                 '<span style="color: red;">&cross;</span>'))
+             mark_safe('<span style="color: green;">&check;</span>') if document.illuminated is True else (mark_safe(
+                 '<span style="color: red;">&cross;</span>') if document.illuminated is False else mark_safe(
+                 '<span style="color: orange; font-style: italic; font-weight: bold">?</span>'))),
             ]
     return title_value_list(data)
 

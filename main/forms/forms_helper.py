@@ -93,6 +93,8 @@ def get_clean_partial_date(data):
 
 
 def get_user_readable_partial_date(value):
+    if value is None:
+        return value
     value = str(value)
     # The date is a full date
     if re.match(r'[0-9]{2,4}-([0-1]|)[0-9]-([0-3]|)[0-9]', value) is not None:

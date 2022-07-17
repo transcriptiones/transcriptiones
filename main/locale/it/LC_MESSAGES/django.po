@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-17 10:27+0200\n"
+"POT-Creation-Date: 2022-07-17 12:53+0200\n"
 "PO-Revision-Date: 2021-09-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,24 +18,64 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0\n"
 
+#: main/cron.py:53
+msgid ""
+"There were {changes.count()} changes in your document subscription "
+"<strong>{doc_in_subscription.title_name}</strong>."
+msgstr ""
+
+#: main/cron.py:55
+msgid "The last commit message is: <i>{changes.last().commit_message}</i>"
+msgstr ""
+
+#: main/cron.py:58 main/cron.py:69 main/cron.py:84 main/cron.py:95
+msgid "There is a problem with your subscription."
+msgstr ""
+
+#: main/cron.py:66
+#, fuzzy
+msgid ""
+"{changes.count()} documents changed in your reference number subscription "
+"<strong>{ref_in_subscription.ref_number_title}</strong>."
+msgstr "Documenti con questo numero di riferimento"
+
+#: main/cron.py:81
+msgid ""
+"The user <strong>{user_in_subscription.username}</strong> made {changes."
+"count()} changes in {unique_changes.count()}. documents."
+msgstr ""
+
+#: main/cron.py:92
+msgid ""
+"{changes.count()} documents changed in your institution subscription. "
+"<strong>{institution_in_subscription.institution_name}</strong>."
+msgstr ""
+
+#: main/cron.py:100
+#, python-brace-format
+msgid ""
+"There are a total of <strong>{total_documents_changed}</strong> changes in "
+"your subscriptions:"
+msgstr ""
+
 #: main/filters.py:46
 #, fuzzy
 msgid "Reference Number or Title contain"
 msgstr "Numeri di riferimento in questa istituzione"
 
-#: main/filters.py:85 main/models.py:777 main/models.py:813
+#: main/filters.py:85 main/models.py:775 main/models.py:811
 msgid "User"
 msgstr "Utente"
 
-#: main/filters.py:86 main/models.py:778
+#: main/filters.py:86 main/models.py:776
 msgid "Staff"
 msgstr ""
 
-#: main/filters.py:87 main/models.py:779
+#: main/filters.py:87 main/models.py:777
 msgid "Admin"
 msgstr ""
 
-#: main/forms/forms_admin.py:15
+#: main/forms/forms_admin.py:16 main/forms/forms_admin.py:28
 #: main/templates/main/admin/confirm_deactivate_user.html:15
 #: main/templates/main/admin/confirm_delete_all_messages.html:14
 #: main/templates/main/admin/confirm_delete_all_notifications.html:14
@@ -47,24 +87,38 @@ msgstr ""
 msgid "Cancel"
 msgstr "Modifiche"
 
-#: main/forms/forms_admin.py:16
+#: main/forms/forms_admin.py:17
 #, fuzzy
 #| msgid "Send Message"
 msgid "Send Answer"
 msgstr "Invia messaggio"
 
-#: main/forms/forms_admin.py:19 main/forms/forms_info.py:54
+#: main/forms/forms_admin.py:20 main/forms/forms_info.py:55
 #: main/tables/tables.py:137
 msgid "Subject"
 msgstr ""
 
-#: main/forms/forms_edit.py:32 main/forms/forms_upload.py:33
+#: main/forms/forms_admin.py:29
+#: main/templates/main/admin/send_newsletter.html:26
+msgid "Send Test Newsletter"
+msgstr ""
+
+#: main/forms/forms_admin.py:30 main/templates/main/admin/admin_options.html:8
+#: main/templates/main/admin/send_newsletter.html:8
+#: main/templates/main/admin/send_newsletter.html:14
+#: main/templates/main/admin/send_newsletter.html:27
+#, fuzzy
+#| msgid "Send Message"
+msgid "Send Newsletter"
+msgstr "Invia messaggio"
+
+#: main/forms/forms_edit.py:32 main/forms/forms_upload.py:34
 #, fuzzy
 msgid "First level Source Type"
 msgstr "Tipo di origine di primo livello"
 
 #: main/forms/forms_helper.py:37 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:815
+#: main/models.py:97 main/models.py:813
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -118,65 +172,65 @@ msgstr "Tipo di fonte"
 msgid "Parent source type"
 msgstr "Tipo di fonte"
 
-#: main/forms/forms_info.py:11
+#: main/forms/forms_info.py:12
 msgid "Subscribe To Newsletter"
 msgstr ""
 
-#: main/forms/forms_info.py:21
+#: main/forms/forms_info.py:22
 #, fuzzy
 msgid "Subscribe"
 msgstr "Oggetto Subscription"
 
-#: main/forms/forms_info.py:29 main/templates/main/info/unsubscribe.html:8
+#: main/forms/forms_info.py:30 main/templates/main/info/unsubscribe.html:8
 #, fuzzy
 msgid "Unsubscribe From Newsletter"
 msgstr "Annulla l'iscrizione a tutti"
 
-#: main/forms/forms_info.py:39 main/tables/tables.py:242
+#: main/forms/forms_info.py:40 main/tables/tables.py:242
 #: main/templates/main/admin/confirm_unsubscribe.html:15
 #: main/templates/main/info/unsubscribe.html:19
 #, fuzzy
 msgid "Unsubscribe"
 msgstr "Annulla l'iscrizione a tutti"
 
-#: main/forms/forms_info.py:51 main/forms/forms_upload.py:270
-#: main/forms/forms_user.py:24
+#: main/forms/forms_info.py:52 main/forms/forms_upload.py:273
+#: main/forms/forms_user.py:30
 msgid "Send Message"
 msgstr "Invia messaggio"
 
-#: main/forms/forms_info.py:54
+#: main/forms/forms_info.py:55
 #, fuzzy
 msgid "Question about transcriptiones"
 msgstr "Informazioni sulle trascrizioni"
 
-#: main/forms/forms_info.py:55
+#: main/forms/forms_info.py:56
 msgid "Change the subject to something more meaningful, if possible."
 msgstr ""
 
-#: main/forms/forms_info.py:56
+#: main/forms/forms_info.py:57
 #, fuzzy
 msgid "Reply Email"
 msgstr "Rispondi e-mail"
 
-#: main/forms/forms_info.py:56
+#: main/forms/forms_info.py:57
 #, fuzzy
 msgid "We are going to reply to this email address."
 msgstr "Risponderemo a questo indirizzo e-mail."
 
-#: main/forms/forms_info.py:57
+#: main/forms/forms_info.py:58
 msgid ""
 "Please be as specific as you can in your message. This will help us to "
 "answer your questions."
 msgstr ""
 
-#: main/forms/forms_search.py:60 main/forms/forms_upload.py:55
-#: main/forms/forms_upload.py:61
+#: main/forms/forms_search.py:60 main/forms/forms_upload.py:56
+#: main/forms/forms_upload.py:62
 #, fuzzy
 msgid "Yes"
 msgstr "Si"
 
-#: main/forms/forms_search.py:61 main/forms/forms_upload.py:55
-#: main/forms/forms_upload.py:61
+#: main/forms/forms_search.py:61 main/forms/forms_upload.py:56
+#: main/forms/forms_upload.py:62
 msgid "No"
 msgstr "No"
 
@@ -258,60 +312,85 @@ msgstr ""
 msgid "Search"
 msgstr "Cerca"
 
-#: main/forms/forms_upload.py:55 main/forms/forms_upload.py:61
+#: main/forms/forms_upload.py:56 main/forms/forms_upload.py:62
 #: main/models.py:299 main/models.py:306
 msgid "(Unknown)"
 msgstr "(sconosciuto)"
 
-#: main/forms/forms_upload.py:117 main/forms/forms_upload.py:143
+#: main/forms/forms_upload.py:120 main/forms/forms_upload.py:145
 #, fuzzy
 msgid "Create"
 msgstr "Luogo di creazione"
 
-#: main/forms/forms_upload.py:261
+#: main/forms/forms_upload.py:263
 #, fuzzy
 #| msgid "Messages"
 msgid "Message Title"
 msgstr "Messaggi"
 
-#: main/forms/forms_upload.py:262
+#: main/forms/forms_upload.py:264
 msgid "What kind of documents do you want to upload?"
 msgstr ""
 
-#: main/forms/forms_upload.py:263
+#: main/forms/forms_upload.py:265
 #, fuzzy
 msgid "Batch Description"
 msgstr "Descrizione del manoscritto"
 
-#: main/forms/forms_upload.py:264
+#: main/forms/forms_upload.py:266
 msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
 
-#: main/forms/forms_user.py:47 main/forms/forms_user.py:61
+#: main/forms/forms_user.py:53 main/forms/forms_user.py:67
 msgid "Save"
 msgstr ""
 
-#: main/forms/forms_user.py:73
+#: main/forms/forms_user.py:79
 msgid "Email address. We will send an activation link to this address."
 msgstr ""
 
-#: main/forms/forms_user.py:79
+#: main/forms/forms_user.py:85
 #, fuzzy
 msgid "Choose your transcriptiones password."
 msgstr "I tuoi abbonamenti"
 
-#: main/forms/forms_user.py:86 main/forms/forms_user.py:149
-#: main/forms/forms_user.py:213
+#: main/forms/forms_user.py:92 main/forms/forms_user.py:163
+#: main/forms/forms_user.py:227
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: main/forms/forms_user.py:92 main/templates/main/base.html:320
+#: main/forms/forms_user.py:98 main/templates/main/base.html:320
 #: main/templates/main/base_copy.html:128
 msgid "Register"
 msgstr "Registrati"
 
-#: main/forms/forms_user.py:125 main/templates/main/base.html:318
+#: main/forms/forms_user.py:102
+#, fuzzy
+msgid "Accept Terms of Service"
+msgstr "I nostri Termini di servizio"
+
+#: main/forms/forms_user.py:104
+#, python-format
+msgid ""
+"In order to sign up you are required to accept the %s and agree that all "
+"uploaded transcriptions will be will be subject to a %s."
+msgstr ""
+
+#: main/forms/forms_user.py:106
+#, python-brace-format
+msgid ""
+"<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer\">terms "
+"and conditions</a>"
+msgstr ""
+
+#: main/forms/forms_user.py:107
+msgid ""
+"<a href=\"https://creativecommons.org/share-your-work/public-domain/cc0/\" "
+"target=\"_blank\" rel=\"noopener noreferrer\">CC0 licence</a>"
+msgstr ""
+
+#: main/forms/forms_user.py:139 main/templates/main/base.html:318
 #: main/templates/main/base_copy.html:125 main/templates/main/sidebar.html:73
 #: main/templates/main/users/account_activation_invalid.html:7
 #: main/templates/main/users/account_activation_invalid.html:12
@@ -325,33 +404,33 @@ msgstr "Registrati"
 msgid "Login"
 msgstr "Login"
 
-#: main/forms/forms_user.py:135
+#: main/forms/forms_user.py:149
 #, fuzzy
 msgid "Enter your old transcriptiones password."
 msgstr "I tuoi abbonamenti"
 
-#: main/forms/forms_user.py:142 main/forms/forms_user.py:206
+#: main/forms/forms_user.py:156 main/forms/forms_user.py:220
 #, fuzzy
 msgid "Set a new password for transcriptiones."
 msgstr "Informazioni sulle trascrizioni"
 
-#: main/forms/forms_user.py:162
+#: main/forms/forms_user.py:176
 #: main/templates/main/upload/edit_document_transcription.html:53
 #: main/templates/main/upload/edit_meta.html:95
 msgid "Save Changes"
 msgstr "Salva modifiche"
 
-#: main/forms/forms_user.py:165
+#: main/forms/forms_user.py:179
 msgid "You cannot change your username"
 msgstr ""
 
-#: main/forms/forms_user.py:166
+#: main/forms/forms_user.py:180
 #, fuzzy
 #| msgid "Enter your email address"
 msgid "You can change your email address in the respective form"
 msgstr "Inserisci il tuo indirizzo email"
 
-#: main/forms/forms_user.py:196 main/forms/forms_user.py:220
+#: main/forms/forms_user.py:210 main/forms/forms_user.py:234
 #: main/templates/main/users/password_reset.html:9
 #: main/templates/main/users/password_reset.html:14
 #: main/templates/main/users/password_reset_complete.html:12
@@ -360,19 +439,19 @@ msgstr "Inserisci il tuo indirizzo email"
 msgid "Reset Password"
 msgstr "Reimposta Password"
 
-#: main/forms/forms_user.py:226
+#: main/forms/forms_user.py:240
 #, fuzzy
 #| msgid "Email address"
 msgid "Your Email Address"
 msgstr "Indirizzo email"
 
-#: main/forms/forms_user.py:227
+#: main/forms/forms_user.py:241
 msgid ""
 "Please enter the email address you registered with. We will send you an "
 "email with your username."
 msgstr ""
 
-#: main/forms/forms_user.py:233
+#: main/forms/forms_user.py:247
 #: main/templates/main/users/request_username.html:18
 #: main/templates/main/users/request_username_done.html:12
 #, fuzzy
@@ -380,119 +459,119 @@ msgstr ""
 msgid "Request Username"
 msgstr "Nome utente"
 
-#: main/forms/forms_user.py:239
+#: main/forms/forms_user.py:253
 #, fuzzy
 #| msgid "Email address"
 msgid "Your New Email Address"
 msgstr "Indirizzo email"
 
-#: main/forms/forms_user.py:240
+#: main/forms/forms_user.py:254
 #, fuzzy
 msgid "Please enter the email address you want to use for transcriptiones."
 msgstr "Informazioni sulle trascrizioni"
 
-#: main/forms/forms_user.py:245
+#: main/forms/forms_user.py:259
 #, fuzzy
 #| msgid "Changes"
 msgid "Change Address"
 msgstr "Modifiche"
 
-#: main/mail_utils.py:21
+#: main/mail_utils.py:19
 msgid "Best regards"
 msgstr ""
 
-#: main/mail_utils.py:21
+#: main/mail_utils.py:19
 #, fuzzy
 msgid "Your transcriptiones team"
 msgstr "I tuoi abbonamenti"
 
-#: main/mail_utils.py:22
+#: main/mail_utils.py:20
 msgid "This email was sent to you by transcriptiones.ch."
 msgstr ""
 
-#: main/mail_utils.py:23
+#: main/mail_utils.py:21
 msgid ""
 "You received this email because you registered an account on our web site. "
 "We respect and protect your privacy."
 msgstr ""
 
-#: main/mail_utils.py:26
+#: main/mail_utils.py:24
 msgid ""
 "If you don't want to receive our emails, please visit transcriptiones.ch and "
 "update your settings."
 msgstr ""
 
-#: main/mail_utils.py:46
+#: main/mail_utils.py:68
 #, fuzzy
 msgid "Your account has been deactivated"
 msgstr "La notifica è stata eliminata."
 
-#: main/mail_utils.py:49
+#: main/mail_utils.py:71
 msgid "Your account has been deactivated. You cannot login anymore."
 msgstr ""
 
-#: main/mail_utils.py:56
+#: main/mail_utils.py:78
 #, fuzzy
 msgid "Thank you for subscribing to our Newsletter"
 msgstr "Annulla l'iscrizione a tutti"
 
-#: main/mail_utils.py:59
+#: main/mail_utils.py:81
 msgid ""
 "Thank you for subscribing to transcriptiones.ch. We will send you the latest "
 "news."
 msgstr ""
 
-#: main/mail_utils.py:69 main/mail_utils.py:192
+#: main/mail_utils.py:91
 #, fuzzy
 msgid "You received a message"
 msgstr "Scrivici un messaggio"
 
-#: main/mail_utils.py:72
+#: main/mail_utils.py:94
 #, python-brace-format
 msgid "You received a message from {message.sending_user.username}."
 msgstr ""
 
-#: main/mail_utils.py:81
+#: main/mail_utils.py:103
 #, fuzzy
 msgid "Thank you for contacting us"
 msgstr "Grazie per il tuo contributo"
 
-#: main/mail_utils.py:106
+#: main/mail_utils.py:128
 #, fuzzy
 msgid "transcriptiones: New Email address"
 msgstr "Trascrizioni Statistiche"
 
-#: main/mail_utils.py:109
+#: main/mail_utils.py:131
 #, fuzzy, python-brace-format
 msgid "Your New Email address is: {user.email}"
 msgstr "La password è stata reimpostata"
 
-#: main/mail_utils.py:118
+#: main/mail_utils.py:140
 #, fuzzy
 msgid "transcriptiones: Your User Name"
 msgstr "I tuoi abbonamenti"
 
-#: main/mail_utils.py:121
+#: main/mail_utils.py:143
 #, fuzzy, python-brace-format
 msgid "Your Username is: {user.username}"
 msgstr "La password è stata reimpostata"
 
-#: main/mail_utils.py:127
+#: main/mail_utils.py:149
 #, fuzzy
 msgid "transcriptiones: Password Reset"
 msgstr "Trascrizioni Statistiche"
 
-#: main/mail_utils.py:131
+#: main/mail_utils.py:153
 #, fuzzy, python-brace-format
 msgid "Your Username is: {user.username}. Go to {url} to reset your password."
 msgstr "La password è stata reimpostata"
 
-#: main/mail_utils.py:145
+#: main/mail_utils.py:167
 #, fuzzy
 msgid "transcriptiones: Activate your account"
 msgstr "Trascrizioni Statistiche"
 
-#: main/mail_utils.py:151
+#: main/mail_utils.py:173
 msgid ""
 "Hi { user.username }!\n"
 "\n"
@@ -502,41 +581,23 @@ msgid ""
 "\n"
 msgstr ""
 
-#: main/mail_utils.py:157
+#: main/mail_utils.py:179
 msgid "Activate your account"
 msgstr ""
 
-#: main/mail_utils.py:170
+#: main/mail_utils.py:192
 #, fuzzy
 msgid "Daily digest of your notifications"
 msgstr "Le tue notifiche"
 
-#: main/mail_utils.py:171 main/mail_utils.py:181
-#, fuzzy
-msgid "These are your unread notifications:"
-msgstr "Le tue notifiche"
-
-#: main/mail_utils.py:172
-msgid "Today's changes"
-msgstr ""
-
-#: main/mail_utils.py:180
+#: main/mail_utils.py:199
 #, fuzzy
 msgid "Weekly digest of your notifications"
 msgstr "Le tue notifiche"
 
-#: main/mail_utils.py:182
-msgid "This week's changes"
-msgstr ""
-
-#: main/mail_utils.py:190
+#: main/mail_utils.py:206
 msgid "A Message from transcriptiones.ch"
 msgstr ""
-
-#: main/mail_utils.py:191
-#, fuzzy
-msgid "You received a message:"
-msgstr "Scrivici un messaggio"
 
 #: main/model_info.py:47
 msgid ""
@@ -957,7 +1018,7 @@ msgstr ""
 "Link diretto alla collezione nel catalogo dell'istituzione. Deve iniziare "
 "con http:// o https://"
 
-#: main/model_info.py:350 main/models.py:686
+#: main/model_info.py:350 main/models.py:684
 msgid "Username"
 msgstr "Nome utente"
 
@@ -970,7 +1031,7 @@ msgstr ""
 "Il nome deve essere univoco e non può contenere caratteri speciali. Verrà "
 "mostrato ad altri utenti."
 
-#: main/model_info.py:353 main/models.py:692
+#: main/model_info.py:353 main/models.py:690
 msgid "First name"
 msgstr "Nome"
 
@@ -981,7 +1042,7 @@ msgstr ""
 "Il tuo nome. Queste informazioni non saranno pubbliche a meno che tu non lo "
 "scelga."
 
-#: main/model_info.py:355 main/models.py:697
+#: main/model_info.py:355 main/models.py:695
 msgid "Last name"
 msgstr "Cognome"
 
@@ -1119,7 +1180,7 @@ msgid "Institution which holds this reference number and document"
 msgstr ""
 "L'istituzione che detiene il documento con questo numero di riferimento."
 
-#: main/models.py:101 main/models.py:811
+#: main/models.py:101 main/models.py:809
 msgid "Reference number"
 msgstr "Riferimento"
 
@@ -1324,7 +1385,7 @@ msgstr "Lingue"
 msgid "Languages used in the source"
 msgstr "Lingue utilizzate nella fonte"
 
-#: main/models.py:352 main/models.py:816
+#: main/models.py:352 main/models.py:814
 #, fuzzy
 msgid "Source Type"
 msgstr "Tipo di origine"
@@ -1480,12 +1541,12 @@ msgstr "documento"
 msgid "documents"
 msgstr "documenti"
 
-#: main/models.py:588
+#: main/models.py:589
 #, fuzzy, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:589
+#: main/models.py:590
 #, fuzzy, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
@@ -1506,129 +1567,129 @@ msgid ""
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:615
+#: main/models.py:614
 #, fuzzy
 #| msgid "Password changed"
 msgid "A User has made changes"
 msgstr "Password modificata"
 
-#: main/models.py:616
+#: main/models.py:615
 #, fuzzy, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:640
+#: main/models.py:638
 #, fuzzy
 msgid "Please enter an email address"
 msgstr "Inserisci un indirizzo e-mail"
 
-#: main/models.py:666
+#: main/models.py:664
 #, fuzzy
 msgid "All superusers must have is_staff = True."
 msgstr "Tutti i superutenti devono avere is_staff = True."
 
-#: main/models.py:668
+#: main/models.py:666
 #, fuzzy
 msgid "All superusers must have is_superuser = True"
 msgstr "Tutti i superutenti devono avere is_superuser = True"
 
-#: main/models.py:676 main/models.py:682
+#: main/models.py:674 main/models.py:680
 #, fuzzy
 msgid "No notification Emails"
 msgstr "Nessuna e-mail di notifica"
 
-#: main/models.py:677
+#: main/models.py:675
 #, fuzzy
 msgid "Every time a subscribed document has changed."
 msgstr "Ogni volta che un documento sottoscritto è cambiato."
 
-#: main/models.py:678
+#: main/models.py:676
 #, fuzzy
 msgid "Once a day, only if changes happened."
 msgstr "Una volta al giorno, solo se si sono verificati cambiamenti."
 
-#: main/models.py:679
+#: main/models.py:677
 #, fuzzy
 msgid "Once a week, only if changes happened."
 msgstr "Una volta alla settimana, solo se si sono verificati cambiamenti."
 
-#: main/models.py:683
+#: main/models.py:681
 #, fuzzy
 msgid "Every time a message is received."
 msgstr "Ogni volta che viene inviato un messaggio."
 
-#: main/models.py:684
+#: main/models.py:682
 #, fuzzy
 msgid "Once a day, only if you received messages."
 msgstr "Una volta al giorno, solo se hai ricevuto messaggi."
 
-#: main/models.py:690
+#: main/models.py:688
 #, fuzzy
 msgid "Provide a user name"
 msgstr "Fornire un nome utente"
 
-#: main/models.py:695
+#: main/models.py:693
 #, fuzzy
 #| msgid "Enter your last name"
 msgid "Enter your first name(s)"
 msgstr "Inserisci il tuo cognome"
 
-#: main/models.py:700
+#: main/models.py:698
 msgid "Enter your last name"
 msgstr "Inserisci il tuo cognome"
 
-#: main/models.py:702
+#: main/models.py:700
 msgid "Email"
 msgstr "Email"
 
-#: main/models.py:706
+#: main/models.py:704
 msgid "Enter your email address"
 msgstr "Inserisci il tuo indirizzo email"
 
-#: main/models.py:708
+#: main/models.py:706
 #, fuzzy
 msgid "Email confirmed"
 msgstr "Email confermata"
 
-#: main/models.py:711
+#: main/models.py:709
 #, fuzzy
 msgid "Has the user confirmed the email address?"
 msgstr "L'utente ha confermato l'indirizzo e-mail?"
 
-#: main/models.py:713
+#: main/models.py:711
 #, fuzzy
 msgid "Staff status"
 msgstr "Stato del personale"
 
-#: main/models.py:715
+#: main/models.py:713
 #, fuzzy
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "L'utente ha lo stato di staff e può quindi accedere alla pagina di "
 "amministrazione?"
 
-#: main/models.py:717 main/models.py:790
+#: main/models.py:715 main/models.py:788
 msgid "Active"
 msgstr "Attivo"
 
-#: main/models.py:720
+#: main/models.py:718
 #, fuzzy
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr "L'utente è attivo? Gli utenti vengono disattivati anziché eliminati."
 
-#: main/models.py:722
+#: main/models.py:720
 #, fuzzy
 msgid "Date joined"
 msgstr "Data di adesione"
 
-#: main/models.py:725
+#: main/models.py:723
 #, fuzzy
 msgid "Mark anonymous by default"
 msgstr "Contrassegna anonimo per impostazione predefinita"
 
-#: main/models.py:727
+#: main/models.py:725
 #, fuzzy
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
@@ -1638,43 +1699,43 @@ msgstr ""
 "anonimo per impostazione predefinita. Può essere modificato su base "
 "documentale."
 
-#: main/models.py:730
+#: main/models.py:728
 #, fuzzy
 msgid "Orcid"
 msgstr "Orcido"
 
-#: main/models.py:734
+#: main/models.py:732
 #, fuzzy
 msgid "User id from https://orcid.org/"
 msgstr "ID utente da https://orcid.org/"
 
-#: main/models.py:736
+#: main/models.py:734
 #, fuzzy
 msgid "Subscription Notification policy"
 msgstr "Criteri di notifica della sottoscrizione"
 
-#: main/models.py:739
+#: main/models.py:737
 #, fuzzy
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Con quale frequenza vuoi essere avvisato dei tuoi documenti sottoscritti?"
 
-#: main/models.py:742
+#: main/models.py:740
 #, fuzzy
 msgid "Message Notification policy"
 msgstr "Criteri di notifica dei messaggi"
 
-#: main/models.py:745
+#: main/models.py:743
 #, fuzzy
 msgid "How often do you want to be notified about messages you receive?"
 msgstr "Con quale frequenza vuoi ricevere notifiche sui messaggi che ricevi?"
 
-#: main/models.py:748
+#: main/models.py:746
 #, fuzzy
 msgid "Subscription to owned documents"
 msgstr "Sottoscrizione di documenti di proprietà"
 
-#: main/models.py:749
+#: main/models.py:747
 #, fuzzy
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
@@ -1682,43 +1743,43 @@ msgstr ""
 "Vuoi essere avvisato quando i tuoi documenti sono stati modificati da un "
 "altro utente?"
 
-#: main/models.py:754
+#: main/models.py:752
 msgid "Communication Language"
 msgstr ""
 
-#: main/models.py:755
+#: main/models.py:753
 msgid "What is your preferred language for email communication?"
 msgstr ""
 
-#: main/models.py:760
+#: main/models.py:758
 msgid "Secret API Key"
 msgstr ""
 
-#: main/models.py:761
+#: main/models.py:759
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: main/models.py:791
+#: main/models.py:789
 #, fuzzy
 #| msgid "Active"
 msgid "Inactive"
 msgstr "Attivo"
 
-#: main/models.py:812 main/templates/main/details/document_detail.html:21
+#: main/models.py:810 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr "Documento"
 
-#: main/models.py:814 main/templates/main/details/author_detail.html:8
+#: main/models.py:812 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 #, fuzzy
 msgid "Scribe"
 msgstr "Oggetto Subscription"
 
-#: main/models.py:912
+#: main/models.py:910
 msgid "Default User Interface Language"
 msgstr ""
 
-#: main/models.py:913
+#: main/models.py:911
 msgid "What is your preferred language?"
 msgstr ""
 
@@ -1892,6 +1953,7 @@ msgstr "Funzioni esperte"
 #: main/templates/main/admin/contact_message.html:15
 #: main/templates/main/admin/contact_message_answer.html:15
 #: main/templates/main/admin/contact_messages.html:15
+#: main/templates/main/admin/send_newsletter.html:13
 #: main/templates/main/base.html:293 main/templates/main/sidebar.html:65
 msgid "Administration"
 msgstr "Amministrazione"
@@ -2088,8 +2150,8 @@ msgid "Contact Message Inbox"
 msgstr "Posta in arrivo del messaggio di contatto"
 
 #: main/templates/main/admin/contact_message.html:17
-#: main/templates/main/admin/contact_message.html:25
-#: main/templates/main/admin/contact_message.html:28
+#: main/templates/main/admin/contact_message.html:24
+#: main/templates/main/admin/contact_message.html:27
 #: main/templates/main/admin/contact_message_answer.html:17
 #: main/templates/main/admin/contact_message_answer.html:25
 #, fuzzy
@@ -2097,29 +2159,28 @@ msgstr "Posta in arrivo del messaggio di contatto"
 msgid "Message"
 msgstr "Messaggi"
 
-#: main/templates/main/admin/contact_message.html:18
-#: main/templates/main/admin/contact_message.html:37
-#: main/templates/main/admin/contact_message.html:53
+#: main/templates/main/admin/contact_message.html:36
+#: main/templates/main/admin/contact_message.html:52
 #: main/templates/main/admin/contact_message_answer.html:18
 #, fuzzy
 #| msgid "User"
 msgid "Answer"
 msgstr "Utente"
 
-#: main/templates/main/admin/contact_message.html:45
+#: main/templates/main/admin/contact_message.html:44
 #, fuzzy
 msgid "This message has not been answered."
 msgstr "Il messaggio è stato eliminato."
 
-#: main/templates/main/admin/contact_message.html:52
+#: main/templates/main/admin/contact_message.html:51
 msgid "Go Back"
 msgstr ""
 
-#: main/templates/main/admin/contact_message.html:54
+#: main/templates/main/admin/contact_message.html:53
 msgid "Mark as \"answered\"\""
 msgstr ""
 
-#: main/templates/main/admin/contact_message.html:55
+#: main/templates/main/admin/contact_message.html:54
 #, fuzzy
 msgid "Delete Contact Message"
 msgstr "Messaggi di contatto"
@@ -2146,6 +2207,10 @@ msgid ""
 msgstr ""
 "Non hai messaggi. Puoi inviare messaggi agli utenti tramite la loro pagina "
 "del profilo."
+
+#: main/templates/main/admin/send_newsletter.html:20
+msgid "Create and send a Newsletter"
+msgstr ""
 
 #: main/templates/main/admin/statistics.html:7
 #, fuzzy
@@ -3967,10 +4032,20 @@ msgstr ""
 "Benvenuto, %(username)s\n"
 "                    "
 
+#: main/templates/main/users/public_user_profile.html:30
+#, fuzzy
+msgid "Message this user"
+msgstr "Disattiva questo utente"
+
 #: main/templates/main/users/public_user_profile.html:32
 #, fuzzy
 msgid "Unsubscribe from this user"
 msgstr "Annulla l'iscrizione a tutti"
+
+#: main/templates/main/users/public_user_profile.html:34
+#, fuzzy
+msgid "Subscribe to this user"
+msgstr "Parti trascritte del documento"
 
 #: main/templates/main/users/public_user_profile.html:38
 #, fuzzy, python-format
@@ -4340,47 +4415,55 @@ msgid ""
 "choose another title or contact transcriptiones."
 msgstr ""
 
-#: main/views/views_user.py:78 main/views/views_user.py:88
+#: main/views/views_user.py:80 main/views/views_user.py:90
 msgid "Successfully logged in!"
 msgstr "Effettua il login con successo!"
 
-#: main/views/views_user.py:173
+#: main/views/views_user.py:175
 #, fuzzy
 msgid "Your user information has been updated"
 msgstr "La notifica è stata eliminata."
 
-#: main/views/views_user.py:204
+#: main/views/views_user.py:206
 #, fuzzy
 msgid "This email address is not registered."
 msgstr "Il messaggio è stato eliminato."
 
-#: main/views/views_user.py:221
+#: main/views/views_user.py:223
 #, fuzzy
 msgid "This address is already in use!"
 msgstr "Il messaggio è stato eliminato."
 
-#: main/views/views_user.py:246
+#: main/views/views_user.py:248
 msgid "An API Key has been generated"
 msgstr ""
 
-#: main/views/views_user.py:253
+#: main/views/views_user.py:255
 msgid "You need to generate an API key first."
 msgstr ""
 
-#: main/views/views_user.py:260
+#: main/views/views_user.py:262
 #, fuzzy
 #| msgid "Your message has been sent."
 msgid "Your API Key has been renewed"
 msgstr "Il tuo messaggio è stato spedito."
 
-#: main/views/views_user.py:266
+#: main/views/views_user.py:268
 msgid "No API key was found to delete."
 msgstr ""
 
-#: main/views/views_user.py:272
+#: main/views/views_user.py:274
 #, fuzzy
 msgid "Your API Key has been deleted"
 msgstr "Il messaggio è stato eliminato."
+
+#, fuzzy
+#~ msgid "These are your unread notifications:"
+#~ msgstr "Le tue notifiche"
+
+#, fuzzy
+#~ msgid "You received a message:"
+#~ msgstr "Scrivici un messaggio"
 
 #, fuzzy
 #~| msgid "Languages"

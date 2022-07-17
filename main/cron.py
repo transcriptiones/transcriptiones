@@ -50,8 +50,7 @@ def get_notification_list_since(users_to_notify, past_datetime):
                     doc_in_subscription = Document.all_objects.get(id=notification.object_id)
                     changes = Document.all_objects.filter(document_id=doc_in_subscription.document_id,
                                                           document_utc_add__gt=past_datetime)
-                    notification_message = _(f"There were {changes.count()} changes in your document subscription "
-                                             f"<strong>{doc_in_subscription.title_name}</strong>.")
+                    notification_message = _(f"There were {changes.count()} changes in your document subscription <strong>{doc_in_subscription.title_name}</strong>.")
                     if changes.count() > 0:
                         notification_message += _(f"The last commit message is: <i>{changes.last().commit_message}</i>")
                         total_documents_changed += 1
@@ -64,8 +63,7 @@ def get_notification_list_since(users_to_notify, past_datetime):
                     ref_in_subscription = RefNumber.objects.get(id=notification.object_id)
                     changes = Document.objects.filter(parent_ref_number=ref_in_subscription,
                                                       document_utc_add__gt=past_datetime)
-                    notification_message = _(f"{changes.count()} documents changed in your reference number "
-                                             f"subscription. <strong>{ref_in_subscription.ref_number_title}</strong>.")
+                    notification_message = _(f"{changes.count()} documents changed in your reference number subscription <strong>{ref_in_subscription.ref_number_title}</strong>.")
                     total_documents_changed += changes.count()
                 except RefNumber.DoesNotExist:
                     notification_message = _("There is a problem with your subscription.")
@@ -80,8 +78,7 @@ def get_notification_list_since(users_to_notify, past_datetime):
                     unique_changes = Document.objects.filter(submitted_by=user_in_subscription,
                                                              publish_user=True,
                                                              document_utc_add__gt=past_datetime)
-                    notification_message = _(f"The user <strong>{user_in_subscription.username}</strong> made "
-                                             f"{changes.count()} changes in {unique_changes.count()}. documents.")
+                    notification_message = _(f"The user <strong>{user_in_subscription.username}</strong> made {changes.count()} changes in {unique_changes.count()}. documents.")
                     total_documents_changed += unique_changes.count()
                 except User.DoesNotExist:
                     notification_message = _("There is a problem with your subscription.")
@@ -92,8 +89,7 @@ def get_notification_list_since(users_to_notify, past_datetime):
                     changes = Document.objects.filter(
                         parent_ref_number__holding_institution=institution_in_subscription,
                         document_utc_add__gt=past_datetime)
-                    notification_message = _(f"{changes.count()} documents changed in your institution "
-                                             f"subscription. <strong>{institution_in_subscription.institution_name}</strong>.")
+                    notification_message = _(f"{changes.count()} documents changed in your institution subscription. <strong>{institution_in_subscription.institution_name}</strong>.")
                     total_documents_changed += changes.count()
                 except Institution.DoesNotExist:
                     notification_message = _("There is a problem with your subscription.")

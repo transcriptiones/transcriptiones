@@ -48,6 +48,18 @@ class EditMetaForm(forms.ModelForm):
                                                   url='main:language-autocomplete'),
                                               required=False)
 
+    seal = forms.NullBooleanField(label=get_popover_html(Document, 'seal'),
+                                  help_text=Document._meta.get_field("seal").help_text,
+                                  widget=forms.Select(
+                                      choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]),
+                                  required=False)
+
+    illuminated = forms.NullBooleanField(label=get_popover_html(Document, 'illuminated'),
+                                         help_text=Document._meta.get_field("illuminated").help_text,
+                                         widget=forms.Select(
+                                             choices=[('', _('(Unknown)')), (True, _('Yes')), (False, _('No'))]),
+                                         required=False)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = initialize_form_helper()
@@ -77,8 +89,8 @@ class EditMetaForm(forms.ModelForm):
             'measurements_length': get_popover_html(Document, 'measurements_length'),
             'pages': get_popover_html(Document, 'pages'),
             'paging_system': get_popover_html(Document, 'paging_system'),
-            'illuminated': get_popover_html(Document, 'illuminated'),
-            'seal': get_popover_html(Document, 'seal'),
+            # 'illuminated': get_popover_html(Document, 'illuminated'),
+            # 'seal': get_popover_html(Document, 'seal'),
             'commit_message': get_popover_html(Document, 'commit_message'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
