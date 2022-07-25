@@ -1,7 +1,7 @@
 """forms_user contains Form classes to write user messages and to set the users preferences"""
 import re
 
-from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -18,7 +18,7 @@ from main.forms.forms_helper import initialize_form_helper, get_popover_html
 class WriteMessageForm(forms.ModelForm):
     """Form to write a message to another user."""
 
-    captcha = CaptchaField()
+    captcha = ReCaptchaField()
 
     def __init__(self, *args, **kwargs):
         rec_user = kwargs.pop('user', None)
