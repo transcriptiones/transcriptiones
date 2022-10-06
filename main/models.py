@@ -545,6 +545,14 @@ class Document(models.Model):
         versions = type(self).all_objects.filter(document_id=self.document_id).order_by('-document_utc_add')
         return versions
 
+    def delete(self, *args, **kwargs):
+        """Override delete method in order to ensure that there is always an active version"""
+        if self.version_number is not 1:
+            revert_to = self.get_versions().exclude(pk=self.pk).latest()
+            revert_to.active = True
+            revert_to.save(force_update=True)
+        super().delete(*args, **kwargs)
+
     def save(self, force_update=False, trigger_notifications=True, *args, **kwargs):
         """Save the current instance.
 

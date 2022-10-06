@@ -14,6 +14,7 @@ class InstitutionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'institution_slug': ('institution_name',)}
     # form = InstitutionForm
 
+
 class RefNumberAdmin(admin.ModelAdmin):
     """Admin model for the reference numbers. """
 
@@ -31,14 +32,30 @@ class DocumentAdminForm(ModelForm):
         fields = '__all__'
 
 
+class ActiveDocumentListFilter(admin.SimpleListFilter):
+    title = 'Only show latest versions of documents'
+    parameter_name = 'active'
+
+    def lookups(self, request, model_admin):
+        return(
+            ('latest', 'Show latest versions only'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'latest':
+            return queryset.filter(active=True)
+
+
 class DocumentAdmin(admin.ModelAdmin):
     """Admin model for the Documents. """
 
     form = DocumentAdminForm
 
-    list_display = ('title_name', 'parent_ref_number', 'document_slug')
+    list_display = ('title_name', 'parent_ref_number', 'document_slug', 'version_number')
+    list_filter = (ActiveDocumentListFilter,)
     prepopulated_fields = {'document_slug': ('title_name',)}
     readonly_fields = ('submitted_by', 'document_utc_add')
+    actions = None
 
     def save_model(self, request, obj: Document, form, change):
         if not obj.pk:
@@ -47,7 +64,8 @@ class DocumentAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     def get_queryset(self, request):
-        return super().get_queryset(request).filter(active=True)
+        # use all_objects instead of the default manager
+        return self.model.all_objects.get_queryset()
 
 
 class SourceTypeAdmin(admin.ModelAdmin):
