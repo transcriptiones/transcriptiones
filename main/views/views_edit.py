@@ -28,6 +28,7 @@ def edit_transcription_view(request, inst_slug, ref_slug, doc_slug):
             updated_data = form.save(commit=False)
             if updated_data.transcription_text != old_transcription:
                 document.transcription_text = updated_data.transcription_text
+                document.transcription_scope = updated_data.transcription_scope
                 document.commit_message = updated_data.commit_message
                 document.submitted_by = request.user
                 document.publish_user = not updated_data.publish_user
@@ -74,7 +75,6 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
 
         if form.is_valid():
             updated_data = form.save(commit=False)
-            document.transcription_scope = updated_data.transcription_scope
             document.doc_start_date = updated_data.doc_start_date
             document.doc_end_date = updated_data.doc_end_date
             document.place_name = updated_data.place_name
