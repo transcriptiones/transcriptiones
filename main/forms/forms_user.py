@@ -5,6 +5,7 @@ from captcha.fields import ReCaptchaField
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Submit, Field
 from django import forms
@@ -103,7 +104,7 @@ class SignUpForm(UserCreationForm):
             required=True,
             help_text=mark_safe(_('In order to sign up you are required to accept the %s and agree that '
                                   'all uploaded transcriptions will be will be subject to a %s.') %
-                                  (_(f'<a href="{tos_url}" target="_blank" rel="noopener noreferrer">terms and conditions</a>'),
+                                  (format_lazy('<a href="{tos_url}" target="_blank" rel="noopener noreferrer">{tos_text}</a>', tos_url=tos_url, tos_text=_('terms of service')),
                                    _('<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0 licence</a>'))))
 
     def clean_user_orcid(self):

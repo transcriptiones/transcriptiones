@@ -5,6 +5,9 @@ from crispy_forms.layout import Submit
 from django import forms
 from bootstrap_modal_forms.forms import BSModalModelForm
 from dal import autocomplete
+from django.urls import reverse
+from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -72,6 +75,15 @@ class UploadTranscriptionForm(forms.ModelForm):
         """if self.fields[field].widget.is_required:
             self.fields[field].label = "my_css_class_for_required_fields"
         """
+        tos_url = reverse('main:tos')
+        self.fields['accept_tos'] = forms.BooleanField(
+            label=_('Accept Terms of Service'),
+            required=True,
+            help_text=mark_safe(_('In order to upload your transcription you are required to accept the %s and agree that '
+                                  'all uploaded transcriptions will be will be subject to a %s.') %
+                                  (format_lazy('<a href="{tos_url}" target="_blank" rel="noopener noreferrer">{tos_text}</a>', tos_url=tos_url, tos_text=_('terms of service')),
+                                   _('<a href="https://creativecommons.org/share-your-work/public-domain/cc0/" target="_blank" rel="noopener noreferrer">CC0 licence</a>'))))
+
 
     def clean_doc_start_date(self):
         data = self.cleaned_data['doc_start_date']

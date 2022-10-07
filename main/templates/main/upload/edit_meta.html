@@ -92,6 +92,7 @@
         {% card 'save_edit' _('Save Your Changes') %}
             <div class="text-center">
             <p>{% translate "If you're done changing the metadata, you can save the document." %} </p>
+                {{ form.accept_tos|as_crispy_field }}
                 <input type="submit" value="{% translate 'Save Changes' %}" class="btn btn-primary">
             </div>
         {% endcard %}

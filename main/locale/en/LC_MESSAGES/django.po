@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-17 12:53+0200\n"
+"POT-Creation-Date: 2022-10-07 14:29+0200\n"
 "PO-Revision-Date: 2022-07-17 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,15 +61,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr ""
 
-#: main/filters.py:85 main/models.py:775 main/models.py:811
+#: main/filters.py:85 main/models.py:783 main/models.py:819
 msgid "User"
 msgstr ""
 
-#: main/filters.py:86 main/models.py:776
+#: main/filters.py:86 main/models.py:784
 msgid "Staff"
 msgstr ""
 
-#: main/filters.py:87 main/models.py:777
+#: main/filters.py:87 main/models.py:785
 msgid "Admin"
 msgstr ""
 
@@ -104,12 +104,57 @@ msgstr ""
 msgid "Send Newsletter"
 msgstr ""
 
-#: main/forms/forms_edit.py:32 main/forms/forms_upload.py:34
+#: main/forms/forms_edit.py:21 main/forms/forms_edit.py:80
+#: main/forms/forms_upload.py:80 main/forms/forms_user.py:102
+msgid "Accept Terms of Service"
+msgstr ""
+
+#: main/forms/forms_edit.py:24 main/forms/forms_edit.py:83
+#, python-format
+msgid ""
+"In order to commit your changes you are required to accept the %s and agree "
+"that all uploaded transcriptions will be will be subject to a %s."
+msgstr ""
+
+#: main/forms/forms_edit.py:26 main/forms/forms_edit.py:85
+#: main/forms/forms_user.py:106
+#, python-brace-format
+msgid ""
+"<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer\">terms "
+"and conditions</a>"
+msgstr ""
+
+#: main/forms/forms_edit.py:27 main/forms/forms_edit.py:86
+#: main/forms/forms_upload.py:85 main/forms/forms_user.py:107
+msgid ""
+"<a href=\"https://creativecommons.org/share-your-work/public-domain/cc0/\" "
+"target=\"_blank\" rel=\"noopener noreferrer\">CC0 licence</a>"
+msgstr ""
+
+#: main/forms/forms_edit.py:44 main/forms/forms_upload.py:37
 msgid "First level Source Type"
 msgstr ""
 
+#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_upload.py:59 main/forms/forms_upload.py:65
+#: main/models.py:299 main/models.py:306
+msgid "(Unknown)"
+msgstr ""
+
+#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_search.py:60 main/forms/forms_upload.py:59
+#: main/forms/forms_upload.py:65
+msgid "Yes"
+msgstr ""
+
+#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_search.py:61 main/forms/forms_upload.py:59
+#: main/forms/forms_upload.py:65
+msgid "No"
+msgstr ""
+
 #: main/forms/forms_helper.py:37 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:813
+#: main/models.py:97 main/models.py:821
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -119,7 +164,7 @@ msgstr ""
 msgid "Parent Source Type"
 msgstr ""
 
-#: main/forms/forms_helper.py:41 main/model_info.py:373
+#: main/forms/forms_helper.py:41 main/model_info.py:375
 msgid "Password"
 msgstr ""
 
@@ -165,7 +210,7 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: main/forms/forms_info.py:52 main/forms/forms_upload.py:273
+#: main/forms/forms_info.py:52 main/forms/forms_upload.py:285
 #: main/forms/forms_user.py:30
 msgid "Send Message"
 msgstr ""
@@ -190,16 +235,6 @@ msgstr ""
 msgid ""
 "Please be as specific as you can in your message. This will help us to "
 "answer your questions."
-msgstr ""
-
-#: main/forms/forms_search.py:60 main/forms/forms_upload.py:56
-#: main/forms/forms_upload.py:62
-msgid "Yes"
-msgstr ""
-
-#: main/forms/forms_search.py:61 main/forms/forms_upload.py:56
-#: main/forms/forms_upload.py:62
-msgid "No"
 msgstr ""
 
 #: main/forms/forms_search.py:258
@@ -271,28 +306,34 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: main/forms/forms_upload.py:56 main/forms/forms_upload.py:62
-#: main/models.py:299 main/models.py:306
-msgid "(Unknown)"
+#: main/forms/forms_upload.py:82
+#, python-format
+msgid ""
+"In order to upload your transcription you are required to accept the %s and "
+"agree that all uploaded transcriptions will be will be subject to a %s."
 msgstr ""
 
-#: main/forms/forms_upload.py:120 main/forms/forms_upload.py:145
+#: main/forms/forms_upload.py:84
+msgid "terms of service"
+msgstr ""
+
+#: main/forms/forms_upload.py:132 main/forms/forms_upload.py:157
 msgid "Create"
 msgstr ""
 
-#: main/forms/forms_upload.py:263
+#: main/forms/forms_upload.py:275
 msgid "Message Title"
 msgstr ""
 
-#: main/forms/forms_upload.py:264
+#: main/forms/forms_upload.py:276
 msgid "What kind of documents do you want to upload?"
 msgstr ""
 
-#: main/forms/forms_upload.py:265
+#: main/forms/forms_upload.py:277
 msgid "Batch Description"
 msgstr ""
 
-#: main/forms/forms_upload.py:266
+#: main/forms/forms_upload.py:278
 msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
@@ -319,28 +360,11 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: main/forms/forms_user.py:102
-msgid "Accept Terms of Service"
-msgstr ""
-
 #: main/forms/forms_user.py:104
 #, python-format
 msgid ""
 "In order to sign up you are required to accept the %s and agree that all "
 "uploaded transcriptions will be will be subject to a %s."
-msgstr ""
-
-#: main/forms/forms_user.py:106
-#, python-brace-format
-msgid ""
-"<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer\">terms "
-"and conditions</a>"
-msgstr ""
-
-#: main/forms/forms_user.py:107
-msgid ""
-"<a href=\"https://creativecommons.org/share-your-work/public-domain/cc0/\" "
-"target=\"_blank\" rel=\"noopener noreferrer\">CC0 licence</a>"
 msgstr ""
 
 #: main/forms/forms_user.py:139 main/templates/main/base.html:318
@@ -366,8 +390,8 @@ msgid "Set a new password for transcriptiones."
 msgstr ""
 
 #: main/forms/forms_user.py:176
-#: main/templates/main/upload/edit_document_transcription.html:53
-#: main/templates/main/upload/edit_meta.html:95
+#: main/templates/main/upload/edit_document_transcription.html:54
+#: main/templates/main/upload/edit_meta.html:96
 msgid "Save Changes"
 msgstr ""
 
@@ -575,7 +599,7 @@ msgstr ""
 msgid "Initial Upload"
 msgstr ""
 
-#: main/model_info.py:135 main/model_info.py:197
+#: main/model_info.py:135 main/model_info.py:199
 #: main/tables/tables_document.py:109
 msgid "Anonymous"
 msgstr ""
@@ -592,272 +616,272 @@ msgstr ""
 msgid "(w/h)"
 msgstr ""
 
-#: main/model_info.py:226
+#: main/model_info.py:228
 msgid "No help text found"
 msgstr ""
 
-#: main/model_info.py:231
+#: main/model_info.py:233
 msgid "Title of the document"
 msgstr ""
 
-#: main/model_info.py:231
+#: main/model_info.py:233
 msgid ""
 "Title of the source document, which is transcribed here. Use the original "
 "document's title if possible, use an own title otherwise."
 msgstr ""
 
-#: main/model_info.py:236
+#: main/model_info.py:238
 msgid "Institution which holds the manuscript"
 msgstr ""
 
-#: main/model_info.py:236
+#: main/model_info.py:238
 msgid "If the institution is not in the list, you may create a new one."
 msgstr ""
 
-#: main/model_info.py:240
+#: main/model_info.py:242
 msgid "Reference number as indicated by the holding institution."
 msgstr ""
 
-#: main/model_info.py:241
+#: main/model_info.py:243
 msgid "If the reference number is not in the list, you may create a new one."
 msgstr ""
 
-#: main/model_info.py:244
+#: main/model_info.py:246
 msgid "Which parts of the manuscript have been transcribed?"
 msgstr ""
 
-#: main/model_info.py:245
+#: main/model_info.py:247
 msgid "E. g.: Entire Document, Fol. 3r - 10v, Chapter 10"
 msgstr ""
 
-#: main/model_info.py:247
+#: main/model_info.py:249
 msgid "Earliest creation date of the original manuscript"
 msgstr ""
 
-#: main/model_info.py:248
+#: main/model_info.py:250
 msgid ""
 "Only the year of creation is required. Please specify as precisely as "
 "possible."
 msgstr ""
 
-#: main/model_info.py:251
+#: main/model_info.py:253
 msgid "Latest creation date of the original manuscript"
 msgstr ""
 
-#: main/model_info.py:252
+#: main/model_info.py:254
 msgid ""
 "Optional field. Only the year of creation is required. Please specify as "
 "precisely as possible."
 msgstr ""
 
-#: main/model_info.py:255
+#: main/model_info.py:257
 msgid "Place of origin"
 msgstr ""
 
-#: main/model_info.py:255
+#: main/model_info.py:257
 msgid ""
 "Where has the document been written? Supply a city name if possible, "
 "otherwise use country or region."
 msgstr ""
 
-#: main/model_info.py:259 main/model_info.py:262
+#: main/model_info.py:261 main/model_info.py:264
 msgid "Type of the document"
 msgstr ""
 
-#: main/model_info.py:259
+#: main/model_info.py:261
 msgid "Which type best describes the source? First level of categorization."
 msgstr ""
 
-#: main/model_info.py:262
+#: main/model_info.py:264
 msgid ""
 "Which type best describes the source? Second level of categorization. Select "
 "a parent source type before filling out this field."
 msgstr ""
 
-#: main/model_info.py:267
+#: main/model_info.py:269
 msgid "Transcription of the manuscript"
 msgstr ""
 
-#: main/model_info.py:268
+#: main/model_info.py:270
 msgid ""
 "You can enter the transcription directly or copy your contentsfrom a Word or "
 "Excel file. Most formatting is preserved."
 msgstr ""
 
-#: main/model_info.py:271
+#: main/model_info.py:273
 msgid "Scribe(s) of the source"
 msgstr ""
 
-#: main/model_info.py:271
+#: main/model_info.py:273
 msgid "If a scribe is not in the list, you may create a new one."
 msgstr ""
 
-#: main/model_info.py:274
+#: main/model_info.py:276
 msgid "Used languages"
 msgstr ""
 
-#: main/model_info.py:274
+#: main/model_info.py:276
 msgid "Languages that are used in the source."
 msgstr ""
 
-#: main/model_info.py:276
+#: main/model_info.py:278
 msgid "Material"
 msgstr ""
 
-#: main/model_info.py:276
+#: main/model_info.py:278
 msgid "Optional field. On what material is the manuscript written?"
 msgstr ""
 
-#: main/model_info.py:278
+#: main/model_info.py:280
 msgid "What page numbering system is used?"
 msgstr ""
 
-#: main/model_info.py:278
+#: main/model_info.py:280
 msgid "Optional field. Are the pages foliated or paginated?"
 msgstr ""
 
-#: main/model_info.py:281
+#: main/model_info.py:283
 msgid "Additional comments"
 msgstr ""
 
-#: main/model_info.py:281
+#: main/model_info.py:283
 msgid ""
 "Optional field. You may enter any comments on the creation of the "
 "transcription or its contents. Here, you may also place links to external "
 "resources such as digitizations or editions of the source."
 msgstr ""
 
-#: main/model_info.py:286 main/models.py:434
+#: main/model_info.py:288 main/models.py:434
 msgid "Illuminations"
 msgstr ""
 
-#: main/model_info.py:286
+#: main/model_info.py:288
 msgid "Optional field. Are there illuminations on the document?"
 msgstr ""
 
-#: main/model_info.py:288
+#: main/model_info.py:290
 msgid "Seals"
 msgstr ""
 
-#: main/model_info.py:288
+#: main/model_info.py:290
 msgid "Optional field. Are there any seals on the document?"
 msgstr ""
 
-#: main/model_info.py:290 main/models.py:378
+#: main/model_info.py:292 main/models.py:378
 msgid "Number of pages"
 msgstr ""
 
-#: main/model_info.py:290
+#: main/model_info.py:292
 msgid "Optional field. Enter the total number of pages of the source."
 msgstr ""
 
-#: main/model_info.py:292
+#: main/model_info.py:294
 msgid "Do you want to publish anonymously?"
 msgstr ""
 
-#: main/model_info.py:292
+#: main/model_info.py:294
 msgid ""
 "You can hide your username on the transcription listing if you choose so."
 msgstr ""
 
-#: main/model_info.py:296
+#: main/model_info.py:298
 msgid "Brief description of changes"
 msgstr ""
 
-#: main/model_info.py:296
+#: main/model_info.py:298
 msgid ""
 "Please supply a brief description of the changes you made. Examples: "
 "Corrected typo, Added scribes, etc."
 msgstr ""
 
-#: main/model_info.py:301
+#: main/model_info.py:303
 msgid "Length of the document"
 msgstr ""
 
-#: main/model_info.py:301
+#: main/model_info.py:303
 msgid ""
 "Optional field. Please write down the length (top to bottom) in centimeters."
 msgstr ""
 
-#: main/model_info.py:304
+#: main/model_info.py:306
 msgid "Width of the document"
 msgstr ""
 
-#: main/model_info.py:304
+#: main/model_info.py:306
 msgid ""
 "Optional field. Please write down the width (left to right) in centimeters."
 msgstr ""
 
-#: main/model_info.py:311
+#: main/model_info.py:313
 msgid "Name of the institution"
 msgstr ""
 
-#: main/model_info.py:311
+#: main/model_info.py:313
 msgid "Enter the complete name."
 msgstr ""
 
-#: main/model_info.py:313
+#: main/model_info.py:315
 msgid "Street Name"
 msgstr ""
 
-#: main/model_info.py:313
+#: main/model_info.py:315
 msgid "Enter the street name with the number."
 msgstr ""
 
-#: main/model_info.py:315
+#: main/model_info.py:317
 msgid "Zip Code"
 msgstr ""
 
-#: main/model_info.py:315
+#: main/model_info.py:317
 msgid "Enter the zip code of the institution."
 msgstr ""
 
-#: main/model_info.py:317 main/models.py:34 main/models.py:36
+#: main/model_info.py:319 main/models.py:34 main/models.py:36
 msgid "City"
 msgstr ""
 
-#: main/model_info.py:317
+#: main/model_info.py:319
 msgid "Enter the city."
 msgstr ""
 
-#: main/model_info.py:319 main/models.py:38 main/models.py:39
+#: main/model_info.py:321 main/models.py:38 main/models.py:39
 msgid "Country"
 msgstr ""
 
-#: main/model_info.py:319
+#: main/model_info.py:321
 msgid "Choose the country from the drop down menu."
 msgstr ""
 
-#: main/model_info.py:321
+#: main/model_info.py:323
 msgid "Web site of the institution"
 msgstr ""
 
-#: main/model_info.py:321
+#: main/model_info.py:323
 msgid "Optional Field. Enter a valid URL. Must start with http:// or https://"
 msgstr ""
 
-#: main/model_info.py:328
+#: main/model_info.py:330
 msgid "Holding institution"
 msgstr ""
 
-#: main/model_info.py:328
+#: main/model_info.py:330
 msgid "The institution which holds the document with this reference number."
 msgstr ""
 
-#: main/model_info.py:331 main/models.py:319
+#: main/model_info.py:333 main/models.py:319
 #: main/templates/main/upload/create_document_backup.html:40
 msgid "Reference Number"
 msgstr ""
 
-#: main/model_info.py:331
+#: main/model_info.py:333
 msgid "Reference Number as it is supplied by the institution."
 msgstr ""
 
-#: main/model_info.py:334
+#: main/model_info.py:336
 msgid "Title of collection"
 msgstr ""
 
-#: main/model_info.py:334
+#: main/model_info.py:336
 msgid ""
 "Reference numbers usually have a title. Please supply the complete title. If "
 "the institution does not supply a title for this reference number, you may "
@@ -865,95 +889,95 @@ msgid ""
 "as the title of the transcribed document."
 msgstr ""
 
-#: main/model_info.py:342
+#: main/model_info.py:344
 msgid "Collection link"
 msgstr ""
 
-#: main/model_info.py:342
+#: main/model_info.py:344
 msgid ""
 "Optional Field. Direct link to the collection in the institution's catalog. "
 "Must start with http:// or https://"
 msgstr ""
 
-#: main/model_info.py:350 main/models.py:684
+#: main/model_info.py:352 main/models.py:692
 msgid "Username"
 msgstr ""
 
-#: main/model_info.py:350
+#: main/model_info.py:352
 msgid ""
 "The name must be unique and can't contain any special characters. It will be "
 "shown to other users."
 msgstr ""
 
-#: main/model_info.py:353 main/models.py:690
+#: main/model_info.py:355 main/models.py:698
 msgid "First name"
 msgstr ""
 
-#: main/model_info.py:353
+#: main/model_info.py:355
 msgid "Your given name. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:355 main/models.py:695
+#: main/model_info.py:357 main/models.py:703
 msgid "Last name"
 msgstr ""
 
-#: main/model_info.py:355
+#: main/model_info.py:357
 msgid "Your family name. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:357
+#: main/model_info.py:359
 msgid "Email address"
 msgstr ""
 
-#: main/model_info.py:357
+#: main/model_info.py:359
 msgid ""
 "You must choose a valid address. It is used to verify your information and "
 "activate your account. This information will not be public."
 msgstr ""
 
-#: main/model_info.py:361
+#: main/model_info.py:363
 msgid "Anonymous publishing"
 msgstr ""
 
-#: main/model_info.py:361
+#: main/model_info.py:363
 msgid ""
 "Your documents can be published anonymously by default. You can change this "
 "setting any time."
 msgstr ""
 
-#: main/model_info.py:365
+#: main/model_info.py:367
 msgid "ORCID"
 msgstr ""
 
-#: main/model_info.py:365
+#: main/model_info.py:367
 msgid ""
 "Optional Field. ORCID provides a persistent digital identifier that you own "
 "and control, and that distinguishes you from every other researcher."
 msgstr ""
 
-#: main/model_info.py:369
+#: main/model_info.py:371
 msgid "Preferred Communication Language"
 msgstr ""
 
-#: main/model_info.py:369
+#: main/model_info.py:371
 msgid ""
 "Choose the default language in which you would like to receive emails from "
 "transcriptiones."
 msgstr ""
 
-#: main/model_info.py:375
+#: main/model_info.py:377
 msgid "Confirm password"
 msgstr ""
 
-#: main/model_info.py:375
+#: main/model_info.py:377
 msgid "Enter the password again for confirmation."
 msgstr ""
 
-#: main/model_info.py:377
+#: main/model_info.py:379
 msgid "Your old password"
 msgstr ""
 
-#: main/model_info.py:377
+#: main/model_info.py:379
 msgid "Enter your old password for verification."
 msgstr ""
 
@@ -1008,7 +1032,7 @@ msgstr ""
 msgid "Institution which holds this reference number and document"
 msgstr ""
 
-#: main/models.py:101 main/models.py:809
+#: main/models.py:101 main/models.py:817
 msgid "Reference number"
 msgstr ""
 
@@ -1177,7 +1201,7 @@ msgstr ""
 msgid "Languages used in the source"
 msgstr ""
 
-#: main/models.py:352 main/models.py:814
+#: main/models.py:352 main/models.py:822
 msgid "Source Type"
 msgstr ""
 
@@ -1307,23 +1331,23 @@ msgstr ""
 msgid "documents"
 msgstr ""
 
-#: main/models.py:589
+#: main/models.py:597
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr ""
 
-#: main/models.py:590
+#: main/models.py:598
 #, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
 "\n"
 msgstr ""
 
-#: main/models.py:602
+#: main/models.py:610
 msgid "A Reference Number has changed"
 msgstr ""
 
-#: main/models.py:603
+#: main/models.py:611
 #, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1331,178 +1355,178 @@ msgid ""
 "\n"
 msgstr ""
 
-#: main/models.py:614
+#: main/models.py:622
 msgid "A User has made changes"
 msgstr ""
 
-#: main/models.py:615
+#: main/models.py:623
 #, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr ""
 
-#: main/models.py:638
+#: main/models.py:646
 msgid "Please enter an email address"
 msgstr ""
 
-#: main/models.py:664
+#: main/models.py:672
 msgid "All superusers must have is_staff = True."
 msgstr ""
 
-#: main/models.py:666
+#: main/models.py:674
 msgid "All superusers must have is_superuser = True"
 msgstr ""
 
-#: main/models.py:674 main/models.py:680
+#: main/models.py:682 main/models.py:688
 msgid "No notification Emails"
 msgstr ""
 
-#: main/models.py:675
+#: main/models.py:683
 msgid "Every time a subscribed document has changed."
 msgstr ""
 
-#: main/models.py:676
+#: main/models.py:684
 msgid "Once a day, only if changes happened."
 msgstr ""
 
-#: main/models.py:677
+#: main/models.py:685
 msgid "Once a week, only if changes happened."
 msgstr ""
 
-#: main/models.py:681
+#: main/models.py:689
 msgid "Every time a message is received."
 msgstr ""
 
-#: main/models.py:682
+#: main/models.py:690
 msgid "Once a day, only if you received messages."
 msgstr ""
 
-#: main/models.py:688
+#: main/models.py:696
 msgid "Provide a user name"
 msgstr ""
 
-#: main/models.py:693
+#: main/models.py:701
 msgid "Enter your first name(s)"
 msgstr ""
 
-#: main/models.py:698
+#: main/models.py:706
 msgid "Enter your last name"
 msgstr ""
 
-#: main/models.py:700
+#: main/models.py:708
 msgid "Email"
 msgstr ""
 
-#: main/models.py:704
+#: main/models.py:712
 msgid "Enter your email address"
 msgstr ""
 
-#: main/models.py:706
+#: main/models.py:714
 msgid "Email confirmed"
 msgstr ""
 
-#: main/models.py:709
+#: main/models.py:717
 msgid "Has the user confirmed the email address?"
 msgstr ""
 
-#: main/models.py:711
+#: main/models.py:719
 msgid "Staff status"
 msgstr ""
 
-#: main/models.py:713
+#: main/models.py:721
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 
-#: main/models.py:715 main/models.py:788
+#: main/models.py:723 main/models.py:796
 msgid "Active"
 msgstr ""
 
-#: main/models.py:718
+#: main/models.py:726
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 
-#: main/models.py:720
+#: main/models.py:728
 msgid "Date joined"
 msgstr ""
 
-#: main/models.py:723
+#: main/models.py:731
 msgid "Mark anonymous by default"
 msgstr ""
 
-#: main/models.py:725
+#: main/models.py:733
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
 msgstr ""
 
-#: main/models.py:728
+#: main/models.py:736
 msgid "Orcid"
 msgstr ""
 
-#: main/models.py:732
+#: main/models.py:740
 msgid "User id from https://orcid.org/"
 msgstr ""
 
-#: main/models.py:734
+#: main/models.py:742
 msgid "Subscription Notification policy"
 msgstr ""
 
-#: main/models.py:737
+#: main/models.py:745
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 
-#: main/models.py:740
+#: main/models.py:748
 msgid "Message Notification policy"
 msgstr ""
 
-#: main/models.py:743
+#: main/models.py:751
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 
-#: main/models.py:746
+#: main/models.py:754
 msgid "Subscription to owned documents"
 msgstr ""
 
-#: main/models.py:747
+#: main/models.py:755
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 
-#: main/models.py:752
+#: main/models.py:760
 msgid "Communication Language"
 msgstr ""
 
-#: main/models.py:753
+#: main/models.py:761
 msgid "What is your preferred language for email communication?"
 msgstr ""
 
-#: main/models.py:758
+#: main/models.py:766
 msgid "Secret API Key"
 msgstr ""
 
-#: main/models.py:759
+#: main/models.py:767
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: main/models.py:789
+#: main/models.py:797
 msgid "Inactive"
 msgstr ""
 
-#: main/models.py:810 main/templates/main/details/document_detail.html:21
+#: main/models.py:818 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr ""
 
-#: main/models.py:812 main/templates/main/details/author_detail.html:8
+#: main/models.py:820 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 msgid "Scribe"
 msgstr ""
 
-#: main/models.py:910
+#: main/models.py:918
 msgid "Default User Interface Language"
 msgstr ""
 
-#: main/models.py:911
+#: main/models.py:919
 msgid "What is your preferred language?"
 msgstr ""
 
@@ -1991,7 +2015,7 @@ msgstr ""
 
 #: main/templates/main/base.html:247
 #: main/templates/main/upload/create_document.html:8
-#: main/templates/main/upload/create_document.html:145
+#: main/templates/main/upload/create_document.html:146
 #: main/templates/main/upload/create_document_backup.html:8
 #: main/templates/main/upload/create_document_backup.html:94
 msgid "Upload Transcription"
@@ -2963,17 +2987,17 @@ msgstr ""
 msgid "If you're done entering your information, you can upload the document."
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:200
+#: main/templates/main/upload/create_document.html:201
 #: main/views/views_upload.py:108
 msgid "Success: Institution was created."
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:253
+#: main/templates/main/upload/create_document.html:254
 #: main/views/views_upload.py:140
 msgid "Success: RefNumber was created."
 msgstr ""
 
-#: main/templates/main/upload/create_document.html:304
+#: main/templates/main/upload/create_document.html:305
 msgid "200 characters used"
 msgstr ""
 
@@ -3430,7 +3454,6 @@ msgid "Unsubscribe from this user"
 msgstr ""
 
 #: main/templates/main/users/public_user_profile.html:34
-#| msgid "Subscribe to this author"
 msgid "Subscribe to this user"
 msgstr ""
 
@@ -3628,11 +3651,11 @@ msgstr ""
 msgid "Static version URL"
 msgstr ""
 
-#: main/views/views_edit.py:42
+#: main/views/views_edit.py:43
 msgid "The document has been updated."
 msgstr ""
 
-#: main/views/views_edit.py:48
+#: main/views/views_edit.py:49
 msgid "The transcription did not change. No new version saved."
 msgstr ""
 
