@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-07 14:29+0200\n"
+"POT-Creation-Date: 2022-10-10 17:51+0200\n"
 "PO-Revision-Date: 2022-07-17 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -88,7 +88,7 @@ msgid "Send Answer"
 msgstr ""
 
 #: main/forms/forms_admin.py:20 main/forms/forms_info.py:55
-#: main/tables/tables.py:137
+#: main/tables/tables.py:143
 msgid "Subject"
 msgstr ""
 
@@ -104,50 +104,47 @@ msgstr ""
 msgid "Send Newsletter"
 msgstr ""
 
-#: main/forms/forms_edit.py:21 main/forms/forms_edit.py:80
-#: main/forms/forms_upload.py:80 main/forms/forms_user.py:102
+#: main/forms/forms_edit.py:22 main/forms/forms_edit.py:81
+#: main/forms/forms_upload.py:80 main/forms/forms_user.py:103
 msgid "Accept Terms of Service"
 msgstr ""
 
-#: main/forms/forms_edit.py:24 main/forms/forms_edit.py:83
+#: main/forms/forms_edit.py:25 main/forms/forms_edit.py:84
 #, python-format
 msgid ""
 "In order to commit your changes you are required to accept the %s and agree "
 "that all uploaded transcriptions will be will be subject to a %s."
 msgstr ""
 
-#: main/forms/forms_edit.py:26 main/forms/forms_edit.py:85
-#: main/forms/forms_user.py:106
-#, python-brace-format
-msgid ""
-"<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer\">terms "
-"and conditions</a>"
+#: main/forms/forms_edit.py:27 main/forms/forms_edit.py:86
+#: main/forms/forms_upload.py:84 main/forms/forms_user.py:107
+msgid "terms of service"
 msgstr ""
 
-#: main/forms/forms_edit.py:27 main/forms/forms_edit.py:86
-#: main/forms/forms_upload.py:85 main/forms/forms_user.py:107
+#: main/forms/forms_edit.py:28 main/forms/forms_edit.py:87
+#: main/forms/forms_upload.py:85 main/forms/forms_user.py:108
 msgid ""
 "<a href=\"https://creativecommons.org/share-your-work/public-domain/cc0/\" "
 "target=\"_blank\" rel=\"noopener noreferrer\">CC0 licence</a>"
 msgstr ""
 
-#: main/forms/forms_edit.py:44 main/forms/forms_upload.py:37
+#: main/forms/forms_edit.py:45 main/forms/forms_upload.py:37
 msgid "First level Source Type"
 msgstr ""
 
-#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_edit.py:67 main/forms/forms_edit.py:73
 #: main/forms/forms_upload.py:59 main/forms/forms_upload.py:65
 #: main/models.py:299 main/models.py:306
 msgid "(Unknown)"
 msgstr ""
 
-#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_edit.py:67 main/forms/forms_edit.py:73
 #: main/forms/forms_search.py:60 main/forms/forms_upload.py:59
 #: main/forms/forms_upload.py:65
 msgid "Yes"
 msgstr ""
 
-#: main/forms/forms_edit.py:66 main/forms/forms_edit.py:72
+#: main/forms/forms_edit.py:67 main/forms/forms_edit.py:73
 #: main/forms/forms_search.py:61 main/forms/forms_upload.py:59
 #: main/forms/forms_upload.py:65
 msgid "No"
@@ -204,14 +201,14 @@ msgstr ""
 msgid "Unsubscribe From Newsletter"
 msgstr ""
 
-#: main/forms/forms_info.py:40 main/tables/tables.py:242
+#: main/forms/forms_info.py:40 main/tables/tables.py:248
 #: main/templates/main/admin/confirm_unsubscribe.html:15
 #: main/templates/main/info/unsubscribe.html:19
 msgid "Unsubscribe"
 msgstr ""
 
 #: main/forms/forms_info.py:52 main/forms/forms_upload.py:285
-#: main/forms/forms_user.py:30
+#: main/forms/forms_user.py:31
 msgid "Send Message"
 msgstr ""
 
@@ -313,10 +310,6 @@ msgid ""
 "agree that all uploaded transcriptions will be will be subject to a %s."
 msgstr ""
 
-#: main/forms/forms_upload.py:84
-msgid "terms of service"
-msgstr ""
-
 #: main/forms/forms_upload.py:132 main/forms/forms_upload.py:157
 msgid "Create"
 msgstr ""
@@ -338,36 +331,36 @@ msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
 
-#: main/forms/forms_user.py:53 main/forms/forms_user.py:67
+#: main/forms/forms_user.py:54 main/forms/forms_user.py:68
 msgid "Save"
 msgstr ""
 
-#: main/forms/forms_user.py:79
+#: main/forms/forms_user.py:80
 msgid "Email address. We will send an activation link to this address."
 msgstr ""
 
-#: main/forms/forms_user.py:85
+#: main/forms/forms_user.py:86
 msgid "Choose your transcriptiones password."
 msgstr ""
 
-#: main/forms/forms_user.py:92 main/forms/forms_user.py:163
-#: main/forms/forms_user.py:227
+#: main/forms/forms_user.py:93 main/forms/forms_user.py:164
+#: main/forms/forms_user.py:228
 msgid "Enter the same password as before, for verification."
 msgstr ""
 
-#: main/forms/forms_user.py:98 main/templates/main/base.html:320
+#: main/forms/forms_user.py:99 main/templates/main/base.html:320
 #: main/templates/main/base_copy.html:128
 msgid "Register"
 msgstr ""
 
-#: main/forms/forms_user.py:104
+#: main/forms/forms_user.py:105
 #, python-format
 msgid ""
 "In order to sign up you are required to accept the %s and agree that all "
 "uploaded transcriptions will be will be subject to a %s."
 msgstr ""
 
-#: main/forms/forms_user.py:139 main/templates/main/base.html:318
+#: main/forms/forms_user.py:140 main/templates/main/base.html:318
 #: main/templates/main/base_copy.html:125 main/templates/main/sidebar.html:73
 #: main/templates/main/users/account_activation_invalid.html:7
 #: main/templates/main/users/account_activation_invalid.html:12
@@ -381,29 +374,29 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: main/forms/forms_user.py:149
+#: main/forms/forms_user.py:150
 msgid "Enter your old transcriptiones password."
 msgstr ""
 
-#: main/forms/forms_user.py:156 main/forms/forms_user.py:220
+#: main/forms/forms_user.py:157 main/forms/forms_user.py:221
 msgid "Set a new password for transcriptiones."
 msgstr ""
 
-#: main/forms/forms_user.py:176
+#: main/forms/forms_user.py:177
 #: main/templates/main/upload/edit_document_transcription.html:54
 #: main/templates/main/upload/edit_meta.html:96
 msgid "Save Changes"
 msgstr ""
 
-#: main/forms/forms_user.py:179
+#: main/forms/forms_user.py:180
 msgid "You cannot change your username"
 msgstr ""
 
-#: main/forms/forms_user.py:180
+#: main/forms/forms_user.py:181
 msgid "You can change your email address in the respective form"
 msgstr ""
 
-#: main/forms/forms_user.py:210 main/forms/forms_user.py:234
+#: main/forms/forms_user.py:211 main/forms/forms_user.py:235
 #: main/templates/main/users/password_reset.html:9
 #: main/templates/main/users/password_reset.html:14
 #: main/templates/main/users/password_reset_complete.html:12
@@ -412,31 +405,31 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
-#: main/forms/forms_user.py:240
+#: main/forms/forms_user.py:241
 msgid "Your Email Address"
 msgstr ""
 
-#: main/forms/forms_user.py:241
+#: main/forms/forms_user.py:242
 msgid ""
 "Please enter the email address you registered with. We will send you an "
 "email with your username."
 msgstr ""
 
-#: main/forms/forms_user.py:247
+#: main/forms/forms_user.py:248
 #: main/templates/main/users/request_username.html:18
 #: main/templates/main/users/request_username_done.html:12
 msgid "Request Username"
 msgstr ""
 
-#: main/forms/forms_user.py:253
+#: main/forms/forms_user.py:254
 msgid "Your New Email Address"
 msgstr ""
 
-#: main/forms/forms_user.py:254
+#: main/forms/forms_user.py:255
 msgid "Please enter the email address you want to use for transcriptiones."
 msgstr ""
 
-#: main/forms/forms_user.py:259
+#: main/forms/forms_user.py:260
 msgid "Change Address"
 msgstr ""
 
@@ -1530,7 +1523,7 @@ msgstr ""
 msgid "What is your preferred language?"
 msgstr ""
 
-#: main/tables/tables.py:28 main/tables/tables.py:176
+#: main/tables/tables.py:28 main/tables/tables.py:182
 #: main/templates/main/details/document_detail.html:53
 #: main/templates/main/upload/export_document.html:22
 msgid "Options"
@@ -1556,35 +1549,35 @@ msgstr ""
 msgid "Activate this user"
 msgstr ""
 
-#: main/tables/tables.py:86
-msgid "Answered"
+#: main/tables/tables.py:87
+msgid "Select"
 msgstr ""
 
-#: main/tables/tables.py:87
-msgid "from"
+#: main/tables/tables.py:88
+msgid "State"
 msgstr ""
 
 #: main/tables/tables.py:89
+msgid "from"
+msgstr ""
+
+#: main/tables/tables.py:91
 msgid "sent"
 msgstr ""
 
-#: main/tables/tables.py:114
-msgid "Marked Spam"
-msgstr ""
-
-#: main/tables/tables.py:136
+#: main/tables/tables.py:142
 msgid "From"
 msgstr ""
 
-#: main/tables/tables.py:139
+#: main/tables/tables.py:145
 msgid "Sent At"
 msgstr ""
 
-#: main/tables/tables.py:175
+#: main/tables/tables.py:181
 msgid "Subscription object"
 msgstr ""
 
-#: main/tables/tables.py:242
+#: main/tables/tables.py:248
 msgid "View"
 msgstr ""
 
@@ -1873,11 +1866,27 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
-#: main/templates/main/admin/contact_message.html:53
-msgid "Mark as \"answered\"\""
+#: main/templates/main/admin/contact_message.html:54
+#: main/templates/main/admin/contact_messages.html:40
+msgid "Mark as answered"
 msgstr ""
 
-#: main/templates/main/admin/contact_message.html:54
+#: main/templates/main/admin/contact_message.html:57
+#: main/templates/main/admin/contact_messages.html:39
+msgid "Mark as spam"
+msgstr ""
+
+#: main/templates/main/admin/contact_message.html:60
+#: main/templates/main/admin/contact_messages.html:37
+msgid "Mark as read"
+msgstr ""
+
+#: main/templates/main/admin/contact_message.html:62
+#: main/templates/main/admin/contact_messages.html:38
+msgid "Mark as unread"
+msgstr ""
+
+#: main/templates/main/admin/contact_message.html:64
 msgid "Delete Contact Message"
 msgstr ""
 
@@ -1893,7 +1902,25 @@ msgstr ""
 msgid "Contact Form Messages"
 msgstr ""
 
-#: main/templates/main/admin/contact_messages.html:34
+#: main/templates/main/admin/contact_messages.html:27
+#, fuzzy
+#| msgid "Show All in"
+msgid "Show All"
+msgstr "Show All in"
+
+#: main/templates/main/admin/contact_messages.html:28
+msgid "Show Unanswered"
+msgstr ""
+
+#: main/templates/main/admin/contact_messages.html:41
+msgid "Delete"
+msgstr ""
+
+#: main/templates/main/admin/contact_messages.html:45
+msgid "Execute"
+msgstr ""
+
+#: main/templates/main/admin/contact_messages.html:51
 #: main/templates/main/users/messages.html:32
 #: main/templates/main/users/notifications.html:29
 msgid ""
@@ -3611,36 +3638,73 @@ msgstr ""
 msgid "Make contact with other users of transcriptiones!"
 msgstr ""
 
-#: main/views/views_admin.py:23
+#: main/views/views_admin.py:24
 msgid "User does not exist"
 msgstr ""
 
-#: main/views/views_admin.py:35
+#: main/views/views_admin.py:36
 msgid "User activated"
 msgstr ""
 
-#: main/views/views_admin.py:46
+#: main/views/views_admin.py:47
 msgid "User deactivated"
 msgstr ""
 
-#: main/views/views_admin.py:57
+#: main/views/views_admin.py:58
 msgid "User set to staff"
 msgstr ""
 
-#: main/views/views_admin.py:68
+#: main/views/views_admin.py:69
 msgid "User set to user"
 msgstr ""
 
-#: main/views/views_admin.py:79
+#: main/views/views_admin.py:80
 msgid "User set to admin"
 msgstr ""
 
-#: main/views/views_admin.py:146
-msgid "Contact message marked \"answered\""
+#: main/views/views_admin.py:110
+#, python-brace-format
+msgid "{num_changed} contact messages marked as read"
 msgstr ""
 
-#: main/views/views_admin.py:155
-msgid "Contact message marked \"spam\""
+#: main/views/views_admin.py:115
+#, python-brace-format
+msgid "{num_changed} contact messages marked as unread"
+msgstr ""
+
+#: main/views/views_admin.py:120
+#, python-brace-format
+msgid "{num_changed} contact messages marked as spam"
+msgstr ""
+
+#: main/views/views_admin.py:125
+#, python-brace-format
+msgid "{num_changed} contact messages marked as answered"
+msgstr ""
+
+#: main/views/views_admin.py:129
+#, python-brace-format
+msgid "{num_changed} contact messages deleted"
+msgstr ""
+
+#: main/views/views_admin.py:143
+msgid "Contact message deleted"
+msgstr ""
+
+#: main/views/views_admin.py:180
+msgid "Contact message marked as answered"
+msgstr ""
+
+#: main/views/views_admin.py:189
+msgid "Contact message marked as spam"
+msgstr ""
+
+#: main/views/views_admin.py:197
+msgid "Contact message marked as read"
+msgstr ""
+
+#: main/views/views_admin.py:205
+msgid "Contact message marked as unread"
 msgstr ""
 
 #: main/views/views_browse.py:248
@@ -3906,9 +3970,6 @@ msgstr ""
 
 #~ msgid "Go up"
 #~ msgstr "Go up"
-
-#~ msgid "Show All in"
-#~ msgstr "Show All in"
 
 #~ msgid "Guidelines"
 #~ msgstr "Guidelines"

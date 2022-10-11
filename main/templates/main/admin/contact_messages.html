@@ -22,16 +22,57 @@
 
     {% card 'messages_card' _('Contact Form Messages') %}
         <p>
-                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}" role="button"><i class="fas fa-sync"></i></a>
-                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}?show=all" role="button">Show All</a>
-                    <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}" role="button">Show Unanswered</a>
-                </div>
-             </p>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}" role="button"><i class="fas fa-sync"></i></a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}?show=all" role="button">{% translate 'Show All' %}</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'main:admin_inbox' %}?show=unanswered" role="button">{% translate 'Show Unanswered' %}</a>
+            </div>
+        </p>
         {% if table.data|length > 0 %}
-            {% render_table table %}
+            <form method="post" id="selectForm">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col mb-3">
+                        <select class="form-control" name="action_options">
+                            <option value="mark_read">{% translate 'Mark as read' %}</option>
+                            <option value="mark_unread">{% translate 'Mark as unread' %}</option>
+                            <option value="mark_spam">{% translate 'Mark as spam' %}</option>
+                            <option value="mark_answered">{% translate 'Mark as answered' %}</option>
+                            <option value="delete">{% translate 'Delete' %}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-danger" type="button" id="do-execute">{% translate 'Execute' %}</button>
+                    </div>
+                </div>
+                {% render_table table %}
+            </form>
         {% else %}
             {% translate 'You have no messages. You can send messages to users via their profile page.' %}
         {% endif %}
     {% endcard %}
+
+    {% include "bsmodals/confirm.html" %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="{% static 'bsmodals/bsmodals.js' %}"></script>
+    <script>
+        $( "th input[type=checkbox]" ).change(function (){
+            console.log($( "input[name=select]" ))
+            var checkBoxes = $( "input[name=select]" );
+            checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#do-execute').click(function () {
+                bsmodals_confirm('Execute chosen action?', 'Execute chosen action? In case you are deleting messages, this cannot be undone.', (result) => {
+                    if (result) {
+                        $( "#selectForm" ).submit();
+                    }
+                }, yes_text = "Execute", yes_style = "btn-danger", no_text = "Cancel", no_style = "btn-primary");
+            });
+        });
+    </script>
 {% endblock %}

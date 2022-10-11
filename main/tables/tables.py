@@ -82,8 +82,10 @@ class ContactMessageTable(TranscriptionesTable):
     class Meta(TranscriptionesTable.Meta):
         model = ContactMessage
         fields = ("state", "reply_email", "subject", "sending_time")
+        sequence = ("select", "state", "reply_email", "subject", "sending_time")
 
-    state = tables.Column(verbose_name=_('Answered'), orderable=False)
+    select = tables.CheckBoxColumn(verbose_name=_('Select'), orderable=False, accessor='pk')
+    state = tables.Column(verbose_name=_('State'), orderable=False)
     reply_email = tables.Column(verbose_name=_('from'), orderable=False)
     subject = tables.LinkColumn('main:admin_inbox_message', args=[A('pk')], orderable=False)
     sending_time = tables.Column(verbose_name=_('sent'), orderable=False)
@@ -109,9 +111,13 @@ class ContactMessageTable(TranscriptionesTable):
     @staticmethod
     def render_state(value, record):
         if value == 0:
-            return mark_safe(f'<span style="color: red;">&cross;</span><a class="btn-sm btn-danger" href="{reverse("main:admin_inbox_message_mark_spam", kwargs={"msg_id": record.id})}">{_("Mark Spam")}</a>')
+            return mark_safe(f'<i class="far fa-envelope"></i>')
+        if value == 1:
+            return mark_safe(f'<i class="far fa-envelope-open"></i> <i class="fas fa-reply" style="color: red;"></i>')
         if record.state == 2:
-            return _("Marked Spam")
+            return mark_safe(f'<i class="fas fa-dumpster-fire"></i>')
+        if record.state == 3:
+            return mark_safe(f'<i class="far fa-envelope-open"></i> <i class="fas fa-reply" style="color: green;"></i>')
         return mark_safe(f'<span style="color: green;">&check;</span>')
 
 

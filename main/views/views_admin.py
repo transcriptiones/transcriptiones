@@ -3,6 +3,7 @@ import zipfile
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
@@ -88,12 +89,45 @@ def admin_view(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_inbox_view(request):
-    show_all = request.GET.get('show', 'unanswered')
-    if show_all == 'all':
-        table = ContactMessageTable(data=ContactMessage.objects.all().order_by('-sending_time'))
-    else:
-        table = ContactMessageTable(data=ContactMessage.objects.filter(state=0).order_by('-sending_time'))
-    return render(request, 'main/admin/contact_messages.html', {'table': table})
+    if request.method == 'GET':
+        show = request.GET.get('show')
+        if show == 'all':
+            table = ContactMessageTable(data=ContactMessage.objects.all().order_by('-sending_time'))
+        elif show == 'unanswered':
+            table = ContactMessageTable(data=ContactMessage.objects.exclude(state=2).exclude(state=3).order_by('-sending_time'))
+        else:
+            table = ContactMessageTable(data=ContactMessage.objects.exclude(state=2).order_by('-sending_time'))
+        return render(request, 'main/admin/contact_messages.html', {'table': table})
+
+    if request.method == 'POST':
+        pks = request.POST.getlist('select')
+        action = request.POST.get('action_options')
+        selected_messages = ContactMessage.objects.filter(pk__in=pks)
+        if action == 'mark_read':
+            for message in selected_messages:
+                message.state = 1
+                message.save()
+            messages.success(request, format_lazy(_('{num_changed} contact messages marked as read'), num_changed=str(len(selected_messages))))
+        elif action == 'mark_unread':
+            for message in selected_messages:
+                message.state = 0
+                message.save()
+            messages.success(request, format_lazy(_('{num_changed} contact messages marked as unread'), num_changed=str(len(selected_messages))))
+        elif action == 'mark_spam':
+            for message in selected_messages:
+                message.state = 2
+                message.save()
+            messages.success(request, format_lazy(_('{num_changed} contact messages marked as spam'), num_changed=str(len(selected_messages))))
+        elif action == 'mark_answered':
+            for message in selected_messages:
+                message.state = 3
+                message.save()
+            messages.success(request, format_lazy(_('{num_changed} contact messages marked as answered'), num_changed=str(len(selected_messages))))
+        elif action == 'delete':
+            for message in selected_messages:
+                message.delete()
+            messages.success(request, format_lazy(_('{num_changed} contact messages deleted'), num_changed=str(len(selected_messages))))
+        return redirect('main:admin_inbox')
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -106,7 +140,7 @@ def admin_inbox_message_view(request, msg_id):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_inbox_message_delete(request, msg_id):
     message = get_object_or_404(ContactMessage, id=msg_id)
-    messages.success(request, 'Contact message deleted')
+    messages.success(request, _('Contact message deleted'))
     message.delete()
     return redirect('main:admin_inbox')
 
@@ -131,7 +165,7 @@ def admin_inbox_message_answer(request, msg_id):
             if 'submit' in request.POST.keys():
                 message.answer_subject = form.cleaned_data['subject']
                 message.answer = form.cleaned_data['answer']
-                message.state = 1
+                message.state = 3
                 message.save()
                 send_contact_message_answer(request, message)
                 messages.success(request, "The contact message has been answered")
@@ -141,10 +175,10 @@ def admin_inbox_message_answer(request, msg_id):
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def admin_inbox_message_mark(request, msg_id):
+def admin_inbox_message_mark_answered(request, msg_id):
     message = get_object_or_404(ContactMessage, id=msg_id)
-    messages.success(request, _('Contact message marked "answered"'))
-    message.state = 1
+    messages.success(request, _('Contact message marked as answered'))
+    message.state = 3
     message.save()
     return redirect('main:admin_inbox')
 
@@ -152,8 +186,24 @@ def admin_inbox_message_mark(request, msg_id):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_inbox_message_mark_spam(request, msg_id):
     message = get_object_or_404(ContactMessage, id=msg_id)
-    messages.success(request, _('Contact message marked "spam"'))
+    messages.success(request, _('Contact message marked as spam'))
     message.state = 2
+    message.save()
+    return redirect('main:admin_inbox')
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_mark_read(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    messages.success(request, _('Contact message marked as read'))
+    message.state = 1
+    message.save()
+    return redirect('main:admin_inbox')
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_inbox_message_mark_unread(request, msg_id):
+    message = get_object_or_404(ContactMessage, id=msg_id)
+    messages.success(request, _('Contact message marked as unread'))
+    message.state = 0
     message.save()
     return redirect('main:admin_inbox')
 

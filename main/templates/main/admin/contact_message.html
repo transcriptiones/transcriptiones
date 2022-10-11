@@ -49,8 +49,18 @@
                 <td>
                     <br/>
                     <a href="{% url 'main:admin_inbox' %}" class="btn btn-primary">{% translate 'Go Back' %}</a> &nbsp;
-                    <a href="{% url 'main:admin_inbox_message_answer' message.id %}" class="btn btn-primary">{% translate 'Answer' %}</a> &nbsp;
-                    <a href="{% url 'main:admin_inbox_message_mark' message.id %}" class="btn btn-primary">{% translate 'Mark as "answered""' %}</a> &nbsp;
+                    <a href="{% url 'main:admin_inbox_message_answer' message.id %}" class="btn btn-primary">{% translate 'Answer' %}</a>
+                    {% if message.state != 3 %}
+                        <a href="{% url 'main:admin_inbox_message_mark_answered' message.id %}" class="btn btn-primary">{% translate 'Mark as answered' %}</a>
+                    {% endif %}
+                    {% if message.state != 2 %}
+                        <a href="{% url 'main:admin_inbox_message_mark_spam' message.id %}" class="btn btn-primary">{% translate 'Mark as spam' %}</a>&nbsp;
+                    {% endif %}
+                    {% if message.state != 1 %}
+                        <a href="{% url 'main:admin_inbox_message_mark_read' message.id %}" class="btn btn-primary">{% translate 'Mark as read' %}</a>
+                    {% else %}
+                        <a href="{% url 'main:admin_inbox_message_mark_unread' message.id %}" class="btn btn-primary">{% translate 'Mark as unread' %}</a>
+                    {% endif %}
                     <button class="btn btn-danger" type="button" id="do-delete">{% translate 'Delete Contact Message' %}</button>
                 </td>
             </tr>

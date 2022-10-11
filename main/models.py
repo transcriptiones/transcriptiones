@@ -547,7 +547,7 @@ class Document(models.Model):
 
     def delete(self, *args, **kwargs):
         """Override delete method in order to ensure that there is always an active version"""
-        if self.version_number is not 1:
+        if self.version_number != 1:
             revert_to = self.get_versions().exclude(pk=self.pk).latest()
             revert_to.active = True
             revert_to.save(force_update=True)
@@ -857,9 +857,9 @@ class ContactMessage(models.Model):
     answer_subject = models.CharField(max_length=100, default='')
     answer = models.TextField(default='')
 
-
     # assignee = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # 0=new, 1=read, 2=spam, 3=answered
     state = models.IntegerField(default=0)
     sending_time = models.DateTimeField(auto_now_add=True)
 
