@@ -54,12 +54,12 @@ class EditMetaForm(forms.ModelForm):
 
     author = forms.ModelMultipleChoiceField(queryset=Author.objects.all().order_by('author_name'),
                                             widget=autocomplete.ModelSelect2Multiple(url='main:author-autocomplete'),
-                                            required=False)
+                                            required=True)
 
     language = forms.ModelMultipleChoiceField(queryset=Language.objects.all().order_by('name_native'),
                                               widget=autocomplete.ModelSelect2Multiple(
                                                   url='main:language-autocomplete'),
-                                              required=False)
+                                              required=True)
 
     seal = forms.NullBooleanField(label=get_popover_html(Document, 'seal'),
                                   help_text=Document._meta.get_field("seal").help_text,
