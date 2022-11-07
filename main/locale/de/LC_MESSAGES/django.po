@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-10 17:51+0200\n"
-"PO-Revision-Date: 2022-10-10 17:53+0200\n"
+"POT-Creation-Date: 2022-11-07 22:39+0100\n"
+"PO-Revision-Date: 2022-11-07 22:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -3386,27 +3386,53 @@ msgstr ""
 "das gewünschte Format."
 
 #: main/templates/main/upload/export_document.html:33
+msgid "The resulting HTML file will not contain any metadata."
+msgstr "Die exportierte HTML-Datei enthält keine Metadaten."
+
+#: main/templates/main/upload/export_document.html:34
+msgid "Export HTML"
+msgstr "HTML exportieren"
+
+#: main/templates/main/upload/export_document.html:36
+msgid ""
+"Exports a plain text version of the transcription text. This might run into "
+"problems if the document contains tables."
+msgstr ""
+"Exportiert den unformatierten Transkriptionstext. Dies kann zu unerwarteten "
+"Ergebnissen führen, falls das Dokument Tabellen enthält."
+
 #: main/templates/main/upload/export_document.html:37
+msgid "Export Plain Text"
+msgstr "Plain text exportieren"
+
+#: main/templates/main/upload/export_document.html:39
+msgid ""
+"The export to TEI is still in an experimental phase. It will produce valid "
+"TEI but indentation will look bad and the transcription text will not "
+"contain any semantic or syntactic annotation."
+msgstr ""
+"Der Export in TEI befindet sich noch in einer experimentellen Phase. Das "
+"Resultat ist ein gültiges TEI-Dokument, aber die Einzüge können falsch sein "
+"und der Transkriptionstext enthält weder semantische noch syntaktische "
+"Annotationen."
+
 #: main/templates/main/upload/export_document.html:40
+msgid "Export TEI"
+msgstr "TEI exportieren"
+
+#: main/templates/main/upload/export_document.html:42
+#: main/templates/main/upload/export_document.html:45
 msgid "This feature is not available yet. It will be implemented soon."
 msgstr ""
 "Diese Funktion ist noch nicht verfügbar. Sie wird demnächst implementiert."
 
-#: main/templates/main/upload/export_document.html:34
-msgid "Export TEI"
-msgstr "Als TEI exportieren"
-
-#: main/templates/main/upload/export_document.html:36
+#: main/templates/main/upload/export_document.html:43
 msgid "Export JSON"
-msgstr "Als JSON exportieren"
+msgstr "JSON exportieren"
 
-#: main/templates/main/upload/export_document.html:38
-msgid "Export HTML"
-msgstr "Als HTML exportieren"
-
-#: main/templates/main/upload/export_document.html:41
+#: main/templates/main/upload/export_document.html:46
 msgid "Export PDF"
-msgstr "Als PDF exportieren"
+msgstr "PDF exportieren"
 
 #: main/templates/main/upload/thank_you.html:6
 msgid "Thank you!"

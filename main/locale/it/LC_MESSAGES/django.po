@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-10 17:51+0200\n"
+"POT-Creation-Date: 2022-11-07 22:39+0100\n"
 "PO-Revision-Date: 2021-09-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3631,27 +3631,47 @@ msgstr ""
 "desideri."
 
 #: main/templates/main/upload/export_document.html:33
-#: main/templates/main/upload/export_document.html:37
-#: main/templates/main/upload/export_document.html:40
-msgid "This feature is not available yet. It will be implemented soon."
+msgid "The resulting HTML file will not contain any metadata."
 msgstr ""
 
 #: main/templates/main/upload/export_document.html:34
 #, fuzzy
+msgid "Export HTML"
+msgstr "Esporta HTML"
+
+#: main/templates/main/upload/export_document.html:36
+msgid ""
+"Exports a plain text version of the transcription text. This might run into "
+"problems if the document contains tables."
+msgstr ""
+
+#: main/templates/main/upload/export_document.html:37
+msgid "Export Plain Text"
+msgstr ""
+
+#: main/templates/main/upload/export_document.html:39
+msgid ""
+"The export to TEI is still in an experimental phase. It will produce valid "
+"TEI but indentation will look bad and the transcription text will not "
+"contain any semantic or syntactic annotation."
+msgstr ""
+
+#: main/templates/main/upload/export_document.html:40
+#, fuzzy
 msgid "Export TEI"
 msgstr "Esporta TEI"
 
-#: main/templates/main/upload/export_document.html:36
+#: main/templates/main/upload/export_document.html:42
+#: main/templates/main/upload/export_document.html:45
+msgid "This feature is not available yet. It will be implemented soon."
+msgstr ""
+
+#: main/templates/main/upload/export_document.html:43
 #, fuzzy
 msgid "Export JSON"
 msgstr "Esporta JSON"
 
-#: main/templates/main/upload/export_document.html:38
-#, fuzzy
-msgid "Export HTML"
-msgstr "Esporta HTML"
-
-#: main/templates/main/upload/export_document.html:41
+#: main/templates/main/upload/export_document.html:46
 msgid "Export PDF"
 msgstr "Esporta in PDF"
 

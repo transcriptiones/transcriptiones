@@ -1,5 +1,9 @@
 import json
 import re
+import xml.dom.minidom
+from xml.etree.ElementTree import fromstring
+
+import pypandoc
 
 
 def export(document, export_type='tei'):
@@ -32,42 +36,10 @@ def export_txt(document):
     return cleantext
 
 
+# TODO: Rewrite with DOM tree build to simplify indentation.
 def export_tei(document):
     """Exports a given document within the TEI standard."""
     username = document.submitted_by.username if document.publish_user else 'Anonymous'
-    tei_string = '<TEI xmlns="http://www.tei-c.org/ns/1.0">'\
-                 '  <teiHeader>'\
-                 '    <titleStmt>'\
-                 f'      <title>{document.title_name}</title>'\
-                 '       <respStmt>' \
-                 '         <resp>Transcribed and uploaded by</resp>' \
-                 f'         <name>{username}</name>' \
-                 '       </respStmt>'\
-                 '    </titleStmt>' \
-                 '    <publicationStmt>' \
-                 '      <distributor>transcriptiones.ch</distributor>' \
-                 '      <availability>' \
-                 '        <p>Freely available on a non-commercial basis.</p>'\
-                 '      </availability>' \
-                 '      <p>'\
-                 '        Distributed by transcriptiones.ch - the platform for manuscripts. For more information ' \
-                 f'        about this document visit http://transcriptiones.ch{document.get_absolute_url}' \
-                 '      </p>' \
-                 '    </publicationStmt>' \
-                 '    <sourceDesc>' \
-                 '      <p>' \
-                 '        The original document is hold by '\
-                 f'        {document.parent_ref_number.holding_institution.institution_name} '\
-                 f'        ({document.parent_ref_number.holding_institution.site_url}) under the reference number '\
-                 f'        {document.parent_ref_number.ref_number_name}. More details on the about the document under '\
-                 f'        {document.parent_ref_number.collection_link} (Collection link of the holding institution). '\
-                 '      </p>' \
-                 '    </sourceDesc>' \
-                 '  </teiHeader>'\
-                 '  <text>'\
-                 f'    {document.transcription_text}'\
-                 '  </text>'\
-                 '</TEI>'
 
     illumination_text = 'There are no illuminations in this manuscript.'
     if document.illuminated:
@@ -83,16 +55,37 @@ def export_tei(document):
     elif document.paging_system == 2:
         pages_text = str(document.pages) + ' folio(s)'
 
+    doc_end_date_text = ''
+    if document.doc_end_date:
+        doc_end_date_text = f' notAfter="{document.doc_end_date}"'
+
+    language_text = ''
+    langs = document.language.all().values_list('iso_639_1', 'name_en')
+    otherLangsIso = ''
+    otherLangsName = ''
+    if len(langs) > 1:
+        otherLangsIso = ' otherLangs="' + ' '.join(list(zip(*langs[1:]))[0]) + '"'
+        otherLangsName = ', ' + ', '.join(list(zip(*langs[1:]))[1])
+
+    if len(langs) > 0:
+        language_text = f'<textLang mainLang="{langs[0][0]}"{otherLangsIso}>{langs[0][1]}{otherLangsName}</textLang>'
+
+    # Convert the transcription text to valid TEI
+    tei_transcription = pypandoc.convert_text(document.transcription_text, 'tei', format='html')
 
     with open('main/templates/main/tei_template.xml') as base_file:
         text = base_file.read()
         text = text.replace('{{ SOURCE_TITLE }}', document.title_name)
         text = text.replace('{{ PARTICIPANT_LIST }}', get_xml_list('author', document.author.all().values_list('author_name', flat=True),
-                                                                   number_of_spaces=16))
+                                                                   number_of_spaces=28))
         text = text.replace('{{ UPLOADING_USER }}', username)
         text = text.replace('{{ DISTRIBUTOR }}', 'TRANSCRIPTIONES.CH')
         text = text.replace('{{ UPLOAD_DATE }}', document.document_utc_add.strftime('%Y-%m-%d'))
         text = text.replace('{{ UPLOAD_DATE_COMPLETE }}', document.document_utc_add.strftime('%Y-%m-%d  %H:%M:%S'))
+        text = text.replace('{{ DOC_START_DATE }}', f'{document.doc_start_date}')
+        text = text.replace('{{ DOC_END_DATE }}', doc_end_date_text)
+        text = text.replace('{{ PLACE_NAME }}', document.place_name)
+        text = text.replace('{{ LANGUAGE_LIST }}', language_text)
         text = text.replace('{{ COMMIT_MESSAGE }}', document.commit_message)
         text = text.replace('{{ EDITORIAL_COMMENTS }}', document.comments)
         text = text.replace('{{ TRANSCRIPTION_SCOPE }}', document.transcription_scope)
@@ -104,7 +97,7 @@ def export_tei(document):
         text = text.replace('{{ DOC_WIDTH }}', str(document.measurements_width))
         text = text.replace('{{ HAS_ILLUMINATIONS }}', illumination_text)
         text = text.replace('{{ HAS_SEALS }}', seal_text)
-        text = text.replace('{{ TRANSCRIPTION_TEXT }}', document.transcription_text)
+        text = text.replace('{{ TRANSCRIPTION_TEXT }}', tei_transcription)
 
     return text
 
@@ -120,7 +113,8 @@ def export_json(document):
 
 
 def export_html(document):
-    return document.transcription_text
+    html_transcription = pypandoc.convert_text(document.transcription_text, 'html', format='html', extra_args=['-s'])
+    return html_transcription
 
 
 def export_pdf(document):
@@ -134,5 +128,6 @@ def get_xml_list(element_name, item_list, number_of_spaces=0):
         if loop > 0 and number_of_spaces > 0:
             for sp in range(0,number_of_spaces):
                 text += ' '
+        loop += 1
         text += f'<{element_name}>{item}</{element_name}>\n'
-    return text
+    return text[:-1]

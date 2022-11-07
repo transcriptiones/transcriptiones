@@ -3,51 +3,62 @@
         <fileDesc>
             <titleStmt>
                 <title>{{ SOURCE_TITLE }}</title>
-                {{ PARTICIPANT_LIST }}
                 <respStmt>
-                    <resp>Originally uploaded by</resp>
+                    <resp>Uploaded by</resp>
                     <name>{{ UPLOADING_USER }}</name>
                 </respStmt>
             </titleStmt>
             <publicationStmt>
                 <distributor>{{ DISTRIBUTOR }}</distributor>
-                <availability>
-                    <p>Freely available on a non-commercial basis.</p>
+                <availability status="free">
+                    <licence target="https://creativecommons.org/publicdomain/zero/1.0/">
+                        CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+                    </licence>
                 </availability>
                 <date when="{{ UPLOAD_DATE }}">{{ UPLOAD_DATE_COMPLETE }}</date>
             </publicationStmt>
-            <notesStmt>hodl
+            <notesStmt>
                 <note>Last commit message: {{ COMMIT_MESSAGE }}</note>
                 <note>Editorial comments: {{ EDITORIAL_COMMENTS }}</note>
                 <note>Transcription scope: {{ TRANSCRIPTION_SCOPE }}</note>
             </notesStmt>
+            <sourceDesc>
+                <msIdentifier>
+                    <institution>{{ INSTITUTION_NAME }}</institution>
+                    <idno>{{ REF_NUMBER }}</idno>
+                </msIdentifier>
+                <msDesc>
+                    <msContents>
+                        <msItem>
+                            <title>{{ SOURCE_TITLE }}</title>
+                            {{ PARTICIPANT_LIST }}
+                            {{ LANGUAGE_LIST }}
+                        </msItem>
+                    </msContents>
+                    <history>
+                        <origin notBefore="{{ DOC_START_DATE }}"{{ DOC_END_DATE }}>{{ PLACE_NAME }}</origin>
+                    </history>
+                    <physDesc>
+                        <supportDesc>
+                            <support>{{ WRITING_MATERIAL }}</support>
+                            <extent>
+                                {{ NUMBER_OF_PAGES }}
+                                <dimensions scope="all" type="page" unit="cm">
+                                    <height>{{ DOC_HEIGHT }}</height>
+                                    <width>{{ DOC_WIDTH }}</width>
+                                </dimensions>
+                            </extent>
+                        </supportDesc>
+                        <decoDesc>
+                            <p>{{ HAS_ILLUMINATIONS }}</p>
+                        </decoDesc>
+                        <sealDesc>
+                            <p>{{ HAS_SEALS }}</p>
+                        </sealDesc>
+                    </physDesc>
+                </msDesc>
+            </sourceDesc>
         </fileDesc>
-        <sourceDesc>
-            <msIdentifier>
-                <institution>{{ INSTITUTION_NAME }}</institution>
-                <idno>{{ REF_NUMBER }}</idno>
-            </msIdentifier>
-            <msDesc>
-                <physDesc>
-                    <supportDesc>
-                        <support>{{ WRITING_MATERIAL }}</support>
-                        <extent>
-                            {{ NUMBER_OF_PAGES }} pages
-                            <dimensions scope="all" type="page" unit="cam">
-                                <height>{{ DOC_HEIGHT }}</height>
-                                <width>{{ DOC_WIDTH }}</width>
-                            </dimensions>
-                        </extent>
-                    </supportDesc>
-                    <decoDesc>
-                        <p>{{ HAS_ILLUMINATIONS }}</p>
-                    </decoDesc>
-                    <sealDesc>
-                        <p>{{ HAS_SEALS }}</p>
-                    </sealDesc>
-                </physDesc>
-            </msDesc>
-        </sourceDesc>
     </teiHeader>
     <text>
         {{ TRANSCRIPTION_TEXT }}

@@ -29,14 +29,17 @@
                 {% comment %}
                     TODO: To enable a Button after implementing export, remove style attr and wrapping span.
                 {% endcomment %}
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
-                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_tei" disabled>{%  translate 'Export TEI' %}</button>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'The resulting HTML file will not contain any metadata.' %}">
+                    <button type="submit" class="btn btn-primary" name="export_html">{%  translate 'Export HTML' %}</button>
+                </span>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'Exports a plain text version of the transcription text. This might run into problems if the document contains tables.' %}">
+                    <button type="submit" class="btn btn-primary" name="export_txt">{%  translate 'Export Plain Text' %}</button>
+                </span>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'The export to TEI is still in an experimental phase. It will produce valid TEI but indentation will look bad and the transcription text will not contain any semantic or syntactic annotation.' %}">
+                    <button type="submit" class="btn btn-primary" name="export_tei">{%  translate 'Export TEI' %}</button>
                 </span>
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
                     <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_json" disabled>{%  translate 'Export JSON' %}</button>
-                </span>
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
-                    <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_html" disabled>{%  translate 'Export HTML' %}</button>
                 </span>
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="{% translate 'This feature is not available yet. It will be implemented soon.' %}">
                     <button type="submit" class="btn btn-primary" style="pointer-events: none" name="export_pdf" disabled>{%  translate 'Export PDF' %}</button>

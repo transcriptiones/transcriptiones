@@ -7,7 +7,7 @@ from main.export import export
 from main.models import Document
 
 
-class DocumentExportView(LoginRequiredMixin, DetailView):
+class DocumentExportView(DetailView):
     model = Document
     template_name = 'main/upload/export_document.html'
     context_object_name = 'document'
@@ -42,6 +42,10 @@ class DocumentExportView(LoginRequiredMixin, DetailView):
                 content_type = 'application/pdf'
                 file_ending = 'pdf'
                 file_contents = easy_pdf.rendering.render_to_pdf('main/pdf_export_template.html', {'contents': file_contents})
+            elif 'export_txt' in self.request.POST.keys():
+                file_contents = export(document, export_type='txt')
+                content_type = 'text/plain'
+                file_ending = 'txt'
             else:
                 file_contents = 'Invalid Export Function Selected'
                 content_type = 'text/plain'
