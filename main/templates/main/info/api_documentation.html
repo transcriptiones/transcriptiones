@@ -30,6 +30,9 @@
             a set of simple commands you can search and download our database. The request results are in JSON format and
             the transcription exports are TEI or plain text.<br/><br/>
 
+            All examples in this documentation can be pasted to any command line application. Alternatively you can
+            paste only the URL to the address bar of your favourite internet browser.<br/><br/>
+
             Example (Request the document list):
             <pre><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=[AuthenticationCode]</code></pre>
 
@@ -97,9 +100,9 @@
         </p>
         <p>
             The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
-            <code>institutions</code> (Archives, Libraries and such which hold documents), <code>refnumbers</code>
-            (Reference numbers of document collections), <code>sourcetypes</code> (The type of a document, e. g.: Poetry / Scientific Writings)
-            and <code>documents</code> (actual transcribed documents).
+            <code>institutions</code> (archives, libraries and similar institutions which hold documents), <code>refnumbers</code>
+            (reference numbers of document collections), <code>sourcetypes</code> (the type of a document, e. g.: poetry / scientific writings),
+            <code>scribes</code> (people who have written the source documents) and <code>documents</code> (actual transcribed documents).
         </p>
         <p>
             There are several <code>&lt;PARAM&gt;</code> filters which can be applied. The following table shows what
@@ -112,13 +115,15 @@
                       <th scope="col"><code>institutions</code></th>
                       <th scope="col"><code>refnumbers</code></th>
                       <th scope="col"><code>sourcetypes</code></th>
+                      <th scope="col"><code>scribes</code></th>
                       <th scope="col"><code>documents</code></th>
                     </tr>
                 </thead>
                 <tr>
                     <td>
                         <code>auth=&lt;api-key&gt;</code><br/>
-                        <small>You need an API Key to access the API. Get it from your <a href="{% url 'main:profile' %}">Profile Page</a> or <a href="{% url 'main:signup' %}">create a login</a> if you don't have one.</small></td>
+                        <small>You need an API Key to access the API. Get it from your <a href="{% url 'main:profile' %}">profile page</a> or <a href="{% url 'main:signup' %}">create a login</a> if you don't have one.</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
@@ -132,6 +137,7 @@
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                 </tr>
                 <tr>
                     <td>
@@ -139,8 +145,9 @@
                         <small>Ignores cases and returns results containing the query.</small>
                     </td>
                     <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Institution name)</small></td>
-                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Reference Title)</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Reference title)</small></td>
                     <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Source type name [en])</small></td>
+                    <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Scribe name)</small></td>
                     <td><i class="fas fa-check" style="color: green;"></i><br/><small>(Document title)</small></td>
                 </tr>
                 <tr>
@@ -150,6 +157,7 @@
                     </td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                 </tr>
@@ -161,6 +169,7 @@
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                 </tr>
                 <tr>
@@ -168,6 +177,7 @@
                         <code>sourcetype=&lt;id&gt;</code><br/>
                         <small>Only returns objects of this sourcetype.</small>
                     </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
@@ -182,12 +192,14 @@
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                 </tr>
                 <tr>
                     <td>
                         <code>user=&lt;username&gt;</code><br/>
                         <small>Only returns objects by this user.</small>
                     </td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
@@ -213,6 +225,10 @@
                 <tr>
                     <td><code>curl -X GET https://transcriptiones.ch/api/v1/sourcetypes/?auth=xxx&level=top</code></td>
                     <td>Returns the first level of the Source type hierarchy.</td>
+                </tr>
+                <tr>
+                    <td><code>curl -X GET https://transcriptiones.ch/api/v1/scribes/?auth=xxx&query=jane</code></td>
+                    <td>Returns a list of scribes which hve "Jane" in their name.</td>
                 </tr>
                 <tr>
                     <td><code>curl -X GET https://transcriptiones.ch/api/v1/documents/?auth=xxx&query=letter&institution=1&sourcetype=3</code></td>
@@ -242,9 +258,9 @@
         </p>
         <p>
             The <code>&lt;TYPE&gt;</code> specifies the object type you want to query. The possibilities are:
-            <code>institutions</code> (Archives, Libraries and such which hold documents), <code>refnumbers</code>
-            (Reference numbers of document collections), <code>sourcetypes</code> (The type of a document, e. g.: Poetry / Scientific Writings)
-            and <code>documents</code> (actual transcribed documents).
+            <code>institutions</code> (archives, libraries and similar institutions which hold documents), <code>refnumbers</code>
+            (reference numbers of document collections), <code>sourcetypes</code> (the type of a document, e. g.: poetry / scientific writings),
+            <code>scribes</code> (people who have written the source documents) and <code>documents</code> (actual transcribed documents).
         </p>
         <p>
             The <code>&lt;ID&gt;</code> is the identification number of an object.
@@ -330,6 +346,7 @@
                         <th scope="col"><code>institutions</code></th>
                         <th scope="col"><code>refnumbers</code></th>
                         <th scope="col"><code>sourcetypes</code></th>
+                        <th scope="col"><code>scribes</code></th>
                         <th scope="col"><code>documents</code></th>
                     </tr>
                 </thead>
@@ -340,10 +357,21 @@
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>parent_id</code></td>
+                    <td>Unique identifier of parent object (returns <code>None</code> if no parent obect exists)</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                 </tr>
                 <tr>
                     <td><code>url</code></td>
                     <td>URL to the transcriptiones page of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
@@ -356,10 +384,12 @@
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                 </tr>
                 <tr>
                     <td><code>api-request</code></td>
                     <td>API request to get the detail object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
@@ -383,8 +413,8 @@
             The object detail requests return a JSON string containing information about a single object. At transcriptiones,
             objects are organized in a hierarchy. You'll get information about the objects in the level below. For institutions
             you'll get a list of reference numbers, for reference numbers you'll get a list of documents.
-            For Source types you'll get a list of source type children if it is a top-level element or a list of documents if it
-            is a bottom-level element.
+            For source types you'll get a list of source type children if it is a top-level element or a list of documents if it
+            is a bottom-level element. For scribes you'll get a list of documents.
         </p>
         <p>
             <table class="table table-responsive">
@@ -395,6 +425,7 @@
                         <th scope="col"><code>institutions</code></th>
                         <th scope="col"><code>refnumbers</code></th>
                         <th scope="col"><code>sourcetypes</code></th>
+                        <th scope="col"><code>scribes</code></th>
                         <th scope="col"><code>documents</code></th>
                     </tr>
                 </thead>
@@ -402,13 +433,6 @@
                     <td><code>id</code></td>
                     <td>Unique identifier of object</td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
-                    <td><i class="fas fa-check" style="color: green;"></i></td>
-                    <td><i class="fas fa-check" style="color: green;"></i></td>
-                    <td><i class="fas fa-check" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td><code>url</code></td>
-                    <td>URL to the transcriptiones page of this object</td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
@@ -421,11 +445,22 @@
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                </tr>
+                <tr>
+                    <td><code>url</code></td>
+                    <td>URL to the transcriptiones page of this object</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                 </tr>
                 <tr>
                     <td><code>refnumber-ids</code></td>
                     <td>A list of reference number-ids.</td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
@@ -436,6 +471,7 @@
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td>(<i class="fas fa-check" style="color: green;"></i>)</td>
+                    <td><i class="fas fa-check" style="color: green;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                 </tr>
                 <tr>
@@ -444,6 +480,7 @@
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td>(<i class="fas fa-check" style="color: green;"></i>)</td>
+                    <td><i class="fas fa-times" style="color: darkred;"></i></td>
                     <td><i class="fas fa-times" style="color: darkred;"></i></td>
                 </tr>
             </table>
@@ -515,8 +552,10 @@
         <h4>Error Handling</h4>
         <p>
             If you make an invalid API request you'll get an error message. Error messages are plain text and always
-            start with "TRANSCRIPTIONES API ERROR:". Invalid parameters (ex.: as ?sourcetype=2 on an /institutions/ request)
-            are ignored and do not produce an error. Empty results do not produce an error.
+            start with <code>TRANSCRIPTIONES API ERROR:</code>. Invalid parameters (e. g.: as <code>?sourcetype=2</code>
+            on an <code>/institutions/</code> request) are ignored and do not produce an error. Empty results (e. g.
+            from the <code>?query</code> parameter) do not produce an error. However, requesting details for an object
+            which does not exist, does produce an error.
         </p>
         <p>
             <table class="table table-responsive">
@@ -533,19 +572,24 @@
                 <tr>
                     <td><code>Invalid Request</code></td>
                     <td>You supplied an invalid request identifier after /api/v1/. Currently, <code>institutions</code>,
-                        <code>refnumbers</code>, <code>sourcetypes</code> and <code>documents</code> are valid identifiers.</td>
+                        <code>refnumbers</code>, <code>sourcetypes</code>, <code>scribes</code>
+                        and <code>documents</code> are valid identifiers.</td>
                 </tr>
                 <tr>
                     <td><code>Invalid Authentication</code></td>
-                    <td>You supplied an invalid key for the <code>auth</code> parameter.
+                    <td>You supplied an invalid key for the <code>auth</code> parameter.</td>
                 </tr>
                 <tr>
                     <td><code>Expired Authentication</code></td>
-                    <td>You supplied an expired key for the <code>auth</code> parameter.
+                    <td>You supplied an expired key for the <code>auth</code> parameter.</td>
                 </tr>
                 <tr>
                     <td><code>No Authentication</code></td>
-                    <td>You didn't supply the <code>auth</code> parameter.
+                    <td>You didn't supply the <code>auth</code> parameter.</td>
+                </tr>
+                <tr>
+                    <td><code>Object does not exist</code></td>
+                    <td>There is no object with the requested ID in the object type you have requested.</td>
                 </tr>
                 <tr>
                     <td><code>Error 404: Page Not Found</code></td>
@@ -558,7 +602,7 @@
         Example error message:
         <pre class="pre-scrollable"><code>TRANSCRIPTIONES API ERROR: Invalid Request
  Valid Command Structure: /&lt;version&gt;/&lt;request&gt;/?param=value
-           Error Details: &lt;request&gt; must be one of: [institutions, refnumbers, sourcetypes, documents]
+           Error Details: &lt;request&gt; must be one of: [institutions, refnumbers, sourcetypes, documents, scribes]
 
 
 ---

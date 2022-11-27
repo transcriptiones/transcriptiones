@@ -4,10 +4,11 @@ from datetime import datetime
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
-from main.models import Document, Institution, RefNumber, SourceType
+from main.models import Document, Institution, RefNumber, SourceType, Author
 
-REQUESTS = ("institutions", "refnumbers", "sourcetypes", "documents")
+REQUESTS = ("institutions", "refnumbers", "sourcetypes", "documents", "scribes")
 
 
 def get_error_response(error_msg, details=None):
@@ -84,6 +85,11 @@ def get_api_response(request, api_request):
             object_list = object_list.filter(source_type_id=int(sourcetype))
         if user_name is not None:
             object_list = object_list.filter(submitted_by__username=user_name)
+    # Scribe
+    elif api_request == REQUESTS[4]:
+        object_list = Author.objects.all().order_by('author_name')
+        if query is not None:
+            object_list = object_list.filter(author_name__icontains=query)
 
     else:
         return get_error_response("Invalid Request")
@@ -118,19 +124,27 @@ def get_api_response(request, api_request):
 def get_api_object_response(request, api_request, object_id):
     response_json = create_response_json(request)
 
-    # Get object
-    if api_request == REQUESTS[0]:
-        api_object = Institution.objects.get(id=object_id)
-    elif api_request == REQUESTS[1]:
-        api_object = RefNumber.objects.get(id=object_id)
-    elif api_request == REQUESTS[2]:
-        api_object = SourceType.objects.get(id=object_id)
-    elif api_request == REQUESTS[3]:
-        api_object = Document.all_objects.get(id=object_id)
+    if api_request in REQUESTS:
+        try:
+            # Get object
+            if api_request == REQUESTS[0]:
+                api_object = Institution.objects.get(id=object_id)
+            elif api_request == REQUESTS[1]:
+                api_object = RefNumber.objects.get(id=object_id)
+            elif api_request == REQUESTS[2]:
+                api_object = SourceType.objects.get(id=object_id)
+            elif api_request == REQUESTS[3]:
+                api_object = Document.all_objects.get(id=object_id)
+            elif api_request == REQUESTS[4]:
+                api_object = Author.objects.get(id=object_id)
+        except ObjectDoesNotExist:
+            return get_error_response("Object does not exist", details="There is no object with this ID.")
     else:
         return get_error_response("Invalid Request")
+
     detail_json = api_object.get_api_detail_json()
-    url_updates = ("refnumbers", "documents")
+    detail_json["url"] = request.build_absolute_uri(detail_json["url"])
+    url_updates = ("refnumbers", "documents", "children")
     for update in url_updates:
         if update in detail_json.keys():
             for update_item in detail_json[update]:

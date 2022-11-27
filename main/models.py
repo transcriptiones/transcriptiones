@@ -193,6 +193,25 @@ class Author(models.Model):
     def get_absolute_url(self):
         return reverse('main:author_detail', kwargs={'pk': self.pk})
 
+    def get_api_list_json(self, version="v1"):
+        api_list_json = {"id": self.id,
+                         "name": self.author_name,
+                         "url": self.get_absolute_url(),
+                         "api-request": f'/api/{version}/scribes/{self.id}/'}
+        return api_list_json
+
+    def get_api_detail_json(self, version="v1"):
+        api_detail_json = {"id": self.id,
+                           "name": self.author_name,
+                           "url": self.get_absolute_url(),
+                           "documents": []}
+
+        for document in self.document_set.all().order_by('title_name'):
+            api_detail_json["documents"].append({"id": document.id, "api-request": f'/api/{version}/documents/{document.id}/'})
+
+        return api_detail_json
+
+
     def __str__(self):
         return self.author_name
 
@@ -227,18 +246,38 @@ class SourceType(models.Model):
 
     def get_api_list_json(self, version="v1", minimal=False):
         api_list_json = {"id": self.id,
+                         "parent_id": self.parent_type.id if self.parent_type is not None else "None",
                          "name": self.type_name,
                          "url": self.get_absolute_url(),
-                         "api-request": f'/api/{version}/sourcetypes/{self.id}/',
-                         "documents": []
+                         "api-request": f'/api/{version}/sourcetypes/{self.id}/'
                          }
-
+        """
+        TODO: We don't really need those anyway, right?
         if minimal:
             del api_list_json["documents"]
         else:
             for document in self.document_set.all().order_by('title_name'):
                 api_list_json["documents"].append(document.get_api_list_json(minimal=minimal))
+        """
         return api_list_json
+
+    def get_api_detail_json(self, version="v1"):
+
+        api_detail_json = {"id": self.id,
+                           "name": f"{self.type_name}",
+                           "url": self.get_absolute_url()}
+
+        if self.parent_type is None:
+            api_detail_json.update({"children": []})
+            for child in self.child_type.all().order_by('type_name'):
+                api_detail_json["children"].append({"id": child.id, "api-request": f'/api/{version}/sourcetypes/{child.id}/'})
+
+        else:
+            api_detail_json.update({"documents": []})
+            for document in self.document_set.all().order_by('title_name'):
+                api_detail_json["documents"].append({"id": document.id, "api-request": f'/api/{version}/documents/{document.id}/'})
+
+        return api_detail_json
 
     def get_translated_name(self, language):
         if language == "de":
