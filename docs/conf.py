@@ -18,14 +18,15 @@
 import os
 import sys
 import django
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../'))
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'transcriptiones.settings'
 django.setup()
 
 # -- Project information -----------------------------------------------------
 
 project = 'Transcriptiones'
-copyright = '2022, transcriptiones.ch'
+copyright = '2023, transcriptiones.ch'
 author = 'Dominic Weber, Yvonne Fuchs, Sorin Marti'
 
 # The full version, including alpha/beta/rc tags
@@ -39,6 +40,12 @@ release = '0.0.3'
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx_rtd_theme']
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+}
+intersphinx_disabled_domains = ['std']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
