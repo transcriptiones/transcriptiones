@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2!br_du&%2-^&zbygsfv#y)ekw3a&=kx$i$=vk2sfj45rv2z70'
+SECRET_KEY = '_enter_your_secret_key_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -110,7 +110,7 @@ DATABASES = {
         'NAME': 'transcriptiones',
         'USER': 'transcriptiones_user',
         'PASSWORD': 'transcriptiones',
-        #'PASSWORD': 's0uW@nn@KrrackTh1z?gudLöck',
+        #'PASSWORD': '_your_db_password_',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
@@ -325,5 +325,5 @@ ELASTICSEARCH_DSL = {
     },
 }
 
-RECAPTCHA_PUBLIC_KEY = '6LdlOBshAAAAAOTXPq47RzZLTeoPLuxEGUua3n38'
-RECAPTCHA_PRIVATE_KEY = '6LdlOBshAAAAAGxW09MuXbIrybbSSYnaVCU_3kOQ'
+RECAPTCHA_PUBLIC_KEY = '_get_your_captcha_'
+RECAPTCHA_PRIVATE_KEY = '_get_your_captcha_'
