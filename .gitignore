@@ -367,4 +367,9 @@ cloud_sql_proxy
 
 .DS_store
 
+<<<<<<< Updated upstream
+=======
+# Pycharm Files
+>>>>>>> Stashed changes
 .idea/
+UpdateInstructions.md

@@ -1,29 +1,7 @@
-# Transcriptiones
-Transcriptiones is a Django application to upload/manage/search transcriptions of historical documents.
+# transcriptiones
 
-This project is in a beginning phase and currently not operable.
+transcriptiones is a Django application to upload/manage/search transcriptions of historical documents.
+Visit [transcriptiones.ch](https://transcriptiones.ch) to see it in action.
 
-
-
-Update routine:
-
-- Upload new files
-- Don't overwrite settings.py unless you changed stuff (passwords, etc.)
-- SSH to the machine (in the Unibas VPN)
-  - Stop gunicorn: `pkill gunicorn`
-  - `cd transcricptiones_root`
-  - Activate virtual environment: `source trans_env/bin/activate`
-  - `cd transcriptiones`
-  -  Update requirements: `pip install -r ./requirements.txt`
-  - Apply migrations: `python manage.py migrate`
-  - Collect static files: `python manage.py collectstatic`
-  - Activate cron jobs: `python manage.py crontab add`
-  - If there were changes to the database: 
-    - Rebuild elasticsearch index: `python manage.py search_index --rebuild`
-    - Reload language table: `python manage.py loaddata languages_data.json.gz`
-  -  Start the daemon`gunicorn transcriptiones.wsgi -D`
-
-I18N routine:
-- Create new language (ex.: fr): `python .\manage.py makemessages -l fr`
-- Compile messages: `django-admin compilemessages`
-- Update all language .po-files: `django-admin makemessages -a -s`
+Local installation for contribution can be a bit tricky. Feel free to contact as, should you want
+to contribute but run into troubles. Detailed installation instructions will follow.
