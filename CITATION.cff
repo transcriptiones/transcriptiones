@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Weber"
+  given-names: "Dominic"
+  orcid: "https://orcid.org/0000-0002-9265-3388"
+- family-names: "Fuchs"
+  given-names: "Yvonne"
+- family-names: "Marti"
+  given-names: "Sorin"
+  orcid: "https://orcid.org/0000-0002-9541-1202"
+- family-names: "Diener"
+  given-names: "Nicolas"
+title: "transcriptiones"
+version: 0.9.1
+doi: 10.5281/zenodo.8124784
+date-released: 2023-07-07
+url: "https://github.com/transcriptiones/transcriptiones"
