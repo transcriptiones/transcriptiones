@@ -84,6 +84,10 @@
             {{ form.seal|as_crispy_field }}
         {% endcard %}
 
+        {% card 'edit_meta_form_4' _('Comments and Links') %}
+            {{ form.comments|as_crispy_field }}
+        {% endcard %}
+
         {% card 'edit_transcript_commit_message' _('Document your changes') %}
             {{ form.commit_message|as_crispy_field }}
             {{ form.publish_user|as_crispy_field }}

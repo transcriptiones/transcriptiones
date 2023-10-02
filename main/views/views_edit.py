@@ -88,6 +88,7 @@ def edit_meta_view(request, inst_slug, ref_slug, doc_slug):
             document.paging_system = updated_data.paging_system
             document.illuminated = updated_data.illuminated
             document.seal = updated_data.seal
+            document.comments = updated_data.comments
             document.commit_message = updated_data.commit_message
             document.submitted_by = request.user
             document.publish_user = not updated_data.publish_user

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 22:39+0100\n"
+"POT-Creation-Date: 2023-10-02 14:30+0200\n"
 "PO-Revision-Date: 2021-09-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -63,15 +63,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr "Numeri di riferimento in questa istituzione"
 
-#: main/filters.py:85 main/models.py:783 main/models.py:819
+#: main/filters.py:85 main/models.py:822 main/models.py:858
 msgid "User"
 msgstr "Utente"
 
-#: main/filters.py:86 main/models.py:784
+#: main/filters.py:86 main/models.py:823
 msgid "Staff"
 msgstr ""
 
-#: main/filters.py:87 main/models.py:785
+#: main/filters.py:87 main/models.py:824
 msgid "Admin"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr "Tipo di origine di primo livello"
 
 #: main/forms/forms_edit.py:67 main/forms/forms_edit.py:73
 #: main/forms/forms_upload.py:59 main/forms/forms_upload.py:65
-#: main/models.py:299 main/models.py:306
+#: main/models.py:338 main/models.py:345
 msgid "(Unknown)"
 msgstr "(sconosciuto)"
 
@@ -163,7 +163,7 @@ msgid "No"
 msgstr "No"
 
 #: main/forms/forms_helper.py:37 main/models.py:22 main/models.py:63
-#: main/models.py:97 main/models.py:821
+#: main/models.py:97 main/models.py:860
 #: main/templates/main/details/institution_detail.html:8
 #: main/templates/main/upload/create_document_backup.html:28
 msgid "Institution"
@@ -434,7 +434,7 @@ msgstr "Informazioni sulle trascrizioni"
 
 #: main/forms/forms_user.py:177
 #: main/templates/main/upload/edit_document_transcription.html:54
-#: main/templates/main/upload/edit_meta.html:96
+#: main/templates/main/upload/edit_meta.html:100
 msgid "Save Changes"
 msgstr "Salva modifiche"
 
@@ -619,8 +619,8 @@ msgstr ""
 
 #: main/model_info.py:47
 msgid ""
-"<small {\" style=color:red\" if api_auth_key_expired else \"\"}>({\"Expired"
-"\" if api_auth_key_expired else \"Expires\"} on {user."
+"<small {\" style=color:red\" if api_auth_key_expired else \"\"}"
+">({\"Expired\" if api_auth_key_expired else \"Expires\"} on {user."
 "api_auth_key_expiration})</small>"
 msgstr ""
 
@@ -857,7 +857,7 @@ msgid ""
 "resources such as digitizations or editions of the source."
 msgstr ""
 
-#: main/model_info.py:288 main/models.py:434
+#: main/model_info.py:288 main/models.py:473
 #, fuzzy
 msgid "Illuminations"
 msgstr "Luminarie"
@@ -876,7 +876,7 @@ msgstr "Sigilli"
 msgid "Optional field. Are there any seals on the document?"
 msgstr "Ci sono dei sigilli sul documento?"
 
-#: main/model_info.py:292 main/models.py:378
+#: main/model_info.py:292 main/models.py:417
 msgid "Number of pages"
 msgstr "Numero di pagine"
 
@@ -999,7 +999,7 @@ msgid "The institution which holds the document with this reference number."
 msgstr ""
 "L'istituzione che detiene il documento con questo numero di riferimento."
 
-#: main/model_info.py:333 main/models.py:319
+#: main/model_info.py:333 main/models.py:358
 #: main/templates/main/upload/create_document_backup.html:40
 msgid "Reference Number"
 msgstr "Numero di riferimento"
@@ -1036,7 +1036,7 @@ msgstr ""
 "Link diretto alla collezione nel catalogo dell'istituzione. Deve iniziare "
 "con http:// o https://"
 
-#: main/model_info.py:352 main/models.py:692
+#: main/model_info.py:352 main/models.py:731
 msgid "Username"
 msgstr "Nome utente"
 
@@ -1049,7 +1049,7 @@ msgstr ""
 "Il nome deve essere univoco e non può contenere caratteri speciali. Verrà "
 "mostrato ad altri utenti."
 
-#: main/model_info.py:355 main/models.py:698
+#: main/model_info.py:355 main/models.py:737
 msgid "First name"
 msgstr "Nome"
 
@@ -1060,7 +1060,7 @@ msgstr ""
 "Il tuo nome. Queste informazioni non saranno pubbliche a meno che tu non lo "
 "scelga."
 
-#: main/model_info.py:357 main/models.py:703
+#: main/model_info.py:357 main/models.py:742
 msgid "Last name"
 msgstr "Cognome"
 
@@ -1198,7 +1198,7 @@ msgid "Institution which holds this reference number and document"
 msgstr ""
 "L'istituzione che detiene il documento con questo numero di riferimento."
 
-#: main/models.py:101 main/models.py:817
+#: main/models.py:101 main/models.py:856
 msgid "Reference number"
 msgstr "Riferimento"
 
@@ -1207,7 +1207,7 @@ msgstr "Riferimento"
 msgid "Reference number of the collection containing a document"
 msgstr "numero di riferimento della collezione contenente un documento"
 
-#: main/models.py:105 main/models.py:314
+#: main/models.py:105 main/models.py:353
 msgid "Title"
 msgstr "Titolo"
 
@@ -1267,63 +1267,63 @@ msgstr "Documento"
 msgid "Document Scribes"
 msgstr "Documento"
 
-#: main/models.py:222
+#: main/models.py:241
 msgid "Source type"
 msgstr "Tipo di fonte"
 
-#: main/models.py:223
+#: main/models.py:242
 #, fuzzy
 msgid "Source types"
 msgstr "Tipi di origine"
 
-#: main/models.py:291
+#: main/models.py:330
 msgid "Paper"
 msgstr "Carta"
 
-#: main/models.py:292
+#: main/models.py:331
 msgid "Parchment"
 msgstr "Pergamena"
 
-#: main/models.py:293
+#: main/models.py:332
 #, fuzzy
 msgid "Papyrus"
 msgstr "Papiro"
 
-#: main/models.py:294
+#: main/models.py:333
 msgid "Metal"
 msgstr ""
 
-#: main/models.py:295
+#: main/models.py:334
 msgid "Textile"
 msgstr ""
 
-#: main/models.py:296
+#: main/models.py:335
 msgid "Stone"
 msgstr ""
 
-#: main/models.py:297
+#: main/models.py:336
 msgid "Wood"
 msgstr ""
 
-#: main/models.py:302
+#: main/models.py:341
 msgid "No page numbering"
 msgstr ""
 
-#: main/models.py:303
+#: main/models.py:342
 msgid "Pagination"
 msgstr "Paginazione"
 
-#: main/models.py:304
+#: main/models.py:343
 #, fuzzy
 msgid "Foliated"
 msgstr "Fogliato"
 
-#: main/models.py:308
+#: main/models.py:347
 #, fuzzy
 msgid "Document UUID"
 msgstr "UUID del documento"
 
-#: main/models.py:311
+#: main/models.py:350
 #, fuzzy
 msgid ""
 "ID of the first Version of this document. Is kept constant between versions "
@@ -1332,34 +1332,34 @@ msgstr ""
 "ID della prima versione di questo documento. Viene mantenuto costante tra le "
 "versioni di questo documento."
 
-#: main/models.py:316
+#: main/models.py:355
 #, fuzzy
 msgid "Title of the Document"
 msgstr "Titolo del documento"
 
-#: main/models.py:321
+#: main/models.py:360
 #, fuzzy
 msgid "Reference number of the source"
 msgstr "Numeri di riferimento in questa istituzione"
 
-#: main/models.py:324 main/templates/main/details/author_list.html:14
+#: main/models.py:363 main/templates/main/details/author_list.html:14
 #: main/templates/main/details/author_list.html:18
 #: main/templates/main/details/browse_options.html:39
 #, fuzzy
 msgid "Scribes"
 msgstr "Oggetto Subscription"
 
-#: main/models.py:326
+#: main/models.py:365
 #, fuzzy
 msgid "Scribes of the source"
 msgstr "Tipo di sorgente"
 
-#: main/models.py:328
+#: main/models.py:367
 #, fuzzy
 msgid "Creation period start"
 msgstr "Inizio del periodo di creazione"
 
-#: main/models.py:329
+#: main/models.py:368
 #, fuzzy
 msgid ""
 "When was the document written? Be as specific as possible. <br/>Valid "
@@ -1368,12 +1368,12 @@ msgstr ""
 "Quando è stato scritto il documento? Sii il più specifico possibile. <br/"
 ">Valid fromats: AAAA ('1792'), MM.AAAA ('01.1980'), GG.MM.AAAA ('23.07.1643')"
 
-#: main/models.py:333
+#: main/models.py:372
 #, fuzzy
 msgid "Creation period end"
 msgstr "Fine del periodo di creazione"
 
-#: main/models.py:336
+#: main/models.py:375
 #, fuzzy
 msgid ""
 "If the document was created over a time span, please indicate the end time. "
@@ -1384,200 +1384,200 @@ msgstr ""
 "<br/>Valid fromats: AAAA ('1792'), MM.AAAA ('01.1980'), GG.MM.AAAA "
 "('23.07.1643')"
 
-#: main/models.py:341
+#: main/models.py:380
 #, fuzzy
 msgid "Creation Location"
 msgstr "Luogo di creazione"
 
-#: main/models.py:344
+#: main/models.py:383
 #, fuzzy
 msgid "The City/Place where the source was created"
 msgstr "La città/luogo in cui è stata creata la fonte."
 
-#: main/models.py:347
+#: main/models.py:386
 msgid "Languages"
 msgstr "Lingue"
 
-#: main/models.py:349
+#: main/models.py:388
 #, fuzzy
 msgid "Languages used in the source"
 msgstr "Lingue utilizzate nella fonte"
 
-#: main/models.py:352 main/models.py:822
+#: main/models.py:391 main/models.py:861
 #, fuzzy
 msgid "Source Type"
 msgstr "Tipo di origine"
 
-#: main/models.py:356
+#: main/models.py:395
 #, fuzzy
 msgid "Type of the source"
 msgstr "Tipo di sorgente"
 
-#: main/models.py:358
+#: main/models.py:397
 #, fuzzy
 msgid "Writing material"
 msgstr "Materiale di scrittura"
 
-#: main/models.py:362
+#: main/models.py:401
 #, fuzzy
 msgid "Which material is the Document written on?"
 msgstr "Su quale materiale è scritto il manoscritto?"
 
-#: main/models.py:364
+#: main/models.py:403
 msgid "Height"
 msgstr "Altezza"
 
-#: main/models.py:369
+#: main/models.py:408
 #, fuzzy
 msgid "Height in centimeters (cm)"
 msgstr "Altezza in centimetri (cm)"
 
-#: main/models.py:371
+#: main/models.py:410
 msgid "Width"
 msgstr "Larghezza"
 
-#: main/models.py:376
+#: main/models.py:415
 #, fuzzy
 msgid "Width in centimeters (cm)"
 msgstr "Larghezza in centimetri (cm)"
 
-#: main/models.py:381
+#: main/models.py:420
 #, fuzzy
 msgid "The number of pages of the whole source"
 msgstr "Il numero di pagine dell'intera fonte"
 
-#: main/models.py:383
+#: main/models.py:422
 #, fuzzy
 #| msgid "Pagination"
 msgid "Pagination System"
 msgstr "Paginazione"
 
-#: main/models.py:387
+#: main/models.py:426
 #, fuzzy
 msgid "How are the pages numbered?"
 msgstr "Come sono numerato le pagine?"
 
-#: main/models.py:389
+#: main/models.py:428
 #, fuzzy
 msgid "Transcribed parts of the document"
 msgstr "Parti trascritte del documento"
 
-#: main/models.py:390
+#: main/models.py:429
 #, fuzzy
 msgid "List of the transcribed pages/chapters, etc."
 msgstr "Elenco delle pagine/capitoli trascritti, ecc."
 
-#: main/models.py:392
+#: main/models.py:431
 #, fuzzy
 msgid "Editorial comments"
 msgstr "Commenti editoriali"
 
-#: main/models.py:394
+#: main/models.py:433
 #, fuzzy
 msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 "Aggiungi commenti editoriali o osservazioni sul contenuto del documento."
 
-#: main/models.py:396 main/templates/main/details/document_detail.html:64
+#: main/models.py:435 main/templates/main/details/document_detail.html:64
 #: main/templates/main/upload/create_document.html:78
 #: main/templates/main/upload/create_document_backup.html:58
 msgid "Transcript"
 msgstr "Trascrizione"
 
-#: main/models.py:397
+#: main/models.py:436
 #, fuzzy
 msgid "Formatted text of your transcript"
 msgstr "Testo formattato della trascrizione."
 
-#: main/models.py:399
+#: main/models.py:438
 msgid "Upload date"
 msgstr "Data caricamento"
 
-#: main/models.py:402
+#: main/models.py:441
 msgid "Update date"
 msgstr "Data di aggiornamento"
 
-#: main/models.py:406
+#: main/models.py:445
 msgid "Submitted by"
 msgstr "Inviato da"
 
-#: main/models.py:409
+#: main/models.py:448
 #, fuzzy
 msgid "Uploading user"
 msgstr "Caricamento dell'utente"
 
-#: main/models.py:412
+#: main/models.py:451
 #, fuzzy
 msgid "Publish anonymously"
 msgstr "Pubblica anonima"
 
-#: main/models.py:414
+#: main/models.py:453
 #, fuzzy
 msgid "Select this, if you want to publish this document anonymously"
 msgstr ""
 "Selezionare questa opzione se si desidera pubblicare il documento in modo "
 "anonimo"
 
-#: main/models.py:420
+#: main/models.py:459
 msgid "Changes"
 msgstr "Modifiche"
 
-#: main/models.py:423
+#: main/models.py:462
 #, fuzzy
 msgid "A brief description of the applied changes"
 msgstr "Breve descrizione delle modifiche applicate."
 
-#: main/models.py:425
+#: main/models.py:464
 #, fuzzy
 msgid "version number"
 msgstr "numero di versione"
 
-#: main/models.py:427
+#: main/models.py:466
 #, fuzzy
 msgid "Version number"
 msgstr "Numero di versione"
 
-#: main/models.py:429
+#: main/models.py:468
 msgid "Seal"
 msgstr "Guarnizione"
 
-#: main/models.py:432
+#: main/models.py:471
 #, fuzzy
 msgid "Are there any seals on this page?"
 msgstr "Ci sono dei sigilli in questa pagina?"
 
-#: main/models.py:437
+#: main/models.py:476
 #, fuzzy
 msgid "Does the source contain painted miniatures (illuminations)?"
 msgstr "La fonte contiene miniature dipinte (=illuminazioni)?"
 
-#: main/models.py:443
+#: main/models.py:482
 msgid "document"
 msgstr "documento"
 
-#: main/models.py:444
+#: main/models.py:483
 msgid "documents"
 msgstr "documenti"
 
-#: main/models.py:597
+#: main/models.py:636
 #, fuzzy, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:598
+#: main/models.py:637
 #, fuzzy, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:610
+#: main/models.py:649
 #, fuzzy
 #| msgid "Reference Number"
 msgid "A Reference Number has changed"
 msgstr "Numero di riferimento"
 
-#: main/models.py:611
+#: main/models.py:650
 #, fuzzy, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1585,129 +1585,129 @@ msgid ""
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:622
+#: main/models.py:661
 #, fuzzy
 #| msgid "Password changed"
 msgid "A User has made changes"
 msgstr "Password modificata"
 
-#: main/models.py:623
+#: main/models.py:662
 #, fuzzy, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr "Documento {self.title_name} modificato"
 
-#: main/models.py:646
+#: main/models.py:685
 #, fuzzy
 msgid "Please enter an email address"
 msgstr "Inserisci un indirizzo e-mail"
 
-#: main/models.py:672
+#: main/models.py:711
 #, fuzzy
 msgid "All superusers must have is_staff = True."
 msgstr "Tutti i superutenti devono avere is_staff = True."
 
-#: main/models.py:674
+#: main/models.py:713
 #, fuzzy
 msgid "All superusers must have is_superuser = True"
 msgstr "Tutti i superutenti devono avere is_superuser = True"
 
-#: main/models.py:682 main/models.py:688
+#: main/models.py:721 main/models.py:727
 #, fuzzy
 msgid "No notification Emails"
 msgstr "Nessuna e-mail di notifica"
 
-#: main/models.py:683
+#: main/models.py:722
 #, fuzzy
 msgid "Every time a subscribed document has changed."
 msgstr "Ogni volta che un documento sottoscritto è cambiato."
 
-#: main/models.py:684
+#: main/models.py:723
 #, fuzzy
 msgid "Once a day, only if changes happened."
 msgstr "Una volta al giorno, solo se si sono verificati cambiamenti."
 
-#: main/models.py:685
+#: main/models.py:724
 #, fuzzy
 msgid "Once a week, only if changes happened."
 msgstr "Una volta alla settimana, solo se si sono verificati cambiamenti."
 
-#: main/models.py:689
+#: main/models.py:728
 #, fuzzy
 msgid "Every time a message is received."
 msgstr "Ogni volta che viene inviato un messaggio."
 
-#: main/models.py:690
+#: main/models.py:729
 #, fuzzy
 msgid "Once a day, only if you received messages."
 msgstr "Una volta al giorno, solo se hai ricevuto messaggi."
 
-#: main/models.py:696
+#: main/models.py:735
 #, fuzzy
 msgid "Provide a user name"
 msgstr "Fornire un nome utente"
 
-#: main/models.py:701
+#: main/models.py:740
 #, fuzzy
 #| msgid "Enter your last name"
 msgid "Enter your first name(s)"
 msgstr "Inserisci il tuo cognome"
 
-#: main/models.py:706
+#: main/models.py:745
 msgid "Enter your last name"
 msgstr "Inserisci il tuo cognome"
 
-#: main/models.py:708
+#: main/models.py:747
 msgid "Email"
 msgstr "Email"
 
-#: main/models.py:712
+#: main/models.py:751
 msgid "Enter your email address"
 msgstr "Inserisci il tuo indirizzo email"
 
-#: main/models.py:714
+#: main/models.py:753
 #, fuzzy
 msgid "Email confirmed"
 msgstr "Email confermata"
 
-#: main/models.py:717
+#: main/models.py:756
 #, fuzzy
 msgid "Has the user confirmed the email address?"
 msgstr "L'utente ha confermato l'indirizzo e-mail?"
 
-#: main/models.py:719
+#: main/models.py:758
 #, fuzzy
 msgid "Staff status"
 msgstr "Stato del personale"
 
-#: main/models.py:721
+#: main/models.py:760
 #, fuzzy
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "L'utente ha lo stato di staff e può quindi accedere alla pagina di "
 "amministrazione?"
 
-#: main/models.py:723 main/models.py:796
+#: main/models.py:762 main/models.py:835
 msgid "Active"
 msgstr "Attivo"
 
-#: main/models.py:726
+#: main/models.py:765
 #, fuzzy
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr "L'utente è attivo? Gli utenti vengono disattivati anziché eliminati."
 
-#: main/models.py:728
+#: main/models.py:767
 #, fuzzy
 msgid "Date joined"
 msgstr "Data di adesione"
 
-#: main/models.py:731
+#: main/models.py:770
 #, fuzzy
 msgid "Mark anonymous by default"
 msgstr "Contrassegna anonimo per impostazione predefinita"
 
-#: main/models.py:733
+#: main/models.py:772
 #, fuzzy
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
@@ -1717,43 +1717,43 @@ msgstr ""
 "anonimo per impostazione predefinita. Può essere modificato su base "
 "documentale."
 
-#: main/models.py:736
+#: main/models.py:775
 #, fuzzy
 msgid "Orcid"
 msgstr "Orcido"
 
-#: main/models.py:740
+#: main/models.py:779
 #, fuzzy
 msgid "User id from https://orcid.org/"
 msgstr "ID utente da https://orcid.org/"
 
-#: main/models.py:742
+#: main/models.py:781
 #, fuzzy
 msgid "Subscription Notification policy"
 msgstr "Criteri di notifica della sottoscrizione"
 
-#: main/models.py:745
+#: main/models.py:784
 #, fuzzy
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Con quale frequenza vuoi essere avvisato dei tuoi documenti sottoscritti?"
 
-#: main/models.py:748
+#: main/models.py:787
 #, fuzzy
 msgid "Message Notification policy"
 msgstr "Criteri di notifica dei messaggi"
 
-#: main/models.py:751
+#: main/models.py:790
 #, fuzzy
 msgid "How often do you want to be notified about messages you receive?"
 msgstr "Con quale frequenza vuoi ricevere notifiche sui messaggi che ricevi?"
 
-#: main/models.py:754
+#: main/models.py:793
 #, fuzzy
 msgid "Subscription to owned documents"
 msgstr "Sottoscrizione di documenti di proprietà"
 
-#: main/models.py:755
+#: main/models.py:794
 #, fuzzy
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
@@ -1761,43 +1761,43 @@ msgstr ""
 "Vuoi essere avvisato quando i tuoi documenti sono stati modificati da un "
 "altro utente?"
 
-#: main/models.py:760
+#: main/models.py:799
 msgid "Communication Language"
 msgstr ""
 
-#: main/models.py:761
+#: main/models.py:800
 msgid "What is your preferred language for email communication?"
 msgstr ""
 
-#: main/models.py:766
+#: main/models.py:805
 msgid "Secret API Key"
 msgstr ""
 
-#: main/models.py:767
+#: main/models.py:806
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: main/models.py:797
+#: main/models.py:836
 #, fuzzy
 #| msgid "Active"
 msgid "Inactive"
 msgstr "Attivo"
 
-#: main/models.py:818 main/templates/main/details/document_detail.html:21
+#: main/models.py:857 main/templates/main/details/document_detail.html:21
 msgid "Document"
 msgstr "Documento"
 
-#: main/models.py:820 main/templates/main/details/author_detail.html:8
+#: main/models.py:859 main/templates/main/details/author_detail.html:8
 #: main/templates/main/details/author_detail.html:14
 #, fuzzy
 msgid "Scribe"
 msgstr "Oggetto Subscription"
 
-#: main/models.py:918
+#: main/models.py:957
 msgid "Default User Interface Language"
 msgstr ""
 
-#: main/models.py:919
+#: main/models.py:958
 msgid "What is your preferred language?"
 msgstr ""
 
@@ -2649,8 +2649,8 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Each document has an assigned type. This is a classification of the document "
-"content and structure. Letters, Sermons or Historiographic Writings for "
-"example."
+"content and structure. For example, Letters, Sermons or Historiographic "
+"Writings."
 msgstr ""
 "A ogni documento è assegnato un tipo. Questa è una classificazione della "
 "natura dei documenti, come Vitae, fonti storiografiche, ecc."
@@ -2731,6 +2731,7 @@ msgstr "Descrizione del manoscritto"
 #: main/templates/main/details/document_detail.html:77
 #: main/templates/main/upload/create_document.html:129
 #: main/templates/main/upload/create_document_backup.html:78
+#: main/templates/main/upload/edit_meta.html:87
 #, fuzzy
 msgid "Comments and Links"
 msgstr "Commenti e link"
@@ -2849,13 +2850,13 @@ msgstr ""
 #, fuzzy, python-format
 msgid ""
 "\n"
-"                        You have filtered the table. It now contains <strong>"
-"%(num_of_results)s</strong> Document\n"
+"                        You have filtered the table. It now contains "
+"<strong>%(num_of_results)s</strong> Document\n"
 "                        "
 msgid_plural ""
 "\n"
-"                        You have filtered the table. It now contains <strong>"
-"%(num_of_results)s</strong> Documents\n"
+"                        You have filtered the table. It now contains "
+"<strong>%(num_of_results)s</strong> Documents\n"
 "                    "
 msgstr[0] ""
 "\n"
@@ -2875,8 +2876,8 @@ msgid ""
 "                        "
 msgid_plural ""
 "\n"
-"                        This table contains a total of <strong>"
-"%(num_of_results)s</strong> Documents\n"
+"                        This table contains a total of "
+"<strong>%(num_of_results)s</strong> Documents\n"
 "                    "
 msgstr[0] ""
 "\n"
@@ -3061,8 +3062,8 @@ msgstr ""
 #, fuzzy, python-format
 msgid ""
 "\n"
-"                                Please click <a href=\"%(url_unsub)s\" class="
-"\"\">here</a> to unsubscribe.\n"
+"                                Please click <a href=\"%(url_unsub)s\" "
+"class=\"\">here</a> to unsubscribe.\n"
 "                            "
 msgstr ""
 "\n"
@@ -3522,9 +3523,9 @@ msgid ""
 "reproduce the linguistic (including\n"
 "                    orthographic) form of the original, and not just the "
 "historical-factual content.\" The complete\n"
-"                    guidelines of Ad fontes can be found <a class="
-"\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/schriften-"
-"lesen/transkriptionsregeln\">here</a>.\n"
+"                    guidelines of Ad fontes can be found <a "
+"class=\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/"
+"schriften-lesen/transkriptionsregeln\">here</a>.\n"
 "                "
 msgstr ""
 
@@ -3591,13 +3592,13 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/upload/edit_document_transcription.html:44
-#: main/templates/main/upload/edit_meta.html:87
+#: main/templates/main/upload/edit_meta.html:91
 #, fuzzy
 msgid "Document your changes"
 msgstr "Autori di documenti"
 
 #: main/templates/main/upload/edit_document_transcription.html:50
-#: main/templates/main/upload/edit_meta.html:92
+#: main/templates/main/upload/edit_meta.html:96
 #, fuzzy
 #| msgid "Save Changes"
 msgid "Save Your Changes"
@@ -3613,7 +3614,7 @@ msgstr ""
 msgid "Edit metadata"
 msgstr "Modifica metadati"
 
-#: main/templates/main/upload/edit_meta.html:94
+#: main/templates/main/upload/edit_meta.html:98
 msgid "If you're done changing the metadata, you can save the document."
 msgstr ""
 
@@ -3712,8 +3713,9 @@ msgstr "Importante:"
 #, python-format
 msgid ""
 "\n"
-"            You need a login to upload a document. <a href=\"%(loginurl)s"
-"\">Login</a> or register a <a href=\"%(signupurl)s\">new account.</a>\n"
+"            You need a login to upload a document. <a "
+"href=\"%(loginurl)s\">Login</a> or register a <a href=\"%(signupurl)s\">new "
+"account.</a>\n"
 "            "
 msgstr ""
 
@@ -3821,8 +3823,8 @@ msgstr "Indirizzo email"
 #, python-format
 msgid ""
 "\n"
-"                    Your email address has been changed to <strong>"
-"%(email_address)s</strong>.\n"
+"                    Your email address has been changed to "
+"<strong>%(email_address)s</strong>.\n"
 "                    We sent an email to the new address and you have been "
 "logged out. Please log in again.\n"
 "                "
@@ -4097,8 +4099,8 @@ msgstr "Dati utente"
 #, fuzzy, python-format
 msgid ""
 "\n"
-"                    (This is you. Check your <a href=\"%(profile_url)s"
-"\">private profile</a>.)\n"
+"                    (This is you. Check your <a "
+"href=\"%(profile_url)s\">private profile</a>.)\n"
 "                    "
 msgstr ""
 "\n"
@@ -4404,7 +4406,7 @@ msgstr "Il documento è stato creato."
 msgid "The transcription did not change. No new version saved."
 msgstr ""
 
-#: main/views/views_edit.py:103
+#: main/views/views_edit.py:104
 #, fuzzy
 msgid "The metadata of the document has been updated."
 msgstr "Il documento è stato creato."
@@ -4569,6 +4571,11 @@ msgstr ""
 #, fuzzy
 msgid "Your API Key has been deleted"
 msgstr "Il messaggio è stato eliminato."
+
+#, fuzzy
+#~| msgid "documents"
+#~ msgid "Comments"
+#~ msgstr "documenti"
 
 #, fuzzy, python-format
 #~ msgid "%s contact messages marked as unread"

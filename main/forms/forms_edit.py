@@ -113,6 +113,7 @@ class EditMetaForm(forms.ModelForm):
             'paging_system': get_popover_html(Document, 'paging_system'),
             # 'illuminated': get_popover_html(Document, 'illuminated'),
             # 'seal': get_popover_html(Document, 'seal'),
+            'comments': get_popover_html(Document, 'comments'),
             'commit_message': get_popover_html(Document, 'commit_message'),
             'publish_user': get_popover_html(Document, 'publish_user'),
         }
