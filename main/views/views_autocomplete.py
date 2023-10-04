@@ -1,10 +1,13 @@
 import json
 
 from dal import autocomplete
+from dal.views import BaseQuerySetView
+from dal_select2.views import Select2ViewMixin
 from django.db.models import Q
 from django.utils.html import format_html
 from django.http import HttpResponse
 from django.utils.translation import get_language
+from django.utils.translation import ugettext as _
 
 from main.models import Institution, RefNumber, SourceType, Author, Language
 
@@ -115,7 +118,21 @@ class SourceTypeChildAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class AuthorAutocomplete(autocomplete.Select2QuerySetView):
+class AuthorSelect2ViewMixin(Select2ViewMixin):
+    """ Override the label of the create option to include the search term. """
+    def get_create_option(self, context, q):
+        # call base logic to check if new option is needed
+        create_option = super().get_create_option(context, q)
+        if not create_option == []:
+            create_option = [{
+                'id': q,
+                'text': _('Click or press enter to create "%(new_value)s"') % {'new_value': q},
+                'create_id': True,
+            }]
+        return create_option
+
+
+class AuthorAutocomplete(AuthorSelect2ViewMixin, BaseQuerySetView):
     """Autocomplete View for Authors"""
 
     def get_queryset(self):

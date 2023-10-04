@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-02 14:30+0200\n"
-"PO-Revision-Date: 2023-10-02 14:34+0200\n"
+"POT-Creation-Date: 2023-10-03 09:14+0200\n"
+"PO-Revision-Date: 2023-10-03 09:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -4097,6 +4097,11 @@ msgstr "Kontaktnachricht als gelesen markiert"
 #: main/views/views_admin.py:205
 msgid "Contact message marked as unread"
 msgstr "Kontaktnachricht als ungelesen markiert"
+
+#: main/views/views_autocomplete.py:129
+#, python-format
+msgid "Click or press enter to create \"%(new_value)s\""
+msgstr "Klicken oder Enter drücken, um “%(new_value)s” zu erstellen"
 
 #: main/views/views_browse.py:248
 msgid "The transcription version you requested is not available."

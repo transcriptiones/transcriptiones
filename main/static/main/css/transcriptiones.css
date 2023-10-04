@@ -127,6 +127,15 @@ h6 {
     display: none;
 }
 
+.select2-container--default li.select2-results__option--highlighted[aria-selected] {
+    background-color: #1D809F;
+    color: white;
+}
+
+.select2-results__option--highlighted:has(> .dal-create) {
+    background-color: #c82333 !important;
+}
+
 .fa,
 .fas,
 .far,
