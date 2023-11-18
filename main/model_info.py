@@ -51,7 +51,10 @@ def get_user_info(user):
             (get_verbose_field_name(user, 'last_name'), user.last_name),
             (get_verbose_field_name(user, 'email'), user.email),
             (get_verbose_field_name(user, 'date_joined'), user.date_joined),
-            (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
+            (get_verbose_field_name(user, 'user_orcid'),
+             mark_safe(f'<a href="https://orcid.org/{user.user_orcid}" target="_blank">'
+                       f'<img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" />'
+                       f'https://orcid.org/{user.user_orcid}</a>') if user.user_orcid else "—"),
             (get_verbose_field_name(user, 'ui_language'), get_language_info(user.ui_language)['name_local']),
             (_('User State'), mark_safe(user.get_user_state_badge())),
             (_('Activity Status'), mark_safe(user.get_user_activity_badge())),
@@ -65,7 +68,10 @@ def get_user_info(user):
 
 def get_public_user_info(user):
     data = [(get_verbose_field_name(user, 'username'), user.username),
-            (get_verbose_field_name(user, 'user_orcid'), user.user_orcid),
+            (get_verbose_field_name(user, 'user_orcid'),
+             mark_safe(f'<a href="https://orcid.org/{user.user_orcid}" target="_blank">'
+                       f'<img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" />'
+                       f'https://orcid.org/{user.user_orcid}</a>') if user.user_orcid else "—"),
             (_('Year joined'), user.date_joined.year),
             (_('Activity Status'), mark_safe(user.get_user_activity_badge())),
             ]

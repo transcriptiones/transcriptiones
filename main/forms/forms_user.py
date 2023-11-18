@@ -113,8 +113,9 @@ class SignUpForm(UserCreationForm):
         if data == '':
             return data
         # If it is not, it must have the correct form
-        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
-            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
+        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[1-9X]$", data)):
+            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234 or follow the same "
+                                  "structure and end in X")
         return data
 
     class Meta:
@@ -186,8 +187,9 @@ class UserUpdateForm(forms.ModelForm):
         if data == '':
             return data
         # If it is not, it must have the correct form
-        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$", data)):
-            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234")
+        if not bool(re.match("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[1-9X]$", data)):
+            raise ValidationError("Your ORCID must be a valid 4 number block: 1234-1234-1234-1234 or follow the same "
+                                  "structure and end in X")
         return data
 
     class Meta:
