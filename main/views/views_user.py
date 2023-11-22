@@ -75,6 +75,7 @@ def activate(request):
         if user is not None and account_activation_token.check_token(user, token):
             user.email_confirmed = True
             user.is_active = True
+            user.user_permissions.add(5)
             user.save()
             login(request, user)
             messages.success(request, _('Successfully logged in!'))
