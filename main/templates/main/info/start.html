@@ -121,15 +121,15 @@
                     {% if LANGUAGE_CODE == 'de' %}
                         <p class="lead mb-5">
                             Hochgeladene Transkriptionen lassen sich unterschiedlich auffinden:
-                            Sie können einerseits <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Entdecken</a>
-                            anwählen und über die Institutionen, Quellentypen oder Autor*innen zur gewünschten
+                            Sie können einerseits <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Bestand</a>
+                            anwählen und über die Institutionen, Quellentypen oder Schreiber*innen zur gewünschten
                             Transkription gelangen, andererseits können Sie eine
                             <a href="{% url 'main:search' %}" class="text-white font-weight-bold">Volltextsuche</a> starten.
                         </p>
                     {% else %}
                         <p class="lead mb-5">
                             Uploaded transcriptions can be found in several ways: You can either click
-                            <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Explore</a> to browse the database by
+                            <a href="{% url 'main:browse_options' %}" class="text-white font-weight-bold">Collection</a> to browse the database by
                             institutions, source types or scribes and navigate to the respective transcription.
                             Or you can use our <a href="{% url 'main:search' %}" class="text-white font-weight-bold">full-text search</a>.
                         </p>
@@ -178,7 +178,7 @@
                         </a>
                     </span>
                     <h4>
-                        <strong>{% translate 'Transcript Guidelines' %}</strong>
+                        <strong>{% translate 'Instructions' %}</strong>
                     </h4>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
