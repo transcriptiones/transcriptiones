@@ -38,6 +38,31 @@ def get_base_render_object(request, subject):
     return basest_base
 
 
+def get_newsletter_render_object():
+    """Returns an object to render a newsletter html message. Used for all messages """
+    """Not implemented yet"""
+
+    newsletter_base_object = {}
+
+    return newsletter_base_object
+
+
+def create_newsletter_message(subject_en, subject_de, message_en, message_de):
+    render_object = get_newsletter_render_object()
+    render_object["logo_url"] = 'https://transcriptiones.ch'
+    render_object["mail_title"] = 'Newsletter: transcriptiones'
+    render_object["subject_de"] = subject_de
+    render_object["subject_en"] = subject_en
+    render_object["message_de"] = message_de
+    render_object["message_en"] = message_en
+    html_message = render_to_string('main/users/email_templates/base_newsletter.html', render_object)
+    plain_message = "\n".join(["(english version below)", subject_de, message_de, subject_en, message_en])
+    plain_message = plain_message.replace("<br/>", "\n")
+    tree = html.fromstring(plain_message)
+    plain_message = clean_html(tree).text_content().strip()
+    return plain_message, html_message
+
+
 def create_message(request, subject, message):
     render_object = get_base_render_object(request, subject)
     render_object["mail_paragraphs"] = [message,]

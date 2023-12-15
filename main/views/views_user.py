@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from django.contrib import messages
+from django.contrib.auth.models import Permission
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -75,7 +76,8 @@ def activate(request):
         if user is not None and account_activation_token.check_token(user, token):
             user.email_confirmed = True
             user.is_active = True
-            user.user_permissions.add(5)
+            permission = Permission.objects.get(codename='add_author')
+            user.user_permissions.add(permission)
             user.save()
             login(request, user)
             messages.success(request, _('Successfully logged in!'))
