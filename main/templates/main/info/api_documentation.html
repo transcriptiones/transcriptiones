@@ -492,26 +492,30 @@
         </p>
         <p>
             <pre class="pre-scrollable"><code>{
-    "request": "{...}",                     <-- request info (the same for all requests)
-    "id": &lt;id&gt;,                             <-- id of the document
-    "name": &lt;name-of-the-document&gt;,         <-- name (=title) of the document
+    "request": "{...}",                     <-- Request info (the same for all requests)
+    "id": &lt;id&gt;,                             <-- Id of the document
+    "name": &lt;name-of-the-document&gt;,         <-- Name (=title) of the document
     "url": &lt;url-to-the-document&gt;,           <-- URL to the document on transcriptiones.ch
 
-    "doc-meta-data": {                      <-- Meta data for the <b>digital</b> document
+    "doc-meta-data": {                      <-- Metadata for the <b>digital</b> document
         "version": 1,                       <-- Version number of the document
         "created": "2022-02-02 22:22:22"    <-- Creation time of this version
         "transcript": {
-            "tei": "...",                   <-- api-request to get the TEI transcript
-            "plain": "..."                  <-- api-request to get the plain text transcript
+            "tei": "...",                   <-- Api-request to get the TEI transcript
+            "plain": "..."                  <-- Api-request to get the plain text transcript
         }
     },
 
-    "source-meta-data": {                   <-- Meta data for the <b>physical</b> document
+    "source-meta-data": {                   <-- Metadata for the <b>physical</b> document
+        "institution-id": 42                <-- Id of the institution holding the document 
+        "institution-name": &lt;foo&gt;,          <-- Name of the institution holding the document
+        "ref-number-id": 161                <-- Id of the reference number containing the document
+        "ref-number": &lt;bar: baz&gt;,           <-- Reference number containing the document, and its title
         "source-type": {                    <-- All documents have a source type. All source types are organized in two levels
             "first-level": {
                 "id": 1,
                 "name": "Poetry",
-                "api-request": "..."        <-- api-request to get source type details
+                "api-request": "..."        <-- Api-request to get source type details
             },
             "second-level": {
                 "id": 21,

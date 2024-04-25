@@ -543,8 +543,8 @@ class Document(models.Model):
                            "source-meta-data": {
                                "institution-id": self.parent_ref_number.holding_institution.id,
                                "institution-name": self.parent_ref_number.holding_institution.institution_name,
-                               "ref-number-id": self.parent_ref_number,
-                               "ref-number": f"{self.ref_number_name}: {self.ref_number_title}",
+                               "ref-number-id": self.parent_ref_number.id,
+                               "ref-number": f"{self.parent_ref_number.ref_number_name}: {self.parent_ref_number.ref_number_title}",
                                "source-type": {
                                    "first-level": {
                                        "id": self.source_type.parent_type.id,
