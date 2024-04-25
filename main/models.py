@@ -153,6 +153,8 @@ class RefNumber(models.Model):
         api_detail_json = {"id": self.id,
                            "name": f"{self.ref_number_name}: {self.ref_number_title}",
                            "url": self.get_absolute_url(),
+                           "institution-id": self.holding_institution.id,
+                           "institution-name": self.holding_institution.institution_name,
                            "documents": []}
 
         for document in self.document_set.all().order_by('title_name'):
@@ -539,6 +541,10 @@ class Document(models.Model):
                                }
                            },
                            "source-meta-data": {
+                               "institution-id": self.parent_ref_number.holding_institution.id,
+                               "institution-name": self.parent_ref_number.holding_institution.institution_name,
+                               "ref-number-id": self.parent_ref_number,
+                               "ref-number": f"{self.ref_number_name}: {self.ref_number_title}",
                                "source-type": {
                                    "first-level": {
                                        "id": self.source_type.parent_type.id,
