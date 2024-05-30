@@ -28,7 +28,7 @@ class Institution(models.Model):
                               max_length=80,
                               help_text=_("Street with number"))
 
-    zip_code = models.IntegerField(verbose_name=_("Zip code"),
+    zip_code = models.IntegerField(verbose_name=_("Zip Code"),
                                    help_text=_("Zip code"))
 
     city = models.CharField(verbose_name=_("City"),
@@ -38,10 +38,10 @@ class Institution(models.Model):
     country = CountryField(verbose_name=_("Country"),
                            help_text=_("Country"))
 
-    site_url = models.URLField(verbose_name=_("Web site"),
+    site_url = models.URLField(verbose_name=_("Website"),
                                max_length=200,
                                blank=True,
-                               help_text=_("URL of the web site"))
+                               help_text=_("URL of the website"))
 
     institution_utc_add = models.DateTimeField(auto_now_add=True)
 
@@ -98,7 +98,7 @@ class RefNumber(models.Model):
                                             on_delete=models.PROTECT,
                                             help_text=_("Institution which holds this reference number and document"))
 
-    ref_number_name = models.CharField(verbose_name=_("Reference number"),
+    ref_number_name = models.CharField(verbose_name=_("Reference Number"),
                                        max_length=100,
                                        help_text=_("Reference number of the collection containing a document"))
 
@@ -167,7 +167,7 @@ class Author(models.Model):
     """Authors are people who wrote the **original** documents which were transcribed. They are **not** the
     transcribers of the documents. They are no longer referred to as authors but as SCRIBES."""
 
-    author_name = models.CharField(verbose_name=_("Name of scribe"),
+    author_name = models.CharField(verbose_name=_("Name of Scribe"),
                                    max_length=150,
                                    help_text=_("Name of the scribe of the original document."))
 
@@ -366,12 +366,12 @@ class Document(models.Model):
                                     blank=True,  # null=True,
                                     help_text=_("Scribes of the source"))
 
-    doc_start_date = PartialDateField(verbose_name=_("Creation period start"),
+    doc_start_date = PartialDateField(verbose_name=_("Creation Period Start"),
                                       help_text=_("When was the document written? Be as specific as possible. <br/>"
                                                   "Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), "
                                                   "DD.MM.YYYY ('23.07.1643')"))
 
-    doc_end_date = PartialDateField(verbose_name=_("Creation period end"),
+    doc_end_date = PartialDateField(verbose_name=_("Creation Period End"),
                                     null=True,
                                     blank=True,
                                     help_text=_("If the document was created over a time span, "
@@ -396,7 +396,7 @@ class Document(models.Model):
                                     null=False,
                                     help_text=_("Type of the source"))
 
-    material = models.IntegerField(verbose_name=_("Writing material"),
+    material = models.IntegerField(verbose_name=_("Writing Material"),
                                    blank=True,
                                    null=True,
                                    choices=MaterialType.choices,
@@ -416,7 +416,7 @@ class Document(models.Model):
                                              null=True,
                                              help_text=_("Width in centimeters (cm)"))
 
-    pages = models.PositiveSmallIntegerField(verbose_name=_("Number of pages"),
+    pages = models.PositiveSmallIntegerField(verbose_name=_("Number of Pages"),
                                              blank=True,
                                              null=True,
                                              help_text=_("The number of pages of the whole source"))
@@ -427,20 +427,20 @@ class Document(models.Model):
                                         choices=PaginationType.choices,
                                         help_text=_("How are the pages numbered?"))
 
-    transcription_scope = models.TextField(verbose_name=_("Transcribed parts of the document"),
+    transcription_scope = models.TextField(verbose_name=_("Transcribed Parts of the Document"),
                                            help_text=_("List of the transcribed pages/chapters, etc."))
 
-    comments = models.TextField(verbose_name=_("Editorial comments"),
+    comments = models.TextField(verbose_name=_("Editorial Comments"),
                                 blank=True,
                                 help_text=_("Add editorial comments or remarks on the contents of the document"))
 
     transcription_text = RichTextField(verbose_name=_("Transcript"),
                                        help_text=_("Formatted text of your transcript"))
 
-    document_utc_add = models.DateTimeField(verbose_name=_("Upload date"),
+    document_utc_add = models.DateTimeField(verbose_name=_("Upload Date"),
                                             auto_now_add=True)
 
-    document_utc_update = models.DateTimeField(verbose_name=_("Update date"),
+    document_utc_update = models.DateTimeField(verbose_name=_("Update Date"),
                                                auto_now=True)
 
     submitted_by = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -463,7 +463,7 @@ class Document(models.Model):
                                       default="initial",
                                       help_text=_("A brief description of the applied changes"))
 
-    version_number = models.IntegerField(verbose_name=_("version number"),
+    version_number = models.IntegerField(verbose_name=_("Version Number"),
                                          default=1,
                                          help_text=_("Version number"))
 

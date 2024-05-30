@@ -326,7 +326,7 @@ def get_extended_help_text(model, field):
         elif field == 'country':
             help_text = get_title_text_format(_('Country'), _('Choose the country from the drop down menu.'))
         elif field == 'site_url':
-            help_text = get_title_text_format(_('Web site of the institution'), _('Optional Field. Enter a valid URL. Must start '
+            help_text = get_title_text_format(_('Website of the institution'), _('Optional Field. Enter a valid URL. Must start '
                                                                                   'with http:// or https://'))
 
     ###
