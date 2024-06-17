@@ -450,7 +450,7 @@ class Document(models.Model):
                                      help_text=_("Uploading user"),
                                      editable=False)
 
-    publish_user = models.BooleanField(verbose_name=_("Publish anonymously"),
+    publish_user = models.BooleanField(verbose_name=_("Publish Anonymously"),
                                        default=False,
                                        help_text=_("Select this, if you want to publish this document anonymously"))
 

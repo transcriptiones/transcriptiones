@@ -270,7 +270,7 @@ class DocumentDetailView(MultiTableMixin, DetailView):
         document = self.get_object()
 
         overview_data = m_info.get_document_info_overview(document)
-        overview_data.append({'title': _('Static version URL'), 'value': m_info.get_version_url_string(document, self.request)})
+        overview_data.append({'title': _('Static Version URL'), 'value': m_info.get_version_url_string(document, self.request)})
 
         tables = [
             TitleValueTable(data=overview_data),

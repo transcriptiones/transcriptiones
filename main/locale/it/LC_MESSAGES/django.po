@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-30 17:43+0200\n"
+"POT-Creation-Date: 2024-05-31 08:46+0200\n"
 "PO-Revision-Date: 2021-09-20 13:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1518,7 +1518,7 @@ msgstr "Caricamento dell'utente"
 
 #: .\main\models.py:453
 #, fuzzy
-msgid "Publish anonymously"
+msgid "Publish Anonymously"
 msgstr "Pubblica anonima"
 
 #: .\main\models.py:455
@@ -4424,7 +4424,7 @@ msgstr ""
 
 #: .\main\views\views_browse.py:273
 #, fuzzy
-msgid "Static version URL"
+msgid "Static Version URL"
 msgstr "URL statico"
 
 #: .\main\views\views_edit.py:43
