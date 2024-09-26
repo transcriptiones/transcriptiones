@@ -28,8 +28,9 @@ class Institution(models.Model):
                               max_length=80,
                               help_text=_("Street with number"))
 
-    zip_code = models.IntegerField(verbose_name=_("Zip Code"),
-                                   help_text=_("Zip code"))
+    zip_code = models.CharField(verbose_name=_("Zip Code"),
+                                max_length=10,
+                                help_text=_("Zip code"))
 
     city = models.CharField(verbose_name=_("City"),
                             max_length=100,
