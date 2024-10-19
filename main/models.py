@@ -147,14 +147,16 @@ class RefNumber(models.Model):
 
     def get_api_list_json(self, version="v1"):
         api_list_json = {"id": self.id,
-                         "name": f"{self.ref_number_name}: {self.ref_number_title}",
+                         "reference-number": self.ref_number_name,
+                         "collection-title": self.ref_number_title,
                          "url": self.get_absolute_url(),
                          "api-request": f'/api/{version}/refnumbers/{self.id}/'}
         return api_list_json
 
     def get_api_detail_json(self, version="v1"):
         api_detail_json = {"id": self.id,
-                           "name": f"{self.ref_number_name}: {self.ref_number_title}",
+                           "reference-number": self.ref_number_name,
+                           "collection-title": self.ref_number_title,
                            "url": self.get_absolute_url(),
                            "institution-id": self.holding_institution.id,
                            "institution-name": self.holding_institution.institution_name,
@@ -548,7 +550,8 @@ class Document(models.Model):
                                "institution-id": self.parent_ref_number.holding_institution.id,
                                "institution-name": self.parent_ref_number.holding_institution.institution_name,
                                "ref-number-id": self.parent_ref_number.id,
-                               "ref-number": f"{self.parent_ref_number.ref_number_name}: {self.parent_ref_number.ref_number_title}",
+                               "reference-number": self.parent_ref_number.ref_number_name,
+                               "collection-title": self.parent_ref_number.ref_number_title,
                                "source-type": {
                                    "first-level": {
                                        "id": self.source_type.parent_type.id,
