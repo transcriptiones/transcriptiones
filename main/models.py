@@ -158,6 +158,7 @@ class RefNumber(models.Model):
                            "url": self.get_absolute_url(),
                            "institution-id": self.holding_institution.id,
                            "institution-name": self.holding_institution.institution_name,
+                           "collection-link": self.collection_link if self.collection_link else None,
                            "documents": []}
 
         for document in self.document_set.all().order_by('title_name'):
