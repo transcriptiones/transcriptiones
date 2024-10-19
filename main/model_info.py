@@ -347,7 +347,7 @@ def get_extended_help_text(model, field):
                                                                           'that this might not be the same as the '
                                                                           'title of the transcribed document.'))
         elif field == 'collection_link':
-            help_text = get_title_text_format(_('Collection link'), _('Optional Field. Direct link to the collection in '
+            help_text = get_title_text_format(_('Collection link'), _('Required Field for certain institutions. Direct link to the collection in '
                                                                       'the institution\'s catalog. Must start with http:// '
                                                                       'or https://'))
 

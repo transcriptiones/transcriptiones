@@ -60,6 +60,8 @@ class Institution(models.Model):
 
     institution_slug = models.SlugField(unique=True)
 
+    ref_url_required = models.BooleanField(default=False)
+
     class Meta:
         verbose_name = _("Institution")
         verbose_name_plural = _("Institutions")

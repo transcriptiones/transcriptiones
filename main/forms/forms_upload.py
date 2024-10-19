@@ -128,6 +128,8 @@ class RefnModelForm(BSModalModelForm):
     """TODO """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if self['holding_institution'].initial.ref_url_required:
+            self.fields['collection_link'].required = True
         self.helper = initialize_form_helper(option="modal_popup")
         self.helper.add_input(Submit('submit', _('Create'), css_class='btn-secondary'))
 

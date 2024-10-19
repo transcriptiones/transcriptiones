@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-31 08:46+0200\n"
+"POT-Creation-Date: 2024-10-19 14:20+0200\n"
 "PO-Revision-Date: 2022-07-17 13:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,15 +61,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr ""
 
-#: .\main\filters.py:85 .\main\models.py:828 .\main\models.py:864
+#: .\main\filters.py:85 .\main\models.py:831 .\main\models.py:867
 msgid "User"
 msgstr ""
 
-#: .\main\filters.py:86 .\main\models.py:829
+#: .\main\filters.py:86 .\main\models.py:832
 msgid "Staff"
 msgstr ""
 
-#: .\main\filters.py:87 .\main\models.py:830
+#: .\main\filters.py:87 .\main\models.py:833
 msgid "Admin"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 
 #: .\main\forms\forms_edit.py:67 .\main\forms\forms_edit.py:73
 #: .\main\forms\forms_upload.py:59 .\main\forms\forms_upload.py:65
-#: .\main\models.py:340 .\main\models.py:347
+#: .\main\models.py:343 .\main\models.py:350
 msgid "(Unknown)"
 msgstr ""
 
@@ -151,8 +151,8 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: .\main\forms\forms_helper.py:37 .\main\models.py:22 .\main\models.py:63
-#: .\main\models.py:97 .\main\models.py:866
+#: .\main\forms\forms_helper.py:37 .\main\models.py:22 .\main\models.py:66
+#: .\main\models.py:100 .\main\models.py:869
 #: .\main\templates\main\details\institution_detail.html:8
 #: .\main\templates\main\upload\create_document_backup.html:28
 msgid "Institution"
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: .\main\forms\forms_info.py:52 .\main\forms\forms_upload.py:285
+#: .\main\forms\forms_info.py:52 .\main\forms\forms_upload.py:287
 #: .\main\forms\forms_user.py:31
 msgid "Send Message"
 msgstr ""
@@ -311,23 +311,23 @@ msgid ""
 "agree that all uploaded transcriptions will be will be subject to a %s."
 msgstr ""
 
-#: .\main\forms\forms_upload.py:132 .\main\forms\forms_upload.py:157
+#: .\main\forms\forms_upload.py:134 .\main\forms\forms_upload.py:159
 msgid "Create"
 msgstr ""
 
-#: .\main\forms\forms_upload.py:275
+#: .\main\forms\forms_upload.py:277
 msgid "Message Title"
 msgstr ""
 
-#: .\main\forms\forms_upload.py:276
+#: .\main\forms\forms_upload.py:278
 msgid "What kind of documents do you want to upload?"
 msgstr ""
 
-#: .\main\forms\forms_upload.py:277
+#: .\main\forms\forms_upload.py:279
 msgid "Batch Description"
 msgstr ""
 
-#: .\main\forms\forms_upload.py:278
+#: .\main\forms\forms_upload.py:280
 msgid ""
 "Please describe the documents you want to upload. Be as specific as possible"
 msgstr ""
@@ -746,7 +746,7 @@ msgid ""
 "resources such as digitizations or editions of the source."
 msgstr ""
 
-#: .\main\model_info.py:294 .\main\models.py:475
+#: .\main\model_info.py:294 .\main\models.py:478
 msgid "Illuminations"
 msgstr ""
 
@@ -831,7 +831,7 @@ msgstr ""
 msgid "Enter the zip code of the institution."
 msgstr ""
 
-#: .\main\model_info.py:325 .\main\models.py:34 .\main\models.py:36
+#: .\main\model_info.py:325 .\main\models.py:35 .\main\models.py:37
 msgid "City"
 msgstr ""
 
@@ -839,7 +839,7 @@ msgstr ""
 msgid "Enter the city."
 msgstr ""
 
-#: .\main\model_info.py:327 .\main\models.py:38 .\main\models.py:39
+#: .\main\model_info.py:327 .\main\models.py:39 .\main\models.py:40
 msgid "Country"
 msgstr ""
 
@@ -863,7 +863,7 @@ msgstr ""
 msgid "The institution which holds the document with this reference number."
 msgstr ""
 
-#: .\main\model_info.py:339 .\main\models.py:101 .\main\models.py:360
+#: .\main\model_info.py:339 .\main\models.py:104 .\main\models.py:363
 #: .\main\templates\main\upload\create_document_backup.html:40
 msgid "Reference Number"
 msgstr ""
@@ -890,11 +890,11 @@ msgstr ""
 
 #: .\main\model_info.py:350
 msgid ""
-"Optional Field. Direct link to the collection in the institution's catalog. "
-"Must start with http:// or https://"
+"Required Field for certain institutions. Direct link to the collection in "
+"the institution's catalog. Must start with http:// or https://"
 msgstr ""
 
-#: .\main\model_info.py:358 .\main\models.py:737
+#: .\main\model_info.py:358 .\main\models.py:740
 msgid "Username"
 msgstr ""
 
@@ -904,7 +904,7 @@ msgid ""
 "shown to other users."
 msgstr ""
 
-#: .\main\model_info.py:361 .\main\models.py:743
+#: .\main\model_info.py:361 .\main\models.py:746
 msgid "First name"
 msgstr ""
 
@@ -912,7 +912,7 @@ msgstr ""
 msgid "Your given name. This information will not be public."
 msgstr ""
 
-#: .\main\model_info.py:363 .\main\models.py:748
+#: .\main\model_info.py:363 .\main\models.py:751
 msgid "Last name"
 msgstr ""
 
@@ -988,27 +988,27 @@ msgstr ""
 msgid "Street with number"
 msgstr ""
 
-#: .\main\models.py:32
+#: .\main\models.py:33
 msgid "Zip code"
 msgstr ""
 
-#: .\main\models.py:41
+#: .\main\models.py:42
 msgid "Website"
 msgstr ""
 
-#: .\main\models.py:44
+#: .\main\models.py:45
 msgid "URL of the website"
 msgstr ""
 
-#: .\main\models.py:49 .\main\models.py:117 .\main\models.py:180
+#: .\main\models.py:50 .\main\models.py:120 .\main\models.py:183
 msgid "Created by"
 msgstr ""
 
-#: .\main\models.py:54 .\main\models.py:122 .\main\models.py:185
+#: .\main\models.py:55 .\main\models.py:125 .\main\models.py:188
 msgid "Updated by"
 msgstr ""
 
-#: .\main\models.py:64 .\main\templates\main\admin\admin.html:29
+#: .\main\models.py:67 .\main\templates\main\admin\admin.html:29
 #: .\main\templates\main\base_copy.html:115
 #: .\main\templates\main\details\browse_options.html:21
 #: .\main\templates\main\details\document_detail.html:18
@@ -1023,332 +1023,332 @@ msgstr ""
 msgid "Institutions"
 msgstr ""
 
-#: .\main\models.py:99
+#: .\main\models.py:102
 msgid "Institution which holds this reference number and document"
 msgstr ""
 
-#: .\main\models.py:103
+#: .\main\models.py:106
 msgid "Reference number of the collection containing a document"
 msgstr ""
 
-#: .\main\models.py:105 .\main\models.py:355
+#: .\main\models.py:108 .\main\models.py:358
 msgid "Title"
 msgstr ""
 
-#: .\main\models.py:107
+#: .\main\models.py:110
 msgid "Title of the collection"
 msgstr ""
 
-#: .\main\models.py:109
+#: .\main\models.py:112
 msgid "Static URL"
 msgstr ""
 
-#: .\main\models.py:112
+#: .\main\models.py:115
 msgid "Link to the collection"
 msgstr ""
 
-#: .\main\models.py:135
+#: .\main\models.py:138
 msgid "reference number"
 msgstr ""
 
-#: .\main\models.py:136
+#: .\main\models.py:139
 msgid "reference numbers"
 msgstr ""
 
-#: .\main\models.py:170
+#: .\main\models.py:173
 msgid "Name of Scribe"
 msgstr ""
 
-#: .\main\models.py:172
+#: .\main\models.py:175
 msgid "Name of the scribe of the original document."
 msgstr ""
 
-#: .\main\models.py:174
+#: .\main\models.py:177
 msgid "Link to GND entry"
 msgstr ""
 
-#: .\main\models.py:177
+#: .\main\models.py:180
 msgid "Persistent URL to the GND entry of the scribe."
 msgstr ""
 
-#: .\main\models.py:192
+#: .\main\models.py:195
 msgid "Document Scribe"
 msgstr ""
 
-#: .\main\models.py:193
+#: .\main\models.py:196
 msgid "Document Scribes"
 msgstr ""
 
-#: .\main\models.py:243
+#: .\main\models.py:246
 msgid "Source type"
 msgstr ""
 
-#: .\main\models.py:244
+#: .\main\models.py:247
 msgid "Source types"
 msgstr ""
 
-#: .\main\models.py:332
+#: .\main\models.py:335
 msgid "Paper"
 msgstr ""
 
-#: .\main\models.py:333
+#: .\main\models.py:336
 msgid "Parchment"
 msgstr ""
 
-#: .\main\models.py:334
+#: .\main\models.py:337
 msgid "Papyrus"
 msgstr ""
 
-#: .\main\models.py:335
+#: .\main\models.py:338
 msgid "Metal"
 msgstr ""
 
-#: .\main\models.py:336
+#: .\main\models.py:339
 msgid "Textile"
 msgstr ""
 
-#: .\main\models.py:337
+#: .\main\models.py:340
 msgid "Stone"
 msgstr ""
 
-#: .\main\models.py:338
+#: .\main\models.py:341
 msgid "Wood"
 msgstr ""
 
-#: .\main\models.py:343
+#: .\main\models.py:346
 msgid "No page numbering"
 msgstr ""
 
-#: .\main\models.py:344
+#: .\main\models.py:347
 msgid "Pagination"
 msgstr ""
 
-#: .\main\models.py:345
+#: .\main\models.py:348
 msgid "Foliated"
 msgstr ""
 
-#: .\main\models.py:349
+#: .\main\models.py:352
 msgid "Document UUID"
 msgstr ""
 
-#: .\main\models.py:352
+#: .\main\models.py:355
 msgid ""
 "ID of the first Version of this document. Is kept constant between versions "
 "of this document"
 msgstr ""
 
-#: .\main\models.py:357
+#: .\main\models.py:360
 msgid "Title of the Document"
 msgstr ""
 
-#: .\main\models.py:362
+#: .\main\models.py:365
 msgid "Reference number of the source"
 msgstr ""
 
-#: .\main\models.py:365 .\main\templates\main\details\author_list.html:14
+#: .\main\models.py:368 .\main\templates\main\details\author_list.html:14
 #: .\main\templates\main\details\author_list.html:18
 #: .\main\templates\main\details\browse_options.html:39
 msgid "Scribes"
 msgstr ""
 
-#: .\main\models.py:367
+#: .\main\models.py:370
 msgid "Scribes of the source"
 msgstr ""
 
-#: .\main\models.py:369
+#: .\main\models.py:372
 msgid "Creation Period Start"
 msgstr ""
 
-#: .\main\models.py:370
+#: .\main\models.py:373
 msgid ""
 "When was the document written? Be as specific as possible. <br/>Valid "
 "fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY ('23.07.1643')"
 msgstr ""
 
-#: .\main\models.py:374
+#: .\main\models.py:377
 msgid "Creation Period End"
 msgstr ""
 
-#: .\main\models.py:377
+#: .\main\models.py:380
 msgid ""
 "If the document was created over a time span, please indicate the end time. "
 "<br/>Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY "
 "('23.07.1643')"
 msgstr ""
 
-#: .\main\models.py:382
+#: .\main\models.py:385
 msgid "Creation Location"
 msgstr ""
 
-#: .\main\models.py:385
+#: .\main\models.py:388
 msgid "The City/Place where the source was created"
 msgstr ""
 
-#: .\main\models.py:388
+#: .\main\models.py:391
 msgid "Languages"
 msgstr ""
 
-#: .\main\models.py:390
+#: .\main\models.py:393
 msgid "Languages used in the source"
 msgstr ""
 
-#: .\main\models.py:393 .\main\models.py:867
+#: .\main\models.py:396 .\main\models.py:870
 msgid "Source Type"
 msgstr ""
 
-#: .\main\models.py:397
+#: .\main\models.py:400
 msgid "Type of the source"
 msgstr ""
 
-#: .\main\models.py:399
+#: .\main\models.py:402
 msgid "Writing Material"
 msgstr ""
 
-#: .\main\models.py:403
+#: .\main\models.py:406
 msgid "Which material is the Document written on?"
 msgstr ""
 
-#: .\main\models.py:405
+#: .\main\models.py:408
 msgid "Height"
 msgstr ""
 
-#: .\main\models.py:410
+#: .\main\models.py:413
 msgid "Height in centimeters (cm)"
 msgstr ""
 
-#: .\main\models.py:412
+#: .\main\models.py:415
 msgid "Width"
 msgstr ""
 
-#: .\main\models.py:417
+#: .\main\models.py:420
 msgid "Width in centimeters (cm)"
 msgstr ""
 
-#: .\main\models.py:419
+#: .\main\models.py:422
 #, fuzzy
 #| msgid "Minimum No. of Pages"
 msgid "Number of Pages"
 msgstr "Minimum No. of Pages"
 
-#: .\main\models.py:422
+#: .\main\models.py:425
 msgid "The number of pages of the whole source"
 msgstr ""
 
-#: .\main\models.py:424
+#: .\main\models.py:427
 msgid "Pagination System"
 msgstr ""
 
-#: .\main\models.py:428
+#: .\main\models.py:431
 msgid "How are the pages numbered?"
 msgstr ""
 
-#: .\main\models.py:430
+#: .\main\models.py:433
 msgid "Transcribed Parts of the Document"
 msgstr ""
 
-#: .\main\models.py:431
+#: .\main\models.py:434
 msgid "List of the transcribed pages/chapters, etc."
 msgstr ""
 
-#: .\main\models.py:433
+#: .\main\models.py:436
 #, fuzzy
 #| msgid "My Documents"
 msgid "Editorial Comments"
 msgstr "My Documents"
 
-#: .\main\models.py:435
+#: .\main\models.py:438
 msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 
-#: .\main\models.py:437 .\main\templates\main\details\document_detail.html:64
+#: .\main\models.py:440 .\main\templates\main\details\document_detail.html:64
 #: .\main\templates\main\upload\create_document.html:78
 #: .\main\templates\main\upload\create_document_backup.html:58
 msgid "Transcript"
 msgstr ""
 
-#: .\main\models.py:438
+#: .\main\models.py:441
 msgid "Formatted text of your transcript"
 msgstr ""
 
-#: .\main\models.py:440
+#: .\main\models.py:443
 #, fuzzy
 #| msgid "Uploaded"
 msgid "Upload Date"
 msgstr "Uploaded"
 
-#: .\main\models.py:443
+#: .\main\models.py:446
 msgid "Update Date"
 msgstr ""
 
-#: .\main\models.py:447
+#: .\main\models.py:450
 msgid "Submitted by"
 msgstr ""
 
-#: .\main\models.py:450
+#: .\main\models.py:453
 msgid "Uploading user"
 msgstr ""
 
-#: .\main\models.py:453
+#: .\main\models.py:456
 msgid "Publish Anonymously"
 msgstr ""
 
-#: .\main\models.py:455
+#: .\main\models.py:458
 msgid "Select this, if you want to publish this document anonymously"
 msgstr ""
 
-#: .\main\models.py:461
+#: .\main\models.py:464
 msgid "Changes"
 msgstr ""
 
-#: .\main\models.py:464
+#: .\main\models.py:467
 msgid "A brief description of the applied changes"
 msgstr ""
 
-#: .\main\models.py:466
+#: .\main\models.py:469
 msgid "Version Number"
 msgstr ""
 
-#: .\main\models.py:468
+#: .\main\models.py:471
 msgid "Version number"
 msgstr ""
 
-#: .\main\models.py:470
+#: .\main\models.py:473
 msgid "Seal"
 msgstr ""
 
-#: .\main\models.py:473
+#: .\main\models.py:476
 msgid "Are there any seals on this page?"
 msgstr ""
 
-#: .\main\models.py:478
+#: .\main\models.py:481
 msgid "Does the source contain painted miniatures (illuminations)?"
 msgstr ""
 
-#: .\main\models.py:484
+#: .\main\models.py:487
 msgid "document"
 msgstr ""
 
-#: .\main\models.py:485
+#: .\main\models.py:488
 msgid "documents"
 msgstr ""
 
-#: .\main\models.py:642
+#: .\main\models.py:645
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr ""
 
-#: .\main\models.py:643
+#: .\main\models.py:646
 #, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
 "\n"
 msgstr ""
 
-#: .\main\models.py:655
+#: .\main\models.py:658
 msgid "A Reference Number has changed"
 msgstr ""
 
-#: .\main\models.py:656
+#: .\main\models.py:659
 #, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1356,182 +1356,182 @@ msgid ""
 "\n"
 msgstr ""
 
-#: .\main\models.py:667
+#: .\main\models.py:670
 msgid "A User has made changes"
 msgstr ""
 
-#: .\main\models.py:668
+#: .\main\models.py:671
 #, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
 "\n"
 msgstr ""
 
-#: .\main\models.py:691
+#: .\main\models.py:694
 msgid "Please enter an email address"
 msgstr ""
 
-#: .\main\models.py:717
+#: .\main\models.py:720
 msgid "All superusers must have is_staff = True."
 msgstr ""
 
-#: .\main\models.py:719
+#: .\main\models.py:722
 msgid "All superusers must have is_superuser = True"
 msgstr ""
 
-#: .\main\models.py:727 .\main\models.py:733
+#: .\main\models.py:730 .\main\models.py:736
 msgid "No notification Emails"
 msgstr ""
 
-#: .\main\models.py:728
+#: .\main\models.py:731
 msgid "Every time a subscribed document has changed."
 msgstr ""
 
-#: .\main\models.py:729
+#: .\main\models.py:732
 msgid "Once a day, only if changes happened."
 msgstr ""
 
-#: .\main\models.py:730
+#: .\main\models.py:733
 msgid "Once a week, only if changes happened."
 msgstr ""
 
-#: .\main\models.py:734
+#: .\main\models.py:737
 msgid "Every time a message is received."
 msgstr ""
 
-#: .\main\models.py:735
+#: .\main\models.py:738
 msgid "Once a day, only if you received messages."
 msgstr ""
 
-#: .\main\models.py:741
+#: .\main\models.py:744
 msgid "Provide a user name"
 msgstr ""
 
-#: .\main\models.py:746
+#: .\main\models.py:749
 msgid "Enter your first name(s)"
 msgstr ""
 
-#: .\main\models.py:751
+#: .\main\models.py:754
 msgid "Enter your last name"
 msgstr ""
 
-#: .\main\models.py:753
+#: .\main\models.py:756
 msgid "Email"
 msgstr ""
 
-#: .\main\models.py:757
+#: .\main\models.py:760
 msgid "Enter your email address"
 msgstr ""
 
-#: .\main\models.py:759
+#: .\main\models.py:762
 msgid "Email confirmed"
 msgstr ""
 
-#: .\main\models.py:762
+#: .\main\models.py:765
 msgid "Has the user confirmed the email address?"
 msgstr ""
 
-#: .\main\models.py:764
+#: .\main\models.py:767
 msgid "Staff status"
 msgstr ""
 
-#: .\main\models.py:766
+#: .\main\models.py:769
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 
-#: .\main\models.py:768 .\main\models.py:841
+#: .\main\models.py:771 .\main\models.py:844
 msgid "Active"
 msgstr ""
 
-#: .\main\models.py:771
+#: .\main\models.py:774
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 
-#: .\main\models.py:773
+#: .\main\models.py:776
 msgid "Date joined"
 msgstr ""
 
-#: .\main\models.py:776
+#: .\main\models.py:779
 msgid "Mark anonymous by default"
 msgstr ""
 
-#: .\main\models.py:778
+#: .\main\models.py:781
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
 msgstr ""
 
-#: .\main\models.py:781
+#: .\main\models.py:784
 msgid "Orcid"
 msgstr ""
 
-#: .\main\models.py:785
+#: .\main\models.py:788
 msgid "User id from https://orcid.org/"
 msgstr ""
 
-#: .\main\models.py:787
+#: .\main\models.py:790
 msgid "Subscription Notification policy"
 msgstr ""
 
-#: .\main\models.py:790
+#: .\main\models.py:793
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 
-#: .\main\models.py:793
+#: .\main\models.py:796
 msgid "Message Notification policy"
 msgstr ""
 
-#: .\main\models.py:796
+#: .\main\models.py:799
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 
-#: .\main\models.py:799
+#: .\main\models.py:802
 msgid "Subscription to owned documents"
 msgstr ""
 
-#: .\main\models.py:800
+#: .\main\models.py:803
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 
-#: .\main\models.py:805
+#: .\main\models.py:808
 msgid "Communication Language"
 msgstr ""
 
-#: .\main\models.py:806
+#: .\main\models.py:809
 msgid "What is your preferred language for email communication?"
 msgstr ""
 
-#: .\main\models.py:811
+#: .\main\models.py:814
 msgid "Secret API Key"
 msgstr ""
 
-#: .\main\models.py:812
+#: .\main\models.py:815
 msgid "Use this key for API requests. Do not share!"
 msgstr ""
 
-#: .\main\models.py:842
+#: .\main\models.py:845
 msgid "Inactive"
 msgstr ""
 
-#: .\main\models.py:862
+#: .\main\models.py:865
 msgid "Reference number"
 msgstr ""
 
-#: .\main\models.py:863 .\main\templates\main\details\document_detail.html:21
+#: .\main\models.py:866 .\main\templates\main\details\document_detail.html:21
 msgid "Document"
 msgstr ""
 
-#: .\main\models.py:865 .\main\templates\main\details\author_detail.html:8
+#: .\main\models.py:868 .\main\templates\main\details\author_detail.html:8
 #: .\main\templates\main\details\author_detail.html:14
 msgid "Scribe"
 msgstr ""
 
-#: .\main\models.py:963
+#: .\main\models.py:966
 msgid "Default User Interface Language"
 msgstr ""
 
-#: .\main\models.py:964
+#: .\main\models.py:967
 msgid "What is your preferred language?"
 msgstr ""
 
