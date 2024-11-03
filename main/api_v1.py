@@ -118,7 +118,7 @@ def get_api_response(request, api_request):
                 result_object['parent-type'] = result.parent_type.type_name"""
 
     json_object = json.dumps(response_json)
-    return HttpResponse(json_object, content_type='text/plain')
+    return HttpResponse(json_object, content_type='application/json')
 
 
 def get_api_object_response(request, api_request, object_id):
@@ -151,4 +151,4 @@ def get_api_object_response(request, api_request, object_id):
                 update_item["api-request"] = request.build_absolute_uri(update_item["api-request"])
     response_json.update(detail_json)
     json_object = json.dumps(response_json)
-    return HttpResponse(json_object, content_type='text/plain')
+    return HttpResponse(json_object, content_type='application/json')
