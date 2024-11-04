@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponse
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -95,27 +95,24 @@ def get_api_response(request, api_request):
         return get_error_response("Invalid Request")
 
     paginator = Paginator(object_list, 10)
-    if 0 < page_number <= paginator.num_pages:
-        page = paginator.page(page_number)
-    else:
-        return get_error_response("Invalid Page Number", details="The page number is out of bounds")
 
     response_json["num-results"] = paginator.count
     response_json["num-pages"] = paginator.num_pages
-    response_json["page"] = page.number
-    response_json["result-list"] = []
 
-    for result in page:
-        result_object = result.get_api_list_json()
-        result_object["url"] = request.build_absolute_uri(result_object["url"])
-        result_object["api-request"] = request.build_absolute_uri(result_object["api-request"])
-        response_json["result-list"].append(result_object)
+    try:
+        page = paginator.page(page_number)
+    except EmptyPage:
+        response_json["page"] = page_number
+        response_json["result-list"] = []
+    else:
+        response_json["page"] = page.number
+        response_json["result-list"] = []
 
-        """if api_request == REQUESTS[2]:
-            result_object['name'] = result.type_name
-            result_object['parent-type'] = "None (top level)"
-            if result.parent_type is not None:
-                result_object['parent-type'] = result.parent_type.type_name"""
+        for result in page:
+            result_object = result.get_api_list_json()
+            result_object["url"] = request.build_absolute_uri(result_object["url"])
+            result_object["api-request"] = request.build_absolute_uri(result_object["api-request"])
+            response_json["result-list"].append(result_object)
 
     json_object = json.dumps(response_json)
     return HttpResponse(json_object, content_type='application/json')
