@@ -457,7 +457,7 @@ class Document(models.Model):
                                      editable=False)
 
     publish_user = models.BooleanField(verbose_name=_("Publish Anonymously"),
-                                       default=False,
+                                       default=False, # True means User is being published!! TODO: Clean this up
                                        help_text=_("Select this, if you want to publish this document anonymously"))
 
     document_slug = models.SlugField()

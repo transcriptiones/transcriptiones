@@ -61,7 +61,7 @@ class DocumentAdmin(admin.ModelAdmin):
         if not obj.pk:
             # If generated in the admin, use the currently logged in user as submitter
             obj.submitted_by = request.user
-        super().save_model(request, obj, form, change)
+        obj.save(force_update=True)
 
     def get_queryset(self, request):
         # use all_objects instead of the default manager
