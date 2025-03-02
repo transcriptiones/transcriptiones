@@ -11,6 +11,7 @@ InstitutionForm = select2_modelform(Institution, attrs={'width': '250px'})
 class InstitutionAdmin(admin.ModelAdmin):
     """Admin model for the institutions. """
     list_display = ('institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug')
+    search_fields = ('institution_name',)
     prepopulated_fields = {'institution_slug': ('institution_name',)}
     # form = InstitutionForm
 
@@ -19,6 +20,7 @@ class RefNumberAdmin(admin.ModelAdmin):
     """Admin model for the reference numbers. """
 
     list_display = ('ref_number_name', 'ref_number_title', 'holding_institution', 'ref_number_slug')
+    search_fields = ('ref_number_name', 'ref_number_title', 'holding_institution__institution_name')
     prepopulated_fields = {'ref_number_slug': ('ref_number_name',)}
 
 
