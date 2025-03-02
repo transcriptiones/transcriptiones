@@ -51,11 +51,16 @@ class DocumentAdmin(admin.ModelAdmin):
 
     form = DocumentAdminForm
 
-    list_display = ('title_name', 'parent_ref_number', 'document_slug', 'version_number')
+    list_display = ('title_name', 'institution_name', 'parent_ref_number', 'version_number', 'document_utc_add')
     list_filter = (ActiveDocumentListFilter,)
+    search_fields = ['title_name', 'parent_ref_number__holding_institution__institution_name', 'parent_ref_number__ref_number_name']
     prepopulated_fields = {'document_slug': ('title_name',)}
     readonly_fields = ('submitted_by', 'document_utc_add')
     actions = None
+
+    @admin.display(description='institution')
+    def institution_name(self, obj):
+        return obj.parent_ref_number.holding_institution.institution_name
 
     def save_model(self, request, obj: Document, form, change):
         if not obj.pk:
