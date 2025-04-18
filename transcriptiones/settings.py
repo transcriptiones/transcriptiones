@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'bsmodals',
     'django_filters',
     'bootstrap4',
-    'easy_pdf',
     'rest_framework',
     'dal',              # Remove
     'dal_select2',      # Remove
