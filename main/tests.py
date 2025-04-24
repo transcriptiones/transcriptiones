@@ -204,20 +204,20 @@ class CleanupTestCase(TestCase):
 
     def test_user_cleanup(self):
         self.assertEqual(User.objects.all().count(), 3)
-        cleanup_users()
+        cleanup_users(dry_run=False)
         self.assertEqual(User.objects.all().count(), 2)
 
     def test_inst_cleanup(self):
         self.assertEqual(Institution.objects.all().count(), 2)
-        cleanup_inst()
+        cleanup_inst(dry_run=False)
         self.assertEqual(Institution.objects.all().count(), 1)
 
     def test_ref_cleanup(self):
         self.assertEqual(RefNumber.objects.all().count(), 2)
-        cleanup_ref()
+        cleanup_ref(dry_run=False)
         self.assertEqual(RefNumber.objects.all().count(), 1)
 
     def test_author_cleanup(self):
         self.assertEqual(Author.objects.all().count(), 2)
-        cleanup_author()
+        cleanup_author(dry_run=False)
         self.assertEqual(Author.objects.all().count(), 1)
