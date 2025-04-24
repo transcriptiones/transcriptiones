@@ -152,6 +152,15 @@ class CleanupTestCase(TestCase):
         user_go.set_password('12345')
         user_go.save()
 
+        user_stay_2 = User.objects.create(username='stay2',
+                                        first_name='Stacy2',
+                                        last_name='Rest2',
+                                        email='stay@here2.com',
+                                        is_staff=False,
+                                        email_confirmed=True)
+        user_stay_2.set_password('12345')
+        user_stay_2.save()
+
         inst_stay = Institution.objects.create(institution_name='Stayarchive',
                                    street='somestreet',
                                    zip_code='1234',
@@ -194,9 +203,9 @@ class CleanupTestCase(TestCase):
                                           author_utc_add=timezone.now() - datetime.timedelta(50))
 
     def test_user_cleanup(self):
-        self.assertEqual(User.objects.all().count(), 2)
+        self.assertEqual(User.objects.all().count(), 3)
         cleanup_users()
-        self.assertEqual(User.objects.all().count(), 1)
+        self.assertEqual(User.objects.all().count(), 2)
 
     def test_inst_cleanup(self):
         self.assertEqual(Institution.objects.all().count(), 2)
