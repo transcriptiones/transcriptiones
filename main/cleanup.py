@@ -12,7 +12,7 @@ def cleanup_all(hours=48, dry_run=True):
     cleanup_author(hours, dry_run)
 
 
-def cleanup_users(hours = 48, dry_run=True):
+def cleanup_users(hours=48, dry_run=True):
     users = User.objects.annotate(d_count=Count('contributions')).filter(email_confirmed=False,
                                                                          is_active=False,
                                                                          date_joined__lte=timezone.now() - datetime.timedelta(hours=hours),
