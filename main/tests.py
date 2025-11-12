@@ -1,9 +1,12 @@
+import datetime
+
 from django.test import TestCase
 from django.test import Client
+from django.utils import timezone
 
-from cron import send_weekly_notification_email
-from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification, \
-    UserManager
+from main.cron import send_weekly_notification_email
+from main.cleanup import cleanup_users, cleanup_inst, cleanup_ref, cleanup_author
+from main.models import Document, RefNumber, Institution, User, SourceType, UserSubscription, UserNotification, UserManager, Author
 
 
 class MailTestCase(TestCase):
@@ -127,3 +130,105 @@ class AnimalTestCase(TestCase):
         pass
 
 
+
+class CleanupTestCase(TestCase):
+    def setUp(self):
+        user_stay = User.objects.create(username='stay',
+                                        first_name='Stacy',
+                                        last_name='Rest',
+                                        email='stay@here.com',
+                                        is_staff=False)
+        user_stay.set_password('12345')
+        user_stay.save()
+
+        user_go = User.objects.create(username='go',
+                                      first_name='Goran',
+                                      last_name='Flee',
+                                      email='go@away.com',
+                                      is_staff=False,
+                                      email_confirmed=False,
+                                      is_active=False,
+                                      date_joined=timezone.now() - datetime.timedelta(hours=50))
+        user_go.set_password('12345')
+        user_go.save()
+
+        user_stay_2 = User.objects.create(username='stay2',
+                                        first_name='Stacy2',
+                                        last_name='Rest2',
+                                        email='stay@here2.com',
+                                        is_staff=False,
+                                        email_confirmed=True)
+        user_stay_2.set_password('12345')
+        user_stay_2.save()
+
+        inst_stay = Institution.objects.create(institution_name='Stayarchive',
+                                   street='somestreet',
+                                   zip_code='1234',
+                                   city='somecity',
+                                   country='ch',
+                                   site_url='https://stayarchive.ch',
+                                   institution_slug='stayarchive',
+                                   created_by_id=user_stay.pk)
+
+        inst_stay2 = Institution.objects.create(institution_name='Archive Tostay',
+                                   street='somestreet',
+                                   zip_code='1234',
+                                   city='Lomé',
+                                   country='tg',
+                                   site_url='https://tostayarchive.com',
+                                   institution_slug='tostayarchive',
+                                   created_by_id=user_stay.pk,
+                                   institution_utc_add=timezone.now() - datetime.timedelta(50),
+                                   ref_url_required=True,)
+
+        inst_go = Institution.objects.create(institution_name='Archive Togo',
+                                   street='somestreet',
+                                   zip_code='1234',
+                                   city='Lomé',
+                                   country='tg',
+                                   site_url='https://togoarchive.ch',
+                                   institution_slug='togoarchive',
+                                   created_by_id=user_stay.pk,
+                                   institution_utc_add=timezone.now() - datetime.timedelta(50),)
+
+        ref_stay = RefNumber.objects.create(holding_institution=inst_stay,
+                                            ref_number_name='#1234',
+                                            ref_number_title='Ref Title',
+                                            collection_link='https://whatever.ch',
+                                            ref_number_slug='1234',
+                                            created_by_id=user_stay.pk)
+
+        ref_go = RefNumber.objects.create(holding_institution=inst_stay,
+                                          ref_number_name='#5678',
+                                          ref_number_title='Ref Title 2',
+                                          collection_link='https://whatever.ch',
+                                          ref_number_slug='5678',
+                                          created_by_id=user_stay.pk,
+                                          ref_number_utc_add=timezone.now() - datetime.timedelta(50))
+
+        author_stay = Author.objects.create(author_name='Stay',
+                                            created_by_id=user_stay.pk)
+
+        author_go = Author.objects.create(author_name='Golem',
+                                          created_by_id=user_stay.pk,
+                                          author_utc_add=timezone.now() - datetime.timedelta(50))
+
+    def test_user_cleanup(self):
+        self.assertEqual(User.objects.all().count(), 3)
+        cleanup_users(dry_run=False)
+        self.assertEqual(User.objects.all().count(), 2)
+
+    def test_inst_cleanup(self):
+        self.assertEqual(Institution.objects.all().count(), 3)
+        cleanup_inst(dry_run=False)
+        self.assertEqual(Institution.objects.all().count(), 2)
+
+    def test_ref_cleanup(self):
+        self.assertEqual(RefNumber.objects.all().count(), 2)
+        cleanup_ref(dry_run=False)
+        self.assertEqual(RefNumber.objects.all().count(), 1)
+
+    def test_author_cleanup(self):
+        self.assertEqual(Author.objects.all().count(), 2)
+        cleanup_author(dry_run=False)
+        self.assertEqual(Author.objects.all().count(), 1)

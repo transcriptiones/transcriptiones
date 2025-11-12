@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views.generic import DetailView
-import easy_pdf.rendering
 
 from main.export import export
 from main.models import Document

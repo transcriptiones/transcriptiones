@@ -5,6 +5,7 @@ from django.db.models import Q, UniqueConstraint
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _, get_language
+from django.utils import timezone
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from partial_date import PartialDateField
@@ -44,7 +45,7 @@ class Institution(models.Model):
                                blank=True,
                                help_text=_("URL of the website"))
 
-    institution_utc_add = models.DateTimeField(auto_now_add=True)
+    institution_utc_add = models.DateTimeField(default=timezone.now)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    verbose_name=_("Created by"),
@@ -114,7 +115,7 @@ class RefNumber(models.Model):
                                       blank=True,
                                       help_text=_("Link to the collection"))
 
-    ref_number_utc_add = models.DateTimeField(auto_now_add=True)
+    ref_number_utc_add = models.DateTimeField(default=timezone.now)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    verbose_name=_("Created by"),
@@ -193,6 +194,8 @@ class Author(models.Model):
                                        related_name="author_updater",
                                        blank=True, null=True,
                                        default=None)
+
+    author_utc_add = models.DateTimeField(default=timezone.now)
 
     class Meta:
         verbose_name = _("Document Scribe")
@@ -778,7 +781,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Is the user active? Users get deactivated instead of deleted.'))
 
     date_joined = models.DateTimeField(verbose_name=_('Date joined'),
-                                       auto_now_add=True)
+                                       default=timezone.now,)
 
     mark_anonymous = models.BooleanField(verbose_name=_('Mark anonymous by default'),
                                          default=False,
