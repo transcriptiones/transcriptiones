@@ -170,6 +170,17 @@ class CleanupTestCase(TestCase):
                                    institution_slug='stayarchive',
                                    created_by_id=user_stay.pk)
 
+        inst_stay2 = Institution.objects.create(institution_name='Archive Tostay',
+                                   street='somestreet',
+                                   zip_code='1234',
+                                   city='Lomé',
+                                   country='tg',
+                                   site_url='https://tostayarchive.com',
+                                   institution_slug='tostayarchive',
+                                   created_by_id=user_stay.pk,
+                                   institution_utc_add=timezone.now() - datetime.timedelta(50),
+                                   ref_url_required=True,)
+
         inst_go = Institution.objects.create(institution_name='Archive Togo',
                                    street='somestreet',
                                    zip_code='1234',
@@ -208,9 +219,9 @@ class CleanupTestCase(TestCase):
         self.assertEqual(User.objects.all().count(), 2)
 
     def test_inst_cleanup(self):
-        self.assertEqual(Institution.objects.all().count(), 2)
+        self.assertEqual(Institution.objects.all().count(), 3)
         cleanup_inst(dry_run=False)
-        self.assertEqual(Institution.objects.all().count(), 1)
+        self.assertEqual(Institution.objects.all().count(), 2)
 
     def test_ref_cleanup(self):
         self.assertEqual(RefNumber.objects.all().count(), 2)

@@ -30,7 +30,8 @@ def cleanup_users(hours=48, dry_run=True):
 
 def cleanup_inst(hours=48, dry_run=True):
     insts = Institution.objects.annotate(ref_count=Count('refnumber')).filter(ref_count=0,
-                                                                              institution_utc_add__lte=timezone.now() - datetime.timedelta(hours=hours))
+                                                                              institution_utc_add__lte=timezone.now() - datetime.timedelta(hours=hours),
+                                                                              ref_url_required=False)
 
     if dry_run:
         with open("insts_to_delete.txt", "w", encoding='utf-8') as f:
