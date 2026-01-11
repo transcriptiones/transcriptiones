@@ -13,7 +13,7 @@ class InstitutionAdmin(admin.ModelAdmin):
     list_display = ('institution_name', 'street', 'zip_code', 'city', 'country', 'site_url', 'institution_slug')
     search_fields = ('institution_name',)
     prepopulated_fields = {'institution_slug': ('institution_name',)}
-    readonly_fields = {'created_by', 'last_update_by'}
+    readonly_fields = ['created_by', 'last_update_by']
     # form = InstitutionForm
 
 
@@ -23,7 +23,7 @@ class RefNumberAdmin(admin.ModelAdmin):
     list_display = ('ref_number_name', 'ref_number_title', 'holding_institution', 'ref_number_slug')
     search_fields = ('ref_number_name', 'ref_number_title', 'holding_institution__institution_name')
     prepopulated_fields = {'ref_number_slug': ('ref_number_name',)}
-    readonly_fields = {'created_by', 'last_update_by'}
+    readonly_fields = ['created_by', 'last_update_by']
 
 class DocumentAdminForm(ModelForm):
     """Overwrites the Admin form for the Document object to use the ckEditor as widget for the transcription."""
