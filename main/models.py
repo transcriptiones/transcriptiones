@@ -881,18 +881,6 @@ class UserSubscription(models.Model):
     object_id = models.BigIntegerField()
 
 
-class UserMessage(models.Model):
-    receiving_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tc_msg_rec_user')
-    sending_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tc_msg_send_user')
-
-    subject = models.CharField(max_length=250)
-    message = models.TextField()
-
-    # 0 = new, 1 = read
-    viewing_state = models.IntegerField(default=0)
-    sending_time = models.DateTimeField(auto_now_add=True)
-
-
 class UserNotification(models.Model):
     subscription = models.ForeignKey(UserSubscription, null=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

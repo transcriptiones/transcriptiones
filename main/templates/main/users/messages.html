@@ -7,14 +7,14 @@
 {% load crispy_forms_tags %}
 
 {% block page_title %}
-    {% translate 'Messages' %}
+    {% translate 'Notifications' %}
 {%  endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb _('Users') "" %}
     {% breadcrumb request.user.username "main:profile" %}
-    {% breadcrumb _('Messages') '' %}
+    {% breadcrumb _('Notifications') '' %}
 {% endblock %}
 
 {% block content %}
@@ -29,12 +29,12 @@
              </p>
             {% render_table table %}
         {% else %}
-            {% translate 'You have no messages. You can send messages to users via their profile page.' %}
+            {% translate 'You have no notifications.' %}
         {% endif %}
     {% endcard %}
 
     {% card 'message_options_card' _('Your Email Notification Options') %}
-            <p>{% translate 'How do you want to to be notified if you receive messages?' %}</p>
+            <p>{% translate 'How do you want to to be notified if you receive notifications?' %}</p>
             {% crispy form %}
     {% endcard %}
 
@@ -55,7 +55,7 @@
 
         $(document).ready(function() {
             $('#do-delete-all').click(function () {
-                bsmodals_confirm('Delete all messages?', ' Do you really want to delete all your messages? This cannot be undone.', (result) => {
+                bsmodals_confirm('Delete all notifications?', ' Do you really want to delete all your notifications? This cannot be undone.', (result) => {
                     if (result) {
                         location.href="{% url 'main:messages_delete_all' %}"
 

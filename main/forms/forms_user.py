@@ -12,37 +12,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,\
     PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
-from main.models import User, UserMessage
+from main.models import User
 from main.forms.forms_helper import initialize_form_helper, get_popover_html
-
-
-class WriteMessageForm(forms.ModelForm):
-    """Form to write a message to another user."""
-
-    captcha = ReCaptchaField()
-
-    def __init__(self, *args, **kwargs):
-        rec_user = kwargs.pop('user', None)
-        subject = kwargs.pop('subject', None)
-        message = kwargs.pop('message', None)
-
-        super(WriteMessageForm, self).__init__(*args, **kwargs)
-        self.helper = initialize_form_helper()
-        self.helper.add_input(Submit('submit', _('Send Message'), css_class='btn-primary'))
-        self.helper.form_method = 'POST'
-
-        if rec_user:
-            self.fields['receiving_user'].initial = rec_user
-        if subject:
-            self.fields['subject'].initial = subject
-        if message:
-            self.fields['message'].initial = message
-
-        self.fields['receiving_user'].disabled = True
-
-    class Meta:
-        model = UserMessage
-        fields = ('receiving_user', 'subject', 'message')
 
 
 class UserMessageOptionsForm(forms.ModelForm):

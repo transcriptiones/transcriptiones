@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-19 14:20+0200\n"
+"POT-Creation-Date: 2026-01-11 17:37+0100\n"
 "PO-Revision-Date: 2024-10-19 14:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -74,15 +74,15 @@ msgstr ""
 msgid "Reference Number or Title contain"
 msgstr "Signatur oder Titel der Verzeichniseinheit enthält"
 
-#: .\main\filters.py:85 .\main\models.py:831 .\main\models.py:867
+#: .\main\filters.py:85 .\main\models.py:838 .\main\models.py:874
 msgid "User"
 msgstr "Benutzer*in"
 
-#: .\main\filters.py:86 .\main\models.py:832
+#: .\main\filters.py:86 .\main\models.py:839
 msgid "Staff"
 msgstr "Mitarbeiter*in"
 
-#: .\main\filters.py:87 .\main\models.py:833
+#: .\main\filters.py:87 .\main\models.py:840
 msgid "Admin"
 msgstr "Administrator*in"
 
@@ -119,7 +119,7 @@ msgid "Send Newsletter"
 msgstr "Newsletter senden"
 
 #: .\main\forms\forms_edit.py:22 .\main\forms\forms_edit.py:81
-#: .\main\forms\forms_upload.py:80 .\main\forms\forms_user.py:103
+#: .\main\forms\forms_upload.py:80 .\main\forms\forms_user.py:74
 msgid "Accept Terms of Service"
 msgstr "Nutzungsbedingungen akzeptieren"
 
@@ -133,12 +133,12 @@ msgstr ""
 "zustimmen, dass alle hochgeladenen Transkriptionen einer %s unterliegen."
 
 #: .\main\forms\forms_edit.py:27 .\main\forms\forms_edit.py:86
-#: .\main\forms\forms_upload.py:84 .\main\forms\forms_user.py:107
+#: .\main\forms\forms_upload.py:84 .\main\forms\forms_user.py:78
 msgid "terms of service"
 msgstr "Nutzungsbedingungen"
 
 #: .\main\forms\forms_edit.py:28 .\main\forms\forms_edit.py:87
-#: .\main\forms\forms_upload.py:85 .\main\forms\forms_user.py:108
+#: .\main\forms\forms_upload.py:85 .\main\forms\forms_user.py:79
 msgid ""
 "<a href=\"https://creativecommons.org/share-your-work/public-domain/cc0/\" "
 "target=\"_blank\" rel=\"noopener noreferrer\">CC0 licence</a>"
@@ -152,7 +152,7 @@ msgstr "Quellentyp (übergeordnet)"
 
 #: .\main\forms\forms_edit.py:67 .\main\forms\forms_edit.py:73
 #: .\main\forms\forms_upload.py:59 .\main\forms\forms_upload.py:65
-#: .\main\models.py:343 .\main\models.py:350
+#: .\main\models.py:349 .\main\models.py:356
 msgid "(Unknown)"
 msgstr "(Unbekannt)"
 
@@ -168,8 +168,8 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#: .\main\forms\forms_helper.py:37 .\main\models.py:22 .\main\models.py:66
-#: .\main\models.py:100 .\main\models.py:869
+#: .\main\forms\forms_helper.py:37 .\main\models.py:23 .\main\models.py:67
+#: .\main\models.py:101 .\main\models.py:876
 #: .\main\templates\main\details\institution_detail.html:8
 #: .\main\templates\main\upload\create_document_backup.html:28
 msgid "Institution"
@@ -226,7 +226,6 @@ msgid "Unsubscribe"
 msgstr "Abbestellen"
 
 #: .\main\forms\forms_info.py:52 .\main\forms\forms_upload.py:287
-#: .\main\forms\forms_user.py:31
 msgid "Send Message"
 msgstr "Nachricht senden"
 
@@ -355,31 +354,31 @@ msgstr ""
 "Bitte beschreiben Sie die Dokumente, die Sie hochladen möchten. Seien Sie so "
 "spezifisch wie möglich"
 
-#: .\main\forms\forms_user.py:54 .\main\forms\forms_user.py:68
+#: .\main\forms\forms_user.py:25 .\main\forms\forms_user.py:39
 msgid "Save"
 msgstr "Speichern"
 
-#: .\main\forms\forms_user.py:80
+#: .\main\forms\forms_user.py:51
 msgid "Email address. We will send an activation link to this address."
 msgstr ""
 "E-Mail-Adresse. Wir werden einen Aktivierungslink an diese Adresse "
 "verschicken."
 
-#: .\main\forms\forms_user.py:86
+#: .\main\forms\forms_user.py:57
 msgid "Choose your transcriptiones password."
 msgstr "Setzen Sie Ihr transcriptiones-Passwort."
 
-#: .\main\forms\forms_user.py:93 .\main\forms\forms_user.py:165
-#: .\main\forms\forms_user.py:230
+#: .\main\forms\forms_user.py:64 .\main\forms\forms_user.py:136
+#: .\main\forms\forms_user.py:201
 msgid "Enter the same password as before, for verification."
 msgstr "Wiederholen Sie zur Bestätigung das Password."
 
-#: .\main\forms\forms_user.py:99 .\main\templates\main\base.html:320
+#: .\main\forms\forms_user.py:70 .\main\templates\main\base.html:320
 #: .\main\templates\main\base_copy.html:128
 msgid "Register"
 msgstr "Registrieren"
 
-#: .\main\forms\forms_user.py:105
+#: .\main\forms\forms_user.py:76
 #, python-format
 msgid ""
 "In order to sign up you are required to accept the %s and agree that all "
@@ -388,7 +387,7 @@ msgstr ""
 "Um sich zu registrieren müssen Sie unsere %s akzeptieren und zustimmen, dass "
 "alle hochgeladenen Transkriptionen einer %s unterliegen."
 
-#: .\main\forms\forms_user.py:141 .\main\templates\main\base.html:318
+#: .\main\forms\forms_user.py:112 .\main\templates\main\base.html:318
 #: .\main\templates\main\base_copy.html:125
 #: .\main\templates\main\sidebar.html:73
 #: .\main\templates\main\users\account_activation_invalid.html:7
@@ -403,29 +402,29 @@ msgstr ""
 msgid "Login"
 msgstr "Anmelden"
 
-#: .\main\forms\forms_user.py:151
+#: .\main\forms\forms_user.py:122
 msgid "Enter your old transcriptiones password."
 msgstr "Geben Sie Ihr altes transcriptiones-Passwort ein."
 
-#: .\main\forms\forms_user.py:158 .\main\forms\forms_user.py:223
+#: .\main\forms\forms_user.py:129 .\main\forms\forms_user.py:194
 msgid "Set a new password for transcriptiones."
 msgstr "Setzen Sie ein neues Passwort für transcriptiones."
 
-#: .\main\forms\forms_user.py:178
+#: .\main\forms\forms_user.py:149
 #: .\main\templates\main\upload\edit_document_transcription.html:54
 #: .\main\templates\main\upload\edit_meta.html:100
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: .\main\forms\forms_user.py:181
+#: .\main\forms\forms_user.py:152
 msgid "You cannot change your username"
 msgstr "Sie können Ihren Benutzernamen nicht ändern"
 
-#: .\main\forms\forms_user.py:182
+#: .\main\forms\forms_user.py:153
 msgid "You can change your email address in the respective form"
 msgstr "Sie können Ihre E-Mail-Adresse im entsprechenden Formular ändern"
 
-#: .\main\forms\forms_user.py:213 .\main\forms\forms_user.py:237
+#: .\main\forms\forms_user.py:184 .\main\forms\forms_user.py:208
 #: .\main\templates\main\users\password_reset.html:9
 #: .\main\templates\main\users\password_reset.html:14
 #: .\main\templates\main\users\password_reset_complete.html:12
@@ -434,11 +433,11 @@ msgstr "Sie können Ihre E-Mail-Adresse im entsprechenden Formular ändern"
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
-#: .\main\forms\forms_user.py:243
+#: .\main\forms\forms_user.py:214
 msgid "Your Email Address"
 msgstr "Ihre E-Mail-Adresse"
 
-#: .\main\forms\forms_user.py:244
+#: .\main\forms\forms_user.py:215
 msgid ""
 "Please enter the email address you registered with. We will send you an "
 "email with your username."
@@ -446,23 +445,23 @@ msgstr ""
 "Bitte geben Sie die E-Mail-Adresse an, mit der Sie sich registriert haben. "
 "Wir werden Ihnen Ihren Benutzernamen an diese Adresse senden."
 
-#: .\main\forms\forms_user.py:250
+#: .\main\forms\forms_user.py:221
 #: .\main\templates\main\users\request_username.html:18
 #: .\main\templates\main\users\request_username_done.html:12
 msgid "Request Username"
 msgstr "Benutzername anfordern"
 
-#: .\main\forms\forms_user.py:256
+#: .\main\forms\forms_user.py:227
 msgid "Your New Email Address"
 msgstr "Ihre neue E-Mail-Adresse"
 
-#: .\main\forms\forms_user.py:257
+#: .\main\forms\forms_user.py:228
 msgid "Please enter the email address you want to use for transcriptiones."
 msgstr ""
 "Bitte geben Sie die E-Mail-Adresse an, die Sie für transcriptiones verwenden "
 "möchten."
 
-#: .\main\forms\forms_user.py:262
+#: .\main\forms\forms_user.py:233
 msgid "Change Address"
 msgstr "Adresse ändern"
 
@@ -595,8 +594,8 @@ msgstr "Eine Nachricht von transcriptiones.ch"
 
 #: .\main\model_info.py:47
 msgid ""
-"<small {\" style=color:red\" if api_auth_key_expired else \"\"}"
-">({\"Expired\" if api_auth_key_expired else \"Expires\"} on {user."
+"<small {\" style=color:red\" if api_auth_key_expired else \"\"}>({\"Expired"
+"\" if api_auth_key_expired else \"Expires\"} on {user."
 "api_auth_key_expiration})</small>"
 msgstr ""
 "<small {\" style=color:red\" if api_auth_key_expired else \"\"}"
@@ -821,7 +820,7 @@ msgstr ""
 "Originaldokuments einfügen. Ausserdem können Sie hier Links zu externen "
 "Ressourcen wie Digitalisaten oder Editionen platzieren."
 
-#: .\main\model_info.py:294 .\main\models.py:478
+#: .\main\model_info.py:294 .\main\models.py:484
 msgid "Illuminations"
 msgstr "Illuminationen"
 
@@ -907,7 +906,7 @@ msgstr "Strasse"
 msgid "Enter the street name with the number."
 msgstr "Geben Sie die Strasse mit der Hausnummer ein."
 
-#: .\main\model_info.py:323 .\main\models.py:31
+#: .\main\model_info.py:323 .\main\models.py:32
 msgid "Zip Code"
 msgstr "Postleitzahl"
 
@@ -915,7 +914,7 @@ msgstr "Postleitzahl"
 msgid "Enter the zip code of the institution."
 msgstr "Geben Sie die Postleitzahl der Institution ein."
 
-#: .\main\model_info.py:325 .\main\models.py:35 .\main\models.py:37
+#: .\main\model_info.py:325 .\main\models.py:36 .\main\models.py:38
 msgid "City"
 msgstr "Stadt"
 
@@ -923,7 +922,7 @@ msgstr "Stadt"
 msgid "Enter the city."
 msgstr "Geben Sie die Stadt ein."
 
-#: .\main\model_info.py:327 .\main\models.py:39 .\main\models.py:40
+#: .\main\model_info.py:327 .\main\models.py:40 .\main\models.py:41
 msgid "Country"
 msgstr "Land"
 
@@ -949,7 +948,7 @@ msgstr "Institution"
 msgid "The institution which holds the document with this reference number."
 msgstr "Die Institution, die das Dokument mit dieser Signatur besitzt."
 
-#: .\main\model_info.py:339 .\main\models.py:104 .\main\models.py:363
+#: .\main\model_info.py:339 .\main\models.py:105 .\main\models.py:369
 #: .\main\templates\main\upload\create_document_backup.html:40
 msgid "Reference Number"
 msgstr "Signatur"
@@ -988,7 +987,7 @@ msgstr ""
 "Verzeichniseinheit im Katalog der Institution. Muss mit http:// oder "
 "https:// beginnen"
 
-#: .\main\model_info.py:358 .\main\models.py:740
+#: .\main\model_info.py:358 .\main\models.py:747
 msgid "Username"
 msgstr "Benutzername"
 
@@ -1000,7 +999,7 @@ msgstr ""
 "Der Name muss einmalig sein und darf keine Sonderzeichen enthalten. Er wird "
 "anderen Benutzern angezeigt."
 
-#: .\main\model_info.py:361 .\main\models.py:746
+#: .\main\model_info.py:361 .\main\models.py:753
 msgid "First name"
 msgstr "Vorname"
 
@@ -1008,7 +1007,7 @@ msgstr "Vorname"
 msgid "Your given name. This information will not be public."
 msgstr "Ihr Vorname. Diese Information ist nicht öffentlich einsehbar."
 
-#: .\main\model_info.py:363 .\main\models.py:751
+#: .\main\model_info.py:363 .\main\models.py:758
 msgid "Last name"
 msgstr "Nachname"
 
@@ -1082,39 +1081,39 @@ msgstr "Ihr altes Passwort"
 msgid "Enter your old password for verification."
 msgstr "Geben Sie zur Verifizierung Ihr altes Passwort ein."
 
-#: .\main\models.py:25
+#: .\main\models.py:26
 msgid "Complete name of the institution"
 msgstr "Vollständiger Name der Institution"
 
-#: .\main\models.py:27
+#: .\main\models.py:28
 msgid "Street"
 msgstr "Strasse"
 
-#: .\main\models.py:29
+#: .\main\models.py:30
 msgid "Street with number"
 msgstr "Strasse mit Hausnummer"
 
-#: .\main\models.py:33
+#: .\main\models.py:34
 msgid "Zip code"
 msgstr "Postleitzahl"
 
-#: .\main\models.py:42
+#: .\main\models.py:43
 msgid "Website"
 msgstr "Webseite"
 
-#: .\main\models.py:45
+#: .\main\models.py:46
 msgid "URL of the website"
 msgstr "URL der Website"
 
-#: .\main\models.py:50 .\main\models.py:120 .\main\models.py:183
+#: .\main\models.py:51 .\main\models.py:121 .\main\models.py:187
 msgid "Created by"
 msgstr "Erstellt von"
 
-#: .\main\models.py:55 .\main\models.py:125 .\main\models.py:188
+#: .\main\models.py:56 .\main\models.py:126 .\main\models.py:192
 msgid "Updated by"
 msgstr "Hochgeladen von"
 
-#: .\main\models.py:67 .\main\templates\main\admin\admin.html:29
+#: .\main\models.py:68 .\main\templates\main\admin\admin.html:29
 #: .\main\templates\main\base_copy.html:115
 #: .\main\templates\main\details\browse_options.html:21
 #: .\main\templates\main\details\document_detail.html:18
@@ -1129,115 +1128,115 @@ msgstr "Hochgeladen von"
 msgid "Institutions"
 msgstr "Institutionen"
 
-#: .\main\models.py:102
+#: .\main\models.py:103
 msgid "Institution which holds this reference number and document"
 msgstr "Die Institution, die das Dokument mit dieser Signatur besitzt"
 
-#: .\main\models.py:106
+#: .\main\models.py:107
 msgid "Reference number of the collection containing a document"
 msgstr "Signatur der Sammlung, die ein Dokument enthält"
 
-#: .\main\models.py:108 .\main\models.py:358
+#: .\main\models.py:109 .\main\models.py:364
 msgid "Title"
 msgstr "Titel"
 
-#: .\main\models.py:110
+#: .\main\models.py:111
 msgid "Title of the collection"
 msgstr "Titel der Sammlung"
 
-#: .\main\models.py:112
+#: .\main\models.py:113
 msgid "Static URL"
 msgstr "Statische URL"
 
-#: .\main\models.py:115
+#: .\main\models.py:116
 msgid "Link to the collection"
 msgstr "Link zur Sammlung"
 
-#: .\main\models.py:138
+#: .\main\models.py:139
 msgid "reference number"
 msgstr "Signatur"
 
-#: .\main\models.py:139
+#: .\main\models.py:140
 msgid "reference numbers"
 msgstr "Signaturen"
 
-#: .\main\models.py:173
+#: .\main\models.py:177
 msgid "Name of Scribe"
 msgstr "Name des/der Schreiber*in"
 
-#: .\main\models.py:175
+#: .\main\models.py:179
 msgid "Name of the scribe of the original document."
 msgstr "Name des/der Schreiber*in des Originaldokuments."
 
-#: .\main\models.py:177
+#: .\main\models.py:181
 msgid "Link to GND entry"
 msgstr "Link zum GND-Eintrag"
 
-#: .\main\models.py:180
+#: .\main\models.py:184
 msgid "Persistent URL to the GND entry of the scribe."
 msgstr "Persistente URL zum GND-Eintrag des/der Schreiber*in."
 
-#: .\main\models.py:195
+#: .\main\models.py:201
 msgid "Document Scribe"
 msgstr "Schreiber*in des Dokuments"
 
-#: .\main\models.py:196
+#: .\main\models.py:202
 msgid "Document Scribes"
 msgstr "Schreiber*innen des Dokuments"
 
-#: .\main\models.py:246
+#: .\main\models.py:252
 msgid "Source type"
 msgstr "Quellentyp"
 
-#: .\main\models.py:247
+#: .\main\models.py:253
 msgid "Source types"
 msgstr "Quellentypen"
 
-#: .\main\models.py:335
+#: .\main\models.py:341
 msgid "Paper"
 msgstr "Papier"
 
-#: .\main\models.py:336
+#: .\main\models.py:342
 msgid "Parchment"
 msgstr "Pergament"
 
-#: .\main\models.py:337
+#: .\main\models.py:343
 msgid "Papyrus"
 msgstr "Papyrus"
 
-#: .\main\models.py:338
+#: .\main\models.py:344
 msgid "Metal"
 msgstr "Metall"
 
-#: .\main\models.py:339
+#: .\main\models.py:345
 msgid "Textile"
 msgstr "Textilien"
 
-#: .\main\models.py:340
+#: .\main\models.py:346
 msgid "Stone"
 msgstr "Stein"
 
-#: .\main\models.py:341
+#: .\main\models.py:347
 msgid "Wood"
 msgstr "Holz"
 
-#: .\main\models.py:346
+#: .\main\models.py:352
 msgid "No page numbering"
 msgstr "Kein Paginierungssystem"
 
-#: .\main\models.py:347
+#: .\main\models.py:353
 msgid "Pagination"
 msgstr "Paginierung"
 
-#: .\main\models.py:348
+#: .\main\models.py:354
 msgid "Foliated"
 msgstr "Foliierung"
 
-#: .\main\models.py:352
+#: .\main\models.py:358
 msgid "Document UUID"
 msgstr "Dokument-UUID"
 
-#: .\main\models.py:355
+#: .\main\models.py:361
 msgid ""
 "ID of the first Version of this document. Is kept constant between versions "
 "of this document"
@@ -1245,29 +1244,29 @@ msgstr ""
 "ID der ersten Version dieses Dokuments. Wird zwischen den Versionen dieses "
 "Dokuments konstant gehalten"
 
-#: .\main\models.py:360
+#: .\main\models.py:366
 msgid "Title of the Document"
 msgstr "Titel des Dokuments"
 
-#: .\main\models.py:365
+#: .\main\models.py:371
 msgid "Reference number of the source"
 msgstr "Signatur der Quelle"
 
-#: .\main\models.py:368 .\main\templates\main\details\author_list.html:14
+#: .\main\models.py:374 .\main\templates\main\details\author_list.html:14
 #: .\main\templates\main\details\author_list.html:18
 #: .\main\templates\main\details\browse_options.html:39
 msgid "Scribes"
 msgstr "Schreiber*innen"
 
-#: .\main\models.py:370
+#: .\main\models.py:376
 msgid "Scribes of the source"
 msgstr "Schreiber*innen der Quelle"
 
-#: .\main\models.py:372
+#: .\main\models.py:378
 msgid "Creation Period Start"
 msgstr "Beginn des Herstellungszeitraums"
 
-#: .\main\models.py:373
+#: .\main\models.py:379
 msgid ""
 "When was the document written? Be as specific as possible. <br/>Valid "
 "fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY ('23.07.1643')"
@@ -1276,11 +1275,11 @@ msgstr ""
 "<br/>Gültige Formate: YYYY ('1792'), MM.YYYY ('01.1980'), TT.MM.YYYY "
 "('23.07.1643')"
 
-#: .\main\models.py:377
+#: .\main\models.py:383
 msgid "Creation Period End"
 msgstr "Ende des Herstellungszeitraums"
 
-#: .\main\models.py:380
+#: .\main\models.py:386
 msgid ""
 "If the document was created over a time span, please indicate the end time. "
 "<br/>Valid fromats: YYYY ('1792'), MM.YYYY ('01.1980'), DD.MM.YYYY "
@@ -1290,166 +1289,166 @@ msgstr ""
 "Endzeit an. <br/>Gültige Formate: YYYY ('1792'), MM.YYYY ('01.1980'), TT.MM."
 "YYYY ('23.07.1643')"
 
-#: .\main\models.py:385
+#: .\main\models.py:391
 msgid "Creation Location"
 msgstr "Herstellungsort"
 
-#: .\main\models.py:388
+#: .\main\models.py:394
 msgid "The City/Place where the source was created"
 msgstr "Die Stadt/der Ort, an dem die Quelle hergestellt wurde"
 
-#: .\main\models.py:391
+#: .\main\models.py:397
 msgid "Languages"
 msgstr "Sprachen"
 
-#: .\main\models.py:393
+#: .\main\models.py:399
 msgid "Languages used in the source"
 msgstr "In der Quelle verwendete Sprachen"
 
-#: .\main\models.py:396 .\main\models.py:870
+#: .\main\models.py:402 .\main\models.py:877
 msgid "Source Type"
 msgstr "Quellentyp"
 
-#: .\main\models.py:400
+#: .\main\models.py:406
 msgid "Type of the source"
 msgstr "Ojektart der Quelle"
 
-#: .\main\models.py:402
+#: .\main\models.py:408
 msgid "Writing Material"
 msgstr "Beschreibstoff"
 
-#: .\main\models.py:406
+#: .\main\models.py:412
 msgid "Which material is the Document written on?"
 msgstr "Auf welchem Material ist das Manuskript geschrieben?"
 
-#: .\main\models.py:408
+#: .\main\models.py:414
 msgid "Height"
 msgstr "Höhe"
 
-#: .\main\models.py:413
+#: .\main\models.py:419
 msgid "Height in centimeters (cm)"
 msgstr "Höhe in Zentimetern (cm)"
 
-#: .\main\models.py:415
+#: .\main\models.py:421
 msgid "Width"
 msgstr "Breite"
 
-#: .\main\models.py:420
+#: .\main\models.py:426
 msgid "Width in centimeters (cm)"
 msgstr "Breite in Zentimetern (cm)"
 
-#: .\main\models.py:422
+#: .\main\models.py:428
 msgid "Number of Pages"
 msgstr "Seitenzahl"
 
-#: .\main\models.py:425
+#: .\main\models.py:431
 msgid "The number of pages of the whole source"
 msgstr "Die Anzahl der Seiten der gesamten Quelle"
 
-#: .\main\models.py:427
+#: .\main\models.py:433
 msgid "Pagination System"
 msgstr "Paginierungssystem"
 
-#: .\main\models.py:431
+#: .\main\models.py:437
 msgid "How are the pages numbered?"
 msgstr "Wie sind die Seiten nummeriert?"
 
-#: .\main\models.py:433
+#: .\main\models.py:439
 msgid "Transcribed Parts of the Document"
 msgstr "Transkribierte Teile des Dokuments"
 
-#: .\main\models.py:434
+#: .\main\models.py:440
 msgid "List of the transcribed pages/chapters, etc."
 msgstr "Liste der transkribierten Seiten/Kapitel etc."
 
-#: .\main\models.py:436
+#: .\main\models.py:442
 msgid "Editorial Comments"
 msgstr "Redaktionelle Kommentare"
 
-#: .\main\models.py:438
+#: .\main\models.py:444
 msgid "Add editorial comments or remarks on the contents of the document"
 msgstr ""
 "Fügen Sie redaktionelle Kommentare oder Anmerkungen zum Inhalt des Dokuments "
 "an"
 
-#: .\main\models.py:440 .\main\templates\main\details\document_detail.html:64
+#: .\main\models.py:446 .\main\templates\main\details\document_detail.html:64
 #: .\main\templates\main\upload\create_document.html:78
 #: .\main\templates\main\upload\create_document_backup.html:58
 msgid "Transcript"
 msgstr "Transkription"
 
-#: .\main\models.py:441
+#: .\main\models.py:447
 msgid "Formatted text of your transcript"
 msgstr "Formatierter Text Ihrer Transkription"
 
-#: .\main\models.py:443
+#: .\main\models.py:449
 msgid "Upload Date"
 msgstr "Hochladedatum"
 
-#: .\main\models.py:446
+#: .\main\models.py:452
 msgid "Update Date"
 msgstr "Aktualisierungsdatum"
 
-#: .\main\models.py:450
+#: .\main\models.py:456
 msgid "Submitted by"
 msgstr "Hochgeladen von"
 
-#: .\main\models.py:453
+#: .\main\models.py:459
 msgid "Uploading user"
 msgstr "Hochladende*r Benutzer*in"
 
-#: .\main\models.py:456
+#: .\main\models.py:462
 msgid "Publish Anonymously"
 msgstr "Anonym veröffentlichen"
 
-#: .\main\models.py:458
+#: .\main\models.py:464
 msgid "Select this, if you want to publish this document anonymously"
 msgstr ""
 "Wählen Sie diese Option, wenn Sie dieses Dokument anonym veröffentlichen "
 "möchten"
 
-#: .\main\models.py:464
+#: .\main\models.py:470
 msgid "Changes"
 msgstr "Änderungen"
 
-#: .\main\models.py:467
+#: .\main\models.py:473
 msgid "A brief description of the applied changes"
 msgstr "Eine kurze Beschreibung der vorgenommenen Änderungen"
 
-#: .\main\models.py:469
+#: .\main\models.py:475
 msgid "Version Number"
 msgstr "Versionsnummer"
 
-#: .\main\models.py:471
+#: .\main\models.py:477
 msgid "Version number"
 msgstr "Versionsnummer"
 
-#: .\main\models.py:473
+#: .\main\models.py:479
 msgid "Seal"
 msgstr "Siegel"
 
-#: .\main\models.py:476
+#: .\main\models.py:482
 msgid "Are there any seals on this page?"
 msgstr "Gibt es Siegel auf dieser Seite?"
 
-#: .\main\models.py:481
+#: .\main\models.py:487
 msgid "Does the source contain painted miniatures (illuminations)?"
 msgstr "Enthält die Quelle gemalte Miniaturen (Illuminationen)?"
 
-#: .\main\models.py:487
+#: .\main\models.py:493
 msgid "document"
 msgstr "Dokument"
 
-#: .\main\models.py:488
+#: .\main\models.py:494
 msgid "documents"
 msgstr "Dokumente"
 
-#: .\main\models.py:645
+#: .\main\models.py:652
 #, python-brace-format
 msgid "Document \"{self.title_name}\" has changed"
 msgstr "Dokument \"{self.title_name}\" wurde verändert"
 
-#: .\main\models.py:646
+#: .\main\models.py:653
 #, python-brace-format
 msgid ""
 "The document {self.title_name} has changed.\n"
@@ -1458,11 +1457,11 @@ msgstr ""
 "Das Dokument {self.title_name} wurde verändert.\n"
 "\n"
 
-#: .\main\models.py:658
+#: .\main\models.py:665
 msgid "A Reference Number has changed"
 msgstr "Eine Signatur wurde verändert"
 
-#: .\main\models.py:659
+#: .\main\models.py:666
 #, python-brace-format
 msgid ""
 "The reference number \"{self.parent_ref_number.ref_number_name}\" has "
@@ -1472,11 +1471,11 @@ msgstr ""
 "Die Signatur \"{self.parent_ref_number.ref_number_name}\" wurde verändert.\n"
 "\n"
 
-#: .\main\models.py:670
+#: .\main\models.py:677
 msgid "A User has made changes"
 msgstr "Ein Benutzer hat Änderungen vorgenommen"
 
-#: .\main\models.py:671
+#: .\main\models.py:678
 #, python-brace-format
 msgid ""
 "The user \"{self.submitted_by.username}\" changed.\n"
@@ -1485,99 +1484,99 @@ msgstr ""
 "Der Benutzer \"{self.submitted_by.username}\" hat Änderungen vorgenommen.\n"
 "\n"
 
-#: .\main\models.py:694
+#: .\main\models.py:701
 msgid "Please enter an email address"
 msgstr "Bitte geben Sie eine E-Mail-Adresse ein"
 
-#: .\main\models.py:720
+#: .\main\models.py:727
 msgid "All superusers must have is_staff = True."
 msgstr "Alle Superuser müssen is_staff = True haben."
 
-#: .\main\models.py:722
+#: .\main\models.py:729
 msgid "All superusers must have is_superuser = True"
 msgstr "Alle Superuser müssen is_superuser = True haben"
 
-#: .\main\models.py:730 .\main\models.py:736
+#: .\main\models.py:737 .\main\models.py:743
 msgid "No notification Emails"
 msgstr "Keine Benachrichtigungs-E-Mails"
 
-#: .\main\models.py:731
+#: .\main\models.py:738
 msgid "Every time a subscribed document has changed."
 msgstr "Jedes Mal, wenn sich ein abonniertes Dokument geändert hat."
 
-#: .\main\models.py:732
+#: .\main\models.py:739
 msgid "Once a day, only if changes happened."
 msgstr "Einmal am Tag, nur wenn Änderungen stattgefunden haben."
 
-#: .\main\models.py:733
+#: .\main\models.py:740
 msgid "Once a week, only if changes happened."
 msgstr "Einmal pro Woche, nur wenn Änderungen stattgefunden haben."
 
-#: .\main\models.py:737
+#: .\main\models.py:744
 msgid "Every time a message is received."
 msgstr "Jedes Mal, wenn eine Nachricht empfangen wird."
 
-#: .\main\models.py:738
+#: .\main\models.py:745
 msgid "Once a day, only if you received messages."
 msgstr "Einmal täglich, nur wenn Sie Nachrichten erhalten haben."
 
-#: .\main\models.py:744
+#: .\main\models.py:751
 msgid "Provide a user name"
 msgstr "Geben Sie einen Benutzernamen an"
 
-#: .\main\models.py:749
+#: .\main\models.py:756
 msgid "Enter your first name(s)"
 msgstr "Geben Sie Ihre(n) Vorname(n) ein"
 
-#: .\main\models.py:754
+#: .\main\models.py:761
 msgid "Enter your last name"
 msgstr "Geben Sie Ihren Nachnamen ein"
 
-#: .\main\models.py:756
+#: .\main\models.py:763
 msgid "Email"
 msgstr "E-Mail"
 
-#: .\main\models.py:760
+#: .\main\models.py:767
 msgid "Enter your email address"
 msgstr "Geben Sie Ihre E-Mail-Adresse ein"
 
-#: .\main\models.py:762
+#: .\main\models.py:769
 msgid "Email confirmed"
 msgstr "E-Mail bestätigt"
 
-#: .\main\models.py:765
+#: .\main\models.py:772
 msgid "Has the user confirmed the email address?"
 msgstr "Hat der Benutzer die E-Mail-Adresse bestätigt?"
 
-#: .\main\models.py:767
+#: .\main\models.py:774
 msgid "Staff status"
 msgstr "Mitarbeiterstatus"
 
-#: .\main\models.py:769
+#: .\main\models.py:776
 msgid "Does the user have staff status and can thus login to the admin page?"
 msgstr ""
 "Hat der/die Benutzer*in einen Mitarbeiterstatus und kann sich somit auf der "
 "Admin-Seite anmelden?"
 
-#: .\main\models.py:771 .\main\models.py:844
+#: .\main\models.py:778 .\main\models.py:851
 msgid "Active"
 msgstr "Aktiv"
 
-#: .\main\models.py:774
+#: .\main\models.py:781
 msgid "Is the user active? Users get deactivated instead of deleted."
 msgstr ""
 "Ist das Benutzerkonto aktiv? Benutzerkonten werden deaktiviert statt "
 "gelöscht."
 
-#: .\main\models.py:776
+#: .\main\models.py:783
 msgid "Date joined"
 msgstr "Beitrittsdatum"
 
-#: .\main\models.py:779
+#: .\main\models.py:786
 msgid "Mark anonymous by default"
 msgstr "Standardmässig anonym veröffentlichen"
 
-#: .\main\models.py:781
+#: .\main\models.py:788
 msgid ""
 "If selected, your documents will be published anonymously by default. Can be "
 "changed on a document basis."
@@ -1585,81 +1584,81 @@ msgstr ""
 "Wenn diese Option ausgewählt ist, werden Ihre Dokumente standardmässig "
 "anonym veröffentlicht. Kann für jedes Dokument angepasst werden."
 
-#: .\main\models.py:784
+#: .\main\models.py:791
 msgid "Orcid"
 msgstr "ORCID"
 
-#: .\main\models.py:788
+#: .\main\models.py:795
 msgid "User id from https://orcid.org/"
 msgstr "Benutzer-ID von https://orcid.org/"
 
-#: .\main\models.py:790
+#: .\main\models.py:797
 msgid "Subscription Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Abonnementen"
 
-#: .\main\models.py:793
+#: .\main\models.py:800
 msgid "How often do you want to be notified about your subscribed documents?"
 msgstr ""
 "Wie oft möchten Sie über Ihre abonnierten Dokumente benachrichtigt werden?"
 
-#: .\main\models.py:796
+#: .\main\models.py:803
 msgid "Message Notification policy"
 msgstr "Häufigkeit von Benachrichtigungen aus Nachrichten"
 
-#: .\main\models.py:799
+#: .\main\models.py:806
 msgid "How often do you want to be notified about messages you receive?"
 msgstr ""
 "Wie oft möchten Sie über empfangene Nachrichten, benachrichtigt werden?"
 
-#: .\main\models.py:802
+#: .\main\models.py:809
 msgid "Subscription to owned documents"
 msgstr "Eigene Dokumente abonnieren"
 
-#: .\main\models.py:803
+#: .\main\models.py:810
 msgid ""
 "Do you want to be notified when your documents were edited by another user?"
 msgstr ""
 "Möchten Sie benachrichtigt werden, wenn Ihre Dokumente von einem/einer "
 "anderen Benutzer*in bearbeitet wurden?"
 
-#: .\main\models.py:808
+#: .\main\models.py:815
 msgid "Communication Language"
 msgstr "Kommunikationssprache"
 
-#: .\main\models.py:809
+#: .\main\models.py:816
 msgid "What is your preferred language for email communication?"
 msgstr "Was ist Ihre präferierte Sprache für die Kommunikation per E-Mail?"
 
-#: .\main\models.py:814
+#: .\main\models.py:821
 msgid "Secret API Key"
 msgstr "Geheimer API-Key"
 
-#: .\main\models.py:815
+#: .\main\models.py:822
 msgid "Use this key for API requests. Do not share!"
 msgstr "Benutzen Sie diesen Key für Ihre API-Requests. Nicht weitergeben!"
 
-#: .\main\models.py:845
+#: .\main\models.py:852
 msgid "Inactive"
 msgstr "Deaktiviert"
 
-#: .\main\models.py:865
+#: .\main\models.py:872
 msgid "Reference number"
 msgstr "Signatur"
 
-#: .\main\models.py:866 .\main\templates\main\details\document_detail.html:21
+#: .\main\models.py:873 .\main\templates\main\details\document_detail.html:21
 msgid "Document"
 msgstr "Dokument"
 
-#: .\main\models.py:868 .\main\templates\main\details\author_detail.html:8
+#: .\main\models.py:875 .\main\templates\main\details\author_detail.html:8
 #: .\main\templates\main\details\author_detail.html:14
 msgid "Scribe"
 msgstr "Schreiber*in"
 
-#: .\main\models.py:966
+#: .\main\models.py:961
 msgid "Default User Interface Language"
 msgstr "Standardsprache der Benutzeroberfläche"
 
-#: .\main\models.py:967
+#: .\main\models.py:962
 msgid "What is your preferred language?"
 msgstr "Was ist Ihre präferierte Sprache?"
 
@@ -1795,8 +1794,8 @@ msgstr ""
 "seine Leistungen anzubieten. Wir verwenden <strong>keine</strong> Tracking-"
 "Mechanismen oder Cookies von Dritten. Bitte bestätigen Sie, dass sie diese "
 "Information gelesen haben, indem Sie den untenstehenden Knopf drücken.</p>\n"
-"              <p>Erfahren Sie mehr über unsere <a "
-"href=\"%(tosurl)s\">Nutzungsbedingungen</a></p>\n"
+"              <p>Erfahren Sie mehr über unsere <a href=\"%(tosurl)s"
+"\">Nutzungsbedingungen</a></p>\n"
 "          "
 
 #: .\main\templates\cookielaw\banner.html:18
@@ -2090,7 +2089,6 @@ msgid "Execute"
 msgstr "Ausführen"
 
 #: .\main\templates\main\admin\contact_messages.html:51
-#: .\main\templates\main\users\messages.html:32
 #: .\main\templates\main\users\notifications.html:29
 msgid ""
 "You have no messages. You can send messages to users via their profile page."
@@ -2194,7 +2192,9 @@ msgid "wrote"
 msgstr "hat geschrieben"
 
 #: .\main\templates\main\base.html:203
-msgid "View all messages and notifications"
+#, fuzzy
+#| msgid "View all messages and notifications"
+msgid "View all notifications"
 msgstr "Alle Nachrichten und Benachrichtigungen anzeigen"
 
 #: .\main\templates\main\base.html:220
@@ -2288,8 +2288,6 @@ msgid "Logout"
 msgstr "Abmelden"
 
 #: .\main\templates\main\base.html:297
-#: .\main\templates\main\users\messages.html:10
-#: .\main\templates\main\users\messages.html:17
 #: .\main\templates\main\users\read_message.html:17
 #: .\main\templates\main\users\user_options.html:10
 #: .\main\templates\main\users\user_options_copy.html:10
@@ -2629,13 +2627,13 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                        You have filtered the table. It now contains "
-"<strong>%(num_of_results)s</strong> Document\n"
+"                        You have filtered the table. It now contains <strong>"
+"%(num_of_results)s</strong> Document\n"
 "                        "
 msgid_plural ""
 "\n"
-"                        You have filtered the table. It now contains "
-"<strong>%(num_of_results)s</strong> Documents\n"
+"                        You have filtered the table. It now contains <strong>"
+"%(num_of_results)s</strong> Documents\n"
 "                    "
 msgstr[0] ""
 "\n"
@@ -2657,8 +2655,8 @@ msgid ""
 "                        "
 msgid_plural ""
 "\n"
-"                        This table contains a total of "
-"<strong>%(num_of_results)s</strong> Documents\n"
+"                        This table contains a total of <strong>"
+"%(num_of_results)s</strong> Documents\n"
 "                    "
 msgstr[0] ""
 "\n"
@@ -2667,8 +2665,8 @@ msgstr[0] ""
 "                    "
 msgstr[1] ""
 "\n"
-"                        Diese Tabelle enthält insgesamt "
-"<strong>%(num_of_results)s</strong> Dokumente\n"
+"                        Diese Tabelle enthält insgesamt <strong>"
+"%(num_of_results)s</strong> Dokumente\n"
 "                    "
 
 #: .\main\templates\main\document_filter.html:28
@@ -2720,9 +2718,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Dieses Bild wurde mit dem <u><a href=\"%(link)s\" "
-"target=\"_blank\">Bayeux Historic Tale Construction Kit</a></u> "
-"hergestellt.\n"
+"                Dieses Bild wurde mit dem <u><a href=\"%(link)s\" target="
+"\"_blank\">Bayeux Historic Tale Construction Kit</a></u> hergestellt.\n"
 "            "
 
 #: .\main\templates\main\errors\400.html:18
@@ -2777,8 +2774,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"                Haben Sie eine Frage, die in unseren <a "
-"href=\"%(faq_url)s\">häufig gestellten Fragen</a> nicht beantwortet ist?\n"
+"                Haben Sie eine Frage, die in unseren <a href=\"%(faq_url)s"
+"\">häufig gestellten Fragen</a> nicht beantwortet ist?\n"
 "                Schreiben Sie uns eine Nachricht! Wir werden Ihnen so bald "
 "als möglich antworten.\n"
 "            "
@@ -2845,13 +2842,13 @@ msgstr "Auf dem Laufenden bleiben"
 #, python-format
 msgid ""
 "\n"
-"                                Please click <a href=\"%(url_unsub)s\" "
-"class=\"\">here</a> to unsubscribe.\n"
+"                                Please click <a href=\"%(url_unsub)s\" class="
+"\"\">here</a> to unsubscribe.\n"
 "                            "
 msgstr ""
 "\n"
-"                                Klicken Sie <a href=%(url_unsub)s "
-"class=\"\">hier</a> um den Newsletter abzubestellen.\n"
+"                                Klicken Sie <a href=%(url_unsub)s class="
+"\"\">hier</a> um den Newsletter abzubestellen.\n"
 "                            "
 
 #: .\main\templates\main\info\start.html:162
@@ -3285,9 +3282,9 @@ msgid ""
 "reproduce the linguistic (including\n"
 "                    orthographic) form of the original, and not just the "
 "historical-factual content.\" The complete\n"
-"                    guidelines of Ad fontes can be found <a "
-"class=\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/"
-"schriften-lesen/transkriptionsregeln\">here</a>.\n"
+"                    guidelines of Ad fontes can be found <a class="
+"\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/schriften-"
+"lesen/transkriptionsregeln\">here</a>.\n"
 "                "
 msgstr ""
 "\n"
@@ -3303,9 +3300,9 @@ msgstr ""
 "Quelle erkennbar sind. Die Transkription soll über die Wiedergabe des "
 "sachlich-historischen Inhaltes hinaus die sprachliche (inkl. "
 "orthographische) Form des Originals wiedergeben.\" Die vollständigen "
-"Transkriptionsregeln von Ad fontes finden Sie <a class=\"strong_link\" "
-"href=\"https://www.adfontes.uzh.ch/tutorium/schriften-lesen/"
-"transkriptionsregeln\">hier</a>."
+"Transkriptionsregeln von Ad fontes finden Sie <a class=\"strong_link\" href="
+"\"https://www.adfontes.uzh.ch/tutorium/schriften-lesen/transkriptionsregeln"
+"\">hier</a>."
 
 #: .\main\templates\main\upload\create_document.html:142
 #: .\main\templates\main\upload\create_document_backup.html:91
@@ -3488,15 +3485,14 @@ msgstr "Wichtig:"
 #, python-format
 msgid ""
 "\n"
-"            You need a login to upload a document. <a "
-"href=\"%(loginurl)s\">Login</a> or register a <a href=\"%(signupurl)s\">new "
-"account.</a>\n"
+"            You need a login to upload a document. <a href=\"%(loginurl)s"
+"\">Login</a> or register a <a href=\"%(signupurl)s\">new account.</a>\n"
 "            "
 msgstr ""
 "\n"
-"            Um ein Dokument hochzuladen, müssen Sie angemeldet sein. <a "
-"href=\"%(loginurl)s\">Melden Sie sich an</a> oder legen Sie ein <a "
-"href=\"%(signupurl)s\">neues Benutzerkonto</a> an.\n"
+"            Um ein Dokument hochzuladen, müssen Sie angemeldet sein. <a href="
+"\"%(loginurl)s\">Melden Sie sich an</a> oder legen Sie ein <a href="
+"\"%(signupurl)s\">neues Benutzerkonto</a> an.\n"
 "            "
 
 #: .\main\templates\main\upload\upload_options.html:30
@@ -3592,8 +3588,8 @@ msgstr "Ihre E-Mail-Adresse wurde geändert"
 #, python-format
 msgid ""
 "\n"
-"                    Your email address has been changed to "
-"<strong>%(email_address)s</strong>.\n"
+"                    Your email address has been changed to <strong>"
+"%(email_address)s</strong>.\n"
 "                    We sent an email to the new address and you have been "
 "logged out. Please log in again.\n"
 "                "
@@ -3751,6 +3747,14 @@ msgstr "Zur Startseite"
 msgid "Login again"
 msgstr "Erneut anmelden"
 
+#: .\main\templates\main\users\messages.html:10
+#: .\main\templates\main\users\messages.html:17
+#: .\main\templates\main\users\notifications.html:10
+#: .\main\templates\main\users\notifications.html:17
+#: .\main\templates\main\users\read_notification.html:17
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
 #: .\main\templates\main\users\messages.html:24
 #: .\main\templates\main\users\notifications.html:24
 msgid "Your Inbox"
@@ -3760,25 +3764,27 @@ msgstr "Posteingang"
 msgid "Delete all Messages"
 msgstr "Alle Nachrichten löschen"
 
+#: .\main\templates\main\users\messages.html:32
+#, fuzzy
+#| msgid "You have no new notifications."
+msgid "You have no notifications."
+msgstr "Sie haben keine neuen Benachrichtigungen."
+
 #: .\main\templates\main\users\messages.html:36
 #: .\main\templates\main\users\notifications.html:33
 msgid "Your Email Notification Options"
 msgstr "Ihre E-Mail-Benachrichtigungsoptionen"
 
 #: .\main\templates\main\users\messages.html:37
-msgid "How do you want to to be notified if you receive messages?"
+#, fuzzy
+#| msgid "How do you want to to be notified if you receive messages?"
+msgid "How do you want to to be notified if you receive notifications?"
 msgstr "Wie oft möchten Sie über erhaltene Nachrichten informiert werden?"
 
 #: .\main\templates\main\users\my_documents.html:8
 #: .\main\templates\main\users\my_documents.html:15
 msgid "Your Documents"
 msgstr "Ihre Dokumente"
-
-#: .\main\templates\main\users\notifications.html:10
-#: .\main\templates\main\users\notifications.html:17
-#: .\main\templates\main\users\read_notification.html:17
-msgid "Notifications"
-msgstr "Benachrichtigungen"
 
 #: .\main\templates\main\users\notifications.html:26
 msgid "Delete All Notifications"
@@ -3862,28 +3868,24 @@ msgstr "Benutzerdaten"
 #, python-format
 msgid ""
 "\n"
-"                    (This is you. Check your <a "
-"href=\"%(profile_url)s\">private profile</a>.)\n"
+"                    (This is you. Check your <a href=\"%(profile_url)s"
+"\">private profile</a>.)\n"
 "                    "
 msgstr ""
 "\n"
-"                    (Dies sind Sie. Sehen Sie Ihr <a "
-"href=\"%(profile_url)s\">privates Profil</a> an.)\n"
+"                    (Dies sind Sie. Sehen Sie Ihr <a href=\"%(profile_url)s"
+"\">privates Profil</a> an.)\n"
 "                    "
 
-#: .\main\templates\main\users\public_user_profile.html:30
-msgid "Message this user"
-msgstr "Nachricht senden"
-
-#: .\main\templates\main\users\public_user_profile.html:32
+#: .\main\templates\main\users\public_user_profile.html:31
 msgid "Unsubscribe from this user"
 msgstr "Diese*n Benutzer*in nicht mehr abonnieren"
 
-#: .\main\templates\main\users\public_user_profile.html:34
+#: .\main\templates\main\users\public_user_profile.html:33
 msgid "Subscribe to this user"
 msgstr "Diese*n Benutzer*in abonnieren"
 
-#: .\main\templates\main\users\public_user_profile.html:38
+#: .\main\templates\main\users\public_user_profile.html:37
 #, python-format
 msgid ""
 "\n"
@@ -3895,7 +3897,7 @@ msgstr ""
 "                  (Abonnemente <a href=\"%(sub_url)s\">hier</a> verwalten)\n"
 "                  "
 
-#: .\main\templates\main\users\public_user_profile.html:46
+#: .\main\templates\main\users\public_user_profile.html:45
 msgid "User Activity"
 msgstr "Benutzeraktivität"
 
@@ -4168,24 +4170,20 @@ msgid "Your Message has been sent. You received a copy by email."
 msgstr ""
 "Ihre Nachricht wurde gesendet. Sie haben eine Kopie per E-Mail erhalten."
 
-#: .\main\views\views_messages.py:47
+#: .\main\views\views_messages.py:39
 msgid "Your notification policy has been updated."
 msgstr "Ihre Benachrichtigungseinstellungen wurden angepasst."
 
-#: .\main\views\views_messages.py:59 .\main\views\views_messages.py:93
-#: .\main\views\views_messages.py:105 .\main\views\views_messages.py:123
+#: .\main\views\views_messages.py:51 .\main\views\views_messages.py:64
+#: .\main\views\views_messages.py:78
 msgid "This message does not exist or does not belong to you."
 msgstr "Diese Nachricht existiert nicht oder Sie haben keinen Zugriff darauf."
 
-#: .\main\views\views_messages.py:83
-msgid "Your message has been sent."
-msgstr "Ihre Nachricht wurde gesendet."
-
-#: .\main\views\views_messages.py:127
+#: .\main\views\views_messages.py:82
 msgid "The message has been deleted."
 msgstr "Die Nachricht wurde gelöscht."
 
-#: .\main\views\views_messages.py:142
+#: .\main\views\views_messages.py:93
 msgid "All messages have been deleted."
 msgstr "Alle Nachrichten wurden gelöscht."
 
@@ -4296,6 +4294,12 @@ msgstr "Es wurde kein API-Key gefunden, der hätte gelöscht werden können."
 msgid "Your API Key has been deleted"
 msgstr "Ihr API-Key wurde gelöscht"
 
+#~ msgid "Message this user"
+#~ msgstr "Nachricht senden"
+
+#~ msgid "Your message has been sent."
+#~ msgstr "Ihre Nachricht wurde gesendet."
+
 #~ msgid "version number"
 #~ msgstr "Versionsnummer"
 
@@ -4323,8 +4327,8 @@ msgstr "Ihr API-Key wurde gelöscht"
 #~ "<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer\">terms "
 #~ "and conditions</a>"
 #~ msgstr ""
-#~ "<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener "
-#~ "noreferrer\">Nutzungsbedingungen</a>"
+#~ "<a href=\"{tos_url}\" target=\"_blank\" rel=\"noopener noreferrer"
+#~ "\">Nutzungsbedingungen</a>"
 
 #~ msgid "These are your unread notifications:"
 #~ msgstr "Dies sind Ihre ungelesenen Benachrichtigungen:"
@@ -4357,9 +4361,9 @@ msgstr "Ihr API-Key wurde gelöscht"
 #~ "should reproduce the linguistic (including\n"
 #~ "                    orthographic) form of the original, and not just the "
 #~ "historical-factual content.\" The complete\n"
-#~ "                    guidelines of Ad fontes can be found <a "
-#~ "class=\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/"
-#~ "schriften-lesen/transkriptionsregeln\">here</a>.\n"
+#~ "                    guidelines of Ad fontes can be found <a class="
+#~ "\"strong_link\" href=\"https://www.adfontes.uzh.ch/en/tutorium/schriften-"
+#~ "lesen/transkriptionsregeln\">here</a>.\n"
 #~ "                "
 #~ msgstr ""
 #~ "\n"
@@ -4376,9 +4380,9 @@ msgstr "Ihr API-Key wurde gelöscht"
 #~ "Textschichten der Quelle erkennbar sind. Die Transkription soll über die "
 #~ "Wiedergabe des sachlich-historischen Inhaltes hinaus die sprachliche "
 #~ "(inkl. orthographische) Form des Originals wiedergeben.\" Die "
-#~ "vollständigen Transkriptionsregeln von Ad fontes finden Sie <a "
-#~ "class=\"strong_link\" href=\"https://www.adfontes.uzh.ch/tutorium/"
-#~ "schriften-lesen/transkriptionsregeln\">hier</a>."
+#~ "vollständigen Transkriptionsregeln von Ad fontes finden Sie <a class="
+#~ "\"strong_link\" href=\"https://www.adfontes.uzh.ch/tutorium/schriften-"
+#~ "lesen/transkriptionsregeln\">hier</a>."
 
 #~ msgid "Default website language"
 #~ msgstr "Standardsprache der Benutzeroberfläche"

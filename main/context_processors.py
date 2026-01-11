@@ -2,7 +2,7 @@ import datetime
 
 from django.urls import reverse
 
-from main.models import UserMessage, UserNotification, ContactMessage
+from main.models import UserNotification, ContactMessage
 
 
 def user_notifications(request):
@@ -11,15 +11,8 @@ def user_notifications(request):
     three unread notifications and the number of total unread messages."""
 
     if request.user.is_authenticated:
-        new_messages = UserMessage.objects.filter(receiving_user=request.user, viewing_state=0).order_by('-sending_time')[:3]
         new_user_notifications = UserNotification.objects.filter(user=request.user, viewing_state=0).order_by('-sending_time')[:3]
         new_notifications = list()
-        for msg in new_messages:
-            new_notifications.append({'url': reverse('main:messages_read', args=['message', msg.id]),
-                                      'sender': msg.sending_user.username,
-                                      'user_color': msg.sending_user.get_user_color(),
-                                      'subject': msg.subject,
-                                      'sending_time': msg.sending_time})
         for msg in new_user_notifications:
             new_notifications.append({'url': reverse('main:messages_read', args=['notification', msg.id]),
                                       'sender': 'Transcriptiones',
@@ -31,7 +24,7 @@ def user_notifications(request):
 
         cnt = ContactMessage.objects.filter(state=0).count()
         # print(cnt, request.user.is_superuser)
-        total_new_notifications = new_messages.count() + new_user_notifications.count()
+        total_new_notifications = new_user_notifications.count()
 
         if request.user.is_superuser and cnt > 0:
             new_notifications.append({'url': reverse('main:admin_inbox'),

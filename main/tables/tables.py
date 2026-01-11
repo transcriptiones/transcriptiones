@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 from django_tables2 import A
-from main.models import RefNumber, Document, Institution, UserSubscription, User, UserMessage, UserNotification, \
+from main.models import RefNumber, Document, Institution, UserSubscription, User, UserNotification, \
     ContactMessage, SourceType, Author
 from main.tables.tables_base import TranscriptionesTable, default_table_attrs, default_row_attrs
 
